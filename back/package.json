@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start:dev": "ts-node -r tsconfig-paths/register ./src/index.ts",
+    "start:prod": "node -r ts-node/register/transpile-only -r tsconfig-paths.register ./dist/src/index.js",
+    "bulid": "tsc"
+  },
   "devDependencies": {
     "@types/node": "^17.0.8",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
