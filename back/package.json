@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "prepare": "cd .. && husky install back/.husky",
     "start:dev": "nodemon",
     "start:prod": "node -r ts-node/register/transpile-only -r tsconfig-paths.register ./dist/src/index.js",
     "build": "tsc -p tsconfig.prod.json",
@@ -22,7 +23,9 @@
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
     "jest": "^27.4.7",
+    "lint-staged": "^12.1.7",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
     "ts-jest": "^27.1.3",
