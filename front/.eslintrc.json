@@ -5,33 +5,30 @@
     "node": true
   },
   "extends": [
-    "airbnb",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
+    "next",
+    "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
-    "plugin:import/recommended",
-    "plugin:import/typescript",
-    "plugin:jsx-a11y/recommended"
+    "prettier" // Add "prettier" last. This will turn off eslint rules conflicting with prettier. This is not what will format our code.
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 13,
-    "sourceType": "module"
+    "project": "./tsconfig.json"
   },
-  "plugins": ["react", "react-hooks", "jsx-a11y", "prettier", "import", "@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "prettier", "import"],
   "rules": {
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto"
+    // I suggest you add at least those two rules:
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "error"
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
       }
-    ],
-    "import/extensions": "off"
+    }
   }
 }
