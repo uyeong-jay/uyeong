@@ -5,7 +5,10 @@
     "outDir": "dist",
     "paths": {
       "@src/*": ["src/*"],
-      "@styles/*": ["styles/*"]
+      "@pages/*": ["src/components/pages/*"],
+      "@styles/*": ["src/styles/*"],
+      "@lib/*": ["src/lib/*"],
+      "@_types/*": ["src/types/*"]
     },
 
     /* Project */
