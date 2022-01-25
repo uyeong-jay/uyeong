@@ -6,20 +6,26 @@ export type BlogFrontMatter = {
 };
 
 export type BlogPostProps = {
-  //posts
+  frontMatter: BlogFrontMatter;
+  markdownBody: never;
+};
+
+export type BlogPostsProps = {
   slug: string;
   date: string;
   title: string;
   description: string;
   tags: string[];
-
-  //post
-  frontMatter: BlogFrontMatter;
-  markdownBody: never;
 };
 
 export type BlogProps = {
-  posts?: BlogPostProps[];
+  posts?: BlogPostsProps[];
   title: string;
   description: string;
+};
+
+export type Params = {
+  params: {
+    slug: string;
+  };
 };

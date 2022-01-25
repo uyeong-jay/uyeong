@@ -2,27 +2,20 @@ import fs from 'fs'; //file system module
 import path from 'path';
 import matter from 'gray-matter';
 
-// getFiles
 // getPostSlugs
 // getPostBySlug
 // getSortedPosts
 
 const postsDirectory = path.join(process.cwd(), 'src/posts');
 
-export async function getFiles() {
-  return fs.readdirSync(postsDirectory, 'utf-8');
-}
+export async function getPostSlugs() {
+  const postNames = fs.readdirSync(postsDirectory);
 
-export function getPostSlugs() {
-  const fileNames = fs.readdirSync(postsDirectory);
-
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        slug: fileName.replace(/\.md$/, ''),
-      },
-    };
-  });
+  return postNames.map((postName) => ({
+    params: {
+      slug: postName.replace(/\.md$/, ''),
+    },
+  }));
 }
 
 export async function getPostBySlug(slug: string) {
@@ -33,7 +26,7 @@ export async function getPostBySlug(slug: string) {
   const { data, content } = matter(postContents);
 
   return {
-    frontMatter: data,
+    frontMatter: data, //date, title, description, tags
     markdownBody: content,
   };
 }
@@ -42,7 +35,7 @@ export async function getSortedPosts() {
   const postNames = fs.readdirSync(postsDirectory);
 
   const allPostsData = postNames.map((postName) => {
-    const slug = postName.replace(/\.md$/, '');
+    // const slug = postName.replace(/\.md$/, '');
 
     const fullPath = path.join(postsDirectory, postName);
 
@@ -51,7 +44,7 @@ export async function getSortedPosts() {
     const { data: frontMatter } = matter(postContents);
 
     return {
-      slug,
+      slug: postName.replace(/\.md$/, ''),
       ...frontMatter, //date, title, description, tags
     };
   });
@@ -62,22 +55,4 @@ export async function getSortedPosts() {
     if (a.date < b.date) return 1;
     else return -1;
   });
-
-  // const posts = fs.readdirSync(postsDirectory);
-
-  // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // // @ts-ignore
-  // return posts.reduce((allPosts, postSlug) => {
-  //   const post = fs.readFileSync(path.join(process.cwd(), 'src/posts', postSlug), 'utf8');
-
-  //   const { data } = matter(post);
-
-  //   return [
-  //     {
-  //       frontMatter: data,
-  //       slug: postSlug.replace('.md', ''),
-  //     },
-  //     ...allPosts,
-  //   ];
-  // }, []);
 }
