@@ -5,7 +5,10 @@ import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 const SyntaxWrapper = styled.div`
   width: 500px;
-  font-size: 9px;
+`;
+
+const InlineCodeWrapper = styled.code`
+  background: yellow;
 `;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -28,7 +31,9 @@ const code = ({ node, inline, className, children, ...props }: CodeProps) => {
     </SyntaxWrapper>
   ) : (
     //강조
-    <code className={className ? className : ''}>{children}</code>
+    <InlineCodeWrapper>
+      <code className={className ? className : ''}>{children}</code>
+    </InlineCodeWrapper>
   );
 };
 export default code;
