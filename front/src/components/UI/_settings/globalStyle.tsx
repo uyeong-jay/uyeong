@@ -12,13 +12,7 @@ const GlobalStyle = () => {
           box-sizing: border-box;
         }
 
-        /* 모든 곳에 기본 여백 제거 */
-        * {
-          margin: 0;
-          padding: 0;
-        }
-
-        /* 백분율 기반 높이 사용 가능 */
+        /* 기본 마진 제거, 백분율 기반 높이 사용 가능 */
         html,
         body,
         #__next {
@@ -27,7 +21,8 @@ const GlobalStyle = () => {
 
         /* 줄 높이 지정, 글꼴 지정, 텍스트 렌더링 개선 */
         body {
-          line-height: 1.5; //줄 높이 글자 크기의 1.5배,
+          margin: 0;
+          line-height: 1.5; //줄 높이 글자 크기의 1.5배
           font-family: 'Noto Sans KR', sans-serif;
           -webkit-font-smoothing: antialiased;
         }
@@ -41,6 +36,10 @@ const GlobalStyle = () => {
         h6,
         p {
           overflow-wrap: break-word;
+        }
+
+        h1 {
+          font-size: 30px;
         }
 
         /* 미디어 기본값 inline > block, 삐져나감 방지 */
@@ -61,7 +60,7 @@ const GlobalStyle = () => {
           font: inherit;
         }
 
-        /* 원하는 태그 기본 스타일 변경 */
+        /* 원하는 태그 기본 스타일 제거 */
         button {
           background: none;
           border: 1px solid black
@@ -72,7 +71,8 @@ const GlobalStyle = () => {
           outline: none;
         }
         ul { 
-          list-style:none 
+          // list-style:none 
+          list-style-type: '- '
         }
 
         /* z-index 없이도 항상 새로운 쌓임 순서 생성가능 */
