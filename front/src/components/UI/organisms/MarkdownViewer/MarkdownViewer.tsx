@@ -8,7 +8,9 @@ interface Props {
   content: string;
 }
 
-const MarkdownWrapper = styled.div``;
+const MarkdownWrapper = styled.div`
+  border: 1px solid black;
+`;
 
 const MarkdownViewer = ({ content }: Props) => {
   return (
