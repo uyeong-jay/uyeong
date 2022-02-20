@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "cd .. && husky install front/.husky",
+    "prepare": "cd .. && husky install client/.husky",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
