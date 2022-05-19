@@ -40,3 +40,5 @@ yarn-error.log*
 src/posts
 
 .vscode
+
+_memo.txt
