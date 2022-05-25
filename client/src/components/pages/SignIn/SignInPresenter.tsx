@@ -15,9 +15,11 @@ const SignInPresenter = ({ onSubmit, onChangeEmail, onChangePassword, email, pas
         <label>Email</label>
         <input type="email" value={email} onChange={onChangeEmail}></input>
 
+        {/* input >> molecules 에서 가져오기 */}
         <label>Password</label>
         <input type="password" value={password} onChange={onChangePassword}></input>
 
+        {/* button >> atoms 에서 가져오기 */}
         <button type="submit">Join</button>
       </form>
     </section>
