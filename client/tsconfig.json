@@ -9,6 +9,8 @@
       "@_types/*": ["src/types/*"],
       "@pages/*": ["src/components/pages/*"],
       "@_settings/*": ["src/components/UI/_settings/*"],
+      "@atoms/*": ["src/components/UI/atoms/*"],
+      "@molecules/*": ["src/components/UI/molecules/*"],
       "@organisms/*": ["src/components/UI/organisms/*"],
       "@templates/*": ["src/components/UI/templates/*"]
     },

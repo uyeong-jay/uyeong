@@ -1,4 +1,4 @@
-import React from 'react';
+import Button from '@atoms/Button';
 
 interface Props {
   onSubmit: (e: React.FormEvent) => void;
@@ -20,7 +20,7 @@ const SignInPresenter = ({ onSubmit, onChangeEmail, onChangePassword, email, pas
         <input type="password" value={password} onChange={onChangePassword}></input>
 
         {/* button >> atoms 에서 가져오기 */}
-        <button type="submit">Join</button>
+        <Button type="submit" text="Join" />
       </form>
     </section>
   );
