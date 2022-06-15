@@ -1,22 +1,18 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 
+// import type { NextPage } from 'next';
 // import Image from 'next/image';
 // import styles from '../styles/Home.module.css';
 
-const HomePresenter: NextPage = () => {
+const HomePresenter = () => {
   return (
     <div>
       <Head>
         <title>UYeong</title>
       </Head>
-      <h1>Blog Home</h1>
-      <main>main</main>
-      <footer>footer</footer>
-      <Link href={`/blog`}>
-        <a>blog button</a>
-      </Link>
+      <h1>title</h1>
+      {/* search */}
+      serach-bar
     </div>
   );
 };

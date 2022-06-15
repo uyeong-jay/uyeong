@@ -71,8 +71,9 @@ const GlobalStyle = () => {
           outline: none;
         }
         ul { 
-          // list-style:none 
-          list-style-type: '- '
+          list-style:none;
+          padding-left: 0; 
+          // list-style-type: '- '
         }
 
         /* z-index 없이도 항상 새로운 쌓임 순서 생성가능 */

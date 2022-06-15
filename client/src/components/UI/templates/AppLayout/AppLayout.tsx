@@ -7,6 +7,9 @@ interface AppLayoutProps {
 }
 
 const AppLayoutWrapper = styled.div`
+  border: 1px solid black;
+  width: 1000px;
+  margin: auto;
   background-color: ${({ theme }) => theme.BACKGROUND_COLOR};
   color: ${({ theme }) => theme.COLOR};
 `;

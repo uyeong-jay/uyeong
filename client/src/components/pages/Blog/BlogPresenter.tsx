@@ -1,9 +1,13 @@
 import Link from 'next/link';
+import Head from 'next/head';
 import { BlogProps } from '@_types/types-blog';
 
 const BlogPresenter = ({ posts, title, description }: BlogProps) => {
   return (
     <div>
+      <Head>
+        <title>UYeong | Blog</title>
+      </Head>
       {!posts && <div>No Posts!</div>}
       <h3>My Blog</h3>
       <p>{title}</p>

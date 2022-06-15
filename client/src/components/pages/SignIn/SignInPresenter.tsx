@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Button from '@atoms/Button';
 
 interface Props {
@@ -10,19 +11,25 @@ interface Props {
 
 const SignInPresenter = ({ onSubmit, onChangeEmail, onChangePassword, email, password }: Props) => {
   return (
-    <section>
-      <form onSubmit={onSubmit}>
-        <label>Email</label>
-        <input type="email" value={email} onChange={onChangeEmail}></input>
+    <>
+      <Head>
+        <title>UYeong | Join</title>
+      </Head>
+      <section>
+        <form onSubmit={onSubmit}>
+          {/* input >> molecules 에서 가져오기 */}
+          <label>Email</label>
+          <input type="email" value={email} onChange={onChangeEmail}></input>
 
-        {/* input >> molecules 에서 가져오기 */}
-        <label>Password</label>
-        <input type="password" value={password} onChange={onChangePassword}></input>
+          {/* input >> molecules 에서 가져오기 */}
+          <label>Password</label>
+          <input type="password" value={password} onChange={onChangePassword}></input>
 
-        {/* button >> atoms 에서 가져오기 */}
-        <Button type="submit" text="Join" />
-      </form>
-    </section>
+          {/* button >> atoms 에서 가져오기 */}
+          <Button type="submit" text="Join" />
+        </form>
+      </section>
+    </>
   );
 };
 

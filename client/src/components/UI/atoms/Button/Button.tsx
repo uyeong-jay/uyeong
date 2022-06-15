@@ -17,4 +17,9 @@ const Button = ({ type, onClick, text }: Props) => {
     </StyledButton>
   );
 };
+
+Button.defaultProps = {
+  type: 'button',
+};
+
 export default Button;
