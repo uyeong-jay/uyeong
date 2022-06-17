@@ -6,9 +6,11 @@ interface AppLayoutProps {
   children: React.ReactNode;
 }
 
-const AppLayoutWrapper = styled.div`
+//AppLayout 안 은 자유롭게 배치 >> no flex
+const StyledAppLayout = styled.div`
   border: 1px solid black;
   width: 1000px;
+  min-height: calc(100vh - 70px);
   margin: auto;
   background-color: ${({ theme }) => theme.BACKGROUND_COLOR};
   color: ${({ theme }) => theme.COLOR};
@@ -16,11 +18,11 @@ const AppLayoutWrapper = styled.div`
 
 const AppLayout = ({ children }: AppLayoutProps) => {
   return (
-    <AppLayoutWrapper>
+    <StyledAppLayout>
       <Header />
       {children}
       <Footer />
-    </AppLayoutWrapper>
+    </StyledAppLayout>
   );
 };
 
