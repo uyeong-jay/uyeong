@@ -10,10 +10,12 @@ interface AppLayoutProps {
 const StyledAppLayout = styled.div`
   border: 1px solid black;
   width: 1000px;
+  // height: 100vh;
   min-height: calc(100vh - 70px);
-  margin: auto;
-  background-color: ${({ theme }) => theme.BACKGROUND_COLOR};
-  color: ${({ theme }) => theme.COLOR};
+  margin: 0 auto;
+  // background-color: ${({ theme }) => theme.BACKGROUND_COLOR};
+  background-color: #f4f1e9;
+  // color: ${({ theme }) => theme.COLOR};
 `;
 
 const AppLayout = ({ children }: AppLayoutProps) => {

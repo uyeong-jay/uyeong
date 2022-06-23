@@ -9,7 +9,7 @@ const breakpoint = {
 };
 
 export const lightTheme = {
-  BACKGROUND_COLOR: '#ffffff',
+  BACKGROUND_COLOR: '#F4F1E9',
   BP: breakpoint,
 };
 

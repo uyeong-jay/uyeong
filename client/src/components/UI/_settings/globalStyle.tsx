@@ -4,7 +4,6 @@ const GlobalStyle = () => {
   return (
     <Global
       styles={css`
-
         /* 테두리까지 포함시켜 보다 직관적이게 상자 크기 조절을 가능 */
         *,
         *::before,
@@ -63,22 +62,24 @@ const GlobalStyle = () => {
         /* 원하는 태그 기본 스타일 제거 */
         button {
           background: none;
-          border: 1px solid black
+          outline: none;
+          border: 1px solid black;
           cursor: pointer;
         }
         a {
           text-decoration: none;
           outline: none;
         }
-        ul { 
-          list-style:none;
-          padding-left: 0; 
+        ul {
+          list-style: none;
+          padding-left: 0;
           // list-style-type: '- '
         }
 
         /* z-index 없이도 항상 새로운 쌓임 순서 생성가능 */
         #root, //React.js 최상위 요소 선택자
-        #__next { //Next.js 최상위 요소 선택자
+        #__next {
+          //Next.js 최상위 요소 선택자
           isolation: isolate;
         }
       `}

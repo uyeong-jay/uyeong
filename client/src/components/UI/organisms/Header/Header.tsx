@@ -5,17 +5,32 @@ import styled from '@_settings/styled';
 import JoinButton from '@atoms/JoinButton';
 
 const StyledHeader = styled.header`
+  border: 1px solid black;
   position: relative;
-  border: 1px solid blue;
   width: 800px;
-  margin: auto;
+  margin: 0 auto;
 `;
 
 const StyledNav = styled.nav`
+  border: 1px solid black;
   positon: absolute;
-  border: 1px solid red;
   width: 500px;
+  height: 100px;
   margin: 0 auto;
+`;
+
+const StyledUl = styled.ul`
+  border: 1px solid black;
+  display: flex;
+  flex-direction: cloumn;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+`;
+
+const ColorLink = styled.a`
+  color: #433624;
 `;
 
 const Header = () => {
@@ -24,20 +39,28 @@ const Header = () => {
       <StyledHeader>
         <StyledNav>
           <JoinButton />
-          <ul>
+          <StyledUl>
             <li>
-              <Link href="/">로고 UYeong</Link>
+              <Link href="/" passHref>
+                <ColorLink>로고 UYeong</ColorLink>
+              </Link>
             </li>
             <li>
-              <Link href="/blog">Blog</Link>
+              <Link href="/blog" passHref>
+                <ColorLink>Blog</ColorLink>
+              </Link>
             </li>
             <li>
-              <Link href="/about">About</Link>
+              <Link href="/about" passHref>
+                <ColorLink>About</ColorLink>
+              </Link>
             </li>
             <li>
-              <Link href="/contact">Contact</Link>
+              <Link href="/contact" passHref>
+                <ColorLink>Contact</ColorLink>
+              </Link>
             </li>
-          </ul>
+          </StyledUl>
         </StyledNav>
       </StyledHeader>
     </>
