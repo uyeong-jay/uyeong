@@ -62,7 +62,6 @@ const GlobalStyle = () => {
         /* 원하는 태그 기본 스타일 제거 */
         button {
           background: none;
-          outline: none;
           border: 1px solid black;
           cursor: pointer;
         }

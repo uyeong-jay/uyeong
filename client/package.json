@@ -9,7 +9,9 @@
     "prepare": "cd .. && husky install client/.husky",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -26,7 +28,16 @@
     "remark-gfm": "^3.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.5",
     "@emotion/babel-plugin": "^11.7.2",
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/builder-webpack5": "^6.5.9",
+    "@storybook/manager-webpack5": "^6.5.9",
+    "@storybook/react": "^6.5.9",
+    "@storybook/testing-library": "^0.0.13",
     "@testing-library/dom": "^8.11.2",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -38,11 +49,13 @@
     "@types/react-syntax-highlighter": "^13.5.2",
     "@typescript-eslint/eslint-plugin": "5.10.0",
     "axe-core": "^4.3.5",
+    "babel-loader": "^8.2.5",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "8.0.0",
     "eslint-config-next": "^12.0.8",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-storybook": "^0.5.13",
     "jest": "^27.4.7",
     "jest-environment-jsdom": "^27.4.6",
     "lint-staged": "^12.1.3",
