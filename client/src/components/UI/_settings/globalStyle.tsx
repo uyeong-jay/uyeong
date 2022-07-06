@@ -9,21 +9,23 @@ const GlobalStyle = () => {
         *::before,
         *::after {
           box-sizing: border-box;
+          margin: 0;
         }
 
         /* 기본 마진 제거, 백분율 기반 높이 사용 가능 */
         html,
         body,
         #__next {
+          width: 100%;
           height: 100%;
         }
 
         /* 줄 높이 지정, 글꼴 지정, 텍스트 렌더링 개선 */
         body {
-          margin: 0;
           line-height: 1.5; //줄 높이 글자 크기의 1.5배
           font-family: 'Noto Sans KR', sans-serif;
           -webkit-font-smoothing: antialiased;
+          background-color: #f4f1e9;
         }
 
         /* 텍스트 삐져나감 방지 */
@@ -62,7 +64,7 @@ const GlobalStyle = () => {
         /* 원하는 태그 기본 스타일 제거 */
         button {
           background: none;
-          border: 1px solid black;
+          border: none;
           cursor: pointer;
         }
         a {

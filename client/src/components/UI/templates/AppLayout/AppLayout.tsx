@@ -6,16 +6,17 @@ interface AppLayoutProps {
   children: React.ReactNode;
 }
 
-//AppLayout 안 은 자유롭게 배치 >> no flex
+//AppLayout 안 은 자유롭게 배치: no flex
+//AppLayout에서 height는 AppLayout안의 요소안에 넣은 vh에 의해 결정되도록 하기
 const StyledAppLayout = styled.div`
   border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justufy-content: center;
+  align-items: center;
+  position: relative;
   width: 1000px;
-  // height: 100vh;
-  min-height: calc(100vh - 70px);
-  margin: 0 auto;
-  // background-color: ${({ theme }) => theme.BACKGROUND_COLOR};
-  background-color: #f4f1e9;
-  // color: ${({ theme }) => theme.COLOR};
+  margin: 0 auto; //중간을 크게 확대시 가운데 먼저가 아닌 왼쪽 끝부터 보이도록 함
 `;
 
 const AppLayout = ({ children }: AppLayoutProps) => {

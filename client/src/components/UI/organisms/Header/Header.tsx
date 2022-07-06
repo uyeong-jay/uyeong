@@ -7,26 +7,28 @@ import JoinButton from '@atoms/JoinButton';
 const StyledHeader = styled.header`
   border: 1px solid black;
   position: relative;
-  width: 800px;
-  margin: 0 auto;
+  width: 100%;
+  height: 150px;
 `;
 
+//스크롤시 nav width만 남도록 하기
 const StyledNav = styled.nav`
   border: 1px solid black;
-  positon: absolute;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 500px;
-  height: 100px;
-  margin: 0 auto;
+  height: 60px;
 `;
 
 const StyledUl = styled.ul`
   border: 1px solid black;
   display: flex;
-  flex-direction: cloumn;
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 70px;
+  height: 100%;
 `;
 
 const ColorLink = styled.a`
@@ -38,7 +40,6 @@ const Header = () => {
     <>
       <StyledHeader>
         <StyledNav>
-          <JoinButton />
           <StyledUl>
             <li>
               <Link href="/" passHref>
@@ -60,6 +61,7 @@ const Header = () => {
                 <ColorLink>Contact</ColorLink>
               </Link>
             </li>
+            <JoinButton />
           </StyledUl>
         </StyledNav>
       </StyledHeader>

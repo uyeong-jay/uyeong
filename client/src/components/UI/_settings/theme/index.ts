@@ -1,5 +1,7 @@
 import '@emotion/react';
 
+//https://getbootstrap.com/docs/5.0/layout/breakpoints/
+//https://kinsta.com/blog/responsive-web-design/
 const breakpoint = {
   FHDPC: '1400px',
   HDPC: '1200px',
@@ -10,6 +12,7 @@ const breakpoint = {
 
 export const lightTheme = {
   BACKGROUND_COLOR: '#F4F1E9',
+  COLOR: '#ada591',
   BP: breakpoint,
 };
 
