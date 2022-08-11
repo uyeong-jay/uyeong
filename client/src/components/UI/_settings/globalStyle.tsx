@@ -26,6 +26,7 @@ const GlobalStyle = () => {
           font-family: 'Noto Sans KR', sans-serif;
           -webkit-font-smoothing: antialiased;
           background-color: #f4f1e9;
+          // font-size: 14px;
         }
 
         /* 텍스트 삐져나감 방지 */

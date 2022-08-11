@@ -1,24 +1,28 @@
 import Link from 'next/link';
 import styled from '@_settings/styled';
 
+interface Props {
+  text: string;
+}
+
 //커지면서 아래로 내려오는 동그라미
 const StyledButton = styled.button`
-  width: 60px;
-  height: 35px;
+  width: 50px;
+  height: 50px;
   padding-bottom: 3px;
-  background-color: #433624;
-  border-radius: 20px;
+  background-color: #d1c7b0;
+  border-radius: 50%;
 `;
 
-const ColorLink = styled.a`
-  color: #ada591;
+const StyledAnchor = styled.a`
+  color: #433624;
 `;
 
-const JoinButton = () => {
+const JoinButton = ({ text }: Props) => {
   return (
     <StyledButton>
       <Link href="/signin" passHref>
-        <ColorLink>Join</ColorLink>
+        <StyledAnchor>{text}</StyledAnchor>
       </Link>
     </StyledButton>
   );

@@ -5,12 +5,13 @@ export { default } from '@pages/Blog';
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await getSortedPosts();
+  //posts: slug, date, title, description, tags
 
   return {
     props: {
       posts,
-      title: 'Blog',
-      description: 'Posts on software engineering',
+      title: 'UYeong Blog',
+      description: '제 블로그에 오신걸 환영합니다 🙂👋',
     },
   };
 };

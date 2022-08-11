@@ -9,7 +9,7 @@ interface Props {
 }
 
 const MarkdownWrapper = styled.div`
-  border: 1px solid black;
+  border: 1px solid #dadada;
 `;
 
 const MarkdownViewer = ({ content }: Props) => {

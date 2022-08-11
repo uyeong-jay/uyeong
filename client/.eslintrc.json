@@ -17,13 +17,12 @@
   },
   "plugins": ["@typescript-eslint", "prettier", "import"],
   "rules": {
-    // I suggest you add at least those two rules:
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error"
   },
   "settings": {
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+      "@typescript-eslint/parser": [".ts", ".tsx", ".stories.tsx"]
     },
     "import/resolver": {
       "typescript": {
@@ -31,5 +30,15 @@
         "project": "./tsconfig.json"
       }
     }
-  }
+  },
+  //https://github.com/storybookjs/storybook/issues/12914
+  //  - storybook "export default {}" eslint 오류해결
+  "overrides": [
+    {
+      "files": ["**/*.stories.tsx"],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ]
 }

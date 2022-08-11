@@ -5,7 +5,7 @@ import styled from '@_settings/styled';
 import JoinButton from '@atoms/JoinButton';
 
 const StyledHeader = styled.header`
-  border: 1px solid black;
+  border: 1px solid #dadada;
   position: relative;
   width: 100%;
   height: 150px;
@@ -13,17 +13,19 @@ const StyledHeader = styled.header`
 
 //스크롤시 nav width만 남도록 하기
 const StyledNav = styled.nav`
-  border: 1px solid black;
+  background-color: #d3d5c9;
+  border: 1px solid #dadada;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
+  width: 750px;
   height: 60px;
+  border-radius: 30px;
 `;
 
 const StyledUl = styled.ul`
-  border: 1px solid black;
+  border: 1px solid #dadada;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -31,7 +33,7 @@ const StyledUl = styled.ul`
   height: 100%;
 `;
 
-const ColorLink = styled.a`
+const StyledAnchor = styled.a`
   color: #433624;
 `;
 
@@ -43,25 +45,25 @@ const Header = () => {
           <StyledUl>
             <li>
               <Link href="/" passHref>
-                <ColorLink>로고 UYeong</ColorLink>
+                <StyledAnchor>로고 UYeong</StyledAnchor>
               </Link>
             </li>
             <li>
               <Link href="/blog" passHref>
-                <ColorLink>Blog</ColorLink>
+                <StyledAnchor>Blog</StyledAnchor>
               </Link>
             </li>
             <li>
               <Link href="/about" passHref>
-                <ColorLink>About</ColorLink>
+                <StyledAnchor>About</StyledAnchor>
               </Link>
             </li>
             <li>
               <Link href="/contact" passHref>
-                <ColorLink>Contact</ColorLink>
+                <StyledAnchor>Contact</StyledAnchor>
               </Link>
             </li>
-            <JoinButton />
+            <JoinButton text="Join" />
           </StyledUl>
         </StyledNav>
       </StyledHeader>

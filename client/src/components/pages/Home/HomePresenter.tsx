@@ -10,12 +10,13 @@ import ContactSummary from './ContactSummary';
 // import styles from '../styles/Home.module.css';
 
 const StyledMain = styled.main`
-  border: 1px solid black;
+  border: 1px solid #dadada;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding: 10%;
 `;
 
 const HomePresenter = () => {
@@ -26,8 +27,8 @@ const HomePresenter = () => {
       </Head>
       <StyledMain>
         <Banner />
-        <AboutSummary />
         <BlogSummary />
+        <AboutSummary />
         <ContactSummary />
       </StyledMain>
     </>
