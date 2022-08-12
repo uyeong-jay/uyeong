@@ -7,7 +7,7 @@ interface Props {
 
 const StyledMoreButton = styled.button`
   border: 1px solid #dadada;
-  background-color: #efe9e0;
+  //background-color: #efe9e0;
   border-radius: 30px;
   width: 100px;
   height: 40px;

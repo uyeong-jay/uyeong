@@ -13,7 +13,7 @@ const StyledHeader = styled.header`
 
 //스크롤시 nav width만 남도록 하기
 const StyledNav = styled.nav`
-  background-color: #d3d5c9;
+  //background-color: #d3d5c9;
   border: 1px solid #dadada;
   position: absolute;
   top: 50%;

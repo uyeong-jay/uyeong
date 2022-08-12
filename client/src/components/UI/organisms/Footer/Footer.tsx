@@ -7,7 +7,7 @@ const StyledFooter = styled.footer`
   height: 150px;
   margin: 10px 0;
   padding: 10px;
-  background-color: #d7d3c8;
+  //background-color: #d7d3c8;
   border-radius: 30px;
 `;
 

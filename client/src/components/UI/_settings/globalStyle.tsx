@@ -25,7 +25,7 @@ const GlobalStyle = () => {
           line-height: 1.5; //줄 높이 글자 크기의 1.5배
           font-family: 'Noto Sans KR', sans-serif;
           -webkit-font-smoothing: antialiased;
-          background-color: #f4f1e9;
+          //background-color: #f4f1e9;
           // font-size: 14px;
         }
 

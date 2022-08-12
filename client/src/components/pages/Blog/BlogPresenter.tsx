@@ -15,7 +15,7 @@ const StyledBlog = styled.section`
 
 const StyledBlogHeader = styled.header`
   border: 1px solid #dadada;
-  background-color: #efe9e0;
+  //background-color: #efe9e0;
   display: flex;
   flex-direction: column;
   justify-content: center;

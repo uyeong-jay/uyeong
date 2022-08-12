@@ -8,7 +8,7 @@ interface Props {
 }
 
 const StyledBlogPostCard = styled.article`
-  background-color: #efe9e0;
+  //background-color: #efe9e0;
   border: 1px solid #dadada;
   width: 200px;
   height: 300px;
