@@ -1,6 +1,7 @@
 import styled from '@_settings/styled';
 import Head from 'next/head';
 import Image from 'next/image';
+import GitHubChart from '@atoms/GitHubChart';
 
 const AboutPresenter = () => {
   const StyledAbout = styled.section`
@@ -12,17 +13,22 @@ const AboutPresenter = () => {
     width: 750px;
 
     & > header {
-      border: 1px solid red;
+      border: 1px solid #dadada;
       display: flex;
       justify-content: space-between;
       align-items: center;
 
-      & img {
+      & > span {
+        margin: 10px;
+      }
+
+      & > span img {
         border-radius: 100px;
       }
 
       & > p {
-        border: 1px solid black;
+        border: 1px solid #dadada;
+        margin: 10px;
 
         & > .underline {
           position: relative;
@@ -31,25 +37,26 @@ const AboutPresenter = () => {
         & > .underline:after {
           content: '';
           position: absolute;
-          left: 0;
+          left: -10px;
           bottom: -10px;
           width: 0px;
         }
 
         & .underline:nth-child(1):after {
-          animation: underline_purple 3s ease-in-out 0s forwards;
+          //animation: 이름 유지시간 효과 딜레이시간 마지막상태유지;
+          animation: underline_purple 2s ease-in-out 0s forwards;
           background: url('/pencils/purple_pencil.png');
-          background-size: 100px 15px;
+          background-size: 110px 15px;
         }
         & .underline:nth-child(2):after {
-          animation: underline_blue 3s ease-in-out 0.6s forwards;
+          animation: underline_blue 2s ease-in-out 0.6s forwards;
           background: url('/pencils/blue_pencil.png');
-          background-size: 100px 15px;
+          background-size: 70px 15px;
         }
         & .underline:nth-child(4):after {
-          animation: underline_green 3s ease-in-out 1.2s forwards;
+          animation: underline_green 2s ease-in-out 1.2s forwards;
           background: url('/pencils/green_pencil.png');
-          background-size: 100px 15px;
+          background-size: 50px 15px;
         }
 
         @keyframes underline_purple {
@@ -60,11 +67,10 @@ const AboutPresenter = () => {
           }
           to {
             opacity: 0.7;
-            width: 100px;
+            width: 110px;
             height: 15px;
           }
         }
-
         @keyframes underline_blue {
           from {
             opacity: 0;
@@ -73,11 +79,10 @@ const AboutPresenter = () => {
           }
           to {
             opacity: 0.7;
-            width: 100px;
+            width: 70px;
             height: 15px;
           }
         }
-
         @keyframes underline_green {
           from {
             opacity: 0;
@@ -86,11 +91,19 @@ const AboutPresenter = () => {
           }
           to {
             opacity: 0.7;
-            width: 100px;
+            width: 50px;
             height: 15px;
           }
         }
       }
+    }
+
+    & > section {
+      border: 1px solid #dadada;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
     }
   `;
 
@@ -101,7 +114,9 @@ const AboutPresenter = () => {
       </Head>
       <StyledAbout>
         <header>
-          <Image src={'/profile.jpg'} alt="profile" width={200} height={200} />
+          <span>
+            <Image src={'/profile.jpg'} alt="profile" width={100} height={100} />
+          </span>
           <p>
             안녕하세요! 저는 <strong className="underline">프론트 엔드</strong>를 개발자를 꿈꾸고 있는{' '}
             <strong className="underline">장우영</strong> 입니다.
@@ -110,7 +125,10 @@ const AboutPresenter = () => {
             것 입니다.
           </p>
         </header>
-        <section>oo</section>
+        <section>
+          <GitHubChart />
+          skill
+        </section>
       </StyledAbout>
     </>
   );

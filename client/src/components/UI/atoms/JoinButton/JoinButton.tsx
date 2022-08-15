@@ -10,7 +10,7 @@ const StyledButton = styled.button`
   width: 50px;
   height: 50px;
   padding-bottom: 3px;
-  background-color: #d1c7b0;
+  //background-color: #d1c7b0;
   border-radius: 50%;
 `;
 
