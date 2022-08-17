@@ -6,11 +6,19 @@ export const register = async (req: Request, res: Response) => {
 	try {
 		//client에서 body 가져오기
 		//아직 body를 만들기 전일경우 postman 사용해서 직접 만들어 넘겨도됨
-		const { name, email, password, cf_password } = req.body;
+		const { nickname, email, password, cf_password } = req.body;
+
+		//name 탐색
+		const userNickname = await userModel.findOne({ nickname }); // { email: email }
+		//(findOne: 데이터들 중 가장 첫번째 데이터 하나만 탐색)
+
+		//name이 이미 존재할때
+		if (userNickname) {
+			return res.status(400).json({ msg: "이 닉네임은 이미 존재합니다.\n(This nickname already exist.)" });
+		}
 
 		//email 탐색
 		const userEmail = await userModel.findOne({ email }); // { email: email }
-		//(findOne: 데이터들 중 가장 첫번째 데이터 하나만 탐색)
 
 		//email이 이미 존재할때
 		if (userEmail) {
@@ -27,7 +35,7 @@ export const register = async (req: Request, res: Response) => {
 
 		//가입한 새유저 비번 암화된 데이터
 		const newUser = new userModel({
-			name,
+			nickname,
 			email,
 			password: passwordHash,
 			cf_password: passwordHash,

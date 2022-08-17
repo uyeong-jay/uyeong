@@ -11,13 +11,14 @@ export const validateEmail = (email: string) => {
 
 //valid 미들웨어
 export const valid = (req: Request, res: Response, next: NextFunction) => {
-	const { name, email, password, cf_password } = req.body;
+	const { nickname, email, password, cf_password } = req.body;
 
 	//error들 모아 놓기
 	const errors = [];
 
-	if (!name) errors.push("이름 칸을 채워주세요(Please add your name.)");
-	else if (name.length > 20) errors.push("이름은 적어도 20자 이하여야 합니다.(Your name must be 20 chars or less.)");
+	if (!nickname) errors.push("닉네임 칸을 채워주세요(Please add your name.)");
+	else if (nickname.length > 20)
+		errors.push("닉네임은 적어도 20자 이하여야 합니다.(Your nickname must be 20 chars or less.)");
 
 	if (!email) errors.push("이메일 칸을 채워주세요.\n(Please add your email.)");
 	else if (!validateEmail(email)) errors.push("이메일을 정확히 입력해주세요.\n(Please enter your email correctly.)");

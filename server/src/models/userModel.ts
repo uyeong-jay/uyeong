@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 
 interface IUser {
-	name: string;
+	nickname: string;
 	email: string;
 	password: string;
 	cf_password: string;
@@ -13,7 +13,7 @@ interface IUser {
 
 const userSchema = new Schema<IUser>(
 	{
-		name: {
+		nickname: {
 			type: String,
 			required: [true, "이름 칸을 채워주세요(Please add your name.)"],
 			trim: true,

@@ -19,9 +19,6 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 
 // Routes
-// app.get("/", (req, res) => {
-// 	res.json({ msg: "Hello World" });
-// });
 app.use("/api", routes.authRouter);
 
 const PORT = process.env.PORT || 5000;
