@@ -1,15 +1,5 @@
 import { Schema, model } from "mongoose";
-
-interface IUser {
-	nickname: string;
-	email: string;
-	password: string;
-	cf_password: string;
-	avatar?: string;
-	role: string;
-	type: string;
-	_doc: object;
-}
+import { IUser } from "@_types/types";
 
 const userSchema = new Schema<IUser>(
 	{
