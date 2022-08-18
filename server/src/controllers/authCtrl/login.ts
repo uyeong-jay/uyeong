@@ -15,7 +15,7 @@ export const login = async (req: Request, res: Response) => {
 		if (!user) return res.status(400).json({ msg: "해당 이메일는 존재하지 않습니다.\n(This account doesn't exist.)" });
 
 		//user email 이 있을경우
-		//비밀번호 일치 확인
+		//비밀번호 일치 확인(bcrypt)
 		const isMatch = await bcrypt.compare(password, user.password);
 
 		//일치 하지 않으면 에러
@@ -26,6 +26,7 @@ export const login = async (req: Request, res: Response) => {
 		const access_token = generateAccessToken({ id: user._id });
 		const refresh_token = generateRefreshToken({ id: user._id });
 
+		//해당id 유저에 새로만든 refresh_token 추가해주기
 		//findOneAndUpdate(조건, 변경, 옵션, 콜백)??
 		await Users.findOneAndUpdate({ _id: user._id }, { refresh_token });
 
@@ -41,7 +42,7 @@ export const login = async (req: Request, res: Response) => {
 			msg: "Login Success!",
 			access_token,
 			refresh_token,
-			data: { ...user._doc, password: "", cf_password: "" }, //비번빼고 보여주는 방법
+			data: { ...user._doc, password: "", cf_password: "" }, //비번빼고 가져오는 방법
 		});
 	} catch (err) {
 		if (err instanceof Error) return res.status(500).json({ msg: err.message });
