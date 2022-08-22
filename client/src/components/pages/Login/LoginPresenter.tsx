@@ -9,7 +9,7 @@ interface Props {
   password: string;
 }
 
-const SignInPresenter = ({ onSubmit, onChangeEmail, onChangePassword, email, password }: Props) => {
+const LoginPresenter = ({ onSubmit, onChangeEmail, onChangePassword, email, password }: Props) => {
   return (
     <>
       <Head>
@@ -33,4 +33,4 @@ const SignInPresenter = ({ onSubmit, onChangeEmail, onChangePassword, email, pas
   );
 };
 
-export default SignInPresenter;
+export default LoginPresenter;

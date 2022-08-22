@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import SignInPresenter from './SignInPresenter';
+import LoginPresenter from './LoginPresenter';
 
-const SignInContainer = () => {
+const LoginContainer = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -29,7 +29,7 @@ const SignInContainer = () => {
   };
 
   return (
-    <SignInPresenter
+    <LoginPresenter
       onSubmit={onSubmit}
       onChangeEmail={onChangeEmail}
       onChangePassword={onChangePassword}
@@ -39,4 +39,4 @@ const SignInContainer = () => {
   );
 };
 
-export default SignInContainer;
+export default LoginContainer;
