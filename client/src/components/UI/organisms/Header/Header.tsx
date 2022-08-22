@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from '@_settings/styled';
-
-import JoinButton from '@atoms/JoinButton';
+import LoginButton from '@atoms/LoginButton';
 
 const StyledHeader = styled.header`
   border: 1px solid #dadada;
@@ -63,7 +62,7 @@ const Header = () => {
                 <StyledAnchor>Contact</StyledAnchor>
               </Link>
             </li>
-            <JoinButton text="Join" />
+            <LoginButton text="Login" />
           </StyledUl>
         </StyledNav>
       </StyledHeader>
