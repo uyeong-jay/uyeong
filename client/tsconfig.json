@@ -5,6 +5,7 @@
     "outDir": "dist",
     "paths": {
       "@src/*": ["src/*"],
+      "@app/*": ["src/app/*"],
       "@lib/*": ["src/lib/*"],
       "@_types/*": ["src/types/*"],
       "@pages/*": ["src/components/pages/*"],
