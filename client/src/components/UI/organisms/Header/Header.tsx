@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from '@_settings/styled';
-import LoginButton from '@atoms/LoginButton';
+import Button from '@atoms/Button';
 
 const StyledHeader = styled.header`
   border: 1px solid #dadada;
@@ -34,6 +34,7 @@ const StyledUl = styled.ul`
 
 const StyledAnchor = styled.a`
   color: #433624;
+  // color: white;
 `;
 
 const Header = () => {
@@ -62,7 +63,11 @@ const Header = () => {
                 <StyledAnchor>Contact</StyledAnchor>
               </Link>
             </li>
-            <LoginButton text="Login" />
+            <Link href="/login" passHref>
+              <StyledAnchor>
+                <Button variant="login" text="Login" type="submit" />
+              </StyledAnchor>
+            </Link>
           </StyledUl>
         </StyledNav>
       </StyledHeader>

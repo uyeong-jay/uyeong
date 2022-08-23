@@ -5,11 +5,45 @@ import Link from 'next/link';
 const StyledFooter = styled.footer`
   border: 1px solid #dadada;
   width: 750px;
-  height: 150px;
+  height: 190px;
   margin: 10px 0;
-  padding: 10px;
+  padding: 20px;
   //background-color: #d7d3c8;
   border-radius: 30px;
+  color: black;
+
+  & div i {
+    color: maroon;
+  }
+
+  & div a {
+    color: black;
+  }
+
+  & div {
+    & > .fa-instagram {
+      margin-left: -1px;
+      margin-top: 4px;
+      font-size: 20px;
+    }
+
+    & > .fa-github {
+      margin-top: 4px;
+      font-size: 18px;
+    }
+
+    & > .fa-t {
+      margin-left: 2px;
+      margin-top: 4px;
+      font-size: 18px;
+    }
+  }
+
+  & p i {
+    color: maroon;
+    margin-top: 4px;
+    font-size: 18px;
+  }
 `;
 
 const Footer = () => {

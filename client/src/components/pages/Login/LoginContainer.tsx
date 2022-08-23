@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import LoginPresenter from './LoginPresenter';
 
 const LoginContainer = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const initialState = { email: '', password: '' };
+  const [inputs, setInputs] = useState(initialState);
+  const { email, password } = inputs;
 
-  const onChangeEmail = (e: React.FormEvent<HTMLInputElement>) => {
-    setEmail(e.currentTarget.value);
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputs({ ...inputs, [name]: value });
   };
 
-  const onChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
-    setPassword(e.currentTarget.value);
-  };
-
-  const onSubmit = (e: { preventDefault: () => void }) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     //로딩중 구현
@@ -28,15 +26,7 @@ const LoginContainer = () => {
     //성공 표시(리턴)
   };
 
-  return (
-    <LoginPresenter
-      onSubmit={onSubmit}
-      onChangeEmail={onChangeEmail}
-      onChangePassword={onChangePassword}
-      email={email}
-      password={password}
-    />
-  );
+  return <LoginPresenter onSubmit={onSubmit} onChangeInput={onChangeInput} email={email} password={password} />;
 };
 
 export default LoginContainer;
