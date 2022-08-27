@@ -5,8 +5,7 @@ interface Props {
   text: string;
   type?: 'button' | 'submit';
   onClick?: () => void;
-  email?: string;
-  password?: string;
+  disabled?: boolean;
 }
 
 const StyledWideButtonWrapper = styled.div`
@@ -27,10 +26,10 @@ const StyledWideButtonWrapper = styled.div`
   }
 `;
 
-const WideButton = ({ variant, text, type, email, password, onClick }: Props) => {
+const WideButton = ({ variant, text, type, onClick, disabled }: Props) => {
   return (
     <StyledWideButtonWrapper>
-      <button className={`${variant}`} type={type} onClick={onClick} disabled={email && password ? false : true}>
+      <button className={variant} type={type} onClick={onClick} disabled={disabled}>
         {text}
       </button>
     </StyledWideButtonWrapper>
@@ -38,8 +37,8 @@ const WideButton = ({ variant, text, type, email, password, onClick }: Props) =>
 };
 
 WideButton.defaultProps = {
-  text: 'wide-button',
   type: 'button',
+  disabled: false,
 };
 
 export default WideButton;

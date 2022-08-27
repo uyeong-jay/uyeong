@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import { getSortedPosts } from '@lib/utils-post';
+import { getSortedPosts } from '@utils/utils-post';
 
 export { default } from '@pages/Blog';
 

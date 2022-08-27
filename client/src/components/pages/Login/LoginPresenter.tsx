@@ -2,7 +2,9 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import styled from '@_settings/styled';
+import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
+import Input from '@molecules/Input';
 
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -12,13 +14,12 @@ interface Props {
 }
 
 const StyledForm = styled.form`
-  border: 3px dotted lightslategray;
+  border: 2px dotted lightslategray;
   display: flex;
   flex-direction: column;
   justify-content: center;
   aglin-items: cetner;
   width: 750px;
-  // border-radius: 400px 600px 650px 350px / 400px 450px 550px 600px;
   border-radius: 20% 50% 30% / 30% 40% 40%;
   padding: 100px;
   margin: 50px 0 50px 0;
@@ -28,40 +29,18 @@ const StyledForm = styled.form`
     justify-content: center;
     aglin-items: cetner;
 
-    & label {
-      color: darkslategray;
-      margin-right: 10px;
-    }
 
-    & input {
-      border: 1px dotted darkslategray;
-      margin: 5px 0 30px 0;
-      // padding-left: 20px;
-      width: 70%;
-      height: 40px;
-      text-align: center;
-      color: lightslategray;
-    }
+  // /* password */
+  // & div:nth-child(2) {
+  //   & button {
+  //     color: red;
+  //     margin-left: 100px;
+  //   }
+  // }
 
-    & > input:nth-child(2) {
-      border-radius: 90px 80px 60px 50px;
-    }
-  }
-
-  /* password */
-  & div:nth-child(2) {
-    & > input:nth-child(2) {
-      margin: 5px 0 5px 0;
-      border-radius: 50px 80px 50px 80px;
-    }
-    & button {
-      margin: 10px;
-    }
-  }
-
-  & p a {
-    color: blue;
-  }
+  // & p a {
+  //   color: red;
+  // }
 `;
 
 const LoginPresenter = ({ onSubmit, onChangeInput, email, password }: Props) => {
@@ -74,42 +53,37 @@ const LoginPresenter = ({ onSubmit, onChangeInput, email, password }: Props) => 
       </Head>
       <section>
         <StyledForm onSubmit={onSubmit}>
-          {/* input >> atoms 에서 가져오기 */}
           <div>
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={onChangeInput}
-              aria-hidden="true"
-              autoComplete="off"
-            ></input>
+            {/* input >> molecules 에서 가져오기 */}
+            <Input labelText="Email" variant="email" name="email" type="email" value={email} onChange={onChangeInput} />
           </div>
 
-          {/* input >> atoms 에서 가져오기 */}
           <div>
-            <label>Password</label>
-            <input
-              type={passwordType ? 'password' : 'text'}
+            {/* input >> molecules 에서 가져오기 */}
+            <Input
+              labelText="Password"
+              variant="password"
               name="password"
+              type={passwordType ? 'password' : 'text'}
               value={password}
               onChange={onChangeInput}
-            ></input>
-            <button onClick={() => setPasswordType(!passwordType)} disabled={password ? false : true}>
-              {passwordType ? 'Show' : 'Hide'}
-            </button>
+            />
+            <Button
+              variant="primary"
+              text={passwordType ? 'Show' : 'Hide'}
+              type="button"
+              onClick={() => setPasswordType(!passwordType)}
+              disabled={password ? false : true}
+            />
           </div>
 
           {/* button >> atoms 에서 가져오기 */}
-          <WideButton variant="login" text="Login" type="submit" email={email} password={password} />
+          <WideButton variant="login" text="Login" type="submit" disabled={email && password ? false : true} />
 
           <p>
             비밀번호를 잊어버리셨나요? ( <Link href="/fotget_password">Forget password?</Link> )
-          </p>
-
-          <p>
-            가입하지 않으셨나요? ( Didn&apos;t you join? - <Link href="/join">Join Now</Link> )
+            <br />
+            가입이 안 되어 있나요? ( <Link href="/join">Wanna join?</Link> )
           </p>
         </StyledForm>
       </section>

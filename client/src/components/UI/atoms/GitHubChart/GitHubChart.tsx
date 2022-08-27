@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { sourceLoader } from '@lib/sourceLoader';
+import { sourceLoader } from '@src/utils/sourceLoader';
 
 const GitHubChart = () => {
   return (

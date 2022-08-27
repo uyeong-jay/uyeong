@@ -1,7 +1,20 @@
 import React from 'react';
 
 const JoinPresenter = () => {
-  return <div>JoinPresenter</div>;
+  return (
+    <>
+      {/* <form>
+        <label></label>
+        <input name="" type="" value={} onChange={}></input>
+        <label></label>
+        <input name="" type="" value={} onChange={}></input>
+        <label></label>
+        <input name="" type="" value={} onChange={}></input>
+        <label></label>
+        <input name="" type="" value={} onChange={}></input>
+      </form> */}
+    </>
+  );
 };
 
 export default JoinPresenter;

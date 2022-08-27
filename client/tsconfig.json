@@ -6,7 +6,7 @@
     "paths": {
       "@src/*": ["src/*"],
       "@app/*": ["src/app/*"],
-      "@lib/*": ["src/lib/*"],
+      "@utils/*": ["src/utils/*"],
       "@_types/*": ["src/types/*"],
       "@pages/*": ["src/components/pages/*"],
       "@_settings/*": ["src/components/UI/_settings/*"],

@@ -3,6 +3,7 @@ import styled from '@_settings/styled';
 
 const StyledContactSummary = styled.section`
   border: 1px solid #dadada;
+  background-color: silver;
   display: flex;
   justify-content: center;
   align-items: center;

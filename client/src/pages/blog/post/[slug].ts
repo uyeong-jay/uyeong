@@ -1,4 +1,4 @@
-import { getPostSlugs, getPostBySlug } from '@lib/utils-post';
+import { getPostSlugs, getPostBySlug } from '@src/utils/utils-post';
 import { Params } from '@_types/types-blog';
 
 export { default } from '@pages/BlogPost';

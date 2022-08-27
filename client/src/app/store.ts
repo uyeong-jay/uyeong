@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'; //리듀서들 + 미들웨어
+import loginReducer from '@pages/Login/loginSlice';
 import reduxLogger from 'redux-logger'; //미들웨어
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    login: loginReducer,
+  },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(reduxLogger),
 });
 

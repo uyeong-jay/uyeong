@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 const StyledFooter = styled.footer`
   border: 1px solid #dadada;
+  background-color: #fef6b5;
   width: 750px;
   height: 190px;
   margin: 10px 0;
