@@ -23,25 +23,30 @@ const StyledFooter = styled.footer`
 
   & div {
     & > .fa-instagram {
-      margin-left: -1px;
+      margin-left: -2px;
       margin-top: 4px;
       font-size: 20px;
     }
 
+    & > .fa-envelope {
+      margin-left: -1px;
+    }
+
     & > .fa-github {
+      margin-left: -1px;
       margin-top: 4px;
       font-size: 18px;
     }
 
     & > .fa-t {
-      margin-left: 2px;
       margin-top: 4px;
       font-size: 18px;
     }
   }
 
-  & p i {
+  & p .fa-copyright {
     color: maroon;
+    margin-left: -1px;
     margin-top: 4px;
     font-size: 18px;
   }

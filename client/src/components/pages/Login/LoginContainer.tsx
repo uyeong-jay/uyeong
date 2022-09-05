@@ -1,24 +1,24 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import LoginPresenter from './LoginPresenter';
 import { useAppDispatch } from '@app/hooks';
-import { fetchLoginUser } from './loginSlice';
+import { fetchUserLogin } from './loginSlice';
 
 const LoginContainer = () => {
   const initialState = { email: '', password: '' };
-  const [LoginUserInfo, setLoginUserInfo] = useState(initialState);
-  const { email, password } = LoginUserInfo;
+  const [userLoginInfo, setUserLoginInfo] = useState(initialState);
+  const { email, password } = userLoginInfo;
 
   const dispatch = useAppDispatch();
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setLoginUserInfo({ ...LoginUserInfo, [name]: value });
+    setUserLoginInfo({ ...userLoginInfo, [name]: value });
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(fetchLoginUser(LoginUserInfo));
+    dispatch(fetchUserLogin(userLoginInfo));
     //로딩중 구현
 
     //유저 데이터(아이디, 비번) 전달

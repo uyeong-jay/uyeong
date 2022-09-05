@@ -4,7 +4,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { postAPI } from '@utils/fetchData';
 
-interface User {
+interface UserLoginInfo {
   email: string;
   password: string;
 }
@@ -19,7 +19,7 @@ interface LoginError {
 
 interface InitialState {
   loading: boolean;
-  user: User | null;
+  user: UserLoginInfo | null;
   error: LoginError | unknown | null;
 }
 
@@ -29,7 +29,7 @@ const initialState: InitialState = {
   error: null,
 };
 
-export const fetchLoginUser = createAsyncThunk('login/fetchLoginUser', async (data: object, { rejectWithValue }) => {
+export const fetchUserLogin = createAsyncThunk('login/fetchUserLogin', async (data: object, { rejectWithValue }) => {
   try {
     const res = await postAPI('login', data);
     console.log(res);
@@ -49,18 +49,18 @@ const loginSlice = createSlice({
   initialState, //login(리듀서 이름): {lading, user, error}
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchLoginUser.pending, (state) => {
+    builder.addCase(fetchUserLogin.pending, (state) => {
       state.loading = true;
       state.user = null;
       state.error = null;
     });
-    builder.addCase(fetchLoginUser.fulfilled, (state, action: PayloadAction<User>) => {
+    builder.addCase(fetchUserLogin.fulfilled, (state, action: PayloadAction<UserLoginInfo>) => {
       state.loading = false;
       state.user = action.payload;
       //user: { access_token, refresh_token, data: {~}, msg }
       state.error = null;
     });
-    builder.addCase(fetchLoginUser.rejected, (state, action) => {
+    builder.addCase(fetchUserLogin.rejected, (state, action) => {
       state.loading = false;
       state.user = null;
       state.error = action.payload;

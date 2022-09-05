@@ -5,7 +5,7 @@ interface Props {
   labelText: string;
   variant: string;
   name: string;
-  type: string;
+  type?: string;
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -15,8 +15,10 @@ interface InputProps {
 }
 
 const StyledLabel = styled.label`
-  color: darkslategray;
+  display: inline-block;
   margin-right: 10px;
+  color: darkslategray;
+  white-space: pre-line;
 `;
 
 const StyledInput = styled.input<InputProps>`
@@ -28,14 +30,21 @@ const StyledInput = styled.input<InputProps>`
   color: lightslategray;
   ${(props) => {
     switch (props.variant) {
+      case 'nickName':
+        return `
+          border-radius: 50px 80px 50px 80px;
+        `;
       case 'email':
         return `
           border-radius: 90px 55px 80px 50px;
         `;
       case 'password':
         return `
-          margin: 5px 0 5px 0;
           border-radius: 50px 80px 50px 80px;
+        `;
+      case 'cf_password':
+        return `
+          border-radius: 90px 55px 80px 50px;
         `;
       default:
         return `
@@ -52,6 +61,10 @@ const Input = ({ labelText, variant, name, type, value, onChange }: Props) => {
       <StyledInput variant={variant} name={name} type={type} value={value} onChange={onChange} />
     </>
   );
+};
+
+Input.defaultProps = {
+  type: 'text',
 };
 
 export default Input;
