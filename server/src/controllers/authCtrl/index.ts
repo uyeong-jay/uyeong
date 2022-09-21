@@ -6,8 +6,8 @@ import { refresh } from "./refresh";
 const authCtrl = {
 	register,
 	login,
-	logout,
 	refresh,
+	logout,
 };
 
 export default authCtrl; //index 파일(default)

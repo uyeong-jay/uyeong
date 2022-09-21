@@ -14,7 +14,7 @@ export const register = async (req: Request, res: Response) => {
 
 		//name이 이미 존재할때
 		if (user) {
-			return res.status(400).json({ msg: "이 닉네임은 이미 존재합니다.\n(This nickname already exist.)" });
+			return res.status(400).json({ msg: "This nickname already exist." });
 		}
 
 		//email 탐색
@@ -22,7 +22,7 @@ export const register = async (req: Request, res: Response) => {
 
 		//email이 이미 존재할때
 		if (userEmail) {
-			return res.status(400).json({ msg: "이 이메일은 이미 존재합니다.\n(This email already exist.)" });
+			return res.status(400).json({ msg: "This email already exist." });
 		}
 
 		//사용가능한 email 일때
@@ -44,7 +44,7 @@ export const register = async (req: Request, res: Response) => {
 		//db에 저장(위 형식으로 저장)
 		await newUser.save();
 
-		res.json({ msg: "Register Success!" });
+		res.json({ msg: "Join Success!" });
 	} catch (err) {
 		if (err instanceof Error) return res.status(500).json({ msg: err.message });
 	}

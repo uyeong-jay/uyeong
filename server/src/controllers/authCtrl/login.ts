@@ -12,14 +12,14 @@ export const login = async (req: Request, res: Response) => {
 		const user = await Users.findOne({ email });
 
 		//못찾으면 에러
-		if (!user) return res.status(400).json({ msg: "해당 이메일는 존재하지 않습니다.\n(This account doesn't exist.)" });
+		if (!user) return res.status(400).json({ msg: "This account doesn't exist." });
 
 		//user email 이 있을경우
 		//비밀번호 일치 확인(bcrypt)
 		const isMatch = await bcrypt.compare(password, user.password);
 
 		//일치 하지 않으면 에러
-		if (!isMatch) return res.status(400).json({ msg: "비밀번호가 일치하지 않습니다.\n(Password is incorrect)" });
+		if (!isMatch) return res.status(400).json({ msg: "Password is incorrect" });
 
 		//비밀번호까지 일치한다면
 		//(access, refresh)토큰 만들기
