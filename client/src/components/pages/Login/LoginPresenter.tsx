@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import styled from '@_settings/styled';
+import Loader from '@modals/Loader';
 import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
 import Input from '@molecules/Input';
@@ -11,6 +12,11 @@ interface Props {
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
   email: string;
   password: string;
+  user: {
+    loading: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    error: any;
+  };
 }
 
 const StyledSection = styled.section`
@@ -29,7 +35,7 @@ const StyledSection = styled.section`
   }
 `;
 
-const LoginPresenter = ({ onSubmit, onChangeInput, email, password }: Props) => {
+const LoginPresenter = ({ onSubmit, onChangeInput, email, password, user }: Props) => {
   const [passwordType, setPasswordType] = useState(true);
 
   return (
@@ -37,6 +43,9 @@ const LoginPresenter = ({ onSubmit, onChangeInput, email, password }: Props) => 
       <Head>
         <title>UYeong | Login</title>
       </Head>
+      {/* 로딩화면 */}
+      {user.loading && <Loader />}
+
       <StyledSection>
         <form onSubmit={onSubmit}>
           <div>
@@ -63,8 +72,11 @@ const LoginPresenter = ({ onSubmit, onChangeInput, email, password }: Props) => 
             />
           </div>
 
+          {/* 에러 메시지 */}
+          {user.error && <div style={{ color: 'red' }}>{user.error}</div>}
+
           {/* widebutton >> atoms 에서 가져오기 */}
-          <WideButton variant="login" text="Login" type="submit" disabled={email && password ? false : true} />
+          <WideButton variant="login" text="Login" type="submit" /* disabled={email && password ? false : true} */ />
         </form>
 
         <p>

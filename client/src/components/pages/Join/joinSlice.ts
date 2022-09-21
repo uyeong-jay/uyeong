@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { postAPI } from '@utils/fetchData';
 
 interface UserJoinInfo {
-  nickName: string;
+  nickname: string;
   email: string;
   password: string;
   cf_password: string;
@@ -30,10 +30,10 @@ const initialState: InitialState = {
 
 export const fetchUserJoin = createAsyncThunk('join/fetchUserJoin', async (data: object, { rejectWithValue }) => {
   try {
-    const res = await postAPI('join', data);
+    const res = await postAPI('register', data);
     console.log(res);
     return res;
-  } catch (err: unknown) {
+  } catch (err) {
     const error = err as JoinError;
     if (!error.response) {
       throw error;

@@ -1,12 +1,14 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import JoinPresenter from './JoinPresenter';
-import { useAppDispatch } from '@app/hooks';
+import { useAppSelector, useAppDispatch } from '@app/hooks';
 import { fetchUserJoin } from './joinSlice';
 
 const JoinContainer = () => {
-  const initialState = { nickName: '', email: '', password: '', cf_password: '' };
+  const initialState = { nickname: '', email: '', password: '', cf_password: '' };
   const [userJoinInfo, setUserJoinInfo] = useState(initialState);
-  const { nickName, email, password, cf_password } = userJoinInfo;
+  const { nickname, email, password, cf_password } = userJoinInfo;
+
+  const user = useAppSelector((state) => state.join);
 
   const dispatch = useAppDispatch();
 
@@ -17,21 +19,20 @@ const JoinContainer = () => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    console.log(userJoinInfo);
     dispatch(fetchUserJoin(userJoinInfo));
   };
 
   return (
-    <>
-      <JoinPresenter
-        onSubmit={onSubmit}
-        onChangeInput={onChangeInput}
-        nickName={nickName}
-        email={email}
-        password={password}
-        cf_password={cf_password}
-      />
-    </>
+    <JoinPresenter
+      onSubmit={onSubmit}
+      onChangeInput={onChangeInput}
+      nickname={nickname}
+      email={email}
+      password={password}
+      cf_password={cf_password}
+      user={user}
+    />
   );
 };
 

@@ -29,6 +29,7 @@ const initialState: InitialState = {
   error: null,
 };
 
+//유저 데이터(아이디, 비번) 전달
 export const fetchUserLogin = createAsyncThunk('login/fetchUserLogin', async (data: object, { rejectWithValue }) => {
   try {
     const res = await postAPI('login', data);
@@ -45,7 +46,7 @@ export const fetchUserLogin = createAsyncThunk('login/fetchUserLogin', async (da
 });
 
 const loginSlice = createSlice({
-  name: 'login',
+  name: 'user',
   initialState, //login(리듀서 이름): {lading, user, error}
   reducers: {},
   extraReducers: (builder) => {

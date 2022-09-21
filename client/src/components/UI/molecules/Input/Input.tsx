@@ -30,7 +30,7 @@ const StyledInput = styled.input<InputProps>`
   color: lightslategray;
   ${(props) => {
     switch (props.variant) {
-      case 'nickName':
+      case 'nickname':
         return `
           border-radius: 50px 80px 50px 80px;
         `;

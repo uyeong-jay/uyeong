@@ -19,11 +19,13 @@ const StyledAppLayout = styled.div`
 
 const AppLayout = ({ children }: AppLayoutProps) => {
   return (
-    <StyledAppLayout>
-      <Header />
-      {children}
-      <Footer />
-    </StyledAppLayout>
+    <>
+      <StyledAppLayout>
+        <Header />
+        {children}
+        <Footer />
+      </StyledAppLayout>
+    </>
   );
 };
 

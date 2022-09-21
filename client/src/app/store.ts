@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'; //리듀서들 + 미들웨어
 import loginReducer from '@pages/Login/loginSlice';
 import reduxLogger from 'redux-logger'; //미들웨어
+import joinReducer from '@pages/Join/joinSlice';
 
 const store = configureStore({
   reducer: {
     login: loginReducer,
+    join: joinReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(reduxLogger),
 });
