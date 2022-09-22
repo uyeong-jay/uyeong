@@ -1,13 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { postAPI } from '@utils/fetchData';
 
-interface UserJoinInfo {
-  nickname: string;
-  email: string;
-  password: string;
-  cf_password: string;
-}
-
 interface JoinError {
   response: {
     data: {
@@ -18,13 +11,13 @@ interface JoinError {
 
 interface InitialState {
   loading: boolean;
-  user: UserJoinInfo | null;
+  success: string | null;
   error: JoinError | unknown | null;
 }
 
 const initialState: InitialState = {
   loading: false,
-  user: null,
+  success: null,
   error: null,
 };
 
@@ -50,20 +43,20 @@ const joinSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchUserJoin.pending, (state) => {
       state.loading = true;
-      state.user = null;
+      state.success = null;
       state.error = null;
     });
-    builder.addCase(fetchUserJoin.fulfilled, (state, action: PayloadAction<UserJoinInfo>) => {
+    builder.addCase(fetchUserJoin.fulfilled, (state, action: PayloadAction<string | null>) => {
       state.loading = false;
-      state.user = action.payload;
-      // user: {}
+      state.success = action.payload;
+      // success: { msg: '' }
       state.error = null;
     });
     builder.addCase(fetchUserJoin.rejected, (state, action) => {
       state.loading = false;
-      state.user = null;
+      state.success = null;
       state.error = action.payload;
-      //error: ""
+      //error: "에러 메세지"
     });
   },
 });

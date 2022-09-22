@@ -54,7 +54,7 @@ const StyledInput = styled.input<InputProps>`
   }};
 `;
 
-const Input = ({ labelText, variant, name, type, value, onChange }: Props) => {
+const InputBox = ({ labelText, variant, name, type, value, onChange }: Props) => {
   return (
     <>
       <StyledLabel>{labelText}</StyledLabel>
@@ -63,8 +63,8 @@ const Input = ({ labelText, variant, name, type, value, onChange }: Props) => {
   );
 };
 
-Input.defaultProps = {
+InputBox.defaultProps = {
   type: 'text',
 };
 
-export default Input;
+export default InputBox;

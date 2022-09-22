@@ -8,7 +8,7 @@ const JoinContainer = () => {
   const [userJoinInfo, setUserJoinInfo] = useState(initialState);
   const { nickname, email, password, cf_password } = userJoinInfo;
 
-  const user = useAppSelector((state) => state.join);
+  const joinState = useAppSelector((state) => state.join);
 
   const dispatch = useAppDispatch();
 
@@ -19,7 +19,6 @@ const JoinContainer = () => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(userJoinInfo);
     dispatch(fetchUserJoin(userJoinInfo));
   };
 
@@ -31,7 +30,7 @@ const JoinContainer = () => {
       email={email}
       password={password}
       cf_password={cf_password}
-      user={user}
+      joinState={joinState}
     />
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
-import Link from 'next/link';
 import styled from '@_settings/styled';
 import Button from '@atoms/Button';
+import NavLinkBox from '@molecules/NavLinkBox';
 
 const StyledHeader = styled.header`
   border: 1px solid #dadada;
@@ -32,42 +32,19 @@ const StyledUl = styled.ul`
   height: 100%;
 `;
 
-const StyledAnchor = styled.a`
-  color: #433624;
-  // color: white;
-`;
-
 const Header = () => {
   return (
     <>
       <StyledHeader>
         <StyledNav>
           <StyledUl>
-            <li>
-              <Link href="/" passHref>
-                <StyledAnchor>로고 UYeong</StyledAnchor>
-              </Link>
-            </li>
-            <li>
-              <Link href="/blog" passHref>
-                <StyledAnchor>Blog</StyledAnchor>
-              </Link>
-            </li>
-            <li>
-              <Link href="/about" passHref>
-                <StyledAnchor>About</StyledAnchor>
-              </Link>
-            </li>
-            <li>
-              <Link href="/contact" passHref>
-                <StyledAnchor>Contact</StyledAnchor>
-              </Link>
-            </li>
-            <Link href="/login" passHref>
-              <StyledAnchor>
-                <Button variant="login" text="Login" type="submit" />
-              </StyledAnchor>
-            </Link>
+            <NavLinkBox href="/">로고 UYeong</NavLinkBox>
+            <NavLinkBox href="/blog">Blog</NavLinkBox>
+            <NavLinkBox href="/about">About</NavLinkBox>
+            <NavLinkBox href="/contact">Contact</NavLinkBox>
+            <NavLinkBox href="/login" passHref={true}>
+              <Button variant="login" text="Login" />
+            </NavLinkBox>
           </StyledUl>
         </StyledNav>
       </StyledHeader>

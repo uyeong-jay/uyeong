@@ -18,7 +18,7 @@ const StyledFooter = styled.footer`
   }
 
   & div a {
-    color: black;
+    color: blue;
   }
 
   & div {

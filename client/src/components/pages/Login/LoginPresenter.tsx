@@ -5,14 +5,14 @@ import styled from '@_settings/styled';
 import Loader from '@modals/Loader';
 import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
-import Input from '@molecules/Input';
+import InputBox from '@molecules/InputBox';
 
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
   email: string;
   password: string;
-  user: {
+  loginState: {
     loading: boolean;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     error: any;
@@ -35,7 +35,7 @@ const StyledSection = styled.section`
   }
 `;
 
-const LoginPresenter = ({ onSubmit, onChangeInput, email, password, user }: Props) => {
+const LoginPresenter = ({ onSubmit, onChangeInput, email, password, loginState }: Props) => {
   const [passwordType, setPasswordType] = useState(true);
 
   return (
@@ -44,18 +44,25 @@ const LoginPresenter = ({ onSubmit, onChangeInput, email, password, user }: Prop
         <title>UYeong | Login</title>
       </Head>
       {/* 로딩화면 */}
-      {user.loading && <Loader />}
+      {loginState.loading && <Loader />}
 
       <StyledSection>
         <form onSubmit={onSubmit}>
           <div>
             {/* input >> molecules 에서 가져오기 */}
-            <Input labelText="Email" variant="email" name="email" type="email" value={email} onChange={onChangeInput} />
+            <InputBox
+              labelText="Email"
+              variant="email"
+              name="email"
+              type="email"
+              value={email}
+              onChange={onChangeInput}
+            />
           </div>
 
           <div>
             {/* input >> molecules 에서 가져오기 */}
-            <Input
+            <InputBox
               labelText="Password"
               variant="password"
               name="password"
@@ -73,7 +80,7 @@ const LoginPresenter = ({ onSubmit, onChangeInput, email, password, user }: Prop
           </div>
 
           {/* 에러 메시지 */}
-          {user.error && <div style={{ color: 'red' }}>{user.error}</div>}
+          {loginState.error && <div style={{ color: 'red' }}>{loginState.error}</div>}
 
           {/* widebutton >> atoms 에서 가져오기 */}
           <WideButton variant="login" text="Login" type="submit" /* disabled={email && password ? false : true} */ />

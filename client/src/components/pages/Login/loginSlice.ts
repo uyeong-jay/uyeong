@@ -4,9 +4,11 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { postAPI } from '@utils/fetchData';
 
-interface UserLoginInfo {
-  email: string;
-  password: string;
+export interface UserLoginData {
+  msg: string;
+  access_token: string;
+  refresh_token: string;
+  data: object;
 }
 
 interface LoginError {
@@ -19,7 +21,7 @@ interface LoginError {
 
 interface InitialState {
   loading: boolean;
-  user: UserLoginInfo | null;
+  user: UserLoginData | null;
   error: LoginError | unknown | null;
 }
 
@@ -55,7 +57,7 @@ const loginSlice = createSlice({
       state.user = null;
       state.error = null;
     });
-    builder.addCase(fetchUserLogin.fulfilled, (state, action: PayloadAction<UserLoginInfo>) => {
+    builder.addCase(fetchUserLogin.fulfilled, (state, action: PayloadAction<UserLoginData>) => {
       state.loading = false;
       state.user = action.payload;
       //user: { access_token, refresh_token, data: {~}, msg }
