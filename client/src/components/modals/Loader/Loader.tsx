@@ -25,11 +25,14 @@ function shuffle(array: string[]) {
   return array;
 }
 
+//loading... 문자 모아 놓음
+const loadingLetters = ['L', 'O', 'A', 'D', 'I', 'N', 'G', '.', '.', '.'];
+
+//pink color와 비슷한 색 종류별로 모아 놓음
+const pinkColors = ['pink', 'lightpink', 'hotpink', 'deeppink', 'palevioletred', 'mediumvioletred'];
+
 //color가 1초마다 바뀌도록 하기
 const Loader = () => {
-  const loadingLetters = ['L', 'O', 'A', 'D', 'I', 'N', 'G', '.', '.', '.'];
-  const pinkColors = ['pink', 'lightpink', 'hotpink', 'deeppink', 'palevioletred', 'mediumvioletred'];
-
   const [randomNum, setRandomNum] = useState(0);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -41,7 +44,7 @@ const Loader = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isRunning, setIsRunning] = useState(true);
 
-  // 1초 마다 다른 random 숫자 가져오기
+  // 0.5초 마다 다른 random 숫자 가져오기
   useInterval(
     () => {
       setRandomNum(Math.floor(Math.random() * colors.length));
@@ -53,7 +56,7 @@ const Loader = () => {
     <LoaderWrapper>
       {loadingLetters.map((v, i) => {
         return (
-          //state값이 아닌 함수의 리턴값을 넣으니 loadingLetters가 모두 각각 다르게 적용이 가능하게 됨
+          //state값이 아닌 외부함수의 리턴값을 넣으니 map의 모든 value값에  각각 서로 다르게 적용이 가능하게 됨
           <span style={{ color: `${shuffle(colors)[randomNum]}` }} key={i}>
             {v}
           </span>

@@ -23,7 +23,6 @@ const StyledWideButton = styled.button<WideButtonProps>`
         return `
           border: 1px solid red;
           background-color: rgb(255, 105, 180, 0.5);
-          
         `;
       case 'join':
         return `

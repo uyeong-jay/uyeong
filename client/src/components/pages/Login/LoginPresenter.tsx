@@ -26,8 +26,13 @@ const StyledSection = styled.section`
   padding: 100px;
   margin: 50px 0 50px 0;
 
-  & form div {
-    // border: 1px solid red;
+  & form {
+    & div:nth-child(1) input {
+      border-radius: 50px 80px 50px 80px;
+    }
+    & div:nth-child(2) input {
+      border-radius: 90px 55px 80px 50px;
+    }
   }
 
   & p a {
@@ -49,22 +54,12 @@ const LoginPresenter = ({ onSubmit, onChangeInput, email, password, loginState }
       <StyledSection>
         <form onSubmit={onSubmit}>
           <div>
-            {/* input >> molecules 에서 가져오기 */}
-            <InputBox
-              labelText="Email"
-              variant="email"
-              name="email"
-              type="email"
-              value={email}
-              onChange={onChangeInput}
-            />
+            <InputBox labelText="Email" name="email" type="email" value={email} onChange={onChangeInput} />
           </div>
 
           <div>
-            {/* input >> molecules 에서 가져오기 */}
             <InputBox
               labelText="Password"
-              variant="password"
               name="password"
               type={passwordType ? 'password' : 'text'}
               value={password}

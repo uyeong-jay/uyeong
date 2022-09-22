@@ -29,8 +29,13 @@ const StyledSection = styled.section`
   padding: 100px;
   margin: 50px 0 50px 0;
 
-  & form div {
-    // border: 1px solid red;
+  & form {
+    & div:nth-child(odd) input {
+      border-radius: 50px 80px 50px 80px;
+    }
+    & div:nth-child(even) input {
+      border-radius: 90px 55px 80px 50px;
+    }
   }
 
   & p a {
@@ -56,30 +61,16 @@ const JoinPresenter = ({ onSubmit, onChangeInput, nickname, email, password, cf_
         <StyledSection>
           <form onSubmit={onSubmit}>
             <div>
-              <InputBox
-                labelText="Nickname"
-                variant="nickname"
-                name="nickname"
-                value={nickname}
-                onChange={onChangeInput}
-              />
+              <InputBox labelText="Nickname" name="nickname" value={nickname} onChange={onChangeInput} />
             </div>
 
             <div>
-              <InputBox
-                labelText="Email"
-                variant="email"
-                name="email"
-                type="email"
-                value={email}
-                onChange={onChangeInput}
-              />
+              <InputBox labelText="Email" name="email" type="email" value={email} onChange={onChangeInput} />
             </div>
 
             <div>
               <InputBox
                 labelText="Password"
-                variant="password"
                 name="password"
                 type={passwordType ? 'password' : 'text'}
                 value={password}
@@ -97,7 +88,6 @@ const JoinPresenter = ({ onSubmit, onChangeInput, nickname, email, password, cf_
             <div>
               <InputBox
                 labelText={'Confirm \n password'}
-                variant="cf_password"
                 name="cf_password"
                 type={cf_passwordType ? 'password' : 'text'}
                 value={cf_password}

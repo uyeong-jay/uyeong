@@ -30,3 +30,5 @@ function useInterval(callback: IntervalFunction, delay: number | null) {
 }
 
 export default useInterval;
+
+//사용: useInterval(콜백함수, 딜레이 초수)

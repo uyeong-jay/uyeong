@@ -6,21 +6,22 @@ import styled from '@_settings/styled';
 interface Props {
   href: string;
   passHref?: boolean;
+  target?: string;
+  rel?: string;
   children: ReactNode;
 }
 
 const StyledNavLinkBox = styled.li`
-  & > a {
-    //다크모드
-    color: blue;
-  }
+  //호버 적용하기
 `;
 
-const NavLinkBox = ({ href, passHref, children }: Props): ReactElement => {
+const NavLinkBox = ({ href, passHref, target, rel, children }: Props): ReactElement => {
   return (
     <StyledNavLinkBox>
       <Link href={href} passHref={passHref ? true : false}>
-        {children}
+        <a target={target} rel={rel}>
+          {children}
+        </a>
       </Link>
     </StyledNavLinkBox>
   );

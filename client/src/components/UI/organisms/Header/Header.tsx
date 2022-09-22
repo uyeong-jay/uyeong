@@ -21,15 +21,20 @@ const StyledNav = styled.nav`
   width: 750px;
   height: 60px;
   border-radius: 30px;
-`;
 
-const StyledUl = styled.ul`
-  border: 1px solid #dadada;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+  & ul {
+    border: 1px solid #dadada;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    & li a {
+      //다크모드
+      color: blue;
+    }
+  }
 `;
 
 const Header = () => {
@@ -37,7 +42,7 @@ const Header = () => {
     <>
       <StyledHeader>
         <StyledNav>
-          <StyledUl>
+          <ul>
             <NavLinkBox href="/">로고 UYeong</NavLinkBox>
             <NavLinkBox href="/blog">Blog</NavLinkBox>
             <NavLinkBox href="/about">About</NavLinkBox>
@@ -45,7 +50,7 @@ const Header = () => {
             <NavLinkBox href="/login" passHref={true}>
               <Button variant="login" text="Login" />
             </NavLinkBox>
-          </StyledUl>
+          </ul>
         </StyledNav>
       </StyledHeader>
     </>

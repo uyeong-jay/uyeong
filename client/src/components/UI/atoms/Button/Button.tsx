@@ -31,7 +31,7 @@ const StyledButton = styled.button<ButtonProps>`
         `;
       case 'update':
         return `
-        background-color: green;
+          background-color: green;
         `;
       case 'login':
         return `
