@@ -6,6 +6,7 @@ import Loader from '@modals/Loader';
 import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
 import InputBox from '@molecules/InputBox';
+import { ErrorMessage, UserData } from '@slices/userSlice';
 
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -13,9 +14,11 @@ interface Props {
   email: string;
   password: string;
   loginState: {
-    loading: boolean;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    error: any;
+    user: UserData | null;
+    login: {
+      loading: boolean;
+      error: ErrorMessage | null;
+    };
   };
 }
 
@@ -49,7 +52,7 @@ const LoginPresenter = ({ onSubmit, onChangeInput, email, password, loginState }
         <title>UYeong | Login</title>
       </Head>
       {/* 로딩화면 */}
-      {loginState.loading && <Loader />}
+      {loginState.login.loading && <Loader />}
 
       <StyledSection>
         <form onSubmit={onSubmit}>
@@ -75,7 +78,7 @@ const LoginPresenter = ({ onSubmit, onChangeInput, email, password, loginState }
           </div>
 
           {/* 에러 메시지 */}
-          {loginState.error && <div style={{ color: 'red' }}>{loginState.error}</div>}
+          {loginState.login.error && <div style={{ color: 'red' }}>{loginState.login.error}</div>}
 
           {/* widebutton >> atoms 에서 가져오기 */}
           <WideButton variant="login" text="Login" type="submit" /* disabled={email && password ? false : true} */ />

@@ -7,10 +7,12 @@ const LoaderWrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-color: #0007;
   z-index: 9999;
+  background-color: #0007;
   user-select: none;
   font-size: 30px;
 `;

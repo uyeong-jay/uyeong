@@ -12,7 +12,9 @@ interface Props {
 }
 
 const StyledNavLinkBox = styled.li`
-  //호버 적용하기
+  & a:hover {
+    opacity: 0.5;
+  }
 `;
 
 const NavLinkBox = ({ href, passHref, target, rel, children }: Props): ReactElement => {

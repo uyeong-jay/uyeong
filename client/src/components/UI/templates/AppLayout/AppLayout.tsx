@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
 import styled from '@_settings/styled';
 import Footer from '@organisms/Footer';
 import Header from '@organisms/Header';
+import { useAppDispatch } from '@app/hooks';
+import { fetchRefreshData } from '@actions/user';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -18,6 +21,12 @@ const StyledAppLayout = styled.div`
 `;
 
 const AppLayout = ({ children }: AppLayoutProps) => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchRefreshData(null));
+  }, [dispatch]);
+
   return (
     <>
       <StyledAppLayout>

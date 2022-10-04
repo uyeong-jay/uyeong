@@ -1,7 +1,11 @@
-import React from 'react';
 import styled from '@_settings/styled';
 import Button from '@atoms/Button';
 import NavLinkBox from '@molecules/NavLinkBox';
+import { UserData } from '@slices/userSlice';
+
+interface Props {
+  user: UserData | null;
+}
 
 const StyledHeader = styled.header`
   border: 1px solid #dadada;
@@ -37,7 +41,7 @@ const StyledNav = styled.nav`
   }
 `;
 
-const Header = () => {
+const HeaderPresenter = ({ user }: Props) => {
   return (
     <>
       <StyledHeader>
@@ -47,9 +51,13 @@ const Header = () => {
             <NavLinkBox href="/blog">Blog</NavLinkBox>
             <NavLinkBox href="/about">About</NavLinkBox>
             <NavLinkBox href="/contact">Contact</NavLinkBox>
-            <NavLinkBox href="/login" passHref={true}>
-              <Button variant="login" text="Login" />
-            </NavLinkBox>
+            {user ? (
+              <li>완료, 로그아웃</li>
+            ) : (
+              <NavLinkBox href="/login" passHref={true}>
+                <Button variant="login" text="Login" />
+              </NavLinkBox>
+            )}
           </ul>
         </StyledNav>
       </StyledHeader>
@@ -57,4 +65,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderPresenter;

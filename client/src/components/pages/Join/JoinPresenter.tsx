@@ -6,6 +6,7 @@ import Loader from '@modals/Loader';
 import InputBox from '@molecules/InputBox';
 import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
+import { ErrorMessage, UserData } from '@slices/userSlice';
 
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -15,10 +16,11 @@ interface Props {
   password: string;
   cf_password: string;
   joinState: {
-    loading: boolean;
-    success: string | null;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    error: any;
+    user: UserData | null;
+    join: {
+      loading: boolean;
+      error: ErrorMessage | null;
+    };
   };
 }
 
@@ -53,9 +55,9 @@ const JoinPresenter = ({ onSubmit, onChangeInput, nickname, email, password, cf_
         <title>UYeong | Join</title>
       </Head>
       {/* 로딩화면 */}
-      {joinState.loading && <Loader />}
+      {joinState.join.loading && <Loader />}
 
-      {joinState.success ? (
+      {joinState.user ? (
         <div>가입이 완료 되었습니다. 로그인을 해주세요.</div>
       ) : (
         <StyledSection>
@@ -103,7 +105,7 @@ const JoinPresenter = ({ onSubmit, onChangeInput, nickname, email, password, cf_
             </div>
 
             {/* 에러 메시지 */}
-            {joinState.error && <div style={{ color: 'red' }}>{joinState.error}</div>}
+            {joinState.join.error && <div style={{ color: 'red' }}>{joinState.join.error}</div>}
 
             <WideButton
               variant="join"
