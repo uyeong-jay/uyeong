@@ -10,19 +10,20 @@ export const refresh = async (req: Request, res: Response) => {
 		//token refresh 하기전 token이 있는지 확인 하기
 		//refresh_token 쿠키(유저id) 가져오기
 		const rf_token = req.cookies.refresh_token;
-		if (!rf_token) return res.status(400).json({ msg: "로그인을 해주세요.\n(Please login first.)" }); //refresh_token 쿠키(유저id 쿠키)가 없다는건 아직 로그인을 하지 않았다는 뜻
+		console.log("쿠키:", req.cookies.refresh_token);
+		if (!rf_token) return res.status(400).json({ msg: "Please login first." }); //refresh_token 쿠키(유저id 쿠키)가 없다는건 아직 로그인을 하지 않았다는 뜻
 
 		//token이 있으면 디코드 시켜서 해당 유저id 가져오기
 		//refresh_token 쿠키(유저id) 디코드 하기(jwt)
 		const decoded = <IDecodedToken>jwt.verify(rf_token, `${process.env.REFRESH_TOKEN_SECRET}`);
-		if (!decoded) res.status(400).json({ msg: "로그인을 해주세요.\n(Please login first.)" });
+		if (!decoded) res.status(400).json({ msg: "Please login first." });
 		//refresh_token 쿠키(유저id 쿠키)가 없다는건 아직 로그인을 하지 않았다는 뜻
 		// console.log(decoded);
 		// { id: '628c484bd2b44d75c5515c18', iat: 1653360788, exp: 1655952788 }
 
 		//디코드된 id의 유저 데이터 가져오기 (토큰 새로 넣어줄려고)
 		const user = await Users.findById(decoded.id).select("-password -cf_password"); //비번빼고 가져오기
-		if (!user) res.status(400).json({ msg: "계정이 존재하지 않습니다..(This account doesn't exist.)" }); //유저 자체가 없다는 건 없는 계정이라는 뜻
+		if (!user) res.status(400).json({ msg: "This account doesn't exist." }); //유저 자체가 없다는 건 없는 계정이라는 뜻
 		// console.log(user);
 		// {
 		//   _id: new ObjectId("628c484bd2b44d75c5515c18"),

@@ -22,13 +22,14 @@ if (process.env.NODE_ENV === "production") {
 	//   credentials: true,
 	// }));
 } else {
-	app.use(morgan("dev"));
+	// app.use(cors());
 	app.use(
 		cors({
 			origin: true,
 			credentials: true,
 		})
-	);
+	); //백,프 간 쿠키 공유도되록 만들기
+	app.use(morgan("dev"));
 }
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

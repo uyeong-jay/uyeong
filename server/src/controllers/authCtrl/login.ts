@@ -42,7 +42,7 @@ export const login = async (req: Request, res: Response) => {
 			msg: "Login Success!",
 			access_token,
 			refresh_token,
-			data: { ...user._doc, password: "", cf_password: "" }, //비번빼고 가져오는 방법
+			user: { ...user._doc, password: "", cf_password: "" }, //비번빼고 가져오는 방법
 		});
 	} catch (err) {
 		if (err instanceof Error) return res.status(500).json({ msg: err.message });
