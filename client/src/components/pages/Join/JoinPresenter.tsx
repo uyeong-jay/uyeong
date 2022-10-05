@@ -15,8 +15,8 @@ interface Props {
   email: string;
   password: string;
   cf_password: string;
-  joinState: {
-    user: UserData | null;
+  userState: {
+    userData: UserData | null;
     join: {
       loading: boolean;
       error: ErrorMessage | null;
@@ -45,7 +45,7 @@ const StyledSection = styled.section`
   }
 `;
 
-const JoinPresenter = ({ onSubmit, onChangeInput, nickname, email, password, cf_password, joinState }: Props) => {
+const JoinPresenter = ({ onSubmit, onChangeInput, nickname, email, password, cf_password, userState }: Props) => {
   const [passwordType, setPasswordType] = useState(true);
   const [cf_passwordType, setCf_passwordType] = useState(true);
 
@@ -55,9 +55,9 @@ const JoinPresenter = ({ onSubmit, onChangeInput, nickname, email, password, cf_
         <title>UYeong | Join</title>
       </Head>
       {/* 로딩화면 */}
-      {joinState.join.loading && <Loader />}
+      {userState.join.loading && <Loader />}
 
-      {joinState.user ? (
+      {userState.userData ? (
         <div>가입이 완료 되었습니다. 로그인을 해주세요.</div>
       ) : (
         <StyledSection>
@@ -105,7 +105,7 @@ const JoinPresenter = ({ onSubmit, onChangeInput, nickname, email, password, cf_
             </div>
 
             {/* 에러 메시지 */}
-            {joinState.join.error && <div style={{ color: 'red' }}>{joinState.join.error}</div>}
+            {userState.join.error && <div style={{ color: 'red' }}>{userState.join.error}</div>}
 
             <WideButton
               variant="join"

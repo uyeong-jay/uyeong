@@ -11,7 +11,7 @@ const LoginContainer = () => {
 
   const router = useRouter();
 
-  const loginState = useAppSelector((state) => state.user);
+  const userState = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -30,13 +30,13 @@ const LoginContainer = () => {
 
   //login 성공시
   useEffect(() => {
-    if (loginState.user) router.replace('/');
+    if (userState.userData) router.replace('/');
     //router.push > window.history에 push에 넣은 새로운 url 기록을 추가
     //router.replace > 현 페이지를 repalce에 넣은 url로 대체
     //(로그인시 자주 사용)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loginState.user]);
+  }, [userState.userData]);
 
   return (
     <LoginPresenter
@@ -44,7 +44,7 @@ const LoginContainer = () => {
       onChangeInput={onChangeInput}
       email={email}
       password={password}
-      loginState={loginState}
+      userState={userState}
     />
   );
 };

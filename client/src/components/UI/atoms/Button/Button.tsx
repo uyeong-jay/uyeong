@@ -15,11 +15,6 @@ interface ButtonProps {
 const StyledButton = styled.button<ButtonProps>`
   ${(props) => {
     switch (props.variant) {
-      case 'primary':
-        return `
-          background: none;
-          border: none;
-        `;
       case 'add':
         return `
           background-color: blue;
@@ -35,17 +30,17 @@ const StyledButton = styled.button<ButtonProps>`
         `;
       case 'login':
         return `
-          border: 1px solid red;
-          background-color: rgb(255, 105, 180, 0.5);
-        `;
-      case 'logout':
-        return `
           border: 1px solid magenta;
           background-color: rgb(238, 130, 238, 0.6);
         `;
+      case 'logout':
+        return `
+          // border: 1px solid black;
+          background-color: white;
+        `;
       default:
         return `
-          border: 1px solid black;
+          // border: 1px solid black;
           background-color: white;
         `;
     }

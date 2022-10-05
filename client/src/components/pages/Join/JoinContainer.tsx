@@ -8,7 +8,7 @@ const JoinContainer = () => {
   const [userJoinInfo, setUserJoinInfo] = useState(initialState);
   const { nickname, email, password, cf_password } = userJoinInfo;
 
-  const joinState = useAppSelector((state) => state.user);
+  const userState = useAppSelector((state) => state.user);
 
   const dispatch = useAppDispatch();
 
@@ -30,7 +30,7 @@ const JoinContainer = () => {
       email={email}
       password={password}
       cf_password={cf_password}
-      joinState={joinState}
+      userState={userState}
     />
   );
 };

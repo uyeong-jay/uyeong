@@ -1,25 +1,28 @@
-import { configureStore } from '@reduxjs/toolkit'; //리듀서 + 미들웨어
+import { configureStore, Reducer } from '@reduxjs/toolkit'; //리듀서 + 미들웨어
 import { createWrapper } from 'next-redux-wrapper';
-import { IState, persistedReducer } from '@slices/index';
+// import { IState, persistedReducer } from '@slices/index';
 import reduxLogger from 'redux-logger'; //미들웨어
 import { CurriedGetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware';
-import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import rootReducer, { IState } from '@slices/index';
+// import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 
 const isDev = process.env.NODE_ENV === 'development';
 
 const createStore = () => {
   const middleware = (getDefaultMiddleware: CurriedGetDefaultMiddleware<IState>) => {
     if (isDev)
-      return getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-      }).concat(reduxLogger);
+      // return getDefaultMiddleware({
+      //   serializableCheck: {
+      //     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      //   },
+      // }).concat(reduxLogger);
+      return getDefaultMiddleware().concat(reduxLogger);
     return getDefaultMiddleware();
   };
 
   const store = configureStore({
-    reducer: persistedReducer,
+    // reducer: persistedReducer,
+    reducer: rootReducer as Reducer,
     middleware,
     devTools: isDev,
   });
@@ -38,6 +41,6 @@ const wrapper = createWrapper<AppStore>(createStore, {
   deserializeState: (state) => JSON.parse(state),
 });
 
-export const persistor = persistStore(createStore());
+// export const persistor = persistStore(createStore());
 
 export default wrapper;

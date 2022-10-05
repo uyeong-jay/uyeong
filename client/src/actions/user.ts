@@ -42,6 +42,10 @@ export const fetchRefreshData = createAsyncThunk(
   async (data: object | null, { rejectWithValue }) => {
     try {
       const login = localStorage.getItem('login');
+      //localstorage에 user가 없으면
+      //아무 것도 없는 걸 전달하기(return;)
+      //(전달을 안하는게 아님)
+      //(아무것도 없는 걸 전달해도 refresh는 실행되어 refresh.success는 true로 바뀜)
       if (login !== 'user') return;
       const res = await getAPI('refresh');
       return res.data;
