@@ -24,8 +24,6 @@ const LoginContainer = () => {
 
     //유저 데이터(아이디, 비번) 전달
     dispatch(fetchLoginData(userLoginInfo));
-
-    localStorage.setItem('login', 'user');
   };
 
   //login 성공시

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchJoinData, fetchLoginData, fetchRefreshData } from '@actions/user';
+import { fetchJoinData, fetchLoginData, fetchLogoutData, fetchRefreshData } from '@actions/user';
 
 export interface UserData {
   msg?: string;
@@ -29,6 +29,7 @@ export interface IUserState {
   userData: UserData | null;
   join: DefaultState;
   login: DefaultState;
+  logout: DefaultState;
   refresh: DefaultState;
 }
 
@@ -42,6 +43,7 @@ const initialState: IUserState = {
   userData: null,
   join: defaultState,
   login: defaultState,
+  logout: defaultState,
   refresh: defaultState,
 };
 
@@ -89,6 +91,26 @@ const userSlice = createSlice({
       state.login.success = false;
       state.userData = null;
       state.login.error = action.payload;
+      //error: "에러 메세지"
+    });
+
+    //logout
+    builder.addCase(fetchLogoutData.pending, (state) => {
+      state.logout.loading = true;
+      state.logout.success = false;
+      state.logout.error = null;
+    });
+    builder.addCase(fetchLogoutData.fulfilled, (state) => {
+      state.logout.loading = false;
+      state.logout.success = true;
+      state.userData = null;
+      state.logout.error = null;
+    });
+    builder.addCase(fetchLogoutData.rejected, (state, action) => {
+      state.logout.loading = false;
+      state.logout.success = false;
+      state.userData = null;
+      state.logout.error = action.payload;
       //error: "에러 메세지"
     });
 

@@ -9,7 +9,6 @@ import { postAPI, getAPI } from '@utils/fetchData';
 export const fetchJoinData = createAsyncThunk('fetchJoinData', async (data: object, { rejectWithValue }) => {
   try {
     const res = await postAPI('register', data);
-    console.log(res);
     return res.data;
   } catch (err) {
     const error = err as ErrorMessage;
@@ -25,6 +24,23 @@ export const fetchJoinData = createAsyncThunk('fetchJoinData', async (data: obje
 export const fetchLoginData = createAsyncThunk('fetchLoginData', async (data: object, { rejectWithValue }) => {
   try {
     const res = await postAPI('login', data);
+    if (res.data) localStorage.setItem('login', 'user');
+    return res.data;
+  } catch (err) {
+    const error = err as ErrorMessage;
+    if (!error.response) {
+      throw error;
+    }
+    console.log(error.response.data.msg);
+    return rejectWithValue(error.response.data.msg);
+  }
+});
+
+//logout
+export const fetchLogoutData = createAsyncThunk('fetchLogoutData', async (data: null, { rejectWithValue }) => {
+  try {
+    localStorage.removeItem('login');
+    const res = await getAPI('logout');
     return res.data;
   } catch (err) {
     const error = err as ErrorMessage;
@@ -37,25 +53,19 @@ export const fetchLoginData = createAsyncThunk('fetchLoginData', async (data: ob
 });
 
 //refresh
-export const fetchRefreshData = createAsyncThunk(
-  'fetchRefreshData',
-  async (data: object | null, { rejectWithValue }) => {
-    try {
-      const login = localStorage.getItem('login');
-      //localstorage에 user가 없으면
-      //아무 것도 없는 걸 전달하기(return;)
-      //(전달을 안하는게 아님)
-      //(아무것도 없는 걸 전달해도 refresh는 실행되어 refresh.success는 true로 바뀜)
-      if (login !== 'user') return;
-      const res = await getAPI('refresh');
-      return res.data;
-    } catch (err) {
-      const error = err as ErrorMessage;
-      if (!error.response) {
-        throw error;
-      }
-      console.log(error.response.data.msg);
-      return rejectWithValue(error.response.data.msg);
+export const fetchRefreshData = createAsyncThunk('fetchRefreshData', async (data: null, { rejectWithValue }) => {
+  try {
+    //localstorage에 user가 없어도 에러를 내지않고 return; 을 실행해 refresh.success를 true 로 바꾸기
+    const login = localStorage.getItem('login');
+    if (login !== 'user') return;
+    const res = await getAPI('refresh');
+    return res.data;
+  } catch (err) {
+    const error = err as ErrorMessage;
+    if (!error.response) {
+      throw error;
     }
-  },
-);
+    console.log(error.response.data.msg);
+    return rejectWithValue(error.response.data.msg);
+  }
+});

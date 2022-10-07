@@ -42,18 +42,18 @@ const AboutPresenter = () => {
           width: 0px;
         }
 
-        & .underline:nth-child(1):after {
+        & .underline:nth-of-type(1):after {
           //animation: 이름 유지시간 효과 딜레이시간 마지막상태유지;
           animation: underline_purple 2s ease-in-out 0s forwards;
           background: url('/pencils/purple_pencil.png');
           background-size: 110px 15px;
         }
-        & .underline:nth-child(2):after {
+        & .underline:nth-of-type(2):after {
           animation: underline_blue 2s ease-in-out 0.6s forwards;
           background: url('/pencils/blue_pencil.png');
           background-size: 70px 15px;
         }
-        & .underline:nth-child(4):after {
+        & .underline:nth-of-type(3):after {
           animation: underline_green 2s ease-in-out 1.2s forwards;
           background: url('/pencils/green_pencil.png');
           background-size: 50px 15px;

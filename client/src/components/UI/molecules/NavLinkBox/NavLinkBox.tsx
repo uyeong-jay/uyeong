@@ -13,7 +13,7 @@ interface Props {
 
 const StyledNavLinkBox = styled.li`
   & a:hover {
-    opacity: 0.5;
+    color: rgba(0, 0, 0, 0.5);
   }
 `;
 

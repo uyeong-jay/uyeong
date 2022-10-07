@@ -32,10 +32,10 @@ const StyledSection = styled.section`
   margin: 50px 0 50px 0;
 
   & form {
-    & div:nth-child(odd) input {
+    & > div:nth-of-type(odd) input {
       border-radius: 50px 80px 50px 80px;
     }
-    & div:nth-child(even) input {
+    & > div:nth-of-type(even) input {
       border-radius: 90px 55px 80px 50px;
     }
   }

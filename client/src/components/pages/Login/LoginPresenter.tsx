@@ -29,10 +29,10 @@ const StyledSection = styled.section`
   margin: 50px 0 50px 0;
 
   & form {
-    & div:nth-child(1) input {
+    & > div:nth-of-type(1) input {
       border-radius: 50px 80px 50px 80px;
     }
-    & div:nth-child(2) input {
+    & > div:nth-of-type(2) input {
       border-radius: 90px 55px 80px 50px;
     }
   }
