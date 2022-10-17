@@ -1,16 +1,18 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import Users from "@models/userModel";
-import { IDecodedToken } from "@_types/types";
+import { IDecodedToken, IReqAuth } from "@_types/types";
 import { generateAccessToken, generateRefreshToken } from "@utils/generateToken";
 
 //새로고침 되었을때 유저 확인 + 토큰 새로 발급해주기
-export const refresh = async (req: Request, res: Response) => {
+export const refresh = async (req: IReqAuth, res: Response) => {
 	try {
 		//token refresh 하기전 token이 있는지 확인 하기
 		//refresh_token 쿠키(유저id) 가져오기
+		// console.log("헤더:", req.headers);
+		console.log("쿠키", req.cookies.refresh_token);
 		const rf_token = req.cookies.refresh_token;
-		console.log("쿠키:", req.cookies.refresh_token);
+
 		if (!rf_token) return res.status(400).json({ msg: "Please login first." }); //refresh_token 쿠키(유저id 쿠키)가 없다는건 아직 로그인을 하지 않았다는 뜻
 
 		//token이 있으면 디코드 시켜서 해당 유저id 가져오기
@@ -41,7 +43,7 @@ export const refresh = async (req: Request, res: Response) => {
 		const access_token = generateAccessToken({ id: user?._id });
 		const refresh_token = generateRefreshToken({ id: user?._id });
 
-		//해당id 유저에 새로만든 refresh_token 추가해주기
+		//해당id 유저에 새로만든 refresh_token으로 바꾸기
 		await Users.findOneAndUpdate({ _id: user?._id }, { refresh_token });
 
 		//성공시
@@ -49,6 +51,7 @@ export const refresh = async (req: Request, res: Response) => {
 			access_token,
 			refresh_token,
 			user,
+			msg: "새로고침 완료",
 		});
 	} catch (err) {
 		if (err instanceof Error) return res.status(500).json({ msg: err.message });

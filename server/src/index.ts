@@ -14,7 +14,7 @@ const app = express();
 
 // Middelware
 if (process.env.NODE_ENV === "production") {
-	app.use(morgan("combined"));
+	// app.use(morgan("combined"));
 	// app.use(hpp());
 	// app.use(helmet({ contentSecurityPolicy: false }));
 	// app.use(cors({
@@ -26,9 +26,9 @@ if (process.env.NODE_ENV === "production") {
 	app.use(
 		cors({
 			origin: true,
-			credentials: true,
+			credentials: true, //백,프 간 쿠키 공유도되록 만들기
 		})
-	); //백,프 간 쿠키 공유도되록 만들기
+	);
 	app.use(morgan("dev"));
 }
 app.use(express.json());

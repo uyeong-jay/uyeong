@@ -5,7 +5,7 @@ import { IReqAuth } from "@_types/types";
 export const logout = async (req: IReqAuth, res: Response) => {
 	try {
 		//refresh_token 쿠키 삭제하기
-		res.clearCookie("refresh_token", { path: `/api/refresh` });
+		res.clearCookie("refresh_token", { path: "/" });
 
 		//해당id 유저 refresh_token 없애기
 		await Users.findOneAndUpdate(

@@ -30,10 +30,10 @@ export const login = async (req: Request, res: Response) => {
 		//findOneAndUpdate(조건, 변경, 옵션, 콜백)??
 		await Users.findOneAndUpdate({ _id: user._id }, { refresh_token });
 
-		//refresh token 쿠키 생성하기
+		// refresh token 쿠키 생성하기
 		res.cookie("refresh_token", refresh_token, {
+			path: "/",
 			httpOnly: true,
-			path: `/api/refresh`,
 			maxAge: 30 * 24 * 60 * 60 * 1000, // day*hour*min*sec*ms //30days
 		});
 

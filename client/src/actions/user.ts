@@ -24,7 +24,6 @@ export const fetchJoinData = createAsyncThunk('fetchJoinData', async (data: obje
 export const fetchLoginData = createAsyncThunk('fetchLoginData', async (data: object, { rejectWithValue }) => {
   try {
     const res = await postAPI('login', data);
-    if (res.data) localStorage.setItem('login', 'user');
     return res.data;
   } catch (err) {
     const error = err as ErrorMessage;
@@ -39,7 +38,6 @@ export const fetchLoginData = createAsyncThunk('fetchLoginData', async (data: ob
 //logout
 export const fetchLogoutData = createAsyncThunk('fetchLogoutData', async (data: null, { rejectWithValue }) => {
   try {
-    localStorage.removeItem('login');
     const res = await getAPI('logout');
     return res.data;
   } catch (err) {
@@ -55,9 +53,6 @@ export const fetchLogoutData = createAsyncThunk('fetchLogoutData', async (data: 
 //refresh
 export const fetchRefreshData = createAsyncThunk('fetchRefreshData', async (data: null, { rejectWithValue }) => {
   try {
-    //localstorage에 user가 없어도 에러를 내지않고 return; 을 실행해 refresh.success를 true 로 바꾸기
-    const login = localStorage.getItem('login');
-    if (login !== 'user') return;
     const res = await getAPI('refresh');
     return res.data;
   } catch (err) {

@@ -57,7 +57,7 @@ const StyledNav = styled.nav`
         flex-direction: column;
         position: absolute;
         top: 40px;
-        z-index: 9;
+        z-index: 999;
         left: -2px;
         width: 130px;
         height: 200px;
@@ -90,7 +90,7 @@ const StyledNav = styled.nav`
 `;
 
 const HeaderPresenter = ({ userState, onClickLogout }: Props) => {
-  const { userData, refresh } = userState;
+  const { userData } = userState;
   const [isOpen, setIsOpen] = useState(false);
 
   //dropdown 버튼 내부 - 클릭시 dropdown toggle
@@ -113,40 +113,33 @@ const HeaderPresenter = ({ userState, onClickLogout }: Props) => {
             <NavLinkBox href="/blog">Blog</NavLinkBox>
             <NavLinkBox href="/about">About</NavLinkBox>
             <NavLinkBox href="/contact">Contact</NavLinkBox>
-            {refresh.success ? (
-              userData ? (
-                //로그인 후: refresh.success(true) , userData - O
-                <li
-                  onClick={onClickDropDown}
-                  onMouseLeave={() => {
-                    document.addEventListener('click', onClickOutside);
-                  }}
-                >
-                  <Button variant="" text={`${userData.user?.nickname}`} />
-                  <i className="fa-solid fa-caret-down"></i>
-                  {isOpen && (
-                    <ul /* ref={modalEl} */>
-                      <li>
-                        <Button variant="" onClick={onClickLogout} text="Your profile" />
-                      </li>
-                      <li>
-                        <Button variant="" onClick={onClickLogout} text="Your likes" />
-                      </li>
-                      <li>
-                        <Button variant="logout" onClick={onClickLogout} text="Logout" />
-                      </li>
-                    </ul>
-                  )}
-                </li>
-              ) : (
-                //로그인 전: refresh.success(true) , userData - X
-                <NavLinkBox href="/login" passHref={true}>
-                  <Button variant="login" text="Login" />
-                </NavLinkBox>
-              )
+            {userData ? (
+              <li
+                onClick={onClickDropDown}
+                onMouseLeave={() => {
+                  document.addEventListener('click', onClickOutside);
+                }}
+              >
+                <Button variant="" text={`${userData.user?.nickname}`} />
+                <i className="fa-solid fa-caret-down"></i>
+                {isOpen && (
+                  <ul>
+                    <li>
+                      <Button variant="" onClick={onClickLogout} text="Your profile" />
+                    </li>
+                    <li>
+                      <Button variant="" onClick={onClickLogout} text="Your likes" />
+                    </li>
+                    <li>
+                      <Button variant="logout" onClick={onClickLogout} text="Logout" />
+                    </li>
+                  </ul>
+                )}
+              </li>
             ) : (
-              //새로고침(초기화) 상태:  refresh.success(false) , userData - X
-              <li></li>
+              <NavLinkBox href="/login" passHref={true}>
+                <Button variant="login" text="Login" />
+              </NavLinkBox>
             )}
           </ul>
         </StyledNav>

@@ -6,7 +6,7 @@ import Loader from '@modals/Loader';
 import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
 import InputBox from '@molecules/InputBox';
-import { ErrorMessage } from '@slices/userSlice';
+import { ErrorMessage, UserData } from '@slices/userSlice';
 
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -14,6 +14,7 @@ interface Props {
   email: string;
   password: string;
   userState: {
+    user: UserData | null;
     login: {
       loading: boolean;
       error: ErrorMessage | null;
