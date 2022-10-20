@@ -23,9 +23,3 @@ export type BlogProps = {
   title: string;
   description: string;
 };
-
-export type Params = {
-  params: {
-    slug: string;
-  };
-};

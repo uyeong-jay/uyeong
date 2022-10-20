@@ -1,7 +1,8 @@
-import { GetServerSideProps } from 'next/types';
+import { GetServerSideProps } from 'next';
 import wrapper from '@app/store';
-import { fetchRefreshData } from '@actions/user';
 import axios from 'axios';
+import { getUserData } from '@slices/api/apiSlice';
+
 export { default } from '@pages/Home';
 
 // Client sdie rendering 에서는
@@ -17,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
     axios.defaults.headers.common.Cookie = cookie;
   }
 
-  await store.dispatch(fetchRefreshData(null));
+  await store.dispatch(getUserData.initiate());
 
   return {
     props: {},

@@ -1,11 +1,12 @@
 import HeaderPresenter from './HeaderPresenter';
-import { useAppSelector } from '@src/app/hooks';
 import { useAppDispatch } from '@app/hooks';
 import { fetchLogoutData } from '@actions/user';
 import { useRouter } from 'next/router';
+import { useGetUserDataQuery } from '@slices/api/apiSlice';
 
 const HeaderContainer = () => {
-  const userState = useAppSelector((state) => state.user);
+  const { data: userData, isLoading, isError } = useGetUserDataQuery();
+  console.log(userData);
 
   const dispatch = useAppDispatch();
 
@@ -16,7 +17,7 @@ const HeaderContainer = () => {
     router.replace('/');
   };
 
-  return <HeaderPresenter onClickLogout={onClickLogout} userState={userState} />;
+  return <HeaderPresenter userData={userData} isLoading={isLoading} isError={isError} onClickLogout={onClickLogout} />;
 };
 
 export default HeaderContainer;

@@ -8,17 +8,18 @@ import matter from 'gray-matter';
 
 const postsDirectory = path.join(process.cwd(), 'src/posts');
 
-export async function getPostSlugs() {
-  const postNames = fs.readdirSync(postsDirectory);
+//getStaticPaths 가 필요할때 주석 풀어서 쓰기
+// export async function getPostSlugs() {
+//   const postNames = fs.readdirSync(postsDirectory);
 
-  return postNames.map((postName) => ({
-    params: {
-      slug: postName.replace(/\.md$/, ''),
-    },
-  }));
-}
+//   return postNames.map((postName) => ({
+//     params: {
+//       slug: postName.replace(/\.md$/, ''),
+//     },
+//   }));
+// }
 
-export async function getPostBySlug(slug: string) {
+export async function getPostBySlug(slug: string | string[] | undefined) {
   const fullPath = path.join(postsDirectory, `${slug}.md`);
 
   const postContents = fs.readFileSync(fullPath, 'utf-8');

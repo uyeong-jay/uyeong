@@ -2,16 +2,14 @@ import { useState } from 'react';
 import styled from '@_settings/styled';
 import Button from '@atoms/Button';
 import NavLinkBox from '@molecules/NavLinkBox';
-import { UserData } from '@slices/userSlice';
+import { UserData } from '@slices/api/apiSlice';
+import Loader from '@modals/Loader';
 
 interface Props {
+  userData: UserData | undefined;
+  isLoading: boolean;
+  isError: boolean;
   onClickLogout: () => void;
-  userState: {
-    userData: UserData | null;
-    refresh: {
-      success: boolean;
-    };
-  };
 }
 
 const StyledHeader = styled.header`
@@ -40,18 +38,19 @@ const StyledNav = styled.nav`
     width: 100%;
     height: 100%;
 
-    & li a {
+    & > li > a {
+      // border: 1px solid black;
       //다크모드
       color: blue;
     }
 
-    & li:nth-of-type(5) {
+    & > li:nth-of-type(5) {
       // border: 1px solid black;
       position: relative;
       cursor: pointer;
       width: 100px;
 
-      & ul {
+      & > ul {
         border: 1px solid red;
         display: flex;
         flex-direction: column;
@@ -62,12 +61,14 @@ const StyledNav = styled.nav`
         width: 130px;
         height: 200px;
         border-radius: 10px;
+        background-color: white;
 
         & > li {
           width: 100%;
           height: 100%;
 
-          & > button {
+          & > button,
+          a {
             // border: 1px solid black;
             display: flex;
             justify-content: start;
@@ -77,20 +78,14 @@ const StyledNav = styled.nav`
             height: 100%;
             border-radius: 10px;
           }
-
-          & > button:hover {
-            color: rgba(0, 0, 0, 0.5);
-          }
         }
       }
     }
   }
-
   //+스크롤시 nav width만 남도록 하기
 `;
 
-const HeaderPresenter = ({ userState, onClickLogout }: Props) => {
-  const { userData } = userState;
+const HeaderPresenter = ({ userData, isLoading, isError, onClickLogout }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   //dropdown 버튼 내부 - 클릭시 dropdown toggle
@@ -104,8 +99,11 @@ const HeaderPresenter = ({ userState, onClickLogout }: Props) => {
     setIsOpen(false);
   };
 
+  if (isError) return <div>Error</div>;
   return (
     <>
+      {/* 로딩화면 */}
+      {isLoading && <Loader />}
       <StyledHeader>
         <StyledNav>
           <ul>
@@ -124,12 +122,8 @@ const HeaderPresenter = ({ userState, onClickLogout }: Props) => {
                 <i className="fa-solid fa-caret-down"></i>
                 {isOpen && (
                   <ul>
-                    <li>
-                      <Button variant="" onClick={onClickLogout} text="Your profile" />
-                    </li>
-                    <li>
-                      <Button variant="" onClick={onClickLogout} text="Your likes" />
-                    </li>
+                    <NavLinkBox href="/profile">Your profile</NavLinkBox>
+                    <NavLinkBox href="/profile">Your likes</NavLinkBox>
                     <li>
                       <Button variant="logout" onClick={onClickLogout} text="Logout" />
                     </li>

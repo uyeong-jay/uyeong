@@ -41,4 +41,6 @@ src/posts
 
 .vscode
 
+# etc
+reusableFiles
 _memo.txt

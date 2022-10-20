@@ -1,19 +1,21 @@
-import { getPostSlugs, getPostBySlug } from '@src/utils/utils-post';
-import { Params } from '@_types/types-blog';
+import { fetchRefreshData } from '@actions/user';
+import wrapper from '@app/store';
+import { getPostBySlug } from '@utils/utils-post';
+import axios from 'axios';
+import { GetServerSideProps } from 'next';
 
 export { default } from '@pages/BlogPost';
 
-export const getStaticPaths = async () => {
-  const paths = await getPostSlugs();
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async ({ params, req }) => {
+  const cookie = req ? req.headers.cookie : '';
+  axios.defaults.headers.common.Cookie = '';
+  if (req && cookie) {
+    axios.defaults.headers.common.Cookie = cookie;
+  }
 
-  return {
-    paths,
-    fallback: false,
-  };
-};
+  const { frontMatter, markdownBody } = await getPostBySlug(params?.slug);
 
-export const getStaticProps = async ({ params }: Params) => {
-  const { frontMatter, markdownBody } = await getPostBySlug(params.slug);
+  await store.dispatch(fetchRefreshData(null));
 
   return {
     props: {
@@ -21,4 +23,4 @@ export const getStaticProps = async ({ params }: Params) => {
       markdownBody,
     },
   };
-};
+});
