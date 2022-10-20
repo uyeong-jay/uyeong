@@ -5,9 +5,8 @@ import { IReqAuth } from "@_types/types";
 export const logout = async (req: IReqAuth, res: Response) => {
 	try {
 		//refresh_token 쿠키 삭제하기
-		res.clearCookie("refresh_token", { path: "/" });
+		res.clearCookie("refresh_token", { path: "/" }); //프론트쪽 path
 
-		//해당id 유저 refresh_token 없애기
 		await Users.findOneAndUpdate(
 			{ _id: req.user?._id },
 			{
@@ -15,8 +14,8 @@ export const logout = async (req: IReqAuth, res: Response) => {
 			}
 		);
 
-		//성공시
-		res.status(200).json({ msg: "Logout Success!" });
+		//성공
+		res.status(200).json({ msg: "Logout success!" });
 	} catch (err) {
 		if (err instanceof Error) return res.status(500).json({ msg: err.message });
 	}
