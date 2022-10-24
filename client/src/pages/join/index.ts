@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import wrapper from '@app/store';
 import axios from 'axios';
-import { getUserData } from '@slices/api/apiSlice';
+import { getUserData } from '@app/services/api';
 
 export { default } from '@pages/Join';
 
@@ -10,9 +10,8 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   axios.defaults.headers.common.Cookie = '';
   if (context.req && cookie) {
     axios.defaults.headers.common.Cookie = cookie;
+    await store.dispatch(getUserData.initiate());
   }
-
-  await store.dispatch(getUserData.initiate());
 
   return {
     props: {},

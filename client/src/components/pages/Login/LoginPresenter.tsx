@@ -6,20 +6,14 @@ import Loader from '@modals/Loader';
 import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
 import InputBox from '@molecules/InputBox';
-import { ErrorMessage, UserData } from '@slices/userSlice';
 
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
   email: string;
   password: string;
-  userState: {
-    user: UserData | null;
-    login: {
-      loading: boolean;
-      error: ErrorMessage | null;
-    };
-  };
+  isLoading: boolean;
+  error: any;
 }
 
 const StyledSection = styled.section`
@@ -43,7 +37,7 @@ const StyledSection = styled.section`
   }
 `;
 
-const LoginPresenter = ({ onSubmit, onChangeInput, email, password, userState }: Props) => {
+const LoginPresenter = ({ onSubmit, onChangeInput, email, password, isLoading, error }: Props) => {
   const [passwordType, setPasswordType] = useState(true);
 
   return (
@@ -52,7 +46,7 @@ const LoginPresenter = ({ onSubmit, onChangeInput, email, password, userState }:
         <title>UYeong | Login</title>
       </Head>
       {/* 로딩화면 */}
-      {userState.login.loading && <Loader />}
+      {isLoading && <Loader />}
 
       <StyledSection>
         <form onSubmit={onSubmit}>
@@ -78,7 +72,7 @@ const LoginPresenter = ({ onSubmit, onChangeInput, email, password, userState }:
           </div>
 
           {/* 에러 메시지 */}
-          {userState.login.error && <div style={{ color: 'red' }}>{userState.login.error}</div>}
+          {error && <div style={{ color: 'red' }}>{error.data.msg}</div>}
 
           {/* widebutton >> atoms 에서 가져오기 */}
           <WideButton variant="login" text="Login" type="submit" /* disabled={email && password ? false : true} */ />

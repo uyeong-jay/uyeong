@@ -1,5 +1,5 @@
-import { fetchRefreshData } from '@actions/user';
 import wrapper from '@app/store';
+import { getUserData } from '@app/services/api';
 import { getPostBySlug } from '@utils/utils-post';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
@@ -11,11 +11,10 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   axios.defaults.headers.common.Cookie = '';
   if (req && cookie) {
     axios.defaults.headers.common.Cookie = cookie;
+    await store.dispatch(getUserData.initiate());
   }
 
   const { frontMatter, markdownBody } = await getPostBySlug(params?.slug);
-
-  await store.dispatch(fetchRefreshData(null));
 
   return {
     props: {

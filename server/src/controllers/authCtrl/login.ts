@@ -21,7 +21,7 @@ export const login = async (req: Request, res: Response) => {
 
 		await Users.findOneAndUpdate({ _id: user._id }, { refresh_token });
 
-		//refresh token쿠키 생성하기(프론트서버로 보내질 쿠키임)
+		//refresh token쿠키 생성하기(프론트서버로 보내질 쿠키)
 		res.cookie("refresh_token", refresh_token, {
 			path: "/", //프론트쪽 path
 			httpOnly: true,
@@ -30,10 +30,9 @@ export const login = async (req: Request, res: Response) => {
 
 		//성공
 		res.status(200).json({
-			msg: "Login success!",
 			access_token,
-			refresh_token,
 			user: { ...user._doc, password: "", cf_password: "" }, //비번빼고 가져오기
+			msg: "Login success!",
 		});
 	} catch (err) {
 		if (err instanceof Error) return res.status(500).json({ msg: err.message });

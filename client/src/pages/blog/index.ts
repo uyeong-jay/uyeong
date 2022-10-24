@@ -2,7 +2,7 @@ import { GetServerSideProps /* GetStaticProps */ } from 'next';
 import wrapper from '@app/store';
 import axios from 'axios';
 import { getSortedPosts } from '@utils/utils-post';
-import { getUserData } from '@slices/api/apiSlice';
+import { getUserData } from '@app/services/api';
 
 export { default } from '@pages/Blog';
 
@@ -11,12 +11,11 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   axios.defaults.headers.common.Cookie = '';
   if (context.req && cookie) {
     axios.defaults.headers.common.Cookie = cookie;
+    await store.dispatch(getUserData.initiate());
   }
 
   const posts = await getSortedPosts();
   //posts: slug, date, title, description, tags
-
-  await store.dispatch(getUserData.initiate());
 
   return {
     props: {

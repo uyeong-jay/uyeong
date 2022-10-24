@@ -4,7 +4,6 @@
     "baseUrl": ".",
     "outDir": "dist",
     "paths": {
-      "@src/*": ["src/*"],
       "@app/*": ["src/app/*"],
       "@actions/*": ["src/actions/*"],
       "@slices/*": ["src/slices/*"],
@@ -17,7 +16,8 @@
       "@atoms/*": ["src/components/UI/atoms/*"],
       "@molecules/*": ["src/components/UI/molecules/*"],
       "@organisms/*": ["src/components/UI/organisms/*"],
-      "@templates/*": ["src/components/UI/templates/*"]
+      "@templates/*": ["src/components/UI/templates/*"],
+      "@src/*": ["src/*"]
     },
 
     /* Project */

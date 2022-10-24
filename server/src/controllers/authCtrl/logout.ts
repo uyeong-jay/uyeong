@@ -7,15 +7,18 @@ export const logout = async (req: IReqAuth, res: Response) => {
 		//refresh_token 쿠키 삭제하기
 		res.clearCookie("refresh_token", { path: "/" }); //프론트쪽 path
 
-		await Users.findOneAndUpdate(
+		const user = await Users.findOneAndUpdate(
 			{ _id: req.user?._id },
 			{
 				refresh_token: "",
 			}
 		);
+		console.log(user, req.user);
 
 		//성공
-		res.status(200).json({ msg: "Logout success!" });
+		res.status(200).json({
+			msg: "Logout success!",
+		});
 	} catch (err) {
 		if (err instanceof Error) return res.status(500).json({ msg: err.message });
 	}

@@ -2,13 +2,13 @@ import { useState } from 'react';
 import styled from '@_settings/styled';
 import Button from '@atoms/Button';
 import NavLinkBox from '@molecules/NavLinkBox';
-import { UserData } from '@slices/api/apiSlice';
+import { UserResponse } from '@app/services/api';
 import Loader from '@modals/Loader';
 
 interface Props {
-  userData: UserData | undefined;
+  userData: UserResponse | undefined;
   isLoading: boolean;
-  isError: boolean;
+  error: any;
   onClickLogout: () => void;
 }
 
@@ -85,7 +85,7 @@ const StyledNav = styled.nav`
   //+스크롤시 nav width만 남도록 하기
 `;
 
-const HeaderPresenter = ({ userData, isLoading, isError, onClickLogout }: Props) => {
+const HeaderPresenter = ({ userData, isLoading, error, onClickLogout }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   //dropdown 버튼 내부 - 클릭시 dropdown toggle
@@ -99,7 +99,12 @@ const HeaderPresenter = ({ userData, isLoading, isError, onClickLogout }: Props)
     setIsOpen(false);
   };
 
-  if (isError) return <div>Error</div>;
+  // if (error)
+  //   return (
+  //     <div>
+  //       {error.status} {error.data.msg}
+  //     </div>
+  //   );
   return (
     <>
       {/* 로딩화면 */}
@@ -111,7 +116,7 @@ const HeaderPresenter = ({ userData, isLoading, isError, onClickLogout }: Props)
             <NavLinkBox href="/blog">Blog</NavLinkBox>
             <NavLinkBox href="/about">About</NavLinkBox>
             <NavLinkBox href="/contact">Contact</NavLinkBox>
-            {userData ? (
+            {userData && !error ? (
               <li
                 onClick={onClickDropDown}
                 onMouseLeave={() => {

@@ -41,7 +41,6 @@ export const refresh = async (req: IReqAuth, res: Response) => {
 		//성공
 		res.status(200).json({
 			access_token,
-			refresh_token,
 			user,
 			msg: "Refresh success!",
 		});
