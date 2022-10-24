@@ -7,7 +7,7 @@ type IntervalFunction = () => unknown | void;
 function useInterval(callback: IntervalFunction, delay: number | null) {
   const savedCallback = useRef<IntervalFunction | null>(null);
 
-  //가장 최근 콜백함수 기억해줌
+  //가장 최근 콜백함수 기억하기
   useEffect(() => {
     if (delay === null) return;
     savedCallback.current = callback;

@@ -16,7 +16,7 @@ export const valid = (req: Request, res: Response, next: NextFunction) => {
 	//error들 모아 놓기
 	const errors = [];
 
-	if (!nickname) errors.push("Please add your name.");
+	if (!nickname) errors.push("Please add your nickname.");
 	else if (nickname.length < 2 || nickname.length > 10)
 		errors.push("Your nickname must be between 2 and 10 characters.");
 

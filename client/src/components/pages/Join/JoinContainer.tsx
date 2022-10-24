@@ -1,16 +1,13 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import JoinPresenter from './JoinPresenter';
-import { useAppSelector, useAppDispatch } from '@app/hooks';
-import { fetchJoinData } from '@actions/user';
+import { useJoinMutation } from '@app/services/api';
 
 const JoinContainer = () => {
   const initialState = { nickname: '', email: '', password: '', cf_password: '' };
   const [userJoinInfo, setUserJoinInfo] = useState(initialState);
   const { nickname, email, password, cf_password } = userJoinInfo;
 
-  const userState = useAppSelector((state) => state.user);
-
-  const dispatch = useAppDispatch();
+  const [join, { isSuccess, isLoading, error }] = useJoinMutation();
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -19,7 +16,7 @@ const JoinContainer = () => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(fetchJoinData(userJoinInfo));
+    join(userJoinInfo);
   };
 
   return (
@@ -30,7 +27,9 @@ const JoinContainer = () => {
       email={email}
       password={password}
       cf_password={cf_password}
-      userState={userState}
+      isSuccess={isSuccess}
+      isLoading={isLoading}
+      error={error}
     />
   );
 };

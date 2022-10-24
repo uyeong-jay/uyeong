@@ -3,7 +3,6 @@ import { createWrapper } from 'next-redux-wrapper';
 // import reduxLogger from 'redux-logger'; //미들웨어
 import { CurriedGetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware';
 import { api } from '@app/services/api';
-import userSlice from '@slices/userSlice';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -17,7 +16,6 @@ const createStore = () => {
   const store = configureStore({
     reducer: {
       [api.reducerPath]: api.reducer,
-      user: userSlice.reducer,
     },
     middleware,
     devTools: isDev,

@@ -6,7 +6,6 @@ import Loader from '@modals/Loader';
 import InputBox from '@molecules/InputBox';
 import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
-import { ErrorMessage, UserData } from '@slices/userSlice';
 
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -15,13 +14,9 @@ interface Props {
   email: string;
   password: string;
   cf_password: string;
-  userState: {
-    userData: UserData | null;
-    join: {
-      loading: boolean;
-      error: ErrorMessage | null;
-    };
-  };
+  isSuccess: boolean;
+  isLoading: boolean;
+  error: any;
 }
 
 const StyledSection = styled.section`
@@ -45,7 +40,17 @@ const StyledSection = styled.section`
   }
 `;
 
-const JoinPresenter = ({ onSubmit, onChangeInput, nickname, email, password, cf_password, userState }: Props) => {
+const JoinPresenter = ({
+  onSubmit,
+  onChangeInput,
+  nickname,
+  email,
+  password,
+  cf_password,
+  isSuccess,
+  isLoading,
+  error,
+}: Props) => {
   const [passwordType, setPasswordType] = useState(true);
   const [cf_passwordType, setCf_passwordType] = useState(true);
 
@@ -55,9 +60,9 @@ const JoinPresenter = ({ onSubmit, onChangeInput, nickname, email, password, cf_
         <title>UYeong | Join</title>
       </Head>
       {/* 로딩화면 */}
-      {userState.join.loading && <Loader />}
+      {isLoading && <Loader />}
 
-      {userState.userData ? (
+      {isSuccess ? (
         <div>가입이 완료 되었습니다. 로그인을 해주세요.</div>
       ) : (
         <StyledSection>
@@ -105,7 +110,7 @@ const JoinPresenter = ({ onSubmit, onChangeInput, nickname, email, password, cf_
             </div>
 
             {/* 에러 메시지 */}
-            {userState.join.error && <div style={{ color: 'red' }}>{userState.join.error}</div>}
+            {error && <div style={{ color: 'red' }}>{error.data.msg}</div>}
 
             <WideButton
               variant="join"

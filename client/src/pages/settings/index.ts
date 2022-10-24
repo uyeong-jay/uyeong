@@ -3,7 +3,7 @@ import wrapper from '@app/store';
 import axios from 'axios';
 import { getUserData } from '@app/services/api';
 
-export { default } from '@pages/Profile';
+export { default } from '@pages/Settings';
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   const cookie = context.req ? context.req.headers.cookie : '';
