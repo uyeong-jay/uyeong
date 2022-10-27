@@ -9,7 +9,7 @@ export const refresh = async (req: IReqAuth, res: Response) => {
 	try {
 		//refresh_token(유저의 _id) 쿠키 가져오기
 		const rf_token = req.cookies.refresh_token;
-		if (!rf_token) return res.status(400).json({ msg: "Please login first." });
+		if (!rf_token) return res.status(200).json({ msg: "Please login first." });
 
 		//디코드 하기(jwt)
 		const decoded = <IDecodedToken>jwt.verify(rf_token, `${process.env.REFRESH_TOKEN_SECRET}`);
@@ -23,7 +23,7 @@ export const refresh = async (req: IReqAuth, res: Response) => {
 		// console.log(user);
 		// {
 		//   _id: '628c484bd2b44d75c5515c18',
-		//   name: 'test1',
+		//   nickname: 'test1',
 		//   email: 'test1@gmail.com',
 		//   avatar: 'https://res.cloudinary.com/uyeong/image/upload/v1637676343/nextjs_media/igin1evr3clomdfy2ikm.png',
 		//   role: 'user',
