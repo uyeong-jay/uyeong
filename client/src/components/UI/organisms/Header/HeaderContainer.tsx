@@ -1,18 +1,18 @@
 import HeaderPresenter from './HeaderPresenter';
 import { useRouter } from 'next/router';
 import { useGetUserDataQuery, useLogoutMutation } from '@app/services/api';
+import { useCallback } from 'react';
 
 const HeaderContainer = () => {
   const { data: userData, isLoading, error } = useGetUserDataQuery();
   const [logout] = useLogoutMutation();
-  console.log(userData);
 
   const router = useRouter();
 
-  const onClickLogout = async () => {
+  const onClickLogout = useCallback(async () => {
     await logout(null);
     router.replace('/');
-  };
+  }, [logout, router]);
 
   return <HeaderPresenter userData={userData} isLoading={isLoading} error={error} onClickLogout={onClickLogout} />;
 };

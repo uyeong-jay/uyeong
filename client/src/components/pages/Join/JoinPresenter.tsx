@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { StyledSection } from './JoinStyle';
 import Head from 'next/head';
 import Link from 'next/link';
-import styled from '@_settings/styled';
 import Loader from '@modals/Loader';
 import InputBox from '@molecules/InputBox';
 import Button from '@atoms/Button';
@@ -10,49 +10,21 @@ import WideButton from '@atoms/WideButton';
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  nickname: string;
-  email: string;
-  password: string;
-  cf_password: string;
+  userJoinInfo: {
+    nickname: string;
+    email: string;
+    password: string;
+    cf_password: string;
+  };
   isSuccess: boolean;
   isLoading: boolean;
   error: any;
 }
 
-const StyledSection = styled.section`
-  border: 2px dotted lightslategray;
-  width: 750px;
-  border-radius: 20% 50% 30% / 30% 40% 40%;
-  padding: 100px;
-  margin: 50px 0 50px 0;
-
-  & form {
-    & > div:nth-of-type(odd) input {
-      border-radius: 50px 80px 50px 80px;
-    }
-    & > div:nth-of-type(even) input {
-      border-radius: 90px 55px 80px 50px;
-    }
-  }
-
-  & p a {
-    color: blue;
-  }
-`;
-
-const JoinPresenter = ({
-  onSubmit,
-  onChangeInput,
-  nickname,
-  email,
-  password,
-  cf_password,
-  isSuccess,
-  isLoading,
-  error,
-}: Props) => {
+const JoinPresenter = ({ onSubmit, onChangeInput, userJoinInfo, isSuccess, isLoading, error }: Props) => {
+  const { nickname, email, password, cf_password } = userJoinInfo;
   const [passwordType, setPasswordType] = useState(true);
-  const [cf_passwordType, setCf_passwordType] = useState(true);
+  const [cfPasswordType, setCfPasswordType] = useState(true);
 
   return (
     <>
@@ -96,15 +68,15 @@ const JoinPresenter = ({
               <InputBox
                 labelText={'Confirm \n password'}
                 name="cf_password"
-                type={cf_passwordType ? 'password' : 'text'}
+                type={cfPasswordType ? 'password' : 'text'}
                 value={cf_password}
                 onChange={onChangeInput}
               />
               <Button
                 variant="primary"
-                text={cf_passwordType ? 'Show' : 'Hide'}
+                text={cfPasswordType ? 'Show' : 'Hide'}
                 type="button"
-                onClick={() => setCf_passwordType(!cf_passwordType)}
+                onClick={() => setCfPasswordType(!cfPasswordType)}
                 disabled={cf_password ? false : true}
               />
             </div>
