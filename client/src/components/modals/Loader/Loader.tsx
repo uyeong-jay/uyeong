@@ -27,7 +27,7 @@ function shuffle(array: string[]) {
   return array;
 }
 
-//loading... 문자 모아 놓음
+// [loading...] 문자 모아 놓음
 const loadingLetters = ['L', 'O', 'A', 'D', 'I', 'N', 'G', '.', '.', '.'];
 
 //pink color와 비슷한 색 종류별로 모아 놓음

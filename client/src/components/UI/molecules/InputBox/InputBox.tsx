@@ -5,8 +5,10 @@ interface Props {
   labelText: string;
   name: string;
   type?: string;
-  value: string;
+  value?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  readOnly?: boolean;
 }
 
 const StyledLabel = styled.label`
@@ -25,17 +27,25 @@ const StyledInput = styled.input`
   color: lightslategray;
 `;
 
-const InputBox = ({ labelText, name, type, value, onChange }: Props) => {
+const InputBox = ({ labelText, name, type, value, onChange, placeholder, readOnly }: Props) => {
   return (
     <>
       <StyledLabel>{labelText}</StyledLabel>
-      <StyledInput name={name} type={type} value={value} onChange={onChange} />
+      <StyledInput
+        name={name}
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        readOnly={readOnly ? true : false}
+      />
     </>
   );
 };
 
 InputBox.defaultProps = {
   type: 'text',
+  readOnly: false,
 };
 
 export default InputBox;

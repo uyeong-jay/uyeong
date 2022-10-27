@@ -7,7 +7,9 @@ export interface UserResponse {
   access_token?: string;
   refresh_token?: string;
   user?: {
+    avatar: string;
     nickname: string;
+    email: string;
   };
 }
 
