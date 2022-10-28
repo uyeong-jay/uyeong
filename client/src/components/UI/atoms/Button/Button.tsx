@@ -26,7 +26,8 @@ const StyledButton = styled.button<ButtonProps>`
         `;
       case 'update':
         return `
-          background-color: green;
+          border: 1px solid limegreen;
+          background-color: rgb(127, 255, 0, 0.6);
         `;
       case 'login':
         return `

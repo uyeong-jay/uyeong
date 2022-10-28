@@ -4,15 +4,17 @@ import Button from '@atoms/Button';
 import NavLinkBox from '@molecules/NavLinkBox';
 import { UserResponse } from '@app/services/api';
 import Loader from '@modals/Loader';
+import { NotFound } from '@src/pages/404';
 
 interface Props {
   userData: UserResponse | undefined;
-  isLoading: boolean;
-  error: any;
+  getUserDataLoading: boolean;
+  getUserDataError: any;
+  logoutError: any;
   onClickLogout: () => void;
 }
 
-const HeaderPresenter = ({ userData, isLoading, /* error, */ onClickLogout }: Props) => {
+const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logoutError, onClickLogout }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   //dropdown 버튼 내부 - 클릭시 dropdown toggle
@@ -26,16 +28,12 @@ const HeaderPresenter = ({ userData, isLoading, /* error, */ onClickLogout }: Pr
     setIsOpen(false);
   }, []);
 
-  // if (error)
-  //   return (
-  //     <div>
-  //       {error.status} {error.data.msg}
-  //     </div>
-  //   );
+  if (getUserDataError || logoutError) return <NotFound />;
   return (
     <>
       {/* 로딩화면 */}
-      {isLoading && <Loader />}
+      {getUserDataLoading && <Loader />}
+
       <StyledHeader>
         <StyledNav>
           <ul>

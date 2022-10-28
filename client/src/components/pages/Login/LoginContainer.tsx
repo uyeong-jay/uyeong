@@ -1,23 +1,23 @@
 import React, { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import LoginPresenter from './LoginPresenter';
-import { useLoginMutation } from '@app/services/api';
+import { useGetUserDataQuery, useLoginMutation } from '@app/services/api';
 
 const LoginContainer = () => {
   const initialState = { email: '', password: '' };
   const [userLoginInfo, setUserLoginInfo] = useState(initialState);
-  const { email, password } = userLoginInfo;
 
-  const [login, { isSuccess, isLoading, error }] = useLoginMutation();
+  const { data: userData } = useGetUserDataQuery();
+  const [login, { isSuccess: loginSuccess, isLoading: loginLoading, error }] = useLoginMutation();
 
   const router = useRouter();
 
   useEffect(() => {
-    if (isSuccess) router.replace('/');
+    if (loginSuccess) router.replace('/');
     //router.push > window.history에 push에 넣은 새로운 url 기록을 추가
     //router.replace > 현 페이지를 repalce에 넣은 url로 대체
     //(로그인시 자주 사용)
-  }, [isSuccess, router]);
+  }, [loginSuccess, router]);
 
   const onChangeInput = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,9 +41,10 @@ const LoginContainer = () => {
     <LoginPresenter
       onSubmit={onSubmit}
       onChangeInput={onChangeInput}
-      email={email}
-      password={password}
-      isLoading={isLoading}
+      userLoginInfo={userLoginInfo}
+      userData={userData}
+      loginSuccess={loginSuccess}
+      loginLoading={loginLoading}
       error={error}
     />
   );
