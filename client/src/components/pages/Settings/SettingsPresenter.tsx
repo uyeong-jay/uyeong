@@ -1,14 +1,16 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { StyledSection } from './SettingsStyle';
 import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
 import InputBox from '@molecules/InputBox';
 import Image from 'next/image';
 import { UserResponse } from '@app/services/api';
+import { NotFound } from '@src/pages/404';
 
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFile: (e: ChangeEvent<HTMLInputElement>) => void;
   userUpdateInfo: {
     avatar: any;
     nickname: string;
@@ -18,43 +20,55 @@ interface Props {
   userData: UserResponse | undefined;
 }
 
-const SettingsPresenter = ({ onSubmit, onChangeInput, userUpdateInfo, userData }: Props) => {
+const SettingsPresenter = ({ onSubmit, onChangeInput, onChangeFile, userUpdateInfo, userData }: Props) => {
   const { avatar, nickname, password, cf_password } = userUpdateInfo;
   const [passwordType, setPasswordType] = useState(true);
   const [cfPasswordType, setCfPasswordType] = useState(true);
 
+  //URL.createObjectURL(), URL.revokeObjectURL() 정상 실행을 위해 추가한 코드
+  const [fileURL, setFileURL] = useState('');
+  useEffect(() => {
+    if (avatar) setFileURL(URL.createObjectURL(avatar));
+    return;
+  }, [avatar]);
+  // console.log('avatar: ', avatar, 'fileURL: ', fileURL);
+
+  if (!userData?.user) return <NotFound loginError />;
   return (
     <StyledSection>
+      {/* 프로필 사진 바꾸기 */}
       <div>
-        <Image
-          src={avatar ? URL.createObjectURL(avatar) : userData?.user?.avatar ? userData?.user?.avatar : ''}
-          // onLoad={() => URL.revokeObjectURL()}
-          alt="user avater"
-          width={100}
-          height={100}
-        />
+        <div className="user_avatar_container user_avatar">
+          <Image
+            className="user_avatar"
+            src={avatar ? fileURL : userData?.user?.avatar}
+            onLoad={() => URL.revokeObjectURL(fileURL)}
+            alt="user avater"
+            width={130}
+            height={130}
+          />
+        </div>
+
         <span>
           <i className="fas fa-camera" />
-          <p>Change</p>
-          <input type="file" name="file" id="file_up" accept="image/*" /* onChange={onChangeAvatar} */ />
+          <p>Edit</p>
+          <input type="file" name="file" accept=".gif, .jpg, .png" onChange={onChangeFile} />
         </span>
       </div>
+
+      {/* 정보 수정하기 */}
       <form onSubmit={onSubmit}>
+        {/* nickname */}
         <div>
           <InputBox labelText="Nickname" name="nickname" value={nickname} onChange={onChangeInput} />
         </div>
 
+        {/* email - disabled */}
         <div>
-          <InputBox
-            labelText="Email"
-            name="email"
-            type="email"
-            onChange={onChangeInput}
-            placeholder={userData?.user?.email}
-            readOnly
-          />
+          <InputBox labelText="Email" name="email" type="email" defaultValue={userData?.user?.email} disabled />
         </div>
 
+        {/* password */}
         <div>
           <InputBox
             labelText="Password"
@@ -72,6 +86,7 @@ const SettingsPresenter = ({ onSubmit, onChangeInput, userUpdateInfo, userData }
           />
         </div>
 
+        {/* cf_password */}
         <div>
           <InputBox
             labelText={'Confirm \n password'}
@@ -94,8 +109,8 @@ const SettingsPresenter = ({ onSubmit, onChangeInput, userUpdateInfo, userData }
         {/* {error && <div style={{ color: 'red' }}>{error.data.msg}</div>} */}
 
         <WideButton
-          variant="join"
-          text="Join"
+          variant="update"
+          text="Update"
           type="submit"
           // disabled={nickname && email && password && cf_password ? false : true}
         />
