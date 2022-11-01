@@ -77,7 +77,13 @@ export const api = createApi({
 });
 
 // export hooks for usage in functional components
-export const { useGetUserDataQuery, useJoinMutation, useLoginMutation, useLogoutMutation } = api;
+export const {
+  useGetUserDataQuery,
+  useJoinMutation,
+  useLoginMutation,
+  useLogoutMutation,
+  util: { getRunningOperationPromises },
+} = api;
 
 // export endpoints for use in SSR
 export const { getUserData } = api.endpoints;
