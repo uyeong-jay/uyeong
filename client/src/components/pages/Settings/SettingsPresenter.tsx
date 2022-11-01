@@ -5,7 +5,7 @@ import WideButton from '@atoms/WideButton';
 import InputBox from '@molecules/InputBox';
 import Image from 'next/image';
 import { UserResponse } from '@app/services/api';
-import { NotFound } from '@src/pages/404';
+import NotFound from '@src/pages/404';
 
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;

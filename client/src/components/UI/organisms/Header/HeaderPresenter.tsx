@@ -4,7 +4,7 @@ import Button from '@atoms/Button';
 import NavLinkBox from '@molecules/NavLinkBox';
 import { UserResponse } from '@app/services/api';
 import Loader from '@modals/Loader';
-import { NotFound } from '@src/pages/404';
+import NotFound from '@src/pages/404';
 
 interface Props {
   userData: UserResponse | undefined;

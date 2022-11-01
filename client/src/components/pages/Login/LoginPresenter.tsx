@@ -7,7 +7,7 @@ import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
 import InputBox from '@molecules/InputBox';
 import { UserResponse } from '@app/services/api';
-import { NotFound } from '@src/pages/404';
+import NotFound from '@src/pages/404';
 
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -35,7 +35,7 @@ const LoginPresenter = ({
   const { email, password } = userLoginInfo;
 
   //!loginSuccess: loginSuccess가 일회성(페이지가 바뀔때마다 새로고침을 실행하기 때문)인 걸 활용하여 url로 검색하여 들어왔을때는 이미 false인 상태이기 때문에 로그인페이지 에러 화면이 보이도록 함
-  if (userData?.user && !loginSuccess) return <NotFound loginError />;
+  if (userData?.user && !loginSuccess) return <NotFound />;
   return (
     <>
       <Head>
