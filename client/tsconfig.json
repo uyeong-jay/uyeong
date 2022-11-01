@@ -5,8 +5,6 @@
     "outDir": "dist",
     "paths": {
       "@app/*": ["src/app/*"],
-      "@actions/*": ["reusableFiles/actions/*"],
-      "@slices/*": ["reusableFiles/slices/*"],
       "@hooks/*": ["src/hooks/*"],
       "@utils/*": ["src/utils/*"],
       "@_types/*": ["src/types/*"],
