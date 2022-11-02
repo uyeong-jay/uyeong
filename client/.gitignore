@@ -11,6 +11,7 @@
 # next.js
 /.next/
 /out/
+next-env.d.ts
 
 # production
 /build
@@ -29,6 +30,7 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+environment.d.ts
 
 # vercel
 .vercel
@@ -39,8 +41,7 @@ yarn-error.log*
 # my blog posts
 src/posts
 
-.vscode
-
 # etc
-reusableFiles
+.vscode
+/reusableFiles
 _memo.txt
