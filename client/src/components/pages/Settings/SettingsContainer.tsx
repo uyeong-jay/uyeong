@@ -27,21 +27,41 @@ const SettingsContainer = () => {
     [userUpdateInfo],
   );
 
-  const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    // console.log(files);
+  const onChangeAvatar = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
 
-    if (files) {
-      const file = files[0];
-      setUserUpdateInfo({ ...userUpdateInfo, avatar: file });
-    }
-  };
+      if (file) {
+        console.log(file.type);
+
+        //파일 크기 에러
+        if (file.size > 1024 * 1024) {
+          console.log('사이즈 에러');
+          return;
+        }
+
+        //파일 확장자 에러
+        if (
+          file.type !== 'image/jpg' &&
+          file.type !== 'image/jpeg' &&
+          file.type !== 'image/png' &&
+          file.type !== 'image/gif'
+        ) {
+          console.log('확장자 에러');
+          return;
+        }
+
+        setUserUpdateInfo({ ...userUpdateInfo, avatar: file });
+      }
+    },
+    [userUpdateInfo],
+  );
 
   return (
     <SettingsPresenter
       onSubmit={onSubmit}
       onChangeInput={onChangeInput}
-      onChangeFile={onChangeFile}
+      onChangeAvatar={onChangeAvatar}
       userUpdateInfo={userUpdateInfo}
       userData={userData}
     />

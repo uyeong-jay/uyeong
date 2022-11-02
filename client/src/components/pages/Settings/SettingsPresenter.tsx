@@ -10,7 +10,7 @@ import NotFound from '@src/pages/404';
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeFile: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeAvatar: (e: ChangeEvent<HTMLInputElement>) => void;
   userUpdateInfo: {
     avatar: any;
     nickname: string;
@@ -20,7 +20,7 @@ interface Props {
   userData: UserResponse | undefined;
 }
 
-const SettingsPresenter = ({ onSubmit, onChangeInput, onChangeFile, userUpdateInfo, userData }: Props) => {
+const SettingsPresenter = ({ onSubmit, onChangeInput, onChangeAvatar, userUpdateInfo, userData }: Props) => {
   const { avatar, nickname, password, cf_password } = userUpdateInfo;
   const [passwordType, setPasswordType] = useState(true);
   const [cfPasswordType, setCfPasswordType] = useState(true);
@@ -52,7 +52,7 @@ const SettingsPresenter = ({ onSubmit, onChangeInput, onChangeFile, userUpdateIn
         <span>
           <i className="fas fa-camera" />
           <p>Edit</p>
-          <input type="file" name="file" accept=".gif, .jpg, .png" onChange={onChangeFile} />
+          <input type="file" name="file" accept=".jpg, .jpeg, .png, .gif" onChange={onChangeAvatar} />
         </span>
       </div>
 
