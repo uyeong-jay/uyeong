@@ -2,10 +2,12 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { StyledSection } from './JoinStyle';
 import Head from 'next/head';
 import Link from 'next/link';
-import Loader from '@modals/Loader';
+// import Loader from '@modals/Loader';
 import InputBox from '@molecules/InputBox';
 import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
+import { UserResponse } from '@app/services/api';
+import NotFound from '@src/pages/404';
 
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -16,23 +18,32 @@ interface Props {
     password: string;
     cf_password: string;
   };
+  userData: UserResponse | undefined;
   isSuccess: boolean;
   isLoading: boolean;
   error: any;
 }
 
-const JoinPresenter = ({ onSubmit, onChangeInput, userJoinInfo, isSuccess, isLoading, error }: Props) => {
+const JoinPresenter = ({
+  onSubmit,
+  onChangeInput,
+  userJoinInfo,
+  userData,
+  isSuccess,
+  /* isLoading, */ error,
+}: Props) => {
   const { nickname, email, password, cf_password } = userJoinInfo;
   const [passwordType, setPasswordType] = useState(true);
   const [cfPasswordType, setCfPasswordType] = useState(true);
 
+  if (userData?.user) return <NotFound joinError />;
   return (
     <>
       <Head>
         <title>UYeong | Join</title>
       </Head>
       {/* 로딩화면 */}
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
 
       {isSuccess ? (
         <div>가입이 완료 되었습니다. 로그인을 해주세요.</div>

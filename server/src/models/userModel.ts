@@ -5,28 +5,20 @@ const userSchema = new Schema<IUser>(
 	{
 		nickname: {
 			type: String,
-			required: [true, "이름 칸을 채워주세요(Please add your name.)"],
+			required: [true, "Please add your name."],
 			trim: true,
-			maxLength: [20, "이름은 적어도 20자 이하여야 합니다.(Your name must be 20 chars or less.)"],
+			maxLength: [20, "Your name must be 20 chars or less.)"],
 		},
 		email: {
 			type: String,
-			required: [true, "이메일 칸을 채워주세요.\n(Please add your email.)"],
+			required: [true, "Please add your email."],
 			trim: true,
 			unique: true,
 		},
 		password: {
 			type: String,
-			required: [true, "비밀번호 칸을 채워주세요.\n(Please add your password.)"],
-			minLength: [6, "비밀번호는 적어도 6자 이상이여야 합니다.\n(Your password must be 6 chars or more.)"],
-		},
-		cf_password: {
-			type: String,
-			required: [true, "비밀번호 확인 칸을 채워주세요.\n(Please add your password.)"],
-			minLength: [
-				6,
-				"확인 비밀번호 또한 적어도 6자 이상이여야 합니다.\n(Your confirm password also must be 6 chars or more.)",
-			],
+			required: [true, "Please add your password."],
+			minLength: [6, "Your password must be 6 chars or more."],
 		},
 		avatar: {
 			type: String,

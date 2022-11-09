@@ -10,14 +10,20 @@ export interface UserResponse {
     avatar: string;
     nickname: string;
     email: string;
+    password?: string;
   };
 }
 
 export interface UserRequest {
   nickname?: string;
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
   cf_password?: string;
+}
+
+export interface UserRequestWithToken extends UserRequest {
+  userUpdateInfo: UserRequest;
+  token?: string;
 }
 
 //https://redux-toolkit.js.org/rtk-query/usage/code-splitting
@@ -73,6 +79,19 @@ export const api = createApi({
       }),
       invalidatesTags: ['User'],
     }),
+
+    //update
+    update: builder.mutation<UserResponse, UserRequestWithToken>({
+      query: (data) => ({
+        url: '/api/user',
+        method: 'patch',
+        data: data.userUpdateInfo,
+        headers: {
+          Authorization: data.token,
+        },
+      }),
+      invalidatesTags: ['User'],
+    }),
   }),
 });
 
@@ -82,6 +101,7 @@ export const {
   useJoinMutation,
   useLoginMutation,
   useLogoutMutation,
+  useUpdateMutation,
   util: { getRunningOperationPromises },
 } = api;
 
