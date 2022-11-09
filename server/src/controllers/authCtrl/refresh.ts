@@ -13,13 +13,13 @@ export const refresh = async (req: IReqAuth, res: Response) => {
 
 		//디코드 하기(jwt)
 		const decoded = <IDecodedToken>jwt.verify(rf_token, `${process.env.REFRESH_TOKEN_SECRET}`);
-		if (!decoded) res.status(400).json({ msg: "Please login first." });
+		if (!decoded) return res.status(400).json({ msg: "Please login first." });
 		// console.log(decoded);
 		// { id: '628c484bd2b44d75c5515c18', iat: 1653360788, exp: 1655952788 }
 
-		//디코드된 _id로 유저 데이터 가져오기
-		const user = await Users.findById(decoded.id).select("-password -cf_password"); //비번빼고 가져오기
-		if (!user) res.status(400).json({ msg: "This account doesn't exist." });
+		//디코드된 _id로 유저 데이터 가져오기(findById)
+		const user = await Users.findById(decoded.id).select("-password"); //비번빼고 가져오기
+		if (!user) return res.status(400).json({ msg: "This account doesn't exist." });
 		// console.log(user);
 		// {
 		//   _id: '628c484bd2b44d75c5515c18',

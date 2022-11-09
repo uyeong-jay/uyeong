@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 export const register = async (req: Request, res: Response) => {
 	try {
 		//client 데이터 가져오기
-		const { nickname, email, password, cf_password } = req.body;
+		const { nickname, email, password } = req.body;
 
 		//nickname 탐색
 		const userNickname = await Users.findOne({ nickname });
@@ -20,7 +20,7 @@ export const register = async (req: Request, res: Response) => {
 		}
 
 		//password 암호화 하기
-		//- 단방향 해싱(여기선 bcrypt사용)
+		//- 단방향(복호화 불가능) 해싱(bcrypt사용) 적용하기
 		const salt = await bcrypt.genSalt(5); //솔트 추가
 		const passwordHash = await bcrypt.hash(password, salt); //비번 해싱
 		//- 보안 더 강화 하고싶을 땐
@@ -31,10 +31,9 @@ export const register = async (req: Request, res: Response) => {
 			nickname,
 			email,
 			password: passwordHash,
-			cf_password: passwordHash,
 		});
 
-		//db에 (위 형식으로)저장
+		//db에 저장
 		await newUser.save();
 
 		res.json({ msg: "Join Success!" });

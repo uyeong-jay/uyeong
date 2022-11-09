@@ -19,8 +19,9 @@ export interface IReqAuth extends Request {
 	user?: IUser;
 }
 
+//token 디코드시 얻는 데이터
 export interface IDecodedToken {
-	id?: string; //refresh_token 디코드 > id정보
+	id?: string;
 	iat: number;
 	exp: number;
 }

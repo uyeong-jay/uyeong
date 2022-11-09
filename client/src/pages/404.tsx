@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 interface Props {
   loginError?: boolean;
+  joinError?: boolean;
 }
 
 const ErrorPageWrapper = styled.div`
@@ -35,11 +36,19 @@ const ErrorPageWrapper = styled.div`
   }
 `;
 
-const NotFound = ({ loginError }: Props) => {
+const NotFound = ({ loginError, joinError }: Props) => {
   if (loginError)
     return (
       <ErrorPageWrapper>
         <h1>Please Login First</h1>
+        <Link href="/">Go to home</Link>
+      </ErrorPageWrapper>
+    );
+
+  if (joinError)
+    return (
+      <ErrorPageWrapper>
+        <h1>Please Logout First</h1>
         <Link href="/">Go to home</Link>
       </ErrorPageWrapper>
     );
