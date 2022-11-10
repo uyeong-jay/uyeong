@@ -31,7 +31,6 @@ const valid = (req: Request, res: Response, next: NextFunction) => {
 
 	//cf_password 에러
 	if (!cf_password) errors.push("Please add your confirm password.");
-	else if (cf_password.length < 6) errors.push("Your confirm password also must be 6 chars or more.");
 	else if (password !== cf_password) errors.push("Your password and confirm password should be same.");
 
 	//가장 첫번째 에러 내보내기

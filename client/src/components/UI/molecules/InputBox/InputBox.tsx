@@ -13,17 +13,21 @@ interface Props {
   readOnly?: boolean;
 }
 
+const StyledInputBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const StyledLabel = styled.label`
-  display: inline-block;
   margin-right: 10px;
   color: darkslategray;
-  white-space: pre-line;
+  // white-space: pre-line;
 `;
 
 const StyledInput = styled.input`
   border: 2px dotted darkslategray;
   margin: 5px 0 30px 0;
-  width: 70%;
+  width: 100%;
   height: 40px;
   text-align: center;
   color: lightslategray;
@@ -31,7 +35,7 @@ const StyledInput = styled.input`
 
 const InputBox = ({ labelText, name, type, value, defaultValue, onChange, placeholder, disabled, readOnly }: Props) => {
   return (
-    <>
+    <StyledInputBox>
       <StyledLabel>{labelText}</StyledLabel>
       <StyledInput
         name={name}
@@ -43,7 +47,7 @@ const InputBox = ({ labelText, name, type, value, defaultValue, onChange, placeh
         disabled={disabled ? true : false}
         readOnly={readOnly ? true : false}
       />
-    </>
+    </StyledInputBox>
   );
 };
 

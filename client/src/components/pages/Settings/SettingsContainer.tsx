@@ -8,20 +8,22 @@ export interface IUserUpdateInfo {
   avatar: string | File | undefined;
   nickname: string | undefined;
   email: string | undefined;
-  password: string;
-  cf_password: string;
+  old_password: string;
+  new_password: string;
+  cf_new_password: string;
 }
 
 const SettingsContainer = () => {
   const { data: userData } = useGetUserDataQuery();
-  const [update] = useUpdateMutation();
+  const [update, { isLoading: userUpdateLoading, error: authErr }] = useUpdateMutation();
 
   const initialState = {
     avatar: '',
     email: userData?.user?.email,
     nickname: userData?.user?.nickname,
-    password: '',
-    cf_password: '',
+    old_password: '',
+    new_password: '',
+    cf_new_password: '',
   };
   const [userUpdateInfo, setUserUpdateInfo] = useState<IUserUpdateInfo>(initialState);
   const [fileObj, setFileObj] = useState<File>();
@@ -41,17 +43,20 @@ const SettingsContainer = () => {
 
       //에러 없으면 유저 데이터 업데이트
       if (!errMsg[0]) {
-        //데이터: {유저데이터, 토큰}
+        // 데이터: {유저데이터, access토큰}
         const data = {
           userUpdateInfo: {
             ...userUpdateInfo,
-            avatar: fileObj ? await getUploadImageUrl(fileObj) : userData?.user?.avatar,
+            avatar: userUpdateInfo.avatar && fileObj ? await getUploadImageUrl(fileObj) : userData?.user?.avatar,
           },
           token: userData?.access_token,
         };
 
         //유저 데이터 업데이트
         await update(data);
+
+        // 유저 데이터 초기화 (보여지는 nickname, email 제외)
+        setUserUpdateInfo({ ...userUpdateInfo, avatar: '', old_password: '', new_password: '', cf_new_password: '' });
       }
     },
     [fileObj, update, userData?.access_token, userData?.user, userUpdateInfo],
@@ -106,7 +111,9 @@ const SettingsContainer = () => {
       userUpdateInfo={userUpdateInfo}
       userData={userData}
       fileObj={fileObj}
+      userUpdateLoading={userUpdateLoading}
       settingErrMsg={settingErrMsg}
+      authErr={authErr}
     />
   );
 };

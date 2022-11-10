@@ -28,10 +28,6 @@ const userSchema = new Schema<IUser>(
 			type: String,
 			default: "user", //admin
 		},
-		type: {
-			type: String,
-			deafault: "register", //login
-		},
 	},
 	{ timestamps: true }
 	//timestamps - mogoose

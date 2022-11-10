@@ -5,6 +5,7 @@ import NavLinkBox from '@molecules/NavLinkBox';
 import { UserResponse } from '@app/services/api';
 import Loader from '@modals/Loader';
 import NotFound from '@src/pages/404';
+import Image from 'next/image';
 
 interface Props {
   userData: UserResponse | undefined;
@@ -48,7 +49,15 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
                   document.addEventListener('click', onClickOutside);
                 }}
               >
-                <Button variant="" text={`${userData.user?.nickname}`} />
+                <div className="user_avatar_container user_avatar">
+                  <Image
+                    className="user_avatar"
+                    src={userData?.user?.avatar}
+                    alt="user avater"
+                    width={30}
+                    height={30}
+                  />
+                </div>
                 <i className="fa-solid fa-caret-down" />
                 {isOpen && (
                   <ul>

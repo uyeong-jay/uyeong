@@ -38,6 +38,23 @@ export const StyledNav = styled.nav`
       cursor: pointer;
       width: 100px;
 
+      & .user_avatar_container {
+        display: inline-flex;
+        border: solid 5px rgba(0, 255, 0, 0.5);
+      }
+
+      & .user_avatar {
+        border-radius: 50%;
+        object-fit: cover; //원본크기로 넣기
+      }
+
+      & .fa-caret-down {
+        // border: 1px solid black;
+        position: absolute;
+        top: 13px;
+        left: 48px; //30+13+5
+      }
+
       & > ul {
         border: 1px solid red;
         display: flex;
