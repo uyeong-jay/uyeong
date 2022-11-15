@@ -5,11 +5,11 @@ import valid from "@middleware/valid";
 const authRouter = express.Router();
 const { register, login, logout, refresh } = authCtrl;
 
-// get: 데이터 조회, no need data
-// post: 데이터 등록
-// put: 데이터 변경(모두)
-// patch: 데이터 변경(부분)
-// delete: 데이터 제거
+// get(read): 데이터 조회, no need data
+// post(create): 데이터 등록
+// put(update): 데이터 변경(모두)
+// patch(update): 데이터 변경(부분)
+// delete(delete): 데이터 제거
 authRouter.post("/register", valid, register);
 authRouter.post("/login", login);
 authRouter.post("/logout", logout);

@@ -11,7 +11,7 @@ export const logout = async (req: IReqAuth, res: Response) => {
 		res.status(200).json({
 			msg: "Logout success!",
 		});
-	} catch (err) {
-		if (err instanceof Error) return res.status(500).json({ msg: err.message });
+	} catch (err: any) {
+		return res.status(500).json({ msg: err.message });
 	}
 };

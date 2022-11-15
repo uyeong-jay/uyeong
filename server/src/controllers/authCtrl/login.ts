@@ -10,7 +10,7 @@ export const login = async (req: Request, res: Response) => {
 
 		//email 조회
 		const user = await Users.findOne({ email });
-		if (!user) return res.status(400).json({ msg: "This account doesn't exist." });
+		if (!user) return res.status(400).json({ msg: "This account doesn't exists." });
 
 		//password 조회(bcrypt)
 		const isMatch = await bcrypt.compare(password, user.password);
@@ -34,7 +34,7 @@ export const login = async (req: Request, res: Response) => {
 			user: { ...user._doc, password: "", cf_password: "" }, //비번빼고 가져오기
 			msg: "Login success!",
 		});
-	} catch (err) {
-		if (err instanceof Error) return res.status(500).json({ msg: err.message });
+	} catch (err: any) {
+		return res.status(500).json({ msg: err.message });
 	}
 };

@@ -17,7 +17,7 @@ const auth = async (req: IReqAuth, res: Response, next: NextFunction) => {
 
 		//디코드된 _id로 유저 데이터 가져오기(findOne)
 		const user = await Users.findOne({ _id: decoded.id }).select("-password"); //비번빼고 가져오기
-		if (!user) return res.status(400).json({ msg: "User doesn't exist." });
+		if (!user) return res.status(400).json({ msg: "User doesn't exists." });
 		// console.log(user);
 		// {
 		// 	_id: new ObjectId("62fe3d99c15dd2880b5f864f"),
@@ -33,8 +33,8 @@ const auth = async (req: IReqAuth, res: Response, next: NextFunction) => {
 		req.user = user;
 
 		next();
-	} catch (err) {
-		if (err instanceof Error) return res.status(500).json({ msg: err.message });
+	} catch (err: any) {
+		return res.status(500).json({ msg: err.message });
 	}
 };
 

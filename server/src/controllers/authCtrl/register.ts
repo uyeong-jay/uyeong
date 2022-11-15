@@ -7,16 +7,16 @@ export const register = async (req: Request, res: Response) => {
 		//client 데이터 가져오기
 		const { nickname, email, password } = req.body;
 
-		//nickname 탐색
+		//nickname 조회
 		const userNickname = await Users.findOne({ nickname });
 		if (userNickname) {
-			return res.status(400).json({ msg: "This nickname already exist." });
+			return res.status(400).json({ msg: "This nickname already exists." });
 		}
 
-		//email 탐색
+		//email 조회
 		const userEmail = await Users.findOne({ email });
 		if (userEmail) {
-			return res.status(400).json({ msg: "This email already exist." });
+			return res.status(400).json({ msg: "This email already exists." });
 		}
 
 		//password 암호화 하기
@@ -26,7 +26,7 @@ export const register = async (req: Request, res: Response) => {
 		//- 보안 더 강화 하고싶을 땐
 		//	- https://st-lab.tistory.com/100 (보안): 비번(+솔트)  > 해시 > 다이제스트(+솔트) > 해시 > 다이제스트
 
-		//가입한 새유저 비번 암화된 데이터
+		//가입한 새유저 비번 암화된 데이터 생성
 		const newUser = new Users({
 			nickname,
 			email,
@@ -36,8 +36,8 @@ export const register = async (req: Request, res: Response) => {
 		//db에 저장
 		await newUser.save();
 
-		res.json({ msg: "Join Success!" });
-	} catch (err) {
-		if (err instanceof Error) return res.status(500).json({ msg: err.message });
+		res.status(200).json({ msg: "Join Success!" });
+	} catch (err: any) {
+		return res.status(500).json({ msg: err.message });
 	}
 };

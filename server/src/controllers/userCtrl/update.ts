@@ -13,7 +13,7 @@ export const update = async (req: IReqAuth, res: Response) => {
 
 		//email 조회
 		const user = await Users.findOne({ email });
-		if (!user) return res.status(400).json({ msg: "This account doesn't exist." });
+		if (!user) return res.status(400).json({ msg: "This account doesn't exists." });
 
 		//password를 바꾸지 않을때
 		if (!new_password) {
@@ -37,7 +37,7 @@ export const update = async (req: IReqAuth, res: Response) => {
 
 		//성공
 		res.status(200).json({ msg: "Update success!" });
-	} catch (err) {
-		if (err instanceof Error) return res.status(500).json({ msg: err.message });
+	} catch (err: any) {
+		return res.status(500).json({ msg: err.message });
 	}
 };

@@ -19,7 +19,7 @@ export const refresh = async (req: IReqAuth, res: Response) => {
 
 		//디코드된 _id로 유저 데이터 가져오기(findById)
 		const user = await Users.findById(decoded.id).select("-password"); //비번빼고 가져오기
-		if (!user) return res.status(400).json({ msg: "This account doesn't exist." });
+		if (!user) return res.status(400).json({ msg: "This account doesn't exists." });
 		// console.log(user);
 		// {
 		//   _id: '628c484bd2b44d75c5515c18',
@@ -44,7 +44,7 @@ export const refresh = async (req: IReqAuth, res: Response) => {
 			user,
 			msg: "Refresh success!",
 		});
-	} catch (err) {
-		if (err instanceof Error) return res.status(500).json({ msg: err.message });
+	} catch (err: any) {
+		return res.status(500).json({ msg: err.message });
 	}
 };
