@@ -15,31 +15,29 @@ const CategoryContainer = () => {
   const [updateBlogCategory] = useUpdateBlogCategoryMutation();
   const [deleteBlogCategory] = useDeleteBlogCategoryMutation();
 
-  const initialState = { name: '', token: userData?.access_token };
+  const initialState = { name: '' };
   const [blogCategoryInfo, setBlogCategoryInfo] = useState(initialState);
-
-  console.log(blogCategoryData, blogCategoryInfo);
 
   //Create Category
   const onSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      createBlogCategory(blogCategoryInfo);
+      createBlogCategory({ blogCategoryInfo, token: userData?.access_token });
     },
-    [blogCategoryInfo, createBlogCategory],
+    [blogCategoryInfo, createBlogCategory, userData?.access_token],
   );
 
   //Update Category
   const onClickUpdate = useCallback(() => {
     ``;
-    updateBlogCategory(blogCategoryInfo);
-  }, [blogCategoryInfo, updateBlogCategory]);
+    updateBlogCategory({ blogCategoryInfo, token: userData?.access_token });
+  }, [blogCategoryInfo, updateBlogCategory, userData?.access_token]);
 
   //Delete Category
   const onClickDelete = useCallback(() => {
-    deleteBlogCategory(blogCategoryInfo);
-  }, [blogCategoryInfo, deleteBlogCategory]);
+    deleteBlogCategory({ blogCategoryInfo, token: userData?.access_token });
+  }, [blogCategoryInfo, deleteBlogCategory, userData?.access_token]);
 
   const onChangeInput = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
