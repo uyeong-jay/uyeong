@@ -1,13 +1,12 @@
-import { StyledBlog, StyledBlogHeader, StyledBlogPosts } from './BlogStyle';
+import { StyledBlog, StyledBlogContents, StyledPosts, StyledTags } from './BlogStyle';
 import Head from 'next/head';
-import BlogPostCard from '@molecules/BlogPostCard';
+import BlogPostCard from './BlogPost/BlogPostCard';
 import { BlogProps } from '@_types/types-blog';
-import MoreButton from '@atoms/MoreButton';
+import BlogHeader from './BlogHeader';
+// import MoreButton from '@atoms/MoreButton';
 
-const BlogPresenter = ({ posts, title, description }: BlogProps) => {
+const BlogPresenter = ({ posts }: BlogProps) => {
   //posts: slug, frontMatter(date, title, description, tags)
-  //title
-  //description
 
   return (
     <>
@@ -16,13 +15,12 @@ const BlogPresenter = ({ posts, title, description }: BlogProps) => {
       </Head>
       <StyledBlog>
         {!posts && <div>No Posts!</div>}
-        <StyledBlogHeader>
-          <h3>{title}</h3>
-          <p>{description}</p>
-          <p>검색바</p>
-        </StyledBlogHeader>
-        <StyledBlogPosts>{posts && posts.map((post) => <BlogPostCard key={post.slug} post={post} />)}</StyledBlogPosts>
-        <MoreButton text="더보기" />
+        <BlogHeader />
+        <StyledBlogContents>
+          <StyledTags>tags</StyledTags>
+          <StyledPosts>{posts && posts.map((post) => <BlogPostCard key={post.slug} post={post} />)}</StyledPosts>
+        </StyledBlogContents>
+        {/* <MoreButton text="더보기" /> */}
       </StyledBlog>
     </>
   );

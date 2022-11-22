@@ -95,7 +95,7 @@ export const StyledAboutHeader = styled.header`
   }
 `;
 
-export const StyledAboutSection = styled.section`
+export const StyledAboutContents = styled.section`
   border: 1px solid #dadada;
   display: flex;
   flex-direction: column;

@@ -1,35 +1,36 @@
 import styled from '@_settings/styled';
 
 export const StyledBlog = styled.section`
-  border: 1px solid #dadada;
+  border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 750px;
+  width: 1200px;
 `;
 
-export const StyledBlogHeader = styled.header`
-  border: 1px solid #dadada;
-  //background-color: #efe9e0;
+export const StyledBlogContents = styled.div`
+  border: 1px solid blue;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 750px;
-  height: 200px;
-  margin: 10px auto 10px auto;
-  border-radius: 30px;
-
-  & > h3 {
-    margin-bottom: 10px;
-  }
+  align-itmes: center;
+  position: relative;
+  width: 100%;
+  height: 700px;
 `;
 
-export const StyledBlogPosts = styled.section`
-  border: 1px solid #dadada;
+export const StyledTags = styled.aside`
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+export const StyledPosts = styled.section`
+  border: 1px solid blue;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-itmes: center;
+  width: 800px;
+  // margin: 100px auto 100px auto;
 `;

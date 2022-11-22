@@ -1,4 +1,4 @@
-import { StyledAbout, StyledAboutHeader, StyledAboutSection } from './AboutStyle';
+import { StyledAbout, StyledAboutHeader, StyledAboutContents } from './AboutStyle';
 import Head from 'next/head';
 import Image from 'next/image';
 import GitHubChart from '@atoms/GitHubChart';
@@ -22,10 +22,10 @@ const AboutPresenter = () => {
             것 입니다.
           </p>
         </StyledAboutHeader>
-        <StyledAboutSection>
+        <StyledAboutContents>
           <GitHubChart />
           skill
-        </StyledAboutSection>
+        </StyledAboutContents>
       </StyledAbout>
     </>
   );

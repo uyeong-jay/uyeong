@@ -1,30 +1,32 @@
 import styled from '@emotion/styled';
 
 export const StyledHeader = styled.header`
-  border: 1px solid #dadada;
-  position: relative;
+  // border: 1px solid #dadada;
+  border: 1px solid red;
+  // position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 150px;
 `;
 
-export const StyledNav = styled.nav`
+export const StyledHeaderNav = styled.nav`
   // background-color: #d3d5c9;
-  border: 1px solid #dadada;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 750px;
+  // border: 1px solid #dadada;
+  // border: 1px solid green;
+  width: 1000px;
   height: 60px;
-  border-radius: 30px;
 
   & > ul {
-    border: 1px solid #dadada;
+    // border: 1px solid #dadada;
+    border: 1px solid blue;
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 100%;
     height: 100%;
+    border-radius: 30px;
 
     & > li > a {
       // border: 1px solid black;

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Banner from './Banner';
 import AboutSummary from './AboutSummary';
-import { StyledMain } from './HomeStyle';
+import { StyledHome } from './HomeStyle';
 import BlogSummary from './BlogSummary';
 import ContactSummary from './ContactSummary';
 
@@ -15,12 +15,12 @@ const HomePresenter = () => {
       <Head>
         <title>UYeong</title>
       </Head>
-      <StyledMain>
+      <StyledHome>
         <Banner />
         <BlogSummary />
         <AboutSummary />
         <ContactSummary />
-      </StyledMain>
+      </StyledHome>
     </>
   );
 };

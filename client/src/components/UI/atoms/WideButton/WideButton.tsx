@@ -19,7 +19,7 @@ const StyledWideButton = styled.button<WideButtonProps>`
   text-align: left;
   ${(props) => {
     switch (props.variant) {
-      case 'add':
+      case 'create':
         return `
           background-color: blue;
           color: red;

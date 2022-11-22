@@ -1,7 +1,8 @@
 import styled from '@_settings/styled';
 
-export const StyledMain = styled.main`
-  border: 1px solid #dadada;
+export const StyledHome = styled.main`
+  // border: 1px solid #dadada;
+  border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: center;

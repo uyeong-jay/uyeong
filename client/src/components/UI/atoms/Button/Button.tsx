@@ -15,19 +15,24 @@ interface ButtonProps {
 const StyledButton = styled.button<ButtonProps>`
   ${(props) => {
     switch (props.variant) {
-      case 'add':
+      case 'create':
         return `
-          background-color: blue;
-          color: red;
+          // background-color: white;
+          border: 1px solid blue;
+          color: blue;
         `;
-      case 'delate':
+      case 'delete':
         return `
-          background-color: red;
+          // background-color: red;
+          border: 1px solid red;
+          color: red;
         `;
       case 'update':
         return `
-          border: 1px solid limegreen;
-          background-color: rgb(127, 255, 0, 0.6);
+          // border: 1px solid limegreen;
+          // background-color: rgb(127, 255, 0, 0.6);
+          border: 1px solid green;
+          color: green;
         `;
       case 'login':
         return `
