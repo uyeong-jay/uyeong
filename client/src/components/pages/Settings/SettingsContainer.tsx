@@ -1,6 +1,6 @@
 import React, { useState, useCallback, ChangeEvent, FormEvent } from 'react';
 import SettingsPresenter from './SettingsPresenter';
-import { useGetUserDataQuery, useUpdateMutation } from '@app/services/api';
+import { useGetUserDataQuery, useUpdateMutation } from '@app/services/userApi';
 import valid from '@utils/valid';
 import { getUploadImageUrl } from '@utils/uploadImage';
 

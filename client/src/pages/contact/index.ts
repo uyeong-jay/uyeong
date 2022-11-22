@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import wrapper from '@app/store';
 import axios from 'axios';
-import { getRunningOperationPromises, getUserData } from '@app/services/api';
+import { getRunningOperationPromises, getUserData } from '@app/services/userApi';
 
 export { default } from '@pages/Contact';
 
@@ -12,6 +12,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
     axios.defaults.headers.common.Cookie = cookie;
     store.dispatch(getUserData.initiate());
   }
+
   await Promise.all(getRunningOperationPromises());
 
   return {

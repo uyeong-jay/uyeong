@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import JoinPresenter from './JoinPresenter';
-import { useGetUserDataQuery, useJoinMutation } from '@app/services/api';
+import { useGetUserDataQuery, useJoinMutation } from '@app/services/userApi';
 
 const JoinContainer = () => {
   const initialState = { nickname: '', email: '', password: '', cf_password: '' };

@@ -1,5 +1,5 @@
 import HeaderPresenter from './HeaderPresenter';
-import { useGetUserDataQuery, useLogoutMutation } from '@app/services/api';
+import { useGetUserDataQuery, useLogoutMutation } from '@app/services/userApi';
 import { useCallback } from 'react';
 
 const HeaderContainer = () => {

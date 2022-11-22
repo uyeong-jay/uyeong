@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
-import { StyledHeader, StyledNav } from './HeaderStyle';
+import { StyledHeader, StyledHeaderNav } from './HeaderStyle';
 import Button from '@atoms/Button';
 import NavLinkBox from '@molecules/NavLinkBox';
-import { UserResponse } from '@app/services/api';
+import { UserResponse } from '@app/services/userApi';
 import Loader from '@modals/Loader';
 import NotFound from '@src/pages/404';
 import Image from 'next/image';
@@ -36,7 +36,7 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
       {getUserDataLoading && <Loader />}
 
       <StyledHeader>
-        <StyledNav>
+        <StyledHeaderNav>
           <ul>
             <NavLinkBox href="/">로고 UYeong</NavLinkBox>
             <NavLinkBox href="/blog">Blog</NavLinkBox>
@@ -49,6 +49,7 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
                   document.addEventListener('click', onClickOutside);
                 }}
               >
+                {/* 프로필 이미지 */}
                 <div className="user_avatar_container user_avatar">
                   <Image
                     className="user_avatar"
@@ -58,16 +59,27 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
                     height={30}
                   />
                 </div>
+                {/* 아래 화살표 */}
                 <i className="fa-solid fa-caret-down" />
-                {isOpen && (
-                  <ul>
-                    <NavLinkBox href="/settings">Your activity</NavLinkBox>
-                    <NavLinkBox href="/settings">Settings</NavLinkBox>
-                    <li>
-                      <Button variant="logout" onClick={onClickLogout} text="Logout" />
-                    </li>
-                  </ul>
-                )}
+                {/* 아래 화살표 클릭시 오픈 */}
+                {isOpen &&
+                  (userData?.user.role === 'admin' ? (
+                    <ul>
+                      <NavLinkBox href="/category">Category</NavLinkBox>
+                      <NavLinkBox href="/settings">Settings</NavLinkBox>
+                      <li>
+                        <Button variant="logout" onClick={onClickLogout} text="Logout" />
+                      </li>
+                    </ul>
+                  ) : (
+                    <ul>
+                      <NavLinkBox href="/settings">Your activity</NavLinkBox>
+                      <NavLinkBox href="/settings">Settings</NavLinkBox>
+                      <li>
+                        <Button variant="logout" onClick={onClickLogout} text="Logout" />
+                      </li>
+                    </ul>
+                  ))}
               </li>
             ) : (
               <NavLinkBox href="/login" passHref={true}>
@@ -75,7 +87,7 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
               </NavLinkBox>
             )}
           </ul>
-        </StyledNav>
+        </StyledHeaderNav>
       </StyledHeader>
     </>
   );

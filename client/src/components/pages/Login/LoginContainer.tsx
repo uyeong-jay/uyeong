@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import LoginPresenter from './LoginPresenter';
-import { useGetUserDataQuery, useLoginMutation } from '@app/services/api';
+import { useGetUserDataQuery, useLoginMutation } from '@app/services/userApi';
 
 const LoginContainer = () => {
   const initialState = { email: '', password: '' };

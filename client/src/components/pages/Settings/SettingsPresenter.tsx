@@ -1,11 +1,11 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Head from 'next/head';
-import { StyledSection } from './SettingsStyle';
+import { StyledSttings } from './SettingsStyle';
 import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
 import InputBox from '@molecules/InputBox';
 import Image from 'next/image';
-import { UserResponse } from '@app/services/api';
+import { UserResponse } from '@app/services/userApi';
 import NotFound from '@src/pages/404';
 import Loader from '@modals/Loader';
 
@@ -66,7 +66,7 @@ const SettingsPresenter = ({
       {/* 로딩중 */}
       {userUpdateLoading && <Loader />}
 
-      <StyledSection>
+      <StyledSttings>
         {/* 프로필 사진 바꾸기 */}
         <div>
           <div className="user_avatar_container user_avatar">
@@ -99,7 +99,7 @@ const SettingsPresenter = ({
 
           {/* email - disabled */}
           <div>
-            <InputBox labelText="Email" name="email" type="email" defaultValue={email} disabled />
+            <InputBox labelText="Email" type="email" name="email" defaultValue={email} disabled />
           </div>
 
           {/* old_password */}
@@ -169,7 +169,7 @@ const SettingsPresenter = ({
             // disabled={nickname && email && new_password && cf_new_password ? false : true}
           />
         </form>
-      </StyledSection>
+      </StyledSttings>
     </>
   );
 };

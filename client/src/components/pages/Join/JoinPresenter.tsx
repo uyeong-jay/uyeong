@@ -1,12 +1,12 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { StyledSection } from './JoinStyle';
+import { StyledJoin } from './JoinStyle';
 import Head from 'next/head';
 import Link from 'next/link';
 // import Loader from '@modals/Loader';
 import InputBox from '@molecules/InputBox';
 import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
-import { UserResponse } from '@app/services/api';
+import { UserResponse } from '@app/services/userApi';
 import NotFound from '@src/pages/404';
 
 interface Props {
@@ -48,14 +48,14 @@ const JoinPresenter = ({
       {isSuccess ? (
         <div>가입이 완료 되었습니다. 로그인을 해주세요.</div>
       ) : (
-        <StyledSection>
+        <StyledJoin>
           <form onSubmit={onSubmit}>
             <div>
               <InputBox labelText="Nickname" name="nickname" value={nickname} onChange={onChangeInput} />
             </div>
 
             <div>
-              <InputBox labelText="Email" name="email" type="email" value={email} onChange={onChangeInput} />
+              <InputBox labelText="Email" type="email" name="email" value={email} onChange={onChangeInput} />
             </div>
 
             <div>
@@ -108,7 +108,7 @@ const JoinPresenter = ({
             <br />
             이미 가입이 되어 있나요? ( <Link href="/login">Login now!</Link> )
           </p>
-        </StyledSection>
+        </StyledJoin>
       )}
     </>
   );

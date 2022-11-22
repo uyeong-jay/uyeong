@@ -2,7 +2,7 @@ import { GetServerSideProps /* GetStaticProps */ } from 'next';
 import wrapper from '@app/store';
 import axios from 'axios';
 import { getSortedPosts } from '@utils/utils-post';
-import { getRunningOperationPromises, getUserData } from '@app/services/api';
+import { getRunningOperationPromises, getUserData } from '@app/services/userApi';
 
 export { default } from '@pages/Blog';
 
@@ -13,6 +13,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
     axios.defaults.headers.common.Cookie = cookie;
     store.dispatch(getUserData.initiate());
   }
+
   await Promise.all(getRunningOperationPromises());
 
   const posts = await getSortedPosts();
@@ -21,8 +22,6 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   return {
     props: {
       posts,
-      title: 'UYeong Blog',
-      description: '제 블로그에 오신걸 환영합니다 🙂👋',
     },
   };
 });

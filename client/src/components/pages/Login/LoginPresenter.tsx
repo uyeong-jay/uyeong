@@ -1,12 +1,12 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { StyledSection } from './LoginStyle';
+import { StyledLogin } from './LoginStyle';
 import Head from 'next/head';
 import Link from 'next/link';
 // import Loader from '@modals/Loader';
 import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
 import InputBox from '@molecules/InputBox';
-import { UserResponse } from '@app/services/api';
+import { UserResponse } from '@app/services/userApi';
 import NotFound from '@src/pages/404';
 
 interface Props {
@@ -44,10 +44,10 @@ const LoginPresenter = ({
       {/* 로딩화면 */}
       {/* {loginLoading && <Loader />} */}
 
-      <StyledSection>
+      <StyledLogin>
         <form onSubmit={onSubmit}>
           <div>
-            <InputBox labelText="Email" name="email" type="email" value={email} onChange={onChangeInput} />
+            <InputBox labelText="Email" type="email" name="email" value={email} onChange={onChangeInput} />
           </div>
 
           <div>
@@ -79,7 +79,7 @@ const LoginPresenter = ({
           <br />
           가입이 안 되어 있나요? ( <Link href="/join">Wanna join?</Link> )
         </p>
-      </StyledSection>
+      </StyledLogin>
     </>
   );
 };
