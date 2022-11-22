@@ -23,7 +23,7 @@ export const createCategory = async (req: IReqAuth, res: Response) => {
 		//db에 저장
 		await newCategory.save();
 
-		res.status(200).json({ newCategory });
+		res.status(200).json({ msg: "Create Success!" });
 	} catch (err: any) {
 		let errMsg;
 

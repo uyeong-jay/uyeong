@@ -31,7 +31,7 @@ export const login = async (req: Request, res: Response) => {
 		//성공
 		res.status(200).json({
 			access_token,
-			user: { ...user._doc, password: "", cf_password: "" }, //비번빼고 가져오기
+			user: { ...user._doc, password: "" }, //비번빼고 가져오기
 			msg: "Login success!",
 		});
 	} catch (err: any) {
