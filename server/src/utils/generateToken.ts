@@ -23,7 +23,7 @@ export const generateAccessToken = (payload: object) => {
 	//- jwt.sign(userInfo, secretKey, options, 익명함수)
 	//  - secretKey는 password generator 이용하기
 	return jwt.sign(payload, `${process.env.ACCESS_TOKEN_SECRET}`, {
-		expiresIn: "15m",
+		expiresIn: "1d",
 	});
 };
 
