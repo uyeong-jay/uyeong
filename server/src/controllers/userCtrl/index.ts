@@ -1,7 +1,7 @@
-import { update } from "./update";
+import { updateUser } from "./updateUser";
 
 const userCtrl = {
-	update,
+	updateUser,
 };
 
 export default userCtrl; //index 파일(default)
