@@ -10,7 +10,7 @@ const { createCategory, getCategories, updateCategory, deleteCategory } = catego
 // put(update): 데이터 변경(모두)
 // patch(update): 데이터 변경(부분)
 // delete(delete): 데이터 제거
-router.route("/category").get(getCategories).post(auth, createCategory);
-router.route("/category/:slug").patch(auth, updateCategory).delete(auth, deleteCategory);
+router.route("/blog/category").get(getCategories).post(auth, createCategory);
+router.route("/blog/category/:slug").patch(auth, updateCategory).delete(auth, deleteCategory);
 
 export default router;
