@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
 import Button from '@atoms/Button';
-import styled from '@_settings/styled';
+import { StyledBlogCategoryCard } from './BlogCategoryCardStyle';
 
 interface Props {
   category: {
@@ -13,11 +13,6 @@ interface Props {
   onClickSave: (name: string, cardName: string) => void;
   onClickDelete: (name: string) => void;
 }
-
-const StyledBlogCategoryCard = styled.div`
-  border: 1px solid black;
-  width: 400px;
-`;
 
 const BlogCategoryCard = ({
   category,

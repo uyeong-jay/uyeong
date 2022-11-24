@@ -1,21 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import styled from '@_settings/styled';
 import { BlogPostsProps } from '@_types/types-blog';
+import { StyledBlogPostCard } from './BlogPostCardStyle';
 
 interface Props {
   post: BlogPostsProps;
 }
-
-const StyledBlogPostCard = styled.article`
-  //background-color: #efe9e0;
-  border: 1px solid #dadada;
-  width: 200px;
-  height: 300px;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 30px;
-`;
 
 const BlogPostCard = ({ post }: Props) => {
   const { slug, title, description, date, tags } = post;
