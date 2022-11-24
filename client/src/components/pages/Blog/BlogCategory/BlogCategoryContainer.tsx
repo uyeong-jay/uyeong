@@ -15,45 +15,69 @@ const CategoryContainer = () => {
   const [updateBlogCategory] = useUpdateBlogCategoryMutation();
   const [deleteBlogCategory] = useDeleteBlogCategoryMutation();
 
+  //Craete Category
   const initialState = { name: '' };
-  const [blogCategoryInfo, setBlogCategoryInfo] = useState(initialState);
+  const [categoryInfo, setCategoryInfo] = useState(initialState);
+
+  //Update Name
+  const [categoryName, setCategoryName] = useState({ name: '' });
 
   //Create Category
   const onSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      createBlogCategory({ blogCategoryInfo, token: userData?.access_token });
+      createBlogCategory({ categoryInfo, token: userData?.access_token });
+
+      setCategoryInfo({ name: '' });
     },
-    [blogCategoryInfo, createBlogCategory, userData?.access_token],
+    [categoryInfo, createBlogCategory, userData?.access_token],
   );
 
   //Update Category
-  const onClickUpdate = useCallback(() => {
-    ``;
-    updateBlogCategory({ blogCategoryInfo, token: userData?.access_token });
-  }, [blogCategoryInfo, updateBlogCategory, userData?.access_token]);
+  const onClickSave = useCallback(
+    async (cardName, currName) => {
+      await updateBlogCategory({
+        categoryName: { ...categoryName, name: cardName, currName },
+        token: userData?.access_token,
+      });
+
+      setCategoryName({ name: '' });
+    },
+    [categoryName, updateBlogCategory, userData?.access_token],
+  );
 
   //Delete Category
-  const onClickDelete = useCallback(() => {
-    deleteBlogCategory({ blogCategoryInfo, token: userData?.access_token });
-  }, [blogCategoryInfo, deleteBlogCategory, userData?.access_token]);
-
-  const onChangeInput = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setBlogCategoryInfo({ ...blogCategoryInfo, name: e.target.value });
+  const onClickDelete = useCallback(
+    (cardName) => {
+      deleteBlogCategory({
+        categoryInfo: { name: cardName },
+        token: userData?.access_token,
+      });
     },
-    [blogCategoryInfo],
+    [deleteBlogCategory, userData?.access_token],
   );
+
+  //Create Input
+  const onChangeCategoryInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setCategoryInfo({ name: e.target.value });
+  }, []);
+
+  //Update Input
+  const onChangeCateogoryNameInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setCategoryName({ name: e.target.value });
+  }, []);
 
   return (
     <BlogCategoryPresenter
       userData={userData}
-      onSubmit={onSubmit}
-      onChangeInput={onChangeInput}
-      blogCategoryInfo={blogCategoryInfo}
       blogCategoryData={blogCategoryData}
-      onClickUpdate={onClickUpdate}
+      categoryInfo={categoryInfo}
+      categoryName={categoryName}
+      onSubmit={onSubmit}
+      onChangeCategoryInput={onChangeCategoryInput}
+      onChangeCateogoryNameInput={onChangeCateogoryNameInput}
+      onClickSave={onClickSave}
       onClickDelete={onClickDelete}
     />
   );

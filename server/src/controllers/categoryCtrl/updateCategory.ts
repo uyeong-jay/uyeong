@@ -11,10 +11,13 @@ export const updateCategory = async (req: IReqAuth, res: Response) => {
 		if (req.user.role !== "admin") return res.status(400).json({ msg: "Invalid Authentication." });
 
 		//client 데이터 가져오기
-		const { name } = req.body;
+		const { name, currName } = req.body;
 
 		//category 조회 후 업데이트
-		await Categories.findOneAndUpdate({ name: req.params.slug }, { name: name.toLowerCase() });
+		await Categories.findOneAndUpdate({ name }, { name: currName.toLowerCase() });
+		//name: req.params.id
+		//name: req.params.slug
+		//name: req.body.name
 
 		res.status(200).json({ msg: "Update Success!" });
 	} catch (err: any) {

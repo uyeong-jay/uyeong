@@ -11,7 +11,11 @@ export interface BlogCategoryRes {
 }
 
 export interface BlogCategoryReq {
-  blogCategoryInfo: {
+  categoryName?: {
+    currName: string;
+    name: string;
+  };
+  categoryInfo?: {
     name: string;
   };
   token?: string;
@@ -36,7 +40,7 @@ export const blogCategoryApi = api.injectEndpoints({
       query: (data) => ({
         url: '/api/blog/category',
         method: 'post',
-        data: data.blogCategoryInfo,
+        data: data.categoryInfo,
         headers: {
           Authorization: data.token,
         },
@@ -47,9 +51,9 @@ export const blogCategoryApi = api.injectEndpoints({
     //update
     updateBlogCategory: builder.mutation<BlogCategoryRes, BlogCategoryReq>({
       query: (data) => ({
-        url: '/api/blog/category/:slug',
+        url: '/api/blog/category',
         method: 'patch',
-        data: data.blogCategoryInfo,
+        data: data.categoryName,
         headers: {
           Authorization: data.token,
         },
@@ -60,8 +64,9 @@ export const blogCategoryApi = api.injectEndpoints({
     //delete
     deleteBlogCategory: builder.mutation<BlogCategoryRes, BlogCategoryReq>({
       query: (data) => ({
-        url: '/api/blog/category/:slug',
+        url: '/api/blog/category',
         method: 'delete',
+        data: data.categoryInfo,
         headers: {
           Authorization: data.token,
         },

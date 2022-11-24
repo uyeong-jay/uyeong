@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
 import Button from '@atoms/Button';
 import styled from '@_settings/styled';
 
 interface Props {
-  onClickUpdate: () => void;
-  onClickDelete: () => void;
   category: {
     name: string;
     _id: string;
   };
-  // category: any;
+  categoryName: { name: string };
+  onChangeCateogoryNameInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClickSave: (name: string, cardName: string) => void;
+  onClickDelete: (name: string) => void;
 }
 
 const StyledBlogCategoryCard = styled.div`
@@ -18,7 +19,19 @@ const StyledBlogCategoryCard = styled.div`
   width: 400px;
 `;
 
-const BlogCategoryCard = ({ onClickUpdate, onClickDelete, category }: Props) => {
+const BlogCategoryCard = ({
+  category,
+  categoryName,
+  onChangeCateogoryNameInput,
+  onClickSave,
+  onClickDelete,
+}: Props) => {
+  const { name: cardName } = category;
+  const { name } = categoryName;
+  const [updateCategoryName, setUpdateCategoryName] = useState(false);
+
+  console.log(!updateCategoryName);
+
   return (
     <StyledBlogCategoryCard>
       {/* 포스트 이미지 */}
@@ -33,13 +46,27 @@ const BlogCategoryCard = ({ onClickUpdate, onClickDelete, category }: Props) => 
       </div>
       <div>
         {/* 제목 */}
-        <p>{category.name}</p>
+        {!updateCategoryName ? (
+          <>
+            <p>{cardName}</p>
+            <Button variant="update" text="Edit" onClick={() => setUpdateCategoryName((prev) => !prev)} />
 
-        {/* 수정버튼(input) > 저장버튼 (admin) */}
-        <Button variant="update" text="Edit" onClick={onClickUpdate} />
+            <Button variant="delete" text="Delete" onClick={() => onClickDelete(cardName)} />
+          </>
+        ) : (
+          <>
+            <input type="text" value={name} onChange={onChangeCateogoryNameInput} placeholder={cardName} />
+            <Button
+              variant="update"
+              text="Save"
+              onClick={() => {
+                onClickSave(cardName, name);
+              }}
+            />
 
-        {/* 삭제버튼 > 모달 (admin) */}
-        <Button variant="delete" text="Delete" onClick={onClickDelete} />
+            <Button text="Back" onClick={() => setUpdateCategoryName((prev) => !prev)} />
+          </>
+        )}
       </div>
 
       {/* 포스트 개수, 최근 업데이트 날짜 */}
@@ -49,3 +76,7 @@ const BlogCategoryCard = ({ onClickUpdate, onClickDelete, category }: Props) => 
 };
 
 export default BlogCategoryCard;
+
+//수정버튼(input) > 저장버튼 (admin)
+//삭제버튼 > 모달 (admin)
+//저장버튼

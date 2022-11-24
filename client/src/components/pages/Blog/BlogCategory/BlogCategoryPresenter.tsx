@@ -9,9 +9,8 @@ import BlogCategoryCard from './BlogCategoryCard';
 
 interface Props {
   userData: UserResponse | undefined;
-  onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  blogCategoryInfo: { name: string };
+  categoryInfo: { name: string };
+  categoryName: { name: string };
   blogCategoryData?: {
     categories?: [
       {
@@ -20,20 +19,25 @@ interface Props {
       },
     ];
   };
-  onClickUpdate: () => void;
-  onClickDelete: () => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  onChangeCategoryInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeCateogoryNameInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClickSave: (name: string, cardName: string) => void;
+  onClickDelete: (name: string) => void;
 }
 
 const BlogCategoryPresenter = ({
   userData,
-  onChangeInput,
-  onSubmit,
-  blogCategoryInfo,
   blogCategoryData,
-  onClickUpdate,
+  categoryInfo,
+  categoryName,
+  onSubmit,
+  onChangeCategoryInput,
+  onChangeCateogoryNameInput,
+  onClickSave,
   onClickDelete,
 }: Props) => {
-  const { name } = blogCategoryInfo;
+  const { name } = categoryInfo;
 
   return (
     <>
@@ -46,18 +50,20 @@ const BlogCategoryPresenter = ({
           {/* 카테고리 생성 바 (admin) */}
           {userData?.user?.role === 'admin' && (
             <form onSubmit={onSubmit}>
-              <InputBox labelText="category" name="category" value={name} onChange={onChangeInput} />
+              <InputBox labelText="category" name="category" value={name} onChange={onChangeCategoryInput} />
               <Button variant="create" type="submit" text="Create" />
             </form>
           )}
 
-          {/* 카테고리 카드 여러개 웨퍼 */}
+          {/* 카테고리 카드들 웨퍼 */}
           <div>
             {blogCategoryData?.categories?.map((category) => (
               <BlogCategoryCard
                 key={category._id}
                 category={category}
-                onClickUpdate={onClickUpdate}
+                categoryName={categoryName}
+                onChangeCateogoryNameInput={onChangeCateogoryNameInput}
+                onClickSave={onClickSave}
                 onClickDelete={onClickDelete}
               />
             ))}
