@@ -3,7 +3,7 @@ import wrapper from '@app/store';
 import axios from 'axios';
 import { getRunningOperationPromises, getUserData } from '@app/services/userApi';
 
-export { default } from '@pages/Home';
+export { default } from '@pages/Home/HomePage';
 
 // Client sdie rendering 에서는
 // 브라우저 -> 백서버로 데이터를 보낼 때, 브라우저가 스스로 쿠키를 담아서 보냄
