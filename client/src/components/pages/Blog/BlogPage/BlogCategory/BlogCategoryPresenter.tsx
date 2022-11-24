@@ -1,11 +1,11 @@
 import { UserResponse } from '@app/services/userApi';
 import Button from '@atoms/Button';
-import BlogHeader from '@pages/Blog/BlogHeader';
+import BlogHeader from '@pages/Blog/BlogComponents/BlogHeader/BlogHeader';
 import InputBox from '@molecules/InputBox';
 import Head from 'next/head';
 import { ChangeEvent, FormEvent } from 'react';
 import { StyledBlogCategory, StyledBlogCategoryContents } from './BlogCategoryStyle';
-import BlogCategoryCard from './BlogCategoryCard';
+import BlogCategoryCard from '../../BlogComponents/BlogCtegoryCard/BlogCategoryCard';
 
 interface Props {
   userData: UserResponse | undefined;

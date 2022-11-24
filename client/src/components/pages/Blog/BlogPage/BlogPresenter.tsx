@@ -1,8 +1,8 @@
 import { StyledBlog, StyledBlogContents, StyledPosts, StyledTags } from './BlogStyle';
 import Head from 'next/head';
-import BlogPostCard from './BlogPost/BlogPostCard';
+import BlogPostCard from '@pages/Blog/BlogComponents/BlogPostCard';
 import { BlogProps } from '@_types/types-blog';
-import BlogHeader from './BlogHeader';
+import BlogHeader from '@pages/Blog/BlogComponents/BlogHeader';
 // import MoreButton from '@atoms/MoreButton';
 
 const BlogPresenter = ({ posts }: BlogProps) => {

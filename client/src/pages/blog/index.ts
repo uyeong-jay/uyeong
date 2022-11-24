@@ -4,7 +4,7 @@ import axios from 'axios';
 import { getSortedPosts } from '@utils/utils-post';
 import { getRunningOperationPromises, getUserData } from '@app/services/userApi';
 
-export { default } from '@pages/Blog';
+export { default } from '@pages/Blog/BlogPage';
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   const cookie = context.req ? context.req.headers.cookie : '';

@@ -4,7 +4,7 @@ import { getPostBySlug } from '@utils/utils-post';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
 
-export { default } from '@pages/Blog/BlogPost';
+export { default } from '@pages/Blog/BlogPage/BlogPost';
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async ({ params, req }) => {
   const cookie = req ? req.headers.cookie : '';
