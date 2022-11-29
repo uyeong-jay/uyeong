@@ -10,7 +10,7 @@ export const createCategory = async (req: IReqAuth, res: Response) => {
 		if (req.user.role !== "admin") return res.status(400).json({ msg: "Invalid Authentication." });
 
 		//client 데이터 가져오기
-		const name = req.body.name.toLowerCase();
+		const name = req.body.name;
 
 		//category 조회
 		// const category = await Categories.findOne({ name });

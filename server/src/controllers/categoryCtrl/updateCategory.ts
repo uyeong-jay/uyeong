@@ -14,7 +14,7 @@ export const updateCategory = async (req: IReqAuth, res: Response) => {
 		const { name, currName } = req.body;
 
 		//category 조회 후 업데이트
-		await Categories.findOneAndUpdate({ name }, { name: currName.toLowerCase() });
+		await Categories.findOneAndUpdate({ name }, { name: currName });
 		//name: req.params.id
 		//name: req.params.slug
 		//name: req.body.name
