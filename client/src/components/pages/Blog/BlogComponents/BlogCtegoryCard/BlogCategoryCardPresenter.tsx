@@ -53,6 +53,7 @@ const BlogCategoryCardPresenter = ({
                 variant="update"
                 text="Save"
                 onClick={() => {
+                  if (!categoryName.name) return;
                   onClickSave(cardName, categoryName.name);
                 }}
               />
@@ -61,13 +62,9 @@ const BlogCategoryCardPresenter = ({
         ) : (
           <>
             {/* 이름 저장시 잠시 이전 이름이 노출되는 이슈 해결 */}
-            {
-              /* client data */ categoryName.name ? (
-                /* client data */ <p>{categoryName.name}</p>
-              ) : (
-                /* server data */ <p>{cardName}</p>
-              )
-            }
+            {/* client data: categoryName.name */}
+            {/* server data: cardName */}
+            {categoryName.name ? <p>{categoryName.name}</p> : <p>{cardName}</p>}
             {userData?.user?.role === 'admin' && (
               <>
                 <Button variant="update" text="Edit" onClick={onClickEdit} />
