@@ -85,14 +85,7 @@ export const userApi = api.injectEndpoints({
 });
 
 // export hooks for usage in functional components
-export const {
-  useGetUserDataQuery,
-  useJoinMutation,
-  useLoginMutation,
-  useLogoutMutation,
-  useUpdateMutation,
-  util: { getRunningOperationPromises },
-} = userApi;
+export const { useGetUserDataQuery, useJoinMutation, useLoginMutation, useLogoutMutation, useUpdateMutation } = userApi;
 
 // export endpoints for use in SSR
 export const { getUserData } = userApi.endpoints;

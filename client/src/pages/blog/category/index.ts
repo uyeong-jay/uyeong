@@ -1,7 +1,8 @@
 import { GetServerSideProps } from 'next';
 import wrapper from '@app/store';
 import axios from 'axios';
-import { getRunningOperationPromises, getUserData } from '@app/services/userApi';
+import { getRunningOperationPromises } from '@app/services/api';
+import { getUserData } from '@app/services/userApi';
 import { getBlogCategories } from '@app/services/blogApi/blogCategoryApi';
 
 export { default } from '@pages/Blog/BlogPage/BlogCategory';

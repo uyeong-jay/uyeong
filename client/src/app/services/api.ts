@@ -14,3 +14,7 @@ export const api = createApi({
   tagTypes: ['User', 'BlogCategory'],
   endpoints: () => ({}),
 });
+
+export const {
+  util: { getRunningOperationPromises },
+} = api;

@@ -1,4 +1,5 @@
 import wrapper from '@app/store';
+import { getRunningOperationPromises } from '@app/services/api';
 import { getUserData } from '@app/services/userApi';
 import { getPostBySlug } from '@utils/utils-post';
 import axios from 'axios';
@@ -11,10 +12,12 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   axios.defaults.headers.common.Cookie = '';
   if (req && cookie) {
     axios.defaults.headers.common.Cookie = cookie;
-    await store.dispatch(getUserData.initiate());
+    store.dispatch(getUserData.initiate());
   }
 
   const { frontMatter, markdownBody } = await getPostBySlug(params?.slug);
+
+  await Promise.all(getRunningOperationPromises());
 
   return {
     props: {

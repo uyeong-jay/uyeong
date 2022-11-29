@@ -2,7 +2,8 @@ import { GetServerSideProps /* GetStaticProps */ } from 'next';
 import wrapper from '@app/store';
 import axios from 'axios';
 import { getSortedPosts } from '@utils/utils-post';
-import { getRunningOperationPromises, getUserData } from '@app/services/userApi';
+import { getRunningOperationPromises } from '@app/services/api';
+import { getUserData } from '@app/services/userApi';
 
 export { default } from '@pages/Blog/BlogPage';
 
