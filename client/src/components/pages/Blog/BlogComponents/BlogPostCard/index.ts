@@ -1,1 +1,1 @@
-export { default } from './BlogPostCard';
+export { default } from './BlogPostCardContainer';

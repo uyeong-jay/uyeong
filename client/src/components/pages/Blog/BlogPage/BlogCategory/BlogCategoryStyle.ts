@@ -17,17 +17,18 @@ export const StyledBlogCategoryContents = styled.section`
   align-items: center;
   position: relative;
   width: 100%;
-  height: 700px;
+  minheight: 1000px;
 
   //FORM
   & > form {
-    // border: 1px solid black;
+    border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     width: 800px;
     height: 150px;
-    margin-left: 80px;
+    padding-left: 80px;
 
     // InputBox
     & > div {
@@ -50,12 +51,24 @@ export const StyledBlogCategoryContents = styled.section`
       margin-left: 10px;
       height: 40px;
     }
+
+    //ERROR MESSAGE
+    & > .blog-category-error {
+      // border: 1px solid red;
+      position: absolute;
+      bottom: 25px;
+      left: 205px;
+    }
   }
 
   //CATEGORY CARDS WRAPPER
   & > div {
     border: 1px solid black;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    justify-content: center;
     width: 800px;
-    height: 550px;
+    height: 100%;
+    margin-bottom: 100px;
   }
 `;

@@ -39,7 +39,7 @@ export const createCategory = async (req: IReqAuth, res: Response) => {
 
 			// errMsg = err.keyValue.name + " already exists.";
 			// errMsg = Object.keys(err.keyValue)[0] + " already exists."; //'name already exists'.
-			errMsg = Object.values(err.keyValue)[0] + " already exists."; //'javascript already exists'.
+			errMsg = " Category " + "' " + Object.values(err.keyValue)[0] + " '" + " already exists."; //'javascript already exists'.
 		} else {
 			let name = Object.keys(err.errors)[0];
 			errMsg = err.errors[`${name}`].message;

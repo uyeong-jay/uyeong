@@ -1,1 +1,1 @@
-export { default } from './BlogHeader';
+export { default } from './BlogHeaderContainer';

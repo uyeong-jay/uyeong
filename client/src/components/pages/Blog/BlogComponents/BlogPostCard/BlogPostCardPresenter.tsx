@@ -7,7 +7,7 @@ interface Props {
   post: BlogPostsProps;
 }
 
-const BlogPostCard = ({ post }: Props) => {
+const BlogPostCardPresenter = ({ post }: Props) => {
   const { slug, title, description, date, tags } = post;
 
   return (
@@ -22,4 +22,4 @@ const BlogPostCard = ({ post }: Props) => {
   );
 };
 
-export default BlogPostCard;
+export default BlogPostCardPresenter;

@@ -2,7 +2,7 @@ import React from 'react';
 import NavLinkBox from '@molecules/NavLinkBox';
 import { StyledBlogHeader, StyledBlogHeaderNav } from './BlogHeaderStyle';
 
-const BlogHeader = () => {
+const BlogHeaderPresenter = () => {
   return (
     <StyledBlogHeader>
       <h3>UYeong Blog</h3>
@@ -18,4 +18,4 @@ const BlogHeader = () => {
   );
 };
 
-export default BlogHeader;
+export default BlogHeaderPresenter;

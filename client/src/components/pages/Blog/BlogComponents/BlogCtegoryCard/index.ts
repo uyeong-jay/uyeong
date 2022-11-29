@@ -1,1 +1,1 @@
-export { default } from './BlogCategoryCard';
+export { default } from './BlogCategoryCardContainer';

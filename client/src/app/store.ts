@@ -4,6 +4,9 @@ import { createWrapper } from 'next-redux-wrapper';
 import { CurriedGetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware';
 import { api } from '@app/services/api';
 
+//reducers
+// import blogCategoryReducer from '@pages/Blog/BlogPage/BlogCategory/BlogCategorySlice';
+
 const isDev = process.env.NODE_ENV === 'development';
 
 const createStore = () => {
@@ -16,6 +19,7 @@ const createStore = () => {
   const store = configureStore({
     reducer: {
       [api.reducerPath]: api.reducer,
+      // blogCategory: blogCategoryReducer,
     },
     middleware,
     devTools: isDev,
