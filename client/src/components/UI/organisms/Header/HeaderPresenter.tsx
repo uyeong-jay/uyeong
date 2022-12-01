@@ -50,9 +50,9 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
                 }}
               >
                 {/* 프로필 이미지 */}
-                <div className="user_avatar_container user_avatar">
+                <div className="user-avatar-container user-avatar">
                   <Image
-                    className="user_avatar"
+                    className="user-avatar"
                     src={userData?.user?.avatar}
                     alt="user avater"
                     width={30}
@@ -65,7 +65,7 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
                 {isOpen &&
                   (userData?.user.role === 'admin' ? (
                     <ul>
-                      <NavLinkBox href="/category">Category</NavLinkBox>
+                      <NavLinkBox href="/write">New post</NavLinkBox>
                       <NavLinkBox href="/settings">Settings</NavLinkBox>
                       <li>
                         <Button variant="logout" onClick={onClickLogout} text="Logout" />

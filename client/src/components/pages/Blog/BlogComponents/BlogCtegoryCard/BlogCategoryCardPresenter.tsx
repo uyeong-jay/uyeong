@@ -32,23 +32,26 @@ const BlogCategoryCardPresenter = ({
 }: Props) => {
   return (
     <StyledBlogCategoryCard>
-      {/* 포스트 이미지 */}
-      <div>
+      {/* 카드 이미지 */}
+      <div className="card-image-wrapper card-image">
         {/* 만약 블로그가 있으면 다른 블로그 첫번째 이미지로 하기 */}
         <Image
+          className="card-image"
           src="https://res.cloudinary.com/uyeong/image/upload/v1668671461/uyeong-blog/purplePNG_umvvlq.png"
           alt="category"
           width={400}
           height={200}
         />
       </div>
-      <div>
+
+      {/* 카드 내용 */}
+      <div className="card-content">
         {/* 제목 */}
         {/* userData?.user?.role === 'admin' */}
         {isUpdate ? (
           userData?.user?.role === 'admin' && (
-            <>
-              <input type="text" value={categoryName.name} onChange={onChangeCategoryNameInput} />
+            <div className="card-content-title-wrapper">
+              <input type="text" value={categoryName.name} onChange={onChangeCategoryNameInput} autoFocus />
               <Button
                 variant="update"
                 text="Save"
@@ -57,10 +60,10 @@ const BlogCategoryCardPresenter = ({
                   onClickSave(cardName, categoryName.name);
                 }}
               />
-            </>
+            </div>
           )
         ) : (
-          <>
+          <div className="card-content-title-wrapper">
             {/* 이름 저장시 잠시 이전 이름이 노출되는 이슈 해결 */}
             {/* client data: categoryName.name */}
             {/* server data: cardName */}
@@ -72,12 +75,12 @@ const BlogCategoryCardPresenter = ({
                 <Button variant="delete" text="Delete" onClick={() => onClickDelete(cardName)} />
               </>
             )}
-          </>
+          </div>
         )}
-      </div>
 
-      {/* 포스트 개수, 최근 업데이트 날짜 */}
-      <div>포스트개수, 마지막 업데이트: ~ 시간 전</div>
+        {/* 포스트 개수, 최근 업데이트 날짜 */}
+        <div className="card-content-footer">포스트개수, 마지막 업데이트: ~ 시간 전</div>
+      </div>
     </StyledBlogCategoryCard>
   );
 };

@@ -9,19 +9,19 @@ export const StyledBlogCategory = styled.section`
   width: 1200px;
 `;
 
-export const StyledBlogCategoryContents = styled.section`
-  border: 1px solid blue;
+export const StyledBlogCategoryContent = styled.section`
+  border: 1px solid green;
   display: flex;
   flex-direction: column;
   // justify-content: center;
   align-items: center;
   position: relative;
   width: 100%;
-  minheight: 1000px;
+  min-height: 1000px;
 
   //FORM
   & > form {
-    border: 1px solid black;
+    // border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,7 +63,7 @@ export const StyledBlogCategoryContents = styled.section`
 
   //CATEGORY CARDS WRAPPER
   & > div {
-    border: 1px solid black;
+    // border: 1px solid black;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
     justify-content: center;

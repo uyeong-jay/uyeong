@@ -17,12 +17,12 @@ export const StyledSttings = styled.section`
     position: relative;
     padding-bottom: 60px;
 
-    & .user_avatar_container {
+    & .user-avatar-container {
       display: inline-flex;
       border: solid 5px rgba(0, 255, 0, 0.5);
     }
 
-    & .user_avatar {
+    & .user-avatar {
       border-radius: 50%;
       object-fit: cover; //원본크기로 넣기
     }

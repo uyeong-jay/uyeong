@@ -4,7 +4,7 @@ import BlogHeader from '@pages/Blog/BlogComponents/BlogHeader/BlogHeaderPresente
 import InputBox from '@molecules/InputBox';
 import Head from 'next/head';
 import { ChangeEvent, FormEvent } from 'react';
-import { StyledBlogCategory, StyledBlogCategoryContents } from './BlogCategoryStyle';
+import { StyledBlogCategory, StyledBlogCategoryContent } from './BlogCategoryStyle';
 import BlogCategoryCard from '../../BlogComponents/BlogCtegoryCard/BlogCategoryCardContainer';
 
 interface Props {
@@ -40,7 +40,7 @@ const BlogCategoryPresenter = ({
       </Head>
       <StyledBlogCategory>
         <BlogHeader />
-        <StyledBlogCategoryContents>
+        <StyledBlogCategoryContent>
           {/* 카테고리 생성 바 (admin) */}
           {userData?.user?.role === 'admin' && (
             <form onSubmit={onSubmit}>
@@ -61,7 +61,7 @@ const BlogCategoryPresenter = ({
               <BlogCategoryCard key={category._id} category={category} userData={userData} />
             ))}
           </div>
-        </StyledBlogCategoryContents>
+        </StyledBlogCategoryContent>
       </StyledBlogCategory>
     </>
   );
