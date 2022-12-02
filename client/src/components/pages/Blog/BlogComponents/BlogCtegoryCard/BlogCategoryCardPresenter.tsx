@@ -11,6 +11,7 @@ interface Props {
     name: string;
   };
   isUpdate: boolean;
+  error: any;
   onClickEdit: () => void;
   onClickDelete: (cardName: string) => void;
   onClickSave: (cardName: string, currName: string) => void;
@@ -25,6 +26,7 @@ const BlogCategoryCardPresenter = ({
   cardName,
   categoryName,
   isUpdate,
+  error,
   onClickEdit,
   onClickDelete,
   onClickSave,
@@ -75,6 +77,13 @@ const BlogCategoryCardPresenter = ({
                 <Button variant="delete" text="Delete" onClick={() => onClickDelete(cardName)} />
               </>
             )}
+          </div>
+        )}
+
+        {/* 에러 메시지 */}
+        {error && (
+          <div className="card-content-title-error" style={{ color: 'red' }}>
+            {error.data.msg}
           </div>
         )}
 

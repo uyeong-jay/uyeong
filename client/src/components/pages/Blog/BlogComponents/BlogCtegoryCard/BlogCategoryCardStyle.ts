@@ -22,7 +22,7 @@ export const StyledBlogCategoryCard = styled.div`
     & .card-content-title-wrapper {
       // border: 1px solid black;
       display: flex;
-      padding: 10px 10px;
+      margin: 10px 10px;
 
       & > input {
         // border: 1px solid red;
@@ -33,6 +33,11 @@ export const StyledBlogCategoryCard = styled.div`
         // border: 1px solid red;
         width: 100%;
       }
+    }
+
+    & .card-content-title-error {
+      // border: 1px solid red;
+      padding: 0px 10px 10px 10px;
     }
 
     & .card-content-footer {

@@ -13,7 +13,7 @@ interface Props {
 }
 
 const BlogCategoryCard = ({ category, userData }: Props) => {
-  const [updateBlogCategory] = useUpdateBlogCategoryMutation();
+  const [updateBlogCategory, { error }] = useUpdateBlogCategoryMutation();
   const [deleteBlogCategory] = useDeleteBlogCategoryMutation();
   const { name: cardName } = category;
 
@@ -60,6 +60,7 @@ const BlogCategoryCard = ({ category, userData }: Props) => {
       cardName={cardName}
       categoryName={categoryName}
       isUpdate={isUpdate}
+      error={error}
       onClickEdit={onClickEdit}
       onClickDelete={onClickDelete}
       onClickSave={onClickSave}

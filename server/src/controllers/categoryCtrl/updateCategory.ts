@@ -13,6 +13,10 @@ export const updateCategory = async (req: IReqAuth, res: Response) => {
 		//client 데이터 가져오기
 		const { name, currName } = req.body;
 
+		//category 조회
+		const category = await Categories.findOne({ name });
+		if (category) return res.status(400).json({ msg: "This category name already exists." });
+
 		//category 조회 후 업데이트
 		await Categories.findOneAndUpdate({ name }, { name: currName });
 		//name: req.params.id
