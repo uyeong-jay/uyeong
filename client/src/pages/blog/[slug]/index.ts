@@ -15,9 +15,9 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
     store.dispatch(getUserData.initiate());
   }
 
-  const { frontMatter, markdownBody } = await getPostBySlug(params?.slug);
-
   await Promise.all(getRunningOperationPromises());
+
+  const { frontMatter, markdownBody } = await getPostBySlug(params?.slug);
 
   return {
     props: {

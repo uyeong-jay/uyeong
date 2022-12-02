@@ -13,7 +13,7 @@ const BlogPostCardPresenter = ({ post }: Props) => {
   return (
     <StyledBlogPostCard key={slug}>
       <h3>
-        제목: <Link href={`/blog/post/${slug}`}>{title}</Link>
+        제목: <Link href={`/blog/${slug}`}>{title}</Link>
       </h3>
       <p>설명: {description}</p>
       <p>날짜: {date}</p>
