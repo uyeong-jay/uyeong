@@ -69,7 +69,7 @@ export const StyledSttings = styled.section`
         position: absolute;
         top: 35px;
         right: 10px;
-        // z-index: 999;
+        // z-index: 1;
       }
     }
 
