@@ -6,7 +6,7 @@ interface Props {
   joinError?: boolean;
 }
 
-const ErrorPageWrapper = styled.div`
+const StyledErrorPage = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,25 +39,25 @@ const ErrorPageWrapper = styled.div`
 const NotFound = ({ loginError, joinError }: Props) => {
   if (loginError)
     return (
-      <ErrorPageWrapper>
+      <StyledErrorPage>
         <h1>Please Login First</h1>
         <Link href="/">Go to home</Link>
-      </ErrorPageWrapper>
+      </StyledErrorPage>
     );
 
   if (joinError)
     return (
-      <ErrorPageWrapper>
+      <StyledErrorPage>
         <h1>Please Logout First</h1>
         <Link href="/">Go to home</Link>
-      </ErrorPageWrapper>
+      </StyledErrorPage>
     );
 
   return (
-    <ErrorPageWrapper>
+    <StyledErrorPage>
       <h1>Page Not Found</h1>
       <Link href="/">Go to home</Link>
-    </ErrorPageWrapper>
+    </StyledErrorPage>
   );
 };
 
