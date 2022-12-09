@@ -11,7 +11,7 @@ export const api = createApi({
       return action.payload[reducerPath];
     }
   },
-  tagTypes: ['User', 'BlogCategory'],
+  tagTypes: ['User', 'BlogCategory', 'BlogPost'],
   endpoints: () => ({}),
 });
 

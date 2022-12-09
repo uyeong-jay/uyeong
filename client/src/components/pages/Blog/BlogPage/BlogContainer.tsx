@@ -1,8 +1,8 @@
 import BlogPresenter from './BlogPresenter';
 import { BlogProps } from '@_types/types-blog';
 
-const BlogContainer = ({ posts, title, description }: BlogProps) => {
-  return <BlogPresenter posts={posts} title={title} description={description} />;
+const BlogContainer = ({ posts }: BlogProps) => {
+  return <BlogPresenter posts={posts} />;
 };
 
 export default BlogContainer;
