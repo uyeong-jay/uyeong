@@ -10,4 +10,4 @@ const authCtrl = {
 	logout,
 };
 
-export default authCtrl; //index 파일(default)
+export default authCtrl;

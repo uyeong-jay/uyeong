@@ -10,7 +10,6 @@ const { createCategory, getCategories, updateCategory, deleteCategory } = catego
 // put(update): 데이터 변경(모두)
 // patch(update): 데이터 변경(부분)
 // delete(delete): 데이터 제거
-
 categoryRouter
 	.route("/blog/category")
 	.get(getCategories)

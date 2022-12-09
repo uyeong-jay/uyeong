@@ -10,4 +10,4 @@ const categoryCtrl = {
 	deleteCategory,
 };
 
-export default categoryCtrl; //index 파일(default)
+export default categoryCtrl;
