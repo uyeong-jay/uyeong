@@ -25,3 +25,15 @@ export interface IDecodedToken {
 	iat: number;
 	exp: number;
 }
+
+export interface IBlog {
+	_id: typeof ObjectId;
+	user: string;
+	title: string;
+	tags: [String];
+	content: string;
+	description: string;
+	thumnail: string;
+	category: string;
+	_doc: object;
+}

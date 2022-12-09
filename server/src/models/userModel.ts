@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 import { IUser } from "@_types/types";
 
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema(
 	{
 		nickname: {
 			type: String,
@@ -36,4 +36,4 @@ const userSchema = new Schema<IUser>(
 );
 
 //Model 생성
-export default model("user", userSchema);
+export default model<IUser>("user", userSchema);

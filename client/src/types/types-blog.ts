@@ -20,6 +20,6 @@ export type BlogPostsProps = {
 
 export type BlogProps = {
   posts?: BlogPostsProps[];
-  title: string;
-  description: string;
+  // title: string;
+  // description: string;
 };
