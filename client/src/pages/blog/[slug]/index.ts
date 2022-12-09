@@ -1,7 +1,7 @@
 import wrapper from '@app/store';
 import { getRunningOperationPromises } from '@app/services/api';
-import { getUserData } from '@app/services/userApi';
-import { getPostBySlug } from '@utils/utils-post';
+import { getUserData } from '@app/services/user/userApi';
+// import { getPostBySlug } from '@utils/utils-post';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
 
@@ -17,12 +17,16 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
 
   await Promise.all(getRunningOperationPromises());
 
-  const { frontMatter, markdownBody } = await getPostBySlug(params?.slug);
+  // const { frontMatter, markdownBody } = await getPostBySlug(params?.slug);
+  const urlSlug = params?.slug;
 
   return {
+    // props: {
+    //   frontMatter,
+    //   markdownBody,
+    // },
     props: {
-      frontMatter,
-      markdownBody,
+      urlSlug,
     },
   };
 });

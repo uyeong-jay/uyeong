@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { StyledHeader, StyledHeaderNav } from './HeaderStyle';
 import Button from '@atoms/Button';
 import NavLinkBox from '@molecules/NavLinkBox';
-import { UserResponse } from '@app/services/userApi';
+import { UserResponse } from '@app/services/user/userApi';
 import Loader from '@modals/Loader';
 import NotFound from '@src/pages/404';
 import Image from 'next/image';

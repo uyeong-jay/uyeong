@@ -1,8 +1,8 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 import BlogCategoryCardPresenter from './BlogCategoryCardPresenter';
 
-import { useUpdateBlogCategoryMutation, useDeleteBlogCategoryMutation } from '@app/services/blogApi/blogCategoryApi';
-import { UserResponse } from '@app/services/userApi';
+import { useUpdateBlogCategoryMutation, useDeleteBlogCategoryMutation } from '@app/services/blog/blogCategoryApi';
+import { UserResponse } from '@app/services/user/userApi';
 
 interface Props {
   userData: UserResponse | undefined;

@@ -1,9 +1,10 @@
 import { GetServerSideProps /* GetStaticProps */ } from 'next';
 import wrapper from '@app/store';
 import axios from 'axios';
-import { getSortedPosts } from '@utils/utils-post';
+// import { getSortedPosts } from '@utils/utils-post';
 import { getRunningOperationPromises } from '@app/services/api';
-import { getUserData } from '@app/services/userApi';
+import { getUserData } from '@app/services/user/userApi';
+// import { getBlogPosts } from '@app/services/blog/blogPostApi';
 
 export { default } from '@pages/Blog/BlogPage';
 
@@ -13,16 +14,17 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   if (context.req && cookie) {
     axios.defaults.headers.common.Cookie = cookie;
     store.dispatch(getUserData.initiate());
+    // store.dispatch(getBlogPosts.initiate());
   }
 
   await Promise.all(getRunningOperationPromises());
 
-  const posts = await getSortedPosts();
+  // const posts = await getSortedPosts();
   //posts: slug, date, title, description, tags
 
   return {
     props: {
-      posts,
+      // posts,
     },
   };
 });

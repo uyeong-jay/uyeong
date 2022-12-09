@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react';
 import { StyledBlogCategoryCard } from './BlogCategoryCardStyle';
 import Button from '@atoms/Button';
 import Image from 'next/image';
-import { UserResponse } from '@app/services/userApi';
+import { UserResponse } from '@app/services/user/userApi';
 
 interface Props {
   userData: UserResponse | undefined;

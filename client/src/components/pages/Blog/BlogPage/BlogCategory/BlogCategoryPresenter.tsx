@@ -1,4 +1,4 @@
-import { UserResponse } from '@app/services/userApi';
+import { UserResponse } from '@app/services/user/userApi';
 import Button from '@atoms/Button';
 import BlogHeader from '@pages/Blog/BlogComponents/BlogHeader/BlogHeaderPresenter';
 import InputBox from '@molecules/InputBox';

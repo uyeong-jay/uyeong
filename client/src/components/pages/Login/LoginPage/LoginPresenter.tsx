@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
 import InputBox from '@molecules/InputBox';
-import { UserResponse } from '@app/services/userApi';
+import { UserResponse } from '@app/services/user/userApi';
 import NotFound from '@src/pages/404';
 
 interface Props {

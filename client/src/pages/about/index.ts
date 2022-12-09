@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import wrapper from '@app/store';
 import axios from 'axios';
 import { getRunningOperationPromises } from '@app/services/api';
-import { getUserData } from '@app/services/userApi';
+import { getUserData } from '@app/services/user/userApi';
 
 export { default } from '@pages/About/AboutPage';
 

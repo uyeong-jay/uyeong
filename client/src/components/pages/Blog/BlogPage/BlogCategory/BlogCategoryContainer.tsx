@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import BlogCategoryPresenter from './BlogCategoryPresenter';
-import { useGetUserDataQuery } from '@app/services/userApi';
-import { useGetBlogCategoriesQuery, useCreateBlogCategoryMutation } from '@app/services/blogApi/blogCategoryApi';
+import { useGetUserDataQuery } from '@app/services/user/userApi';
+import { useGetBlogCategoriesQuery, useCreateBlogCategoryMutation } from '@app/services/blog/blogCategoryApi';
 
 const CategoryContainer = () => {
   const { data: userData } = useGetUserDataQuery();
