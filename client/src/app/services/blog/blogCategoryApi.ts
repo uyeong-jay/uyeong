@@ -82,7 +82,6 @@ export const {
   useCreateBlogCategoryMutation,
   useUpdateBlogCategoryMutation,
   useDeleteBlogCategoryMutation,
-  util: { getRunningOperationPromises },
 } = blogCategoryApi;
 
 // export endpoints for use in SSR
