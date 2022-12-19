@@ -1,8 +1,7 @@
 import { useLayoutEffect } from 'react';
 
 // 마운트시 body로 부터 scroll bar 숨기기
-// 이후 언마운트로 되돌리기
-const HideScroll = () => {
+export const useScrollBlock = () => {
   useLayoutEffect(() => {
     const { overflowX, overflowY } = getComputedStyle(window.document.body);
 
@@ -21,5 +20,4 @@ const HideScroll = () => {
   }, []);
   return null;
 };
-
-export default HideScroll;
+//사용법: useScrollBlock();
