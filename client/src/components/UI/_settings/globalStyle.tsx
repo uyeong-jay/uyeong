@@ -61,6 +61,7 @@ const GlobalStyle = () => {
         textarea,
         select {
           font: inherit;
+          outline: none;
         }
 
         /* 원하는 태그 기본 스타일 제거 */

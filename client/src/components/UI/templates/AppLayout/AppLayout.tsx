@@ -11,11 +11,11 @@ const StyledAppLayout = styled.div`
   border: 1px solid red;
   display: flex;
   flex-direction: column;
-  justufy-content: center;
+  // justify-content: center; //안먹힘
+  margin: 0 auto; //justify대체, 확대시 왼쪽 구석 확대 가능
   align-items: center;
   position: relative;
   width: 1200px;
-  margin: 0 auto; //중간배열+중간을 크게 확대시 가운데 먼저가 아닌 왼쪽 끝부터 보이도록 함
 `;
 
 const AppLayout = ({ children }: AppLayoutProps) => {
