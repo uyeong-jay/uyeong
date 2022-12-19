@@ -11,13 +11,22 @@ export interface BlogPostRes {
 }
 
 export interface BlogPostReq {
-  blogPostInfo?: {
-    blogContent: string;
-  };
+  user: string;
+  title: string;
+  tags: string[];
+  content: string;
+  thumbnail: string;
+  description: string;
+  category: string;
+  createdAt: string;
+}
+
+export interface BlogPostReqWithToken {
+  blogPostInfo: BlogPostReq;
   token?: string;
 }
 
-export const blogPostsApi = api.injectEndpoints({
+export const blogPostApi = api.injectEndpoints({
   endpoints: (builder) => ({
     //refresh
     getBlogPosts: builder.query<BlogPostRes, void>({
@@ -29,7 +38,7 @@ export const blogPostsApi = api.injectEndpoints({
     }),
 
     //create
-    createBlogPost: builder.mutation<BlogPostRes, BlogPostReq>({
+    createBlogPost: builder.mutation<BlogPostRes, BlogPostReqWithToken>({
       query: (data) => ({
         url: '/api/blog',
         method: 'post',
@@ -44,7 +53,7 @@ export const blogPostsApi = api.injectEndpoints({
 });
 
 // export hooks for usage in functional components
-export const { useGetBlogPostsQuery, useCreateBlogPostMutation } = blogPostsApi;
+export const { useGetBlogPostsQuery, useCreateBlogPostMutation } = blogPostApi;
 
 // export endpoints for use in SSR
-export const { getBlogPosts } = blogPostsApi.endpoints;
+export const { getBlogPosts } = blogPostApi.endpoints;

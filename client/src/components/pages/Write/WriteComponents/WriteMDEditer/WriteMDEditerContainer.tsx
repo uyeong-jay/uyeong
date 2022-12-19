@@ -1,8 +1,21 @@
-import React from 'react';
+import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import React, { ChangeEvent, useCallback } from 'react';
 import WriteMDEditerPresenter from './WriteMDEditerPresenter';
 
-const WriteMDEditerContainer = () => {
-  return <WriteMDEditerPresenter />;
+interface Props {
+  blogPostInfo: BlogPostReq;
+  setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
+}
+
+const WriteMDEditerContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
+  const onChangeTextarea = useCallback(
+    (e: ChangeEvent<HTMLTextAreaElement>) => {
+      setBlogPostInfo({ ...blogPostInfo, content: e.target.value });
+    },
+    [blogPostInfo, setBlogPostInfo],
+  );
+
+  return <WriteMDEditerPresenter blogPostInfo={blogPostInfo} onChangeTextarea={onChangeTextarea} />;
 };
 
 export default WriteMDEditerContainer;

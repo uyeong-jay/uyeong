@@ -5,7 +5,7 @@ import { CurriedGetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMid
 import { api } from '@app/services/api';
 
 //reducers
-// import blogCategoryReducer from '@pages/Blog/BlogPage/BlogCategory/BlogCategorySlice';
+import writeReducer from '@pages/Write/WriteSlice';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -19,7 +19,7 @@ const createStore = () => {
   const store = configureStore({
     reducer: {
       [api.reducerPath]: api.reducer,
-      // blogCategory: blogCategoryReducer,
+      write: writeReducer,
     },
     middleware,
     devTools: isDev,

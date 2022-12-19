@@ -6,4 +6,9 @@ export const StyledWriteMDEditer = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+
+  & > textarea {
+    border: 1px solid red;
+    height: 70%;
+  }
 `;

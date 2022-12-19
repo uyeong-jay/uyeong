@@ -1,13 +1,16 @@
-import React from 'react';
+import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import React, { ChangeEvent } from 'react';
 import { StyledWriteMDEditer } from './WriteMDEditerStyle';
 
-const WriteMDEditerPresenter = () => {
+interface Props {
+  blogPostInfo: BlogPostReq;
+  onChangeTextarea: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+}
+const WriteMDEditerPresenter = ({ blogPostInfo, onChangeTextarea }: Props) => {
   return (
     <StyledWriteMDEditer>
-      <input />
-      <input />
       <div>toolbar</div>
-      <textarea />
+      <textarea value={blogPostInfo.content} onChange={onChangeTextarea} />
     </StyledWriteMDEditer>
   );
 };

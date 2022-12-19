@@ -1,24 +1,37 @@
-import { useState } from 'react';
-import { useGetUserDataQuery } from '@app/services/userApi';
+import { ChangeEvent, useCallback, useState } from 'react';
 import WritePresenter from './WritePresenter';
+import { useGetUserDataQuery } from '@app/services/user/userApi';
 
 const WriteContainer = () => {
   const { data: userData } = useGetUserDataQuery();
 
   const initialState = {
     user: '',
-    title: '',
-    content: '',
-    description: '',
-    thumnail: '',
-    category: '',
+    title: '', //o
+    tags: [''],
+    content: ``, //o
+    thumbnail: '', //o
+    description: '', //o
+    category: '', //o
     createdAt: new Date().toISOString(), //2022-11-29T17:35:07.526Z
   };
+  const [blogPostInfo, setBlogPostInfo] = useState(initialState);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [blog, setBlog] = useState(initialState);
+  const onChangeTitleInput = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setBlogPostInfo({ ...blogPostInfo, title: e.target.value });
+    },
+    [blogPostInfo],
+  );
 
-  return <WritePresenter userData={userData} />;
+  return (
+    <WritePresenter
+      userData={userData}
+      blogPostInfo={blogPostInfo}
+      setBlogPostInfo={setBlogPostInfo}
+      onChangeTitleInput={onChangeTitleInput}
+    />
+  );
 };
 
 export default WriteContainer;
