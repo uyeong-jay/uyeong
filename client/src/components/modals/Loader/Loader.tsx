@@ -1,6 +1,6 @@
 import styled from '@_settings/styled';
 import React, { useState } from 'react';
-import useInterval from '@hooks/useInterval';
+import { useInterval } from '@hooks/useInterval';
 
 const LoaderWrapper = styled.div`
   display: flex;

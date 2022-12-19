@@ -16,17 +16,17 @@ interface Props {
 }
 
 const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logoutError, onClickLogout }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
 
   //dropdown 버튼 내부 - 클릭시 dropdown toggle
   const onClickDropDown = useCallback(() => {
-    setIsOpen((prev) => !prev);
+    setOpen((prev) => !prev);
   }, []);
 
   //dropdown 버튼 외부 - 마우스가 버튼 내부에서 떠나면 클릭시 dropdown false
   const onClickOutside = useCallback(() => {
     document.removeEventListener('click', onClickOutside);
-    setIsOpen(false);
+    setOpen(false);
   }, []);
 
   if (getUserDataError || logoutError) return <NotFound />;

@@ -17,7 +17,8 @@ export const StyledSttings = styled.section`
     position: relative;
     padding-bottom: 60px;
 
-    & .user-avatar-container {
+    & .user-avatar-wrapper {
+      //border: 1px solid black;
       display: inline-flex;
       border: solid 5px rgba(0, 255, 0, 0.5);
     }
@@ -49,11 +50,11 @@ export const StyledSttings = styled.section`
         width: 100%;
         height: 100%;
         opacity: 0;
-        cursor: pointer; //input 커서 넣기1
+        cursor: pointer; //input 넓이에 커서 넣기
       }
 
       & input[type='file']::file-selector-button:hover {
-        cursor: pointer; //input 커서 넣기2
+        cursor: pointer; //input 파일선택 버튼에 커서 넣기
       }
     }
   }

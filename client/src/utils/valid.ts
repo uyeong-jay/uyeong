@@ -11,7 +11,7 @@ interface userDataProps {
   nickname: string;
 }
 
-const valid = (userUpdateInfo: userUpdateInfoProps, userData: userDataProps | undefined) => {
+export const valid = (userUpdateInfo: userUpdateInfoProps, userData: userDataProps | undefined) => {
   const { avatar, nickname, email, old_password, new_password, cf_new_password } = userUpdateInfo;
 
   const userNickname = userData?.nickname;
@@ -47,5 +47,3 @@ const valid = (userUpdateInfo: userUpdateInfoProps, userData: userDataProps | un
 
   return '';
 };
-
-export default valid;

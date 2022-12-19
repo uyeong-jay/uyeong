@@ -1,8 +1,9 @@
 import React, { useState, useCallback, ChangeEvent, FormEvent } from 'react';
 import SettingsPresenter from './SettingsPresenter';
 import { useGetUserDataQuery, useUpdateMutation } from '@app/services/user/userApi';
-import valid from '@utils/valid';
+import { valid } from '@utils/valid';
 import { getUploadImageUrl } from '@utils/uploadImage';
+import { validFile } from '@utils/validFile';
 
 export interface IUserUpdateInfo {
   avatar: string | File | undefined;
@@ -35,10 +36,13 @@ const SettingsContainer = () => {
 
       //에러 모아 놓기
       const errMsg = [];
+
       //form에러
       errMsg.push(valid(userUpdateInfo, userData?.user));
+
       //토큰 만료 에러 만들기
 
+      //에러 보여주기
       setSettingErrMsg(errMsg[0]);
 
       //에러 없으면 유저 데이터 업데이트
@@ -75,28 +79,14 @@ const SettingsContainer = () => {
     async (e: ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
 
-      //파일 체크 util 만들기
+      //파일 에러
+      validFile(file);
+
+      //파일 에러
       if (file) {
-        //파일 크기 에러
-        if (file.size > 1024 * 1024) {
-          console.log('사이즈 에러');
-          return;
-        }
-
-        //파일 확장자 에러
-        if (
-          file.type !== 'image/jpg' &&
-          file.type !== 'image/jpeg' &&
-          file.type !== 'image/png' &&
-          file.type !== 'image/gif'
-        ) {
-          console.log('확장자 에러');
-          return;
-        }
-
         // URL.revokeObjectURL() 정상 실행을 위해 추가한 코드
         setFileObj(file);
-        //아무런 변경이 없을때 valid 에러내기 위해 추가한 코드
+
         setUserUpdateInfo({ ...userUpdateInfo, avatar: file });
       }
     },
@@ -105,15 +95,15 @@ const SettingsContainer = () => {
 
   return (
     <SettingsPresenter
-      onSubmit={onSubmit}
-      onChangeInput={onChangeInput}
-      onChangeAvatar={onChangeAvatar}
       userUpdateInfo={userUpdateInfo}
       userData={userData}
       fileObj={fileObj}
       userUpdateLoading={userUpdateLoading}
       settingErrMsg={settingErrMsg}
       authErr={authErr}
+      onSubmit={onSubmit}
+      onChangeInput={onChangeInput}
+      onChangeAvatar={onChangeAvatar}
     />
   );
 };

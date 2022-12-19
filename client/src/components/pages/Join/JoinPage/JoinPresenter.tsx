@@ -6,18 +6,13 @@ import Link from 'next/link';
 import InputBox from '@molecules/InputBox';
 import Button from '@atoms/Button';
 import WideButton from '@atoms/WideButton';
-import { UserResponse } from '@app/services/user/userApi';
+import { UserRequest, UserResponse } from '@app/services/user/userApi';
 import NotFound from '@src/pages/404';
 
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  userJoinInfo: {
-    nickname: string;
-    email: string;
-    password: string;
-    cf_password: string;
-  };
+  userJoinInfo: UserRequest;
   userData: UserResponse | undefined;
   isSuccess: boolean;
   isLoading: boolean;

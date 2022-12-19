@@ -8,54 +8,44 @@ import Image from 'next/image';
 import { UserResponse } from '@app/services/user/userApi';
 import NotFound from '@src/pages/404';
 import Loader from '@modals/Loader';
+import { IUserUpdateInfo } from './SettingsContainer';
 
 interface Props {
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeAvatar: (e: ChangeEvent<HTMLInputElement>) => void;
-  userUpdateInfo: {
-    avatar: string | File | undefined;
-    email: string | undefined;
-    nickname: string | undefined;
-    old_password: string;
-    new_password: string;
-    cf_new_password: string;
-  };
+  userUpdateInfo: IUserUpdateInfo;
   userData: UserResponse | undefined;
   fileObj: File | undefined;
   userUpdateLoading: boolean;
   settingErrMsg: string;
   authErr: any;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeAvatar: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const SettingsPresenter = ({
-  onSubmit,
-  onChangeInput,
-  onChangeAvatar,
   userUpdateInfo,
   userData,
   fileObj,
   userUpdateLoading,
   settingErrMsg,
   authErr,
+  onSubmit,
+  onChangeInput,
+  onChangeAvatar,
 }: Props) => {
   const { nickname, email, old_password, new_password, cf_new_password } = userUpdateInfo;
   const [oldPasswordType, setOldPasswordType] = useState(true);
   const [newPasswordType, setNewPasswordType] = useState(true);
   const [cfNewPasswordType, setCfNewPasswordType] = useState(true);
 
-  const [fileUrl, setFileUrl] = useState('/');
-
   // URL.revokeObjectURL() 정상 실행을 위해 추가한 코드
+  const [fileUrl, setFileUrl] = useState('/');
   useEffect(() => {
     if (fileObj) {
       // console.log('만들어짐:', fileObj);
       setFileUrl(URL.createObjectURL(fileObj));
     }
   }, [fileObj]);
-
-  //파일변경시에는 저장 안되도록
-  //URL 사용
 
   if (!userData?.user) return <NotFound loginError />;
   return (
@@ -69,7 +59,7 @@ const SettingsPresenter = ({
       <StyledSttings>
         {/* 프로필 사진 바꾸기 */}
         <div>
-          <div className="user-avatar-container user-avatar">
+          <div className="user-avatar-wrapper user-avatar">
             <Image
               className="user-avatar"
               src={fileObj ? fileUrl : userData?.user?.avatar}
