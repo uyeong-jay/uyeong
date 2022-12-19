@@ -11,11 +11,11 @@ const { createCategory, getCategories, updateCategory, deleteCategory } = catego
 // patch(update): 데이터 변경(부분)
 // delete(delete): 데이터 제거
 categoryRouter
-	.route("/blog/category")
-	.get(getCategories)
-	.post(auth, createCategory)
-	.patch(auth, updateCategory)
-	.delete(auth, deleteCategory);
+  .route("/blog/category")
+  .get(getCategories)
+  .post(auth, createCategory)
+  .patch(auth, updateCategory)
+  .delete(auth, deleteCategory);
 
 export default categoryRouter;
 

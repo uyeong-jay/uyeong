@@ -4,10 +4,10 @@ import { logout } from "./logout";
 import { refresh } from "./refresh";
 
 const authCtrl = {
-	register,
-	login,
-	refresh,
-	logout,
+  register,
+  login,
+  refresh,
+  logout,
 };
 
 export default authCtrl;

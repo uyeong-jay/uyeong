@@ -1,43 +1,43 @@
 {
-	"compilerOptions": {
-		/* Visit https://aka.ms/tsconfig.json to read more about this file */
+  "compilerOptions": {
+    /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
-		/* Basic Options */
-		"target": "es2016",
-		"module": "commonjs",
-		"lib": ["esnext", "dom"],
-		"allowJs": true,
-		"outDir": "dist",
-		"rootDir": ".",
-		"removeComments": true,
+    /* Basic Options */
+    "target": "es2016",
+    "module": "commonjs",
+    "lib": ["esnext", "dom"],
+    "allowJs": true,
+    "outDir": "dist",
+    "rootDir": ".",
+    "removeComments": true,
 
-		/* Strict Type Checking Options */
-		"strict": true,
-		"noImplicitAny": true,
+    /* Strict Type Checking Options */
+    "strict": true,
+    "noImplicitAny": true,
 
-		/* Modules Resolution Options */
-		"moduleResolution": "node",
-		"baseUrl": ".",
-		"paths": {
-			"@_types/*": ["src/_types/*"],
-			"@config/*": ["src/config/*"],
-			"@controllers/*": ["src/controllers/*"],
-			"@middleware/*": ["src/middleware/*"],
-			"@models/*": ["src/models/*"],
-			"@routes/*": ["src/routes/*"],
-			"@utils/*": ["src/utils/*"],
-			"@src/*": ["src/*"]
-		},
-		"esModuleInterop": true,
+    /* Modules Resolution Options */
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@_types/*": ["src/_types/*"],
+      "@config/*": ["src/config/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@middleware/*": ["src/middleware/*"],
+      "@models/*": ["src/models/*"],
+      "@routes/*": ["src/routes/*"],
+      "@utils/*": ["src/utils/*"],
+      "@src/*": ["src/*"]
+    },
+    "esModuleInterop": true,
 
-		/* Experimental Options */
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
+    /* Experimental Options */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
 
-		/* Advanced Options */
-		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true
-	},
-	"exclude": ["node_modules", "dist", "coverage"],
-	"include": ["src"]
+    /* Advanced Options */
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "exclude": ["node_modules", "dist", "coverage"],
+  "include": ["src"]
 }

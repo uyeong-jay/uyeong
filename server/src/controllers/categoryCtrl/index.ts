@@ -4,10 +4,10 @@ import { getCategories } from "./getCategories";
 import { updateCategory } from "./updateCategory";
 
 const categoryCtrl = {
-	createCategory,
-	getCategories,
-	updateCategory,
-	deleteCategory,
+  createCategory,
+  getCategories,
+  updateCategory,
+  deleteCategory,
 };
 
 export default categoryCtrl;

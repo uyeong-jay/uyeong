@@ -12,7 +12,7 @@ export interface IUser {
 	avatar?: string;
 	role: string;
 	type: string;
-	_doc: object;
+	_doc: object; 
 }
 
 export interface IReqAuth extends Request {

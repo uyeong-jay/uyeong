@@ -1,7 +1,7 @@
 import { createCategory } from "./createBlog";
 
 const blogCtrl = {
-	createCategory,
+  createCategory,
 };
 
 export default blogCtrl;

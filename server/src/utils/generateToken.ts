@@ -19,18 +19,18 @@
 import jwt from "jsonwebtoken";
 
 export const generateAccessToken = (payload: object) => {
-	//토큰 생성
-	//- jwt.sign(userInfo, secretKey, options, 익명함수)
-	//  - secretKey는 password generator 이용하기
-	return jwt.sign(payload, `${process.env.ACCESS_TOKEN_SECRET}`, {
-		expiresIn: "1d",
-	});
+  //토큰 생성
+  //- jwt.sign(userInfo, secretKey, options, 익명함수)
+  //  - secretKey는 password generator 이용하기
+  return jwt.sign(payload, `${process.env.ACCESS_TOKEN_SECRET}`, {
+    expiresIn: "1d",
+  });
 };
 
 export const generateRefreshToken = (payload: object) => {
-	return jwt.sign(payload, `${process.env.REFRESH_TOKEN_SECRET}`, {
-		expiresIn: "30d",
-	});
+  return jwt.sign(payload, `${process.env.REFRESH_TOKEN_SECRET}`, {
+    expiresIn: "30d",
+  });
 };
 
 //사용: const refresh_token = generateAccessToken({ id: user._id });

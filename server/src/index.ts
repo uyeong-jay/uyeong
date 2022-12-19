@@ -14,22 +14,22 @@ const app = express();
 
 // Middelware
 if (process.env.NODE_ENV === "production") {
-	// app.use(morgan("combined"));
-	// app.use(hpp());
-	// app.use(helmet({ contentSecurityPolicy: false }));
-	// app.use(cors({
-	//   origin: 'url',
-	//   credentials: true,
-	// }));
+  // app.use(morgan("combined"));
+  // app.use(hpp());
+  // app.use(helmet({ contentSecurityPolicy: false }));
+  // app.use(cors({
+  //   origin: 'url',
+  //   credentials: true,
+  // }));
 } else {
-	// app.use(cors());
-	app.use(
-		cors({
-			origin: true,
-			credentials: true, //백,프 간 쿠키 공유도되록 만들기
-		})
-	);
-	app.use(morgan("dev"));
+  // app.use(cors());
+  app.use(
+    cors({
+      origin: true,
+      credentials: true, //백,프 간 쿠키 공유도되록 만들기
+    })
+  );
+  app.use(morgan("dev"));
 }
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -43,5 +43,5 @@ app.use("/api", routes.blogRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-	console.log("Server is running on port", PORT);
+  console.log("Server is running on port", PORT);
 });
