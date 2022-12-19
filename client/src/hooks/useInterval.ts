@@ -4,7 +4,7 @@ import { useRef, useEffect } from 'react';
 
 type IntervalFunction = () => unknown | void;
 
-function useInterval(callback: IntervalFunction, delay: number | null) {
+export const useInterval = (callback: IntervalFunction, delay: number | null) => {
   const savedCallback = useRef<IntervalFunction | null>(null);
 
   //가장 최근 콜백함수 기억하기
@@ -17,18 +17,16 @@ function useInterval(callback: IntervalFunction, delay: number | null) {
   useEffect(() => {
     if (delay === null) return;
 
-    function tick() {
+    const tick = () => {
       //https://stackoverflow.com/questions/65715282/cannot-invoke-an-object-which-is-possibly-null-ts2721
       typeof savedCallback.current === 'function' && savedCallback.current();
-    }
+    };
 
     if (delay !== null) {
       const id = setInterval(tick, delay);
       return () => clearInterval(id);
     }
   }, [delay]);
-}
-
-export default useInterval;
+};
 
 //사용: useInterval(콜백함수, 딜레이 초수)
