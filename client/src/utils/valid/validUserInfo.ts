@@ -11,7 +11,7 @@ interface userDataProps {
   nickname: string;
 }
 
-export const valid = (userUpdateInfo: userUpdateInfoProps, userData: userDataProps | undefined) => {
+const validUserInfo = (userUpdateInfo: userUpdateInfoProps, userData: userDataProps | undefined) => {
   const { avatar, nickname, email, old_password, new_password, cf_new_password } = userUpdateInfo;
 
   const userNickname = userData?.nickname;
@@ -47,3 +47,15 @@ export const valid = (userUpdateInfo: userUpdateInfoProps, userData: userDataPro
 
   return '';
 };
+
+export default validUserInfo;
+
+//사용법
+
+//에러 모아 놓기
+// const errMsg = [];
+
+// errMsg.push(validUserInfo(userUpdateInfo, userData?.user));
+
+//에러 보여주기
+// setSettingErrMsg(errMsg[0]);

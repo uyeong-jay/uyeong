@@ -1,9 +1,9 @@
 import React, { useState, useCallback, ChangeEvent, FormEvent } from 'react';
 import SettingsPresenter from './SettingsPresenter';
 import { useGetUserDataQuery, useUpdateMutation } from '@app/services/user/userApi';
-import { valid } from '@utils/valid';
-import { getUploadImageUrl } from '@utils/uploadImage';
-import { validFile } from '@utils/validFile';
+import validUserInfo from '@utils/valid/validUserInfo';
+import getUploadImageUrl from '@utils/uploadImage';
+import validFile from '@utils/valid/validFile';
 
 export interface IUserUpdateInfo {
   avatar: string | File | undefined;
@@ -26,6 +26,7 @@ const SettingsContainer = () => {
     new_password: '',
     cf_new_password: '',
   };
+
   const [userUpdateInfo, setUserUpdateInfo] = useState<IUserUpdateInfo>(initialState);
   const [fileObj, setFileObj] = useState<File>();
   const [settingErrMsg, setSettingErrMsg] = useState('');
@@ -38,7 +39,7 @@ const SettingsContainer = () => {
       const errMsg = [];
 
       //form에러
-      errMsg.push(valid(userUpdateInfo, userData?.user));
+      errMsg.push(validUserInfo(userUpdateInfo, userData?.user));
 
       //토큰 만료 에러 만들기
 

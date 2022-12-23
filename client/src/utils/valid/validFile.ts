@@ -1,9 +1,9 @@
-export const validFile = (file: File | undefined) => {
+const validFile = (file: File | undefined) => {
   //파일 에러
   if (file) {
     //파일 크기 에러
     if (file.size > 1024 * 1024) {
-      alert('사이즈 에러');
+      alert('Image size must be less than 1MB.');
       return;
     }
 
@@ -14,8 +14,10 @@ export const validFile = (file: File | undefined) => {
       file.type !== 'image/png' &&
       file.type !== 'image/gif'
     ) {
-      alert('확장자 에러');
+      alert('Please choose other image extension');
       return;
     }
   }
 };
+
+export default validFile;
