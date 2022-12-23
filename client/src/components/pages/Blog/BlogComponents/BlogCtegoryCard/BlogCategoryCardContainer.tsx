@@ -8,7 +8,7 @@ interface Props {
   userData: UserResponse | undefined;
   category: {
     name: string;
-    _id: string;
+    createdAt: string;
   };
 }
 
@@ -57,6 +57,7 @@ const BlogCategoryCard = ({ category, userData }: Props) => {
   return (
     <BlogCategoryCardPresenter
       userData={userData}
+      category={category}
       cardName={cardName}
       categoryName={categoryName}
       isUpdate={isUpdate}

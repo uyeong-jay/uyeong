@@ -3,9 +3,14 @@ import { StyledBlogCategoryCard } from './BlogCategoryCardStyle';
 import Button from '@atoms/Button';
 import Image from 'next/image';
 import { UserResponse } from '@app/services/user/userApi';
+import foramtDate from '@utils/formatDate';
 
 interface Props {
   userData: UserResponse | undefined;
+  category: {
+    name: string;
+    createdAt: string;
+  };
   cardName: string;
   categoryName: {
     name: string;
@@ -23,6 +28,7 @@ interface Props {
 //저장버튼
 const BlogCategoryCardPresenter = ({
   userData,
+  category,
   cardName,
   categoryName,
   isUpdate,
@@ -88,7 +94,7 @@ const BlogCategoryCardPresenter = ({
         )}
 
         {/* 포스트 개수, 최근 업데이트 날짜 */}
-        <div className="card-content-footer">포스트개수, 마지막 업데이트: ~ 시간 전</div>
+        <div className="card-content-footer">포스트개수, 마지막 업데이트: {foramtDate(category.createdAt)}</div>
       </div>
     </StyledBlogCategoryCard>
   );

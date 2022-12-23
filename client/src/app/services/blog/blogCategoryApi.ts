@@ -5,6 +5,7 @@ export interface BlogCategoryRes {
     {
       _id: string;
       name: string;
+      createdAt: string;
     },
   ];
   msg?: string;
