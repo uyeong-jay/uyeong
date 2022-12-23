@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { loadSource } from '@utils/loadSource';
+import loadSource from '@utils/loadSource';
 
 const GitHubChart = () => {
   return (

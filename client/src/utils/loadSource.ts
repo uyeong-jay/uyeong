@@ -2,6 +2,8 @@ interface LoaderProps {
   src: string;
 }
 
-export const loadSource = ({ src }: LoaderProps) => {
+const loadSource = ({ src }: LoaderProps) => {
   return `${src}`;
 };
+
+export default loadSource;

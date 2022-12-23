@@ -1,4 +1,4 @@
-export const getUploadImageUrl = async (file: File) => {
+const getUploadImageUrl = async (file: File) => {
   const formData = new FormData();
   formData.append('file', file);
   formData.append('upload_preset', process.env.CLOUDINARY_UPLOAD_PRESET);
@@ -39,6 +39,8 @@ export const getUploadImageUrl = async (file: File) => {
 
   return url;
 };
+
+export default getUploadImageUrl;
 
 // 사용
 // const image = await uploadImage(file);
