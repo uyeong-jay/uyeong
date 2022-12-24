@@ -1,8 +1,8 @@
 import styled from '@_settings/styled';
 import React, { useState } from 'react';
-import { useInterval } from '@hooks/useInterval';
+import useInterval from '@hooks/useInterval';
 
-const LoaderWrapper = styled.div`
+const StyledLoader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,7 +55,7 @@ const Loader = () => {
   );
 
   return (
-    <LoaderWrapper>
+    <StyledLoader>
       {loadingLetters.map((v, i) => {
         return (
           //state값이 아닌 외부함수의 리턴값을 넣으니 map의 모든 value값에  각각 서로 다르게 적용이 가능하게 됨
@@ -64,8 +64,9 @@ const Loader = () => {
           </span>
         );
       })}
-    </LoaderWrapper>
+    </StyledLoader>
   );
 };
 
 export default Loader;
+//로딩이 오래 걸릴만한곳을 찾아서 주로 쓰기
