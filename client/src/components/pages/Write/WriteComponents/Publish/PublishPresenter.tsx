@@ -4,7 +4,7 @@ import PublishPreview from '../PublishPreview';
 import PublishPrivacy from '../PublishPrivacy';
 import PublishURL from '../PublishURL';
 import { StyledPublish } from './PublishStyle';
-import { useAnimation } from '@hooks/useAnimation';
+import useAnimation from '@hooks/useAnimation';
 import { BlogPostReq } from '@app/services/blog/blogPostApi';
 
 interface Props {
@@ -14,12 +14,12 @@ interface Props {
 }
 
 const PublishPresenter = ({ blogPostInfo, setBlogPostInfo, isPublish }: Props) => {
-  const [toggle, showAnimation, onAnimationEnd] = useAnimation(isPublish);
+  const [show, render, onAnimationEnd] = useAnimation(isPublish);
 
   return (
     <>
-      {showAnimation && (
-        <StyledPublish animationName={toggle ? 'up-publish' : 'down-publish'} onAnimationEnd={() => onAnimationEnd}>
+      {render && (
+        <StyledPublish animationName={show ? 'up-publish' : 'down-publish'} onAnimationEnd={() => onAnimationEnd}>
           <div className="publish-block">
             <div className="publish-right-group">
               <PublishPreview blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />

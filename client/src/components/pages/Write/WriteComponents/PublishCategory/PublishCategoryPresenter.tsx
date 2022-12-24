@@ -1,5 +1,5 @@
 import { StyledOpenedCategory, StyledPublishCategory } from './PublishCategoryStyle';
-import { useAnimation } from '@hooks/useAnimation';
+import useAnimation from '@hooks/useAnimation';
 import { BlogCategoryRes } from '@app/services/blog/blogCategoryApi';
 import { MouseEventHandler } from 'react';
 
@@ -20,16 +20,16 @@ const PublishCategoryPresenter = ({
   onClickDone,
   onClickCategory,
 }: Props) => {
-  const [toggle, showAnimation, onAnimationEnd] = useAnimation(isOpenedCtegory);
+  const [show, render, onAnimationEnd] = useAnimation(isOpenedCtegory);
 
   return (
     <StyledPublishCategory>
       <button type="button" onClick={onClickChooseCtegory}>
         <i className="fa-solid fa-list"></i> Choose a category
       </button>
-      {showAnimation && (
+      {render && (
         <StyledOpenedCategory
-          animationName={toggle ? 'down-category' : 'up-category'}
+          animationName={show ? 'down-category' : 'up-category'}
           onAnimationEnd={() => onAnimationEnd}
         >
           {/* 취소 버튼 */}
