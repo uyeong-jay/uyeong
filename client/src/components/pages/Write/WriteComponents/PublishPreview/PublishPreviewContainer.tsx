@@ -1,5 +1,5 @@
 import { BlogPostReq } from '@app/services/blog/blogPostApi';
-import { validFile } from '@utils/validFile';
+import validFile from '@utils/valid/validFile';
 import { ChangeEvent, useCallback, useState } from 'react';
 import PublishPreviewPresenter from './PublishPreviewPresenter';
 
