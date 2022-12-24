@@ -1,30 +1,37 @@
 import { useState, useEffect, useCallback } from 'react';
 
 // mount/unmount animation
-export const useAnimation = (toggle: boolean) => {
-  const [showAnimation, setShowAnimation] = useState(toggle);
+const useAnimation = (show: boolean) => {
+  const [render, setRender] = useState(show);
 
   useEffect(() => {
-    if (toggle) setShowAnimation(true);
-  }, [toggle]);
+    if (show) setRender(true);
+  }, [show]);
 
   const onAnimationEnd = useCallback(() => {
-    if (!toggle) setShowAnimation(false);
-  }, [toggle]);
+    if (!show) setRender(false);
+  }, [show]);
 
-  return [toggle, showAnimation, onAnimationEnd];
+  return [show, render, onAnimationEnd];
 };
 
+export default useAnimation;
+
 //사용법
-//  const [toggle, showAnimation, onAnimationEnd] = useAnimation(boolean값);
+//  const [show, render, onAnimationEnd] = useAnimation(boolean값);
 //
-// {showAnimation && (
-//   <div animationName={toggle ? 'up' : 'down'} onAnimationEnd={() => onAnimationEnd}>
+// {render && (
+//   <div animationName={show ? 'up' : 'down'} onAnimationEnd={() => onAnimationEnd}>
 //     ~
 //   </div>
 //  }
 
-//styled
+//+styled
+// interface PublishCategpryProps {
+//   animationName: string;
+// }
+//const StyledOpenedCategory = styled.div<PublishCategpryProps>`
+
 // animation: ${(props) => props.animationName} 0.5s ease-out 0s forwards;
 
 //   @keyframes up {
@@ -44,3 +51,4 @@ export const useAnimation = (toggle: boolean) => {
 //       top: 100%;
 //     }
 //   }
+// `

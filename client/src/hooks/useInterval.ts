@@ -1,10 +1,8 @@
-//https://overreacted.io/making-setinterval-declarative-with-react-hooks/
-//https://gist.github.com/babakness/faca3b633bc23d9a0924efb069c9f1f5#file-use-interval-ts-L6
 import { useRef, useEffect } from 'react';
 
 type IntervalFunction = () => unknown | void;
 
-export const useInterval = (callback: IntervalFunction, delay: number | null) => {
+const useInterval = (callback: IntervalFunction, delay: number | null) => {
   const savedCallback = useRef<IntervalFunction | null>(null);
 
   //가장 최근 콜백함수 기억하기
@@ -28,5 +26,7 @@ export const useInterval = (callback: IntervalFunction, delay: number | null) =>
     }
   }, [delay]);
 };
+
+export default useInterval;
 
 //사용: useInterval(콜백함수, 딜레이 초수)
