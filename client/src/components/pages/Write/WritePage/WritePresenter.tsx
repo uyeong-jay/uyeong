@@ -1,25 +1,22 @@
-import { UserResponse } from '@app/services/user/userApi';
-import NotFound from '@src/pages/404';
-import WriteMDEditer from '../WriteComponents/WriteMDEditer';
-import WriteMDViewer from '../WriteComponents/WriteMDViewer';
-import { StyledWrite } from './WriteStyle';
-import { useScrollBlock } from '@hooks/useScrollBlock';
-import WriteMDFooter from '../WriteComponents/WriteMDFooter';
-import { ChangeEvent } from 'react';
 import Head from 'next/head';
 import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import { UserResponse } from '@app/services/user/userApi';
+import WriteHeader from '../WriteComponents/WriteHeader';
+import WriteMDEditer from '../WriteComponents/WriteMDEditer';
+import WriteMDViewer from '../WriteComponents/WriteMDViewer';
+import WriteFooter from '../WriteComponents/WriteFooter';
+import NotFound from '@src/pages/404';
+import { StyledWrite } from './WriteStyle';
+import useScrollBlock from '@hooks/useScrollBlock';
 
 interface Props {
   userData: UserResponse | undefined;
   blogPostInfo: BlogPostReq;
   setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
-  onChangeTitleInput: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const WritePresenter = ({ userData, blogPostInfo, setBlogPostInfo, onChangeTitleInput }: Props) => {
+const WritePresenter = ({ userData, blogPostInfo, setBlogPostInfo }: Props) => {
   useScrollBlock();
-
-  const { title /* tags */ } = blogPostInfo;
 
   if (userData?.user?.role !== 'admin') return <NotFound />;
   return (
@@ -29,12 +26,13 @@ const WritePresenter = ({ userData, blogPostInfo, setBlogPostInfo, onChangeTitle
       </Head>
       <StyledWrite>
         <div className="write-right-group">
-          <input type="text" name="title" value={title} onChange={onChangeTitleInput} placeholder="Title" />
-          <input placeholder="Tags" />
+          <WriteHeader blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
           <WriteMDEditer blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
+          <WriteFooter blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
         </div>
-        <WriteMDViewer blogPostInfo={blogPostInfo} />
-        <WriteMDFooter blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
+        <div className="write-left-group">
+          <WriteMDViewer blogPostInfo={blogPostInfo} />
+        </div>
       </StyledWrite>
     </>
   );

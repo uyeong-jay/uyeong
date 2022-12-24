@@ -4,33 +4,22 @@ export const StyledWrite = styled.div`
   // border: 1px solid red;
   background-color: white;
   display: flex;
-  // flex-direction: column-reverse;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  // overflow-style: none;
-  // overflow: hidden;
-  // scrollbar: none;
-
-  // &::-webkit-scrollbar {
-  //   display: none;
-  // }
-
-  // & .write-group {
-  //   scrollbar-width: none;
-  //   -ms-overflow-style: none;
-  // }
-
-  // & > .write-group::-webkit-scrollbar {
-  //   display: none;
-  // }
 
   & > .write-right-group {
-    border: 1px solid red;
+    // border: 1px solid red;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 50%;
+    padding: 0 0 0 25px;
+  }
+
+  & > .write-left-group {
+    // border: 1px solid green;
+    width: 50%;
   }
 `;
