@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { StyledHeader, StyledHeaderNav } from './HeaderStyle';
 import Button from '@atoms/Button';
 import NavLinkBox from '@molecules/NavLinkBox';
@@ -6,6 +6,7 @@ import { UserResponse } from '@app/services/user/userApi';
 import Loader from '@modals/Loader';
 import NotFound from '@src/pages/404';
 import Image from 'next/image';
+import useOnClickOutside from '@hooks/useOnClickOutside';
 
 interface Props {
   userData: UserResponse | undefined;
@@ -16,18 +17,21 @@ interface Props {
 }
 
 const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logoutError, onClickLogout }: Props) => {
+  const dropdownBoxRef = useRef(null);
   const [isOpen, setOpen] = useState(false);
 
-  //dropdown 버튼 내부 - 클릭시 dropdown toggle
-  const onClickDropDown = useCallback(() => {
+  //Dropdown lsit
+  const onClickList = useCallback(() => {
     setOpen((prev) => !prev);
   }, []);
 
-  //dropdown 버튼 외부 - 마우스가 버튼 내부에서 떠나면 클릭시 dropdown false
+  //Dropdown lsit
   const onClickOutside = useCallback(() => {
-    document.removeEventListener('click', onClickOutside);
     setOpen(false);
   }, []);
+
+  //Dropdown lsit
+  useOnClickOutside(dropdownBoxRef, onClickOutside);
 
   if (getUserDataError || logoutError) return <NotFound />;
   return (
@@ -43,12 +47,7 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
             <NavLinkBox href="/about">About</NavLinkBox>
             <NavLinkBox href="/contact">Contact</NavLinkBox>
             {userData?.user ? (
-              <li
-                onClick={onClickDropDown}
-                onMouseLeave={() => {
-                  document.addEventListener('click', onClickOutside);
-                }}
-              >
+              <li onClick={onClickList} ref={dropdownBoxRef}>
                 {/* 프로필 이미지 */}
                 <div className="user-avatar-container user-avatar">
                   <Image
