@@ -77,7 +77,7 @@ export const StyledPublishPreview = styled.div`
     height: 150px;
     background-color: #eff1f3;
     border: none;
-    resize: none;
+    resize: none; //textarea 크기조절 막기
     border-radius: 15px;
     padding: 15px;
     // text-indent: 5%;
