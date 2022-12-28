@@ -1,12 +1,12 @@
 interface blogPostInfoProps {
-  user: string;
-  title: string;
-  tags: string[];
-  content: string;
-  thumbnail: string;
-  description: string;
-  category: string;
-  createdAt: string;
+  user?: string;
+  title?: string;
+  tags?: string[];
+  content?: string;
+  thumbnail?: string;
+  description?: string;
+  category?: string;
+  createdAt?: string;
 }
 
 const validBlog = (blogPostInfo: blogPostInfoProps) => {

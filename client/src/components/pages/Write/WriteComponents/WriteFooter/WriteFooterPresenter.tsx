@@ -7,18 +7,30 @@ import { StyledWriteFooter } from './WriteFooterStyle';
 interface Props {
   blogPostInfo: BlogPostReq;
   setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
+  writeErrMsg: string;
   isModalOpen: boolean;
   setModalOpen: (isModalOpen: boolean) => void;
   onClickDone: () => void;
 }
 
-const WriteFooterPresenter = ({ blogPostInfo, setBlogPostInfo, isModalOpen, setModalOpen, onClickDone }: Props) => {
+const WriteFooterPresenter = ({
+  blogPostInfo,
+  setBlogPostInfo,
+  writeErrMsg,
+  isModalOpen,
+  setModalOpen,
+  onClickDone,
+}: Props) => {
   return (
     <StyledWriteFooter>
-      <button>나가기</button>
-      <button>임시저장</button>
-      <button onClick={onClickDone}>완료</button>
-      <Modal type="alert" msg="에러에러" isOpen={isModalOpen} setOpen={setModalOpen} />
+      <button>
+        <i className="fa-solid fa-angle-left"></i> 나가기
+      </button>
+      {/* <button>임시저장</button> */}
+      <button onClick={onClickDone}>
+        완료 <i className="fa-solid fa-angle-up"></i>
+      </button>
+      <Modal type="alert" msg={writeErrMsg} isOpen={isModalOpen} setOpen={setModalOpen} />
       <Publish blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
     </StyledWriteFooter>
   );
