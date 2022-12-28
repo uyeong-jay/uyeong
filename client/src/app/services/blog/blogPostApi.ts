@@ -18,6 +18,7 @@ export interface BlogPostReq {
   thumbnail: string;
   description: string;
   category: string;
+  privacy: boolean;
   createdAt: string;
 }
 

@@ -26,6 +26,11 @@ const blogSchema = new Schema(
       type: String,
       default: "https://res.cloudinary.com/uyeong/image/upload/v1668671461/uyeong-blog/purplePNG_umvvlq.png",
     },
+    privacy: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     category: { type: Schema.Types.ObjectId, ref: "category" },
   },
   { timestamps: true }

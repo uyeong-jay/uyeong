@@ -19,23 +19,30 @@ export const StyledPublishPrivacy = styled.div`
     width: 300px;
     height: 100px;
 
-    & .public-button {
-      border: 1px solid black;
+    & .public-button,
+    .private-button {
+      // border: 1px solid black;
+      background-color: #eff1f3;
       width: 140px;
       height: 50%;
       border-radius: 20px;
     }
 
-    & .private-button {
-      border: 1px solid black;
-      width: 140px;
-      height: 50%;
-      border-radius: 20px;
+    & .public-button,
+    .private-button {
+      color: gray;
     }
+
+    // & .clicked {
+    //   background-color: silver;
+    //   pointer-events: none; //hover가 바로 안없어짐
+    //   user-select: none;
+    //   color: black;
+    // }
 
     & .public-button:hover,
     .private-button:hover {
-      color: rgba(0, 0, 0, 0.5);
+      color: rgba(128, 128, 128, 0.5);
     }
   }
 `;

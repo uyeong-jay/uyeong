@@ -26,7 +26,7 @@ const PublishPresenter = ({ blogPostInfo, setBlogPostInfo, isPublish }: Props) =
             </div>
             <div className="publish-left-group">
               <PublishCategory blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
-              <PublishPrivacy />
+              <PublishPrivacy blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
               <PublishURL />
               <PublishActionButtons />
             </div>
