@@ -12,14 +12,16 @@ export const StyledPublishCategory = styled.div`
   height: 100%;
 
   & > button {
-    border: 1px solid black;
+    // border: 1px solid black;
+    background-color: #eff1f3;
     width: 75%;
     height: 50px;
     margin: 0 auto;
     border-radius: 20px;
+    color: dimgray;
   }
   & > button:hover {
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(105, 105, 105, 0.5);
   }
 `;
 
@@ -77,7 +79,7 @@ export const StyledOpenedCategory = styled.div<PublishCategpryProps>`
   }
 
   & > .category-list-block {
-    border: 1px solid black;
+    border: 1px solid dimgray;
     margin-top: 60px;
     height: 350px;
     width: 250px;
@@ -96,18 +98,30 @@ export const StyledOpenedCategory = styled.div<PublishCategpryProps>`
       border-radius: 50%;
     }
     ::-webkit-scrollbar-thumb {
-      background: black;
+      background: dimgray;
       border-radius: 10px;
     }
 
     & > li {
       // border: 1px solid black;
-      border-bottom: 1px solid black;
+      position: relative;
+      border-bottom: 1px solid dimgray;
       margin: 40px auto;
       // width: 250px;
       width: 80%;
       padding-left: 10px;
+      cursor: pointer;
+
+      & > .fa-check {
+        position: absolute;
+        right: 0;
+      }
     }
+
+    // & > li:hover {
+    //   color: rgba(0, 0, 0, 0.5);
+    //   border-bottom: 1px solid rgba(105, 105, 105, 0.5);
+    // }
   }
 
   & > .button-wrapper {
@@ -119,9 +133,11 @@ export const StyledOpenedCategory = styled.div<PublishCategpryProps>`
     margin-top: 20px;
 
     & > .done-button {
-      border: 1px solid black;
+      // border: 1px solid dimgray;
+      background-color: gainsboro;
       width: 100px;
       border-radius: 10px;
+      color: rgba(0, 0, 0, 0.5);
     }
   }
 `;

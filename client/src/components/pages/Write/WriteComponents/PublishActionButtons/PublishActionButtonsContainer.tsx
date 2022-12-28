@@ -9,7 +9,11 @@ const PublishActionButtons = () => {
   const onClickCancel = useCallback(() => {
     dispatch(cancel());
   }, [dispatch]);
-  return <PublishActionButtonsPresenter onClickCancel={onClickCancel} />;
+
+  const onClickPost = useCallback(() => {
+    dispatch(cancel());
+  }, [dispatch]);
+  return <PublishActionButtonsPresenter onClickCancel={onClickCancel} onClickPost={onClickPost} />;
 };
 
 export default PublishActionButtons;

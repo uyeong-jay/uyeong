@@ -2,10 +2,13 @@ import { StyledOpenedCategory, StyledPublishCategory } from './PublishCategorySt
 import useAnimation from '@hooks/useAnimation';
 import { BlogCategoryRes } from '@app/services/blog/blogCategoryApi';
 import { MouseEventHandler } from 'react';
+import { BlogPostReq } from '@app/services/blog/blogPostApi';
 
 interface Props {
   blogCategoryData: BlogCategoryRes | undefined;
-  isOpenedCtegory: boolean;
+  blogPostInfo: BlogPostReq;
+  isOpenedCategory: boolean;
+  isClickedCategory: boolean;
   onClickChooseCtegory: () => void;
   onClickCancel: () => void;
   onClickDone: () => void;
@@ -14,13 +17,15 @@ interface Props {
 
 const PublishCategoryPresenter = ({
   blogCategoryData,
-  isOpenedCtegory,
+  blogPostInfo,
+  isOpenedCategory,
+  isClickedCategory,
   onClickChooseCtegory,
   onClickCancel,
   onClickDone,
   onClickCategory,
 }: Props) => {
-  const [show, render, onAnimationEnd] = useAnimation(isOpenedCtegory);
+  const [show, render, onAnimationEnd] = useAnimation(isOpenedCategory);
 
   return (
     <StyledPublishCategory>
@@ -42,13 +47,21 @@ const PublishCategoryPresenter = ({
             {blogCategoryData?.categories?.map((category) => (
               <li key={category._id} value={category.name} onClick={onClickCategory}>
                 {category.name}
+                {isClickedCategory && category.name === blogPostInfo.category ? (
+                  <i className="fa-solid fa-check"></i>
+                ) : null}
               </li>
             ))}
           </ul>
 
           {/* 완료 버튼 */}
           <div className="button-wrapper">
-            <button className="done-button" type="button" onClick={onClickDone}>
+            <button
+              className="done-button"
+              type="button"
+              onClick={onClickDone}
+              style={isClickedCategory ? { backgroundColor: 'gray', border: 'none', color: 'white' } : undefined}
+            >
               Done
             </button>
           </div>

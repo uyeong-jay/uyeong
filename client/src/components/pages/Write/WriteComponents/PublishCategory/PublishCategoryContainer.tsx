@@ -11,23 +11,28 @@ interface Props {
 const PublishCategoryContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
   const { data: blogCategoryData } = useGetBlogCategoriesQuery();
 
-  const [isOpenedCtegory, setOpenedCtegory] = useState(false);
+  const [isOpenedCategory, setOpenedCategory] = useState(false);
+  const [isClickedCategory, setClickedCategory] = useState(false);
 
   const onClickChooseCtegory = useCallback(() => {
-    setOpenedCtegory(true);
+    setOpenedCategory(true);
   }, []);
 
   const onClickCancel = useCallback(() => {
-    setOpenedCtegory(false);
-  }, []);
+    setBlogPostInfo({ ...blogPostInfo, category: '' });
+    setOpenedCategory(false);
+    setClickedCategory(false);
+  }, [blogPostInfo, setBlogPostInfo]);
 
   const onClickDone = useCallback(() => {
-    setOpenedCtegory(false);
-  }, []);
+    if (isClickedCategory) setOpenedCategory(false);
+    return;
+  }, [isClickedCategory]);
 
   const onClickCategory = useCallback(
     (e) => {
       setBlogPostInfo({ ...blogPostInfo, category: e.target.getAttribute('value') });
+      setClickedCategory(true);
     },
     [blogPostInfo, setBlogPostInfo],
   );
@@ -35,7 +40,9 @@ const PublishCategoryContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
   return (
     <PublishCategoryPresenter
       blogCategoryData={blogCategoryData}
-      isOpenedCtegory={isOpenedCtegory}
+      blogPostInfo={blogPostInfo}
+      isOpenedCategory={isOpenedCategory}
+      isClickedCategory={isClickedCategory}
       onClickChooseCtegory={onClickChooseCtegory}
       onClickCancel={onClickCancel}
       onClickDone={onClickDone}

@@ -2,7 +2,7 @@ import styled from '@_settings/styled';
 
 export const StyledWrite = styled.div`
   // border: 1px solid red;
-  background-color: white;
+  background-color: #eff1f3;
   display: flex;
   position: fixed;
   top: 0;

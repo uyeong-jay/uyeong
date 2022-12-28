@@ -18,9 +18,11 @@ export const StyledPublishActionButtons = styled.div`
     // padding-left: 20px;
 
     & > button {
-      border: 1px solid black;
+      // border: 1px solid black;
+      background-color: #eff1f3;
       height: 45px;
       border-radius: 15px;
+      color: dimgray;
     }
 
     & .cancel-button {
@@ -33,7 +35,7 @@ export const StyledPublishActionButtons = styled.div`
     }
 
     & > button:hover {
-      color: rgba(0, 0, 0, 0.5);
+      color: rgba(105, 105, 105, 0.5);
     }
   }
 `;

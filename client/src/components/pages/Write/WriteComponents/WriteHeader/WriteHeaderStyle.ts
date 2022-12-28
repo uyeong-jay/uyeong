@@ -13,6 +13,7 @@ export const StyledWriteHeader = styled.div`
   //Title input
   & > input {
     // border: 1px solid black;
+    background-color: #eff1f3;
     border: none;
     outline: none;
     height: 80px;
@@ -51,6 +52,7 @@ export const StyledWriteHeader = styled.div`
 
       & > input {
         // border: 1px solid black;
+        background-color: #eff1f3;
         border: none;
         outline: none;
         width: 100%;

@@ -27,7 +27,7 @@ const GlobalStyle = () => {
           -webkit-font-smoothing: antialiased;
           // background-color: #000034;
           // color: white;
-          // font-size: 14px;
+          font-size: 14px;
         }
 
         /* 텍스트 삐져나감 방지 */
