@@ -22,7 +22,7 @@ export interface BlogCategoryReq {
   token?: string;
 }
 
-export const blogCategoryApi = api.injectEndpoints({
+export const categoryApi = api.injectEndpoints({
   endpoints: (builder) => ({
     // 서버에 전달할 data ? builder.mutation() : builder.query()
     // builder.query<type of 'res' , type of 'query arg'>
@@ -83,7 +83,7 @@ export const {
   useCreateBlogCategoryMutation,
   useUpdateBlogCategoryMutation,
   useDeleteBlogCategoryMutation,
-} = blogCategoryApi;
+} = categoryApi;
 
 // export endpoints for use in SSR
-export const { getBlogCategories } = blogCategoryApi.endpoints;
+export const { getBlogCategories } = categoryApi.endpoints;
