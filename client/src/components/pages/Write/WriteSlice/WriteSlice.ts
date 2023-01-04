@@ -2,12 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 //initialState type
 interface initialState {
-  isPublish: boolean;
+  isPublishing: boolean;
 }
 
 //initialState
 const initialState: initialState = {
-  isPublish: false,
+  isPublishing: false,
 };
 
 //slice
@@ -15,15 +15,15 @@ const writeSlice = createSlice({
   name: 'write',
   initialState,
   reducers: {
-    done: (state) => {
-      state.isPublish = true;
+    startPuslishing: (state) => {
+      state.isPublishing = true;
     },
-    cancel: (state) => {
-      state.isPublish = false;
+    cancelPublishing: (state) => {
+      state.isPublishing = false;
     },
   },
 });
 
 //reducer, actions 내보내기
 export default writeSlice.reducer;
-export const { done, cancel } = writeSlice.actions;
+export const { startPuslishing, cancelPublishing } = writeSlice.actions;
