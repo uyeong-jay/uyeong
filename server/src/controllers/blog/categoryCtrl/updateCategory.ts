@@ -1,8 +1,8 @@
 import { IReqAuth } from "@_types/types";
 import { Response } from "express";
-import Categories from "@models/categoryModel";
+import Categories from "@models/blog/categoryModel";
 
-export const updateCategory = async (req: IReqAuth, res: Response) => {
+const updateCategory = async (req: IReqAuth, res: Response) => {
   try {
     //middleware auth 잘통과 했는지 확인
     if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
@@ -28,3 +28,5 @@ export const updateCategory = async (req: IReqAuth, res: Response) => {
     return res.status(500).json({ msg: err.message });
   }
 };
+
+export default updateCategory;

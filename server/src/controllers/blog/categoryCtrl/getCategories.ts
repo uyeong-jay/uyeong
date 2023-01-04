@@ -1,8 +1,7 @@
-import { IReqAuth } from "@_types/types";
 import { Request, Response } from "express";
-import Categories from "@models/categoryModel";
+import Categories from "@models/blog/categoryModel";
 
-export const getCategories = async (req: Request, res: Response) => {
+const getCategories = async (req: Request, res: Response) => {
   try {
     //middleware auth 잘통과 했는지 확인
     // if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
@@ -10,7 +9,7 @@ export const getCategories = async (req: Request, res: Response) => {
     //admin 인지 확인
     // if (req.user.role !== "admin") return res.status(400).json({ msg: "Invalid Authentication." });
 
-    //category 생성된 순서로 가져오기
+    //category가 생성된 순서로 가져오기
     const categories = await Categories.find().sort("-createAt");
 
     res.status(200).json({ categories });
@@ -36,3 +35,5 @@ export const getCategories = async (req: Request, res: Response) => {
     return res.status(500).json({ msg: err.message });
   }
 };
+
+export default getCategories;

@@ -38,8 +38,8 @@ app.use(cookieParser());
 // Routes
 app.use("/api", routes.authRouter);
 app.use("/api", routes.userRouter);
-app.use("/api", routes.categoryRouter);
-app.use("/api", routes.blogRouter);
+app.use("/api", routes.blogCategoryRouter);
+app.use("/api", routes.blogPostRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

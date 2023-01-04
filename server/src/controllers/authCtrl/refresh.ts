@@ -5,7 +5,7 @@ import { IDecodedToken, IReqAuth } from "@_types/types";
 import { generateAccessToken, generateRefreshToken } from "@utils/generateToken";
 
 //새로고침 되었을때 유저 확인 + 토큰 새로 발급해주기
-export const refresh = async (req: IReqAuth, res: Response) => {
+const refresh = async (req: IReqAuth, res: Response) => {
   try {
     //refresh_token(유저의 _id) 쿠키 가져오기
     const rf_token = req.cookies.refresh_token;
@@ -48,3 +48,5 @@ export const refresh = async (req: IReqAuth, res: Response) => {
     return res.status(500).json({ msg: err.message });
   }
 };
+
+export default refresh;

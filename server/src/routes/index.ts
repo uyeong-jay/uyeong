@@ -1,13 +1,13 @@
 import authRouter from "./authRouter";
 import userRouter from "./uerRouter";
-import categoryRouter from "./categoryRouter";
-import blogRouter from "./blogRouter";
+import blogCategoryRouter from "./blog/categoryRouter";
+import blogPostRouter from "./blog/postRouter";
 
 const routes = {
   authRouter,
   userRouter,
-  categoryRouter,
-  blogRouter,
+  blogCategoryRouter,
+  blogPostRouter,
 };
 
 export default routes;

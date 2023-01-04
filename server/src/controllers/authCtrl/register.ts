@@ -2,7 +2,7 @@ import { Request, Response } from "express"; //types
 import Users from "@models/userModel";
 import bcrypt from "bcrypt";
 
-export const register = async (req: Request, res: Response) => {
+const register = async (req: Request, res: Response) => {
   try {
     //client 데이터 가져오기
     const { nickname, email, password } = req.body;
@@ -26,7 +26,7 @@ export const register = async (req: Request, res: Response) => {
     //- 보안 더 강화 하고싶을 땐
     //	- https://st-lab.tistory.com/100 (보안): 비번(+솔트)  > 해시 > 다이제스트(+솔트) > 해시 > 다이제스트
 
-    //가입한 새유저 비번 암화된 데이터 생성
+    //(가입한 새유저 비번 암화된) 데이터 생성
     const newUser = new Users({
       nickname,
       email,
@@ -41,3 +41,5 @@ export const register = async (req: Request, res: Response) => {
     return res.status(500).json({ msg: err.message });
   }
 };
+
+export default register;

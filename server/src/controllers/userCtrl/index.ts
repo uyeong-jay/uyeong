@@ -1,4 +1,4 @@
-import { updateUser } from "./updateUser";
+import updateUser from "./updateUser";
 
 const userCtrl = {
   updateUser,
