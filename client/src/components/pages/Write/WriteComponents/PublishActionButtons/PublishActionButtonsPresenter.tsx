@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyledPublishActionButtons } from './PublishActionButtonsStyle';
+
 interface Props {
   onClickCancel: () => void;
   onClickPost: () => void;

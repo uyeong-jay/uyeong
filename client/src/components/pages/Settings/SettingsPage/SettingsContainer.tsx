@@ -88,6 +88,7 @@ const SettingsContainer = () => {
         // URL.revokeObjectURL() 정상 실행을 위해 추가한 코드
         setFileObj(file);
 
+        // 이미지를 넣을때마다 cloud에 올라가는걸 방지 하려고 잠시 file을 넣어두기
         setUserUpdateInfo({ ...userUpdateInfo, avatar: file });
       }
     },
