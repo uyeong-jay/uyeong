@@ -1,8 +1,8 @@
 import { StyledOpenedCategory, StyledPublishCategory } from './PublishCategoryStyle';
 import useAnimation from '@hooks/useAnimation';
-import { BlogCategoryRes } from '@app/services/blog/blogCategoryApi';
+import { BlogCategoryRes } from '@app/services/blog/categoryApi';
 import { MouseEventHandler } from 'react';
-import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import { BlogPostReq } from '@app/services/blog/postApi';
 
 interface Props {
   blogCategoryData: BlogCategoryRes | undefined;

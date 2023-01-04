@@ -1,4 +1,4 @@
-import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import { BlogPostReq } from '@app/services/blog/postApi';
 import Image from 'next/image';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { StyledPublishPreview } from './PublishPreviewStyle';

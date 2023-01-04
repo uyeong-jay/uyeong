@@ -1,5 +1,5 @@
-import { useGetBlogCategoriesQuery } from '@app/services/blog/blogCategoryApi';
-import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import { useGetBlogCategoriesQuery } from '@app/services/blog/categoryApi';
+import { BlogPostReq } from '@app/services/blog/postApi';
 import React, { useCallback, useState } from 'react';
 import PublishCategoryPresenter from './PublishCategoryPresenter';
 

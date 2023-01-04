@@ -1,7 +1,7 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 import BlogCategoryCardPresenter from './BlogCategoryCardPresenter';
 
-import { useUpdateBlogCategoryMutation, useDeleteBlogCategoryMutation } from '@app/services/blog/blogCategoryApi';
+import { useUpdateBlogCategoryMutation, useDeleteBlogCategoryMutation } from '@app/services/blog/categoryApi';
 import { UserResponse } from '@app/services/user/userApi';
 
 interface Props {

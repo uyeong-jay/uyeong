@@ -1,8 +1,12 @@
+import { useGetBlogPostsQuery } from '@app/services/blog/postApi';
 import BlogPresenter from './BlogPresenter';
-import { BlogProps } from '@_types/types-blog';
 
-const BlogContainer = ({ posts }: BlogProps) => {
-  return <BlogPresenter posts={posts} />;
+const BlogContainer = () => {
+  const { data: blogPostsData } = useGetBlogPostsQuery();
+
+  console.log(blogPostsData);
+
+  return <BlogPresenter />;
 };
 
 export default BlogContainer;

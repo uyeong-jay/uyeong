@@ -3,7 +3,7 @@ import wrapper from '@app/store';
 import axios from 'axios';
 import { getRunningOperationPromises } from '@app/services/api';
 import { getUserData } from '@app/services/user/userApi';
-import { getBlogCategories } from '@app/services/blog/blogCategoryApi';
+import { getBlogCategories } from '@app/services/blog/categoryApi';
 
 export { default } from '@pages/Blog/BlogPage/BlogCategory';
 

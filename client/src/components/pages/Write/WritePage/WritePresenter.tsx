@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import { BlogPostReq } from '@app/services/blog/postApi';
 import { UserResponse } from '@app/services/user/userApi';
 import WriteHeader from '../WriteComponents/WriteHeader';
 import WriteMDEditer from '../WriteComponents/WriteMDEditer';
@@ -28,7 +28,7 @@ const WritePresenter = ({ userData, blogPostInfo, setBlogPostInfo }: Props) => {
         <div className="write-right-group">
           <WriteHeader blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
           <WriteMDEditer blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
-          <WriteFooter blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
+          <WriteFooter userData={userData} blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
         </div>
         <div className="write-left-group">
           <WriteMDViewer blogPostInfo={blogPostInfo} />

@@ -1,4 +1,4 @@
-import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import { BlogPostReq } from '@app/services/blog/postApi';
 import React, { CSSProperties, useMemo } from 'react';
 import { StyledPublishPrivacy } from './PublishPrivacyStyle';
 

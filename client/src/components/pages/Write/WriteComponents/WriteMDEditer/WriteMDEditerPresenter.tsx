@@ -1,4 +1,4 @@
-import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import { BlogPostReq } from '@app/services/blog/postApi';
 import React, { ChangeEvent } from 'react';
 import { StyledWriteMDEditer } from './WriteMDEditerStyle';
 

@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useCallback, useRef, useState } from 'react';
-import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import { BlogPostReq } from '@app/services/blog/postApi';
 import { StyledDropdownMsg, StyledWriteHeader } from './WriteHeaderStyle';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import useAnimation from '@hooks/useAnimation';

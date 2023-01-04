@@ -5,16 +5,18 @@ import PublishPrivacy from '../PublishPrivacy';
 import PublishURL from '../PublishURL';
 import { StyledPublish } from './PublishStyle';
 import useAnimation from '@hooks/useAnimation';
-import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import { BlogPostReq } from '@app/services/blog/postApi';
+import { UserResponse } from '@app/services/user/userApi';
 
 interface Props {
+  userData: UserResponse | undefined;
   blogPostInfo: BlogPostReq;
   setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
-  isPublish: boolean;
+  isPublishing: boolean;
 }
 
-const PublishPresenter = ({ blogPostInfo, setBlogPostInfo, isPublish }: Props) => {
-  const [show, render, onAnimationEnd] = useAnimation(isPublish);
+const PublishPresenter = ({ userData, blogPostInfo, setBlogPostInfo, isPublishing }: Props) => {
+  const [show, render, onAnimationEnd] = useAnimation(isPublishing);
 
   return (
     <>
@@ -28,7 +30,7 @@ const PublishPresenter = ({ blogPostInfo, setBlogPostInfo, isPublish }: Props) =
               <PublishCategory blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
               <PublishPrivacy blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
               <PublishURL />
-              <PublishActionButtons />
+              <PublishActionButtons userData={userData} blogPostInfo={blogPostInfo} />
             </div>
           </div>
         </StyledPublish>

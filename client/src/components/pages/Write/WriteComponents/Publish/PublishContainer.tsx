@@ -1,17 +1,26 @@
 import { useAppSelector } from '@app/hooks';
-import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import { BlogPostReq } from '@app/services/blog/postApi';
+import { UserResponse } from '@app/services/user/userApi';
 import React from 'react';
 import PublishPresenter from './PublishPresenter';
 
 interface Props {
+  userData: UserResponse | undefined;
   blogPostInfo: BlogPostReq;
   setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
 }
 
-const PublishContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
-  const isPublish = useAppSelector((state) => state.write.isPublish);
+const PublishContainer = ({ userData, blogPostInfo, setBlogPostInfo }: Props) => {
+  const isPublishing = useAppSelector((state) => state.write.isPublishing);
 
-  return <PublishPresenter blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} isPublish={isPublish} />;
+  return (
+    <PublishPresenter
+      userData={userData}
+      blogPostInfo={blogPostInfo}
+      setBlogPostInfo={setBlogPostInfo}
+      isPublishing={isPublishing}
+    />
+  );
 };
 
 export default PublishContainer;

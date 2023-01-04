@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import WritePresenter from './WritePresenter';
 import { useGetUserDataQuery } from '@app/services/user/userApi';
+import { BlogPostReq } from '@app/services/blog/postApi';
 
 const WriteContainer = () => {
   const { data: userData } = useGetUserDataQuery();
 
-  const initialState = {
+  const initialState: BlogPostReq = {
     user: '',
     title: '', //o
-    tags: [] as string[], //o
-    content: ``, //o
+    tags: [], //o
+    content: '', //o
     thumbnail: '', //o
     description: '', //o
     category: '', //o

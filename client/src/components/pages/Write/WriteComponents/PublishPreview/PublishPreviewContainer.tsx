@@ -1,4 +1,5 @@
-import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import { BlogPostReq } from '@app/services/blog/postApi';
+// import getUploadImageUrl from '@utils/uploadImage';
 import validFile from '@utils/valid/validFile';
 import { ChangeEvent, useCallback, useState } from 'react';
 import PublishPreviewPresenter from './PublishPreviewPresenter';
@@ -22,7 +23,8 @@ const PublishPreviewContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
         // URL.revokeObjectURL() 정상 실행을 위해 추가한 코드
         setFileObj(file);
 
-        setBlogPostInfo({ ...blogPostInfo, content: 'file' });
+        //여기서는 file만 넣어두고 포스트시에만 이미지 업로드하기
+        setBlogPostInfo({ ...blogPostInfo, thumbnail: file });
       }
     },
     [blogPostInfo, setBlogPostInfo],

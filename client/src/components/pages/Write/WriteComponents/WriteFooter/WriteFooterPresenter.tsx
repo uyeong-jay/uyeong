@@ -1,10 +1,12 @@
-import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import { BlogPostReq } from '@app/services/blog/postApi';
+import { UserResponse } from '@app/services/user/userApi';
 import Modal from '@modals/Modal';
 import React from 'react';
 import Publish from '../Publish';
 import { StyledWriteFooter } from './WriteFooterStyle';
 
 interface Props {
+  userData: UserResponse | undefined;
   blogPostInfo: BlogPostReq;
   setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
   writeErrMsg: string;
@@ -14,6 +16,7 @@ interface Props {
 }
 
 const WriteFooterPresenter = ({
+  userData,
   blogPostInfo,
   setBlogPostInfo,
   writeErrMsg,
@@ -31,7 +34,7 @@ const WriteFooterPresenter = ({
         완료 <i className="fa-solid fa-angle-up"></i>
       </button>
       <Modal type="alert" msg={writeErrMsg} isOpen={isModalOpen} setOpen={setModalOpen} />
-      <Publish blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
+      <Publish userData={userData} blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
     </StyledWriteFooter>
   );
 };

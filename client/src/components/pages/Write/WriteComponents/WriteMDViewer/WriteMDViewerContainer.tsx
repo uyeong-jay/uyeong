@@ -1,4 +1,4 @@
-import { BlogPostReq } from '@app/services/blog/blogPostApi';
+import { BlogPostReq } from '@app/services/blog/postApi';
 import React from 'react';
 import WriteMDViewerPresenter from './WriteMDViewerPresenter';
 
