@@ -6,7 +6,7 @@ const BlogContainer = () => {
 
   console.log(blogPostsData);
 
-  return <BlogPresenter />;
+  return <BlogPresenter blogPostsData={blogPostsData} />;
 };
 
 export default BlogContainer;

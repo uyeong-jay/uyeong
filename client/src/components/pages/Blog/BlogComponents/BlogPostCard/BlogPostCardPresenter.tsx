@@ -1,23 +1,26 @@
 import React from 'react';
 import Link from 'next/link';
-import { BlogPostsProps } from '@_types/types-blog';
 import { StyledBlogPostCard } from './BlogPostCardStyle';
+import { BlogPost } from '@app/services/blog/postApi';
+import foramtDate from '@utils/formatDate';
 
 interface Props {
-  post: BlogPostsProps;
+  post: BlogPost;
 }
 
 const BlogPostCardPresenter = ({ post }: Props) => {
-  const { slug, title, description, date, tags } = post;
+  const { /* _id, user, */ title, tags, /* content, thumbnail, */ description, /* privacy, createdAt, */ category } =
+    post;
 
   return (
-    <StyledBlogPostCard key={slug}>
+    <StyledBlogPostCard>
       <h3>
-        제목: <Link href={`/blog/${slug}`}>{title}</Link>
+        제목: <Link href={`/blog/${title}`}>{title}</Link>
       </h3>
       <p>설명: {description}</p>
-      <p>날짜: {date}</p>
+      <p>날짜: {foramtDate(category.createdAt)}</p>
       <p>태그: {tags}</p>
+      <p>카테고리: {category.name}</p>
     </StyledBlogPostCard>
   );
 };

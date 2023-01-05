@@ -1,25 +1,33 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 import BlogCategoryCardPresenter from './BlogCategoryCardPresenter';
 
 import { useUpdateBlogCategoryMutation, useDeleteBlogCategoryMutation } from '@app/services/blog/categoryApi';
 import { UserResponse } from '@app/services/user/userApi';
+import { BlogPostRes } from '@app/services/blog/postApi';
 
 interface Props {
-  userData: UserResponse | undefined;
+  userData?: UserResponse;
+  blogPostsData?: BlogPostRes;
   category: {
     name: string;
     createdAt: string;
   };
 }
 
-const BlogCategoryCard = ({ category, userData }: Props) => {
+const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props) => {
   const [updateBlogCategory, { error }] = useUpdateBlogCategoryMutation();
   const [deleteBlogCategory] = useDeleteBlogCategoryMutation();
   const { name: cardName } = category;
 
   const [isUpdate, setIsUpdate] = useState(false);
 
+  //이전 카테고리 이름이 잠시 노출되는 현상 해결차 생성
   const [categoryName, setCategoryName] = useState({ name: cardName });
+
+  const numberOfPosts = useMemo(() => {
+    const PostsByCategoryName = blogPostsData?.posts.filter((post) => post.category.name === categoryName.name);
+    return PostsByCategoryName?.length;
+  }, [blogPostsData?.posts, categoryName.name]);
 
   //Save category name
   const onClickSave = useCallback(
@@ -60,6 +68,7 @@ const BlogCategoryCard = ({ category, userData }: Props) => {
       category={category}
       cardName={cardName}
       categoryName={categoryName}
+      numberOfPosts={numberOfPosts}
       isUpdate={isUpdate}
       error={error}
       onClickEdit={onClickEdit}
@@ -70,4 +79,4 @@ const BlogCategoryCard = ({ category, userData }: Props) => {
   );
 };
 
-export default BlogCategoryCard;
+export default BlogCategoryCardContainer;

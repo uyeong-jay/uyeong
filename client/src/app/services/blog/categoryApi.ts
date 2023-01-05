@@ -1,13 +1,13 @@
 import { api } from '../api';
 
+export interface BlogCategory {
+  _id: string;
+  name: string;
+  createdAt: string;
+}
+
 export interface BlogCategoryRes {
-  categories?: [
-    {
-      _id: string;
-      name: string;
-      createdAt: string;
-    },
-  ];
+  categories?: BlogCategory[];
   msg?: string;
 }
 

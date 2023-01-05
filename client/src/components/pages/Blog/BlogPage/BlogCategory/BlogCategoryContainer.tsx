@@ -2,10 +2,12 @@ import React, { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import BlogCategoryPresenter from './BlogCategoryPresenter';
 import { useGetUserDataQuery } from '@app/services/user/userApi';
 import { useGetBlogCategoriesQuery, useCreateBlogCategoryMutation } from '@app/services/blog/categoryApi';
+import { useGetBlogPostsQuery } from '@app/services/blog/postApi';
 
 const CategoryContainer = () => {
   const { data: userData } = useGetUserDataQuery();
   const { data: blogCategoryData /* , isLoading, isSuccess, error */ } = useGetBlogCategoriesQuery();
+  const { data: blogPostsData } = useGetBlogPostsQuery();
   const [createBlogCategory, { error }] = useCreateBlogCategoryMutation();
 
   //Craete Category
@@ -32,6 +34,7 @@ const CategoryContainer = () => {
   return (
     <BlogCategoryPresenter
       userData={userData}
+      blogPostsData={blogPostsData}
       blogCategoryData={blogCategoryData}
       categoryInfo={categoryInfo}
       error={error}

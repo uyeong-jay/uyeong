@@ -6,7 +6,7 @@ import { UserResponse } from '@app/services/user/userApi';
 import foramtDate from '@utils/formatDate';
 
 interface Props {
-  userData: UserResponse | undefined;
+  userData?: UserResponse;
   category: {
     name: string;
     createdAt: string;
@@ -15,6 +15,7 @@ interface Props {
   categoryName: {
     name: string;
   };
+  numberOfPosts?: number;
   isUpdate: boolean;
   error: any;
   onClickEdit: () => void;
@@ -31,6 +32,7 @@ const BlogCategoryCardPresenter = ({
   category,
   cardName,
   categoryName,
+  numberOfPosts,
   isUpdate,
   error,
   onClickEdit,
@@ -94,7 +96,9 @@ const BlogCategoryCardPresenter = ({
         )}
 
         {/* 포스트 개수, 최근 업데이트 날짜 */}
-        <div className="card-content-footer">포스트개수, 마지막 업데이트: {foramtDate(category.createdAt)}</div>
+        <div className="card-content-footer">
+          포스트개수: {numberOfPosts}, 마지막 업데이트: {foramtDate(category.createdAt)}
+        </div>
       </div>
     </StyledBlogCategoryCard>
   );

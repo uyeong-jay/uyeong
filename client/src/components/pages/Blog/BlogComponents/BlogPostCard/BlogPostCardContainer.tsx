@@ -1,8 +1,8 @@
-import { BlogPostsProps } from '@_types/types-blog';
+import { BlogPost } from '@app/services/blog/postApi';
 import BlogPostCardPresenter from './BlogPostCardPresenter';
 
 interface Props {
-  post: BlogPostsProps;
+  post: BlogPost;
 }
 
 const BlogPostCardContainer = ({ post }: Props) => {

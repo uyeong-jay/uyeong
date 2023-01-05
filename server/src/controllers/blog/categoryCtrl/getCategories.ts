@@ -9,8 +9,35 @@ const getCategories = async (req: Request, res: Response) => {
     //admin 인지 확인
     // if (req.user.role !== "admin") return res.status(400).json({ msg: "Invalid Authentication." });
 
-    //category가 생성된 순서로 가져오기
+    //category가 생성된 순서로 가져오기(가장 최근에 생성된것이 가장 첫번째)
     const categories = await Categories.find().sort("-createAt");
+
+    // const categories = await Categories.aggregate([
+    //   // {
+    //   //   $lookup: {
+    //   //     from: "posts", //가져올 db 이름
+    //   //     localField: "post", //posts db 내부 category
+    //   //     foreignField: "_id", //posts db 내부 category.name
+    //   //     as: "post",
+    //   //   },
+    //   // },
+    //   // {
+    //   //   $lookup: {
+    //   //     from: "posts", //가져올 db 이름
+    //   //     let: { post_id: "$post" }, // posts db 내부 user (이름은 post_id 로 지정)
+    //   //     pipeline: [{ $match: { $expr: { $eq: ["$_id", "$$post_id"] } } }],
+    //   //     as: "post",
+    //   //   },
+    //   // },
+    //   // // Group
+    //   // {
+    //   //   $group: {
+    //   //     _id: "$category._id", //1. _id: ''
+    //   //     name: { $first: "$category.name" }, //2. name: ''
+    //   //     count: { $sum: 1 }, //4. count: 개수
+    //   //   },
+    //   // },
+    // ]);
 
     res.status(200).json({ categories });
     // {

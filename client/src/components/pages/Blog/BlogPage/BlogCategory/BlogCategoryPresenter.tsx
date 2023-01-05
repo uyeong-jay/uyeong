@@ -6,19 +6,14 @@ import Head from 'next/head';
 import { ChangeEvent, FormEvent } from 'react';
 import { StyledBlogCategory, StyledBlogCategoryContent } from './BlogCategoryStyle';
 import BlogCategoryCard from '../../BlogComponents/BlogCtegoryCard/BlogCategoryCardContainer';
+import { BlogCategoryRes } from '@app/services/blog/categoryApi';
+import { BlogPostRes } from '@app/services/blog/postApi';
 
 interface Props {
-  userData: UserResponse | undefined;
+  userData?: UserResponse;
+  blogPostsData?: BlogPostRes;
+  blogCategoryData?: BlogCategoryRes;
   categoryInfo: { name: string };
-  blogCategoryData?: {
-    categories?: [
-      {
-        _id: string;
-        name: string;
-        createdAt: string;
-      },
-    ];
-  };
   error: any;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeCategoryInput: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -26,6 +21,7 @@ interface Props {
 
 const BlogCategoryPresenter = ({
   userData,
+  blogPostsData,
   blogCategoryData,
   categoryInfo,
   error,
@@ -59,7 +55,12 @@ const BlogCategoryPresenter = ({
           {/* 카테고리 카드들 웨퍼 */}
           <div>
             {blogCategoryData?.categories?.map((category) => (
-              <BlogCategoryCard key={category._id} category={category} userData={userData} />
+              <BlogCategoryCard
+                key={category._id}
+                category={category}
+                userData={userData}
+                blogPostsData={blogPostsData}
+              />
             ))}
           </div>
         </StyledBlogCategoryContent>
