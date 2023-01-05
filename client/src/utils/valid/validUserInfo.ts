@@ -1,7 +1,7 @@
 interface userUpdateInfoProps {
-  avatar: string | File | undefined;
-  nickname: string | undefined;
-  email: string | undefined;
+  avatar?: string | File;
+  nickname?: string;
+  email?: string;
   old_password: string;
   new_password: string;
   cf_new_password: string;
@@ -11,7 +11,7 @@ interface userDataProps {
   nickname: string;
 }
 
-const validUserInfo = (userUpdateInfo: userUpdateInfoProps, userData: userDataProps | undefined) => {
+const validUserInfo = (userUpdateInfo: userUpdateInfoProps, userData?: userDataProps) => {
   const { avatar, nickname, email, old_password, new_password, cf_new_password } = userUpdateInfo;
 
   const userNickname = userData?.nickname;

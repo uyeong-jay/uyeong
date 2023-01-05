@@ -1,4 +1,4 @@
-const validFile = (file: File | undefined) => {
+const validFile = (file?: File) => {
   //파일 에러
   if (file) {
     //파일 크기 에러

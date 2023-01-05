@@ -6,7 +6,7 @@ import Publish from '../Publish';
 import { StyledWriteFooter } from './WriteFooterStyle';
 
 interface Props {
-  userData: UserResponse | undefined;
+  userData?: UserResponse;
   blogPostInfo: BlogPostReq;
   setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
   writeErrMsg: string;

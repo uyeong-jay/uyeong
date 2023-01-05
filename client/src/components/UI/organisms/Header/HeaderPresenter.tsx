@@ -9,7 +9,7 @@ import Image from 'next/image';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 
 interface Props {
-  userData: UserResponse | undefined;
+  userData?: UserResponse;
   getUserDataLoading: boolean;
   getUserDataError: any;
   logoutError: any;

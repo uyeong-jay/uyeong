@@ -10,7 +10,7 @@ import { StyledWrite } from './WriteStyle';
 import useScrollBlock from '@hooks/useScrollBlock';
 
 interface Props {
-  userData: UserResponse | undefined;
+  userData?: UserResponse;
   blogPostInfo: BlogPostReq;
   setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
 }

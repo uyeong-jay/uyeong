@@ -6,9 +6,9 @@ import getUploadImageUrl from '@utils/uploadImage';
 import validFile from '@utils/valid/validFile';
 
 export interface IUserUpdateInfo {
-  avatar: string | File | undefined;
-  nickname: string | undefined;
-  email: string | undefined;
+  avatar?: string | File;
+  nickname?: string;
+  email?: string;
   old_password: string;
   new_password: string;
   cf_new_password: string;

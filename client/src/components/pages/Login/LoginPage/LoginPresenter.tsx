@@ -16,7 +16,7 @@ interface Props {
     email: string;
     password: string;
   };
-  userData: UserResponse | undefined;
+  userData?: UserResponse;
   loginSuccess: boolean;
   loginLoading: boolean;
   error: any;

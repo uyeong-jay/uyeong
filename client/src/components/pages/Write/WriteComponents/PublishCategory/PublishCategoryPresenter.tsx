@@ -5,7 +5,7 @@ import { MouseEventHandler } from 'react';
 import { BlogPostReq } from '@app/services/blog/postApi';
 
 interface Props {
-  blogCategoryData: BlogCategoryRes | undefined;
+  blogCategoryData?: BlogCategoryRes;
   blogPostInfo: BlogPostReq;
   isOpenedCategory: boolean;
   isClickedCategory: boolean;

@@ -5,7 +5,7 @@ import React from 'react';
 import PublishPresenter from './PublishPresenter';
 
 interface Props {
-  userData: UserResponse | undefined;
+  userData?: UserResponse;
   blogPostInfo: BlogPostReq;
   setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
 }

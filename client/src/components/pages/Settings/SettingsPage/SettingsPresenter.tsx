@@ -12,8 +12,8 @@ import { IUserUpdateInfo } from './SettingsContainer';
 
 interface Props {
   userUpdateInfo: IUserUpdateInfo;
-  userData: UserResponse | undefined;
-  fileObj: File | undefined;
+  userData?: UserResponse;
+  fileObj?: File;
   userUpdateLoading: boolean;
   settingErrMsg: string;
   authErr: any;

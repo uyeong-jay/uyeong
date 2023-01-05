@@ -5,7 +5,7 @@ import { StyledPublishPreview } from './PublishPreviewStyle';
 
 interface Props {
   blogPostInfo: BlogPostReq;
-  fileObj: File | undefined;
+  fileObj?: File;
   onChangeThumbnail: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeTextarea: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }

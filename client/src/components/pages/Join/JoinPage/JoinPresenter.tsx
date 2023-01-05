@@ -13,7 +13,7 @@ interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
   userJoinInfo: UserRequest;
-  userData: UserResponse | undefined;
+  userData?: UserResponse;
   isSuccess: boolean;
   isLoading: boolean;
   error: any;

@@ -9,7 +9,7 @@ import { BlogPostReq } from '@app/services/blog/postApi';
 import { UserResponse } from '@app/services/user/userApi';
 
 interface Props {
-  userData: UserResponse | undefined;
+  userData?: UserResponse;
   blogPostInfo: BlogPostReq;
   setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
   isPublishing: boolean;
