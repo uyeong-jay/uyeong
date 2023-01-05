@@ -9,9 +9,8 @@ const getPosts = async (req: Request, res: Response) => {
     //admin 인지 확인
     // if (req.user.role !== "admin") return res.status(400).json({ msg: "Invalid Authentication." });
 
-    //post가 생성된 순서로 가져오기
     const posts = await Posts.aggregate([
-      // User
+      // User 데이터 추가
       {
         $lookup: {
           from: "users", //가져올 db 이름
@@ -23,7 +22,7 @@ const getPosts = async (req: Request, res: Response) => {
       // array -> object
       { $unwind: "$user" },
 
-      // Category
+      // Category 데이터 추가
       {
         $lookup: {
           from: "categories", //가져올 db 이름
@@ -34,32 +33,33 @@ const getPosts = async (req: Request, res: Response) => {
       },
       // array -> object
       { $unwind: "$category" },
+
       // Sorting
       { $sort: { createdAt: -1 } },
 
-      // Group by category
-      {
-        $group: {
-          _id: "$category._id", //1. _id: ''
-          name: { $first: "$category.name" }, //2. name: ''
-          posts: { $push: "$$ROOT" }, //3. posts: [{user:{~}, post정보, category:{~} }, {~반복~}]
-          count: { $sum: 1 }, //4. count: 개수
-        },
-      },
+      // // Group by category
+      // {
+      //   $group: {
+      //     _id: "$category._id", //1. _id: ''
+      //     name: { $first: "$category.name" }, //2. name: ''
+      //     posts: { $push: "$$ROOT" }, //3. posts: [{user:{~}, post정보, category:{~} }, {~반복~}]
+      //     count: { $sum: 1 }, //4. count: 개수
+      //   },
+      // },
 
-      // Pagination(페이지 매기기) for posts
-      {
-        $project: {
-          posts: {
-            $slice: ["$posts", 0, 4],
-          },
-          count: 1,
-          name: 1,
-        },
-      },
+      // // Pagination(페이지 매기기) for posts
+      // {
+      //   $project: {
+      //     posts: {
+      //       $slice: ["$posts", 0, 4],
+      //     },
+      //     count: 1,
+      //     name: 1,
+      //   },
+      // },
     ]);
 
-    res.status(200).json({ posts, msg: "" });
+    res.status(200).json({ posts });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });
   }
