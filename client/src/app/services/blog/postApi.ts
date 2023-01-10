@@ -1,35 +1,7 @@
 import { api } from '../api';
-import { UserResponse } from '../user/userApi';
 
-// export interface BlogPost {
-//   _id: string;
-//   user: UserResponse['user'];
-//   title: string;
-//   tags: string[];
-//   content: string;
-//   thumbnail: string | File;
-//   description: string;
-//   privacy: boolean;
-//   createdAt: string;
-//   category: {
-//     _id: string;
-//     name: string;
-//     createdAt: string;
-//   };
-// }
-
-// export interface BlogPosts {
-//   _id: string; //카테고리 id
-//   name: string;
-//   count: number;
-//   posts: BlogPost[];
-// }
-
-// export interface BlogPostRes extends Array<BlogPosts> {}
-
-export interface BlogPost {
+export interface IBlogPost {
   _id: string;
-  user: UserResponse['user'];
   title: string;
   tags: string[];
   content: string;
@@ -37,6 +9,9 @@ export interface BlogPost {
   description: string;
   privacy: boolean;
   createdAt: string;
+}
+
+export interface BlogPost extends IBlogPost {
   category: {
     _id: string;
     name: string;
@@ -44,12 +19,21 @@ export interface BlogPost {
   };
 }
 
+export interface BlogPostByCategoryName extends IBlogPost {
+  category: string;
+}
+
+export interface BlogPostByPostTitle extends IBlogPost {
+  category: string;
+}
+
 export interface BlogPostRes {
-  posts: BlogPost[];
+  posts?: BlogPost[];
+  postsByCategory?: BlogPostByCategoryName[];
+  post?: BlogPostByPostTitle;
 }
 
 export interface BlogPostReq {
-  user: string;
   title: string;
   tags: string[];
   content: string;
@@ -67,10 +51,28 @@ export interface BlogPostReqWithToken {
 
 export const postApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    //refresh
+    //get1
     getBlogPosts: builder.query<BlogPostRes, void>({
       query: () => ({
         url: '/api/blog',
+        method: 'get',
+      }),
+      providesTags: ['BlogPost'],
+    }),
+
+    //get2
+    getBlogPostsByCategory: builder.query<BlogPostRes, string>({
+      query: (slug) => ({
+        url: `/api/blog/category/${slug}`,
+        method: 'get',
+      }),
+      providesTags: ['BlogPost'],
+    }),
+
+    //get3
+    getBlogPost: builder.query<BlogPostRes, string>({
+      query: (slug) => ({
+        url: `/api/blog/${slug}`,
         method: 'get',
       }),
       providesTags: ['BlogPost'],
@@ -92,7 +94,8 @@ export const postApi = api.injectEndpoints({
 });
 
 // export hooks for usage in functional components
-export const { useGetBlogPostsQuery, useCreateBlogPostMutation } = postApi;
+export const { useGetBlogPostsQuery, useGetBlogPostsByCategoryQuery, useGetBlogPostQuery, useCreateBlogPostMutation } =
+  postApi;
 
 // export endpoints for use in SSR
-export const { getBlogPosts } = postApi.endpoints;
+export const { getBlogPosts, getBlogPost, getBlogPostsByCategory } = postApi.endpoints;

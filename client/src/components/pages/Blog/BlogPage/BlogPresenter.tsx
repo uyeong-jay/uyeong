@@ -19,9 +19,11 @@ const BlogPresenter = ({ blogPostsData }: Props) => {
         {!blogPostsData && <div>No Posts!</div>}
         <BlogHeader />
         <StyledBlogContents>
-          <StyledTags>tags</StyledTags>
+          <StyledTags>
+            <div className="tags-wrapper">tags</div>
+          </StyledTags>
           <StyledPosts>
-            {blogPostsData?.posts.map((post) => (
+            {blogPostsData?.posts?.map((post) => (
               <BlogPostCard key={post._id} post={post} />
             ))}
           </StyledPosts>

@@ -1,8 +1,17 @@
 import BlogPostPresenter from './BlogPostPresenter';
-import { BlogPostProps } from '@_types/types-blog';
+import { useRouter } from 'next/router';
+import { useGetBlogPostQuery } from '@app/services/blog/postApi';
 
-const BlogPostContainer = ({ frontMatter, markdownBody }: BlogPostProps) => {
-  return <BlogPostPresenter frontMatter={frontMatter} markdownBody={markdownBody} />;
+const BlogPostContainer = () => {
+  const router = useRouter();
+
+  const { slug } = router.query;
+
+  const { data: blogPostData } = useGetBlogPostQuery(slug as string);
+
+  const { post: blogPost } = blogPostData || {};
+
+  return <BlogPostPresenter blogPost={blogPost} />;
 };
 
 export default BlogPostContainer;

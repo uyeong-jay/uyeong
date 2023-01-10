@@ -3,7 +3,7 @@ import { IPost } from "@_types/types";
 
 const postSchema = new Schema(
   {
-    user: { type: Schema.Types.ObjectId, ref: "user" },
+    // user: { type: Schema.Types.ObjectId, ref: "user" },
     title: {
       type: String,
       required: true,

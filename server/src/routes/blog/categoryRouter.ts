@@ -17,16 +17,4 @@ blogCategoryRouter
   .patch(auth, updateCategory)
   .delete(auth, deleteCategory);
 
-// blogCategoryRouter
-//   .route("/blog/category/:slug")
-//   .get(getCategories)
-//   .post(auth, createCategory)
-//   .patch(auth, updateCategory)
-//   .delete(auth, deleteCategory);
-
 export default blogCategoryRouter;
-
-// const router = express.Router();
-// router.route("/blog/category").get(getCategories).post(auth, createCategory);
-// router.route("/blog/category/:slug").patch(auth, updateCategory).delete(auth, deleteCategory);
-// export default router;

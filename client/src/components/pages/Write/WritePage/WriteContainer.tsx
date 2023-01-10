@@ -7,7 +7,6 @@ const WriteContainer = () => {
   const { data: userData } = useGetUserDataQuery();
 
   const initialState: BlogPostReq = {
-    user: '',
     title: '', //o
     tags: [], //o
     content: '', //o

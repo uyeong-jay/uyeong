@@ -27,7 +27,7 @@ export const categoryApi = api.injectEndpoints({
     // 서버에 전달할 data ? builder.mutation() : builder.query()
     // builder.query<type of 'res' , type of 'query arg'>
 
-    //refresh
+    //get
     getBlogCategories: builder.query<BlogCategoryRes, void>({
       query: () => ({
         url: '/api/blog/category',

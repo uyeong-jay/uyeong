@@ -5,7 +5,7 @@ import InputBox from '@molecules/InputBox';
 import Head from 'next/head';
 import { ChangeEvent, FormEvent } from 'react';
 import { StyledBlogCategory, StyledBlogCategoryContent } from './BlogCategoryStyle';
-import BlogCategoryCard from '../../BlogComponents/BlogCtegoryCard/BlogCategoryCardContainer';
+import BlogCategoryCard from '@pages/Blog/BlogComponents/BlogCategoryCard';
 import { BlogCategoryRes } from '@app/services/blog/categoryApi';
 import { BlogPostRes } from '@app/services/blog/postApi';
 

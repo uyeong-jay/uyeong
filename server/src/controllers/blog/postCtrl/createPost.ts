@@ -15,7 +15,7 @@ const createPost = async (req: IReqAuth, res: Response) => {
 
     //데이터 생성
     const newPost = new Posts({
-      user: req.user._id,
+      // user: req.user._id,
       title,
       tags,
       content,
