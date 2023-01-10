@@ -22,7 +22,7 @@ const userSchema = new Schema(
     },
     avatar: {
       type: String,
-      default: "https://res.cloudinary.com/uyeong/image/upload/v1637676343/nextjs_media/igin1evr3clomdfy2ikm.png",
+      default: "https://res.cloudinary.com/uyeong/image/upload/v1672882372/uyeong-blog/igin1evr3clomdfy2ikm_aa4oca.png",
     },
     role: {
       type: String,
