@@ -34,21 +34,21 @@ export default useAnimation;
 
 // animation: ${(props) => props.animationName} 0.5s ease-out 0s forwards;
 
-//   @keyframes up {
-//     from {
-//       top: 100%;
-//     }
-//     to {
-//       top: 0;
-//     }
+// @keyframes up {
+//   from {
+//     top: 100%;
 //   }
+//   to {
+//     top: 0;
+//   }
+// }
 
-//   @keyframes down {
-//     from {
-//       top: 0;
-//     }
-//     to {
-//       top: 100%;
-//     }
-//   }
-// `
+//  @keyframes down {
+//    from {
+//      top: 0;
+//    }
+//    to {
+//      top: 100%;
+//    }
+//  }
+//`
