@@ -6,4 +6,5 @@ export const StyledWriteMDViewer = styled.div`
   height: 100%;
   overflow: auto;
   background-color: white;
+  padding: 30px;
 `;
