@@ -42,13 +42,13 @@ const StyledModal = styled.div<StyledModalProps>`
 
     animation: ${(props) => props.animationName}
       ${(props) => {
-        if (props.animationName === 'down-alert-modal') return '2s linear';
-        if (props.animationName === 'up-alert-modal') return '0.2s ease-in-out';
+        if (props.animationName === 'shake-alert-modal') return '2s linear';
+        else if (props.animationName === 'up-alert-modal') return '0.2s ease-in-out';
         else return '0.2s ease-in-out';
       }}
       0s forwards;
 
-    @keyframes down-alert-modal {
+    @keyframes shake-alert-modal {
       0% {
         top: 15px;
         transform: rotateZ(0);
@@ -214,7 +214,7 @@ const Modal = ({ type, msg, isOpen, setOpen, callback }: ModalProps) => {
   return (
     <>
       {render && (
-        <StyledModal animationName={isOpen ? 'down-alert-modal' : 'up-alert-modal'} onAnimationEnd={onAnimationEnd}>
+        <StyledModal animationName={isOpen ? 'shake-alert-modal' : 'up-alert-modal'} onAnimationEnd={onAnimationEnd}>
           {modalContent()}
         </StyledModal>
       )}
