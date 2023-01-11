@@ -14,7 +14,8 @@ const updateCategory = async (req: IReqAuth, res: Response) => {
     const { name, currName } = req.body;
 
     //category 조회
-    const category = await Categories.findOne({ name });
+    const category = await Categories.findOne({ name: currName });
+    console.log(category, name, currName);
     if (category) return res.status(400).json({ msg: "This category name already exists." });
 
     //category 조회 후 업데이트
