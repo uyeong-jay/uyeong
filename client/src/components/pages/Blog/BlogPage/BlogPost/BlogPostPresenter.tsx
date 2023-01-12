@@ -2,25 +2,33 @@ import MarkdownViewer from '@organisms/MarkdownViewer';
 import { BlogPostByPostTitle } from '@app/services/blog/postApi';
 import NotFound from '@src/pages/404';
 import foramtDate from '@utils/formatDate';
+import BlogPostToc from '@pages/Blog/BlogComponents/BlogPostToc';
+import { StyledBlogPost } from './BlogPostStyle';
 
 interface Props {
   blogPost?: BlogPostByPostTitle;
 }
+
+//tags 가져오기
 
 const BlogPostPresenter = ({ blogPost }: Props) => {
   const { title, category, createdAt, content } = blogPost || {};
 
   if (!blogPost) return <NotFound />;
   return (
-    <div>
-      <h3>{title}</h3>
+    <StyledBlogPost>
+      <h1>{title}</h1>
       <p>{category}</p>
       <p>{foramtDate(createdAt as string)}</p>
       <article>
         <MarkdownViewer content={content as string} />
       </article>
-      {/* <small>{date}</small> */}
-    </div>
+      <BlogPostToc />
+      {/* 좋아요 with 폭죽 - velog, youtube */}
+      {/* 링크복사,  - velog */}
+      {/* 댓글 - ellismin */}
+      {/* anchor top */}
+    </StyledBlogPost>
   );
 };
 
