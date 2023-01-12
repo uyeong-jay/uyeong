@@ -27,9 +27,6 @@ export interface UserRequestWithToken extends UserRequest {
 
 export const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    // 서버에 전달할 data ? builder.mutation() : builder.query()
-    // builder.query<type of 'res' , type of 'query arg'>
-
     //refresh
     getUserData: builder.query<UserResponse, void>({
       query: () => ({
