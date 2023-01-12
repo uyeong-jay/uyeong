@@ -45,12 +45,17 @@ export const StyledBlogCategoryDetail = styled.div`
         border-radius: 20px;
         object-fit: cover; //원본크기로 넣기
         opacity: 0.6;
+        z-index: -1;
       }
 
       & > .post-card-title {
         // border: 1px solid black;
         width: 80%;
         margin: 40px 0 25px 35px;
+
+        & > a {
+          color: black;
+        }
       }
       & > .post-card-description {
         // border: 1px solid black;
