@@ -1,4 +1,3 @@
-import styled from '@_settings/styled';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -8,17 +7,11 @@ interface Props {
   content: string;
 }
 
-const MarkdownWrapper = styled.div`
-  border: 1px solid #dadada;
-`;
-
 const MarkdownViewer = ({ content }: Props) => {
   return (
-    <MarkdownWrapper>
-      <ReactMarkdown components={components} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-        {content}
-      </ReactMarkdown>
-    </MarkdownWrapper>
+    <ReactMarkdown components={components} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+      {content}
+    </ReactMarkdown>
   );
 };
 
