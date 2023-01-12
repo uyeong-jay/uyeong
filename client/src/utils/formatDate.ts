@@ -1,7 +1,7 @@
 import { format, formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
-//업데이트된 date 전달 받기
+//업데이트된 or 만들어진 date 전달 받기
 const foramtDate = (date: string) => {
   const newDate = new Date(date);
   const now = Date.now();
