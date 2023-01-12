@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import WritePresenter from './WritePresenter';
 import { useGetUserDataQuery } from '@app/services/user/userApi';
-import { BlogPostReq } from '@app/services/blog/postApi';
+import { BlogPostReq, useGetBlogPostsQuery } from '@app/services/blog/postApi';
 
 const WriteContainer = () => {
   const { data: userData } = useGetUserDataQuery();
+  const { data: blogPostsData } = useGetBlogPostsQuery();
 
   const initialState: BlogPostReq = {
     title: '', //o
@@ -18,7 +19,14 @@ const WriteContainer = () => {
   };
   const [blogPostInfo, setBlogPostInfo] = useState(initialState);
 
-  return <WritePresenter userData={userData} blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />;
+  return (
+    <WritePresenter
+      userData={userData}
+      blogPostsData={blogPostsData}
+      blogPostInfo={blogPostInfo}
+      setBlogPostInfo={setBlogPostInfo}
+    />
+  );
 };
 
 export default WriteContainer;

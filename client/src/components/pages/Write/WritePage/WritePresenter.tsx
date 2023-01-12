@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { BlogPostReq } from '@app/services/blog/postApi';
+import { BlogPostReq, BlogPostRes } from '@app/services/blog/postApi';
 import { UserResponse } from '@app/services/user/userApi';
 import WriteHeader from '../WriteComponents/WriteHeader';
 import WriteMDEditer from '../WriteComponents/WriteMDEditer';
@@ -11,11 +11,12 @@ import useScrollBlock from '@hooks/useScrollBlock';
 
 interface Props {
   userData?: UserResponse;
+  blogPostsData?: BlogPostRes;
   blogPostInfo: BlogPostReq;
   setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
 }
 
-const WritePresenter = ({ userData, blogPostInfo, setBlogPostInfo }: Props) => {
+const WritePresenter = ({ userData, blogPostsData, blogPostInfo, setBlogPostInfo }: Props) => {
   useScrollBlock();
 
   if (userData?.user?.role !== 'admin') return <NotFound />;
@@ -28,7 +29,12 @@ const WritePresenter = ({ userData, blogPostInfo, setBlogPostInfo }: Props) => {
         <div className="write-right-group">
           <WriteHeader blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
           <WriteMDEditer blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
-          <WriteFooter userData={userData} blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
+          <WriteFooter
+            userData={userData}
+            blogPostInfo={blogPostInfo}
+            blogPostsData={blogPostsData}
+            setBlogPostInfo={setBlogPostInfo}
+          />
         </div>
         <div className="write-left-group">
           <WriteMDViewer blogPostInfo={blogPostInfo} />

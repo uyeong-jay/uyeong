@@ -29,7 +29,7 @@ const PublishPresenter = ({ userData, blogPostInfo, setBlogPostInfo, isPublishin
             <div className="publish-left-group">
               <PublishCategory blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
               <PublishPrivacy blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
-              <PublishURL />
+              <PublishURL blogPostInfo={blogPostInfo} />
               <PublishActionButtons userData={userData} blogPostInfo={blogPostInfo} />
             </div>
           </div>

@@ -1,13 +1,19 @@
+import { BlogPostReq } from '@app/services/blog/postApi';
 import React from 'react';
 import { StyledPublishURL } from './PublishURLStyle';
 
-const PublishURLPresenter = () => {
+interface Props {
+  blogPostInfo: BlogPostReq;
+}
+
+const PublishURLPresenter = ({ blogPostInfo }: Props) => {
+  const { title } = blogPostInfo;
   return (
     <StyledPublishURL>
       <div>
         URL
         <span>|</span>
-        <span>/slug/1</span>
+        <span>/blog/{title ?? ''}</span>
       </div>
     </StyledPublishURL>
   );
