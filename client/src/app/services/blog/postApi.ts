@@ -1,36 +1,22 @@
 import { api } from '../api';
 
-export interface IBlogPost {
+export interface BlogPost {
   _id: string;
+  titleForUrl: string;
   title: string;
   tags: string[];
   content: string;
   thumbnail: string | File;
   description: string;
+  category: string;
   privacy: boolean;
   createdAt: string;
 }
 
-export interface BlogPost extends IBlogPost {
-  category: {
-    _id: string;
-    name: string;
-    createdAt: string;
-  };
-}
-
-export interface BlogPostByCategoryName extends IBlogPost {
-  category: string;
-}
-
-export interface BlogPostByPostTitle extends IBlogPost {
-  category: string;
-}
-
 export interface BlogPostRes {
   posts?: BlogPost[];
-  postsByCategory?: BlogPostByCategoryName[];
-  post?: BlogPostByPostTitle;
+  postsByCategory?: BlogPost[];
+  post?: BlogPost;
 }
 
 export interface BlogPostReq {
@@ -51,7 +37,7 @@ export interface BlogPostReqWithToken {
 
 export const postApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    //get1
+    //getMany
     getBlogPosts: builder.query<BlogPostRes, void>({
       query: () => ({
         url: '/api/blog',
@@ -60,7 +46,7 @@ export const postApi = api.injectEndpoints({
       providesTags: ['BlogPost'],
     }),
 
-    //get2
+    //getBy1
     getBlogPostsByCategory: builder.query<BlogPostRes, string>({
       query: (slug) => ({
         url: `/api/blog/category/${slug}`,
@@ -69,7 +55,7 @@ export const postApi = api.injectEndpoints({
       providesTags: ['BlogPost'],
     }),
 
-    //get3
+    //getBy2
     getBlogPost: builder.query<BlogPostRes, string>({
       query: (slug) => ({
         url: `/api/blog/${slug}`,

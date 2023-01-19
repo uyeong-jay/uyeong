@@ -10,12 +10,12 @@ const createPost = async (req: IReqAuth, res: Response) => {
     //admin 인지 확인
     if (req.user.role !== "admin") return res.status(400).json({ msg: "Invalid Authentication." });
 
-    //client 데이터 가져오기 (user 제외)
+    //client 데이터 가져오기
     const { title, tags, content, thumbnail, description, category, privacy, createdAt } = req.body;
 
     //데이터 생성
     const newPost = new Posts({
-      // user: req.user._id,
+      titleForUrl: title.replace(/\s+/g, "-"),
       title,
       tags,
       content,

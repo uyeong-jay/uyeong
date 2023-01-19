@@ -3,13 +3,7 @@ import Posts from "@models/blog/postModel";
 
 const getPost = async (req: Request, res: Response) => {
   try {
-    //middleware auth 잘통과 했는지 확인
-    // if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
-
-    //admin 인지 확인
-    // if (req.user.role !== "admin") return res.status(400).json({ msg: "Invalid Authentication." });
-
-    const post = await Posts.findOne({ title: req.params.slug });
+    const post = await Posts.findOne({ titleForUrl: req.params.slug });
 
     res.status(200).json({ post });
   } catch (err: any) {
