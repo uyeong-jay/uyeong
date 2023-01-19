@@ -14,7 +14,7 @@ const validBlog = (blogPostInfo: blogPostInfoProps) => {
 
   //title 에러
   if (!title) return 'Please add title.';
-  else if (title.length > 2) return 'Title must be 50 characters or less.';
+  else if (title.length >= 100) return 'Title must be 100 characters or less.';
 
   //content 에러
   if (!content) return 'Please add content.';

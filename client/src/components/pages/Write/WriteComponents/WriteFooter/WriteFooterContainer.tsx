@@ -23,17 +23,18 @@ const WriteFooterContainer = ({ userData, blogPostsData, blogPostInfo, setBlogPo
   //동일한 포스트 제목 생성 막기
   const validBlogTitle = useCallback(() => {
     const sameBlogTitle = blogPostsData?.posts?.find((post) => post.title === title);
-    console.log('a');
     if (sameBlogTitle) return true;
     else return false;
   }, [blogPostsData?.posts, title]);
 
   const onClickDone = useCallback(() => {
-    if (!title || !content) {
-      setWriteErrMsg(validBlog({ title, content }));
-      return setModalOpen(true);
-    } else if (validBlogTitle()) {
+    const blogTitleErr = validBlogTitle();
+    const blogErr = validBlog({ title, content });
+    if (blogTitleErr) {
       setWriteErrMsg('동일한 포스트 제목이 존재합니다.');
+      return setModalOpen(true);
+    } else if (blogErr) {
+      setWriteErrMsg(blogErr);
       return setModalOpen(true);
     } else dispatch(startPuslishing());
   }, [content, dispatch, title, validBlogTitle]);
