@@ -3,13 +3,15 @@ import Head from 'next/head';
 import BlogPostCard from '@pages/Blog/BlogComponents/BlogPostCard';
 import BlogHeader from '@pages/Blog/BlogComponents/BlogHeader';
 import { BlogPostRes } from '@app/services/blog/postApi';
+import { TagWithCount } from './BlogContainer';
 // import MoreButton from '@atoms/MoreButton';
 
 interface Props {
   blogPostsData?: BlogPostRes;
+  allTags: TagWithCount[];
 }
 
-const BlogPresenter = ({ blogPostsData }: Props) => {
+const BlogPresenter = ({ blogPostsData, allTags }: Props) => {
   return (
     <>
       <Head>
@@ -20,7 +22,13 @@ const BlogPresenter = ({ blogPostsData }: Props) => {
         <BlogHeader />
         <StyledBlogContents>
           <StyledTags>
-            <div className="tags-wrapper">tags</div>
+            <div className="tags-wrapper">
+              {allTags.map((tag, index) => (
+                <div key={index}>
+                  {tag.name} ({tag.count})
+                </div>
+              ))}
+            </div>
           </StyledTags>
           <StyledPosts>
             {blogPostsData?.posts?.map((post) => (
