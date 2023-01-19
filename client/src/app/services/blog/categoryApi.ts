@@ -4,6 +4,7 @@ export interface BlogCategory {
   _id: string;
   name: string;
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface BlogCategoryRes {
@@ -27,7 +28,7 @@ export const categoryApi = api.injectEndpoints({
     // 서버에 전달할 data ? builder.mutation() : builder.query()
     // builder.query<type of 'res' , type of 'query arg'>
 
-    //get
+    //getMany
     getBlogCategories: builder.query<BlogCategoryRes, void>({
       query: () => ({
         url: '/api/blog/category',
