@@ -1,15 +1,15 @@
-import { BlogPostByCategoryName } from '@app/services/blog/postApi';
+import { BlogPost } from '@app/services/blog/postApi';
 import React from 'react';
 import { StyledBlogCategoryDetail } from './BlogCategoryDetailStyle';
 import Image from 'next/image';
 import Link from 'next/link';
-import foramtDate from '@utils/formatDate';
+import formatDate from '@utils/formatDate';
 import { BlogCategory } from '@app/services/blog/categoryApi';
 import NotFound from '@src/pages/404';
 
 interface Props {
   categoryBySlug?: BlogCategory;
-  postsByCategory?: BlogPostByCategoryName[];
+  postsByCategory?: BlogPost[];
 }
 
 const BlogCategoryDetailPresenter = ({ categoryBySlug, postsByCategory }: Props) => {
@@ -26,12 +26,12 @@ const BlogCategoryDetailPresenter = ({ categoryBySlug, postsByCategory }: Props)
             style={{ border: `${!post.thumbnail ? '1px solid rgba(0, 0, 0, 0.5)' : 'none'}` }}
           >
             {post.thumbnail && (
-              <div className="thumbnail-image-wrapper thumbnail-image">
+              <div className="blog-category-image-wrapper blog-category-image">
                 {
                   <Image
-                    className="thumbnail-image"
+                    className="blog-category-image"
                     src={post.thumbnail as string}
-                    alt="thumbnail-image"
+                    alt="blog-category-image"
                     width={400}
                     height={270}
                   />
@@ -39,10 +39,10 @@ const BlogCategoryDetailPresenter = ({ categoryBySlug, postsByCategory }: Props)
               </div>
             )}
             <h3 className="post-card-title">
-              <Link href={`/blog/${post.title}`}>{post.title}</Link>
+              <Link href={`/blog/${post.titleForUrl}`}>{post.title}</Link>
             </h3>
             <p className="post-card-description">{post.description}</p>
-            <p className="post-card-date">{foramtDate(post.createdAt)}</p>
+            <p className="post-card-date">{formatDate(post.createdAt)}</p>
           </div>
         ))}
       </div>

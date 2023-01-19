@@ -3,7 +3,7 @@ import { StyledBlogCategoryCard } from './BlogCategoryCardStyle';
 import Button from '@atoms/Button';
 import Image from 'next/image';
 import { UserResponse } from '@app/services/user/userApi';
-import foramtDate from '@utils/formatDate';
+import formatDate from '@utils/formatDate';
 import { BlogCategory } from '@app/services/blog/categoryApi';
 import { BlogPost } from '@app/services/blog/postApi';
 import Link from 'next/link';
@@ -44,9 +44,9 @@ const BlogCategoryCardPresenter = ({
     <StyledBlogCategoryCard>
       {/* 카드 포스트 썸네일 */}
       {/* 만약 포스트가 있으면 가장 최근 포스트의 썸네일을 보여주기 */}
-      <div className="card-image-wrapper card-image">
+      <div className="blog-category-card-image-wrapper card-image">
         <Image
-          className="card-image"
+          className="blog-category-card-image"
           src={
             postsByCategoryName
               ? (postsByCategoryName[postsByCategoryName.length - 1]?.thumbnail as string)
@@ -105,7 +105,7 @@ const BlogCategoryCardPresenter = ({
 
         {/* 포스트 개수, 최근 업데이트 날짜 */}
         <div className="card-content-footer">
-          포스트개수: {postsByCategoryName?.length}, 마지막 업데이트: {foramtDate(category.createdAt)}
+          포스트개수: {postsByCategoryName?.length}, 마지막 업데이트: {formatDate(category.updatedAt)}
         </div>
       </div>
     </StyledBlogCategoryCard>
