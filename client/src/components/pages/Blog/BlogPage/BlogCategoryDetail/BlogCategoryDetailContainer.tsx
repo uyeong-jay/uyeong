@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
-import { BlogPostByCategoryName, useGetBlogPostsByCategoryQuery } from '@app/services/blog/postApi';
+import { BlogPost, useGetBlogPostsByCategoryQuery } from '@app/services/blog/postApi';
 import { useRouter } from 'next/router';
 import BlogCategoryDetailPresenter from './BlogCategoryDetailPresenter';
 import { useGetBlogCategoriesQuery } from '@app/services/blog/categoryApi';
 
 interface PostsByCategory {
-  postsByCategory?: BlogPostByCategoryName[];
+  postsByCategory?: BlogPost[];
 }
 
 const BlogCategoryDetailContainer = () => {

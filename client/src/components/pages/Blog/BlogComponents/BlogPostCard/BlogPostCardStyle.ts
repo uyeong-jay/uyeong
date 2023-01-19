@@ -9,11 +9,11 @@ export const StyledBlogPostCard = styled.article`
   position: relative;
   border: 1px solid black;
   width: 750px;
-  height: 240px;
+  height: 225px;
   margin: 50px 70px;
   border-radius: 30px;
 
-  & .thumbnail-image-wrapper {
+  & .blog-card-image-wrapper {
     //border: 1px solid black;
     display: inline-flex;
     position: absolute;
@@ -21,7 +21,7 @@ export const StyledBlogPostCard = styled.article`
     left: -30px;
   }
 
-  & .thumbnail-image {
+  & .blog-card-image {
     border-radius: 20px;
     object-fit: cover; //원본크기로 넣기
   }

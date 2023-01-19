@@ -6,12 +6,12 @@ export const StyledBlogCategoryCard = styled.div`
   height: 300px;
   margin: 20px;
 
-  & .card-image-wrapper {
+  & .blog-category-card-image-wrapper {
     // border: 1px solid black;
     display: inline-flex;
   }
 
-  & .card-image {
+  & .blog-category-card-image {
     border-radius: 20px;
     object-fit: cover; //원본크기로 넣기
   }

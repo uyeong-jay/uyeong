@@ -35,13 +35,13 @@ export const StyledBlogCategoryDetail = styled.div`
       height: 270px;
       border-radius: 20px;
 
-      & .thumbnail-image-wrapper {
+      & .blog-category-image-wrapper {
         // border: 1px solid black;
         display: inline-flex;
         position: absolute;
       }
 
-      & .thumbnail-image {
+      & .blog-category-image {
         border-radius: 20px;
         object-fit: cover; //원본크기로 넣기
         opacity: 0.6;
