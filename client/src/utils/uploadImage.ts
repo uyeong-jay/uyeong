@@ -1,4 +1,5 @@
 const getUploadImageUrl = async (file: File) => {
+  if (!file) return;
   const formData = new FormData();
   formData.append('file', file);
   formData.append('upload_preset', process.env.CLOUDINARY_UPLOAD_PRESET);
