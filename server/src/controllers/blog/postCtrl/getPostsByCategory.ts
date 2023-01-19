@@ -3,14 +3,8 @@ import Posts from "@models/blog/postModel";
 
 const getPostsByCategory = async (req: Request, res: Response) => {
   try {
-    //middleware auth 잘통과 했는지 확인
-    // if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
-
-    //admin 인지 확인
-    // if (req.user.role !== "admin") return res.status(400).json({ msg: "Invalid Authentication." });
-
     //post 데이터 가져오기
-    const posts = await Posts.find().sort("-createAt");
+    const posts = await Posts.find().sort({ createdAt: -1 });
 
     //post 선별 하기 (by Category)
     const postsByCategory = posts.filter((post: { category: string }) => post.category === req.params.slug);
