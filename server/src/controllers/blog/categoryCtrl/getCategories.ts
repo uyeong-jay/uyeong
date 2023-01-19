@@ -3,14 +3,8 @@ import Categories from "@models/blog/categoryModel";
 
 const getCategories = async (req: Request, res: Response) => {
   try {
-    //middleware auth 잘통과 했는지 확인
-    // if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
-
-    //admin 인지 확인
-    // if (req.user.role !== "admin") return res.status(400).json({ msg: "Invalid Authentication." });
-
     //category가 생성된 순서로 가져오기(가장 최근에 생성된것이 가장 첫번째)
-    const categories = await Categories.find().sort("-createAt");
+    const categories = await Categories.find().sort({ createdAt: -1 });
 
     res.status(200).json({ categories });
   } catch (err: any) {

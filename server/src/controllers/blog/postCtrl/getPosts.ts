@@ -3,28 +3,9 @@ import Posts from "@models/blog/postModel";
 
 const getPosts = async (req: Request, res: Response) => {
   try {
-    //middleware auth 잘통과 했는지 확인
-    // if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
-
-    //admin 인지 확인
-    // if (req.user.role !== "admin") return res.status(400).json({ msg: "Invalid Authentication." });
-
-    const posts = await Posts.aggregate([
-      // Category 데이터 추가
-      {
-        $lookup: {
-          from: "categories", //가져올 db 이름
-          localField: "category", //posts db 내부 category
-          foreignField: "name", //posts db 내부 category.name
-          as: "category",
-        },
-      },
-      // array -> object
-      { $unwind: "$category" },
-
-      // Sorting
-      { $sort: { createdAt: 1 } },
-    ]);
+    //category가 생성된 순서로 가져오기(가장 최근에 생성된것이 가장 첫번째)
+    //{createdAt: 1}
+    const posts = await Posts.find().sort({ createdAt: -1 });
 
     res.status(200).json({ posts });
   } catch (err: any) {

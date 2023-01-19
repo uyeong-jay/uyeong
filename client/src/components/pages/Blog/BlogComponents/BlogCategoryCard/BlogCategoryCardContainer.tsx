@@ -27,7 +27,7 @@ const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props)
 
   //카테고리별 포스트
   const postsByCategoryName = useMemo(() => {
-    const postsData = blogPostsData?.posts?.filter((post) => post.category.name === categoryName.name);
+    const postsData = blogPostsData?.posts?.filter((post) => post.category === categoryName.name);
     return postsData;
   }, [blogPostsData?.posts, categoryName.name]);
 

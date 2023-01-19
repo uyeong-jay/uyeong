@@ -3,12 +3,16 @@ import { IPost } from "@_types/types";
 
 const postSchema = new Schema(
   {
-    // user: { type: Schema.Types.ObjectId, ref: "user" },
     title: {
       type: String,
       required: true,
       trim: true,
       maxLength: 50,
+    },
+    titleForUrl: {
+      type: String,
+      required: true,
+      trim: true,
     },
     tags: {
       type: [String],
@@ -25,12 +29,18 @@ const postSchema = new Schema(
     thumbnail: {
       type: String,
     },
+    category: {
+      type: String,
+      trim: true,
+      maxLength: [20, "Name is up to 20 chars long.)"],
+    },
     privacy: {
       type: Boolean,
       required: true,
       default: false,
     },
-    category: { type: Schema.Types.String, ref: "category" },
+    // user: { type: Schema.Types.ObjectId, ref: "user" },
+    // category: { type: Schema.Types.String, ref: "category" },
   },
   { timestamps: true }
 );

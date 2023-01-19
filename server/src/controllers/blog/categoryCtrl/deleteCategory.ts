@@ -1,6 +1,7 @@
 import { IReqAuth } from "@_types/types";
 import { Response } from "express";
 import Categories from "@models/blog/categoryModel";
+import Posts from "@models/blog/postModel";
 
 const deleteCategory = async (req: IReqAuth, res: Response) => {
   try {
@@ -14,6 +15,9 @@ const deleteCategory = async (req: IReqAuth, res: Response) => {
     await Categories.findOneAndDelete({ name: req.body.name });
     //name: req.params.id
     //name: req.params.slug
+
+    //post 조회 후 업데이트
+    await Posts.updateMany({ category: req.body.name }, { $set: { category: "" } });
 
     res.status(200).json({ msg: "Delete Success!" });
   } catch (err: any) {
