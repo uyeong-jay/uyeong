@@ -5,7 +5,7 @@ import Posts from "@models/blog/postModel";
 
 const updateCategory = async (req: IReqAuth, res: Response) => {
   try {
-    //middleware auth 잘통과 했는지 확인
+    //user가 middleware auth를 잘통과 했는지 확인
     if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
 
     //admin인지 확인

@@ -4,7 +4,7 @@ import Categories from "@models/blog/categoryModel";
 
 const createCategory = async (req: IReqAuth, res: Response) => {
   try {
-    //middleware auth 잘통과 했는지 확인
+    //user가 middleware auth를 잘통과 했는지 확인
     if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
     //admin인지 확인
     if (req.user.role !== "admin") return res.status(400).json({ msg: "Invalid Authentication." });
