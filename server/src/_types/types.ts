@@ -3,7 +3,7 @@ import { Types } from "mongoose";
 
 const ObjectId = Types.ObjectId;
 
-export interface IUser {
+export interface IUser extends Document {
   _id: typeof ObjectId;
   nickname: string;
   email: string;
@@ -26,7 +26,7 @@ export interface IDecodedToken {
   exp: number;
 }
 
-export interface IPost {
+export interface IPost extends Document {
   _id: typeof ObjectId;
   user: string;
   title: string;
@@ -36,4 +36,14 @@ export interface IPost {
   thumnail: string;
   category: string;
   _doc: object;
+}
+
+export interface IComment extends Document {
+  user: string;
+  post_title: string;
+  content: string;
+  reply: string;
+  reply_user: string;
+  _doc: object;
+  // comment_root: string;
 }

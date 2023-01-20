@@ -11,7 +11,7 @@ const auth = async (req: IReqAuth, res: Response, next: NextFunction) => {
 
     //디코드하기(jwt)
     const decoded = <IDecodedToken>jwt.verify(token, `${process.env.ACCESS_TOKEN_SECRET}`);
-    if (!decoded) return res.status(400).json({ msg: "Invalid Authorization." });
+    if (!decoded) return res.status(400).json({ msg: "Invalid Authorization2." });
     // console.log(decoded);
     // { id: '62fe3d99c15dd2880b5f864f', iat: 1667445445, exp: 1667446345 }
 

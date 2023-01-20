@@ -40,6 +40,7 @@ app.use("/api", routes.authRouter);
 app.use("/api", routes.userRouter);
 app.use("/api", routes.blogCategoryRouter);
 app.use("/api", routes.blogPostRouter);
+app.use("/api", routes.blogCommentRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
