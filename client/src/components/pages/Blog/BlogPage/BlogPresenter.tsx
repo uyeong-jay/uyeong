@@ -1,10 +1,13 @@
 import { StyledBlog, StyledBlogContents, StyledPosts, StyledTags } from './BlogStyle';
 import Head from 'next/head';
-import BlogPostCard from '@pages/Blog/BlogComponents/BlogPostCard';
 import BlogHeader from '@pages/Blog/BlogComponents/BlogHeader';
 import { BlogPostRes } from '@app/services/blog/postApi';
 import { TagWithCount } from './BlogContainer';
-// import MoreButton from '@atoms/MoreButton';
+import dynamic from 'next/dynamic';
+import Loader from '@modals/Loader';
+const BlogPostCard: any = dynamic(() => import('@pages/Blog/BlogComponents/BlogPostCard') as any, {
+  loading: () => <Loader />,
+});
 
 interface Props {
   blogPostsData?: BlogPostRes;
