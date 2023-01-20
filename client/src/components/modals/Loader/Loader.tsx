@@ -12,7 +12,7 @@ const StyledLoader = styled.div`
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background-color: #0007;
+  background-color: rgba(204, 207, 209, 0.5);
   user-select: none;
   font-size: 30px;
 `;
