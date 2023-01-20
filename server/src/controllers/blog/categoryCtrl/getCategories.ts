@@ -3,7 +3,7 @@ import Categories from "@models/blog/categoryModel";
 
 const getCategories = async (req: Request, res: Response) => {
   try {
-    //category가 생성된 순서로 가져오기(가장 최근에 생성된것이 가장 첫번째)
+    //category를 가장 최근에 생성된것이 가장 첫번째에 오도록 가져오기
     const categories = await Categories.find().sort({ createdAt: -1 });
 
     res.status(200).json({ categories });

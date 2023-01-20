@@ -22,14 +22,14 @@ const refresh = async (req: IReqAuth, res: Response) => {
     if (!user) return res.status(400).json({ msg: "This account doesn't exists." });
     // console.log(user);
     // {
-    //   _id: '628c484bd2b44d75c5515c18',
-    //   nickname: 'test1',
-    //   email: 'test1@gmail.com',
-    //   avatar: 'https://res.cloudinary.com/uyeong/image/upload/v1637676343/nextjs_media/igin1evr3clomdfy2ikm.png',
+    //   _id: '-',
+    //   nickname: '-',
+    //   email: '-',
+    //   avatar: '-',
     //   role: 'user',
     //   type: 'register',
-    //   createdAt: '2022-08-18T02:51:55.843Z',
-    //   updatedAt: '2022-08-18T02:51:55.843Z',
+    //   createdAt: '-',
+    //   updatedAt: '-',
     //   __v: 0
     // }
 

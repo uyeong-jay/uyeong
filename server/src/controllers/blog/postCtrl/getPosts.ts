@@ -3,8 +3,7 @@ import Posts from "@models/blog/postModel";
 
 const getPosts = async (req: Request, res: Response) => {
   try {
-    //category가 생성된 순서로 가져오기(가장 최근에 생성된것이 가장 첫번째)
-    //{createdAt: 1}
+    //Posts를 가장 최근에 생성된것이 가장 첫번째에 오도록 가져오기
     const posts = await Posts.find().sort({ createdAt: -1 });
 
     res.status(200).json({ posts });
