@@ -5,6 +5,7 @@ import BlogPostToc from '@pages/Blog/BlogComponents/BlogPostToc';
 import { StyledBlogPost } from './BlogPostStyle';
 import Image from 'next/image';
 import MarkdownViewer from '@organisms/MarkdownViewer';
+import BlogComment from '@pages/Blog/BlogComponents/BlogComment';
 
 interface Props {
   blogPost?: BlogPost;
@@ -54,6 +55,11 @@ const BlogPostPresenter = ({ blogPost }: Props) => {
       <article>
         <MarkdownViewer content={content ?? ''} />
       </article>
+
+      <section>
+        <BlogComment />
+      </section>
+
       {/* 좋아요 with 폭죽 - velog, youtube */}
       {/* 링크복사,  - velog */}
       {/* 댓글 - ellismin */}
