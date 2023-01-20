@@ -1,10 +1,13 @@
-import MarkdownViewer from '@organisms/MarkdownViewer';
 import { BlogPost } from '@app/services/blog/postApi';
 import NotFound from '@src/pages/404';
 import formatDate from '@utils/formatDate';
 import BlogPostToc from '@pages/Blog/BlogComponents/BlogPostToc';
 import { StyledBlogPost } from './BlogPostStyle';
 import Image from 'next/image';
+import { lazy, Suspense } from 'react';
+import Loader from '@modals/Loader';
+// import MarkdownViewer from '@organisms/MarkdownViewer';
+const MarkdownViewer = lazy(() => import('@organisms/MarkdownViewer'));
 
 interface Props {
   blogPost?: BlogPost;
@@ -52,7 +55,9 @@ const BlogPostPresenter = ({ blogPost }: Props) => {
         </div>
       )}
       <article>
-        <MarkdownViewer content={content ?? ''} />
+        <Suspense fallback={<Loader />}>
+          <MarkdownViewer content={content ?? ''} />
+        </Suspense>
       </article>
       {/* 좋아요 with 폭죽 - velog, youtube */}
       {/* 링크복사,  - velog */}

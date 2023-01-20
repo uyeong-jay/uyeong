@@ -1,10 +1,13 @@
 import { StyledBlog, StyledBlogContents, StyledPosts, StyledTags } from './BlogStyle';
 import Head from 'next/head';
-import BlogPostCard from '@pages/Blog/BlogComponents/BlogPostCard';
+// import BlogPostCard from '@pages/Blog/BlogComponents/BlogPostCard';
 import BlogHeader from '@pages/Blog/BlogComponents/BlogHeader';
 import { BlogPostRes } from '@app/services/blog/postApi';
 import { TagWithCount } from './BlogContainer';
 // import MoreButton from '@atoms/MoreButton';
+import { lazy, Suspense } from 'react';
+import Loader from '@modals/Loader';
+const BlogPostCard = lazy(() => import('@pages/Blog/BlogComponents/BlogPostCard'));
 
 interface Props {
   blogPostsData?: BlogPostRes;
@@ -31,9 +34,11 @@ const BlogPresenter = ({ blogPostsData, allTags }: Props) => {
             </div>
           </StyledTags>
           <StyledPosts>
-            {blogPostsData?.posts?.map((post) => (
-              <BlogPostCard key={post._id} post={post} />
-            ))}
+            <Suspense fallback={<Loader />}>
+              {blogPostsData?.posts?.map((post) => (
+                <BlogPostCard key={post._id} post={post} />
+              ))}
+            </Suspense>
           </StyledPosts>
         </StyledBlogContents>
         {/* <MoreButton text="더보기" /> */}
