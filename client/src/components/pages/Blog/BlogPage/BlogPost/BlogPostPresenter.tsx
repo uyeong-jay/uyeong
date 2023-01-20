@@ -4,10 +4,7 @@ import formatDate from '@utils/formatDate';
 import BlogPostToc from '@pages/Blog/BlogComponents/BlogPostToc';
 import { StyledBlogPost } from './BlogPostStyle';
 import Image from 'next/image';
-import { lazy, Suspense } from 'react';
-import Loader from '@modals/Loader';
-// import MarkdownViewer from '@organisms/MarkdownViewer';
-const MarkdownViewer = lazy(() => import('@organisms/MarkdownViewer'));
+import MarkdownViewer from '@organisms/MarkdownViewer';
 
 interface Props {
   blogPost?: BlogPost;
@@ -55,9 +52,7 @@ const BlogPostPresenter = ({ blogPost }: Props) => {
         </div>
       )}
       <article>
-        <Suspense fallback={<Loader />}>
-          <MarkdownViewer content={content ?? ''} />
-        </Suspense>
+        <MarkdownViewer content={content ?? ''} />
       </article>
       {/* 좋아요 with 폭죽 - velog, youtube */}
       {/* 링크복사,  - velog */}
