@@ -1,9 +1,9 @@
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import components from './components';
-import { lazy, Suspense } from 'react';
 import Loader from '@modals/Loader';
-const ReactMarkdown = lazy(() => import('react-markdown'));
+import dynamic from 'next/dynamic';
+const ReactMarkdown: any = dynamic(() => import('react-markdown') as any, { loading: () => <Loader />, ssr: false });
 
 interface Props {
   content: string;
@@ -11,11 +11,9 @@ interface Props {
 
 const MarkdownViewer = ({ content }: Props) => {
   return (
-    <Suspense fallback={<Loader />}>
-      <ReactMarkdown components={components} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-        {content}
-      </ReactMarkdown>
-    </Suspense>
+    <ReactMarkdown components={components} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+      {content}
+    </ReactMarkdown>
   );
 };
 
