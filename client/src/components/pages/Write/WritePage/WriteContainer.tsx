@@ -15,7 +15,6 @@ const WriteContainer = () => {
     description: '', //o
     category: '', //o
     privacy: false,
-    createdAt: new Date().toISOString(), //2022-11-29T17:35:07.526Z //o
   };
   const [blogPostInfo, setBlogPostInfo] = useState(initialState);
 

@@ -27,7 +27,6 @@ export interface BlogPostReq {
   description: string;
   category: string;
   privacy: boolean;
-  createdAt: string;
 }
 
 export interface BlogPostReqWithToken {
@@ -46,7 +45,7 @@ export const postApi = api.injectEndpoints({
       providesTags: ['BlogPost'],
     }),
 
-    //getBy1
+    //getBy
     getBlogPostsByCategory: builder.query<BlogPostRes, string>({
       query: (slug) => ({
         url: `/api/blog/category/${slug}`,
@@ -55,7 +54,7 @@ export const postApi = api.injectEndpoints({
       providesTags: ['BlogPost'],
     }),
 
-    //getBy2
+    //getBy
     getBlogPost: builder.query<BlogPostRes, string>({
       query: (slug) => ({
         url: `/api/blog/${slug}`,
