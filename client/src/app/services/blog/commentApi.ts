@@ -1,6 +1,7 @@
 import { api } from '../api';
 
 export interface BlogComment {
+  _id: string;
   user_id: string;
   content: string;
   post_title: string;
@@ -8,7 +9,8 @@ export interface BlogComment {
 }
 
 export interface BlogCommentRes {
-  comments?: BlogComment[];
+  comments: BlogComment[];
+  count: number;
   msg?: string;
 }
 
@@ -26,9 +28,9 @@ export interface BlogCommenReqWithToken {
 export const categoryApi = api.injectEndpoints({
   endpoints: (builder) => ({
     //getMany
-    getBlogComments: builder.query<BlogCommentRes, void>({
-      query: () => ({
-        url: '/api/blog/comment',
+    getBlogComments: builder.query<BlogCommentRes, string>({
+      query: (slug) => ({
+        url: `/api/comment/blog/${slug}`,
         method: 'get',
       }),
       providesTags: ['BlogComment'],
@@ -37,7 +39,7 @@ export const categoryApi = api.injectEndpoints({
     //create
     createBlogComment: builder.mutation<BlogCommentRes, BlogCommenReqWithToken>({
       query: (data) => ({
-        url: '/api/blog/comment',
+        url: '/api/comment',
         method: 'post',
         data: data.commentsInfo,
         headers: {
@@ -50,7 +52,7 @@ export const categoryApi = api.injectEndpoints({
     //update
     updateBlogComment: builder.mutation<BlogCommentRes, BlogCommenReqWithToken>({
       query: (data) => ({
-        url: '/api/blog/comment',
+        url: `/api/comment/${data.commentsInfo.user_id}`,
         method: 'patch',
         data: data.commentsInfo,
         headers: {
@@ -63,7 +65,7 @@ export const categoryApi = api.injectEndpoints({
     //delete
     deleteBlogComment: builder.mutation<BlogCommentRes, BlogCommenReqWithToken>({
       query: (data) => ({
-        url: '/api/blog/comment',
+        url: `/api/comment/${data.commentsInfo.user_id}`,
         method: 'delete',
         data: data.commentsInfo,
         headers: {

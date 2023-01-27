@@ -15,6 +15,7 @@ export interface IUser extends Document {
   _doc: object;
 }
 
+//user 증명 데이터를 가져올때 Request 타입 대신 사용
 export interface IReqAuth extends Request {
   user?: IUser;
 }

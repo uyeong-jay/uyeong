@@ -27,4 +27,12 @@ export const StyledBlogPostComment = styled.section`
       margin-top: 10px;
     }
   }
+
+  & > .blog-comment-MDviewer-group {
+    border: 1px solid green;
+
+    & > .blog-comment-MDviewer {
+      border: 1px solid green;
+    }
+  }
 `;
