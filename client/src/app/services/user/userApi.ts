@@ -5,6 +5,7 @@ export interface UserResponse {
   access_token?: string;
   refresh_token?: string;
   user?: {
+    _id: string;
     role: string;
     avatar: string;
     nickname: string;
