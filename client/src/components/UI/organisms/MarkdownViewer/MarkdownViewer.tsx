@@ -1,9 +1,10 @@
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import components from './components';
-import Loader from '@modals/Loader';
-import dynamic from 'next/dynamic';
-const ReactMarkdown: any = dynamic(() => import('react-markdown') as any, { loading: () => <Loader />, ssr: false });
+import ReactMarkdown from 'react-markdown';
+// import Loader from '@modals/Loader';
+// import dynamic from 'next/dynamic';
+// const ReactMarkdown: any = dynamic(() => import('react-markdown') as any, { loading: () => <Loader />, ssr: false });
 
 interface Props {
   content: string;
