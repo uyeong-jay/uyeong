@@ -10,6 +10,6 @@ const { createComment, getComments, updateComment, deleteComment } = blogComment
 // put(update): 데이터 변경(모두)
 // patch(update): 데이터 변경(부분)
 // delete(delete): 데이터 제거
-blogCommentRouter.post("/comment", auth, createComment);
+blogCommentRouter.post("/blog/comment", auth, createComment);
 
 export default blogCommentRouter;
