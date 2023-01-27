@@ -10,16 +10,18 @@ interface Props {
 const BlogPostTocPresenter = ({ headings }: Props) => {
   const activeId = useScrollSpy(
     headings.map(({ id }) => id),
-    { rootMargin: '0% 0% -100% 0px' },
+    { rootMargin: '0% 0% -100% 0%' },
   );
 
   return (
     <StyledBlogPostToc>
-      {headings.map(({ id, text, level }) => (
-        <StyledList key={id} headingLevel={level} headingId={id} activeId={activeId}>
-          <a href={`#${text?.toLowerCase().replace(/\s+/g, '-')}`}>{text}</a>
-        </StyledList>
-      ))}
+      <ul>
+        {headings.map(({ id, text, level }) => (
+          <StyledList key={id} headingLevel={level} headingId={id} activeId={activeId}>
+            <a href={`#${text?.toLowerCase().replace(/\s+/g, '-')}`}>{text}</a>
+          </StyledList>
+        ))}
+      </ul>
     </StyledBlogPostToc>
   );
 };

@@ -6,12 +6,20 @@ interface HeadingListProps {
   activeId: string;
 }
 
-export const StyledBlogPostToc = styled.ul`
+export const StyledBlogPostToc = styled.nav`
   border: 1px solid black;
-  position: sticky;
-  top: 100px;
-  right: 0;
-  width: 200px;
+  position: absolute;
+  top: 150px;
+  right: -300px;
+  height: 95%;
+
+  & > ul {
+    border: 1px solid black;
+    position: sticky;
+    top: 100px;
+    right: 0;
+    width: 200px;
+  }
 `;
 
 export const StyledList = styled.li<HeadingListProps>`
