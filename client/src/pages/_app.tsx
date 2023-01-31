@@ -3,7 +3,7 @@ import AppLayout from '@templates/AppLayout';
 import { Provider } from 'react-redux';
 import wrapper from '@app/store';
 import type { AppProps } from 'next/app';
-import Script from 'next/script';
+// import Script from 'next/script';
 
 function MyApp({ Component, ...rest }: AppProps) {
   const { store, props } = wrapper.useWrappedStore(rest);
@@ -11,7 +11,7 @@ function MyApp({ Component, ...rest }: AppProps) {
   return (
     <>
       {/* fontawsome icon  */}
-      <Script src={`${process.env.FONTAWESOME_KIT}`} crossOrigin="anonymous"></Script>
+      {/* <Script src={`${process.env.FONTAWESOME_KIT}`} crossOrigin="anonymous"></Script> */}
 
       <Provider store={store}>
         <GlobalStyle />
