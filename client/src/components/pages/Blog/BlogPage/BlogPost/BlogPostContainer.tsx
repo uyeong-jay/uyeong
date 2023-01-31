@@ -6,7 +6,6 @@ const BlogPostContainer = () => {
   const router = useRouter();
 
   const { slug } = router.query;
-  console.log(slug);
 
   const { data: blogPostData } = useGetBlogPostQuery(slug as string);
 

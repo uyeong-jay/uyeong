@@ -11,39 +11,58 @@ export const StyledFooter = styled.footer`
   border-radius: 30px;
   color: black;
 
-  & li i {
-    color: maroon;
+  & li {
+    display: flex;
+  }
+
+  & li p {
+    display: flex;
+  }
+
+  & li .user-icon {
+    fill: maroon;
+    width: 12px;
+    margin: 0 8px 0 -1px;
+    font-size: 20px;
   }
 
   & li a {
+    display: flex;
     color: blue;
 
-    & > .fa-instagram {
-      margin-left: -2px;
-      margin-top: 4px;
+    & > .instagram-icon {
+      fill: maroon;
+      width: 14px;
+      margin: 3px 8px 0 -2px;
       font-size: 20px;
     }
 
-    & > .fa-envelope {
-      margin-left: -1px;
+    & > .envelope-icon {
+      fill: maroon;
+      width: 14px;
+      margin: 3px 8px 0 -1px;
     }
 
-    & > .fa-github {
-      margin-left: -1px;
-      margin-top: 4px;
+    & > .github-icon {
+      fill: maroon;
+      width: 14px;
+      margin: 3px 8px 0 -1px;
       font-size: 18px;
     }
 
-    & > .fa-t {
-      margin-top: 4px;
+    & > .t-icon {
+      fill: maroon;
+      width: 11px;
+      margin: 3px 8px 0 0px;
       font-size: 18px;
     }
   }
 
-  & p .fa-copyright {
+  & p .copyright-icon {
+    fill: maroon;
+    width: 14px;
     color: maroon;
-    margin-left: -1px;
-    margin-top: 4px;
+    margin: 3px 8px 0 -0.5px;
     font-size: 18px;
   }
 `;

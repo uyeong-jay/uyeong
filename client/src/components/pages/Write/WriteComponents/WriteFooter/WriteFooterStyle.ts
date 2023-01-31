@@ -13,6 +13,36 @@ export const StyledWriteFooter = styled.div`
   background-color: #dadada;
 
   & > button {
+    // border: 1px solid black;
+    width: 100px;
     color: dimgray;
+  }
+
+  & > .back-button {
+    // border: 1px solid black;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    & .angle-left-icon {
+      // border: 1px solid black;
+      width: 9.5px;
+      margin-right: 10px;
+      fill: dimgray;
+    }
+  }
+
+  & > .done-button {
+    // border: 1px solid black;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    & .angle-up-icon {
+      // border: 1px solid black;
+      width: 14px;
+      margin-left: 10px;
+      fill: dimgray;
+    }
   }
 `;

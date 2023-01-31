@@ -22,6 +22,9 @@ export const StyledPublishPrivacy = styled.div`
     & .public-button,
     .private-button {
       // border: 1px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background-color: #eff1f3;
       width: 140px;
       height: 50%;
@@ -33,6 +36,14 @@ export const StyledPublishPrivacy = styled.div`
       color: gray;
     }
 
+    & .earth-icon,
+    .lock-icon {
+      width: 20px;
+      fill: gray;
+      margin-right: 10px;
+    }
+
+    //한박자 늦게 적용됨
     // & .clicked {
     //   background-color: silver;
     //   pointer-events: none; //hover가 바로 안없어짐
@@ -43,6 +54,11 @@ export const StyledPublishPrivacy = styled.div`
     & .public-button:hover,
     .private-button:hover {
       color: rgba(128, 128, 128, 0.5);
+
+      & .earth-icon,
+      .lock-icon {
+        fill: rgba(128, 128, 128, 0.5);
+      }
     }
   }
 `;

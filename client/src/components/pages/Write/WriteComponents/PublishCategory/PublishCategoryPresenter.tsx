@@ -3,6 +3,8 @@ import useAnimation from '@hooks/useAnimation';
 import { BlogCategoryRes } from '@app/services/blog/categoryApi';
 import { MouseEventHandler } from 'react';
 import { BlogPostReq } from '@app/services/blog/postApi';
+import ListIcon from '@icons/ListIcon';
+import CheckIcon from '@icons/CheckIcon';
 
 interface Props {
   blogCategoryData?: BlogCategoryRes;
@@ -30,32 +32,31 @@ const PublishCategoryPresenter = ({
   return (
     <StyledPublishCategory>
       <button type="button" onClick={onClickChooseCtegory}>
-        <i className="fa-solid fa-list"></i> Choose a category
+        <ListIcon />
+        Choose a category
       </button>
       {render && (
         <StyledOpenedCategory
           animationName={show ? 'down-category' : 'up-category'}
           onAnimationEnd={() => onAnimationEnd}
         >
-          {/* 취소 버튼 */}
-          <button className="cancel-button" type="button" onClick={onClickCancel}>
-            <i className="fa-solid fa-xmark fa-2x"></i>
-          </button>
-
           {/* 카테고리 옵션 */}
           <ul className="category-list-block">
             {blogCategoryData?.categories?.map((category) => (
               <li key={category._id} value={category.name} onClick={onClickCategory}>
                 {category.name}
-                {isClickedCategory && category.name === blogPostInfo.category ? (
-                  <i className="fa-solid fa-check"></i>
-                ) : null}
+                {isClickedCategory && category.name === blogPostInfo.category ? <CheckIcon /> : null}
               </li>
             ))}
           </ul>
 
-          {/* 완료 버튼 */}
-          <div className="button-wrapper">
+          <div className="button-group">
+            {/* 취소 버튼 */}
+            <button className="cancel-button" type="button" onClick={onClickCancel}>
+              Cancel
+            </button>
+
+            {/* 완료 버튼 */}
             <button
               className="done-button"
               type="button"

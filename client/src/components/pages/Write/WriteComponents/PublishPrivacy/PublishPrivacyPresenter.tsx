@@ -1,4 +1,6 @@
 import { BlogPostReq } from '@app/services/blog/postApi';
+import EarthIcon from '@icons/EarthIcon';
+import LockIcon from '@icons/LockIcon';
 import React, { CSSProperties, useMemo } from 'react';
 import { StyledPublishPrivacy } from './PublishPrivacyStyle';
 
@@ -28,14 +30,14 @@ const PublishPrivacyPresenter = ({ blogPostInfo, onClickPublic, onClickPrivate }
           onClick={onClickPublic}
           style={!blogPostInfo?.privacy ? (clickedBtnStyle as CSSProperties) : undefined}
         >
-          <i className="fa-solid fa-earth-americas fa-xl"></i> Public
+          <EarthIcon clicked={!blogPostInfo?.privacy ? true : false} /> Public
         </button>
         <button
           className="private-button"
           onClick={onClickPrivate}
           style={blogPostInfo?.privacy ? (clickedBtnStyle as CSSProperties) : undefined}
         >
-          <i className="fa-solid fa-lock fa-xl"></i> Private
+          <LockIcon clicked={blogPostInfo?.privacy ? true : false} /> Private
         </button>
       </div>
     </StyledPublishPrivacy>

@@ -1,4 +1,5 @@
 import { BlogPostReq } from '@app/services/blog/postApi';
+import CameraIcon from '@icons/CameraIcon';
 import Image from 'next/image';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { StyledPublishPreview } from './PublishPreviewStyle';
@@ -37,7 +38,7 @@ const PublishPreviewPresenter = ({ blogPostInfo, fileObj, onChangeThumbnail, onC
           />
         )}
         <input type="file" name="file" accept=".jpg, .jpeg, .png, .gif" onChange={onChangeThumbnail} />
-        <i className="fa-solid fa-camera fa-2xl"></i>
+        <CameraIcon />
         <button>Upload thumbnail</button>
       </div>
       <textarea value={description} onChange={onChangeTextarea} placeholder="간단히 소개하기" />

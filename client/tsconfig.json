@@ -8,6 +8,7 @@
       "@hooks/*": ["src/hooks/*"],
       "@utils/*": ["src/utils/*"],
       "@_types/*": ["src/types/*"],
+      "@icons/*": ["src/components/icons/*"],
       "@modals/*": ["src/components/modals/*"],
       "@pages/*": ["src/components/pages/*"],
       "@_settings/*": ["src/components/UI/_settings/*"],

@@ -7,6 +7,8 @@ import Loader from '@modals/Loader';
 import NotFound from '@src/pages/404';
 import Image from 'next/image';
 import useOnClickOutside from '@hooks/useOnClickOutside';
+import CaretDownIcon from '@icons/CaretDownIcon';
+import CaretUpIcon from '@icons/CaretUpIcon';
 
 interface Props {
   userData?: UserResponse;
@@ -59,7 +61,7 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
                   />
                 </div>
                 {/* 아래 화살표 */}
-                <i className="fa-solid fa-caret-down" />
+                {isOpen ? <CaretUpIcon /> : <CaretDownIcon />}
                 {/* 아래 화살표 클릭시 오픈 */}
                 {isOpen &&
                   (userData?.user.role === 'admin' ? (

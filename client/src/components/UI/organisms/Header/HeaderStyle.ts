@@ -50,8 +50,17 @@ export const StyledHeaderNav = styled.nav`
         object-fit: cover; //원본크기로 넣기
       }
 
-      & .fa-caret-down {
+      & .caret-down-icon {
         // border: 1px solid black;
+        width: 10px;
+        position: absolute;
+        top: 13px;
+        left: 48px; //30+13+5
+      }
+
+      & .caret-up-icon {
+        // border: 1px solid black;
+        width: 10px;
         position: absolute;
         top: 13px;
         left: 48px; //30+13+5

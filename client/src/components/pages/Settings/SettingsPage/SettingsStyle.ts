@@ -39,9 +39,13 @@ export const StyledSttings = styled.section`
       height: 35px;
       background-color: rgba(0, 255, 0, 0.3); //greenyellow
 
-      & .fa-camera,
+      & .camera-icon,
       p {
         padding: 5px;
+      }
+
+      & .camera-icon {
+        width: 24.3px;
       }
 
       & > input {

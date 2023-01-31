@@ -42,14 +42,15 @@ export const StyledPublishPreview = styled.div`
       cursor: pointer; //input 파일선택 버튼에 커서 넣기
     }
 
-    & > .fa-camera,
+    & > .camera-icon,
     button {
       position: absolute;
     }
 
-    & > .fa-camera {
+    & > .camera-icon {
       top: 40%;
       left: 50%;
+      width: 30px;
       transform: translate(-50%, -50%);
       cursor: pointer;
       // color: red;

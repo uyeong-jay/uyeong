@@ -9,6 +9,7 @@ import { UserResponse } from '@app/services/user/userApi';
 import NotFound from '@src/pages/404';
 import Loader from '@modals/Loader';
 import { IUserUpdateInfo } from './SettingsContainer';
+import CameraIcon from '@icons/CameraIcon';
 
 interface Props {
   userUpdateInfo: IUserUpdateInfo;
@@ -74,7 +75,7 @@ const SettingsPresenter = ({
           </div>
 
           <span>
-            <i className="fas fa-camera" />
+            <CameraIcon />
             <p>Upload</p>
             <input type="file" name="file" accept=".jpg, .jpeg, .png, .gif" onChange={onChangeAvatar} />
           </span>
