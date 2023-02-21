@@ -40,12 +40,12 @@ export const StyledHeaderNav = styled.nav`
       cursor: pointer;
       width: 100px;
 
-      & .user-avatar-container {
+      & .header-user-avatar-wrapper {
         display: inline-flex;
         border: solid 5px rgba(0, 255, 0, 0.5);
       }
 
-      & .user-avatar {
+      & .header-user-avatar {
         border-radius: 50%;
         object-fit: cover; //원본크기로 넣기
       }

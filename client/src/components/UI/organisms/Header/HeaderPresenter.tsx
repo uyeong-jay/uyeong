@@ -51,9 +51,9 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
             {userData?.user ? (
               <li onClick={onClickList} ref={dropdownBoxRef}>
                 {/* 프로필 이미지 */}
-                <div className="user-avatar-container user-avatar">
+                <div className="header-user-avatar-wrapper header-user-avatar">
                   <Image
-                    className="user-avatar"
+                    className="header-user-avatar"
                     src={userData?.user?.avatar}
                     alt="user avater"
                     width={30}

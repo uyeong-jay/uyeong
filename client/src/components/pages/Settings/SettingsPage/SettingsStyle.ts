@@ -17,13 +17,13 @@ export const StyledSttings = styled.section`
     position: relative;
     padding-bottom: 60px;
 
-    & .user-avatar-wrapper {
+    & .settings-user-avatar-wrapper {
       //border: 1px solid black;
       display: inline-flex;
       border: solid 5px rgba(0, 255, 0, 0.5);
     }
 
-    & .user-avatar {
+    & .settings-user-avatar {
       border-radius: 50%;
       object-fit: cover; //원본크기로 넣기
     }

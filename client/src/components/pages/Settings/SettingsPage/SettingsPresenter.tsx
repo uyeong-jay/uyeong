@@ -60,9 +60,9 @@ const SettingsPresenter = ({
       <StyledSttings>
         {/* 프로필 사진 바꾸기 */}
         <div>
-          <div className="user-avatar-wrapper user-avatar">
+          <div className="settings-user-avatar-wrapper settings-user-avatar">
             <Image
-              className="user-avatar"
+              className="settings-user-avatar"
               src={fileObj ? fileUrl : userData?.user?.avatar}
               onLoad={() => {
                 // console.log('지워짐:', fileUrl);
