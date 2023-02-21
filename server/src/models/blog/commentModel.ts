@@ -3,8 +3,7 @@ import { IComment } from "@_types/types";
 
 const commentModel = new Schema(
   {
-    user: { type: Schema.Types.ObjectId, ref: "user" },
-    content: {
+    post_id: {
       type: String,
       require: true,
     },
@@ -12,12 +11,24 @@ const commentModel = new Schema(
       type: String,
       require: true,
     },
+
+    user: { type: Schema.Types.ObjectId, ref: "user" },
+
+    content: {
+      type: String,
+      require: true,
+    },
+
+    replies: { type: [Object] },
+
+    reply_user: { type: Types.ObjectId, ref: "user" },
+
+    comment_id: { type: Types.ObjectId, ref: "comment" },
+
     // comment: {
     //   type: Types.ObjectId,
     //   ref: "comment",
     // },
-    // reply: [{ type: Types.ObjectId, ref: "comment" }],
-    // reply_user: { type: Types.ObjectId, ref: "user" },
   },
   {
     timestamps: true,

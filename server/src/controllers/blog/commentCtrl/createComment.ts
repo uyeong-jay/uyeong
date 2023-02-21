@@ -8,13 +8,14 @@ const createComment = async (req: IReqAuth, res: Response) => {
     if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
 
     //client 데이터 가져오기
-    const { user_id, content, post_title } = req.body;
+    const { post_id, post_title, content } = req.body;
 
     //데이터 생성
     const newComment = new Comments({
-      user: user_id,
-      content,
+      post_id,
       post_title,
+      user: req.user._id,
+      content,
     });
 
     //db에 저장

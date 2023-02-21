@@ -41,7 +41,7 @@ export interface IPost extends Document {
 
 export interface IComment extends Document {
   user: string;
-  post_title: string;
+  post_id: string;
   content: string;
   reply: string;
   reply_user: string;
