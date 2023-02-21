@@ -18,11 +18,16 @@ interface Props {
 }
 
 const editComment = (content: string) => {
-  let commentContent = content;
-  commentContent = commentContent.replace(/(\r\n|\n){4,}/g, '<br><br><br>'); //엔터4번 이상을 <br><br><br>로 대체
-  commentContent = commentContent.replace(/(\r\n|\n)/g, '<br>'); //엔터한번을 <br>로 대체
+  let markdownContent = content;
+  markdownContent = markdownContent.replace(/(\r\n|\n){4,}/g, '&nbsp;\n\n&nbsp;\n\n&nbsp;\n\n'); //엔터4번 이상을 줄바꿈 3번으로 대체
 
-  return commentContent;
+  markdownContent = markdownContent.replace(/(\r\n|\n)/g, '&nbsp;\n\n'); //엔터한번을 \n\n로 대체
+
+  markdownContent = markdownContent.replaceAll('```&nbsp;', '```'); //code 마크다운 사용시 코드가 연장되는 이슈해결 정규식
+
+  //*테이블 제외 모두 표현 가능
+
+  return markdownContent;
 };
 
 const BlogPostCommentWriteContainer = ({ postId, comment, isOpenReply, setOpenReply, setOpenReplies }: Props) => {

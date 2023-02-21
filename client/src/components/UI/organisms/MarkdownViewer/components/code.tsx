@@ -19,14 +19,14 @@ const code = ({ node, inline, className, children, ...props }: CodeProps) => {
     //언어 지정
     <SyntaxWrapper>
       <SyntaxHighlighter style={darcula} language={match[1]} {...props}>
-        {String(children).replace(/\n$/, '')}
+        {String(children).replace(/(&nbsp;\n\n)/g, '\n')}
       </SyntaxHighlighter>
     </SyntaxWrapper>
   ) : !inline ? (
     //언어 지정안함
     <SyntaxWrapper>
       <SyntaxHighlighter style={darcula} language="text" {...props}>
-        {String(children).replace(/\n$/, '')}
+        {String(children).replace(/(&nbsp;\n\n)/g, '\n')}
       </SyntaxHighlighter>
     </SyntaxWrapper>
   ) : (
