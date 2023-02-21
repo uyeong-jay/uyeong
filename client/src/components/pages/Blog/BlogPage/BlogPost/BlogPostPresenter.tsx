@@ -4,7 +4,7 @@ import BlogPostToc from '@pages/Blog/BlogComponents/BlogPostToc';
 import { StyledBlogPost } from './BlogPostStyle';
 import Image from 'next/image';
 import MarkdownViewer from '@organisms/MarkdownViewer';
-import BlogPostComment from '@pages/Blog/BlogComponents/BlogPostComment';
+import BlogPostComments from '@pages/Blog/BlogComponents/BlogPostComments';
 import BlogPostHeader from '@pages/Blog/BlogComponents/BlogPostHeader';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const BlogPostPresenter = ({ blogPost }: Props) => {
-  const { thumbnail, content } = blogPost || {};
+  const { _id, thumbnail, content } = blogPost || {};
 
   //blogPost가 없으면 없다고 표시하기
   if (!blogPost) return <NotFound />;
@@ -38,7 +38,7 @@ const BlogPostPresenter = ({ blogPost }: Props) => {
         <MarkdownViewer content={content ?? ''} />
       </article>
 
-      <BlogPostComment />
+      <BlogPostComments postId={_id} />
 
       {/* 좋아요 with 폭죽 - velog, youtube */}
       {/* 링크복사,  - velog */}
