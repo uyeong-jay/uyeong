@@ -5,6 +5,13 @@ import { formatDistanceToNowStrict } from 'date-fns';
 //ex) 2023-01-27T11:26:37.420Z
 const formatDate = (date: string) => {
   const newDate = new Date(date);
+  const now = Date.now();
+  const diff = (now - newDate.getTime()) / 1000; // 현시간과의 차(초)
+
+  if (diff < 60 * 1) {
+    // 1분 미만
+    return 'Just now';
+  }
   return formatDistanceToNowStrict(newDate) + ' ago';
 };
 
