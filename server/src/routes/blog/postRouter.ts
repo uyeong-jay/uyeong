@@ -1,5 +1,5 @@
 import express from "express";
-import blogPostCtrl from "@controllers/blog/postCtrl";
+import blogPostCtrl from "@controllers/blogCtrl/postCtrl";
 import auth from "@middleware/auth";
 
 const blogPostRouter = express.Router();

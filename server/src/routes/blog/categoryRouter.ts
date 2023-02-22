@@ -1,5 +1,5 @@
 import express from "express";
-import blogCategoryCtrl from "@controllers/blog/categoryCtrl";
+import blogCategoryCtrl from "@controllers/blogCtrl/categoryCtrl";
 import auth from "@middleware/auth";
 
 const blogCategoryRouter = express.Router();

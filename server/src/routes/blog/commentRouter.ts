@@ -1,5 +1,5 @@
 import express from "express";
-import blogCommentCtrl from "@controllers/blog/commentCtrl";
+import blogCommentCtrl from "@controllers/blogCtrl/commentCtrl";
 import auth from "@middleware/auth";
 
 const blogCommentRouter = express.Router();
