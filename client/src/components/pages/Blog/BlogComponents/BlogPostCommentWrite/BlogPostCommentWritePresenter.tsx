@@ -5,7 +5,7 @@ import { BTN, DIV, FORM } from './BlogPostCommentWriteStyle';
 interface Props {
   textareaRef: RefObject<HTMLTextAreaElement>;
   blogCommentInfo: BlogCommentReq;
-  isOpenReply?: boolean;
+  writeReply?: boolean;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeComment: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   onClickReply: () => void;
@@ -15,7 +15,7 @@ interface Props {
 const BlogPostCommentWritePresenter = ({
   textareaRef,
   blogCommentInfo,
-  isOpenReply,
+  writeReply,
   onSubmit,
   onChangeComment,
   onClickReply,
@@ -31,7 +31,7 @@ const BlogPostCommentWritePresenter = ({
         ref={textareaRef}
       ></textarea>
 
-      {isOpenReply ? (
+      {writeReply ? (
         <DIV.ReplyBtnGroup>
           <BTN.ReplyBtn type="button" onClick={onClickReply}>
             Reply

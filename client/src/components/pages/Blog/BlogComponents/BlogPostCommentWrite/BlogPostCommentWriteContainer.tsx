@@ -12,25 +12,42 @@ import BlogPostCommentWritePresenter from './BlogPostCommentWritePresenter';
 interface Props {
   postId?: string;
   comment?: BlogComment;
-  isOpenReply?: boolean;
-  setOpenReply?: (isOpenReply: boolean) => void;
+  taggedNickname?: string;
+  writeReply?: boolean;
+  setWriteReply?: (writeReply: boolean) => void;
   setOpenReplies?: (isOpenReplies: boolean) => void;
 }
 
-const editComment = (content: string) => {
+//댓글or답글 내용 편집
+const editComment = (content: string, taggedNickname = '') => {
   let markdownContent = content;
   markdownContent = markdownContent.replace(/(\r\n|\n){4,}/g, '&nbsp;\n\n&nbsp;\n\n&nbsp;\n\n'); //엔터4번 이상을 줄바꿈 3번으로 대체
 
   markdownContent = markdownContent.replace(/(\r\n|\n)/g, '&nbsp;\n\n'); //엔터한번을 \n\n로 대체
 
-  markdownContent = markdownContent.replaceAll('```&nbsp;', '```'); //code 마크다운 사용시 코드가 연장되는 이슈해결 정규식
+  markdownContent = markdownContent.replaceAll('```&nbsp;', '```'); //code 마크다운이 연장되는 이슈해결 정규식
+
+  //태그된 닉네임 스타일 변경
+  if (taggedNickname) {
+    markdownContent = markdownContent.replace(
+      '@' + taggedNickname,
+      `<span style="background-color: pink; color:red;">${taggedNickname}</span>`,
+    );
+  }
 
   //*테이블 제외 모두 표현 가능
 
   return markdownContent;
 };
 
-const BlogPostCommentWriteContainer = ({ postId, comment, isOpenReply, setOpenReply, setOpenReplies }: Props) => {
+const BlogPostCommentWriteContainer = ({
+  postId,
+  comment,
+  taggedNickname,
+  writeReply,
+  setWriteReply,
+  setOpenReplies,
+}: Props) => {
   const router = useRouter();
   const { slug: postTitle } = router.query;
   const { data: userData } = useGetUserDataQuery();
@@ -41,7 +58,7 @@ const BlogPostCommentWriteContainer = ({ postId, comment, isOpenReply, setOpenRe
     post_id: postId as string,
     post_title: postTitle as string,
     user_id: userData?.user?._id, //현재 유저
-    content: '',
+    content: taggedNickname ? '@' + taggedNickname + ' ' : '',
     replies: [],
   };
 
@@ -50,7 +67,6 @@ const BlogPostCommentWriteContainer = ({ postId, comment, isOpenReply, setOpenRe
     comment_id: comment?._id,
     reply_user_id: userData?.user?._id, //현재 유저
     reply_content: '',
-    //답글에 달리는 댓글은 답글의 유저 이름만 표시해주기 백엔드에는 불필요
   };
 
   const [blogCommentInfo, setBlogCommentInfo] = useState(initialCommentState);
@@ -59,6 +75,7 @@ const BlogPostCommentWriteContainer = ({ postId, comment, isOpenReply, setOpenRe
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  //textarea 높이 수정
   const resizeHeight = useCallback(() => {
     const textareaEl = textareaRef.current;
     if (textareaEl !== null) {
@@ -68,6 +85,7 @@ const BlogPostCommentWriteContainer = ({ postId, comment, isOpenReply, setOpenRe
     }
   }, []);
 
+  //댓글 달기
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
@@ -93,13 +111,14 @@ const BlogPostCommentWriteContainer = ({ postId, comment, isOpenReply, setOpenRe
     [blogCommentInfo, createComment, userData?.access_token],
   );
 
+  //답글 달기
   const onClickReply = useCallback(() => {
     if (!blogCommentInfo.content) return;
 
     const data = {
       replyInfo: {
         ...blogReplyInfo,
-        reply_content: editComment(blogCommentInfo.content),
+        reply_content: editComment(blogCommentInfo.content, taggedNickname),
       },
       token: userData?.access_token,
     };
@@ -110,12 +129,21 @@ const BlogPostCommentWriteContainer = ({ postId, comment, isOpenReply, setOpenRe
       textareaRef.current.style.height = '150px';
     }
 
-    //내용 초기화
-    setBlogCommentInfo({ ...blogCommentInfo, content: '' });
+    setBlogCommentInfo({ ...blogCommentInfo, content: '' }); //내용 초기화
 
-    setOpenReplies?.(true);
-  }, [blogCommentInfo, blogReplyInfo, createReply, setOpenReplies, userData?.access_token]);
+    setOpenReplies?.(true); //답글 목록 펼치기
+    setWriteReply?.(false); //답글 작성 숨기기
+  }, [
+    blogCommentInfo,
+    blogReplyInfo,
+    createReply,
+    setOpenReplies,
+    setWriteReply,
+    taggedNickname,
+    userData?.access_token,
+  ]);
 
+  //댓글or답글 입력
   const onChangeComment = useCallback(
     (e) => {
       resizeHeight();
@@ -124,15 +152,16 @@ const BlogPostCommentWriteContainer = ({ postId, comment, isOpenReply, setOpenRe
     [blogCommentInfo, resizeHeight],
   );
 
+  //댓글or답글 취소
   const onClickCancel = useCallback(() => {
-    setOpenReply?.(false);
-  }, [setOpenReply]);
+    setWriteReply?.(false);
+  }, [setWriteReply]);
 
   return (
     <BlogPostCommentWritePresenter
       textareaRef={textareaRef}
       blogCommentInfo={blogCommentInfo}
-      isOpenReply={isOpenReply}
+      writeReply={writeReply}
       onSubmit={onSubmit}
       onChangeComment={onChangeComment}
       onClickReply={onClickReply}

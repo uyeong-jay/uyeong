@@ -26,7 +26,8 @@ const BlogPostCommentTemplatePresenter = ({
   onClickReplies,
 }: Props) => {
   const { user, content, replies, createdAt } = comment;
-  const [isOpenReply, setOpenReply] = useState(false);
+  const [writeReply, setWriteReply] = useState(false);
+  const [taggedNickname, setTaggedNickname] = useState('');
 
   //- reply -
   // _id
@@ -38,8 +39,11 @@ const BlogPostCommentTemplatePresenter = ({
   // updatedAt
 
   const onClickReply = useCallback(() => {
-    setOpenReply(true);
-  }, []);
+    setWriteReply(true);
+    if (reply) {
+      setTaggedNickname(reply.user.nickname);
+    }
+  }, [reply]);
 
   return (
     <SECTION.Layout>
@@ -82,12 +86,13 @@ const BlogPostCommentTemplatePresenter = ({
 
           <BTN.CommentReplyBtn onClick={onClickReply}>Reply</BTN.CommentReplyBtn>
         </DIV.RightBottom>
-        {isOpenReply && (
+        {writeReply && (
           <BlogPostCommentWrite
             postId={postId}
             comment={comment}
-            isOpenReply={isOpenReply}
-            setOpenReply={setOpenReply}
+            taggedNickname={taggedNickname}
+            writeReply={writeReply}
+            setWriteReply={setWriteReply}
             setOpenReplies={setOpenReplies}
           />
         )}

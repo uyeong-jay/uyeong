@@ -24,7 +24,7 @@ export interface BlogComment {
     avatar: string;
   };
   content: string;
-  replies: BlogReply[]; //안에 상세하게 적어야 하나?
+  replies: BlogReply[];
   createdAt: string;
 }
 
