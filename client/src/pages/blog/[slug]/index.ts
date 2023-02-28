@@ -4,6 +4,7 @@ import { getUserData } from '@app/services/user/userApi';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import { getBlogPost } from '@app/services/blog/postApi';
+import { getBlogComments } from '@app/services/blog/commentApi';
 
 export { default } from '@pages/Blog/BlogPage/BlogPost';
 
@@ -14,6 +15,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
     axios.defaults.headers.common.Cookie = cookie;
     store.dispatch(getUserData.initiate());
     store.dispatch(getBlogPost.initiate(params?.slug as string));
+    store.dispatch(getBlogComments.initiate(params?.slug as string));
   }
 
   await Promise.all(getRunningOperationPromises());

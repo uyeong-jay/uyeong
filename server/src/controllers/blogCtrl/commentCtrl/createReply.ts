@@ -7,14 +7,14 @@ const createReply = async (req: IReqAuth, res: Response) => {
     //user가 middleware auth를 잘통과 했는지 확인
     if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
 
-    const { post_id, comment_id, reply_content } = req.body;
+    const { post_id, comment_id, content } = req.body;
 
     //데이터 생성(_id 자동 생성)
     const newReply = new Comments({
       post_id,
       comment_id,
       user: req.user._id,
-      content: reply_content,
+      content,
     });
     // _id: "1"
     // post_id: "3"

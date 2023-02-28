@@ -35,28 +35,16 @@ export interface BlogCommentRes {
 }
 
 export interface BlogCommentReq {
-  post_id: string;
-  post_title: string;
-  user_id?: string;
-  content: string;
-  replies: object[];
-}
-
-export interface BlogReplyReq {
-  post_id: string;
+  id?: string;
+  post_id?: string;
+  post_title?: string;
   comment_id?: string;
-  reply_user_id?: string;
-  reply_content: string;
-  // createdAt: string;
+  content: string;
+  replies?: object[];
 }
 
 export interface BlogCommentReqWithToken {
   commentInfo: BlogCommentReq;
-  token?: string;
-}
-
-export interface BlogReplyReqWithToken {
-  replyInfo: BlogReplyReq;
   token?: string;
 }
 
@@ -85,11 +73,11 @@ export const commentApi = api.injectEndpoints({
     }),
 
     //create reply
-    createBlogReply: builder.mutation<BlogCommentRes, BlogReplyReqWithToken>({
+    createBlogReply: builder.mutation<BlogCommentRes, BlogCommentReqWithToken>({
       query: (data) => ({
         url: '/api/reply',
         method: 'post',
-        data: data.replyInfo,
+        data: data.commentInfo,
         headers: {
           Authorization: data.token,
         },
@@ -100,7 +88,7 @@ export const commentApi = api.injectEndpoints({
     //update
     updateBlogComment: builder.mutation<BlogCommentRes, BlogCommentReqWithToken>({
       query: (data) => ({
-        url: `/api/comment/${data.commentInfo.user_id}`,
+        url: `/api/comment/${data.commentInfo.id}`,
         method: 'patch',
         data: data.commentInfo,
         headers: {
@@ -113,7 +101,7 @@ export const commentApi = api.injectEndpoints({
     //delete
     deleteBlogComment: builder.mutation<BlogCommentRes, BlogCommentReqWithToken>({
       query: (data) => ({
-        url: `/api/comment/${data.commentInfo.user_id}`,
+        url: `/api/comment/${data.commentInfo.id}`,
         method: 'delete',
         data: data.commentInfo,
         headers: {

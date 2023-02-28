@@ -2,13 +2,16 @@ import { DIV, SECTION } from './BlogPostCommentStyle';
 import { BlogComment } from '@app/services/blog/commentApi';
 import BlogPostCommentTemplate from '../BlogPostCommentTemplate';
 import { useState, useCallback } from 'react';
+import { UserResponse } from '@app/services/user/userApi';
 
 interface Props {
+  userData?: UserResponse;
   postId?: string;
   comment: BlogComment;
+  userMatch: boolean;
 }
 
-const BlogPostCommentPresenter = ({ postId, comment }: Props) => {
+const BlogPostCommentPresenter = ({ userData, postId, comment, userMatch }: Props) => {
   const { replies } = comment;
 
   const [isOpenReplies, setOpenReplies] = useState(false);
@@ -22,6 +25,7 @@ const BlogPostCommentPresenter = ({ postId, comment }: Props) => {
       <BlogPostCommentTemplate
         postId={postId}
         comment={comment}
+        userMatch={userMatch}
         isOpenReplies={isOpenReplies}
         setOpenReplies={setOpenReplies}
         onClickReplies={onClickReplies}
@@ -30,7 +34,7 @@ const BlogPostCommentPresenter = ({ postId, comment }: Props) => {
       {isOpenReplies &&
         replies.map((reply) => (
           <DIV.ReplyGourp key={reply._id}>
-            <BlogPostCommentTemplate postId={postId} comment={comment} reply={reply} />
+            <BlogPostCommentTemplate postId={postId} userData={userData} comment={comment} reply={reply} />
           </DIV.ReplyGourp>
         ))}
     </SECTION.Layout>

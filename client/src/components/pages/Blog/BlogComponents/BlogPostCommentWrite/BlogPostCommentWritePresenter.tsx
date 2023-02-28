@@ -6,20 +6,26 @@ interface Props {
   textareaRef: RefObject<HTMLTextAreaElement>;
   blogCommentInfo: BlogCommentReq;
   writeReply?: boolean;
+  editComment?: boolean;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeComment: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   onClickReply: () => void;
   onClickCancel: () => void;
+  onClickEditCancel: () => void;
+  onClickEditSave: () => void;
 }
 
 const BlogPostCommentWritePresenter = ({
   textareaRef,
   blogCommentInfo,
   writeReply,
+  editComment,
   onSubmit,
   onChangeComment,
   onClickReply,
   onClickCancel,
+  onClickEditCancel,
+  onClickEditSave,
 }: Props) => {
   return (
     <FORM.CommentWriteForm onSubmit={onSubmit}>
@@ -40,6 +46,15 @@ const BlogPostCommentWritePresenter = ({
             Cancel
           </BTN.CancelBtn>
         </DIV.ReplyBtnGroup>
+      ) : editComment ? (
+        <>
+          <button type="button" onClick={onClickEditCancel}>
+            cancel
+          </button>
+          <button type="button" onClick={onClickEditSave}>
+            save
+          </button>
+        </>
       ) : (
         <BTN.CommentBtn type="submit">Comment</BTN.CommentBtn>
       )}

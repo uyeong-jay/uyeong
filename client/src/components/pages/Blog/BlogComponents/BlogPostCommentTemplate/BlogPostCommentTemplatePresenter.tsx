@@ -5,45 +5,57 @@ import { BlogComment, BlogReply } from '@app/services/blog/commentApi';
 import formatDate from '@utils/formatDate';
 import CaretDownIcon from '@icons/CaretDownIcon';
 import CaretUpIcon from '@icons/CaretUpIcon';
-import { useCallback, useState } from 'react';
 import BlogPostCommentWrite from '../BlogPostCommentWrite';
+import { UserResponse } from '@app/services/user/userApi';
 
 interface Props {
   postId?: string;
   comment: BlogComment;
   reply?: BlogReply;
+  userData?: UserResponse;
+  userMatch?: boolean;
+  taggedNickname: string;
+  regexTaggedNickname: string;
+  writeReply: boolean;
+  setWriteReply: (writeReply: boolean) => void;
+  editComment: boolean;
+  setEditComment: (editComment: boolean) => void;
   isOpenReplies?: boolean;
   setOpenReplies?: (isOpenReplies: boolean) => void;
+  commentContent: string;
+  setCommentContent: (commentContent: string) => void;
+  replyContent: string;
+  setReplyContent: (replyContent: string) => void;
+  onClickReply: () => void;
   onClickReplies?: () => void;
+  onClickUpdate: () => void;
+  onClickDelete: () => void;
 }
 
 const BlogPostCommentTemplatePresenter = ({
   postId,
+  userData,
   comment,
   reply,
+  userMatch,
+  taggedNickname,
+  regexTaggedNickname,
+  writeReply,
+  setWriteReply,
+  editComment,
+  setEditComment,
   isOpenReplies,
   setOpenReplies,
+  commentContent,
+  setCommentContent,
+  replyContent,
+  setReplyContent,
+  onClickReply,
   onClickReplies,
+  onClickUpdate,
+  onClickDelete,
 }: Props) => {
   const { user, content, replies, createdAt } = comment;
-  const [writeReply, setWriteReply] = useState(false);
-  const [taggedNickname, setTaggedNickname] = useState('');
-
-  //- reply -
-  // _id
-  // post_id
-  // comment_id
-  // user
-  // content
-  // createdAt
-  // updatedAt
-
-  const onClickReply = useCallback(() => {
-    setWriteReply(true);
-    if (reply) {
-      setTaggedNickname(reply.user.nickname);
-    }
-  }, [reply]);
 
   return (
     <SECTION.Layout>
@@ -67,14 +79,35 @@ const BlogPostCommentTemplatePresenter = ({
             <P.CreatedDate>{reply ? formatDate(reply.createdAt) : formatDate(createdAt)}</P.CreatedDate>
           </DIV.CommentInfo>
 
-          <DIV.CommentSideBtnGroup>
-            <BTN.CommentUpdateBtn>수정</BTN.CommentUpdateBtn>
-            <BTN.CommentDeleteBtn>삭제</BTN.CommentDeleteBtn>
-          </DIV.CommentSideBtnGroup>
+          {(userMatch || (reply && userData?.user?._id === reply?.user._id) || userData?.user?.role === 'admin') && (
+            <DIV.CommentSideBtnGroup>
+              {!editComment && <BTN.CommentUpdateBtn onClick={onClickUpdate}>수정</BTN.CommentUpdateBtn>}
+              <BTN.CommentDeleteBtn onClick={onClickDelete}>삭제</BTN.CommentDeleteBtn>
+            </DIV.CommentSideBtnGroup>
+          )}
         </DIV.RightTop>
 
         <DIV.RightMiddle>
-          <MarkdownViewer content={reply ? reply.content : content} />
+          {!editComment ? (
+            <MarkdownViewer
+              content={
+                //이름 저장시 잠시 이전 이름이 노출되는 이슈 해결차 추가
+                // client data: replyContent, commentContent
+                // server data: reply.content, content
+                reply ? (replyContent ? replyContent : reply.content) : commentContent ? commentContent : content
+              }
+            />
+          ) : (
+            <BlogPostCommentWrite
+              comment={comment}
+              reply={reply}
+              regexTaggedNickname={regexTaggedNickname}
+              editComment={editComment}
+              setEditComment={setEditComment}
+              setCommentContent={setCommentContent}
+              setReplyContent={setReplyContent}
+            />
+          )}
         </DIV.RightMiddle>
 
         <DIV.RightBottom>
