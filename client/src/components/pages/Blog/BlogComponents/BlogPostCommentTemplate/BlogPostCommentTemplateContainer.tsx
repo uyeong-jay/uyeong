@@ -1,4 +1,4 @@
-import { BlogComment, BlogReply } from '@app/services/blog/commentApi';
+import { BlogComment, BlogReply, useDeleteBlogCommentMutation } from '@app/services/blog/commentApi';
 import { UserResponse } from '@app/services/user/userApi';
 import { useCallback, useState } from 'react';
 import BlogPostCommentTemplatePresenter from './BlogPostCommentTemplatePresenter';
@@ -24,17 +24,17 @@ const BlogPostCommentTemplateContainer = ({
   setOpenReplies,
   onClickReplies,
 }: Props) => {
+  const [deleteComment] = useDeleteBlogCommentMutation();
   const [editComment, setEditComment] = useState(false);
   const [writeReply, setWriteReply] = useState(false);
 
   const [taggedNickname, setTaggedNickname] = useState('');
   const [regexTaggedNickname, setRegexTaggedNickname] = useState('');
 
-  //이름 저장시 잠시 이전 이름이 노출되는 이슈 해결차 추가
+  //이름 수정시 잠시 이전 이름이 노출되는 이슈 해결차 추가
   const [commentContent, setCommentContent] = useState('');
   const [replyContent, setReplyContent] = useState('');
 
-  // 태그가 된상태에서 수정을 눌렀을때 html코드 를 다시 @닉네임 으로 변경하기
   const onClickReply = useCallback(() => {
     setWriteReply(true);
     if (reply && reply.user.nickname !== userData?.user?.nickname) {
@@ -50,9 +50,16 @@ const BlogPostCommentTemplateContainer = ({
     setRegexTaggedNickname(result as string);
   }, [reply?.content]);
 
-  const onClickDelete = () => {
-    console.log('a');
-  };
+  const onClickDelete = useCallback(() => {
+    const data = {
+      commentInfo: {
+        id: reply?.comment_id ? reply?._id : comment?._id, //댓글, 답글 삭제용
+        comment_id: reply?.comment_id ? reply?.comment_id : '',
+      },
+      token: userData?.access_token,
+    };
+    deleteComment(data);
+  }, [comment?._id, deleteComment, reply?._id, reply?.comment_id, userData?.access_token]);
 
   return (
     <BlogPostCommentTemplatePresenter

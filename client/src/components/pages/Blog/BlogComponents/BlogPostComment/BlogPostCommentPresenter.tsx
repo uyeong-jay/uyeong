@@ -25,6 +25,7 @@ const BlogPostCommentPresenter = ({ userData, postId, comment, userMatch }: Prop
       <BlogPostCommentTemplate
         postId={postId}
         comment={comment}
+        userData={userData}
         userMatch={userMatch}
         isOpenReplies={isOpenReplies}
         setOpenReplies={setOpenReplies}

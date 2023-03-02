@@ -19,16 +19,9 @@ const commentModel = new Schema(
       require: true,
     },
 
-    replies: { type: [Object] },
-
-    reply_user: { type: Types.ObjectId, ref: "user" },
-
     comment_id: { type: Types.ObjectId, ref: "comment" },
 
-    // comment: {
-    //   type: Types.ObjectId,
-    //   ref: "comment",
-    // },
+    replies: [{ type: Types.ObjectId, ref: "comment" }],
   },
   {
     timestamps: true,

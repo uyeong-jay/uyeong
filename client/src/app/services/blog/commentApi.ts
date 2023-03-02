@@ -39,7 +39,7 @@ export interface BlogCommentReq {
   post_id?: string;
   post_title?: string;
   comment_id?: string;
-  content: string;
+  content?: string;
   replies?: object[];
 }
 
@@ -117,9 +117,9 @@ export const commentApi = api.injectEndpoints({
 export const {
   useGetBlogCommentsQuery,
   useCreateBlogCommentMutation,
+  useCreateBlogReplyMutation,
   useUpdateBlogCommentMutation,
   useDeleteBlogCommentMutation,
-  useCreateBlogReplyMutation,
 } = commentApi;
 
 // export endpoints for use in SSR

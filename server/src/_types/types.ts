@@ -40,11 +40,13 @@ export interface IPost extends Document {
 }
 
 export interface IComment extends Document {
-  user: string;
   post_id: string;
+  post_title: string;
+  user: string;
   content: string;
+  comment_id: string;
   reply: string;
-  reply_user: string;
+  replies: [object];
   _doc: object;
   // comment_root: string;
 }

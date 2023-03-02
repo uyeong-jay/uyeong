@@ -44,18 +44,6 @@ const getComments = async (req: Request, res: Response) => {
                     },
                   },
                   { $unwind: "$user" },
-                  // {
-                  //   $lookup: {
-                  //     from: "users",
-                  //     let: { user_id: "$reply_user" },
-                  //     pipeline: [
-                  //       { $match: { $expr: { $eq: ["$_id", "$$user_id"] } } },
-                  //       { $project: { name: 1, avatar: 1 } },
-                  //     ],
-                  //     as: "reply_user",
-                  //   },
-                  // },
-                  // { $unwind: "$reply_user" },
                 ],
                 as: "replies",
               },

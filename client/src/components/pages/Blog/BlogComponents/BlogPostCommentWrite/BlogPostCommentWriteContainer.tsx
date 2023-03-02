@@ -185,7 +185,7 @@ const BlogPostCommentWriteContainer = ({
     [blogCommentInfo, resizeHeight],
   );
 
-  //댓글or답글 취소
+  //댓글or답글 입력 취소
   const onClickCancel = useCallback(() => {
     setWriteReply?.(false);
   }, [setWriteReply]);
@@ -193,7 +193,7 @@ const BlogPostCommentWriteContainer = ({
   //댓글or답글 수정
   const onClickEditSave = useCallback(() => {
     const editContent = regexEditComment(blogCommentInfo.content, regexTaggedNickname);
-    const data1 = {
+    const data = {
       commentInfo: {
         id: reply?.comment_id ? reply?._id : comment?._id, //댓글, 답글 수정용
         content: editContent,
@@ -201,12 +201,16 @@ const BlogPostCommentWriteContainer = ({
       token: userData?.access_token,
     };
 
+    //순서 지켜서 서버와 클라이언트 데이터 불일치 막기
+    //1
+    updateComment(data);
+
+    //2
     //이름 저장시 잠시 이전 이름이 노출되는 이슈 해결차 추가
     {
       reply?.comment_id ? setReplyContent?.(editContent) : setCommentContent?.(editContent);
     }
 
-    updateComment(data1);
     setEditComment?.(false);
   }, [
     blogCommentInfo.content,
@@ -221,6 +225,7 @@ const BlogPostCommentWriteContainer = ({
     userData?.access_token,
   ]);
 
+  //댓글or답글 수정 취소
   const onClickEditCancel = useCallback(() => {
     setEditComment?.(false);
   }, [setEditComment]);

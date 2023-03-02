@@ -21,7 +21,7 @@ const createComment = async (req: IReqAuth, res: Response) => {
     //db에 저장
     await newComment.save();
 
-    res.status(200).json({ newComment, msg: "Create Success!" });
+    res.status(200).json({ msg: "Create Success!" });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });
   }
