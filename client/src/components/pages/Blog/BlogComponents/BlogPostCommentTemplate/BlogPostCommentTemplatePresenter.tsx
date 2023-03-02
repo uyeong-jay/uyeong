@@ -7,6 +7,7 @@ import CaretDownIcon from '@icons/CaretDownIcon';
 import CaretUpIcon from '@icons/CaretUpIcon';
 import BlogPostCommentWrite from '../BlogPostCommentWrite';
 import { UserResponse } from '@app/services/user/userApi';
+import Modal from '@modals/Modal';
 
 interface Props {
   postId?: string;
@@ -26,10 +27,12 @@ interface Props {
   setCommentContent: (commentContent: string) => void;
   replyContent: string;
   setReplyContent: (replyContent: string) => void;
+  isModalOpen: boolean;
+  setModalOpen: (isModalOpen: boolean) => void;
   onClickReply: () => void;
   onClickReplies?: () => void;
   onClickUpdate: () => void;
-  onClickDelete: () => void;
+  onClickDelete: (isCallback?: boolean) => void;
 }
 
 const BlogPostCommentTemplatePresenter = ({
@@ -50,6 +53,8 @@ const BlogPostCommentTemplatePresenter = ({
   setCommentContent,
   replyContent,
   setReplyContent,
+  isModalOpen,
+  setModalOpen,
   onClickReply,
   onClickReplies,
   onClickUpdate,
@@ -59,6 +64,13 @@ const BlogPostCommentTemplatePresenter = ({
 
   return (
     <SECTION.Layout>
+      <Modal
+        type="delete"
+        msg="Are you sure you want to delete the comment?"
+        isOpen={isModalOpen}
+        setOpen={setModalOpen}
+        callback={() => onClickDelete(true)}
+      />
       {/* 프로필 이미지 */}
       <DIV.Left>
         <div className="comment-user-avatar-warpper comment-user-avatar">
@@ -82,7 +94,7 @@ const BlogPostCommentTemplatePresenter = ({
           {(userMatch || (reply && userData?.user?._id === reply?.user._id) || userData?.user?.role === 'admin') && (
             <DIV.CommentSideBtnGroup>
               {!editComment && <BTN.CommentUpdateBtn onClick={onClickUpdate}>수정</BTN.CommentUpdateBtn>}
-              <BTN.CommentDeleteBtn onClick={onClickDelete}>삭제</BTN.CommentDeleteBtn>
+              <BTN.CommentDeleteBtn onClick={() => onClickDelete()}>삭제</BTN.CommentDeleteBtn>
             </DIV.CommentSideBtnGroup>
           )}
         </DIV.RightTop>

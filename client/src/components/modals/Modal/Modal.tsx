@@ -232,8 +232,8 @@ export default Modal;
 
 // <Modal type="alert" msg="메세지" isOpen={isModalOpen} setOpen={setModalOpen} />
 
-// <Modal type="confirm" msg="메세지" isOpen={isModalOpen} setOpen={setModalOpen} callback={() => func(true)} />
-// const func = useCallback((isCallback) => {
+// <Modal type="confirm" msg="메세지" isOpen={isModalOpen} setOpen={setModalOpen} callback={() => confirmFunc(true)} />
+// const confirmFunc = useCallback((isCallback) => {
 //   if(!isCallback) return setModalOpen(true);
 //
 //   //...

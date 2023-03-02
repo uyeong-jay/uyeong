@@ -25,8 +25,10 @@ const BlogPostCommentTemplateContainer = ({
   onClickReplies,
 }: Props) => {
   const [deleteComment] = useDeleteBlogCommentMutation();
+
   const [editComment, setEditComment] = useState(false);
   const [writeReply, setWriteReply] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const [taggedNickname, setTaggedNickname] = useState('');
   const [regexTaggedNickname, setRegexTaggedNickname] = useState('');
@@ -50,16 +52,20 @@ const BlogPostCommentTemplateContainer = ({
     setRegexTaggedNickname(result as string);
   }, [reply?.content]);
 
-  const onClickDelete = useCallback(() => {
-    const data = {
-      commentInfo: {
-        id: reply?.comment_id ? reply?._id : comment?._id, //댓글, 답글 삭제용
-        comment_id: reply?.comment_id ? reply?.comment_id : '',
-      },
-      token: userData?.access_token,
-    };
-    deleteComment(data);
-  }, [comment?._id, deleteComment, reply?._id, reply?.comment_id, userData?.access_token]);
+  const onClickDelete = useCallback(
+    (isCallback?: boolean) => {
+      if (!isCallback) return setModalOpen(true);
+      const data = {
+        commentInfo: {
+          id: reply?.comment_id ? reply?._id : comment?._id, //댓글, 답글 삭제용
+          comment_id: reply?.comment_id ? reply?.comment_id : '',
+        },
+        token: userData?.access_token,
+      };
+      deleteComment(data);
+    },
+    [comment?._id, deleteComment, reply?._id, reply?.comment_id, userData?.access_token],
+  );
 
   return (
     <BlogPostCommentTemplatePresenter
@@ -80,6 +86,8 @@ const BlogPostCommentTemplateContainer = ({
       setCommentContent={setCommentContent}
       replyContent={replyContent}
       setReplyContent={setReplyContent}
+      isModalOpen={isModalOpen}
+      setModalOpen={setModalOpen}
       onClickReply={onClickReply}
       onClickReplies={onClickReplies}
       onClickUpdate={onClickUpdate}
