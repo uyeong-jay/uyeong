@@ -17,6 +17,7 @@
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@reduxjs/toolkit": "^1.8.4",
+    "add": "^2.0.6",
     "axios": "^0.27.2",
     "cross-env": "^7.0.3",
     "date-fns": "^2.29.3",
@@ -29,7 +30,9 @@
     "react-syntax-highlighter": "^15.4.5",
     "rehype-raw": "^6.1.1",
     "rehype-sanitize": "^5.0.1",
-    "remark-gfm": "^3.0.1"
+    "remark-gfm": "^3.0.1",
+    "socket.io-client": "^4.6.1",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",

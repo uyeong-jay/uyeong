@@ -1,6 +1,7 @@
 import { IReqAuth } from "@_types/types";
 import { Response } from "express";
 import Comments from "@models/blog/commentModel";
+import { io } from "@src/index";
 
 const createComment = async (req: IReqAuth, res: Response) => {
   try {
@@ -17,6 +18,8 @@ const createComment = async (req: IReqAuth, res: Response) => {
       user: req.user._id,
       content,
     });
+
+    io.emit("createComment", content);
 
     //db에 저장
     await newComment.save();

@@ -17,7 +17,7 @@ const useAnimation = (show: boolean) => {
 
 export default useAnimation;
 
-//사용법
+//사용
 //  const [show, render, onAnimationEnd] = useAnimation(boolean값);
 //
 // {render && (

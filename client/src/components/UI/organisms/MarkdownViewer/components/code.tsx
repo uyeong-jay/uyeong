@@ -50,6 +50,7 @@ const InlineCodeWrapper = styled.code`
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const code = ({ node, inline, className, children, ...props }: CodeProps) => {
   const match = /language-(\w+)/.exec(className || '');
+  console.log('code', match, match?.[1]);
 
   return match ? (
     //언어 지정
