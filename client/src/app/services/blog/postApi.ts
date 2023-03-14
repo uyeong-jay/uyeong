@@ -20,6 +20,7 @@ export interface BlogPostRes {
 }
 
 export interface BlogPostReq {
+  _id?: string;
   title: string;
   tags: string[];
   content: string;
@@ -75,12 +76,30 @@ export const postApi = api.injectEndpoints({
       }),
       invalidatesTags: ['BlogPost'],
     }),
+
+    //update
+    updateBlogPost: builder.mutation<BlogPostRes, BlogPostReqWithToken>({
+      query: (data) => ({
+        url: '/api/blog',
+        method: 'patch',
+        data: data.blogPostInfo,
+        headers: {
+          Authorization: data.token,
+        },
+      }),
+      invalidatesTags: ['BlogPost'],
+    }),
   }),
 });
 
 // export hooks for usage in functional components
-export const { useGetBlogPostsQuery, useGetBlogPostsByCategoryQuery, useGetBlogPostQuery, useCreateBlogPostMutation } =
-  postApi;
+export const {
+  useGetBlogPostsQuery,
+  useGetBlogPostsByCategoryQuery,
+  useGetBlogPostQuery,
+  useCreateBlogPostMutation,
+  useUpdateBlogPostMutation,
+} = postApi;
 
 // export endpoints for use in SSR
 export const { getBlogPosts, getBlogPost, getBlogPostsByCategory } = postApi.endpoints;

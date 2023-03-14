@@ -1,17 +1,23 @@
 import { StyledBlogPostHeader } from './BlogPostHeaderStyle';
 import formatDate from '@utils/formatDate';
 import { BlogPost } from '@app/services/blog/postApi';
+import Link from 'next/link';
 
 interface Props {
   blogPost?: BlogPost;
 }
 
 const BlogPostHeaderPresenter = ({ blogPost }: Props) => {
-  const { title, category, createdAt, tags } = blogPost || {};
+  const { _id, title, category, createdAt, tags } = blogPost || {};
+
   return (
     <StyledBlogPostHeader>
       {/* 제목 글씨체 바꾸기 */}
       <h1>{title}</h1>
+      <div>
+        <Link href={`/write?id=${_id}`}>수정</Link>
+        <button>삭제</button>
+      </div>
       <div className="blog-post-header-middle">
         {/* 양쪽으로 */}
         {/* 글씨만 */}

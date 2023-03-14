@@ -12,10 +12,11 @@ interface Props {
 }
 
 const PublishPreviewPresenter = ({ blogPostInfo, fileObj, onChangeThumbnail, onChangeTextarea }: Props) => {
-  const { description } = blogPostInfo;
+  const { description, thumbnail } = blogPostInfo;
 
   // URL.revokeObjectURL() 정상 실행을 위해 추가한 코드
   const [fileUrl, setFileUrl] = useState('/');
+
   useEffect(() => {
     if (fileObj) {
       setFileUrl(URL.createObjectURL(fileObj));
@@ -25,9 +26,21 @@ const PublishPreviewPresenter = ({ blogPostInfo, fileObj, onChangeThumbnail, onC
   return (
     <StyledPublishPreview>
       <div className="post-thumbnail-wrapper-with-image post-thumbnail-wrapper post-thumbnail ">
+        {/* 블로그 수정시 이미지  */}
+        {thumbnail && !fileObj && (
+          <Image
+            className="post-thumbnail non-clickable-image"
+            src={thumbnail as string}
+            alt="post thumbnail"
+            width={300}
+            height={200}
+          />
+        )}
+
+        {/* 블로그 만들때의 이미지 */}
         {fileObj && (
           <Image
-            className="post-thumbnail"
+            className="post-thumbnail non-clickable-image"
             src={fileUrl}
             onLoad={() => {
               URL.revokeObjectURL(fileUrl);

@@ -23,7 +23,7 @@ const PublishPreviewContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
         // URL.revokeObjectURL() 정상 실행을 위해 추가한 코드
         setFileObj(file);
 
-        //여기서는 file만 넣어두고 포스트시에만 이미지 업로드하기
+        //여기서는 file만 넣어두고 포스트시에만 이미지 업로드하여 보관하기
         setBlogPostInfo({ ...blogPostInfo, thumbnail: file });
       }
     },

@@ -50,7 +50,7 @@ export interface BlogCommentReqWithToken {
 }
 
 export const commentApi = api.injectEndpoints({
-  overrideExisting: true,
+  // overrideExisting: true,
   endpoints: (builder) => ({
     //getMany
     getBlogComments: builder.query<BlogCommentRes, string>({

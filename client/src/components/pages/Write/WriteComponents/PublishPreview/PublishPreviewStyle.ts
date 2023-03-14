@@ -72,6 +72,11 @@ export const StyledPublishPreview = styled.div`
     z-index: 1;
   }
 
+  //post-thumbnail을 클릭되지 않게 하고 그 밑에 있는 요소가 클릭되게 함
+  & .non-clickable-image {
+    pointer-events: none;
+  }
+
   & > textarea {
     margin: 0 auto;
     width: 333px;

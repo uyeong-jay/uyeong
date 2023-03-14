@@ -145,17 +145,20 @@ export const StyledOpenedCategory = styled.div<PublishCategpryProps>`
     margin-top: 15px;
     margin-bottom: 15px;
 
-    & > .done-button,
-    .cancel-button {
+    & > .done-button {
       // border: 1px solid dimgray;
       background-color: gainsboro;
       width: 100px;
       border-radius: 10px;
+      color: black;
+    }
+
+    &>.done-button: hover {
       color: rgba(0, 0, 0, 0.5);
     }
 
-    & > .cancel-button {
-      margin-right: 15px;
-    }
+    // & > .cancel-button {
+    //   margin-right: 15px;
+    // }
   }
 `;

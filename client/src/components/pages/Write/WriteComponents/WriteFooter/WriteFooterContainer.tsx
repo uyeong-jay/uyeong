@@ -5,6 +5,7 @@ import { useAppDispatch } from '@app/hooks';
 import { startPuslishing } from '@pages/Write/WriteSlice';
 import validBlog from '@utils/valid/validBlog';
 import { UserResponse } from '@app/services/user/userApi';
+import { useRouter } from 'next/router';
 
 interface Props {
   userData?: UserResponse;
@@ -14,18 +15,20 @@ interface Props {
 }
 
 const WriteFooterContainer = ({ userData, blogPostsData, blogPostInfo, setBlogPostInfo }: Props) => {
+  const router = useRouter();
+
   const { title, content } = blogPostInfo;
   const [writeErrMsg, setWriteErrMsg] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
 
   const dispatch = useAppDispatch();
 
-  //동일한 포스트 제목 생성 막기
+  //동일한 포스트 제목 생성 막는 유효성 검사
   const validBlogTitle = useCallback(() => {
     const sameBlogTitle = blogPostsData?.posts?.find((post) => post.title === title);
-    if (sameBlogTitle) return true;
+    if (!router.query.id && sameBlogTitle) return true;
     else return false;
-  }, [blogPostsData?.posts, title]);
+  }, [blogPostsData?.posts, router.query, title]);
 
   const onClickDone = useCallback(() => {
     const blogTitleErr = validBlogTitle();

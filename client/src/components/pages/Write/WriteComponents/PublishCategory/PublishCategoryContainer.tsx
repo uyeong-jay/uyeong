@@ -12,27 +12,33 @@ const PublishCategoryContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
   const { data: blogCategoryData } = useGetBlogCategoriesQuery();
 
   const [isOpenedCategory, setOpenedCategory] = useState(false);
-  const [isClickedCategory, setClickedCategory] = useState(false);
+  // const [isClickedCategory, setClickedCategory] = useState(false);
 
   const onClickChooseCtegory = useCallback(() => {
     setOpenedCategory(true);
   }, []);
 
-  const onClickCancel = useCallback(() => {
-    setBlogPostInfo({ ...blogPostInfo, category: '' });
-    setOpenedCategory(false);
-    setClickedCategory(false);
-  }, [blogPostInfo, setBlogPostInfo]);
+  // const onClickCancel = useCallback(() => {
+  //   setBlogPostInfo({ ...blogPostInfo, category: '' });
+  //   setOpenedCategory(false);
+  //   // setClickedCategory(false);
+  // }, [blogPostInfo, setBlogPostInfo]);
 
   const onClickDone = useCallback(() => {
-    if (isClickedCategory) setOpenedCategory(false);
-    return;
-  }, [isClickedCategory]);
+    //있으나 없으나 색을 그대로
+    //그럼 setClickedCategory 이거 없어도됨
+    // if (isClickedCategory) setOpenedCategory(false);
+    setOpenedCategory(false);
+  }, []);
 
   const onClickCategory = useCallback(
     (e) => {
-      setBlogPostInfo({ ...blogPostInfo, category: e.target.getAttribute('value') });
-      setClickedCategory(true);
+      //똑같은거 한번더 클릭하면 다시 '' 로 대체
+      //cancel 버튼 없애기
+      const clickedCategory = e.target.getAttribute('value');
+      if (blogPostInfo.category === clickedCategory) setBlogPostInfo({ ...blogPostInfo, category: '' });
+      else setBlogPostInfo({ ...blogPostInfo, category: clickedCategory });
+      // setClickedCategory(true);
     },
     [blogPostInfo, setBlogPostInfo],
   );
@@ -42,9 +48,9 @@ const PublishCategoryContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
       blogCategoryData={blogCategoryData}
       blogPostInfo={blogPostInfo}
       isOpenedCategory={isOpenedCategory}
-      isClickedCategory={isClickedCategory}
+      // isClickedCategory={isClickedCategory}
       onClickChooseCtegory={onClickChooseCtegory}
-      onClickCancel={onClickCancel}
+      // onClickCancel={onClickCancel}
       onClickDone={onClickDone}
       onClickCategory={onClickCategory}
     />

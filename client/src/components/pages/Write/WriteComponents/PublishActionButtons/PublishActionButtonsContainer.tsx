@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import PublishActionButtonsPresenter from './PublishActionButtonsPresenter';
-import { useAppDispatch } from '@app/hooks';
+import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { cancelPublishing } from '@pages/Write/WriteSlice';
-import { BlogPostReq, useCreateBlogPostMutation } from '@app/services/blog/postApi';
+import { BlogPostReq, useCreateBlogPostMutation, useUpdateBlogPostMutation } from '@app/services/blog/postApi';
 import getUploadImageUrl from '@utils/uploadImage';
 import { UserResponse } from '@app/services/user/userApi';
 
@@ -13,6 +13,8 @@ interface Props {
 
 const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
   const [createBlogPost] = useCreateBlogPostMutation();
+  const [updateBlogPost] = useUpdateBlogPostMutation();
+  const blogPostDataById = useAppSelector((state) => state.write.blogPostDataById);
   const dispatch = useAppDispatch();
 
   const onClickCancel = useCallback(() => {
@@ -32,7 +34,30 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
 
     dispatch(cancelPublishing());
   }, [blogPostInfo, createBlogPost, dispatch, userData?.access_token]);
-  return <PublishActionButtonsPresenter onClickCancel={onClickCancel} onClickPost={onClickPost} />;
+
+  const onClickUpdate = useCallback(async () => {
+    console.log(typeof blogPostInfo.thumbnail, blogPostInfo, blogPostDataById);
+    const data = {
+      blogPostInfo: {
+        ...blogPostInfo,
+        _id: blogPostDataById._id,
+        thumbnail:
+          typeof blogPostInfo.thumbnail !== 'string'
+            ? await getUploadImageUrl(blogPostInfo.thumbnail as File)
+            : blogPostInfo.thumbnail,
+      },
+      token: userData?.access_token,
+    };
+    updateBlogPost(data);
+  }, [blogPostDataById, blogPostInfo, updateBlogPost, userData?.access_token]);
+  return (
+    <PublishActionButtonsPresenter
+      blogPostDataById={blogPostDataById}
+      onClickCancel={onClickCancel}
+      onClickPost={onClickPost}
+      onClickUpdate={onClickUpdate}
+    />
+  );
 };
 
 export default PublishActionButtonsContainer;
