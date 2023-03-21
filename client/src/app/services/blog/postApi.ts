@@ -17,6 +17,7 @@ export interface BlogPostRes {
   posts?: BlogPost[];
   postsByCategory?: BlogPost[];
   post?: BlogPost;
+  msg?: string;
 }
 
 export interface BlogPostReq {
@@ -30,8 +31,12 @@ export interface BlogPostReq {
   privacy: boolean;
 }
 
+export interface BlogPostId {
+  _id: string | string[] | undefined;
+}
+
 export interface BlogPostReqWithToken {
-  blogPostInfo: BlogPostReq;
+  blogPostInfo: BlogPostReq | BlogPostId;
   token?: string;
 }
 
@@ -89,16 +94,30 @@ export const postApi = api.injectEndpoints({
       }),
       invalidatesTags: ['BlogPost'],
     }),
+
+    //delete
+    deleteBlogPost: builder.mutation<BlogPostRes, BlogPostReqWithToken>({
+      query: (data) => ({
+        url: '/api/blog',
+        method: 'delete',
+        data: data.blogPostInfo,
+        headers: {
+          Authorization: data.token,
+        },
+      }),
+      invalidatesTags: ['BlogPost'],
+    }),
   }),
 });
 
 // export hooks for usage in functional components
 export const {
   useGetBlogPostsQuery,
-  useGetBlogPostsByCategoryQuery,
   useGetBlogPostQuery,
+  useGetBlogPostsByCategoryQuery,
   useCreateBlogPostMutation,
   useUpdateBlogPostMutation,
+  useDeleteBlogPostMutation,
 } = postApi;
 
 // export endpoints for use in SSR

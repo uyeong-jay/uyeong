@@ -3,20 +3,27 @@ import React from 'react';
 import { StyledPublishActionButtons } from './PublishActionButtonsStyle';
 
 interface Props {
+  postId: string | string[] | undefined;
   blogPostDataById: BlogPost;
   onClickCancel: () => void;
   onClickPost: () => void;
   onClickUpdate: () => void;
 }
 
-const PublishActionButtonsPresenter = ({ blogPostDataById, onClickCancel, onClickPost, onClickUpdate }: Props) => {
+const PublishActionButtonsPresenter = ({
+  postId,
+  blogPostDataById,
+  onClickCancel,
+  onClickPost,
+  onClickUpdate,
+}: Props) => {
   return (
     <StyledPublishActionButtons>
       <div className="action-buttons-block">
         <button className="cancel-button" onClick={onClickCancel}>
           Cancel
         </button>
-        {blogPostDataById ? (
+        {blogPostDataById._id === postId ? (
           <button className="post-button" onClick={onClickUpdate}>
             Update
           </button>

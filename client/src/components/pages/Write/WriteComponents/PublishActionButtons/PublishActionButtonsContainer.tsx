@@ -5,6 +5,7 @@ import { cancelPublishing } from '@pages/Write/WriteSlice';
 import { BlogPostReq, useCreateBlogPostMutation, useUpdateBlogPostMutation } from '@app/services/blog/postApi';
 import getUploadImageUrl from '@utils/uploadImage';
 import { UserResponse } from '@app/services/user/userApi';
+import { useRouter } from 'next/router';
 
 interface Props {
   userData?: UserResponse;
@@ -16,6 +17,8 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
   const [updateBlogPost] = useUpdateBlogPostMutation();
   const blogPostDataById = useAppSelector((state) => state.write.blogPostDataById);
   const dispatch = useAppDispatch();
+  const router = useRouter();
+  const { id: postId } = router.query;
 
   const onClickCancel = useCallback(() => {
     dispatch(cancelPublishing());
@@ -31,12 +34,12 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
       token: userData?.access_token,
     };
     await createBlogPost(data);
+    await router.push(`/blog/${blogPostInfo.title}`);
 
     dispatch(cancelPublishing());
-  }, [blogPostInfo, createBlogPost, dispatch, userData?.access_token]);
+  }, [blogPostInfo, createBlogPost, dispatch, router, userData?.access_token]);
 
   const onClickUpdate = useCallback(async () => {
-    console.log(typeof blogPostInfo.thumbnail, blogPostInfo, blogPostDataById);
     const data = {
       blogPostInfo: {
         ...blogPostInfo,
@@ -48,10 +51,14 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
       },
       token: userData?.access_token,
     };
-    updateBlogPost(data);
-  }, [blogPostDataById, blogPostInfo, updateBlogPost, userData?.access_token]);
+    await updateBlogPost(data);
+    await router.push(`/blog/${blogPostInfo.title}`);
+
+    dispatch(cancelPublishing());
+  }, [blogPostDataById._id, blogPostInfo, dispatch, router, updateBlogPost, userData?.access_token]);
   return (
     <PublishActionButtonsPresenter
+      postId={postId}
       blogPostDataById={blogPostDataById}
       onClickCancel={onClickCancel}
       onClickPost={onClickPost}

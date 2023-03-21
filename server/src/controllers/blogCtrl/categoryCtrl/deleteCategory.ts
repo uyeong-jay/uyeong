@@ -12,9 +12,8 @@ const deleteCategory = async (req: IReqAuth, res: Response) => {
     if (req.user.role !== "admin") return res.status(400).json({ msg: "Invalid Authentication." });
 
     //category 조회 후 삭제
-    await Categories.findOneAndDelete({ name: req.body.name });
-    //name: req.params.id
-    //name: req.params.slug
+    const category = await Categories.findOneAndDelete({ name: req.body.name });
+    if (!category) return res.status(400).json({ msg: "category does not exits." });
 
     //post 조회 후 업데이트
     await Posts.updateMany({ category: req.body.name }, { $set: { category: "" } });

@@ -50,7 +50,7 @@ export interface BlogCommentReqWithToken {
 }
 
 export const commentApi = api.injectEndpoints({
-  // overrideExisting: true,
+  overrideExisting: true,
   endpoints: (builder) => ({
     //getMany
     getBlogComments: builder.query<BlogCommentRes, string>({
@@ -58,25 +58,6 @@ export const commentApi = api.injectEndpoints({
         url: `/api/comment/blog/${slug}`,
         method: 'get',
       }),
-      // async onCacheEntryAdded(data, { cacheDataLoaded, cacheEntryRemoved, updateCachedData }) {
-      //   // try {
-      //   //   console.log('1');
-      //   //   await cacheDataLoaded;
-
-      //   //   socket.on('createComment', (content) => {
-      //   //     console.log('2');
-      //   //     updateCachedData((draft) => {
-      //   //       console.log('3', draft, content);
-      //   //       // draft.comments?.push(content);
-      //   //     });
-      //   //   });
-      //   // } catch {
-      //   //   console.log('error');
-      //   // }
-      //   // console.log('4');
-      //   // await cacheEntryRemoved;
-      //   // socket.off('createComment');
-      // },
       providesTags: ['BlogComment'],
     }),
 

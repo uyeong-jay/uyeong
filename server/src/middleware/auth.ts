@@ -7,11 +7,11 @@ const auth = async (req: IReqAuth, res: Response, next: NextFunction) => {
   try {
     //access_token(유저의 _id) 헤더에서 가져오기
     const token = req.header("Authorization");
-    if (!token) return res.status(400).json({ msg: "Invalid Authorization1." });
+    if (!token) return res.status(400).json({ msg: "Invalid Authorization." });
 
     //디코드하기(jwt)
     const decoded = <IDecodedToken>jwt.verify(token, `${process.env.ACCESS_TOKEN_SECRET}`);
-    if (!decoded) return res.status(400).json({ msg: "Invalid Authorization2." });
+    if (!decoded) return res.status(400).json({ msg: "Invalid Authorization." });
     // console.log(decoded);
     // { id: '62fe3d99c15dd2880b5f864f', iat: 1667445445, exp: 1667446345 }
 

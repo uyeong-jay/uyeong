@@ -17,20 +17,23 @@
 //정보를 보낸이가 바뀌진 않았는지,
 //정보가 도중에 조작되지는 않았는지 검증할 수 있다.
 import jwt from "jsonwebtoken";
+import { Response } from "express";
 
 export const generateAccessToken = (payload: object) => {
   //토큰 생성
   //- jwt.sign(userInfo, secretKey, options, 익명함수)
   //  - secretKey는 password generator 이용하기
   return jwt.sign(payload, `${process.env.ACCESS_TOKEN_SECRET}`, {
-    expiresIn: "1d",
+    expiresIn: "12h",
   });
 };
 
-export const generateRefreshToken = (payload: object) => {
-  return jwt.sign(payload, `${process.env.REFRESH_TOKEN_SECRET}`, {
+export const generateRefreshToken = (payload: object, res: Response) => {
+  const refresh_token = jwt.sign(payload, `${process.env.REFRESH_TOKEN_SECRET}`, {
     expiresIn: "30d",
   });
+
+  return refresh_token;
 };
 
 //사용: const refresh_token = generateAccessToken({ id: user._id });

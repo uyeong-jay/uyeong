@@ -11,7 +11,8 @@ export interface IUser extends Document {
   cf_password: string;
   avatar?: string;
   role: string;
-  type: string;
+  // type: string;
+  rf_token?: string;
   _doc: object;
 }
 

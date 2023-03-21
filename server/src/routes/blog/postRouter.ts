@@ -3,7 +3,7 @@ import blogPostCtrl from "@controllers/blogCtrl/postCtrl";
 import auth from "@middleware/auth";
 
 const blogPostRouter = express.Router();
-const { getPosts, getPost, getPostsByCategory, createPost, updatePost } = blogPostCtrl;
+const { getPosts, getPost, getPostsByCategory, createPost, updatePost, deletePost } = blogPostCtrl;
 
 // get(read): 데이터 조회, no need data
 // post(create): 데이터 등록
@@ -15,5 +15,6 @@ blogPostRouter.get("/blog/:slug", getPost);
 blogPostRouter.get("/blog/category/:slug", getPostsByCategory);
 blogPostRouter.post("/blog", auth, createPost);
 blogPostRouter.patch("/blog", auth, updatePost);
+blogPostRouter.delete("/blog", auth, deletePost);
 
 export default blogPostRouter;

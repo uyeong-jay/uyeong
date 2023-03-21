@@ -31,7 +31,7 @@ const JoinPresenter = ({
   const [passwordType, setPasswordType] = useState(true);
   const [cfPasswordType, setCfPasswordType] = useState(true);
 
-  if (userData?.user) return <NotFound joinError />;
+  if (userData?.user && !isSuccess) return <NotFound joinError />;
   return (
     <>
       <Head>

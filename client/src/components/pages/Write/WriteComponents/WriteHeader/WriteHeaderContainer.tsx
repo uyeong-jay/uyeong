@@ -33,9 +33,11 @@ const WriteHeaderContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
         setCurrTag('');
         return;
       }
-      //존재하지 않을 경우
-      tags.push(currTag);
-      setBlogPostInfo({ ...blogPostInfo, tags });
+      //중복 존재하지 않을 경우
+      const postTags = [...tags]; //props 직접 변경 불가 > 복사 후 변경 하기
+      postTags.push(currTag);
+
+      setBlogPostInfo({ ...blogPostInfo, tags: postTags });
       setCurrTag('');
     },
     [blogPostInfo, currTag, setBlogPostInfo, tags],

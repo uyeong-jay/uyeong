@@ -1,6 +1,7 @@
 import { Request, Response } from "express"; //types
 import Users from "@models/userModel";
 import bcrypt from "bcrypt";
+import { generateAccessToken, generateRefreshToken } from "@utils/generateToken";
 
 const register = async (req: Request, res: Response) => {
   try {
@@ -32,6 +33,11 @@ const register = async (req: Request, res: Response) => {
       email,
       password: passwordHash,
     });
+
+    const access_token = generateAccessToken({ id: newUser._id });
+    const refresh_token = generateRefreshToken({ id: newUser._id }, res);
+
+    newUser.rf_token = refresh_token;
 
     //db에 저장
     await newUser.save();

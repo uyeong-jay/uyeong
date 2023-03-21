@@ -28,6 +28,7 @@ const userSchema = new Schema(
       type: String,
       default: "user", //admin
     },
+    rf_token: { type: String, select: false },
   },
   { timestamps: true }
   //timestamps - mogoose

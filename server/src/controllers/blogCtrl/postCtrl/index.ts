@@ -3,6 +3,7 @@ import createPost from "./createPost";
 import getPostsByCategory from "./getPostsByCategory";
 import getPost from "./getPost";
 import updatePost from "./updatePost";
+import deletePost from "./deletePost";
 
 const postCtrl = {
   getPosts,
@@ -10,6 +11,7 @@ const postCtrl = {
   getPostsByCategory,
   createPost,
   updatePost,
+  deletePost,
 };
 
 export default postCtrl;

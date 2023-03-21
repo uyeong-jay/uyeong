@@ -64,13 +64,6 @@ const BlogPostCommentTemplatePresenter = ({
 
   return (
     <SECTION.Layout>
-      <Modal
-        type="delete"
-        msg="Are you sure you want to delete the comment?"
-        isOpen={isModalOpen}
-        setOpen={setModalOpen}
-        callback={() => onClickDelete(true)}
-      />
       {/* 프로필 이미지 */}
       <DIV.Left>
         <div className="comment-user-avatar-warpper comment-user-avatar">
@@ -142,6 +135,13 @@ const BlogPostCommentTemplatePresenter = ({
           />
         )}
       </DIV.Right>
+      <Modal
+        type="delete"
+        msg="Are you sure you want to delete the comment?"
+        isOpen={isModalOpen}
+        setOpen={setModalOpen}
+        callback={() => onClickDelete(true)}
+      />
     </SECTION.Layout>
   );
 };
