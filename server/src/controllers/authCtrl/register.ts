@@ -34,7 +34,6 @@ const register = async (req: Request, res: Response) => {
       password: passwordHash,
     });
 
-    const access_token = generateAccessToken({ id: newUser._id });
     const refresh_token = generateRefreshToken({ id: newUser._id }, res);
 
     newUser.rf_token = refresh_token;

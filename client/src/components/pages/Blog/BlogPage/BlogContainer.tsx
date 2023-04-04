@@ -1,6 +1,7 @@
 import { useGetBlogPostsQuery } from '@app/services/blog/postApi';
 import { useMemo } from 'react';
 import BlogPresenter from './BlogPresenter';
+import { useAppSelector } from '@app/hooks';
 
 export interface TagWithCount {
   name: string;
@@ -9,8 +10,9 @@ export interface TagWithCount {
 
 const BlogContainer = () => {
   const { data: blogPostsData } = useGetBlogPostsQuery();
+  const blogPostsDataBySearch = useAppSelector((state) => state.blog.blogPostsDataBySearch);
 
-  //모든 태그 with 많은 순 정렬
+  //모든 태그 많은 순 정렬
   const allTags = useMemo(() => {
     const tagList: TagWithCount[] = [];
     blogPostsData?.posts?.forEach((post) => {
@@ -25,7 +27,9 @@ const BlogContainer = () => {
     return tagList.sort((a, b) => b.count - a.count);
   }, [blogPostsData?.posts]);
 
-  return <BlogPresenter blogPostsData={blogPostsData} allTags={allTags} />;
+  return (
+    <BlogPresenter blogPostsData={blogPostsData} blogPostsDataBySearch={blogPostsDataBySearch} allTags={allTags} />
+  );
 };
 
 export default BlogContainer;

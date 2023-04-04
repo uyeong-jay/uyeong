@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import NavLinkBox from '@molecules/NavLinkBox';
 import { StyledBlogHeader, StyledBlogHeaderNav } from './BlogHeaderStyle';
 
-const BlogHeaderPresenter = () => {
+interface Props {
+  search?: string;
+  onChangeInput?: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const BlogHeaderPresenter = ({ search, onChangeInput }: Props) => {
   return (
     <StyledBlogHeader>
       <h3>UYeong Blog</h3>
       <p>제 블로그에 오신걸 환영합니다 🙂👋</p>
-      <p>검색바</p>
+      <input type="search" /* name */ value={search} onChange={onChangeInput} placeholder="Search" />
       <StyledBlogHeaderNav>
         <ul>
           <NavLinkBox href="/blog">Post</NavLinkBox>

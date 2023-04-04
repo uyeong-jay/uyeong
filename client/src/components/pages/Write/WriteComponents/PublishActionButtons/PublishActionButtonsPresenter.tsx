@@ -23,7 +23,7 @@ const PublishActionButtonsPresenter = ({
         <button className="cancel-button" onClick={onClickCancel}>
           Cancel
         </button>
-        {blogPostDataById._id === postId ? (
+        {postId && blogPostDataById?._id === postId ? (
           <button className="post-button" onClick={onClickUpdate}>
             Update
           </button>

@@ -51,6 +51,15 @@ export const postApi = api.injectEndpoints({
       providesTags: ['BlogPost'],
     }),
 
+    //getMany
+    getBlogPostsBySearch: builder.query<BlogPostRes, string>({
+      query: (query) => ({
+        url: `/api/search?q=${query}`,
+        method: 'get',
+      }),
+      providesTags: ['BlogPost'],
+    }),
+
     //getBy
     getBlogPostsByCategory: builder.query<BlogPostRes, string>({
       query: (slug) => ({
@@ -115,10 +124,11 @@ export const {
   useGetBlogPostsQuery,
   useGetBlogPostQuery,
   useGetBlogPostsByCategoryQuery,
+  useGetBlogPostsBySearchQuery,
   useCreateBlogPostMutation,
   useUpdateBlogPostMutation,
   useDeleteBlogPostMutation,
 } = postApi;
 
 // export endpoints for use in SSR
-export const { getBlogPosts, getBlogPost, getBlogPostsByCategory } = postApi.endpoints;
+export const { getBlogPosts, getBlogPost, getBlogPostsByCategory, getBlogPostsBySearch } = postApi.endpoints;

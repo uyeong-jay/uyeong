@@ -6,6 +6,7 @@ import { api } from '@app/services/api';
 
 //reducers
 import writeReducer from '@pages/Write/WriteSlice';
+import blogReducer from '@pages/Blog/BlogSlice';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -20,6 +21,7 @@ const createStore = () => {
     reducer: {
       [api.reducerPath]: api.reducer,
       write: writeReducer,
+      blog: blogReducer,
     },
     middleware,
     devTools: isDev,

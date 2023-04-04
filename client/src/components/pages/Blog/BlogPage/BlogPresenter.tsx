@@ -11,10 +11,11 @@ const BlogPostCard: any = dynamic(() => import('@pages/Blog/BlogComponents/BlogP
 
 interface Props {
   blogPostsData?: BlogPostRes;
+  blogPostsDataBySearch?: BlogPostRes;
   allTags: TagWithCount[];
 }
 
-const BlogPresenter = ({ blogPostsData, allTags }: Props) => {
+const BlogPresenter = ({ blogPostsData, blogPostsDataBySearch, allTags }: Props) => {
   return (
     <>
       <Head>
@@ -34,9 +35,10 @@ const BlogPresenter = ({ blogPostsData, allTags }: Props) => {
             </div>
           </StyledTags>
           <StyledPosts>
-            {blogPostsData?.posts?.map((post) => (
-              <BlogPostCard key={post._id} post={post} />
-            ))}
+            {/* 검색된 포스트 or 일반 포스트 */}
+            {blogPostsDataBySearch?.posts
+              ? blogPostsDataBySearch?.posts?.map((post) => <BlogPostCard key={post._id} post={post} />)
+              : blogPostsData?.posts?.map((post) => <BlogPostCard key={post._id} post={post} />)}
           </StyledPosts>
         </StyledBlogContents>
         {/* <MoreButton text="더보기" /> */}

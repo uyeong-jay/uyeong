@@ -19,6 +19,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { id: postId } = router.query;
+  // console.log(postId, blogPostDataById?.id, !!(postId === blogPostDataById?.id));
 
   const onClickCancel = useCallback(() => {
     dispatch(cancelPublishing());
@@ -43,7 +44,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
     const data = {
       blogPostInfo: {
         ...blogPostInfo,
-        _id: blogPostDataById._id,
+        _id: blogPostDataById?._id,
         thumbnail:
           typeof blogPostInfo.thumbnail !== 'string'
             ? await getUploadImageUrl(blogPostInfo.thumbnail as File)
@@ -55,7 +56,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
     await router.push(`/blog/${blogPostInfo.title}`);
 
     dispatch(cancelPublishing());
-  }, [blogPostDataById._id, blogPostInfo, dispatch, router, updateBlogPost, userData?.access_token]);
+  }, [blogPostDataById?._id, blogPostInfo, dispatch, router, updateBlogPost, userData?.access_token]);
   return (
     <PublishActionButtonsPresenter
       postId={postId}
