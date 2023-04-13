@@ -24,10 +24,10 @@ const validUserInfo = (userUpdateInfo: userUpdateInfoProps, userData?: userDataP
   if (!email) return 'Please add your email.';
 
   //old_password 에러
-  if (0 < old_password.length && old_password.length < 6) return 'Your old password must be 6 chars or more.';
+  if (0 < old_password.length && old_password.length < 6) return 'Your old password must be 6 characters or more.';
 
   //new_password 에러
-  if (0 < new_password.length && new_password.length < 6) return 'Your new password must be 6 chars or more.';
+  if (0 < new_password.length && new_password.length < 6) return 'Your new password must be 6 characters or more.';
 
   //cf_new_password 에러
   if (new_password !== cf_new_password) return 'Your new password and confirm new password should be same.';
