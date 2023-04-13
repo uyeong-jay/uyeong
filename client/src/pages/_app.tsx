@@ -4,8 +4,6 @@ import { Provider } from 'react-redux';
 import wrapper from '@app/store';
 import type { AppProps } from 'next/app';
 
-// import Script from 'next/script';
-
 function MyApp({ Component, ...rest }: AppProps) {
   const { store, props } = wrapper.useWrappedStore(rest);
 

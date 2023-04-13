@@ -5,10 +5,12 @@ module.exports = {
 
   env: {
     BASE_URL: prod ? '' : process.env.BASE_URL,
-    FONTAWESOME_KIT: process.env.FONTAWESOME_KIT,
     CLOUDINARY_UPLOAD_PRESET: process.env.CLOUDINARY_UPLOAD_PRESET,
     CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
     CLOUDINARY_API: process.env.CLOUDINARY_API,
+    EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID,
+    EMAILJS_TEMPLATE_ID: process.env.EMAILJS_TEMPLATE_ID,
+    EMAILJS_PUBLIC_KEY: process.env.EMAILJS_PUBLIC_KEY,
   },
 
   images: {
