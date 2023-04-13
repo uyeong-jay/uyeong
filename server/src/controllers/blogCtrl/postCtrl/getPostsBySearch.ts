@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Posts from "@models/blog/postModel";
 
-const getPostsBySeatch = async (req: Request, res: Response) => {
+const getPostsBySearch = async (req: Request, res: Response) => {
   try {
     if (!req.query.q) return res.status(200).json({ msg: "No query" });
 
@@ -21,6 +21,6 @@ const getPostsBySeatch = async (req: Request, res: Response) => {
   }
 };
 
-export default getPostsBySeatch;
+export default getPostsBySearch;
 
 //client 가 받을 데이터
