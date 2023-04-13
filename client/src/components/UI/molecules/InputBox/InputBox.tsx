@@ -11,6 +11,7 @@ interface Props {
   placeholder?: string;
   disabled?: boolean;
   readOnly?: boolean;
+  required?: boolean;
 }
 
 const StyledInputBox = styled.div`
@@ -36,7 +37,18 @@ const StyledInput = styled.input`
   border-bottom: 1px solid black;
 `;
 
-const InputBox = ({ labelText, type, name, value, defaultValue, onChange, placeholder, disabled, readOnly }: Props) => {
+const InputBox = ({
+  labelText,
+  type,
+  name,
+  value,
+  defaultValue,
+  onChange,
+  placeholder,
+  disabled,
+  readOnly,
+  required,
+}: Props) => {
   return (
     <StyledInputBox>
       <StyledLabel>{labelText}</StyledLabel>
@@ -49,6 +61,7 @@ const InputBox = ({ labelText, type, name, value, defaultValue, onChange, placeh
         placeholder={placeholder}
         disabled={disabled ? true : false}
         readOnly={readOnly ? true : false}
+        required={required ? true : false}
       />
     </StyledInputBox>
   );
