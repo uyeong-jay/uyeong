@@ -7,15 +7,11 @@ interface AppLayoutProps {
 }
 
 const StyledAppLayout = styled.div`
-  // border: 1px solid #dadada;
-  border: 1px solid red;
-  display: flex;
-  flex-direction: column;
-  // justify-content: center; //안먹힘
-  margin: 0 auto; //justify대체, 확대시 왼쪽 구석 확대 가능
-  align-items: center;
-  position: relative;
-  width: 1200px;
+  // border: 1px solid red;
+  // display: flex;
+  // flex-direction: column;
+  // position: relative;
+  background-color: ${({ theme }) => theme.BACKGROUND_COLOR};
 `;
 
 const AppLayout = ({ children }: AppLayoutProps) => {

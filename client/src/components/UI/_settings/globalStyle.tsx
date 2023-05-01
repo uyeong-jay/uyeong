@@ -20,6 +20,10 @@ const GlobalStyle = () => {
           height: 100%;
         }
 
+        body {
+          overflow-x: hidden;
+        }
+
         /* 줄 높이 지정, 글꼴 지정, 텍스트 렌더링 개선 */
         body {
           line-height: 1.5; //줄 높이 글자 크기의 1.5배
@@ -27,7 +31,7 @@ const GlobalStyle = () => {
           -webkit-font-smoothing: antialiased;
           // background-color: #000034;
           // color: white;
-          font-size: 14px;
+          font-size: 12px;
         }
 
         /* 텍스트 삐져나감 방지 */
