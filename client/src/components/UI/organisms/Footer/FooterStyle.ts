@@ -3,7 +3,7 @@ import styled from '@_settings/styled';
 export const StyledFooter = styled.footer`
   border: 1px solid #dadada;
   background-color: #fef6b5;
-  width: 750px;
+  width: 100%;
   height: 190px;
   margin: 10px 0;
   padding: 20px;

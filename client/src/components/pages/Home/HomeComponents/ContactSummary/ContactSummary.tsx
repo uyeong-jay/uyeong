@@ -7,7 +7,7 @@ const StyledContactSummary = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 750px;
+  width: 100%;
   height: 200px;
   border-radius: 30px;
 `;

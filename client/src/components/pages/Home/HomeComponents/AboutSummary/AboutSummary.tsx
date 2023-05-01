@@ -7,7 +7,7 @@ const StyledAboutSummary = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 750px;
+  width: 100%;
   height: 200px;
   margin-bottom: 10%;
   border-radius: 30px;
