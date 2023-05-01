@@ -4,12 +4,17 @@ import Banner from '@pages/Home/HomeComponents/Banner';
 import AboutSummary from '@pages/Home/HomeComponents/AboutSummary';
 import BlogSummary from '@pages/Home/HomeComponents/BlogSummary';
 import ContactSummary from '@pages/Home/HomeComponents/ContactSummary';
+import { BlogPostRes } from '@app/services/blog/postApi';
 
 // import type { NextPage } from 'next';
 // import Image from 'next/image';
 // import styles from '../styles/Home.module.css';
 
-const HomePresenter = () => {
+interface Props {
+  blogPostsData?: BlogPostRes;
+}
+
+const HomePresenter = ({ blogPostsData }: Props) => {
   return (
     <>
       <Head>
@@ -17,7 +22,7 @@ const HomePresenter = () => {
       </Head>
       <StyledHome>
         <Banner />
-        <BlogSummary />
+        <BlogSummary blogPostsData={blogPostsData} />
         <AboutSummary />
         <ContactSummary />
       </StyledHome>
