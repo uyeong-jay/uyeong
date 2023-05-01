@@ -1,5 +1,5 @@
-import { useCallback, useRef, useState } from 'react';
-import { StyledHeader, StyledHeaderNav } from './HeaderStyle';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { HEADER, NAV } from './HeaderStyle';
 import Button from '@atoms/Button';
 import NavLinkBox from '@molecules/NavLinkBox';
 import { UserResponse } from '@app/services/user/userApi';
@@ -9,6 +9,8 @@ import Image from 'next/image';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import CaretDownIcon from '@icons/CaretDownIcon';
 import CaretUpIcon from '@icons/CaretUpIcon';
+import Logo from '@icons/Logo';
+// import ListBarIcon from '@icons/ListBarIcon';
 
 interface Props {
   userData?: UserResponse;
@@ -22,18 +24,52 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
   const dropdownBoxRef = useRef(null);
   const [isOpen, setOpen] = useState(false);
 
-  //Dropdown lsit
-  const onClickList = useCallback(() => {
+  const [isMenuIconClicked, setMenuIconClicked] = useState(false);
+  const [render, setRender] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 833) {
+        setRender(false);
+        setMenuIconClicked(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+
+    // cleanup function
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  //Dropdown
+  const onClickUser = useCallback(() => {
     setOpen((prev) => !prev);
   }, []);
 
-  //Dropdown lsit
+  //Dropdown
   const onClickOutside = useCallback(() => {
     setOpen(false);
   }, []);
 
-  //Dropdown lsit
+  //Dropdown
   useOnClickOutside(dropdownBoxRef, onClickOutside);
+
+  const onClickMenu = useCallback(() => {
+    setRender(false); //애니메이션 실행없이 바로 닫기
+
+    const timer = setTimeout(() => {
+      setMenuIconClicked(false); //아이콘 애니메이션 실행시간 주기
+    }, 400);
+
+    // cleanup function
+    return () => clearTimeout(timer);
+  }, []);
+
+  const onClickMenuIcon = useCallback(() => {
+    setRender(true); //render가 계속 true로 유지되고 있어야 닫는 애니메이션 실행가능
+    setMenuIconClicked((prev) => !prev);
+  }, []);
 
   if (getUserDataError || logoutError) return <NotFound />;
   return (
@@ -41,15 +77,34 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
       {/* 로딩화면 */}
       {getUserDataLoading && <Loader />}
 
-      <StyledHeader>
-        <StyledHeaderNav>
+      <HEADER.Layout>
+        <NAV.HeaderNav isMenuIconClicked={isMenuIconClicked} render={render}>
           <ul>
-            <NavLinkBox href="/">로고 UYeong</NavLinkBox>
-            <NavLinkBox href="/blog">Blog</NavLinkBox>
-            <NavLinkBox href="/about">About</NavLinkBox>
-            <NavLinkBox href="/contact">Contact</NavLinkBox>
+            {/* 1 */}
+            <NavLinkBox href="/">
+              <Logo />
+            </NavLinkBox>
+
+            {/* 2 */}
+            <li>
+              <div>
+                <ul onClick={onClickMenu}>
+                  <NavLinkBox href="/blog" delay={render ? 500 : 0}>
+                    Blog
+                  </NavLinkBox>
+                  <NavLinkBox href="/about" delay={render ? 500 : 0}>
+                    About
+                  </NavLinkBox>
+                  <NavLinkBox href="/contact" delay={render ? 500 : 0}>
+                    Contact
+                  </NavLinkBox>
+                </ul>
+              </div>
+            </li>
+
+            {/* 3 */}
             {userData?.user ? (
-              <li onClick={onClickList} ref={dropdownBoxRef}>
+              <li onClick={onClickUser} ref={dropdownBoxRef}>
                 {/* 프로필 이미지 */}
                 <div className="header-user-avatar-wrapper header-user-avatar">
                   <Image
@@ -87,9 +142,17 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
                 <Button variant="login" text="Login" />
               </NavLinkBox>
             )}
+
+            {/* 4 */}
+            <li onClick={onClickMenuIcon}>
+              <div>
+                <span></span>
+                <span></span>
+              </div>
+            </li>
           </ul>
-        </StyledHeaderNav>
-      </StyledHeader>
+        </NAV.HeaderNav>
+      </HEADER.Layout>
     </>
   );
 };
