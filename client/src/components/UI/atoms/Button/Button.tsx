@@ -36,8 +36,11 @@ const StyledButton = styled.button<ButtonProps>`
         `;
       case 'login':
         return `
-          border: 1px solid magenta;
-          background-color: rgb(238, 130, 238, 0.6);
+          // border: 1px solid magenta;
+          // background-color: rgb(238, 130, 238, 0.6);
+          border: 1px solid #333333;
+          background-color: transparent;
+          color: ${props.theme.COLOR};
         `;
       case 'logout':
         return `
