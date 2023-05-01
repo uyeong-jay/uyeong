@@ -1,6 +1,12 @@
 import styled from '@_settings/styled';
 
-const CommentWriteForm = styled.form`
+export const FORM = {} as any;
+
+export const DIV = {} as any;
+
+export const BTN = {} as any;
+
+FORM.CommentWriteForm = styled.form`
   border: 1px solid red;
   display: flex;
   flex-direction: column;
@@ -24,37 +30,23 @@ const CommentWriteForm = styled.form`
   }
 `;
 
-const ReplyBtnGroup = styled.div`
+DIV.ReplyBtnGroup = styled.div`
   border: 1px solid green;
   display: flex;
   justify-content: end;
 `;
 
-const ReplyBtn = styled.button`
+BTN.ReplyBtn = styled.button`
   border: 1px solid green;
 `;
 
-const CancelBtn = styled.button`
+BTN.CancelBtn = styled.button`
   border: 1px solid green;
 `;
 
-const CommentBtn = styled.button`
+BTN.CommentBtn = styled.button`
   border: 1px solid green;
   width: 100px;
   align-self: end;
   margin-top: 10px;
 `;
-
-export const FORM = {
-  CommentWriteForm,
-};
-
-export const DIV = {
-  ReplyBtnGroup,
-};
-
-export const BTN = {
-  ReplyBtn,
-  CancelBtn,
-  CommentBtn,
-};

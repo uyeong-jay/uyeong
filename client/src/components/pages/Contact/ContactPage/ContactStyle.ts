@@ -1,6 +1,8 @@
 import styled from '@_settings/styled';
 
-const Layout = styled.div`
+export const DIV = {} as any;
+
+DIV.Layout = styled.div`
   border: 1px solid black;
 
   & > form {
@@ -17,7 +19,3 @@ const Layout = styled.div`
     }
   }
 `;
-
-export const DIV = {
-  Layout,
-};
