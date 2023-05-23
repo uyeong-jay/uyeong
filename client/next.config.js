@@ -14,7 +14,7 @@ module.exports = {
   },
 
   images: {
-    domains: ['res.cloudinary.com'],
+    domains: ['res.cloudinary.com', 'img.shields.io'],
   },
   experimental: {
     scrollRestoration: true,
