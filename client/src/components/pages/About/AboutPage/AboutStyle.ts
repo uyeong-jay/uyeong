@@ -1,104 +1,400 @@
 import styled from '@_settings/styled';
 
-export const StyledAbout = styled.section`
-  border: 1px solid black;
+export const SECTION = {} as any;
+export const DIV = {} as any;
+
+const depthEffect = `
+  position: relative;
+  top: 10px;
+  left: 5px;
+
+  &:before {
+    content: '';
+    width: inherit;
+    min-width: inherit;
+    height: 6px;
+    min-height: 6px;
+    background-color: #AFAFB0;
+    position: absolute;
+    top: -6px;
+    left: -5px;
+    // z-index: 1;
+    transform: skew(60deg, 0deg);
+  }
+  &:after {
+    content: '';
+    width: 10px;
+    min-width: 10px;
+    height: inherit;
+    min-height: inherit;
+    background-color: #D2D2D3;
+    position: absolute;
+    top: -3px;
+    left: -10px;
+    // z-index: 1;
+    transform: skew(0deg, 30deg);
+  }
+`;
+
+SECTION.Layout = styled.section`
+  // border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: ${({ theme }) => theme.BACKGROUND_COLOR};
+
+  & > h1 {
+    // border: 1px solid black;
+    width: 100%;
+    padding-left: 40px;
+    padding-top: 40px;
+    max-width: ${({ theme }) => theme.BP.PC};
+  }
+`;
+
+DIV.AboutPart1 = styled.div`
+  // border: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  width: 750px;
-`;
-
-export const StyledAboutHeader = styled.header`
-  border: 1px solid #dadada;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  padding: 30px 0 50px 0;
 
-  & > span {
-    margin: 10px;
+  & > div {
+    border: 1px solid white;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+    min-height: 180px;
+
+    & .about-avatar-wrapper {
+      // border: 1px solid red;
+      display: inline-flex;
+    }
+
+    & .about-avatar {
+      // border: 1px solid red;
+      border-radius: 50%;
+    }
+
+    & p {
+      // border: 1px solid black;
+      font-size: 20px;
+      letter-spacing: 3px;
+    }
   }
 
-  & > span img {
-    border-radius: 100px;
+  @media screen and (max-width: calc(${({ theme }) => theme.BP.PC} - 0.5px)) {
+    & > div {
+      ${depthEffect}
+    }
   }
 
-  & > p {
-    border: 1px solid #dadada;
-    margin: 10px;
-
-    & > .underline {
-      position: relative;
+  @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
+    & > div {
+      width: 300px;
+      height: 180px;
     }
-
-    & > .underline:after {
-      content: '';
-      position: absolute;
-      left: -10px;
-      bottom: -10px;
-      width: 0px;
+  }
+  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+    & > div {
+      width: 300px;
+      height: 180px;
     }
-
-    & .underline:nth-of-type(1):after {
-      //animation: 이름 유지시간 효과 딜레이시간 마지막상태유지;
-      animation: underline_purple 2s ease-in-out 0s forwards;
-      background: url('/pencils/purple_pencil.png');
-      background-size: 110px 15px;
-    }
-    & .underline:nth-of-type(2):after {
-      animation: underline_blue 2s ease-in-out 0.6s forwards;
-      background: url('/pencils/blue_pencil.png');
-      background-size: 70px 15px;
-    }
-    & .underline:nth-of-type(3):after {
-      animation: underline_green 2s ease-in-out 1.2s forwards;
-      background: url('/pencils/green_pencil.png');
-      background-size: 50px 15px;
-    }
-
-    @keyframes underline_purple {
-      from {
-        opacity: 0;
-        width: 0px;
-        height: 15px;
-      }
-      to {
-        opacity: 0.7;
-        width: 110px;
-        height: 15px;
-      }
-    }
-    @keyframes underline_blue {
-      from {
-        opacity: 0;
-        width: 0px;
-        height: 15px;
-      }
-      to {
-        opacity: 0.7;
-        width: 70px;
-        height: 15px;
-      }
-    }
-    @keyframes underline_green {
-      from {
-        opacity: 0;
-        width: 0px;
-        height: 15px;
-      }
-      to {
-        opacity: 0.7;
-        width: 50px;
-        height: 15px;
-      }
+  }
+  @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
+    & > div {
+      width: 700px;
+      height: 350px;
+      border-radius: 25px;
     }
   }
 `;
 
-export const StyledAboutContents = styled.section`
-  border: 1px solid #dadada;
+DIV.AboutPart2 = styled.div`
+  // border: 1px solid black;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  & > div:nth-of-type(1) {
+    border: 1px solid white;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    min-width: 300px;
+    min-height: 150px;
+    margin: 0 0 50px 0;
+    padding: 10px;
+
+    & p {
+      // border: 1px solid black;
+      // margin-top: 5px;
+    }
+  }
+
+  & > div:nth-of-type(2) {
+    border: 1px solid white;
+    background-color: white;
+    min-width: 300px;
+    min-height: 150px;
+    height: 150px;
+    padding: 10px;
+
+    & > ul {
+      // border: 1px solid red;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: flex-start;
+      width: 100%;
+      height: 100%;
+
+      & li {
+        // border: 1px solid black;
+        display: flex;
+
+        .location-icon {
+          // border: 1px solid black;
+          width: 13px;
+          fill: #444444;
+          margin-right: 7px;
+        }
+        .envelope-icon {
+          width: 13px;
+          fill: #444444;
+          margin-right: 7px;
+        }
+        .github-icon {
+          width: 14px;
+          fill: #444444;
+          margin-right: 7px;
+        }
+        .instagram-icon {
+          width: 13px;
+          fill: #444444;
+          margin-right: 7px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: calc(${({ theme }) => theme.BP.PC} - 0.5px)) {
+    & > div:nth-of-type(1) {
+      ${depthEffect}
+    }
+    & > div:nth-of-type(2) {
+      ${depthEffect}
+    }
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    & > div:nth-of-type(1) {
+      width: 300px;
+      height: 150px;
+      margin: 0 0 50px 0;
+    }
+    & > div:nth-of-type(2) {
+      width: 300px;
+      height: 150px;
+    }
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    & > div:nth-of-type(1) {
+      width: 230px;
+      height: 130px;
+      min-width: 230px;
+      min-height: 130px;
+      margin: 0 20px 0 0;
+    }
+    & > div:nth-of-type(2) {
+      width: 230px;
+      height: 130px;
+      min-width: 230px;
+      min-height: 130px;
+      margin: 0 0 0 20px;
+    }
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
+    & > div:nth-of-type(1) {
+      width: 330px;
+      height: 230px;
+      border-radius: 25px;
+    }
+    & > div:nth-of-type(2) {
+      width: 330px;
+      height: 230px;
+      border-radius: 25px;
+    }
+  }
+`;
+
+DIV.AboutPart3 = styled.div`
+  // border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 50px;
+
+  & > div {
+    border: 1px solid white;
+    background-color: white;
+    min-width: 300px;
+    min-height: 50px;
+  }
+
+  @media screen and (max-width: calc(${({ theme }) => theme.BP.PC} - 0.5px)) {
+    & > div {
+      ${depthEffect}
+    }
+  }
+  @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
+    & > div {
+      width: 300px;
+      height: 50px;
+    }
+  }
+  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+    & > div {
+      width: 500px;
+      height: 80px;
+    }
+  }
+  @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
+    & > div {
+      // position: relative;
+      width: 700px;
+      height: 120px;
+      border-radius: 25px;
+    }
+  }
+`;
+
+DIV.AboutPart4 = styled.div`
+  // border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 50px;
+
+  & > div:nth-of-type(1) {
+    border: 1px solid white;
+    background-color: white;
+    width: 90%;
+    height: 100.5%;
+    min-width: 300px;
+    min-height: 150px;
+    margin: 0 0 50px 0;
+    padding-bottom: 10px;
+
+    & > h3 {
+      padding: 10px 0 0 10px;
+    }
+  }
+  & > div:nth-of-type(2) {
+    border: 1px solid white;
+    background-color: white;
+    height: 100.5%;
+    min-width: 300px;
+    min-height: 150px;
+    padding: 10px 0 0 10px;
+
+    & > h3 {
+      padding-bottom: 20px;
+    }
+
+    & > ul {
+      // border: 1px solid black;
+      padding-bottom: 10px;
+
+      & > li {
+        padding-bottom: 15px;
+      }
+    }
+  }
+
+  @media screen and (max-width: calc(${({ theme }) => theme.BP.PC} - 0.5px)) {
+    & > div:nth-of-type(1) {
+      ${depthEffect}
+    }
+    & > div:nth-of-type(2) {
+      ${depthEffect}
+    }
+  }
+  @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    & > div:nth-of-type(1) {
+      width: 300px;
+      height: 100.5%;
+      margin: 0 0 50px 0;
+    }
+    & > div:nth-of-type(2) {
+      width: 300px;
+      height: 100%;
+    }
+  }
+  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+
+    & > div:nth-of-type(1) {
+      width: 230px;
+      height: 100.5%;
+      min-width: 230px;
+      min-height: 130px;
+      margin: 0 20px 0 0;
+    }
+    & > div:nth-of-type(2) {
+      width: 230px;
+      height: 100%;
+      min-width: 230px;
+      min-height: 130px;
+      margin: 0 0 0 20px;
+    }
+  }
+  @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
+    & > div:nth-of-type(1) {
+      width: 330px;
+      height: 100.5%;
+      padding: 5px;
+      border-radius: 25px;
+    }
+    & > div:nth-of-type(2) {
+      width: 330px;
+      height: 100%;
+      padding: 15px;
+      border-radius: 25px;
+    }
+  }
 `;

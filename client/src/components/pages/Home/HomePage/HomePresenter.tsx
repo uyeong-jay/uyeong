@@ -22,8 +22,8 @@ const HomePresenter = ({ blogPostsData }: Props) => {
       </Head>
       <StyledHome>
         <Banner />
-        <BlogSummary blogPostsData={blogPostsData} />
         <AboutSummary />
+        <BlogSummary blogPostsData={blogPostsData} />
         <ContactSummary />
       </StyledHome>
     </>
