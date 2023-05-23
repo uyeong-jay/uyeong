@@ -5,8 +5,8 @@ const SECTION = {} as any;
 
 SECTION.Layout = styled.section`
   // border: 1px solid red;
-  // border-bottom: 1px solid #999999; //다크모드
   background-color: ${({ theme }) => theme.BACKGROUND_COLOR};
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,6 +14,8 @@ SECTION.Layout = styled.section`
   top: -50px;
   left: 0;
   width: 100%; //가로 스크롤 방지
+  min-width: 315px;
+  margin: 0 auto;
   height: 100vh;
 
   & > .scrolling-words-box {
