@@ -76,7 +76,6 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
     <>
       {/* 로딩화면 */}
       {getUserDataLoading && <Loader />}
-
       <HEADER.Layout>
         <NAV.HeaderNav isMenuIconClicked={isMenuIconClicked} render={render}>
           <ul>
@@ -89,11 +88,11 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
             <li>
               <div>
                 <ul onClick={onClickMenu}>
-                  <NavLinkBox href="/blog" delay={render ? 500 : 0}>
-                    Blog
-                  </NavLinkBox>
                   <NavLinkBox href="/about" delay={render ? 500 : 0}>
                     About
+                  </NavLinkBox>
+                  <NavLinkBox href="/blog" delay={render ? 500 : 0}>
+                    Blog
                   </NavLinkBox>
                   <NavLinkBox href="/contact" delay={render ? 500 : 0}>
                     Contact

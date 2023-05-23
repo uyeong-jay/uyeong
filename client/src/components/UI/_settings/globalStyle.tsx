@@ -23,6 +23,11 @@ const GlobalStyle = () => {
         body {
           overflow-x: hidden;
         }
+        @media screen and (max-width: 320px) {
+          body {
+            overflow-x: visible;
+          }
+        }
 
         /* 줄 높이 지정, 글꼴 지정, 텍스트 렌더링 개선 */
         body {

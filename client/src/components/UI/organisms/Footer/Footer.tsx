@@ -8,6 +8,11 @@ import GithubIcon from '@icons/GithubIcon';
 import TIcon from '@icons/TIcon';
 import CopyrightIcon from '@icons/CopyrightIcon';
 
+//이메일
+//깃헙
+//인스타
+//저작권
+
 const Footer = () => {
   return (
     <StyledFooter>

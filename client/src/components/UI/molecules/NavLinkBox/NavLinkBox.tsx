@@ -34,7 +34,7 @@ const NavLinkBox = ({ href, passHref, target, rel, children, delay }: Props): Re
       <Link href={href} passHref={passHref ? true : false}>
         <a
           target={target}
-          rel={rel}
+          rel={rel} //rel="noopener noreferrer"??
           onClick={
             delay
               ? delayLink

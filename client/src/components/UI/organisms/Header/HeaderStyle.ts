@@ -18,14 +18,13 @@ HEADER.Layout = styled.header`
   top: 0;
   z-index: 1;
   width: 100%;
+  max-width: ${({ theme }) => theme.BP.PC};
+  margin: 0 auto;
   height: 50px;
 `;
 
 NAV.HeaderNav = styled.nav<HeaderNavProps>`
   // border: 1px solid green;
-  margin: 0 auto;
-  max-width: 1024px;
-  min-width: 315px;
   height: 100%;
 
   & > ul {
@@ -49,7 +48,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
 
     & > li:nth-of-type(2) {
       // border: 1px solid black;
-      width: 80%;
+      width: 50%;
 
       & > div {
         // border: 1px solid red;
@@ -147,6 +146,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
     @media screen and (max-width: 833px) {
       & > li:nth-of-type(2) {
         // border: 1px solid yellow;
+        width: 80%;
 
         & > div {
           // border: 1px solid red;
@@ -297,13 +297,8 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
               `;
             }
           }}
-
-          & span {
-          }
         }
       }
     }
   }
-
-  //+스크롤시 nav width만 남도록 하기
 `;

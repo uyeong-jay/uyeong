@@ -12,6 +12,7 @@ const StyledAppLayout = styled.div`
   // flex-direction: column;
   // position: relative;
   background-color: ${({ theme }) => theme.BACKGROUND_COLOR};
+  min-width: 320px;
 `;
 
 const AppLayout = ({ children }: AppLayoutProps) => {
