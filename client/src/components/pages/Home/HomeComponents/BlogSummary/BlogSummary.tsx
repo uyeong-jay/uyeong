@@ -13,7 +13,8 @@ const ARTICLE = {} as any;
 const DIV = {} as any;
 
 ARTICLE.Layout = styled.article`
-  border: 2px solid #dadada;
+  // border: 2px solid #dadada;
+  // border: 2px solid black;
   background-color: ${({ theme }) => theme.BACKGROUND_COLOR};
   display: flex;
   flex-direction: column;
@@ -23,27 +24,37 @@ ARTICLE.Layout = styled.article`
   top: -50px;
   width: 100%;
   height: 350px;
+  margin-top: 50px;
   margin-bottom: 10%;
+
+  & > h3 {
+    // border: 1px solid black;
+    font-size: 28px;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 50px;
+  }
 `;
 
 DIV.SliderWrapper = styled.div`
   // border: 1px solid black;
   margin: 0 auto;
-  width: 80%;
+  width: 1220px;
+
+  @media screen and (max-width: 1450px) {
+    width: 920px;
+  }
+  @media screen and (max-width: 1060px) {
+    width: 600px;
+  }
+  @media screen and (max-width: 700px) {
+    width: 320px;
+  }
 `;
 
 interface Props {
   blogPostsData?: BlogPostRes;
 }
-
-// - Responsive breakpoints
-// FHDPC: 1900px(min) ~
-// HDPC: 1200px(min) ~ 1900px(max)
-// LAPTOP, PC: 1024px(min) ~ 1200px(max)
-// TABLET_L: 960px(min) ~ 1024px(max)
-// TABLET_P: 640px(min) ~ 960px(max)
-// MOBILE_L: 480px(min) ~ 640px(max)
-// MOBILE_P: 350px(min) ~ 480px(max)
 
 function NextArrow(props: any) {
   const { className, style, onClick } = props;
@@ -54,44 +65,49 @@ function PrevArrow(props: any) {
   return <ArrowLeftIcon className={`${className} reverse`} onClick={onClick} style={{ ...style, fill: '#777777' }} />;
 }
 
-const BlogSummary = ({ blogPostsData }: Props) => {
-  const settings = {
-    infinite: true,
-    speed: 1500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2500,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        },
+const settings = {
+  infinite: true,
+  speed: 1500,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 2500,
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />,
+  responsive: [
+    {
+      breakpoint: 1450,
+      settings: {
+        slidesToShow: 3,
       },
-      {
-        breakpoint: 734,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
+    },
+    {
+      breakpoint: 1060,
+      settings: {
+        slidesToShow: 2,
       },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
+    },
+    {
+      breakpoint: 700,
+      settings: {
+        slidesToShow: 1,
       },
-    ],
-  };
+    },
+    {
+      breakpoint: 400,
+      settings: {
+        slidesToShow: 1,
+        nextArrow: <></>,
+        prevArrow: <></>,
+      },
+    },
+  ],
+};
 
+const BlogSummary = ({ blogPostsData }: Props) => {
   return (
     <ARTICLE.Layout>
-      <div>Blog</div>
+      <h3>Blog</h3>
       <DIV.SliderWrapper>
         <Slider {...settings}>
           {blogPostsData?.posts?.map((post) => (
