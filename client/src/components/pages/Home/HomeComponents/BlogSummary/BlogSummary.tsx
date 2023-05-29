@@ -8,13 +8,13 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ArrowRightIcon from '@icons/ArrowRightIcon';
 import ArrowLeftIcon from '@icons/ArrowLefttIcon';
+import DetailButton from '@molecules/DetailButton';
 
 const ARTICLE = {} as any;
 const DIV = {} as any;
 
 ARTICLE.Layout = styled.article`
-  // border: 2px solid #dadada;
-  // border: 2px solid black;
+  // border: 1px solid black;
   background-color: ${({ theme }) => theme.BACKGROUND_COLOR};
   display: flex;
   flex-direction: column;
@@ -38,6 +38,7 @@ ARTICLE.Layout = styled.article`
 
 DIV.SliderWrapper = styled.div`
   // border: 1px solid black;
+  position: relative;
   margin: 0 auto;
   width: 1220px;
 
@@ -49,6 +50,13 @@ DIV.SliderWrapper = styled.div`
   }
   @media screen and (max-width: 700px) {
     width: 320px;
+  }
+
+  & > button {
+    // border: 1px solid black;
+    position: absolute;
+    right: 0px;
+    bottom: -60px;
   }
 `;
 
@@ -114,6 +122,7 @@ const BlogSummary = ({ blogPostsData }: Props) => {
             <MiniBlogPostCard key={post._id} post={post} />
           ))}
         </Slider>
+        <DetailButton link="/blog" />
       </DIV.SliderWrapper>
     </ARTICLE.Layout>
   );
