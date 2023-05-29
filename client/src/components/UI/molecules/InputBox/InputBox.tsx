@@ -31,10 +31,10 @@ const StyledInput = styled.input`
   width: 100%;
   height: 40px;
   text-align: center;
-  color: lightslategray;
+  color: darkslategray;
   border: none;
   outline: none;
-  border-bottom: 1px solid black;
+  // border-bottom: 1px solid black;
 `;
 
 const InputBox = ({
