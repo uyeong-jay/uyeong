@@ -1,7 +1,12 @@
 import AboutPresenter from './AboutPresenter';
 
-const AboutContainer = () => {
-  return <AboutPresenter />;
+interface Props {
+  hideInSummary?: boolean;
+  setHideInSummary?: (hideInSummary: boolean) => void;
+}
+
+const AboutContainer = ({ hideInSummary, setHideInSummary }: Props) => {
+  return <AboutPresenter hideInSummary={hideInSummary} setHideInSummary={setHideInSummary} />;
 };
 
 export default AboutContainer;

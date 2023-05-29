@@ -104,8 +104,8 @@ DIV.AboutPart1 = styled.div`
   }
   @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
     & > div {
-      width: 300px;
-      height: 180px;
+      width: 500px;
+      height: 250px;
     }
   }
   @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
@@ -170,20 +170,25 @@ DIV.AboutPart2 = styled.div`
           fill: #444444;
           margin-right: 7px;
         }
-        .envelope-icon {
-          width: 13px;
-          fill: #444444;
-          margin-right: 7px;
-        }
-        .github-icon {
-          width: 14px;
-          fill: #444444;
-          margin-right: 7px;
-        }
-        .instagram-icon {
-          width: 13px;
-          fill: #444444;
-          margin-right: 7px;
+
+        & > a {
+          display: flex;
+
+          .envelope-icon {
+            width: 13px;
+            fill: #444444;
+            margin-right: 7px;
+          }
+          .github-icon {
+            width: 14px;
+            fill: #444444;
+            margin-right: 7px;
+          }
+          .instagram-icon {
+            width: 13px;
+            fill: #444444;
+            margin-right: 7px;
+          }
         }
       }
     }

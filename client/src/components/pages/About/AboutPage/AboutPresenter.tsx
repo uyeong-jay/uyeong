@@ -8,8 +8,19 @@ import EnvelopeIcon from '@icons/EnvelopeIcon';
 import GithubIcon from '@icons/GithubIcon';
 import InstagramIcon from '@icons/InstagramIcon';
 import Badges from '../AboutComponents/Badges/Badges';
+import NavLinkBox from '@molecules/NavLinkBox';
+import { useEffect } from 'react';
 
-const AboutPresenter = () => {
+interface Props {
+  hideInSummary?: boolean;
+  setHideInSummary?: (hideInSummary: boolean) => void;
+}
+
+const AboutPresenter = ({ hideInSummary, setHideInSummary }: Props) => {
+  useEffect(() => {
+    setHideInSummary?.(false);
+  }, [setHideInSummary]);
+
   return (
     <>
       <Head>
@@ -18,7 +29,7 @@ const AboutPresenter = () => {
       <SubFrame>
         <SECTION.Layout>
           {/* 0 */}
-          <h1>About</h1>
+          {hideInSummary ? <></> : <h1>About me</h1>}
 
           {/* 1 */}
           {/* pc 버전 일때는 다른 사진으로? */}
@@ -43,48 +54,71 @@ const AboutPresenter = () => {
                 <li>
                   <LocationIcon /> Korea, Repulic of
                 </li>
-                <li>
+                <NavLinkBox
+                  href="mailto: wjacob2103@gmail.com"
+                  passHref={true}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <EnvelopeIcon /> wjacob2103@gmail.com
-                </li>
-                <li>
+                </NavLinkBox>
+                <NavLinkBox
+                  href="https://github.com/william-jacob"
+                  passHref={true}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <GithubIcon />
                   Github
-                </li>
-                <li>
+                </NavLinkBox>
+                <NavLinkBox
+                  href="https://www.instagram.com/__uyeong__/"
+                  passHref={true}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <InstagramIcon />
                   Instagram
-                </li>
+                </NavLinkBox>
               </ul>
             </div>
           </DIV.AboutPart2>
 
           {/* 3 */}
-          <DIV.AboutPart3>
-            <div>
-              <GitHubChart />
-            </div>
-          </DIV.AboutPart3>
+          {hideInSummary ? (
+            <></>
+          ) : (
+            <DIV.AboutPart3>
+              <div>
+                <GitHubChart />
+              </div>
+            </DIV.AboutPart3>
+          )}
 
           {/* 4 */}
-          <DIV.AboutPart4>
-            <div>
-              <h3>Experiences</h3>
-              <Badges />
-            </div>
-            <div>
-              <h3>Likes</h3>
-              <ul>
-                <li>👀📺🍿</li>
-                <li>🍺🍗🍺</li>
-                <li>
-                  🧑‍💻 <strong>&#62;</strong> 👨‍💻
-                </li>
-                <li>❤️ 🐕🐈 ❤️</li>
-                <li>🌴 ✈️🌏🧳📷 🌴</li>
-                <li>⚾🏀⚽🎳🏓🚴💦</li>
-              </ul>
-            </div>
-          </DIV.AboutPart4>
+          {hideInSummary ? (
+            <></>
+          ) : (
+            <DIV.AboutPart4>
+              <div>
+                <h3>Experiences</h3>
+                <Badges />
+              </div>
+              <div>
+                <h3>Likes</h3>
+                <ul>
+                  <li>📺👀🍿</li>
+                  <li>🍺🍗🍺</li>
+                  <li>
+                    🧑‍💻 <strong>&#62;</strong> 👨‍💻
+                  </li>
+                  <li>❤️ 🐕🐈 ❤️</li>
+                  <li>🌴 ✈️🌏🧳📷 🌴</li>
+                  <li>⚾🏀⚽🎳🏓🚴💦</li>
+                </ul>
+              </div>
+            </DIV.AboutPart4>
+          )}
         </SECTION.Layout>
       </SubFrame>
     </>
