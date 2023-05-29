@@ -41,7 +41,6 @@ const BlogPresenter = ({ blogPostsData, blogPostsDataBySearch, allTags }: Props)
               : blogPostsData?.posts?.map((post) => <BlogPostCard key={post._id} post={post} />)}
           </StyledPosts>
         </StyledBlogContents>
-        {/* <MoreButton text="더보기" /> */}
       </StyledBlog>
     </>
   );
