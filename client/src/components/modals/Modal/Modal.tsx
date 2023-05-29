@@ -7,6 +7,7 @@ interface ModalProps {
   isOpen: boolean;
   setOpen: (isOpen: boolean) => void;
   callback?: () => void;
+  defaultAni?: boolean;
 }
 
 interface StyledModalProps {
@@ -75,6 +76,17 @@ const StyledModal = styled.div<StyledModalProps>`
       }
     }
 
+    @keyframes down-alert-modal {
+      from {
+        top: 0;
+        opacity: 0;
+      }
+      to {
+        top: 15px;
+        opacity: 1;
+      }
+    }
+
     @keyframes up-alert-modal {
       from {
         top: 15px;
@@ -131,7 +143,7 @@ const StyledModal = styled.div<StyledModalProps>`
   }
 `;
 
-const Modal = ({ type, msg, isOpen, setOpen, callback }: ModalProps) => {
+const Modal = ({ type, msg, isOpen, setOpen, callback, defaultAni }: ModalProps) => {
   const [render, setRender] = useState(isOpen);
 
   useEffect(() => {
@@ -214,7 +226,10 @@ const Modal = ({ type, msg, isOpen, setOpen, callback }: ModalProps) => {
   return (
     <>
       {render && (
-        <StyledModal animationName={isOpen ? 'shake-alert-modal' : 'up-alert-modal'} onAnimationEnd={onAnimationEnd}>
+        <StyledModal
+          animationName={isOpen ? (defaultAni ? 'down-alert-modal' : 'shake-alert-modal') : 'up-alert-modal'}
+          onAnimationEnd={onAnimationEnd}
+        >
           {modalContent()}
         </StyledModal>
       )}

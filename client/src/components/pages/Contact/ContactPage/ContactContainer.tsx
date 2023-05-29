@@ -17,8 +17,11 @@ const ContactContainer = () => {
   };
 
   const [userContactInfo, setUserContactInfo] = useState(initialState);
+
   const form = useRef(null);
+
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [sendSuccess, setSendSuccess] = useState(false);
   const [contactErrmsg, setContactErrmsg] = useState('');
 
@@ -31,7 +34,7 @@ const ContactContainer = () => {
       textareaEl.style.height = '150px';
       // console.log(textareaEl.scrollHeight); //2
       textareaEl.style.height = textareaEl.scrollHeight + 2 + 'px';
-      console.log(textareaEl.style.height);
+      // console.log(textareaEl.style.height); //152px
     }
   }, []);
 
@@ -61,6 +64,23 @@ const ContactContainer = () => {
       }
 
       try {
+        setIsLoading(true);
+
+        setTimeout(() => {
+          setIsLoading(false);
+
+          //값 초기화
+          setUserContactInfo({
+            user_name: '',
+            user_email: '',
+            message: '',
+          });
+
+          setContactErrmsg('');
+          setSendSuccess(true);
+          setModalOpen(true);
+        }, 1500);
+
         const result = await emailjs.sendForm(
           process.env.EMAILJS_SERVICE_ID,
           process.env.EMAILJS_TEMPLATE_ID,
@@ -68,16 +88,8 @@ const ContactContainer = () => {
           process.env.EMAILJS_PUBLIC_KEY,
         );
 
-        //값 초기화
-        setUserContactInfo({
-          user_name: '',
-          user_email: '',
-          message: '',
-        });
-
         //성공시
         console.log(result.text);
-        setSendSuccess(true);
       } catch (error: any) {
         setContactErrmsg('Sending failed! Please try again.');
         setModalOpen(true);
@@ -111,6 +123,7 @@ const ContactContainer = () => {
       contactErrmsg={contactErrmsg}
       textareaRef={textareaRef}
       isModalOpen={isModalOpen}
+      isLoading={isLoading}
       setModalOpen={setModalOpen}
       onSubmit={onSubmit}
       onChangeInput={onChangeInput}
