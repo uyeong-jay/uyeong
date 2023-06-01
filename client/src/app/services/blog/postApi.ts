@@ -42,7 +42,7 @@ export interface BlogPostReqWithToken {
 
 export const postApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    //getMany
+    //get
     getBlogPosts: builder.query<BlogPostRes, void>({
       query: () => ({
         url: '/api/blog',
@@ -51,7 +51,7 @@ export const postApi = api.injectEndpoints({
       providesTags: ['BlogPost'],
     }),
 
-    //getMany
+    //get
     getBlogPostsBySearch: builder.query<BlogPostRes, string>({
       query: (query) => ({
         url: `/api/search?q=${query}`,
@@ -60,7 +60,7 @@ export const postApi = api.injectEndpoints({
       providesTags: ['BlogPost'],
     }),
 
-    //getBy
+    //get
     getBlogPostsByCategory: builder.query<BlogPostRes, string>({
       query: (slug) => ({
         url: `/api/blog/category/${slug}`,
@@ -69,7 +69,7 @@ export const postApi = api.injectEndpoints({
       providesTags: ['BlogPost'],
     }),
 
-    //getBy
+    //get
     getBlogPost: builder.query<BlogPostRes, string>({
       query: (slug) => ({
         url: `/api/blog/${slug}`,
