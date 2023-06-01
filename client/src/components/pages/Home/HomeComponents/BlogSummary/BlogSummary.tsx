@@ -25,7 +25,7 @@ ARTICLE.Layout = styled.article`
   width: 100%;
   height: 350px;
   margin-top: 50px;
-  margin-bottom: 10%;
+  margin-bottom: 100px;
 
   & > h3 {
     // border: 1px solid black;
@@ -66,11 +66,11 @@ interface Props {
 
 function NextArrow(props: any) {
   const { className, style, onClick } = props;
-  return <ArrowRightIcon className={`${className}`} onClick={onClick} style={{ ...style, fill: '#777777' }} />;
+  return <ArrowRightIcon className={`${className}`} onClick={onClick} style={{ ...style, fill: 'gray' }} />;
 }
 function PrevArrow(props: any) {
   const { className, style, onClick } = props;
-  return <ArrowLeftIcon className={`${className} reverse`} onClick={onClick} style={{ ...style, fill: '#777777' }} />;
+  return <ArrowLeftIcon className={`${className} reverse`} onClick={onClick} style={{ ...style, fill: 'gray' }} />;
 }
 
 const settings = {
