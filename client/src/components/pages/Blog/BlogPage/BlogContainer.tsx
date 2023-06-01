@@ -12,7 +12,7 @@ const BlogContainer = () => {
   const { data: blogPostsData } = useGetBlogPostsQuery();
   const blogPostsDataBySearch = useAppSelector((state) => state.blog.blogPostsDataBySearch);
 
-  //모든 태그 많은 순 정렬
+  //모든 태그 > 많은 순 정렬
   const allTags = useMemo(() => {
     const tagList: TagWithCount[] = [];
     blogPostsData?.posts?.forEach((post) => {

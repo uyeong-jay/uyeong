@@ -1,2 +1,2 @@
 export { default } from './BlogSlice';
-export { getPostsBySearch } from './BlogSlice';
+export { getPostsBySearch, getTagName } from './BlogSlice';

@@ -27,6 +27,7 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
   const [isMenuIconClicked, setMenuIconClicked] = useState(false);
   const [render, setRender] = useState(false);
 
+  //width가 833px 보다 커지면 메뉴 클릭 animation 없애기
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 833) {
@@ -36,7 +37,6 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
     };
     window.addEventListener('resize', handleResize);
 
-    // cleanup function
     return () => {
       window.removeEventListener('resize', handleResize);
     };

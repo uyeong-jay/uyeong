@@ -22,11 +22,13 @@ const StyledNavLinkBox = styled.li`
 
 const NavLinkBox = ({ href, passHref, target, rel, children, delay }: Props): ReactElement => {
   const delayLink = (e: any) => {
-    e.preventDefault(); // 기본 동작인 링크 이동을 막습니다.
+    e.preventDefault(); // 기본 링크 이동 막기
     const url = e.currentTarget.getAttribute('href');
-    setTimeout(() => {
-      window.location.href = url; // 0.5초 후에 링크 이동을 합니다.
+    const timer = setTimeout(() => {
+      window.location.href = url; // 0.5초 후 링크 이동.
     }, delay);
+
+    return () => clearTimeout(timer);
   };
 
   return (

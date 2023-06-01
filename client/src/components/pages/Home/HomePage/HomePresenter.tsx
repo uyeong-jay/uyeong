@@ -3,8 +3,8 @@ import { StyledHome } from './HomeStyle';
 import Banner from '@pages/Home/HomeComponents/Banner';
 import AboutSummary from '@pages/Home/HomeComponents/AboutSummary';
 import BlogSummary from '@pages/Home/HomeComponents/BlogSummary';
-import ContactSummary from '@pages/Home/HomeComponents/ContactSummary';
 import { BlogPostRes } from '@app/services/blog/postApi';
+import TagsSummary from '../HomeComponents/TagsSummary';
 
 // import type { NextPage } from 'next';
 // import Image from 'next/image';
@@ -24,7 +24,7 @@ const HomePresenter = ({ blogPostsData }: Props) => {
         <Banner />
         <AboutSummary />
         <BlogSummary blogPostsData={blogPostsData} />
-        <ContactSummary />
+        <TagsSummary />
       </StyledHome>
     </>
   );
