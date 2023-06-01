@@ -7,13 +7,14 @@ const getPostsBySearch = async (req: Request, res: Response) => {
 
     const posts = await Posts.find({
       $or: [
-        { title: { $regex: req.query.q } },
+        { title: { $regex: req.query.q } }, //$regex: 부분일치도 검색되도록 함
         { content: { $regex: req.query.q } },
         { description: { $regex: req.query.q } },
+        { tags: { $in: [req.query.q] } }, //정확히 일치 할때만
       ],
     });
 
-    if (!posts.length) return res.status(400).json({ msg: "No blogs" });
+    if (!posts.length) return res.status(200).json({ msg: "No blogs" });
 
     res.status(200).json({ posts, msg: "Seaeched!" });
   } catch (err: any) {

@@ -3,11 +3,14 @@ import Posts from "@models/blog/postModel";
 
 const getPostsByCategory = async (req: Request, res: Response) => {
   try {
-    //post 데이터 가져오기
-    const posts = await Posts.find().sort({ createdAt: -1 });
+    // if (!req.params.slug) return res.status(200).json({ msg: "No query" });
+    // console.log(req.query.q);
 
-    //post 선별 하기 (by Category)
-    const postsByCategory = posts.filter((post: { category: string }) => post.category === req.params.slug);
+    const postsByCategory = await Posts.find({
+      $or: [{ category: { $eq: req.params.slug } }], //$eq: 정확히 일치 할때만
+    }).sort({ createdAt: -1 });
+
+    if (!postsByCategory.length) return res.status(400).json({ msg: "No blogs" }); //client 도 에러 대비 해주기
 
     res.status(200).json({ postsByCategory });
   } catch (err: any) {
