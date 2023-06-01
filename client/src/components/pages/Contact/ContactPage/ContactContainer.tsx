@@ -66,7 +66,7 @@ const ContactContainer = () => {
       try {
         setIsLoading(true);
 
-        setTimeout(() => {
+        const timer = setTimeout(() => {
           setIsLoading(false);
 
           //값 초기화
@@ -87,6 +87,8 @@ const ContactContainer = () => {
           form.current !== null ? form.current : '',
           process.env.EMAILJS_PUBLIC_KEY,
         );
+
+        return () => clearTimeout(timer);
 
         //성공시
         console.log(result.text);
