@@ -3,7 +3,7 @@ import Posts from "@models/blog/postModel";
 
 const getPostsBySearch = async (req: Request, res: Response) => {
   try {
-    if (!req.query.q) return res.status(200).json({ msg: "No query" });
+    if (!req.query.q) return res.status(200).json({ posts: await Posts.find(), msg: "No query" });
 
     const posts = await Posts.find({
       $or: [
