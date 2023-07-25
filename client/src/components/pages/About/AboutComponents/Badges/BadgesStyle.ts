@@ -12,7 +12,7 @@ DIV.Layout = styled.div`
 
     & > p {
       // border: 1px solid red;
-      padding-top: 10px;
+      padding-top: 15px;
       padding-bottom: 5px;
     }
 
@@ -27,9 +27,6 @@ DIV.Layout = styled.div`
         & > div {
           // border: 1px solid black;
           margin-right: 10px;
-
-          & > img {
-          }
         }
       }
     }
