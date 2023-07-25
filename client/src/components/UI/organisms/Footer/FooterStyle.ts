@@ -1,68 +1,52 @@
 import styled from '@_settings/styled';
 
 export const StyledFooter = styled.footer`
-  border: 1px solid #dadada;
-  background-color: #fef6b5;
-  width: 100%;
-  height: 190px;
-  margin: 10px 0;
+  border-top: 2px solid ${({ theme }) => theme.BD_C};
+  // background-color: #dfe2e8;
   padding: 20px;
-  //background-color: #d7d3c8;
-  border-radius: 30px;
-  color: black;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 90%;
+  color: ${({ theme }) => theme.FONT_C};
 
-  & li {
+  & > div {
+    // border: 1px solid black;
+    height: 40px;
     display: flex;
-  }
+    position: relative;
 
-  & li p {
-    display: flex;
-  }
-
-  & li .user-icon {
-    fill: maroon;
-    width: 12px;
-    margin: 0 8px 0 -1px;
-    font-size: 20px;
-  }
-
-  & li a {
-    display: flex;
-    color: blue;
-
-    & > .instagram-icon {
-      fill: maroon;
-      width: 14px;
-      margin: 3px 8px 0 -2px;
+    & .logo {
+      // border: 1px solid black;
+      display: inline-block;
+      width: 30px;
+      height: 40px;
+      position: absolute;
+      top: 5px;
+      left: -5px;
+      // margin: 0 8px 0 -1px;
       font-size: 20px;
-    }
-
-    & > .envelope-icon {
-      fill: maroon;
-      width: 14px;
-      margin: 3px 8px 0 -1px;
-    }
-
-    & > .github-icon {
-      fill: maroon;
-      width: 14px;
-      margin: 3px 8px 0 -1px;
-      font-size: 18px;
-    }
-
-    & > .t-icon {
-      fill: maroon;
-      width: 11px;
-      margin: 3px 8px 0 0px;
-      font-size: 18px;
+      overflow: hidden;
+      fill: ${({ theme }) => theme.LOGO_C};
     }
   }
 
-  & p .copyright-icon {
-    fill: maroon;
-    width: 14px;
-    color: maroon;
-    margin: 3px 8px 0 -0.5px;
-    font-size: 18px;
+  & > ul {
+    // border: 1px solid black;
+    width: 100%;
+    margin: 20px 0 10px 0;
+
+    & > li {
+      // border: 1px solid black;
+      margin-right: 10px;
+      display: block;
+    }
+
+    @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+      & > li {
+        display: inline-block;
+      }
+    }
   }
 `;
