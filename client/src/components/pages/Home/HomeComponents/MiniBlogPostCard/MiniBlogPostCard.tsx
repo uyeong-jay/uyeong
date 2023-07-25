@@ -13,15 +13,13 @@ const P = {} as any;
 const IMG = {} as any;
 
 DIV.Layout = styled.div`
-  // border: 1px solid black;
-  background-color: white;
+  // border: 1px solid ${({ theme }) => theme.BD_C};
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 230px; //3(가):2(세)
-  height: 230px;
-  margin: 0 auto;
-  border-radius: 10px;
+  width: 100%; //3(가):2(세)
+  height: 200px;
+  // margin: 10px auto;
   padding: 10px 15px;
 `;
 

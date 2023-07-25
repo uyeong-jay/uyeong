@@ -15,7 +15,7 @@ const TagsSummaryContainer = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (clickedTag.length) {
+    if (clickedTag) {
       dispatch(getTagName(clickedTag)); //클릭된 태그가 포함시킴 > 이동시 이미 검색되어 있도록 함
       router.push('/blog');
     }
@@ -25,7 +25,7 @@ const TagsSummaryContainer = () => {
     setClickedTag(tagName);
   }, []);
 
-  //모든 태그 > 많은 순 정렬
+  //모든 태그 > 최근 태그 15개 제한
   const allTags = useMemo(() => {
     const tagList: TagWithCount[] = [];
     blogPostsData?.posts?.forEach((post) => {
@@ -37,7 +37,7 @@ const TagsSummaryContainer = () => {
         } else tagList.push({ name: postTag, count: 1 });
       });
     });
-    return tagList.sort((a, b) => b.count - a.count);
+    return tagList.slice(0, 15);
   }, [blogPostsData?.posts]);
 
   return <TagsSummaryPresenter allTags={allTags} onClickTag={onClickTag} />;

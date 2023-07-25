@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { StyledHome } from './HomeStyle';
+import { DIV, MAIN } from './HomeStyle';
 import Banner from '@pages/Home/HomeComponents/Banner';
 import AboutSummary from '@pages/Home/HomeComponents/AboutSummary';
 import BlogSummary from '@pages/Home/HomeComponents/BlogSummary';
@@ -20,12 +20,20 @@ const HomePresenter = ({ blogPostsData }: Props) => {
       <Head>
         <title>UYeong</title>
       </Head>
-      <StyledHome>
-        <Banner />
-        <AboutSummary />
-        <BlogSummary blogPostsData={blogPostsData} />
-        <TagsSummary />
-      </StyledHome>
+      <MAIN.Layout>
+        <DIV.ContainerWidth>
+          <DIV.ContainerHeight>
+            <DIV.BannerBlock>
+              <Banner />
+            </DIV.BannerBlock>
+            <DIV.SummaryBlock>
+              <AboutSummary />
+              <BlogSummary blogPostsData={blogPostsData} />
+              <TagsSummary />
+            </DIV.SummaryBlock>
+          </DIV.ContainerHeight>
+        </DIV.ContainerWidth>
+      </MAIN.Layout>
     </>
   );
 };

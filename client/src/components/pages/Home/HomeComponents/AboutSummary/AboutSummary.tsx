@@ -1,62 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from '@_settings/styled';
-import About from '@pages/About/AboutPage';
 import DetailButton from '@molecules/DetailButton';
+import AboutAvatar from '@pages/About/AboutComponents/AboutAvatar/AboutAvatar';
 
 const SECTION = {} as any;
 const DIV = {} as any;
 
 SECTION.Layout = styled.section`
-  // border: 1px solid black;
+  // border: 1px solid red;
+  width: 100%; //400px;
+  height: 100%;
+  position: relative;
+`;
+
+DIV.ASTitleWrapper = styled.div`
+  // border: 1px solid blue;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
-  margin-bottom: 200px;
-  width: 100%;
-  // height: 100%;
+  height: 25%;
 
   & > h3 {
     // border: 1px solid black;
-    font-size: 28px;
-    font-weight: 600;
-    color: #333333;
-    // margin-top: 5%;
-  }
+    font-size: 30px;
+    font-weight: 400;
+    color: ${({ theme }) => theme.FONT_C};
+    // letter-spacing: 1px;
 `;
 
-DIV.AboutWrapper = styled.div`
-  // border: 1px solid #d2d2d3;
-  position: relative;
-  width: auto;
-  // max-width: ${({ theme }) => theme.BP.PC};
-  min-width: 320px;
-  // transform: scale(0.8);
-  // overflow: hidden;
+DIV.ASContentWarpper = styled.div`
+  // border: 1px solid black;
+  height: 65%;
+  overflow: hidden;
 
   & > button {
     // border: 1px solid black;
     position: absolute;
-    right: 0px;
-    bottom: -60px;
+    right: 10px;
+    bottom: 10px;
   }
 `;
 
 const AboutSummary = () => {
-  const [hideInSummary, setHideInSummary] = useState(false);
-
-  useEffect(() => {
-    setHideInSummary(true);
-  }, []);
-
   return (
     <SECTION.Layout>
-      <h3>About</h3>
-      <DIV.AboutWrapper>
-        <About hideInSummary={hideInSummary} setHideInSummary={setHideInSummary} />
+      <DIV.ASTitleWrapper>
+        <h3>ABOUT</h3>
+      </DIV.ASTitleWrapper>
+      <DIV.ASContentWarpper>
+        <AboutAvatar />
         <DetailButton link="/about" />
-      </DIV.AboutWrapper>
+      </DIV.ASContentWarpper>
     </SECTION.Layout>
   );
 };

@@ -10,12 +10,14 @@ interface Props {
 const TagsSummaryPresenter = ({ allTags, onClickTag }: Props) => {
   return (
     <SECTION.Layout>
-      <h1>Tags</h1>
+      <DIV.TSTitleWrapper>
+        <h1>TAGS</h1>
+      </DIV.TSTitleWrapper>
       <DIV.TagsWrapper>
         {allTags.map((tag, index) => (
-          <div key={index} onClick={() => onClickTag(tag.name)}>
+          <DIV.TagWrapper key={index} onClick={() => onClickTag(tag.name)} tagCount={tag.count}>
             {tag.name}
-          </div>
+          </DIV.TagWrapper>
         ))}
       </DIV.TagsWrapper>
     </SECTION.Layout>
