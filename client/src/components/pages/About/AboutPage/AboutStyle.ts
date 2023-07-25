@@ -3,36 +3,15 @@ import styled from '@_settings/styled';
 export const SECTION = {} as any;
 export const DIV = {} as any;
 
-const depthEffect = `
-  position: relative;
-  top: 10px;
-  left: 5px;
-
-  &:before {
+const rightBorder = (color: string) => `
+  &::after {
     content: '';
-    width: inherit;
-    min-width: inherit;
-    height: 6px;
-    min-height: 6px;
-    background-color: #AFAFB0;
     position: absolute;
-    top: -6px;
-    left: -5px;
-    // z-index: 1;
-    transform: skew(60deg, 0deg);
-  }
-  &:after {
-    content: '';
-    width: 10px;
-    min-width: 10px;
-    height: inherit;
-    min-height: inherit;
-    background-color: #D2D2D3;
-    position: absolute;
-    top: -3px;
-    left: -10px;
-    // z-index: 1;
-    transform: skew(0deg, 30deg);
+    top: -20px;
+    left: 20px;
+    width: 1.7px; //border: 2px;
+    height: 80%;
+    background-color: ${color};
   }
 `;
 
@@ -40,81 +19,16 @@ SECTION.Layout = styled.section`
   // border: 1px solid black;
   display: flex;
   flex-direction: column;
-  // justify-content: center;
+  justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: ${({ theme }) => theme.BACKGROUND_COLOR};
-
-  & > h1 {
-    // border: 1px solid black;
-    width: 100%;
-    padding-left: 40px;
-    padding-top: 40px;
-    max-width: ${({ theme }) => theme.BP.PC};
-  }
+  color: ${({ theme }) => theme.FONT_C};
 `;
 
 DIV.AboutPart1 = styled.div`
   // border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 30px 0 50px 0;
-
-  & > div {
-    border: 1px solid white;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-width: 300px;
-    min-height: 180px;
-
-    & .about-avatar-wrapper {
-      // border: 1px solid red;
-      display: inline-flex;
-    }
-
-    & .about-avatar {
-      // border: 1px solid red;
-      border-radius: 50%;
-    }
-
-    & p {
-      // border: 1px solid black;
-      font-size: 20px;
-      letter-spacing: 3px;
-    }
-  }
-
-  @media screen and (max-width: calc(${({ theme }) => theme.BP.PC} - 0.5px)) {
-    & > div {
-      ${depthEffect}
-    }
-  }
-
-  @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
-    & > div {
-      width: 300px;
-      height: 180px;
-    }
-  }
-  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
-    & > div {
-      width: 500px;
-      height: 250px;
-    }
-  }
-  @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
-    & > div {
-      width: 700px;
-      height: 350px;
-      border-radius: 25px;
-    }
-  }
+  width: auto;
+  height: 400px;
 `;
 
 DIV.AboutPart2 = styled.div`
@@ -123,19 +37,20 @@ DIV.AboutPart2 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: auto%;
 
   & > div:nth-of-type(1) {
-    border: 1px solid white;
-    background-color: white;
+    border-top: 2px solid ${({ theme }) => theme.BD_C};
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
     min-width: 300px;
     min-height: 150px;
-    margin: 0 0 50px 0;
-    padding: 10px;
+    margin: 0 0 100px 0;
+    padding: 10px 10px 0 50px;
+    ${({ theme }) => rightBorder(theme.BD_C)}
 
     & p {
       // border: 1px solid black;
@@ -144,12 +59,13 @@ DIV.AboutPart2 = styled.div`
   }
 
   & > div:nth-of-type(2) {
-    border: 1px solid white;
-    background-color: white;
+    border-top: 2px solid ${({ theme }) => theme.BD_C};
+    position: relative;
     min-width: 300px;
     min-height: 150px;
     height: 150px;
-    padding: 10px;
+    padding: 10px 10px 0 50px;
+    ${({ theme }) => rightBorder(theme.BD_C)}
 
     & > ul {
       // border: 1px solid red;
@@ -194,15 +110,6 @@ DIV.AboutPart2 = styled.div`
     }
   }
 
-  @media screen and (max-width: calc(${({ theme }) => theme.BP.PC} - 0.5px)) {
-    & > div:nth-of-type(1) {
-      ${depthEffect}
-    }
-    & > div:nth-of-type(2) {
-      ${depthEffect}
-    }
-  }
-
   @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
     display: flex;
     flex-direction: column;
@@ -212,8 +119,8 @@ DIV.AboutPart2 = styled.div`
     & > div:nth-of-type(1) {
       width: 300px;
       height: 150px;
-      margin: 0 0 50px 0;
     }
+
     & > div:nth-of-type(2) {
       width: 300px;
       height: 150px;
@@ -224,113 +131,144 @@ DIV.AboutPart2 = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 
     & > div:nth-of-type(1) {
       width: 230px;
       height: 130px;
       min-width: 230px;
       min-height: 130px;
-      margin: 0 20px 0 0;
+      margin: 0 30px 0 0;
     }
+
     & > div:nth-of-type(2) {
       width: 230px;
       height: 130px;
       min-width: 230px;
       min-height: 130px;
-      margin: 0 0 0 20px;
+      margin: 0 0 0 30px;
     }
   }
 
   @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
     & > div:nth-of-type(1) {
       width: 330px;
-      height: 230px;
-      border-radius: 25px;
+      height: 150px;
     }
     & > div:nth-of-type(2) {
       width: 330px;
       height: 230px;
-      border-radius: 25px;
     }
   }
 `;
 
 DIV.AboutPart3 = styled.div`
-  // border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 50px;
+  border-top: 2px solid ${({ theme }) => theme.BD_C};
+  width: auto;
+  margin: 150px 0;
 
   & > div {
-    border: 1px solid white;
-    background-color: white;
+    // border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    width: 100%;
+    height: auto;
     min-width: 300px;
     min-height: 50px;
-  }
+    padding-top: 30px;
 
-  @media screen and (max-width: calc(${({ theme }) => theme.BP.PC} - 0.5px)) {
-    & > div {
-      ${depthEffect}
+    & > .quote-left-icon {
+      // border: 1px solid black;
+      width: 40px;
+      margin-left: 5px;
+      fill: ${({ theme }) => theme.FONT_C};
+    }
+    & > .quote-right-icon {
+      // border: 1px solid black;
+      width: 40px;
+      margin-right: 5px;
+      fill: ${({ theme }) => theme.FONT_C};
+    }
+
+    & > p {
+      // border: 1px solid black;
+      font-family: 'Square Peg', cursive;
+      font-weight: 600;
+      font-size: 25px;
+      text-align: center;
+
+      & > span {
+        font-size: 15px;
+      }
     }
   }
+
   @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
     & > div {
       width: 300px;
-      height: 50px;
     }
   }
+
   @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
     & > div {
-      width: 500px;
-      height: 80px;
+      width: 400px;
+
+      & > p {
+        font-size: 30px;
+
+        & > span {
+          font-size: 20px;
+        }
+      }
     }
   }
+
   @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
     & > div {
-      // position: relative;
-      width: 700px;
-      height: 120px;
-      border-radius: 25px;
+      width: 600px;
     }
   }
 `;
 
 DIV.AboutPart4 = styled.div`
-  // border: 1px solid black;
+  // border-top: 2px solid ${({ theme }) => theme.BD_C};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: auto;
   padding-bottom: 50px;
 
   & > div:nth-of-type(1) {
-    border: 1px solid white;
-    background-color: white;
-    width: 90%;
-    height: 100.5%;
+    border-top: 2px solid ${({ theme }) => theme.BD_C};
+    position: relative;
+    width: auto;
+    height: 100%;
     min-width: 300px;
     min-height: 150px;
-    margin: 0 0 50px 0;
-    padding-bottom: 10px;
+    margin: 0 0 100px 0;
+    padding: 0 10px 10px 40px;
+    ${({ theme }) => rightBorder(theme.BD_C)}
 
     & > h3 {
-      padding: 10px 0 0 10px;
+      padding: 20px 0 0 10px;
     }
   }
+
   & > div:nth-of-type(2) {
-    border: 1px solid white;
-    background-color: white;
-    height: 100.5%;
+    border-top: 2px solid ${({ theme }) => theme.BD_C};
+    position: relative;
+    height: 100%;
     min-width: 300px;
     min-height: 150px;
-    padding: 10px 0 0 10px;
+    // padding: 10px 0 0 10px;
+    padding: 10px 10px 0 45px;
+    ${({ theme }) => rightBorder(theme.BD_C)}
 
     & > h3 {
-      padding-bottom: 20px;
+      padding: 10px 0 10px 0;
     }
 
     & > ul {
@@ -343,14 +281,6 @@ DIV.AboutPart4 = styled.div`
     }
   }
 
-  @media screen and (max-width: calc(${({ theme }) => theme.BP.PC} - 0.5px)) {
-    & > div:nth-of-type(1) {
-      ${depthEffect}
-    }
-    & > div:nth-of-type(2) {
-      ${depthEffect}
-    }
-  }
   @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
     display: flex;
     flex-direction: column;
@@ -359,14 +289,14 @@ DIV.AboutPart4 = styled.div`
 
     & > div:nth-of-type(1) {
       width: 300px;
-      height: 100.5%;
-      margin: 0 0 50px 0;
+      height: 100%;
     }
     & > div:nth-of-type(2) {
       width: 300px;
       height: 100%;
     }
   }
+
   @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
     display: flex;
     flex-direction: row;
@@ -375,31 +305,28 @@ DIV.AboutPart4 = styled.div`
 
     & > div:nth-of-type(1) {
       width: 230px;
-      height: 100.5%;
+      height: 100%;
       min-width: 230px;
       min-height: 130px;
-      margin: 0 20px 0 0;
+      margin: 0 30px 0 0;
     }
     & > div:nth-of-type(2) {
       width: 230px;
       height: 100%;
       min-width: 230px;
       min-height: 130px;
-      margin: 0 0 0 20px;
+      margin: 0 0 0 30px;
     }
   }
+
   @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
     & > div:nth-of-type(1) {
       width: 330px;
-      height: 100.5%;
-      padding: 5px;
-      border-radius: 25px;
+      height: 100%;
     }
     & > div:nth-of-type(2) {
       width: 330px;
       height: 100%;
-      padding: 15px;
-      border-radius: 25px;
     }
   }
 `;
