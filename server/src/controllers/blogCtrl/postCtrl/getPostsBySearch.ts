@@ -3,7 +3,7 @@ import Posts from "@models/blog/postModel";
 
 const getPostsBySearch = async (req: Request, res: Response) => {
   try {
-    if (!req.query.q) return res.status(200).json({ posts: await Posts.find(), msg: "No query" });
+    if (!req.query.q) return res.status(200).json({ posts: await Posts.find().sort({ createdAt: -1 }), msg: "No query" });
 
     const posts = await Posts.find({
       $or: [
@@ -12,7 +12,7 @@ const getPostsBySearch = async (req: Request, res: Response) => {
         { description: { $regex: req.query.q } },
         { tags: { $in: [req.query.q] } }, //정확히 일치 할때만
       ],
-    });
+    }).sort({ createdAt: -1 });
 
     if (!posts.length) return res.status(200).json({ msg: "No blogs" });
 
