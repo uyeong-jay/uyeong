@@ -3,13 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 //initialState type
 interface initialState {
-  blogPostsDataBySearch: BlogPostRes | null;
+  blogPostsBySearch: BlogPostRes | null;
   tagName: string;
 }
 
 //initialState
 const initialState: initialState = {
-  blogPostsDataBySearch: null,
+  blogPostsBySearch: null,
   tagName: '',
 };
 
@@ -19,7 +19,7 @@ const blogSlice = createSlice({
   initialState,
   reducers: {
     getPostsBySearch: (state, action) => {
-      state.blogPostsDataBySearch = action.payload;
+      state.blogPostsBySearch = action.payload;
     },
     getTagName: (state, action) => {
       state.tagName = action.payload;
