@@ -3,7 +3,7 @@ import { useGetUserDataQuery, useLogoutMutation } from '@app/services/user/userA
 import { useCallback } from 'react';
 
 const HeaderContainer = () => {
-  const { data: userData, isLoading: getUserDataLoading, error: getUserDataError } = useGetUserDataQuery();
+  const { data: userData, /* isLoading: getUserDataLoading, */ error: getUserDataError } = useGetUserDataQuery();
   const [logout, { error: logoutError }] = useLogoutMutation();
 
   const onClickLogout = useCallback(async () => {
@@ -13,7 +13,7 @@ const HeaderContainer = () => {
   return (
     <HeaderPresenter
       userData={userData}
-      getUserDataLoading={getUserDataLoading}
+      // getUserDataLoading={getUserDataLoading}
       getUserDataError={getUserDataError}
       onClickLogout={onClickLogout}
       logoutError={logoutError}

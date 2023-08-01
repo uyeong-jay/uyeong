@@ -3,7 +3,7 @@ import { HEADER, NAV } from './HeaderStyle';
 import Button from '@atoms/Button';
 import NavLinkBox from '@molecules/NavLinkBox';
 import { UserResponse } from '@app/services/user/userApi';
-import Loader from '@modals/Loader';
+// import Loader from '@modals/Loader';
 import NotFound from '@src/pages/404';
 import Image from 'next/image';
 import useOnClickOutside from '@hooks/useOnClickOutside';
@@ -14,13 +14,18 @@ import Logo from '@icons/Logo';
 
 interface Props {
   userData?: UserResponse;
-  getUserDataLoading: boolean;
+  // getUserDataLoading: boolean;
   getUserDataError: any;
   logoutError: any;
   onClickLogout: () => void;
 }
 
-const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logoutError, onClickLogout }: Props) => {
+const HeaderPresenter = ({
+  userData,
+  /* getUserDataLoading, */ getUserDataError,
+  logoutError,
+  onClickLogout,
+}: Props) => {
   const dropdownBoxRef = useRef(null);
   const [isOpen, setOpen] = useState(false);
 
@@ -75,8 +80,8 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
   return (
     <>
       {/* 로딩화면 */}
-      {getUserDataLoading && <Loader />}
-      <HEADER.Layout>
+      {/* {getUserDataLoading && <Loader />} */}
+      <HEADER.Frame>
         <NAV.HeaderNav isMenuIconClicked={isMenuIconClicked} render={render}>
           <ul>
             {/* 1 */}
@@ -151,7 +156,7 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
             </li>
           </ul>
         </NAV.HeaderNav>
-      </HEADER.Layout>
+      </HEADER.Frame>
     </>
   );
 };

@@ -2,29 +2,31 @@ import styled from '@_settings/styled';
 
 interface HeaderNavProps {
   isMenuIconClicked: boolean;
-  animationName: string;
   render: boolean;
 }
 
 export const HEADER = {} as any;
 export const NAV = {} as any;
 
-HEADER.Layout = styled.header`
-  // border: 1px solid yellow;
+HEADER.Frame = styled.header`
+  // border: 1px solid red;
   background-color: transparent;
   // backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: sticky; //banner에 그림을 넣을수도 있어서 sticky로 설정
   top: 0;
   z-index: 1;
   width: 100%;
-  max-width: ${({ theme }) => theme.BP.PC};
-  margin: 0 auto;
   height: 50px;
 `;
 
 NAV.HeaderNav = styled.nav<HeaderNavProps>`
   // border: 1px solid green;
+  max-width: ${({ theme }) => theme.BP.PC};
+  width: 100%;
   height: 100%;
 
   & > ul {
@@ -42,7 +44,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
       margin-left: 17px;
 
       & .logo {
-        fill: #2c3333;
+        fill: ${({ theme }) => theme.LOGO_C};
       }
     }
 
@@ -60,6 +62,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
           justify-content: space-around;
           align-items: center;
           width: 100%;
+          font-weight: bold;
         }
       }
     }
@@ -157,6 +160,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
           top: 0;
           left: 0;
           z-index: 1;
+          color: ${({ theme }) => theme.FONT_C};
 
           ${(props) => {
             if (props.render && props.isMenuIconClicked) {
@@ -200,7 +204,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
             // border: 1px solid black;
             display: flex;
             flex-direction: column;
-            height: 85%;
+            height: 100%;
 
             & > li {
               // border: 1px solid black;
