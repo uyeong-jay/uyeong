@@ -6,9 +6,10 @@ export const StyledBlogCategoryDetail = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  width: 1000px;
+  width: 100%;
   min-height: 700px;
   padding: 100px 0;
+  // padding: 50px 25px 100px 25px;
 
   & > .category-title {
     // border: 1px solid black;

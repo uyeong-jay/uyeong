@@ -4,7 +4,7 @@ import { useGetUserDataQuery } from '@app/services/user/userApi';
 import { useGetBlogCategoriesQuery, useCreateBlogCategoryMutation } from '@app/services/blog/categoryApi';
 import { useGetBlogPostsQuery } from '@app/services/blog/postApi';
 
-const CategoryContainer = () => {
+const BlogCategoryContainer = () => {
   const { data: userData } = useGetUserDataQuery();
   const { data: blogCategoryData /* , isLoading, isSuccess, error */ } = useGetBlogCategoriesQuery();
   const { data: blogPostsData } = useGetBlogPostsQuery();
@@ -44,4 +44,4 @@ const CategoryContainer = () => {
   );
 };
 
-export default CategoryContainer;
+export default BlogCategoryContainer;

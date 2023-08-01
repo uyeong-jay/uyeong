@@ -1,12 +1,13 @@
 import styled from '@_settings/styled';
 
 export const StyledBlogCategory = styled.section`
-  border: 1px solid red;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 1200px;
+  // border: 1px solid black;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  // width: 100%;
+  // padding: 50px 25px 100px 25px;
 `;
 
 export const StyledBlogCategoryContent = styled.section`
