@@ -8,11 +8,12 @@ interface AppLayoutProps {
 
 const StyledAppLayout = styled.div`
   // border: 1px solid red;
-  // display: flex;
-  // flex-direction: column;
-  // position: relative;
-  background-color: ${({ theme }) => theme.BACKGROUND_COLOR};
+  // width: 100%;
+  position: relative;
   min-width: 320px;
+  min-height: 100%;
+  padding-bottom: 200px;
+  background-color: ${({ theme }) => theme.BG_C};
 `;
 
 const AppLayout = ({ children }: AppLayoutProps) => {
