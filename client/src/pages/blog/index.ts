@@ -14,8 +14,8 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   if (context.req && cookie) {
     axios.defaults.headers.common.Cookie = cookie;
     store.dispatch(getUserData.initiate());
-    store.dispatch(getBlogPosts.initiate());
   }
+  store.dispatch(getBlogPosts.initiate());
 
   await Promise.all(getRunningOperationPromises());
 
