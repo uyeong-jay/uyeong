@@ -1,20 +1,20 @@
 import styled from '@_settings/styled';
 
-const layout = `
+const flexible = `
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 export const StyledPublishPrivacy = styled.div`
-  ${layout}
+  ${flexible}
   // border: 1px solid black;
   width: 100%;
   height: 100%;
 
   & .privacy-block {
     // border: 1px solid black;
-    ${layout}
+    ${flexible}
     justify-content: space-between;
     width: 300px;
     height: 100px;
