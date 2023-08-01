@@ -3,7 +3,7 @@ import styled from '@_settings/styled';
 export const MAIN = {} as any;
 export const DIV = {} as any;
 
-MAIN.Layout = styled.main`
+MAIN.Frame = styled.main`
   // border: 1px solid black;
   display: flex;
   justify-content: center;

@@ -1,6 +1,11 @@
 import styled from '@_settings/styled';
 
-const Layout = styled.section`
+export const SECTION = {} as any;
+export const DIV = {} as any;
+export const BTN = {} as any;
+export const P = {} as any;
+
+SECTION.Frame = styled.section`
   border: 1px solid green;
   margin: 20px;
   display: flex;
@@ -8,7 +13,7 @@ const Layout = styled.section`
   align-items: start;
 `;
 
-const Left = styled.div`
+DIV.Left = styled.div`
   border: 1px solid black;
 
   & .comment-user-avatar-warpper {
@@ -23,55 +28,55 @@ const Left = styled.div`
   }
 `;
 
-const Right = styled.div`
+DIV.Right = styled.div`
   border: 1px solid black;
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 
-const RightTop = styled.div`
+DIV.RightTop = styled.div`
   border: 1px solid black;
   display: flex;
   justify-content: space-between;
 `;
 
-const CommentInfo = styled.div`
+DIV.CommentInfo = styled.div`
   border: 1px solid black;
   display: flex;
 `;
 
-const Nickname = styled.p`
+P.Nickname = styled.p`
   border: 1px solid black;
 `;
 
-const CreatedDate = styled.p`
+P.CreatedDate = styled.p`
   border: 1px solid black;
 `;
 
-const CommentSideBtnGroup = styled.div`
-  border: 1px solid black;
-  display: flex;
-`;
-
-const CommentUpdateBtn = styled.button`
-  border: 1px solid black;
-`;
-
-const CommentDeleteBtn = styled.button`
-  border: 1px solid black;
-`;
-
-const RightMiddle = styled.div`
-  border: 1px solid black;
-`;
-
-const RightBottom = styled.div`
+DIV.CommentSideBtnGroup = styled.div`
   border: 1px solid black;
   display: flex;
 `;
 
-const Replies = styled.p`
+BTN.CommentUpdateBtn = styled.button`
+  border: 1px solid black;
+`;
+
+BTN.CommentDeleteBtn = styled.button`
+  border: 1px solid black;
+`;
+
+DIV.RightMiddle = styled.div`
+  border: 1px solid black;
+`;
+
+DIV.RightBottom = styled.div`
+  border: 1px solid black;
+  display: flex;
+`;
+
+P.Replies = styled.p`
   border: 1px solid black;
   display: flex;
   padding: 0 5px;
@@ -88,37 +93,10 @@ const Replies = styled.p`
   }
 `;
 
-const CommentReplyBtn = styled.button`
+BTN.CommentReplyBtn = styled.button`
   border: 1px solid black;
 `;
 
-const CommentCancelBtn = styled.button`
+BTN.CommentCancelBtn = styled.button`
   border: 1px solid black;
 `;
-
-export const SECTION = {
-  Layout,
-};
-
-export const DIV = {
-  Left,
-  Right,
-  RightTop,
-  CommentInfo,
-  CommentSideBtnGroup,
-  RightMiddle,
-  RightBottom,
-};
-
-export const P = {
-  Replies,
-  Nickname,
-  CreatedDate,
-};
-
-export const BTN = {
-  CommentUpdateBtn,
-  CommentDeleteBtn,
-  CommentReplyBtn,
-  CommentCancelBtn,
-};

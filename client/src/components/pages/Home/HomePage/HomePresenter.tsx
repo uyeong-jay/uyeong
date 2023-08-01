@@ -20,7 +20,7 @@ const HomePresenter = ({ blogPostsData }: Props) => {
       <Head>
         <title>UYeong</title>
       </Head>
-      <MAIN.Layout>
+      <MAIN.Frame>
         <DIV.ContainerWidth>
           <DIV.ContainerHeight>
             <DIV.BannerBlock>
@@ -33,7 +33,7 @@ const HomePresenter = ({ blogPostsData }: Props) => {
             </DIV.SummaryBlock>
           </DIV.ContainerHeight>
         </DIV.ContainerWidth>
-      </MAIN.Layout>
+      </MAIN.Frame>
     </>
   );
 };

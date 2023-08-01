@@ -12,7 +12,7 @@ const DIV = {} as any;
 const P = {} as any;
 const IMG = {} as any;
 
-DIV.Layout = styled.div`
+DIV.Frame = styled.div`
   // border: 1px solid ${({ theme }) => theme.BD_C};
   display: flex;
   flex-direction: column;
@@ -64,7 +64,7 @@ const MiniBlogPostCard = ({ post }: Props) => {
   } = post;
 
   return (
-    <DIV.Layout>
+    <DIV.Frame>
       {thumbnail && (
         <Link href={`/blog/${titleForUrl}`} rel="noopener noreferrer" passHref>
           <a>
@@ -78,7 +78,7 @@ const MiniBlogPostCard = ({ post }: Props) => {
         </Link>
       </P.SlickPostTitle>
       <P.SlickPostCategory>{category}</P.SlickPostCategory>
-    </DIV.Layout>
+    </DIV.Frame>
   );
 };
 

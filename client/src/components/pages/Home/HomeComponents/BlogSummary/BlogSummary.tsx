@@ -13,7 +13,7 @@ import DetailButton from '@molecules/DetailButton';
 const ARTICLE = {} as any;
 const DIV = {} as any;
 
-ARTICLE.Layout = styled.article`
+ARTICLE.Frame = styled.article`
   // border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -92,7 +92,7 @@ const settings = {
 
 const BlogSummary = ({ blogPostsData }: Props) => {
   return (
-    <ARTICLE.Layout>
+    <ARTICLE.Frame>
       <DIV.BSTitleWrapper>
         <h3>BLOG</h3>
       </DIV.BSTitleWrapper>
@@ -104,7 +104,7 @@ const BlogSummary = ({ blogPostsData }: Props) => {
         </Slider>
         <DetailButton link="/blog" />
       </DIV.SliderWrapper>
-    </ARTICLE.Layout>
+    </ARTICLE.Frame>
   );
 };
 

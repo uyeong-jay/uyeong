@@ -6,7 +6,7 @@ import AboutAvatar from '@pages/About/AboutComponents/AboutAvatar/AboutAvatar';
 const SECTION = {} as any;
 const DIV = {} as any;
 
-SECTION.Layout = styled.section`
+SECTION.Frame = styled.section`
   // border: 1px solid red;
   width: 100%; //400px;
   height: 100%;
@@ -43,7 +43,7 @@ DIV.ASContentWarpper = styled.div`
 
 const AboutSummary = () => {
   return (
-    <SECTION.Layout>
+    <SECTION.Frame>
       <DIV.ASTitleWrapper>
         <h3>ABOUT</h3>
       </DIV.ASTitleWrapper>
@@ -51,7 +51,7 @@ const AboutSummary = () => {
         <AboutAvatar />
         <DetailButton link="/about" />
       </DIV.ASContentWarpper>
-    </SECTION.Layout>
+    </SECTION.Frame>
   );
 };
 

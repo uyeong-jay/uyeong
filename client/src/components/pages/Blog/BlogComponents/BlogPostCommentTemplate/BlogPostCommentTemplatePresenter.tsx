@@ -63,7 +63,7 @@ const BlogPostCommentTemplatePresenter = ({
   const { user, content, replies, createdAt } = comment;
 
   return (
-    <SECTION.Layout>
+    <SECTION.Frame>
       {/* 프로필 이미지 */}
       <DIV.Left>
         <div className="comment-user-avatar-warpper comment-user-avatar">
@@ -142,7 +142,7 @@ const BlogPostCommentTemplatePresenter = ({
         setOpen={setModalOpen}
         callback={() => onClickDelete(true)}
       />
-    </SECTION.Layout>
+    </SECTION.Frame>
   );
 };
 

@@ -9,7 +9,7 @@ interface Props {
 
 const TagsSummaryPresenter = ({ allTags, onClickTag }: Props) => {
   return (
-    <SECTION.Layout>
+    <SECTION.Frame>
       <DIV.TSTitleWrapper>
         <h1>TAGS</h1>
       </DIV.TSTitleWrapper>
@@ -20,7 +20,7 @@ const TagsSummaryPresenter = ({ allTags, onClickTag }: Props) => {
           </DIV.TagWrapper>
         ))}
       </DIV.TagsWrapper>
-    </SECTION.Layout>
+    </SECTION.Frame>
   );
 };
 

@@ -15,7 +15,7 @@ const rightBorder = (color: string) => `
   }
 `;
 
-SECTION.Layout = styled.section`
+SECTION.Frame = styled.section`
   // border: 1px solid black;
   display: flex;
   flex-direction: column;

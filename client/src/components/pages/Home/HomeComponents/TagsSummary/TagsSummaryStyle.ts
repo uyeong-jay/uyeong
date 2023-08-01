@@ -7,7 +7,7 @@ interface TagWrapperProps {
 export const SECTION = {} as any;
 export const DIV = {} as any;
 
-SECTION.Layout = styled.section`
+SECTION.Frame = styled.section`
   // border: 1px solid black;
   display: flex;
   flex-direction: column;

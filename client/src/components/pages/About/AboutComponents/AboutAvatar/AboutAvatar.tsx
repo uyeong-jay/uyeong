@@ -4,7 +4,7 @@ import styled from '@_settings/styled';
 
 const DIV = {} as any;
 
-DIV.Layout = styled.div`
+DIV.Frame = styled.div`
   // border: 1px solid red;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@ DIV.Layout = styled.div`
 
 const AboutAvatar = () => {
   return (
-    <DIV.Layout>
+    <DIV.Frame>
       <div className="about-avatar-wrapper about-avatar">
         <Image
           className="about-avatar"
@@ -46,7 +46,7 @@ const AboutAvatar = () => {
         />
       </div>
       <p>UYeong</p>
-    </DIV.Layout>
+    </DIV.Frame>
   );
 };
 

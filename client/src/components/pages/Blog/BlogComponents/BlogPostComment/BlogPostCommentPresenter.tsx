@@ -21,7 +21,7 @@ const BlogPostCommentPresenter = ({ userData, postId, comment, userMatch }: Prop
   }, []);
 
   return (
-    <SECTION.Layout>
+    <SECTION.Frame>
       <BlogPostCommentTemplate
         postId={postId}
         comment={comment}
@@ -38,7 +38,7 @@ const BlogPostCommentPresenter = ({ userData, postId, comment, userMatch }: Prop
             <BlogPostCommentTemplate postId={postId} userData={userData} comment={comment} reply={reply} />
           </DIV.ReplyGourp>
         ))}
-    </SECTION.Layout>
+    </SECTION.Frame>
   );
 };
 

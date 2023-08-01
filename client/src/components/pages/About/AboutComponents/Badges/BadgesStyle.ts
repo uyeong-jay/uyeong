@@ -2,7 +2,7 @@ import styled from '@_settings/styled';
 
 export const DIV = {} as any;
 
-DIV.Layout = styled.div`
+DIV.Frame = styled.div`
   // border: 1px solid black;
   padding: 0 10px 10px 10px;
   // min-width: 100%;

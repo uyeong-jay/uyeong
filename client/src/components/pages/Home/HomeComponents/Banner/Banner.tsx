@@ -4,7 +4,7 @@ import HeartIcon from '@icons/HeartIcon';
 
 const SECTION = {} as any;
 
-SECTION.Layout = styled.section`
+SECTION.Frame = styled.section`
   // border: 1px solid red;
   position: relative;
   width: 100%;
@@ -70,7 +70,7 @@ SECTION.Layout = styled.section`
 
 const Banner = () => {
   return (
-    <SECTION.Layout>
+    <SECTION.Frame>
       {/* <div></div> */}
       <div className="scrolling-words-box">
         <ul>
@@ -84,7 +84,7 @@ const Banner = () => {
           <li>Hi there !</li>
         </ul>
       </div>
-    </SECTION.Layout>
+    </SECTION.Frame>
   );
 };
 

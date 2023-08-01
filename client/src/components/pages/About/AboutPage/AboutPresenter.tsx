@@ -18,7 +18,7 @@ const AboutPresenter = () => {
         <title>UYeong | About</title>
       </Head>
       <SubFrame>
-        <SECTION.Layout>
+        <SECTION.Frame>
           {/* 1 */}
           <DIV.AboutPart1>
             <AboutAvatar />
@@ -100,7 +100,7 @@ const AboutPresenter = () => {
               </ul>
             </div>
           </DIV.AboutPart4>
-        </SECTION.Layout>
+        </SECTION.Frame>
       </SubFrame>
     </>
   );

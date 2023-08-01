@@ -10,7 +10,7 @@ interface Props {
 
 const BlogPostCommentsPresenter = ({ postId, blogCommentsData }: Props) => {
   return (
-    <SECTION.Layout>
+    <SECTION.Frame>
       <DIV.CommentTypeBtnGroup>
         <BTN.CommonCommentBtn>Common</BTN.CommonCommentBtn>
         <BTN.IssueCommentBtn>Issue</BTN.IssueCommentBtn>
@@ -26,7 +26,7 @@ const BlogPostCommentsPresenter = ({ postId, blogCommentsData }: Props) => {
           <BlogPostComment key={comment._id} postId={postId} comment={comment} />
         ))}
       </DIV.CommentMDviewerGroup>
-    </SECTION.Layout>
+    </SECTION.Frame>
   );
 };
 

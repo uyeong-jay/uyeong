@@ -5,7 +5,7 @@ import { DIV } from './BadgesStyle';
 
 const Badges = () => {
   return (
-    <DIV.Layout>
+    <DIV.Frame>
       {badgeData.map((v) => (
         <div key={v.name}>
           <p>- {v.name} -</p>
@@ -27,7 +27,7 @@ const Badges = () => {
           </ul>
         </div>
       ))}
-    </DIV.Layout>
+    </DIV.Frame>
   );
 };
 
