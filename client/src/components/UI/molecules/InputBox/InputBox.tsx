@@ -1,14 +1,17 @@
-import React, { ChangeEvent /* DetailedHTMLProps, InputHTMLAttributes */ } from 'react';
+import React, { ChangeEvent, ForwardedRef, forwardRef, memo } from 'react';
 import styled from '@_settings/styled';
 
 interface Props {
-  labelText: string;
-  name: string;
+  labelText?: string;
+  name?: string;
   type?: string;
   value?: string;
   defaultValue?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClick?: () => void;
+  onFocus?: () => void;
   placeholder?: string;
+  // ref?: RefObject<HTMLInputElement>;
   disabled?: boolean;
   readOnly?: boolean;
   required?: boolean;
@@ -26,29 +29,33 @@ const StyledLabel = styled.label`
 `;
 
 const StyledInput = styled.input`
-  // border: 2px dotted darkslategray;
+  // border-bottom: 1px solid black;
   margin: 5px 0 30px 0;
   width: 100%;
   height: 40px;
   text-align: center;
-  color: darkslategray;
+  color: ${({ theme }) => theme.FONT_C};
   border: none;
   outline: none;
-  // border-bottom: 1px solid black;
 `;
 
-const InputBox = ({
-  labelText,
-  type,
-  name,
-  value,
-  defaultValue,
-  onChange,
-  placeholder,
-  disabled,
-  readOnly,
-  required,
-}: Props) => {
+const InputBox = (
+  {
+    labelText,
+    type,
+    name,
+    value,
+    defaultValue,
+    onChange,
+    onClick,
+    onFocus,
+    placeholder,
+    disabled,
+    readOnly,
+    required,
+  }: Props,
+  ref?: ForwardedRef<HTMLInputElement>,
+) => {
   return (
     <StyledInputBox>
       <StyledLabel>{labelText}</StyledLabel>
@@ -58,7 +65,10 @@ const InputBox = ({
         value={value}
         defaultValue={defaultValue}
         onChange={onChange}
+        onFocus={onFocus}
+        onClick={onClick}
         placeholder={placeholder}
+        ref={ref}
         disabled={disabled ? true : false}
         readOnly={readOnly ? true : false}
         required={required ? true : false}
@@ -67,10 +77,4 @@ const InputBox = ({
   );
 };
 
-InputBox.defaultProps = {
-  type: 'text',
-  disabled: false,
-  readOnly: false,
-};
-
-export default InputBox;
+export default memo(forwardRef(InputBox));
