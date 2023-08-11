@@ -17,7 +17,7 @@ const BlogPostHeaderPresenter = ({ blogPost, onClickDeletePost, isModalOpen, set
   return (
     <StyledBlogPostHeader>
       {/* 제목 글씨체 바꾸기 */}
-      <h1>{title}</h1>
+      <h1>{title && title.charAt(0).toUpperCase() + title.slice(1)}</h1>
       <div>
         <Link href={`/write?id=${_id}`}>수정</Link>
         <button onClick={() => onClickDeletePost()}>삭제</button>

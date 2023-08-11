@@ -15,7 +15,8 @@ HEADER.Frame = styled.header`
   justify-content: center;
   align-items: flex-end;
   width: 100%;
-  height: 200px;
+  height: 250px;
+  margin-bottom: 50px;
   color: ${({ theme }) => theme.FONT_C};
 `;
 
@@ -33,13 +34,57 @@ DIV.HeaderBlock = styled.div<HeaderBlockProps>`
     display: flex;
     justify-contents: center;
     align-items: center;
+    position: relative;
     width: 100%;
     padding-left: 5%;
 
+    & > li:nth-of-type(1) {
+      border-right: 1px solid ${({ theme }) => theme.BD_C};
+      padding: 10px 15px 10px 0px;
+
+      & > span {
+        padding: 5px 10px 6px 10px;
+        ${(props) => {
+          if (props.routerPathname === '/blog')
+            return `
+              background-color: ${props.theme.FONT_C};
+              color: ${props.theme.BG_C};
+            `;
+        }}
+      }
+    }
+
+    & > li:nth-of-type(2) {
+      border-left: 1px solid ${({ theme }) => theme.BD_C};
+      padding: 10px 0px 10px 15px;
+
+      & > span {
+        padding: 5px 10px 6px 10px;
+        ${(props) => {
+          if (props.routerPathname === '/blog/category')
+            return `
+              background-color: ${props.theme.FONT_C};
+              color: ${props.theme.BG_C};
+            `;
+        }}
+      }
+    }
+
     & > li {
       // border: 1px solid black;
-      margin: 10px;
-      cursor: pointer;
+      position: relative;
+      bottom: -30px;
+      left: 0;
+      height: 70px;
+
+      & > span {
+        // border: 1px solid black;
+        cursor: pointer;
+        border-radius: 20px;
+        font-weight: 600;
+      }
+
+      
     }
   }
 
@@ -51,7 +96,7 @@ DIV.HeaderBlock = styled.div<HeaderBlockProps>`
 
     & > span {
       // border: 1px solid black;
-      margin: 5px 40px 5px 5px;
+      margin: 5px 25px 5px 5px;
       font-family: 'Square Peg', cursive;
       font-size: 25px;
       font-weight: 600;

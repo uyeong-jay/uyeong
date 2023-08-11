@@ -30,6 +30,8 @@ const BlogContainer = () => {
 
   const [isClickedTag, setClickedTag] = useState(false);
 
+  const [savedTagName, setSavedTagName] = useState('');
+
   // 모든 태그 > 많은 순 정렬
   // +50개 로 끊기 (+더보기)
   const allTags = useMemo(() => {
@@ -84,6 +86,7 @@ const BlogContainer = () => {
     setClickedTag(true);
     setSearchWordInput('');
     setSearchWordActual(tag);
+    setSavedTagName(tag);
   }, []);
 
   const onChangeInput = useCallback((e) => {
@@ -104,12 +107,14 @@ const BlogContainer = () => {
       blogPostsData={blogPostsData}
       blogPostsBySearch={blogPostsBySearch}
       allTags={allTags}
+      savedTagName={savedTagName}
       searchWordInput={searchWordInput}
       onChangeInput={onChangeInput}
       onClickInput={onClickInput}
       onFocusInput={onFocusInput}
       inputRef={inputRef}
       onClickTag={onClickTag}
+      isClickedTag={isClickedTag}
     />
   );
 };

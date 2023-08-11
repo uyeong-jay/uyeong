@@ -16,8 +16,12 @@ const BlogHeaderPresenter = () => {
     <HEADER.Frame>
       <DIV.HeaderBlock routerPathname={router.pathname}>
         <ul>
-          <li onClick={onClickPost}>Post</li>
-          <li onClick={onClickCategory}>Category</li>
+          <li>
+            <span onClick={onClickPost}>Post</span>
+          </li>
+          <li>
+            <span onClick={onClickCategory}>Category</span>
+          </li>
         </ul>
         <div>
           <span>UYeong</span>
