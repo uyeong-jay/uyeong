@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useMemo, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import BlogCategoryCardPresenter from './BlogCategoryCardPresenter';
 
 import {
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props) => {
-  const [updateBlogCategory, { error }] = useUpdateBlogCategoryMutation();
+  const [updateBlogCategory, { isSuccess, error }] = useUpdateBlogCategoryMutation();
   const [deleteBlogCategory] = useDeleteBlogCategoryMutation();
   const { name: cardName } = category;
 
@@ -25,11 +25,14 @@ const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props)
   //이전 카테고리 이름이 잠시 노출되는 이슈 해결차 생성
   const [categoryName, setCategoryName] = useState({ name: cardName });
 
+  const [isModalOpen, setModalOpen] = useState(false);
+
   //카테고리별 포스트
   const postsByCategoryName = useMemo(() => {
     const postsData = blogPostsData?.posts?.filter((post) => post.category === categoryName.name);
     return postsData;
-  }, [blogPostsData?.posts, categoryName.name]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [blogPostsData?.posts]);
 
   //Save category name
   const onClickSave = useCallback(
@@ -41,14 +44,19 @@ const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props)
       });
 
       setCategoryName({ name: currName });
-      setIsUpdate(false);
     },
     [categoryName, updateBlogCategory, userData?.access_token],
   );
 
+  //제목을 바꿀수 있는 경우만 save 되게 함
+  useEffect(() => {
+    if (isSuccess) setIsUpdate(false);
+  }, [isSuccess]);
+
   //Delete category
   const onClickDelete = useCallback(
-    (cardName) => {
+    (cardName: string, isCallback?: boolean) => {
+      if (!isCallback) return setModalOpen(true);
       deleteBlogCategory({
         categoryInfo: { name: cardName },
         token: userData?.access_token,
@@ -78,6 +86,8 @@ const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props)
       onClickDelete={onClickDelete}
       onClickSave={onClickSave}
       onChangeCategoryNameInput={onChangeCategoryNameInput}
+      isModalOpen={isModalOpen}
+      setModalOpen={setModalOpen}
     />
   );
 };

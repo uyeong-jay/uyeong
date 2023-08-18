@@ -149,6 +149,7 @@ DIV.SearchBar = styled.div`
   border-bottom: 2px solid ${({ theme }) => theme.BD_C};
   display: flex;
   margin-bottom: 100px;
+  min-width: 300px;
 
   & > svg {
     fill: ${({ theme }) => theme.BD_C};
@@ -162,15 +163,12 @@ DIV.SearchBar = styled.div`
 
     & > input {
       // border: 1px solid black;
-      background-color: ${({ theme }) => theme.BG_C};
       width: 100%;
       padding-left: 40px; //svg width랑 맞추기
-      margin: 0;
     }
   }
 
   @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
-    // 나중에
     width: 300px;
   }
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {

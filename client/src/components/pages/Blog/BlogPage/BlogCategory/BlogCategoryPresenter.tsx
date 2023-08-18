@@ -4,7 +4,7 @@ import BlogHeader from '@pages/Blog/BlogComponents/BlogHeader';
 import InputBox from '@molecules/InputBox';
 import Head from 'next/head';
 import { ChangeEvent, FormEvent } from 'react';
-import { StyledBlogCategory, StyledBlogCategoryContent } from './BlogCategoryStyle';
+import { DIV, SECTION } from './BlogCategoryStyle';
 import BlogCategoryCard from '@pages/Blog/BlogComponents/BlogCategoryCard';
 import { BlogCategoryRes } from '@app/services/blog/categoryApi';
 import { BlogPostRes } from '@app/services/blog/postApi';
@@ -36,21 +36,17 @@ const BlogCategoryPresenter = ({
       <Head>
         <title>UYeong | Blog</title>
       </Head>
-      <SubFrame>
-        <StyledBlogCategory>
+      <SECTION.Frame>
+        <SubFrame>
           <BlogHeader />
-          <StyledBlogCategoryContent>
+          <DIV.Content>
             {/* 카테고리 생성 바 (admin) */}
             {userData?.user?.role === 'admin' && (
               <form onSubmit={onSubmit}>
-                <InputBox labelText="category" name="category" value={name} onChange={onChangeCategoryInput} />
+                <InputBox name="category" value={name} onChange={onChangeCategoryInput} />
                 <Button variant="create" type="submit" text="Create" />
                 {/* 에러 메세지 */}
-                {error && (
-                  <div className="blog-category-error" style={{ color: 'red' }}>
-                    {error.data.msg}
-                  </div>
-                )}
+                {error && <p>{error.data.msg}</p>}
               </form>
             )}
 
@@ -65,9 +61,9 @@ const BlogCategoryPresenter = ({
                 />
               ))}
             </div>
-          </StyledBlogCategoryContent>
-        </StyledBlogCategory>
-      </SubFrame>
+          </DIV.Content>
+        </SubFrame>
+      </SECTION.Frame>
     </>
   );
 };
