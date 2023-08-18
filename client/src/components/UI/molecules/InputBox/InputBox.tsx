@@ -30,13 +30,24 @@ const StyledLabel = styled.label`
 
 const StyledInput = styled.input`
   // border-bottom: 1px solid black;
-  margin: 5px 0 30px 0;
+  background-color: ${({ theme }) => theme.BG_C};
+  // margin: 5px 0 30px 0;
+  margin: 0;
   width: 100%;
   height: 40px;
   text-align: center;
   color: ${({ theme }) => theme.FONT_C};
   border: none;
   outline: none;
+
+  &:autofill {
+    box-shadow: 0 0 0 1000px ${({ theme }) => theme.BG_C} inset;
+    text-fill-color: ${({ theme }) => theme.FONT_C};
+  }
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px ${({ theme }) => theme.BG_C} inset;
+    -webkit-text-fill-color: ${({ theme }) => theme.FONT_C};
+  }
 `;
 
 const InputBox = (
