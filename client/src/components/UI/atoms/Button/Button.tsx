@@ -13,26 +13,21 @@ interface ButtonProps {
 }
 
 const StyledButton = styled.button<ButtonProps>`
+  font-weight: bold;
+
   ${(props) => {
     switch (props.variant) {
       case 'create':
         return `
-          // background-color: white;
-          border: 1px solid blue;
-          color: blue;
+          color: ${props.theme.FONT_C};
         `;
       case 'delete':
         return `
-          // background-color: red;
-          border: 1px solid red;
-          color: red;
+          color: ${props.theme.FONT_C_DANGER};
         `;
       case 'update':
         return `
-          // border: 1px solid limegreen;
-          // background-color: rgb(127, 255, 0, 0.6);
-          border: 1px solid green;
-          color: green;
+          color: ${props.theme.FONT_C_UPDATE};
         `;
       case 'login':
         return `
