@@ -7,7 +7,6 @@ const postSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      maxLength: 50,
     },
     titleForUrl: {
       type: String,
@@ -24,7 +23,7 @@ const postSchema = new Schema(
     description: {
       type: String,
       trim: true,
-      maxLength: 200,
+      maxLength: [200, "Description is up to 200 chars long.)"]
     },
     thumbnail: {
       type: String,

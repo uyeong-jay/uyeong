@@ -26,7 +26,7 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      default: "user", //admin
+      default: "user", //or admin
     },
     rf_token: { type: String, select: false },
   },

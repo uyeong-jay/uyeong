@@ -16,6 +16,8 @@ const createCategory = async (req: IReqAuth, res: Response) => {
     // const category = await Categories.findOne({ name });
     // if (category) return res.status(400).json({ msg: "This category already exists." });
 
+    //catrgory > unique = true
+
     //데이터 생성
     const newCategory = new Categories({ name });
 
@@ -39,7 +41,7 @@ const createCategory = async (req: IReqAuth, res: Response) => {
 
       // errMsg = err.keyValue.name + " already exists.";
       // errMsg = Object.keys(err.keyValue)[0] + " already exists."; //'name already exists'.
-      errMsg = " Category " + "' " + Object.values(err.keyValue)[0] + " '" + " already exists."; //'javascript already exists'.
+      errMsg = " Category " + '"' + Object.values(err.keyValue)[0] + '"' + " already exists.";
     } else {
       let name = Object.keys(err.errors)[0];
       errMsg = err.errors[`${name}`].message;
