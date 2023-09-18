@@ -1,47 +1,55 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ARTICLE, DIV, P } from './BlogPostCardStyle';
 import { BlogPost } from '@app/services/blog/postApi';
 import formatDate from '@utils/formatDate';
-import { BlogCommentRes } from '@app/services/blog/commentApi';
+// import { BlogCommentRes } from '@app/services/blog/commentApi';
+// import removeMd from 'remove-markdown'
 
 interface Props {
   post: BlogPost;
-  blogCommentsData?: BlogCommentRes;
+  // blogCommentsData?: BlogCommentRes;
 }
 
-const BlogPostCardPresenter = ({ post, blogCommentsData }: Props) => {
-  const { /* _id, */ titleForUrl, title, tags, content, thumbnail, description, /* privacy, */ createdAt, category } =
-    post;
+const BlogPostCardPresenter = ({ post /* , blogCommentsData */ }: Props) => {
+  const {
+    /* _id, */ titleForUrl,
+    title,
+    tags,
+    content,
+    thumbnail,
+    description,
+    /* privacy, */ createdAt,
+    category,
+    commentCount,
+  } = post;
 
-  const cardDescription = useMemo(() => {
-    const cutText = description ? description.slice(0, 100) : content.slice(0, 100);
+  // const { count } = blogCommentsData || ({} as BlogCommentRes);
 
-    const finalDescription = description.length > 100 || content.length > 100 ? cutText + '...' : cutText;
+  // const postContent = useMemo(
+  //   () => removeMd(content, { useImgAltText: false }).slice(0, 300),
+  //   [content],
 
-    return finalDescription;
-  }, [content, description]);
-
-  const cardTitle = useMemo(() => {
-    const cutTitle = title.slice(0, 30);
-
-    const finalTitle = title.length > 30 ? cutTitle + '...' : cutTitle;
-
-    return finalTitle;
-  }, [title]);
-
-  const { count } = blogCommentsData || ({} as BlogCommentRes);
+  // );
 
   return (
     <ARTICLE.Frame>
       <DIV.Title thumbnail={thumbnail}>
         <h3>
-          <Link href={`/blog/${titleForUrl}`}>{cardTitle.charAt(0).toUpperCase() + cardTitle.slice(1)}</Link>
+          <Link href={`/blog/${titleForUrl}`}>{title.charAt(0).toUpperCase() + title.slice(1)}</Link>
         </h3>
         {thumbnail && (
           <div className="blog-card-image-wrapper blog-card-image">
-            {<Image className="blog-card-image" src={thumbnail as string} alt="blog-card-image" layout="fill" />}
+            {
+              <Image
+                className="blog-card-image"
+                src={thumbnail as string}
+                alt="blog-card-image"
+                layout="fill"
+                objectFit="cover"
+              />
+            }
           </div>
         )}
       </DIV.Title>
@@ -52,14 +60,29 @@ const BlogPostCardPresenter = ({ post, blogCommentsData }: Props) => {
         </DIV.ContentTop>
 
         <DIV.ContentMiddle thumbnail={thumbnail}>
-          {tags.length ? <P.CardTags>{tags}</P.CardTags> : <></>}
+          {tags.length ? (
+            <DIV.CardTags thumbnail={thumbnail}>
+              <p>
+                {tags.map((tag) => (
+                  <span key={tag}>
+                    <span>#</span>
+                    {tag}
+                  </span>
+                ))}
+              </p>
+            </DIV.CardTags>
+          ) : (
+            <></>
+          )}
           {tags.length ? <DIV.MidLine thumbnail={thumbnail}></DIV.MidLine> : <></>}
-          <P.CardDescription>{cardDescription}</P.CardDescription>
+          <DIV.CardDescription thumbnail={thumbnail}>
+            <p>{description ? description : content}</p>
+          </DIV.CardDescription>
         </DIV.ContentMiddle>
 
         <DIV.ContentBottom>
           <P.CardDate>{formatDate(createdAt)}</P.CardDate>
-          <P.CardComment>{count ? count : '0'} Comments</P.CardComment>
+          <P.CardComment>{commentCount} Comments</P.CardComment>
         </DIV.ContentBottom>
       </DIV.Content>
     </ARTICLE.Frame>

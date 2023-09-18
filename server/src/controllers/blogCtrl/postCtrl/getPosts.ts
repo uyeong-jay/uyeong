@@ -1,12 +1,24 @@
 import { Request, Response } from "express";
 import Posts from "@models/blog/postModel";
+import Comments from "@models/blog/commentModel";
 
 const getPosts = async (req: Request, res: Response) => {
   try {
     //Posts를 가장 최근에 생성된것이 가장 첫번째에 오도록 가져오기
-    const posts = await Posts.find().sort({ createdAt: -1 });
+    const sortedPosts = await Posts.find().sort({ createdAt: -1 });
 
-    res.status(200).json({ posts });
+    // 각 포스트에 대한 댓글 수를 가져오기
+    const postWithCommentCounts = await Promise.all(
+      sortedPosts.map(async (post) => {
+        const commentCount = await Comments.countDocuments({ post_title: post.title });
+        return {
+          ...post._doc,
+          commentCount, // 댓글 수를 포함
+        };
+      })
+    );
+
+    res.status(200).json({ posts: postWithCommentCounts });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });
   }
