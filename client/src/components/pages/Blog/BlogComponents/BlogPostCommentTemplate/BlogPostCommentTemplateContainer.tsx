@@ -46,9 +46,13 @@ const BlogPostCommentTemplateContainer = ({
 
   const onClickUpdate = useCallback(() => {
     setEditComment(true);
-    const regex = /<span style="background-color: pink; color:red;">(.*?)<\/span>/;
+    // const regex = /<span style="background-color: pink; color:red;">(.*?)<\/span>/;
+    // const matches = regex.exec(reply?.content as string);
+    // const result = matches?.[1];
+    const regex = /\*\*@(.*?)\*\*/;
     const matches = regex.exec(reply?.content as string);
     const result = matches?.[1];
+
     setRegexTaggedNickname(result as string);
   }, [reply?.content]);
 

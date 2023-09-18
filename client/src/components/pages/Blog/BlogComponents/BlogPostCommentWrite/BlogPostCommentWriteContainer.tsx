@@ -25,28 +25,6 @@ interface Props {
   setReplyContent?: (replyContent: string) => void;
 }
 
-//댓글or답글 내용 regex사용 편집
-const regexEditComment = (content: string, taggedNickname = '') => {
-  let markdownContent = content;
-
-  markdownContent = markdownContent.replace(/(\r\n|\n)/g, '&nbsp;\n\n'); //엔터한번을 \n\n로 대체
-
-  markdownContent = markdownContent.replaceAll('```&nbsp;', '```'); //code 마크다운이 연장되는 이슈해결 정규식
-
-  //태그된 닉네임 스타일 변경
-  //수정이 있어도 실행하기
-  if (taggedNickname) {
-    markdownContent = markdownContent.replace(
-      `@${taggedNickname}`,
-      `<span style="background-color: pink; color:red;">${taggedNickname}</span>`,
-    );
-  }
-
-  //*테이블 제외 모두 표현 가능
-
-  return markdownContent;
-};
-
 const BlogPostCommentWriteContainer = ({
   postId,
   comment,
@@ -68,13 +46,44 @@ const BlogPostCommentWriteContainer = ({
   const [createReply] = useCreateBlogReplyMutation();
   const [updateComment] = useUpdateBlogCommentMutation();
 
+  // const dispatch = useAppDispatch();
+
+  //댓글or답글 내용 regex사용 편집
+  const regexEditComment = useCallback((content: string, taggedNickname = '') => {
+    let markdownContent = content;
+
+    markdownContent = markdownContent.replace(/(\r\n|\n)/g, '&nbsp;\n\n'); //엔터한번을 \n\n로 대체
+
+    markdownContent = markdownContent.replaceAll('```&nbsp;', '```'); //code 마크다운이 연장되는 이슈해결 정규식
+
+    //태그된 닉네임 스타일 변경
+    //수정이 있어도 실행하기
+
+    if (taggedNickname) {
+      // markdownContent = markdownContent.replace(
+      //   `@${taggedNickname}`,
+      //   `<span style="background-color: pink; color:red;">${taggedNickname}</span>`,
+      // );
+      markdownContent = markdownContent.replace(`@${taggedNickname}`, `**@${taggedNickname}**`);
+    }
+
+    //*테이블 제외 모두 표현 가능
+
+    return markdownContent;
+  }, []);
+
   //답글 regex사용 재편집
   const regexReply = () => {
     let replayContent = reply?.content.replaceAll('&nbsp;', '');
     replayContent = replayContent?.replace(/(\r\n\n|\n\n)/g, '\n'); //엔터두번을 \n로 대체
 
-    replayContent = replayContent?.replace('<span style="background-color: pink; color:red;">', '@');
-    replayContent = replayContent?.replace('</span>', '');
+    // replayContent = replayContent?.replace('<span style="background-color: pink; color:red;">', '@');
+    // replayContent = replayContent?.replace('</span>', '');
+
+    replayContent = replayContent?.replace('**@', '@');
+    replayContent = replayContent?.replace('**', '');
+
+    // replayContent = replayContent?.replace(`**@${taggedNickname}**`, `@${taggedNickname}`);
 
     return replayContent;
   };
@@ -140,7 +149,7 @@ const BlogPostCommentWriteContainer = ({
       //내용 초기화
       setBlogCommentInfo({ ...blogCommentInfo, content: '' });
     },
-    [blogCommentInfo, createComment, userData?.access_token],
+    [blogCommentInfo, createComment, regexEditComment, userData?.access_token],
   );
 
   //답글 달기
@@ -170,6 +179,7 @@ const BlogPostCommentWriteContainer = ({
     blogCommentInfo,
     comment?._id,
     createReply,
+    regexEditComment,
     setOpenReplies,
     setWriteReply,
     taggedNickname,
@@ -215,6 +225,7 @@ const BlogPostCommentWriteContainer = ({
   }, [
     blogCommentInfo.content,
     comment?._id,
+    regexEditComment,
     regexTaggedNickname,
     reply?._id,
     reply?.comment_id,

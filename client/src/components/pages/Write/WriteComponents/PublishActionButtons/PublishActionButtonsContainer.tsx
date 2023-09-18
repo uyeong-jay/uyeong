@@ -35,7 +35,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
       token: userData?.access_token,
     };
     await createBlogPost(data);
-    await router.push(`/blog/${blogPostInfo.title}`);
+    await router.push(`/blog/${blogPostInfo.title.replace(/\s+/g, '-')}`);
 
     dispatch(cancelPublishing());
   }, [blogPostInfo, createBlogPost, dispatch, router, userData?.access_token]);
@@ -53,7 +53,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
       token: userData?.access_token,
     };
     await updateBlogPost(data);
-    await router.push(`/blog/${blogPostInfo.title}`);
+    await router.push(`/blog/${blogPostInfo.title.replace(/\s+/g, '-')}`);
 
     dispatch(cancelPublishing());
   }, [blogPostDataById?._id, blogPostInfo, dispatch, router, updateBlogPost, userData?.access_token]);
