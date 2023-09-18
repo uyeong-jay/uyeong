@@ -11,6 +11,7 @@ export interface BlogPost {
   category: string;
   privacy: boolean;
   createdAt: string;
+  commentCount: number;
 }
 
 export interface BlogPostRes {
