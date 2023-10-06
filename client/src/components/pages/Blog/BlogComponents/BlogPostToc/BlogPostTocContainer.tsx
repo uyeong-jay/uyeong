@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import BlogPostTocPresenter from './BlogPostTocPresenter';
 
 export interface HeadingType {
@@ -11,13 +11,12 @@ const BlogPostTocContainer = () => {
   const [headings, setHeadings] = useState<HeadingType[]>([]);
 
   useEffect(() => {
-    const headingEls = Array.from(document.querySelectorAll('h1, h2, h3'))
-      .filter((headingEl) => headingEl.id) // 제목이 같아도 고유 제목 id값으로 재추출(중복x)
-      .map((headingEl) => ({
-        id: headingEl.id,
-        text: headingEl.textContent ?? '',
-        level: Number(headingEl.tagName.substring(1)),
-      }));
+    const markdownContent = document.getElementById('markdown-content') ?? document;
+    const headingEls = Array.from(markdownContent.querySelectorAll('h1, h2, h3')).map((headingEl) => ({
+      id: headingEl.id,
+      text: headingEl.textContent ?? '',
+      level: Number(headingEl.tagName.substring(1)),
+    }));
 
     setHeadings(headingEls);
   }, []);
@@ -25,4 +24,4 @@ const BlogPostTocContainer = () => {
   return <BlogPostTocPresenter headings={headings} />;
 };
 
-export default BlogPostTocContainer;
+export default memo(BlogPostTocContainer);

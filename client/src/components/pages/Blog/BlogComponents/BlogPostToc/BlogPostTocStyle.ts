@@ -29,9 +29,10 @@ export const StyledList = styled.li<HeadingListProps>`
   & > a {
     font-size: calc(20px - (${(props) => props.headingLevel} * 2px));
 
-    font-weight: ${(props) => {
-      if (props.headingId === props.activeId) return 'bold';
-      else return 'normal';
+    color: ${(props) => {
+      // console.log('111111111', props.headingId, '2222222', props.activeId);
+      if (props.headingId === props.activeId) return 'red';
+      else return 'black';
     }};
   }
 `;
