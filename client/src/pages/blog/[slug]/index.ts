@@ -15,9 +15,9 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
     axios.defaults.headers.common.Cookie = cookie;
     store.dispatch(getUserData.initiate());
     // store.dispatch(getBlogPosts.initiate()); //blog 페이지에서 새로고침후 수정 버튼눌러 write 페이지로 바로 이동시에 필요
-    store.dispatch(getBlogPost.initiate(params?.slug as string));
-    store.dispatch(getBlogComments.initiate(params?.slug as string));
   }
+  store.dispatch(getBlogPost.initiate(params?.slug as string));
+  store.dispatch(getBlogComments.initiate(params?.slug as string));
 
   await Promise.all(getRunningOperationPromises());
 

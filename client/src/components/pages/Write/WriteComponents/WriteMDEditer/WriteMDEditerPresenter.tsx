@@ -1,12 +1,14 @@
 import { BlogPostReq } from '@app/services/blog/postApi';
 import React, { ChangeEvent } from 'react';
 import { StyledWriteMDEditer } from './WriteMDEditerStyle';
+import TextareaBox from '@molecules/textareaBox/textareaBox';
 
 interface Props {
   blogPostInfo: BlogPostReq;
+  memoizedContent: string;
   onChangeTextarea: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
-const WriteMDEditerPresenter = ({ blogPostInfo, onChangeTextarea }: Props) => {
+const WriteMDEditerPresenter = ({ blogPostInfo, memoizedContent, onChangeTextarea }: Props) => {
   return (
     <StyledWriteMDEditer>
       {/* <div>toolbar</div> */}
@@ -16,7 +18,11 @@ const WriteMDEditerPresenter = ({ blogPostInfo, onChangeTextarea }: Props) => {
       한번더 누르면 다시 돌아오기, 
       안누른거 누르면 또 양쪽으로 추가되기,
       누른거 한번더 누르면 눌러져있던거 골라서 빼내기,  */}
-      <textarea value={blogPostInfo.content} onChange={onChangeTextarea} placeholder="Write your story" />
+      <TextareaBox
+        value={!memoizedContent ? blogPostInfo.content : memoizedContent}
+        onChange={onChangeTextarea}
+        placeholder="Write your story"
+      />
     </StyledWriteMDEditer>
   );
 };

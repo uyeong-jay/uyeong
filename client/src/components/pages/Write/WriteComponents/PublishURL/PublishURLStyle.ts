@@ -23,5 +23,10 @@ export const StyledPublishURL = styled.div`
     & span {
       margin: 0 2px 3px 10px;
     }
+
+    & span:nth-of-type(2) {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 `;

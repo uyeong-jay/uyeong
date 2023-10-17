@@ -1,5 +1,5 @@
 import { BlogPostReq } from '@app/services/blog/postApi';
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import WriteMDViewerPresenter from './WriteMDViewerPresenter';
 
 interface Props {
@@ -7,7 +7,14 @@ interface Props {
 }
 
 const WriteMDViewerContainer = ({ blogPostInfo }: Props) => {
-  return <WriteMDViewerPresenter blogPostInfo={blogPostInfo} />;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [content, setContent] = useState(blogPostInfo.content);
+
+  const memoizedContent = useMemo(() => {
+    return content;
+  }, [content]);
+
+  return <WriteMDViewerPresenter blogPostInfo={blogPostInfo} memoizedContent={memoizedContent} />;
 };
 
 export default WriteMDViewerContainer;
