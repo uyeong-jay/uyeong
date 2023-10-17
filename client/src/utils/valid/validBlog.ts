@@ -18,7 +18,7 @@ const validBlog = (blogPostInfo: blogPostInfoProps) => {
 
   //content 에러
   if (!content) return 'Please add content.';
-  else if (content.length > 4000) return 'Content must be 50 characters or less.';
+  // else if (content.length > 4000) return 'Content must be 50 characters or less.';
   return '';
 };
 
