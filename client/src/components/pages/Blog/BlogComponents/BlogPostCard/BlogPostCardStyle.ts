@@ -11,7 +11,9 @@ interface ThumbnailProps {
 type TitleProps = ThumbnailProps;
 type ContentProps = ThumbnailProps;
 type ContentMiddleProps = ThumbnailProps;
+type CardTagsProps = ThumbnailProps;
 type MidLineProps = ThumbnailProps;
+type CardDescriptionProps = ThumbnailProps;
 
 ARTICLE.Frame = styled.article`
   border: 2px solid ${({ theme }) => theme.BD_C};
@@ -53,20 +55,13 @@ DIV.Title = styled.div<TitleProps>`
 
   & > h3 {
     // border: 1px solid blue;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
     position: relative;
     width: 100%;
-    height: 30%;
+    height: 25%;
     padding: 20px;
     font-size: 15px;
-    // overflow: hidden;
-    // text-overflow: ellipsis;
-
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
+    overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
 
     & > a {
@@ -85,11 +80,11 @@ DIV.Title = styled.div<TitleProps>`
 
   & .blog-card-image {
     // border: 1px solid black;
-    object-fit: cover; //원본크기로 넣기
   }
 
   @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
     & .blog-card-image-wrapper {
+      //w:h = 3:2
       width: 350px;
       height: 230px;
     }
@@ -102,7 +97,9 @@ DIV.Title = styled.div<TitleProps>`
       ${(props) => {
         if (props.thumbnail) {
           return `
-            left: 50%;
+            position: absolute;
+            // z-index: 1;
+            left: 0;
             width: 200%;
           `;
         }
@@ -117,6 +114,7 @@ DIV.Title = styled.div<TitleProps>`
     }
 
     & .blog-card-image-wrapper {
+      top: 28%;
       width: 90%;
       height: 60%;
       margin: 0;
@@ -225,21 +223,62 @@ DIV.ContentMiddle = styled.div<ContentMiddleProps>`
   }
 `;
 
-P.CardTags = styled.p`
+DIV.CardTags = styled.div<CardTagsProps>`
   // border: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 8%;
+  padding: 5%;
   text-align: center;
+  line-height: 2;
 
-  //텍스트 줄바꿈
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-  text-overflow: ellipsis;
+  & > p {
+    // border: 1px solid black;
+    overflow: hidden;
+    word-break: break-all; // 긴 단어도 줄 바꿈하여 표시
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; // 표시될 줄 수 지정
+    -webkit-box-orient: vertical;
+
+    & > span {
+      // border: 1px solid black;
+      margin: 0 7px;
+      color: ${({ theme }) => theme.FONT_C};
+
+      & > span {
+        // border: 1px solid black;
+        font-weight: bold;
+        padding-right: 1px;
+      }
+    }
+  }
+
+  @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
+    & > p {
+      ${(props) => {
+        if (!props.thumbnail) {
+          return `
+            font-size: 15px;
+            -webkit-line-clamp: 3;
+          `;
+        } else {
+          return `
+            font-size: 12px;
+            -webkit-line-clamp: 2;
+          `;
+        }
+      }}
+    }
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
+    & > p {
+      -webkit-line-clamp: 3;
+    }
+  }
 `;
 
 DIV.MidLine = styled.div<MidLineProps>`
@@ -257,22 +296,52 @@ DIV.MidLine = styled.div<MidLineProps>`
         `;
       }
     }}
+  }
 `;
 
-P.CardDescription = styled.p`
+DIV.CardDescription = styled.div<CardDescriptionProps>`
   // border: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 8%;
+  padding: 5%;
 
-  //텍스트 줄바꿈
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-  text-overflow: ellipsis;
+  & > p {
+    // border: 1px solid black;
+    overflow: hidden;
+    word-break: break-all; // 긴 단어도 줄 바꿈하여 표시
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; // 표시될 줄 수 지정
+    -webkit-box-orient: vertical;
+    color: ${({ theme }) => theme.FONT_C};
+  }
+
+  @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
+    & > p {
+      ${(props) => {
+        if (!props.thumbnail) {
+          return `
+            font-size: 15px;
+            -webkit-line-clamp: 3;
+          `;
+        } else {
+          return `
+            font-size: 12px;
+            -webkit-line-clamp: 2;
+          `;
+        }
+      }}
+    }
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
+    & > p {
+      -webkit-line-clamp: 3;
+    }
+  }
 `;
 
 DIV.ContentBottom = styled.div`

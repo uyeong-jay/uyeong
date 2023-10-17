@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ARTICLE, DIV, P } from './BlogPostCardStyle';
 import { BlogPost } from '@app/services/blog/postApi';
 import formatDate from '@utils/formatDate';
-// import { BlogCommentRes } from '@app/services/blog/commentApi';
-// import removeMd from 'remove-markdown'
+import removeMd from 'remove-markdown';
 
 interface Props {
   post: BlogPost;
-  // blogCommentsData?: BlogCommentRes;
 }
 
-const BlogPostCardPresenter = ({ post /* , blogCommentsData */ }: Props) => {
+const BlogPostCardPresenter = ({ post }: Props) => {
   const {
     /* _id, */ titleForUrl,
     title,
@@ -25,13 +23,11 @@ const BlogPostCardPresenter = ({ post /* , blogCommentsData */ }: Props) => {
     commentCount,
   } = post;
 
-  // const { count } = blogCommentsData || ({} as BlogCommentRes);
-
-  // const postContent = useMemo(
-  //   () => removeMd(content, { useImgAltText: false }).slice(0, 300),
-  //   [content],
-
-  // );
+  // 설명 , 내용 모두 200자만 제한해서 보여주기
+  const cardContent = useMemo(() => {
+    const editContent = content.slice(0, 200);
+    return removeMd(editContent);
+  }, [content]);
 
   return (
     <ARTICLE.Frame>
@@ -76,7 +72,7 @@ const BlogPostCardPresenter = ({ post /* , blogCommentsData */ }: Props) => {
           )}
           {tags.length ? <DIV.MidLine thumbnail={thumbnail}></DIV.MidLine> : <></>}
           <DIV.CardDescription thumbnail={thumbnail}>
-            <p>{description ? description : content}</p>
+            <p>{description ? cardContent : cardContent}</p>
           </DIV.CardDescription>
         </DIV.ContentMiddle>
 
