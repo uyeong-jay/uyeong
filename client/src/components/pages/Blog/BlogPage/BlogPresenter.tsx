@@ -8,11 +8,6 @@ import { SubFrame } from '@templates/SubFrame';
 import BlogPosts from '../BlogComponents/BlogPosts/BlogPosts';
 import InputBox from '@molecules/InputBox/InputBox';
 import SearchIcon from '@icons/SearchIcon';
-// import dynamic from 'next/dynamic';
-// import Loader from '@modals/Loader';
-// const BlogPostCard: any = dynamic(() => import('@pages/Blog/BlogComponents/BlogPostCard') as any, {
-//   loading: () => <Loader />,
-// });
 
 interface Props {
   blogPostsData?: BlogPostRes;

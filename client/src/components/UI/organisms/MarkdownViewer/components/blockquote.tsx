@@ -1,4 +1,5 @@
 import styled from '@_settings/styled';
+import { memo } from 'react';
 
 interface BlockQuoteProps {
   children: React.ReactNode;
@@ -15,4 +16,4 @@ const blockquote = ({ children }: BlockQuoteProps) => {
   return <Blockquote>{children}</Blockquote>;
 };
 
-export default blockquote;
+export default memo(blockquote);

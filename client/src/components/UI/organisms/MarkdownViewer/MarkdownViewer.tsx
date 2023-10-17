@@ -1,31 +1,14 @@
-import remarkGfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
-import components from './components';
 import ReactMarkdown from 'react-markdown';
-import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
+import components from './components';
+import { memo } from 'react';
 
 interface Props {
   content: string;
 }
 
-const sanitizeSchema = {
-  ...defaultSchema,
-  attributes: {
-    ...defaultSchema.attributes,
-    span: [...(defaultSchema.attributes?.span || []), ['style']],
-  },
-};
-
+// 이 옵션을 추가하여 전체 내용을 렌더링하도록 설정
 const MarkdownViewer = ({ content }: Props) => {
-  return (
-    <ReactMarkdown
-      components={components}
-      remarkPlugins={[remarkGfm]}
-      rehypePlugins={[rehypeRaw, [rehypeSanitize, sanitizeSchema]]}
-    >
-      {content}
-    </ReactMarkdown>
-  );
+  return <ReactMarkdown components={components}>{content}</ReactMarkdown>;
 };
 
-export default MarkdownViewer;
+export default memo(MarkdownViewer);

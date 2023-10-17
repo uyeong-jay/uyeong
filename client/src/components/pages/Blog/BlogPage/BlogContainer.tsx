@@ -1,10 +1,17 @@
 import { useGetBlogPostsQuery } from '@app/services/blog/postApi';
 import { useCallback, useEffect, useRef, useState, useMemo } from 'react';
-import BlogPresenter from './BlogPresenter';
+// import BlogPresenter from './BlogPresenter';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { useGetBlogPostsBySearchQuery } from '@app/services/blog/postApi';
 import { getPostsBySearch, getTagName } from '@pages/Blog/BlogSlice';
 import React from 'react';
+import dynamic from 'next/dynamic';
+// import Loader from '@modals/Loader';
+
+const BlogPresenter = dynamic(() => import('./BlogPresenter'), {
+  // loading: () => <Loader />, // 로딩 중에 표시할 UI
+  // ssr: false, // 서버 사이드 렌더링 비활성화
+});
 
 export interface TagWithCount {
   name: string;
