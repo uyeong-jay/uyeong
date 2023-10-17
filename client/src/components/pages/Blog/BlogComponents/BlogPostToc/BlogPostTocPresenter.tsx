@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import { HeadingType } from './BlogPostTocContainer';
-import { StyledBlogPostToc, StyledList } from './BlogPostTocStyle';
+import { LI, NAV } from './BlogPostTocStyle';
 import { v4 as uuid } from 'uuid';
 import { raiseHeader } from '@pages/Blog/BlogSlice';
 import { useAppDispatch } from '@app/hooks';
@@ -11,10 +11,7 @@ interface Props {
 
 const BlogPostTocPresenter = ({ headings }: Props) => {
   const dispatch = useAppDispatch();
-
-  const onClickheading = useCallback(() => {
-    dispatch(raiseHeader());
-  }, [dispatch]);
+  // 현재 뷰포트의 너비를 상태로 관리
 
   const [isMarkdownScrolling, setIsMarkdownScrolling] = useState(false);
   const [activeId, setactiveId] = useState('');
@@ -25,21 +22,34 @@ const BlogPostTocPresenter = ({ headings }: Props) => {
       // 화면 상단에서 헤딩 영역의 상단까지의 거리를 계산
       const headingOffsets = headings.map((heading) => ({
         id: heading.id,
-        offset: document.getElementById(heading.id)?.offsetTop,
+        offsetTop: document.getElementById(heading.id)?.offsetTop,
       }));
 
       // 현재 스크롤 위치를 가져오기
       const scrollPosition = window.scrollY;
 
       // 현재 스크롤 위치에 해당하는 헤딩을 찾기
-      const currentHeading = headingOffsets.find((offset) => offset.offset && offset.offset > scrollPosition - 420);
+      const currentHeading = headingOffsets.find(
+        (offset) => offset.offsetTop && offset.offsetTop > scrollPosition - 370,
+      );
 
-      // 찾은 헤딩의 ID를 상태에 업데이트
-      setactiveId(currentHeading ? currentHeading.id : '');
+      // 제목에 속한 내용의 높이 까지 고려하기
+      if (currentHeading) {
+        // 찾은 헤딩의 인덱스를 가져오기
+        const currentIndex = headingOffsets.indexOf(currentHeading);
+
+        // 이전 헤딩 가져오기 (현재 헤딩이 배열의 첫 번째 요소인지 확인)
+        const prevHeading = currentIndex > 0 ? headingOffsets[currentIndex - 1] : null;
+
+        // 찾은 이전 헤딩의 ID를 상태에 업데이트
+        setactiveId(prevHeading ? prevHeading.id : currentHeading.id);
+      } else {
+        setactiveId(headingOffsets[headingOffsets.length - 1]?.id);
+      }
     };
 
     //디바운스 타이머 설정
-    const debounceTime = 50;
+    const debounceTime = 25;
 
     // 타이머 ID
     let timerId: NodeJS.Timeout;
@@ -93,18 +103,22 @@ const BlogPostTocPresenter = ({ headings }: Props) => {
     }
   }, []);
 
+  const onClickheading = useCallback(() => {
+    dispatch(raiseHeader());
+  }, [dispatch]);
+
   return (
-    <StyledBlogPostToc>
+    <NAV.Frame>
       <ul>
         {headings.map(({ id, text, level }) => (
-          <StyledList key={uuid()} headingLevel={level} headingId={id} activeId={isMarkdownScrolling ? activeId : ''}>
-            <a onClick={onClickheading} href={`#${text?.toLowerCase().replace(/\s+/g, '-')}`}>
+          <LI.Heading key={uuid()} headingLevel={level} headingId={id} activeId={isMarkdownScrolling ? activeId : ''}>
+            <a onClick={onClickheading} href={`#${id?.toLowerCase().replace(/\s+/g, '-')}`}>
               {text}
             </a>
-          </StyledList>
+          </LI.Heading>
         ))}
       </ul>
-    </StyledBlogPostToc>
+    </NAV.Frame>
   );
 };
 
