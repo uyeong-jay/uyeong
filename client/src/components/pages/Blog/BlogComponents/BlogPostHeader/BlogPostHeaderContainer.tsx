@@ -36,6 +36,7 @@ const BlogPostHeaderContainer = ({ blogPost }: Props) => {
 
   return (
     <BlogPostHeaderPresenter
+      userData={userData}
       blogPost={blogPost}
       onClickDeletePost={onClickDeletePost}
       isModalOpen={isModalOpen}
