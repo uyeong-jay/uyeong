@@ -1,5 +1,10 @@
 import styled from '@_settings/styled';
 
+interface HeaderFrameProps {
+  scrollDirection: string;
+  isHeaderUp: boolean;
+}
+
 interface HeaderNavProps {
   isMenuIconClicked: boolean;
   render: boolean;
@@ -8,7 +13,7 @@ interface HeaderNavProps {
 export const HEADER = {} as any;
 export const NAV = {} as any;
 
-HEADER.Frame = styled.header`
+HEADER.Frame = styled.header<HeaderFrameProps>`
   // border: 1px solid red;
   background-color: transparent;
   // backdrop-filter: saturate(180%) blur(20px);
@@ -21,6 +26,50 @@ HEADER.Frame = styled.header`
   z-index: 1;
   width: 100%;
   height: 50px;
+
+  //스크롤시 header 애니메이션
+  ${(props) => {
+    if (props.scrollDirection === 'up') {
+      if (props.isHeaderUp) {
+        return `
+          animation: down-header 0.2s ease-out 0s forwards;
+          @keyframes down-header {
+            from {
+              transform: translateY(0);
+            }
+            to {
+              transform: translateY(-100%);
+            }
+          }
+        `;
+      } else
+        return `
+          animation: up-header 0.2s ease-out 0s forwards;
+          @keyframes up-header {
+            from {
+              transform: translateY(-100%);
+            }
+            to {
+              transform: translateY(0);
+            }
+          }
+        `;
+    } else if (props.scrollDirection === 'down' || props.isHeaderUp) {
+      return `
+        animation: down-header 0.2s ease-out 0s forwards;
+        @keyframes down-header {
+          from {
+            transform: translateY(0);
+          }
+          to {
+            transform: translateY(-100%);
+          }
+        }
+      `;
+    } else {
+      return `transform: translateY(0);`;
+    }
+  }};
 `;
 
 NAV.HeaderNav = styled.nav<HeaderNavProps>`
@@ -57,7 +106,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
         width: 100%;
 
         & > ul {
-          // border: 1px solid yellow;
+          // border: 1px solid red;
           display: flex;
           justify-content: space-around;
           align-items: center;
@@ -145,7 +194,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
       }
     }
 
-    // max 이하일때 적용
+    // 833px 이하일때 적용
     @media screen and (max-width: 833px) {
       & > li:nth-of-type(2) {
         // border: 1px solid yellow;
@@ -153,7 +202,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
 
         & > div {
           // border: 1px solid red;
-          background-color: white;
+          background-color: ${({ theme }) => theme.HEADER_BG_C};
           display: flex;
           align-items: flex-end;
           position: absolute;
@@ -204,6 +253,8 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
             // border: 1px solid black;
             display: flex;
             flex-direction: column;
+            // justify-content: center;
+            // align-items: center;
             height: 100%;
 
             & > li {
