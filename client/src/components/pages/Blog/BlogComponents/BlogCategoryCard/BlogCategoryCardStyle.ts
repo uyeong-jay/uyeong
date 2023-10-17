@@ -80,6 +80,7 @@ DIV.CardContentMain = styled.div`
     width: 85%;
     outline: none;
     color: ${({ theme }) => theme.FONT_C};
+    font-size: 14.5px; // 편집시 전체 카드 움직임 방지
     font-weight: bold;
   }
 

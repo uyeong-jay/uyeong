@@ -37,7 +37,7 @@ DIV.AboutPart2 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: auto%;
+  width: auto;
 
   & > div:nth-of-type(1) {
     border-top: 2px solid ${({ theme }) => theme.BD_C};
