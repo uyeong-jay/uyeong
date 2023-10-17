@@ -1,23 +1,21 @@
 import { BlogCommentRes } from '@app/services/blog/commentApi';
-import { BTN, DIV, SECTION } from './BlogPostCommentsStyle';
+import { DIV, SECTION } from './BlogPostCommentsStyle';
 import BlogPostComment from '../BlogPostComment';
 import BlogPostCommentWrite from '../BlogPostCommentWrite';
+import { memo } from 'react';
 
 interface Props {
   postId?: string;
   blogCommentsData?: BlogCommentRes;
+  commentCount?: number;
 }
 
-const BlogPostCommentsPresenter = ({ postId, blogCommentsData }: Props) => {
+const BlogPostCommentsPresenter = ({ postId, blogCommentsData, commentCount }: Props) => {
   return (
     <SECTION.Frame>
-      <DIV.CommentTypeBtnGroup>
-        <BTN.CommonCommentBtn>Common</BTN.CommonCommentBtn>
-        <BTN.IssueCommentBtn>Issue</BTN.IssueCommentBtn>
-      </DIV.CommentTypeBtnGroup>
       <DIV.CommonCommentBlock>
         {/* 댓글 개수 넣기 */}
-        <div>ㅁ Comments</div>
+        <div>{commentCount} Comments</div>
         <BlogPostCommentWrite postId={postId} />
       </DIV.CommonCommentBlock>
 
@@ -30,4 +28,4 @@ const BlogPostCommentsPresenter = ({ postId, blogCommentsData }: Props) => {
   );
 };
 
-export default BlogPostCommentsPresenter;
+export default memo(BlogPostCommentsPresenter);

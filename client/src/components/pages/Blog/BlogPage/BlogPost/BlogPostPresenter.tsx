@@ -12,9 +12,8 @@ interface Props {
 }
 
 const BlogPostPresenter = ({ blogPost }: Props) => {
-  const { _id, thumbnail, content } = blogPost || {};
+  const { _id, thumbnail, content, commentCount } = blogPost || {};
 
-  //blogPost가 없으면 없다고 표시하기
   if (!blogPost) return <NotFound />;
   return (
     <StyledBlogPost>
@@ -35,15 +34,14 @@ const BlogPostPresenter = ({ blogPost }: Props) => {
             />
           </div>
         )}
-        <MarkdownViewer content={content ?? ''} />
+        <div id="markdown-content">
+          <MarkdownViewer content={content ?? ''} />
+        </div>
       </article>
 
-      <BlogPostComments postId={_id} />
+      <BlogPostComments postId={_id} commentCount={commentCount} />
 
       {/* 좋아요 with 폭죽 - velog, youtube */}
-      {/* 링크복사,  - velog */}
-      {/* 댓글 - ellismin */}
-      {/* anchor top */}
     </StyledBlogPost>
   );
 };
