@@ -1,16 +1,11 @@
-import styled from '@_settings/styled';
 import React, { memo } from 'react';
-
-const StyledHeading = styled.div`
-  padding-top: 10px;
-`;
 
 const heading = (props: { level: number; children: React.ReactChildren[] }) => {
   const headingText = props.children?.reduce((acc, child) => acc + child, '');
 
   const slug = headingText?.toLowerCase().replace(/\s+/g, '-');
 
-  return <StyledHeading>{React.createElement(`h${props.level}`, { id: slug }, props.children)}</StyledHeading>;
+  return React.createElement(`h${props.level}`, { id: slug }, props.children);
 };
 
 export default memo(heading);

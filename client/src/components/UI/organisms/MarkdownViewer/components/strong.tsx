@@ -11,7 +11,11 @@ interface StrongProps {
 const StyledStrong = styled.strong<StrongProps>`
   ${(props) => {
     if (props.pathname !== '/write' && props.childrenContent === '@') {
-      return `color: red;`;
+      return `
+        border-bottom: 2px solid ${props.theme.FONT_C};
+        color: ${props.theme.FONT_C};
+
+      `;
     } else {
       return `color: black;`;
     }

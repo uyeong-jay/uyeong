@@ -19,16 +19,29 @@ const SHRL = (name: string, lang: any) => {
 SHRL('js', js);
 SHRL('jsx', jsx);
 
+const CodeWrapper = styled.code`
+  font-size: 0.9em;
+  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+    font-size: 15px;
+  }
+`;
+
 const InlineCodeWrapper = styled.code`
-  background: yellow;
+  padding-left: 13px;
+  font-size: 0.9rem;
+  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+    font-size: 15px;
+  }
 `;
 
 const code = ({ inline, className, children, ...props }: CodeProps) => {
   const match = /language-(\w+)/.exec(className || '');
   return !inline && match ? (
-    <SyntaxHighlighter {...props} style={prism} language={match[1]} PreTag="div">
-      {String(children).replace(/\n$/, '')}
-    </SyntaxHighlighter>
+    <CodeWrapper>
+      <SyntaxHighlighter {...props} style={prism} language={match[1]} PreTag="div">
+        {String(children).replace(/(&nbsp;\n\n)/g, '\n')}
+      </SyntaxHighlighter>
+    </CodeWrapper>
   ) : (
     <InlineCodeWrapper {...props} className={className}>
       {children}
