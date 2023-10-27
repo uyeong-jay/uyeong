@@ -51,7 +51,9 @@ const GlobalStyle = () => {
         }
 
         h1 {
-          font-size: 30px;
+          font-size: 2em;
+          margin-block-start: 0.67em;
+          margin-block-end: 0.67em;
         }
 
         /* 미디어 기본값 inline > block, 삐져나감 방지 */
