@@ -5,6 +5,7 @@ interface Props {
   value?: string;
   onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   placeholder?: string;
+  spellCheck?: string;
 }
 
 const StyledTextarea = styled.textarea`
@@ -16,8 +17,15 @@ const StyledTextarea = styled.textarea`
   resize: none; //textarea 크기조절 막기
 `;
 
-const TextareaBox = ({ value, onChange, placeholder }: Props) => {
-  return <StyledTextarea value={value} onChange={onChange} placeholder={placeholder} />;
+const TextareaBox = ({ value, onChange, placeholder, spellCheck }: Props) => {
+  return (
+    <StyledTextarea
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      spellCheck={spellCheck ? 'false' : 'true'}
+    />
+  );
 };
 
 export default memo(TextareaBox);
