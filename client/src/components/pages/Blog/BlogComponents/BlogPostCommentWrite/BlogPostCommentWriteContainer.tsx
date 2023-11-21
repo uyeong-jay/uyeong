@@ -52,6 +52,8 @@ const BlogPostCommentWriteContainer = ({
   const regexEditComment = useCallback((content: string, taggedNickname = '') => {
     let markdownContent = content;
 
+    markdownContent = markdownContent.replace(/(\r\n|\n){4,}/g, '&nbsp;\n\n&nbsp;\n\n&nbsp;\n\n'); //엔터4번 이상을 줄바꿈 3번으로 대체 - 엔터수 제한 하기
+
     markdownContent = markdownContent.replace(/(\r\n|\n)/g, '&nbsp;\n\n'); //엔터한번을 \n\n로 대체
 
     markdownContent = markdownContent.replaceAll('```&nbsp;', '```'); //code 마크다운이 연장되는 이슈해결 정규식
@@ -60,14 +62,8 @@ const BlogPostCommentWriteContainer = ({
     //수정이 있어도 실행하기
 
     if (taggedNickname) {
-      // markdownContent = markdownContent.replace(
-      //   `@${taggedNickname}`,
-      //   `<span style="background-color: pink; color:red;">${taggedNickname}</span>`,
-      // );
       markdownContent = markdownContent.replace(`@${taggedNickname}`, `**@${taggedNickname}**`);
     }
-
-    //*테이블 제외 모두 표현 가능
 
     return markdownContent;
   }, []);
@@ -77,13 +73,8 @@ const BlogPostCommentWriteContainer = ({
     let replayContent = reply?.content.replaceAll('&nbsp;', '');
     replayContent = replayContent?.replace(/(\r\n\n|\n\n)/g, '\n'); //엔터두번을 \n로 대체
 
-    // replayContent = replayContent?.replace('<span style="background-color: pink; color:red;">', '@');
-    // replayContent = replayContent?.replace('</span>', '');
-
     replayContent = replayContent?.replace('**@', '@');
     replayContent = replayContent?.replace('**', '');
-
-    // replayContent = replayContent?.replace(`**@${taggedNickname}**`, `@${taggedNickname}`);
 
     return replayContent;
   };
@@ -113,8 +104,8 @@ const BlogPostCommentWriteContainer = ({
     const textareaEl = textareaRef.current;
     if (textareaEl !== null) {
       textareaEl.style.height = '150px';
-      // console.log(textareaEl.scrollHeight); //2
-      textareaEl.style.height = textareaEl.scrollHeight + 2 + 'px';
+      textareaEl.style.height = textareaEl.scrollHeight + 'px';
+      //만약 border가 있으면 두께만큼 textareaEl.scrollHeight 여기에 숫자로 더해주기
     }
   }, []);
 
@@ -196,12 +187,13 @@ const BlogPostCommentWriteContainer = ({
   );
 
   //댓글or답글 입력 취소
-  const onClickCancel = useCallback(() => {
+  const onClickReplyCancel = useCallback(() => {
     setWriteReply?.(false);
   }, [setWriteReply]);
 
   //댓글or답글 수정
   const onClickEditSave = useCallback(() => {
+    if (!blogCommentInfo.content) return;
     const editContent = regexEditComment(blogCommentInfo.content, regexTaggedNickname);
     const data = {
       commentInfo: {
@@ -212,10 +204,8 @@ const BlogPostCommentWriteContainer = ({
     };
 
     //순서 지켜서 서버와 클라이언트 데이터 불일치 막기
-    //1
     updateComment(data);
 
-    //2
     //이름 저장시 잠시 이전 이름이 노출되는 이슈 해결차 추가
     {
       reply?.comment_id ? setReplyContent?.(editContent) : setCommentContent?.(editContent);
@@ -250,7 +240,7 @@ const BlogPostCommentWriteContainer = ({
       onSubmit={onSubmit}
       onChangeComment={onChangeComment}
       onClickReply={onClickReply}
-      onClickCancel={onClickCancel}
+      onClickReplyCancel={onClickReplyCancel}
       onClickEditCancel={onClickEditCancel}
       onClickEditSave={onClickEditSave}
     />

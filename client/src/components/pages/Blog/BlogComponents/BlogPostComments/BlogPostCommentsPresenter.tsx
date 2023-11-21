@@ -13,17 +13,16 @@ interface Props {
 const BlogPostCommentsPresenter = ({ postId, blogCommentsData, commentCount }: Props) => {
   return (
     <SECTION.Frame>
-      <DIV.CommonCommentBlock>
-        {/* 댓글 개수 넣기 */}
+      <DIV.CommentWriteBlock>
         <div>{commentCount} Comments</div>
         <BlogPostCommentWrite postId={postId} />
-      </DIV.CommonCommentBlock>
+      </DIV.CommentWriteBlock>
 
-      <DIV.CommentMDviewerGroup>
+      <DIV.CommentMdViewerGroup>
         {blogCommentsData?.comments?.map((comment) => (
           <BlogPostComment key={comment._id} postId={postId} comment={comment} />
         ))}
-      </DIV.CommentMDviewerGroup>
+      </DIV.CommentMdViewerGroup>
     </SECTION.Frame>
   );
 };

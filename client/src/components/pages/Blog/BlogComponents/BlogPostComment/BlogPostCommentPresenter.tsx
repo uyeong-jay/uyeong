@@ -17,8 +17,9 @@ const BlogPostCommentPresenter = ({ userData, postId, comment, userMatch }: Prop
   const [isOpenReplies, setOpenReplies] = useState(false);
 
   const onClickReplies = useCallback(() => {
+    if (replies.length === 0) return;
     setOpenReplies((prev) => !prev);
-  }, []);
+  }, [replies]);
 
   return (
     <SECTION.Frame>

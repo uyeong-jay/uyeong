@@ -71,8 +71,9 @@ const BlogPostCommentTemplatePresenter = ({
             className="comment-user-avatar"
             src={reply ? reply.user.avatar : user.avatar}
             alt="user-avatar"
-            width={50}
-            height={50}
+            layout="fill"
+            objectFit="cover"
+            priority
           />
         </div>
       </DIV.Left>
@@ -81,13 +82,13 @@ const BlogPostCommentTemplatePresenter = ({
         <DIV.RightTop>
           <DIV.CommentInfo>
             <P.Nickname>{reply ? reply.user.nickname : user.nickname}</P.Nickname>
-            <P.CreatedDate>{reply ? formatDate(reply.createdAt) : formatDate(createdAt)}</P.CreatedDate>
+            <P.CreatedDate>ㆍ{reply ? formatDate(reply.createdAt) : formatDate(createdAt)}</P.CreatedDate>
           </DIV.CommentInfo>
 
           {(userMatch || (reply && userData?.user?._id === reply?.user._id) || userData?.user?.role === 'admin') && (
             <DIV.CommentSideBtnGroup>
-              {!editComment && <BTN.CommentUpdateBtn onClick={onClickUpdate}>수정</BTN.CommentUpdateBtn>}
-              <BTN.CommentDeleteBtn onClick={() => onClickDelete()}>삭제</BTN.CommentDeleteBtn>
+              {!editComment && <BTN.CommentUpdateBtn onClick={onClickUpdate}>Edit</BTN.CommentUpdateBtn>}
+              <BTN.CommentDeleteBtn onClick={() => onClickDelete()}>Delete</BTN.CommentDeleteBtn>
             </DIV.CommentSideBtnGroup>
           )}
         </DIV.RightTop>
@@ -116,13 +117,22 @@ const BlogPostCommentTemplatePresenter = ({
         </DIV.RightMiddle>
 
         <DIV.RightBottom>
-          {!reply && (
-            <P.Replies onClick={onClickReplies}>
-              {isOpenReplies ? <CaretUpIcon /> : <CaretDownIcon />} {replies.length} replies
-            </P.Replies>
-          )}
+          {!reply &&
+            (replies.length > 0 ? (
+              <>
+                <P.Replies onClick={onClickReplies}>
+                  {isOpenReplies ? <CaretUpIcon /> : <CaretDownIcon />}{' '}
+                  {replies.length > 1 ? `${replies.length} replies` : `${replies.length} reply`}
+                </P.Replies>
+                <span>·</span>
+              </>
+            ) : (
+              <></>
+            ))}
 
-          <BTN.CommentReplyBtn onClick={onClickReply}>Reply</BTN.CommentReplyBtn>
+          <BTN.CommentReplyBtn onClick={onClickReply} writeReply={writeReply}>
+            Reply
+          </BTN.CommentReplyBtn>
         </DIV.RightBottom>
         {writeReply && (
           <BlogPostCommentWrite

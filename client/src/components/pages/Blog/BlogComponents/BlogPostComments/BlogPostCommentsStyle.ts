@@ -6,18 +6,19 @@ export const DIV = {} as any;
 SECTION.Frame = styled.section`
   // border: 1px solid green;
   width: 100%;
-  // height: 300px;
 `;
 
-DIV.CommonCommentBlock = styled.div`
-  border: 1px solid green;
+DIV.CommentWriteBlock = styled.div`
+  // border: 1px solid green;
   width: 100%;
 
   & > div {
-    // border: 1px solid green;
+    // border: 1px solid red;
+    font-size: 15px;
+    color: ${({ theme }) => theme.FONT_C};
   }
 `;
 
-DIV.CommentMDviewerGroup = styled.div`
-  // border: 1px solid green;
+DIV.CommentMdViewerGroup = styled.div`
+  // border: 1px solid blue;
 `;

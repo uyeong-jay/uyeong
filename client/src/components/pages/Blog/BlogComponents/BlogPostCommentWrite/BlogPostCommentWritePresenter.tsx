@@ -10,7 +10,7 @@ interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeComment: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   onClickReply: () => void;
-  onClickCancel: () => void;
+  onClickReplyCancel: () => void;
   onClickEditCancel: () => void;
   onClickEditSave: () => void;
 }
@@ -23,7 +23,7 @@ const BlogPostCommentWritePresenter = ({
   onSubmit,
   onChangeComment,
   onClickReply,
-  onClickCancel,
+  onClickReplyCancel,
   onClickEditCancel,
   onClickEditSave,
 }: Props) => {
@@ -35,26 +35,27 @@ const BlogPostCommentWritePresenter = ({
         onChange={onChangeComment}
         placeholder="Add a comment..."
         ref={textareaRef}
+        spellCheck="false" //문법 교정 빨간줄 없애기
       ></textarea>
 
       {writeReply ? (
         <DIV.ReplyBtnGroup>
+          <BTN.ReplyCancelBtn type="button" onClick={onClickReplyCancel}>
+            Cancel
+          </BTN.ReplyCancelBtn>
           <BTN.ReplyBtn type="button" onClick={onClickReply}>
             Reply
           </BTN.ReplyBtn>
-          <BTN.CancelBtn type="button" onClick={onClickCancel}>
-            Cancel
-          </BTN.CancelBtn>
         </DIV.ReplyBtnGroup>
       ) : editComment ? (
-        <>
-          <button type="button" onClick={onClickEditCancel}>
-            cancel
-          </button>
-          <button type="button" onClick={onClickEditSave}>
-            save
-          </button>
-        </>
+        <DIV.EditBtnGroup>
+          <BTN.EditCancelBtn type="button" onClick={onClickEditCancel}>
+            Cancel
+          </BTN.EditCancelBtn>
+          <BTN.EditSaveBtn type="button" onClick={onClickEditSave}>
+            Save
+          </BTN.EditSaveBtn>
+        </DIV.EditBtnGroup>
       ) : (
         <BTN.CommentBtn type="submit">Comment</BTN.CommentBtn>
       )}
