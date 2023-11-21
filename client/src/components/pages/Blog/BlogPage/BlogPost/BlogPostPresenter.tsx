@@ -23,7 +23,7 @@ const BlogPostPresenter = ({ blogPost }: Props) => {
 
       <article>
         {thumbnail && (
-          <div className="blog-post-image-wrapper">
+          <div className="blog-post-image-wrapper" id="post-thumbnail-wrapper">
             <Image
               className="blog-post-image"
               src={thumbnail as string}

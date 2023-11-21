@@ -1,50 +1,53 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { HeadingType } from './BlogPostTocContainer';
 import { LI, NAV } from './BlogPostTocStyle';
 import { v4 as uuid } from 'uuid';
-import { raiseHeader } from '@pages/Blog/BlogSlice';
-import { useAppDispatch } from '@app/hooks';
 
 interface Props {
   headings: HeadingType[];
 }
 
 const BlogPostTocPresenter = ({ headings }: Props) => {
-  const dispatch = useAppDispatch();
-  // 현재 뷰포트의 너비를 상태로 관리
-
   const [isMarkdownScrolling, setIsMarkdownScrolling] = useState(false);
-  const [activeId, setactiveId] = useState('');
+  const [activeId, setActiveId] = useState('');
 
   //TOC heaading 추적
   useEffect(() => {
+    const postHeaderOffestHeight = document.getElementById('blog-post-header-frame')?.offsetHeight; //썸넬 이미지는 높이는 포함이 안되서 고려안해줘도 됨
+
     const handleScroll = () => {
-      // 화면 상단에서 헤딩 영역의 상단까지의 거리를 계산
-      const headingOffsets = headings.map((heading) => ({
-        id: heading.id,
-        offsetTop: document.getElementById(heading.id)?.offsetTop,
-      }));
-
       // 현재 스크롤 위치를 가져오기
-      const scrollPosition = window.scrollY;
+      // 100: 제목 외 여유분
+      const currentScroll = window.scrollY - (postHeaderOffestHeight ?? 0) - 100;
 
-      // 현재 스크롤 위치에 해당하는 헤딩을 찾기
-      const currentHeading = headingOffsets.find(
-        (offset) => offset.offsetTop && offset.offsetTop > scrollPosition - 370,
-      );
+      const headingOffsets = headings.map((heading) => {
+        const element = document.getElementById(heading.id);
 
-      // 제목에 속한 내용의 높이 까지 고려하기
-      if (currentHeading) {
-        // 찾은 헤딩의 인덱스를 가져오기
-        const currentIndex = headingOffsets.indexOf(currentHeading);
+        return {
+          id: heading.id,
+          offsetTop: element?.offsetTop,
+        };
+      });
 
-        // 이전 헤딩 가져오기 (현재 헤딩이 배열의 첫 번째 요소인지 확인)
-        const prevHeading = currentIndex > 0 ? headingOffsets[currentIndex - 1] : null;
+      // 현재 스크롤 위치와 가장 가까운 offsetTop 값을 가진 요소 찾기
+      const currentElement = headingOffsets.find((heading, index, array) => {
+        const nextHeading = array[index + 1];
 
-        // 찾은 이전 헤딩의 ID를 상태에 업데이트
-        setactiveId(prevHeading ? prevHeading.id : currentHeading.id);
+        if (nextHeading) {
+          // 현재 스크롤 위치가 두 offsetTop 값 사이에 있는지 확인
+          return (
+            currentScroll && (heading.offsetTop ?? 0) <= currentScroll && currentScroll < (nextHeading.offsetTop ?? 0)
+          );
+        }
+
+        // 마지막 요소일 경우
+        return currentScroll && (heading.offsetTop ?? 0) <= currentScroll;
+      });
+
+      if (currentElement) {
+        setActiveId(currentElement.id);
       } else {
-        setactiveId(headingOffsets[headingOffsets.length - 1]?.id);
+        setActiveId('');
       }
     };
 
@@ -103,18 +106,12 @@ const BlogPostTocPresenter = ({ headings }: Props) => {
     }
   }, []);
 
-  const onClickheading = useCallback(() => {
-    dispatch(raiseHeader());
-  }, [dispatch]);
-
   return (
     <NAV.Frame>
       <ul>
         {headings.map(({ id, text, level }) => (
           <LI.Heading key={uuid()} headingLevel={level} headingId={id} activeId={isMarkdownScrolling ? activeId : ''}>
-            <a onClick={onClickheading} href={`#${id?.toLowerCase().replace(/\s+/g, '-')}`}>
-              {text}
-            </a>
+            <a href={`#${id?.toLowerCase().replace(/\s+/g, '-')}`}>{text}</a>
           </LI.Heading>
         ))}
       </ul>

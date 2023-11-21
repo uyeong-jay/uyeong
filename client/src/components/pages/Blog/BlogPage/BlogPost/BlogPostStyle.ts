@@ -8,8 +8,8 @@ export const StyledBlogPost = styled.div`
   align-items: center;
   position: relative; // for TOC
   width: 100%;
-  max-width: calc(${({ theme }) => theme.BP.TABLET} + 60px); //약 양쪽 패딩 크기 만큼 더 추가
-  margin: 0 auto;
+  max-width: calc(${({ theme }) => theme.BP.TABLET} + 40px); //약 양쪽 패딩 크기 만큼 더 추가
+  margin: 0 auto 250px auto; // post toc top값 정도를 더 bottom에 추가 함
   padding: 50px 25px 100px 25px;
   font-size: 12px;
   @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
@@ -36,8 +36,31 @@ export const StyledBlogPost = styled.div`
     }
 
     & #markdown-content {
-      p > img {
-        margin: 3rem auto;
+      line-height: 1.7;
+      letter-spacing: -0.004em;
+      word-break: keep-all;
+      font-size: 1rem;
+      padding: 50px 0;
+
+      @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+        font-size: 1.1rem;
+      }
+
+      & > h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 40px 0 8px 0;
+      }
+
+      & > p {
+        margin-bottom: 15px;
+      }
+
+      & > p > img {
+        margin: 1rem auto;
       }
     }
   }

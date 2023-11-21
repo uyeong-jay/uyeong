@@ -13,15 +13,15 @@ NAV.Frame = styled.nav`
   display: none;
   // border: 1px solid black;
   position: absolute;
-  top: 150px;
+  top: 350px;
   right: -250px;
-  height: 100%;
-  font-size: 13px;
+  height: 95%;
+  font-size: 14px;
 
   & > ul {
     // border: 1px solid black;
     position: sticky;
-    top: 100px;
+    top: 120px;
     right: 0;
     width: 230px;
     height: 70vh;

@@ -40,7 +40,6 @@ const BlogPostTocContainer = () => {
         text: headingEl.textContent ?? '',
         level: Number(headingEl.tagName.substring(1)),
       }));
-
       setHeadings(headingEls);
     }
   }, []);
