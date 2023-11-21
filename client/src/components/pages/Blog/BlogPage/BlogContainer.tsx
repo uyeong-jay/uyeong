@@ -1,17 +1,18 @@
 import { useGetBlogPostsQuery } from '@app/services/blog/postApi';
 import { useCallback, useEffect, useRef, useState, useMemo } from 'react';
-// import BlogPresenter from './BlogPresenter';
+import BlogPresenter from './BlogPresenter';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { useGetBlogPostsBySearchQuery } from '@app/services/blog/postApi';
-import { getPostsBySearch, getTagName } from '@pages/Blog/BlogSlice';
+import { getPostsBySearch, getMorePostsBySearch, getTagName } from '@pages/Blog/BlogSlice';
 import React from 'react';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
+import { useIntersect } from '@hooks/useIntersect';
 // import Loader from '@modals/Loader';
 
-const BlogPresenter = dynamic(() => import('./BlogPresenter'), {
-  // loading: () => <Loader />, // 로딩 중에 표시할 UI
-  // ssr: false, // 서버 사이드 렌더링 비활성화
-});
+// const BlogPresenter = dynamic(() => import('./BlogPresenter'), {
+//   // loading: () => <Loader />, // 로딩 중에 표시할 UI
+//   // ssr: false, // 서버 사이드 렌더링 비활성화
+// });
 
 export interface TagWithCount {
   name: string;
@@ -19,25 +20,33 @@ export interface TagWithCount {
 }
 
 const BlogContainer = () => {
+  const dispatch = useAppDispatch();
+
   //포스트
   const { data: blogPostsData } = useGetBlogPostsQuery();
 
   const blogPostsBySearch = useAppSelector((state) => state.blog.blogPostsBySearch);
 
-  const dispatch = useAppDispatch();
-
   //검색
-  const [searchWordInput, setSearchWordInput] = useState('');
-  const [searchWordActual, setSearchWordActual] = useState('');
-  const { data: blogPostsDataBySearch } = useGetBlogPostsBySearchQuery(searchWordActual);
+  const initialSearchInfo = {
+    nextPageId: '',
+    searchWord: '',
+  };
+  const [searchInfo, setSearchInfo] = useState(initialSearchInfo);
+  const { data: blogPostsDataBySearch } = useGetBlogPostsBySearchQuery(searchInfo);
+
   const tagName = useAppSelector((state) => state.blog.tagName);
 
-  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [searchWordInput, setSearchWordInput] = useState('');
+  const [isSearchStarted, setSearchStarted] = useState(false);
+  const [isInputFocused, setInputFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isClickedTag, setClickedTag] = useState(false);
+  const [tagUnderline, setTagUnderline] = useState('');
 
-  const [savedTagName, setSavedTagName] = useState('');
+  const [loadMore, setLoadMore] = useState(false);
+  const [isIntersectionEnded, setIntersectionEnded] = useState(false);
 
   // 모든 태그 > 많은 순 정렬
   // +50개 로 끊기 (+더보기)
@@ -55,66 +64,168 @@ const BlogContainer = () => {
     return tagList.sort((a, b) => b.count - a.count);
   }, [blogPostsData?.posts]);
 
-  //post탭으로 복귀시 바로 초기화
   useEffect(() => {
-    if (!isClickedTag && !searchWordInput && !isInputFocused && !tagName) {
+    //초기화 이후 코드
+    //새로고침 및 post 탭으로 복귀시 바로 초기화
+    if (!tagName && !isClickedTag && !isInputFocused && !searchWordInput && !loadMore) {
       dispatch(getPostsBySearch(blogPostsDataBySearch));
+      console.log('1');
     }
-  }, [blogPostsDataBySearch, dispatch, isClickedTag, isInputFocused, searchWordInput, tagName]);
-
-  //포스트 검색 with 태그 클릭
-  useEffect(() => {
-    if (isClickedTag) {
+    //초기화 이후 코드
+    if (tagName && !loadMore) {
+      setSearchWordInput(tagName); //검색어 보여주기
+      setSearchInfo({
+        nextPageId: '',
+        searchWord: tagName,
+      }); //loadmore 이 안되는 상태에선 포함 가능한 데이터
       dispatch(getPostsBySearch(blogPostsDataBySearch));
+      console.log('2');
+    }
+
+    //한번에 여러번 바뀌지 않게 시간 지연 시켜두기
+    // (+ 한박자 늦게 바뀌도록 설정)
+    if (isClickedTag && !isSearchStarted) {
+      const timer = setTimeout(() => {
+        dispatch(getPostsBySearch(blogPostsDataBySearch));
+        setIntersectionEnded(false);
+        console.log('3');
+      }, 500);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+    if (isSearchStarted) {
+      const timer = setTimeout(() => {
+        dispatch(getPostsBySearch(blogPostsDataBySearch));
+        setIntersectionEnded(false);
+        setSearchStarted(false);
+        console.log('4-1');
+      }, 300);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+    if (loadMore) {
+      const timer = setTimeout(() => {
+        dispatch(getMorePostsBySearch(blogPostsDataBySearch));
+        setIntersectionEnded(false);
+        console.log('5');
+      }, 500);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [
+    blogPostsDataBySearch,
+    dispatch,
+    isClickedTag,
+    isInputFocused,
+    isSearchStarted,
+    loadMore,
+    searchWordInput,
+    tagName,
+  ]);
+
+  const onClickTag = useCallback(
+    (tag: string) => {
       dispatch(getTagName(''));
-    }
-  }, [blogPostsDataBySearch, dispatch, isClickedTag]);
+      setInputFocused(false);
+      setSearchStarted(false);
+      setLoadMore(false);
+      setClickedTag(true);
+      setTagUnderline(tag);
+      setSearchInfo({
+        nextPageId: '',
+        searchWord: tag,
+      });
+      setIntersectionEnded(true);
+    },
+    [dispatch],
+  );
 
-  // 포스트 검색 with 검색바
-  useEffect(() => {
-    if (!isClickedTag) {
-      if (tagName && !searchWordInput && !isInputFocused) {
-        setSearchWordInput(tagName); //검색어 보여주기
-        setSearchWordActual(tagName);
-      } else {
-        const timer = setTimeout(() => {
-          setSearchWordActual(searchWordInput);
-          dispatch(getPostsBySearch(blogPostsDataBySearch)); //setTimout 사용을 위해 slice 사용(RTK은 내부에 사용 안됨)
-          if (searchWordInput !== tagName) {
-            dispatch(getTagName(searchWordInput)); // 검색어 유지
-          }
-        }, 700);
-        return () => clearTimeout(timer);
+  //검색 with debounce
+  const debounce = (func: (value: string) => void, delay: number) => {
+    let timeoutId: NodeJS.Timeout;
+
+    return (value: string) => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
       }
-    }
-  }, [blogPostsDataBySearch, dispatch, isClickedTag, isInputFocused, searchWordInput, tagName]);
 
-  const onClickTag = useCallback((tag: string) => {
-    setClickedTag(true);
-    setSearchWordInput('');
-    setSearchWordActual(tag);
-    setSavedTagName(tag);
-  }, []);
+      timeoutId = setTimeout(() => {
+        func(value);
+      }, delay);
+    };
+  };
 
-  const onChangeInput = useCallback((e) => {
-    setSearchWordInput(e.target.value);
-  }, []);
+  //검색 with debounce
+  //사용자의 마지막 입력이 끝난 후 0.7초 뒤 실헹
+  const delayedSearchInfoUpdate = useMemo(
+    () =>
+      debounce((value: string) => {
+        setSearchStarted(true); //검색 연속동작을 위해 여기 고정
+        setTagUnderline('');
+        setSearchInfo({
+          nextPageId: '',
+          searchWord: value,
+        });
+        console.log('4-0');
+      }, 700),
+    [setSearchInfo],
+  );
 
+  //검색 with debounce
+  const onChangeInput = useCallback(
+    (e) => {
+      setSearchWordInput(e.target.value);
+      delayedSearchInfoUpdate(e.target.value);
+      setLoadMore(false);
+      setIntersectionEnded(true);
+    },
+    [delayedSearchInfoUpdate],
+  );
+
+  const onFocusInput = useCallback(() => {
+    dispatch(getTagName(''));
+    setClickedTag(false);
+    setLoadMore(false);
+    setInputFocused(true);
+  }, [dispatch]);
+
+  //Input 클릭시 검색어 전체 선택
   const onClickInput = useCallback(() => {
     inputRef.current?.select();
   }, []);
 
-  const onFocusInput = () => {
-    setIsInputFocused(true);
-    setClickedTag(false);
-  };
+  //infinite scroll hook with IntersectionObserver
+  const refa = useIntersect(
+    async (entry, observer) => {
+      observer.unobserve(entry.target);
+      //서버에서 받아온 next_cursor 가 있을때 실행
+      if (blogPostsDataBySearch?.next_cursor && !isIntersectionEnded) {
+        console.log('a');
+        setIntersectionEnded(true);
+        setLoadMore(true);
+        setClickedTag(false);
+        setSearchInfo({
+          ...searchInfo,
+          nextPageId: blogPostsDataBySearch.next_cursor,
+        });
+      }
+    },
+    {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5,
+    },
+  );
 
   return (
     <BlogPresenter
-      blogPostsData={blogPostsData}
+      refa={refa}
       blogPostsBySearch={blogPostsBySearch}
       allTags={allTags}
-      savedTagName={savedTagName}
+      tagUnderline={tagUnderline}
       searchWordInput={searchWordInput}
       onChangeInput={onChangeInput}
       onClickInput={onClickInput}

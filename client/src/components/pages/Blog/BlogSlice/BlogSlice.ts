@@ -5,14 +5,12 @@ import { createSlice } from '@reduxjs/toolkit';
 interface initialState {
   blogPostsBySearch: BlogPostRes | null;
   tagName: string;
-  isHeaderUp: boolean;
 }
 
 //initialState
 const initialState: initialState = {
   blogPostsBySearch: null,
   tagName: '',
-  isHeaderUp: false,
 };
 
 //slice
@@ -23,18 +21,18 @@ const blogSlice = createSlice({
     getPostsBySearch: (state, action) => {
       state.blogPostsBySearch = action.payload;
     },
+    getMorePostsBySearch: (state, action) => {
+      state.blogPostsBySearch = {
+        ...action.payload,
+        posts: state.blogPostsBySearch?.posts?.concat(action.payload.posts),
+      };
+    },
     getTagName: (state, action) => {
       state.tagName = action.payload;
-    },
-    raiseHeader: (state) => {
-      state.isHeaderUp = true;
-    },
-    lowerHeader: (state) => {
-      state.isHeaderUp = false;
     },
   },
 });
 
 //reducer, actions 내보내기
 export default blogSlice.reducer;
-export const { getPostsBySearch, getTagName, raiseHeader, lowerHeader } = blogSlice.actions;
+export const { getPostsBySearch, getMorePostsBySearch, getTagName } = blogSlice.actions;

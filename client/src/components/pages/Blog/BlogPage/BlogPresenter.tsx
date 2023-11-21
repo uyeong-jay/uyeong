@@ -10,10 +10,10 @@ import InputBox from '@molecules/InputBox/InputBox';
 import SearchIcon from '@icons/SearchIcon';
 
 interface Props {
-  blogPostsData?: BlogPostRes;
+  refa: any;
   blogPostsBySearch?: BlogPostRes;
   allTags: TagWithCount[];
-  savedTagName: string;
+  tagUnderline: string;
   searchWordInput?: string;
   onChangeInput?: (e: ChangeEvent<HTMLInputElement>) => void;
   onClickInput?: () => void;
@@ -24,10 +24,10 @@ interface Props {
 }
 
 const BlogPresenter: React.FC<Props> = ({
-  blogPostsData,
+  refa,
   blogPostsBySearch,
   allTags,
-  savedTagName,
+  tagUnderline,
   searchWordInput,
   onChangeInput,
   onClickInput,
@@ -59,7 +59,7 @@ const BlogPresenter: React.FC<Props> = ({
                   <DIV.BlogTag
                     key={index}
                     onClick={() => onClickTag(tag.name)}
-                    savedTagName={savedTagName}
+                    tagUnderline={tagUnderline}
                     tagName={tag.name}
                     isClickedTag={isClickedTag}
                   >
@@ -81,7 +81,8 @@ const BlogPresenter: React.FC<Props> = ({
                 />
                 <SearchIcon />
               </DIV.SearchBar>
-              <BlogPosts blogPostsData={blogPostsData} blogPostsBySearch={blogPostsBySearch} />
+              <BlogPosts blogPostsBySearch={blogPostsBySearch} />
+              <div ref={refa} style={{ height: '50px', border: '1px solid black' }}></div>
             </SECTION.BlogMain>
           </DIV.BlogBlock>
         </SubFrame>

@@ -5,7 +5,7 @@ export const DIV = {} as any;
 export const ASIDE = {} as any;
 
 interface BlogTagProps {
-  savedTagName: string;
+  tagUnderline: string;
   tagName: string;
   isClickedTag: boolean;
 }
@@ -101,7 +101,7 @@ ASIDE.BlogTags = styled.aside`
 
 DIV.BlogTag = styled.div<BlogTagProps>`
   ${(props) => {
-    if (props.isClickedTag && props.savedTagName === props.tagName) {
+    if (props.tagUnderline === props.tagName) {
       return `
         border-bottom: 2px solid ${props.theme.FONT_C};
       `;
