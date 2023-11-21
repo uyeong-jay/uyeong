@@ -18,6 +18,7 @@ export interface BlogPostRes {
   posts?: BlogPost[];
   postsByCategory?: BlogPost[];
   post?: BlogPost;
+  next_cursor?: string;
   msg?: string;
 }
 
@@ -32,6 +33,11 @@ export interface BlogPostReq {
   privacy: boolean;
 }
 
+export interface BlogPostSearchReq {
+  nextPageId: string;
+  searchWord: string;
+}
+
 export interface BlogPostId {
   _id: string | string[] | undefined;
 }
@@ -43,7 +49,6 @@ export interface BlogPostReqWithToken {
 
 export const postApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    //get
     getBlogPosts: builder.query<BlogPostRes, void>({
       query: () => ({
         url: '/api/blog',
@@ -52,16 +57,14 @@ export const postApi = api.injectEndpoints({
       providesTags: ['BlogPost'],
     }),
 
-    //get
-    getBlogPostsBySearch: builder.query<BlogPostRes, string>({
+    getBlogPostsBySearch: builder.query<BlogPostRes, BlogPostSearchReq>({
       query: (query) => ({
-        url: `/api/search?q=${query}`,
+        url: `/api/search?page=${query.nextPageId}&q=${query.searchWord}`,
         method: 'get',
       }),
       providesTags: ['BlogPost'],
     }),
 
-    //get
     getBlogPostsByCategory: builder.query<BlogPostRes, string>({
       query: (slug) => ({
         url: `/api/blog/category/${slug}`,
@@ -70,7 +73,6 @@ export const postApi = api.injectEndpoints({
       providesTags: ['BlogPost'],
     }),
 
-    //get
     getBlogPost: builder.query<BlogPostRes, string>({
       query: (slug) => ({
         url: `/api/blog/${slug}`,
@@ -79,7 +81,6 @@ export const postApi = api.injectEndpoints({
       providesTags: ['BlogPost'],
     }),
 
-    //create
     createBlogPost: builder.mutation<BlogPostRes, BlogPostReqWithToken>({
       query: (data) => ({
         url: '/api/blog',
@@ -92,7 +93,6 @@ export const postApi = api.injectEndpoints({
       invalidatesTags: ['BlogPost'],
     }),
 
-    //update
     updateBlogPost: builder.mutation<BlogPostRes, BlogPostReqWithToken>({
       query: (data) => ({
         url: '/api/blog',
@@ -105,7 +105,6 @@ export const postApi = api.injectEndpoints({
       invalidatesTags: ['BlogPost'],
     }),
 
-    //delete
     deleteBlogPost: builder.mutation<BlogPostRes, BlogPostReqWithToken>({
       query: (data) => ({
         url: '/api/blog',
