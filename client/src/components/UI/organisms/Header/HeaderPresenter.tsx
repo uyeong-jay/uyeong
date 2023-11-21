@@ -9,8 +9,6 @@ import useOnClickOutside from '@hooks/useOnClickOutside';
 import CaretDownIcon from '@icons/CaretDownIcon';
 import CaretUpIcon from '@icons/CaretUpIcon';
 import Logo from '@icons/Logo';
-import { useAppDispatch, useAppSelector } from '@app/hooks';
-import { lowerHeader } from '@pages/Blog/BlogSlice';
 
 interface Props {
   userData?: UserResponse;
@@ -20,11 +18,6 @@ interface Props {
 }
 
 const HeaderPresenter = ({ userData, getUserDataError, logoutError, onClickLogout }: Props) => {
-  const dispatch = useAppDispatch();
-  const [isScrolling, setIsScrolling] = useState(false);
-
-  const isHeaderUp = useAppSelector((state) => state.blog.isHeaderUp);
-
   const dropdownBoxRef = useRef(null);
   const [isProfileOpen, setProfileOpen] = useState(false);
 
@@ -53,137 +46,26 @@ const HeaderPresenter = ({ userData, getUserDataError, logoutError, onClickLogou
     };
   }, []);
 
-  //마우스 휠(+패드) or 터치 이벤트로 header 숨기거나 보여주기
   useEffect(() => {
-    let touchStartY = 0;
-
-    const handleTouchStart = (event: TouchEvent) => {
-      touchStartY = event.touches[0].clientY;
-    };
-
-    const handleScroll = (event: TouchEvent | WheelEvent) => {
-      const scrollY = window.scrollY;
-      if (scrollY === 0) setScrollDirection('');
-      // Ctrl, Shift, Alt, Meta 키가 눌려있지 않은 경우에만 실행
-      if (!(event.ctrlKey || event.shiftKey || event.altKey || event.metaKey) && isScrolling) {
-        setMenuIconClicked(false);
-        setProfileOpen(false);
-
-        // 스크롤 방향을 결정
-        if ('deltaY' in event) {
-          if (event.deltaY > 0) {
-            setScrollDirection('down');
-          } else if (event.deltaY < 0) {
-            // 스크롤이 맨꼭대기에 위치하면 효과없이 그냥 리턴
-            if (scrollY === 0) return;
-            else {
-              setScrollDirection('up');
-              //blog post의 toc 클릭시 헤더 보이게 하기
-              if (isHeaderUp) {
-                dispatch(lowerHeader());
-              }
-            }
-          } else {
-            return;
-          }
-        } else if ('touches' in event) {
-          const touchEndY = event.touches[0].clientY;
-          const mobileDeltaY = touchEndY - touchStartY;
-          if (mobileDeltaY > 0) {
-            setScrollDirection('down');
-          } else if (mobileDeltaY < 0) {
-            // 스크롤이 맨꼭대기에 위치하면 효과없이 그냥 리턴
-            setScrollDirection('');
-            if (scrollY === 0) return;
-            else {
-              setScrollDirection('up');
-              //blog post의 toc 클릭시 헤더 보이게 하기
-              if (isHeaderUp) {
-                dispatch(lowerHeader());
-              }
-            }
-          } else {
-            return;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('wheel', handleScroll);
-    window.addEventListener('touchstart', handleTouchStart);
-    window.addEventListener('touchmove', handleScroll);
-
-    return () => {
-      window.removeEventListener('wheel', handleScroll);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleScroll);
-    };
-  }, [dispatch, isHeaderUp, isScrolling]);
-
-  //뷰포트 스크롤 외 나머지를 스크롤시 헤더를 그대로 두기
-  useEffect(() => {
-    const currentScrollY = window.scrollY;
-    const handleScroll = () => {
-      // console.log('1', currentScrollY, prevScrollY); //항상 동일
-      setIsScrolling(true);
-      setPrevScrollY(currentScrollY);
-    };
-
-    const handleWheel = () => {
-      // console.log('2', currentScrollY, prevScrollY); //항상 동일
-      if (currentScrollY === prevScrollY) {
-        setIsScrolling(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('wheel', handleWheel);
-    window.addEventListener('touchmove', handleWheel);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchmove', handleWheel);
-    };
-  }, [prevScrollY]); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 이벤트 리스너를 등록하고, 언마운트 시에만 이를 해제
-
-  //스크롤을 직접적으로 클릭 or 터치시 실행
-  useEffect(() => {
-    //스크롤을 직접적으로 움직일때(mousedown) header 숨기거나 보여주기
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      setMenuIconClicked(false);
+      setProfileOpen(false);
+
       if (currentScrollY > prevScrollY) {
         setScrollDirection('down');
-      } else if (currentScrollY === 0) {
-        if (!isHeaderUp) {
-          dispatch(lowerHeader());
-        }
+      } else {
         setScrollDirection('up');
       }
       setPrevScrollY(currentScrollY);
     };
 
-    const handleClick = () => {
-      window.addEventListener('scroll', handleScroll);
-    };
-
-    const handleUnclick = () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-
-    window.addEventListener('mousedown', handleClick);
-    window.addEventListener('mouseup', handleUnclick);
-    window.addEventListener('touchstart', handleClick);
-    window.addEventListener('touchend', handleUnclick);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('mousedown', handleClick);
-      window.removeEventListener('mouseup', handleUnclick);
-      window.removeEventListener('touchstart', handleClick);
-      window.removeEventListener('touchend', handleUnclick);
+      window.removeEventListener('scroll', handleScroll);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // 빈 배열로 유지해서 컴포넌트가 마운트될 때와 언마운트될 때만 실행시키기
+  }, [prevScrollY]);
 
   //Dropdown
   const onClickUser = useCallback(() => {
@@ -249,7 +131,7 @@ const HeaderPresenter = ({ userData, getUserDataError, logoutError, onClickLogou
     <>
       {/* 로딩화면 */}
       {/* {getUserDataLoading && <Loader />} */}
-      <HEADER.Frame scrollDirection={scrollDirection} isHeaderUp={isHeaderUp}>
+      <HEADER.Frame scrollDirection={scrollDirection}>
         <NAV.HeaderNav isMenuIconClicked={isMenuIconClicked} render={render}>
           <ul>
             {/* 1 */}

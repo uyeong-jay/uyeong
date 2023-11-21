@@ -2,7 +2,6 @@ import styled from '@_settings/styled';
 
 interface HeaderFrameProps {
   scrollDirection: string;
-  isHeaderUp: boolean;
 }
 
 interface HeaderNavProps {
@@ -30,20 +29,7 @@ HEADER.Frame = styled.header<HeaderFrameProps>`
   //스크롤시 header 애니메이션
   ${(props) => {
     if (props.scrollDirection === 'up') {
-      if (props.isHeaderUp) {
-        return `
-          animation: down-header 0.2s ease-out 0s forwards;
-          @keyframes down-header {
-            from {
-              transform: translateY(0);
-            }
-            to {
-              transform: translateY(-100%);
-            }
-          }
-        `;
-      } else
-        return `
+      return `
           animation: up-header 0.2s ease-out 0s forwards;
           @keyframes up-header {
             from {
@@ -54,7 +40,7 @@ HEADER.Frame = styled.header<HeaderFrameProps>`
             }
           }
         `;
-    } else if (props.scrollDirection === 'down' || props.isHeaderUp) {
+    } else if (props.scrollDirection === 'down') {
       return `
         animation: down-header 0.2s ease-out 0s forwards;
         @keyframes down-header {
@@ -203,6 +189,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
         & > div {
           // border: 1px solid red;
           background-color: ${({ theme }) => theme.HEADER_BG_C};
+          box-shadow: 0 4px 4px rgb(237, 236, 234); //#EDECEA
           display: flex;
           align-items: flex-end;
           position: absolute;
