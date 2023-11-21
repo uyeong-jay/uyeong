@@ -52,7 +52,6 @@ export interface BlogCommentReqWithToken {
 export const commentApi = api.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
-    //getMany
     getBlogComments: builder.query<BlogCommentRes, string>({
       query: (slug) => ({
         url: `/api/comment/blog/${slug}`,
@@ -61,7 +60,6 @@ export const commentApi = api.injectEndpoints({
       providesTags: ['BlogComment'],
     }),
 
-    //create comment
     createBlogComment: builder.mutation<BlogCommentRes, BlogCommentReqWithToken>({
       query: (data) => ({
         url: '/api/comment',
@@ -74,7 +72,6 @@ export const commentApi = api.injectEndpoints({
       invalidatesTags: ['BlogComment'],
     }),
 
-    //create reply
     createBlogReply: builder.mutation<BlogCommentRes, BlogCommentReqWithToken>({
       query: (data) => ({
         url: '/api/reply',
@@ -87,7 +84,6 @@ export const commentApi = api.injectEndpoints({
       invalidatesTags: ['BlogComment'],
     }),
 
-    //update
     updateBlogComment: builder.mutation<BlogCommentRes, BlogCommentReqWithToken>({
       query: (data) => ({
         url: `/api/comment/${data.commentInfo.id}`,
@@ -100,7 +96,6 @@ export const commentApi = api.injectEndpoints({
       invalidatesTags: ['BlogComment'],
     }),
 
-    //delete
     deleteBlogComment: builder.mutation<BlogCommentRes, BlogCommentReqWithToken>({
       query: (data) => ({
         url: `/api/comment/${data.commentInfo.id}`,

@@ -37,7 +37,6 @@ export const userApi = api.injectEndpoints({
       providesTags: ['User'],
     }),
 
-    //join
     join: builder.mutation<UserResponse, UserRequest>({
       query: (data) => ({
         url: '/api/register',
@@ -47,7 +46,6 @@ export const userApi = api.injectEndpoints({
       invalidatesTags: ['User'],
     }),
 
-    //login
     login: builder.mutation<UserResponse, UserRequest>({
       query: (data) => ({
         url: '/api/login',
@@ -57,7 +55,6 @@ export const userApi = api.injectEndpoints({
       invalidatesTags: ['User'],
     }),
 
-    //logout
     logout: builder.mutation<UserResponse, null>({
       query: (data) => ({
         url: '/api/logout',
@@ -67,7 +64,6 @@ export const userApi = api.injectEndpoints({
       invalidatesTags: ['User'],
     }),
 
-    //update
     update: builder.mutation<UserResponse, UserRequestWithToken>({
       query: (data) => ({
         url: '/api/user',

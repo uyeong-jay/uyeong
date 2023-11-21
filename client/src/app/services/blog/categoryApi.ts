@@ -28,7 +28,6 @@ export const categoryApi = api.injectEndpoints({
     // 서버에 전달할 data ? builder.mutation() : builder.query()
     // builder.query<type of 'res' , type of 'query arg'>
 
-    //getMany
     getBlogCategories: builder.query<BlogCategoryRes, void>({
       query: () => ({
         url: '/api/blog/category',
@@ -37,7 +36,6 @@ export const categoryApi = api.injectEndpoints({
       providesTags: ['BlogCategory'],
     }),
 
-    //create
     createBlogCategory: builder.mutation<BlogCategoryRes, BlogCategoryReq>({
       query: (data) => ({
         url: '/api/blog/category',
@@ -50,7 +48,6 @@ export const categoryApi = api.injectEndpoints({
       invalidatesTags: ['BlogCategory'],
     }),
 
-    //update
     updateBlogCategory: builder.mutation<BlogCategoryRes, BlogCategoryReq>({
       query: (data) => ({
         url: '/api/blog/category',
@@ -63,7 +60,6 @@ export const categoryApi = api.injectEndpoints({
       invalidatesTags: ['BlogCategory'],
     }),
 
-    //delete
     deleteBlogCategory: builder.mutation<BlogCategoryRes, BlogCategoryReq>({
       query: (data) => ({
         url: '/api/blog/category',
