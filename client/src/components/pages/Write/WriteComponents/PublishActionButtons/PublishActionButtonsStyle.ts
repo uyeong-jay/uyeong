@@ -22,7 +22,7 @@ export const StyledPublishActionButtons = styled.div`
       background-color: #eff1f3;
       height: 45px;
       border-radius: 15px;
-      color: dimgray;
+      color: ${({ theme }) => theme.FONT_C};
     }
 
     & .cancel-button {

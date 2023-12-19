@@ -18,7 +18,7 @@ export const StyledPublishCategory = styled.div`
     height: 50px;
     margin: 0 auto;
     border-radius: 20px;
-    color: dimgray;
+    color: ${({ theme }) => theme.FONT_C};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +28,7 @@ export const StyledPublishCategory = styled.div`
       width: 13.5px;
       margin-right: 7px;
       transform: translateY(8%);
-      fill: dimgray;
+      fill: ${({ theme }) => theme.FONT_C};
     }
   }
 
@@ -105,7 +105,7 @@ export const StyledOpenedCategory = styled.div<PublishCategpryProps>`
         right: 0;
         top: 0;
         width: 15px;
-        fill: dimgray;
+        fill: ${({ theme }) => theme.FONT_C};
       }
     }
 
@@ -131,7 +131,7 @@ export const StyledOpenedCategory = styled.div<PublishCategpryProps>`
       border-radius: 50%;
     }
     ::-webkit-scrollbar-thumb {
-      background: dimgray;
+      background: ${({ theme }) => theme.FONT_C};
       border-radius: 10px;
     }
   }
@@ -146,7 +146,7 @@ export const StyledOpenedCategory = styled.div<PublishCategpryProps>`
     margin-bottom: 15px;
 
     & > .done-button {
-      // border: 1px solid dimgray;
+      // border: 1px solid ${({ theme }) => theme.FONT_C};
       background-color: gainsboro;
       width: 100px;
       border-radius: 10px;

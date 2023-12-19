@@ -15,7 +15,7 @@ export const StyledWriteFooter = styled.div`
   & > button {
     // border: 1px solid black;
     width: 100px;
-    color: dimgray;
+    color: ${({ theme }) => theme.FONT_C};
   }
 
   & > .back-button {
@@ -28,7 +28,7 @@ export const StyledWriteFooter = styled.div`
       // border: 1px solid black;
       width: 9.5px;
       margin-right: 10px;
-      fill: dimgray;
+      fill: ${({ theme }) => theme.FONT_C};
     }
   }
 
@@ -42,7 +42,7 @@ export const StyledWriteFooter = styled.div`
       // border: 1px solid black;
       width: 14px;
       margin-left: 10px;
-      fill: dimgray;
+      fill: ${({ theme }) => theme.FONT_C};
     }
   }
 `;

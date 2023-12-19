@@ -17,6 +17,7 @@ type CardDescriptionProps = ThumbnailProps;
 
 ARTICLE.Frame = styled.article`
   border: 2px solid ${({ theme }) => theme.BD_C};
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
