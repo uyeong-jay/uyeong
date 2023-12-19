@@ -31,10 +31,10 @@ const BlogPostCommentWritePresenter = ({
     <FORM.CommentWriteForm onSubmit={onSubmit}>
       {/* 효과 넣기 */}
       <textarea
+        ref={textareaRef}
         value={blogCommentInfo.content}
         onChange={onChangeComment}
         placeholder="Add a comment..."
-        ref={textareaRef}
         spellCheck="false" //문법 교정 빨간줄 없애기
       ></textarea>
 

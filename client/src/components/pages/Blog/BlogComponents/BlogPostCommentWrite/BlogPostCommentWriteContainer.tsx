@@ -46,8 +46,6 @@ const BlogPostCommentWriteContainer = ({
   const [createReply] = useCreateBlogReplyMutation();
   const [updateComment] = useUpdateBlogCommentMutation();
 
-  // const dispatch = useAppDispatch();
-
   //댓글or답글 내용 regex사용 편집
   const regexEditComment = useCallback((content: string, taggedNickname = '') => {
     let markdownContent = content;
@@ -59,8 +57,6 @@ const BlogPostCommentWriteContainer = ({
     markdownContent = markdownContent.replaceAll('```&nbsp;', '```'); //code 마크다운이 연장되는 이슈해결 정규식
 
     //태그된 닉네임 스타일 변경
-    //수정이 있어도 실행하기
-
     if (taggedNickname) {
       markdownContent = markdownContent.replace(`@${taggedNickname}`, `**@${taggedNickname}**`);
     }
@@ -88,7 +84,7 @@ const BlogPostCommentWriteContainer = ({
   };
 
   const initialState = {
-    post_id: postId as string,
+    post_id: postId as string, //포스트 삭제시 관련 댓글 모두 삭제할때 사용
     post_title: postTitle as string,
     content:
       (taggedNickname ? '@' + taggedNickname + ' ' : '') ||

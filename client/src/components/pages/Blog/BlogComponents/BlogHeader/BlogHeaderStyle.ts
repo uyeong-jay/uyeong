@@ -10,7 +10,6 @@ export const NAV = {} as any;
 
 HEADER.Frame = styled.header`
   // border: 1px solid green;
-  // background-color: ${({ theme }) => theme.HEADER_BG_C};
   display: flex;
   justify-content: center;
   align-items: flex-end;

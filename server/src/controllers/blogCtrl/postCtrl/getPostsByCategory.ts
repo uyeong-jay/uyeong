@@ -10,7 +10,7 @@ const getPostsByCategory = async (req: Request, res: Response) => {
       $or: [{ category: { $eq: req.params.slug } }], //$eq: 정확히 일치 할때만
     }).sort({ createdAt: -1 });
 
-    if (!postsByCategory.length) return res.status(400).json({ msg: "No blogs" }); //client 도 에러 대비 해주기
+    if (!postsByCategory.length) return res.status(400).json({ msg: "No blogs" });
 
     res.status(200).json({ postsByCategory });
   } catch (err: any) {

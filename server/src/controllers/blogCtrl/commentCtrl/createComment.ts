@@ -19,8 +19,6 @@ const createComment = async (req: IReqAuth, res: Response) => {
       content,
     });
 
-    // io.emit("createComment", content);
-
     //db에 저장
     await newComment.save();
 

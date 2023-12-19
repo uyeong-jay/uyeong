@@ -3,7 +3,6 @@ import Comments from "@models/blog/commentModel";
 
 const getComments = async (req: Request, res: Response) => {
   try {
-    //comment를 가장 최근에 생성된것이 가장 첫번째에 오도록 가져오기
     const data = await Comments.aggregate([
       {
         $facet: {
@@ -68,10 +67,11 @@ const getComments = async (req: Request, res: Response) => {
       },
     ]);
 
-    const comments = data[0].totalData; //[]
-    const count = data[0].count; //number
+    // console.log(data); //[ { totalData: [ [Object], [Object] ], count: 2 } ]
+    const comments = data[0].totalData;
+    const totalCommentCount = data[0].count;
 
-    res.status(200).json({ comments, count });
+    res.status(200).json({ comments, totalCommentCount });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });
   }

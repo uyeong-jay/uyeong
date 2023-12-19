@@ -17,8 +17,13 @@ const useAnimation = (show: boolean) => {
 
 export default useAnimation;
 
-//사용
-//  const [show, render, onAnimationEnd] = useAnimation(boolean값);
+// 사용 예시
+// const [isOpen, setOpen] = useState(boolean값)
+
+// const [show, render, onAnimationEnd] = useAnimation(isOpen);
+// or
+// const [show, render, onAnimationEnd] = useAnimation(boolean값);
+
 //
 // {render && (
 //   <div animationName={show ? 'up' : 'down'} onAnimationEnd={() => onAnimationEnd}>
@@ -30,6 +35,7 @@ export default useAnimation;
 // interface PublishCategpryProps {
 //   animationName: string;
 // }
+
 //const StyledOpenedCategory = styled.div<PublishCategpryProps>`
 
 // animation: ${(props) => props.animationName} 0.5s ease-out 0s forwards;

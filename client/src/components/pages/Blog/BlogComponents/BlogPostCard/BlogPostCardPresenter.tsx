@@ -12,13 +12,14 @@ interface Props {
 
 const BlogPostCardPresenter = ({ post }: Props) => {
   const {
-    /* _id, */ titleForUrl,
+    /* _id, privacy, */
+    titleForUrl,
     title,
     tags,
     content,
     thumbnail,
     description,
-    /* privacy, */ createdAt,
+    createdAt,
     category,
     commentCount,
   } = post;
@@ -43,7 +44,7 @@ const BlogPostCardPresenter = ({ post }: Props) => {
                 src={thumbnail as string}
                 alt="blog-card-image"
                 layout="fill"
-                objectFit="cover"
+                objectFit="contain"
               />
             }
           </div>

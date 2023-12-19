@@ -11,8 +11,6 @@ function MyApp({ Component, ...rest }: AppProps) {
 
   return (
     <>
-      {/* fontawsome icon  */}
-      {/* <Script src={`${process.env.FONTAWESOME_KIT}`} crossOrigin="anonymous"></Script> */}
       <ThemeProvider theme={lightTheme}>
         <Provider store={store}>
           <GlobalStyle />
