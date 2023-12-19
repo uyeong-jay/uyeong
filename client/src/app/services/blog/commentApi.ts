@@ -31,7 +31,7 @@ export interface BlogComment {
 
 export interface BlogCommentRes {
   comments?: BlogComment[];
-  count?: number;
+  totalCommentCount?: number;
   msg?: string;
 }
 

@@ -12,15 +12,13 @@ interface Props {
 }
 
 const BlogPostPresenter = ({ blogPost }: Props) => {
-  const { _id, thumbnail, content, commentCount } = blogPost || {};
+  const { _id, thumbnail, content } = blogPost || {};
 
   if (!blogPost) return <NotFound />;
   return (
     <StyledBlogPost>
       <BlogPostToc />
-
       <BlogPostHeader blogPost={blogPost} />
-
       <article>
         {thumbnail && (
           <div className="blog-post-image-wrapper" id="post-thumbnail-wrapper">
@@ -38,10 +36,7 @@ const BlogPostPresenter = ({ blogPost }: Props) => {
           <MarkdownViewer content={content ?? ''} />
         </div>
       </article>
-
-      <BlogPostComments postId={_id} commentCount={commentCount} />
-
-      {/* 좋아요 with 폭죽 - velog, youtube */}
+      <BlogPostComments postId={_id} />
     </StyledBlogPost>
   );
 };

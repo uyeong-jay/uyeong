@@ -7,14 +7,13 @@ import { memo } from 'react';
 interface Props {
   postId?: string;
   blogCommentsData?: BlogCommentRes;
-  commentCount?: number;
 }
 
-const BlogPostCommentsPresenter = ({ postId, blogCommentsData, commentCount }: Props) => {
+const BlogPostCommentsPresenter = ({ postId, blogCommentsData }: Props) => {
   return (
     <SECTION.Frame>
       <DIV.CommentWriteBlock>
-        <div>{commentCount} Comments</div>
+        <div>{blogCommentsData?.totalCommentCount} Comments</div>
         <BlogPostCommentWrite postId={postId} />
       </DIV.CommentWriteBlock>
 
