@@ -27,10 +27,12 @@ const BlogPostHeaderPresenter = ({ userData, blogPost, onClickDeletePost, isModa
 
         {userData?.user?.role === 'admin' ? (
           <DIV.EditButtonGroup>
-            <Link href={`/write?id=${_id}`} passHref>
-              <Button variant="update" text="수정" />
+            <Link href={`/write?id=${_id}`}>
+              <a>
+                <Button variant="update" text="Edit" />
+              </a>
             </Link>
-            <Button variant="delete" text="삭제" onClick={() => onClickDeletePost()} />
+            <Button variant="delete" text="Delete" onClick={() => onClickDeletePost()} />
           </DIV.EditButtonGroup>
         ) : (
           <></>
@@ -41,7 +43,6 @@ const BlogPostHeaderPresenter = ({ userData, blogPost, onClickDeletePost, isModa
         </DIV.Middle>
 
         <DIV.Bottom>
-          {/* 둥글게 */}
           {tags?.map((tag) => (
             <span key={tag}>#{tag}</span>
           ))}
