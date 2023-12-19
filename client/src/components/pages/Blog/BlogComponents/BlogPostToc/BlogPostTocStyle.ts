@@ -44,7 +44,7 @@ NAV.Frame = styled.nav`
     }
   }
 
-  //1350px(psot+toc+bar) = 1280px(px)+70px,
+  //1350px(post+toc+bar) = 1280px(px)+70px,
   @media screen and (min-width: calc(${({ theme }) => theme.BP.PC} + 70px)) {
     display: block;
   }
@@ -62,20 +62,14 @@ LI.Heading = styled.li<HeadingListProps>`
     opacity: 0.6;
     font-weight: bold;
     color: ${({ theme }) => theme.BD_C};
+    margin-left: 0;
+    transition: all 0.3s ease-out;
 
     ${(props) => {
       if (props.headingId === props.activeId) {
         return `
-          animation: font-bold 0.15s ease-out forwards;
-          @keyframes font-bold {
-            0% {
-              // margin-left: 0;
-            }
-            100% {
-              opacity: 1;
-              // margin-left: -3px;
-            }
-          }
+          margin-left: -5px;
+          opacity: 1;
         `;
       }
     }};
