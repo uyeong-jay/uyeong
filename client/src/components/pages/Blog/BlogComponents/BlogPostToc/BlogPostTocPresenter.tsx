@@ -1,14 +1,14 @@
 import React, { memo, useEffect, useState } from 'react';
 import { HeadingType } from './BlogPostTocContainer';
 import { LI, NAV } from './BlogPostTocStyle';
-import { v4 as uuid } from 'uuid';
+// import { v4 as uuid } from 'uuid';
 
 interface Props {
   headings: HeadingType[];
 }
 
 const BlogPostTocPresenter = ({ headings }: Props) => {
-  const [isMarkdownScrolling, setIsMarkdownScrolling] = useState(false);
+  const [isMarkdownScrolling, setMarkdownScrolling] = useState(false);
   const [activeId, setActiveId] = useState('');
 
   //TOC heaading 추적
@@ -88,13 +88,13 @@ const BlogPostTocPresenter = ({ headings }: Props) => {
         // markdown-content 엘리먼트가 화면에 보이는지 확인
         const rect = markdownContent.getBoundingClientRect();
 
-        //markdownContent의 상단이 뷰포트의 상단을 지나가고 하단을 지나갈대까지 isVisible을 true로 설정 아니면 false
-        const isVisible = rect.top < 0 && rect.bottom > 0;
+        //markdownContent의 상단이 뷰포트의 상단을 지나가고 하단을 지나갈대까지 markdownVisible을 true로 설정 아니면 false
+        const markdownVisible = rect.top < 0 && rect.bottom > 0;
 
-        if (isVisible) {
-          setIsMarkdownScrolling(true);
+        if (markdownVisible) {
+          setMarkdownScrolling(true);
         } else {
-          setIsMarkdownScrolling(false);
+          setMarkdownScrolling(false);
         }
       };
 
@@ -109,11 +109,14 @@ const BlogPostTocPresenter = ({ headings }: Props) => {
   return (
     <NAV.Frame>
       <ul>
-        {headings.map(({ id, text, level }) => (
-          <LI.Heading key={uuid()} headingLevel={level} headingId={id} activeId={isMarkdownScrolling ? activeId : ''}>
-            <a href={`#${id?.toLowerCase().replace(/\s+/g, '-')}`}>{text}</a>
-          </LI.Heading>
-        ))}
+        {headings.map(({ id, text, level }) => {
+          // console.log(id);
+          return (
+            <LI.Heading key={id} headingLevel={level} headingId={id} activeId={isMarkdownScrolling ? activeId : ''}>
+              <a href={`#${id?.toLowerCase().replace(/\s+/g, '-')}`}>{text}</a>
+            </LI.Heading>
+          );
+        })}
       </ul>
     </NAV.Frame>
   );

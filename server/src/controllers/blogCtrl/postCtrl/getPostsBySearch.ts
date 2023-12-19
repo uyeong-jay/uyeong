@@ -4,22 +4,24 @@ import Comments from "@models/blog/commentModel";
 
 const getPostsBySearch = async (req: Request, res: Response) => {
   try {
-    let sortedPosts;
+    let posts;
 
+    //pagination (infinite scroll)
     const { page: nextId, q: searchQuery } = req.query;
-    const limit = 2;
+    const limit = 4;
     const sort = "-_id";
-    // "-" >> 가장 최근 포스트가 먼저 보이도록 정렬
-    // same with sort({ createdAt: -1 })
+    // "-": 가장 최근 포스트가 먼저 보이도록 정렬 - same with sort({ createdAt: -1 })
 
     if (!searchQuery) {
-      sortedPosts = await Posts.find({
+      // blog 검색 전 (첫 페이지)
+      posts = await Posts.find({
         _id: nextId ? { $lt: nextId } : { $exists: true },
       })
         .limit(limit)
         .sort(sort);
     } else {
-      sortedPosts = await Posts.find({
+      // blog 검색 후
+      posts = await Posts.find({
         $and: [
           {
             _id: nextId ? { $lt: nextId } : { $exists: true },
@@ -40,27 +42,25 @@ const getPostsBySearch = async (req: Request, res: Response) => {
         .sort(sort);
     }
 
-    const next_cursor = sortedPosts[limit - 1]?._id.toString() || undefined;
+    const next_cursor = posts[limit - 1]?._id.toString() || undefined;
 
-    if (!sortedPosts.length) return res.status(200).json({ msg: "No blogs" });
+    if (!posts.length) return res.status(200).json({ matchingPosts: false, msg: "No Posts" });
 
     // 각 포스트에 대한 댓글 수를 가져오기
     const postsWithCommentCounts = await Promise.all(
-      sortedPosts.map(async (post) => {
+      posts.map(async (post) => {
         const commentCount = await Comments.countDocuments({ post_title: post.title });
         return {
           ...post._doc,
-          commentCount, // 댓글 수를 포함
+          commentCount, // 댓글 수 포함
         };
       })
     );
 
-    res.status(200).json({ posts: postsWithCommentCounts, next_cursor, msg: "Seaeched!" });
+    res.status(200).json({ posts: postsWithCommentCounts, next_cursor, matchingPosts: true, msg: "Searched!" });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });
   }
 };
 
 export default getPostsBySearch;
-
-//client 가 받을 데이터

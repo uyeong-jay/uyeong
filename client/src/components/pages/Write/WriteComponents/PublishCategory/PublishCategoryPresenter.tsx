@@ -10,7 +10,7 @@ interface Props {
   blogCategoryData?: BlogCategoryRes;
   blogPostInfo: BlogPostReq;
   isOpenedCategory: boolean;
-  // isClickedCategory: boolean;
+  // isCategoryClicked: boolean;
   onClickChooseCtegory: () => void;
   // onClickCancel: () => void;
   onClickDone: () => void;
@@ -21,7 +21,7 @@ const PublishCategoryPresenter = ({
   blogCategoryData,
   blogPostInfo,
   isOpenedCategory,
-  // isClickedCategory,
+  // isCategoryClicked,
   onClickChooseCtegory,
   // onClickCancel,
   onClickDone,
@@ -45,7 +45,7 @@ const PublishCategoryPresenter = ({
             {blogCategoryData?.categories?.map((category) => (
               <li key={category._id} value={category.name} onClick={onClickCategory}>
                 {category.name}
-                {/* isClickedCategory &&  */ category.name === blogPostInfo.category ? <CheckIcon /> : null}
+                {/* isCategoryClicked &&  */ category.name === blogPostInfo.category ? <CheckIcon /> : null}
               </li>
             ))}
           </ul>
@@ -61,7 +61,7 @@ const PublishCategoryPresenter = ({
               className="done-button"
               type="button"
               onClick={onClickDone}
-              // style={isClickedCategory ? { backgroundColor: 'gray', border: 'none', color: 'white' } : undefined}
+              // style={isCategoryClicked ? { backgroundColor: 'gray', border: 'none', color: 'white' } : undefined}
             >
               Done
             </button>

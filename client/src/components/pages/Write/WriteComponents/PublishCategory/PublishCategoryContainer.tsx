@@ -12,7 +12,7 @@ const PublishCategoryContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
   const { data: blogCategoryData } = useGetBlogCategoriesQuery();
 
   const [isOpenedCategory, setOpenedCategory] = useState(false);
-  // const [isClickedCategory, setClickedCategory] = useState(false);
+  // const [isCategoryClicked, setCategoryClicked] = useState(false);
 
   const onClickChooseCtegory = useCallback(() => {
     setOpenedCategory(true);
@@ -21,13 +21,13 @@ const PublishCategoryContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
   // const onClickCancel = useCallback(() => {
   //   setBlogPostInfo({ ...blogPostInfo, category: '' });
   //   setOpenedCategory(false);
-  //   // setClickedCategory(false);
+  //   // setCategoryClicked(false);
   // }, [blogPostInfo, setBlogPostInfo]);
 
   const onClickDone = useCallback(() => {
     //있으나 없으나 색을 그대로
-    //그럼 setClickedCategory 이거 없어도됨
-    // if (isClickedCategory) setOpenedCategory(false);
+    //그럼 setCategoryClicked 이거 없어도됨
+    // if (isCategoryClicked) setOpenedCategory(false);
     setOpenedCategory(false);
   }, []);
 
@@ -38,7 +38,7 @@ const PublishCategoryContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
       const clickedCategory = e.target.getAttribute('value');
       if (blogPostInfo.category === clickedCategory) setBlogPostInfo({ ...blogPostInfo, category: '' });
       else setBlogPostInfo({ ...blogPostInfo, category: clickedCategory });
-      // setClickedCategory(true);
+      // setCategoryClicked(true);
     },
     [blogPostInfo, setBlogPostInfo],
   );
@@ -48,7 +48,7 @@ const PublishCategoryContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
       blogCategoryData={blogCategoryData}
       blogPostInfo={blogPostInfo}
       isOpenedCategory={isOpenedCategory}
-      // isClickedCategory={isClickedCategory}
+      // isCategoryClicked={isCategoryClicked}
       onClickChooseCtegory={onClickChooseCtegory}
       // onClickCancel={onClickCancel}
       onClickDone={onClickDone}
