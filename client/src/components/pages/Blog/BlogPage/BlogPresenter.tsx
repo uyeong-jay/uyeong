@@ -1,18 +1,31 @@
-import React, { ChangeEvent, RefObject, useCallback } from 'react';
-import { ASIDE, DIV, SECTION } from './BlogStyle';
+import React, { ChangeEvent, RefObject } from 'react';
+import { DIV, SECTION } from './BlogStyle';
 import Head from 'next/head';
 import BlogHeader from '@pages/Blog/BlogComponents/BlogHeader';
 import { BlogPostRes } from '@app/services/blog/postApi';
-import { TagWithCount } from './BlogContainer';
 import { SubFrame } from '@templates/SubFrame';
-import BlogPosts from '../BlogComponents/BlogPosts/BlogPosts';
 import InputBox from '@molecules/InputBox/InputBox';
 import SearchIcon from '@icons/SearchIcon';
+import BlogTags from '../BlogComponents/BlogTags';
+// import BlogPosts from '@pages/Blog/BlogComponents/BlogPosts';
+import { DIV as DIV_POSTS } from '../BlogComponents/BlogPosts/BlogPosts';
+import { InitialPostsCardArr } from '../BlogComponents/BlogPosts/BlogPosts';
+import dynamic from 'next/dynamic';
+
+const BlogPosts = dynamic(() => import('../BlogComponents/BlogPosts/BlogPosts'), {
+  loading: () => (
+    <DIV_POSTS.BlogPostsWrapper>
+      {InitialPostsCardArr.map((v) => (
+        <DIV_POSTS.InitialPostsCard key={v}></DIV_POSTS.InitialPostsCard>
+      ))}
+    </DIV_POSTS.BlogPostsWrapper>
+  ),
+  ssr: false,
+});
 
 interface Props {
-  refa: any;
+  targetRef: RefObject<HTMLDivElement>;
   blogPostsBySearch?: BlogPostRes;
-  allTags: TagWithCount[];
   tagUnderline: string;
   searchWordInput?: string;
   onChangeInput?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -20,13 +33,12 @@ interface Props {
   onFocusInput?: () => void;
   inputRef?: RefObject<HTMLInputElement>;
   onClickTag: (tagName: string) => void;
-  isClickedTag: boolean;
+  isTagClicked: boolean;
 }
 
 const BlogPresenter: React.FC<Props> = ({
-  refa,
+  targetRef,
   blogPostsBySearch,
-  allTags,
   tagUnderline,
   searchWordInput,
   onChangeInput,
@@ -34,16 +46,8 @@ const BlogPresenter: React.FC<Props> = ({
   onFocusInput,
   inputRef,
   onClickTag,
-  isClickedTag,
+  isTagClicked,
 }) => {
-  const tagNameLength = useCallback((tagName: string) => {
-    const cutTagName = tagName.slice(0, 13);
-
-    const finalTagName = tagName.length > 13 ? cutTagName + '..' : cutTagName;
-
-    return finalTagName;
-  }, []);
-
   return (
     <>
       <Head>
@@ -53,21 +57,7 @@ const BlogPresenter: React.FC<Props> = ({
         <BlogHeader />
         <SubFrame>
           <DIV.BlogBlock>
-            <ASIDE.BlogTags>
-              <div className="tags-wrapper">
-                {allTags.map((tag, index) => (
-                  <DIV.BlogTag
-                    key={index}
-                    onClick={() => onClickTag(tag.name)}
-                    tagUnderline={tagUnderline}
-                    tagName={tag.name}
-                    isClickedTag={isClickedTag}
-                  >
-                    {tagNameLength(tag.name)} ({tag.count})
-                  </DIV.BlogTag>
-                ))}
-              </div>
-            </ASIDE.BlogTags>
+            <BlogTags tagUnderline={tagUnderline} onClickTag={onClickTag} isTagClicked={isTagClicked} />
             <SECTION.BlogMain>
               <DIV.SearchBar>
                 <InputBox
@@ -82,7 +72,7 @@ const BlogPresenter: React.FC<Props> = ({
                 <SearchIcon />
               </DIV.SearchBar>
               <BlogPosts blogPostsBySearch={blogPostsBySearch} />
-              <div ref={refa} style={{ height: '50px', border: '1px solid black' }}></div>
+              <DIV.IntersectionTarget id="intersection_target" ref={targetRef}></DIV.IntersectionTarget>
             </SECTION.BlogMain>
           </DIV.BlogBlock>
         </SubFrame>

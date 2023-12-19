@@ -1,17 +1,16 @@
-import { useGetBlogPostsQuery } from '@app/services/blog/postApi';
 import { useCallback, useEffect, useRef, useState, useMemo } from 'react';
 import BlogPresenter from './BlogPresenter';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { useGetBlogPostsBySearchQuery } from '@app/services/blog/postApi';
 import { getPostsBySearch, getMorePostsBySearch, getTagName } from '@pages/Blog/BlogSlice';
 import React from 'react';
-// import dynamic from 'next/dynamic';
 import { useIntersect } from '@hooks/useIntersect';
+// import dynamic from 'next/dynamic';
 // import Loader from '@modals/Loader';
 
 // const BlogPresenter = dynamic(() => import('./BlogPresenter'), {
-//   // loading: () => <Loader />, // 로딩 중에 표시할 UI
-//   // ssr: false, // 서버 사이드 렌더링 비활성화
+//   loading: () => <Loader />, // 로딩 중에 표시할 UI
+//   ssr: false, // 서버 사이드 렌더링 비활성화
 // });
 
 export interface TagWithCount {
@@ -23,8 +22,6 @@ const BlogContainer = () => {
   const dispatch = useAppDispatch();
 
   //포스트
-  const { data: blogPostsData } = useGetBlogPostsQuery();
-
   const blogPostsBySearch = useAppSelector((state) => state.blog.blogPostsBySearch);
 
   //검색
@@ -42,34 +39,18 @@ const BlogContainer = () => {
   const [isInputFocused, setInputFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [isClickedTag, setClickedTag] = useState(false);
+  const [isTagClicked, setTagClicked] = useState(false);
   const [tagUnderline, setTagUnderline] = useState('');
 
   const [loadMore, setLoadMore] = useState(false);
   const [isIntersectionEnded, setIntersectionEnded] = useState(false);
 
-  // 모든 태그 > 많은 순 정렬
-  // +50개 로 끊기 (+더보기)
-  const allTags = useMemo(() => {
-    const tagList: TagWithCount[] = [];
-    blogPostsData?.posts?.forEach((post) => {
-      post.tags.forEach((postTag: string) => {
-        const tagIndex = tagList.findIndex((tag) => tag.name === postTag);
-
-        if (tagIndex !== -1) {
-          tagList[tagIndex].count += 1;
-        } else tagList.push({ name: postTag, count: 1 });
-      });
-    });
-    return tagList.sort((a, b) => b.count - a.count);
-  }, [blogPostsData?.posts]);
-
   useEffect(() => {
     //초기화 이후 코드
     //새로고침 및 post 탭으로 복귀시 바로 초기화
-    if (!tagName && !isClickedTag && !isInputFocused && !searchWordInput && !loadMore) {
+    if (!tagName && !isTagClicked && !isInputFocused && !loadMore) {
       dispatch(getPostsBySearch(blogPostsDataBySearch));
-      console.log('1');
+      // console.log('1');
     }
     //초기화 이후 코드
     if (tagName && !loadMore) {
@@ -79,16 +60,16 @@ const BlogContainer = () => {
         searchWord: tagName,
       }); //loadmore 이 안되는 상태에선 포함 가능한 데이터
       dispatch(getPostsBySearch(blogPostsDataBySearch));
-      console.log('2');
+      // console.log('2');
     }
 
     //한번에 여러번 바뀌지 않게 시간 지연 시켜두기
     // (+ 한박자 늦게 바뀌도록 설정)
-    if (isClickedTag && !isSearchStarted) {
+    if (isTagClicked && !isSearchStarted) {
       const timer = setTimeout(() => {
         dispatch(getPostsBySearch(blogPostsDataBySearch));
         setIntersectionEnded(false);
-        console.log('3');
+        // console.log('3');
       }, 500);
       return () => {
         clearTimeout(timer);
@@ -99,7 +80,7 @@ const BlogContainer = () => {
         dispatch(getPostsBySearch(blogPostsDataBySearch));
         setIntersectionEnded(false);
         setSearchStarted(false);
-        console.log('4-1');
+        // console.log('4-1');
       }, 300);
       return () => {
         clearTimeout(timer);
@@ -109,22 +90,13 @@ const BlogContainer = () => {
       const timer = setTimeout(() => {
         dispatch(getMorePostsBySearch(blogPostsDataBySearch));
         setIntersectionEnded(false);
-        console.log('5');
+        // console.log('5');
       }, 500);
       return () => {
         clearTimeout(timer);
       };
     }
-  }, [
-    blogPostsDataBySearch,
-    dispatch,
-    isClickedTag,
-    isInputFocused,
-    isSearchStarted,
-    loadMore,
-    searchWordInput,
-    tagName,
-  ]);
+  }, [blogPostsDataBySearch, dispatch, isTagClicked, isInputFocused, isSearchStarted, loadMore, tagName]);
 
   const onClickTag = useCallback(
     (tag: string) => {
@@ -132,7 +104,7 @@ const BlogContainer = () => {
       setInputFocused(false);
       setSearchStarted(false);
       setLoadMore(false);
-      setClickedTag(true);
+      setTagClicked(true);
       setTagUnderline(tag);
       setSearchInfo({
         nextPageId: '',
@@ -169,7 +141,7 @@ const BlogContainer = () => {
           nextPageId: '',
           searchWord: value,
         });
-        console.log('4-0');
+        // console.log('4-0');
       }, 700),
     [setSearchInfo],
   );
@@ -187,7 +159,7 @@ const BlogContainer = () => {
 
   const onFocusInput = useCallback(() => {
     dispatch(getTagName(''));
-    setClickedTag(false);
+    setTagClicked(false);
     setLoadMore(false);
     setInputFocused(true);
   }, [dispatch]);
@@ -198,15 +170,15 @@ const BlogContainer = () => {
   }, []);
 
   //infinite scroll hook with IntersectionObserver
-  const refa = useIntersect(
+  const targetRef = useIntersect(
     async (entry, observer) => {
       observer.unobserve(entry.target);
       //서버에서 받아온 next_cursor 가 있을때 실행
       if (blogPostsDataBySearch?.next_cursor && !isIntersectionEnded) {
-        console.log('a');
+        // console.log('a');
         setIntersectionEnded(true);
         setLoadMore(true);
-        setClickedTag(false);
+        setTagClicked(false);
         setSearchInfo({
           ...searchInfo,
           nextPageId: blogPostsDataBySearch.next_cursor,
@@ -218,13 +190,13 @@ const BlogContainer = () => {
       rootMargin: '0px',
       threshold: 0.5,
     },
+    'intersection_target',
   );
 
   return (
     <BlogPresenter
-      refa={refa}
+      targetRef={targetRef}
       blogPostsBySearch={blogPostsBySearch}
-      allTags={allTags}
       tagUnderline={tagUnderline}
       searchWordInput={searchWordInput}
       onChangeInput={onChangeInput}
@@ -232,7 +204,7 @@ const BlogContainer = () => {
       onFocusInput={onFocusInput}
       inputRef={inputRef}
       onClickTag={onClickTag}
-      isClickedTag={isClickedTag}
+      isTagClicked={isTagClicked}
     />
   );
 };
