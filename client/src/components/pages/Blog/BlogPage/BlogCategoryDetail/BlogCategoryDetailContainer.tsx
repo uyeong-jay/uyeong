@@ -1,8 +1,7 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { BlogPost, useGetBlogPostsByCategoryQuery } from '@app/services/blog/postApi';
 import { useRouter } from 'next/router';
 import BlogCategoryDetailPresenter from './BlogCategoryDetailPresenter';
-import { useGetBlogCategoriesQuery } from '@app/services/blog/categoryApi';
 
 interface PostsByCategory {
   postsByCategory?: BlogPost[];
@@ -10,18 +9,12 @@ interface PostsByCategory {
 
 const BlogCategoryDetailContainer = () => {
   const router = useRouter();
-  const { slug } = router.query;
-  const { data: blogPostsByCategoryData } = useGetBlogPostsByCategoryQuery(slug as string);
-  const { data: blogCategoryData /* , isLoading, isSuccess, error */ } = useGetBlogCategoriesQuery();
+  const { slug: categoryTitle } = router.query;
+  const { data: blogPostsByCategoryData } = useGetBlogPostsByCategoryQuery(categoryTitle as string);
 
   const { postsByCategory }: PostsByCategory = blogPostsByCategoryData || {};
 
-  const categoryBySlug = useMemo(() => {
-    const categoryData = blogCategoryData?.categories?.find((category) => category.name === slug);
-    return categoryData;
-  }, [blogCategoryData?.categories, slug]);
-
-  return <BlogCategoryDetailPresenter categoryBySlug={categoryBySlug} postsByCategory={postsByCategory} />;
+  return <BlogCategoryDetailPresenter categoryTitle={categoryTitle} postsByCategory={postsByCategory} />;
 };
 
 export default BlogCategoryDetailContainer;
