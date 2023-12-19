@@ -1,6 +1,5 @@
 import styled from '@_settings/styled';
 import { useRouter } from 'next/router';
-import { memo } from 'react';
 
 interface StrongProps {
   children: [string];
@@ -36,4 +35,4 @@ const Strong = ({ children }: StrongProps) => {
   );
 };
 
-export default memo(Strong);
+export default Strong;

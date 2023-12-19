@@ -1,5 +1,4 @@
 import styled from '@_settings/styled';
-import { memo } from 'react';
 import type { CodeProps } from 'react-markdown/lib/ast-to-react';
 
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -34,7 +33,7 @@ const InlineCodeWrapper = styled.code`
   }
 `;
 
-const code = ({ inline, className, children, ...props }: CodeProps) => {
+const Code = ({ inline, className, children, ...props }: CodeProps) => {
   const match = /language-(\w+)/.exec(className || '');
   return !inline && match ? (
     <CodeWrapper>
@@ -48,4 +47,4 @@ const code = ({ inline, className, children, ...props }: CodeProps) => {
     </InlineCodeWrapper>
   );
 };
-export default memo(code);
+export default Code;
