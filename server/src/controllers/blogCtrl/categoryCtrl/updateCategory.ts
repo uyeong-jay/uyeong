@@ -20,9 +20,6 @@ const updateCategory = async (req: IReqAuth, res: Response) => {
 
     //category 조회 후 업데이트
     await Categories.findOneAndUpdate({ name: oldName }, { name: currName });
-    //name: req.params.id
-    //name: req.params.slug
-    //name: req.body.name
 
     //post 조회 후 업데이트
     await Posts.updateMany({ category: oldName }, { $set: { category: currName } });

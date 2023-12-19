@@ -9,6 +9,7 @@ export interface BlogCategory {
 
 export interface BlogCategoryRes {
   categories?: BlogCategory[];
+  totalPages?: number;
   msg?: string;
 }
 
@@ -20,17 +21,18 @@ export interface BlogCategoryReq {
   categoryInfo?: {
     name: string;
   };
+  categoryPageInfo?: {
+    pageId: string;
+    pageNum: number;
+  };
   token?: string;
 }
 
 export const categoryApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    // 서버에 전달할 data ? builder.mutation() : builder.query()
-    // builder.query<type of 'res' , type of 'query arg'>
-
-    getBlogCategories: builder.query<BlogCategoryRes, void>({
-      query: () => ({
-        url: '/api/blog/category',
+    getBlogCategories: builder.query<BlogCategoryRes, number | void>({
+      query: (query) => ({
+        url: `/api/blog/category?page=${query}`,
         method: 'get',
       }),
       providesTags: ['BlogCategory'],

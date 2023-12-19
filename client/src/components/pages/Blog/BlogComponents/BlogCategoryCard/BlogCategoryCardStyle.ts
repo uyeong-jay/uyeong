@@ -44,12 +44,12 @@ DIV.Frame = styled.div`
     //LOGO Wrapper
     & > div {
       border: 3px solid ${({ theme }) => theme.BD_C};
+      position: absolute;
       width: 100%;
       height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      // border-radius: 20px;
 
       & .logo {
         // border: 1px solid black;

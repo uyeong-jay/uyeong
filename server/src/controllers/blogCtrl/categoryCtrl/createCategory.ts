@@ -13,9 +13,6 @@ const createCategory = async (req: IReqAuth, res: Response) => {
     const name = req.body.name;
 
     //category 조회
-    // const category = await Categories.findOne({ name });
-    // if (category) return res.status(400).json({ msg: "This category already exists." });
-
     //catrgory > unique = true
 
     //데이터 생성

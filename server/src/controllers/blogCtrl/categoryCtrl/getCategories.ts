@@ -3,10 +3,28 @@ import Categories from "@models/blog/categoryModel";
 
 const getCategories = async (req: Request, res: Response) => {
   try {
-    //category를 가장 최근에 생성된것이 가장 첫번째에 오도록 가져오기
-    const categories = await Categories.find().sort({ createdAt: -1 });
+    let categories;
 
-    res.status(200).json({ categories });
+    //pagination
+    const { page } = req.query;
+    const pageNum = Number(page);
+    const limit = 4;
+    const skip = (pageNum - 1) * limit;
+    const sort = "-_id"; //가장 최근 포스트가 먼저 보이도록 정렬
+    const total = await Categories.countDocuments({});
+    const totalPages = Math.ceil(total / limit);
+
+    if (!pageNum) {
+      // 카테고리 페이지 외 사용
+      categories = await Categories.find().limit(limit).sort(sort);
+    } else {
+      // 카테고리 페이지 내 사용 (ssr x)
+      categories = await Categories.find().skip(skip).limit(limit).sort(sort);
+    }
+
+    if (!categories.length) return res.status(400).json({ msg: "No categories" });
+
+    res.status(200).json({ categories, totalPages });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });
   }

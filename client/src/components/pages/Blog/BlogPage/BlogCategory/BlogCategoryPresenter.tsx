@@ -1,36 +1,47 @@
 import { UserResponse } from '@app/services/user/userApi';
-import Button from '@atoms/Button';
 import BlogHeader from '@pages/Blog/BlogComponents/BlogHeader';
-import InputBox from '@molecules/InputBox';
 import Head from 'next/head';
-import { ChangeEvent, FormEvent } from 'react';
-import { DIV, SECTION } from './BlogCategoryStyle';
+import { BTN, DIV, SECTION } from './BlogCategoryStyle';
 import BlogCategoryCard from '@pages/Blog/BlogComponents/BlogCategoryCard';
 import { BlogCategoryRes } from '@app/services/blog/categoryApi';
 import { BlogPostRes } from '@app/services/blog/postApi';
 import { SubFrame } from '@templates/SubFrame';
+import AngleDoubleLeftIcon from '@icons/AngleDoubleLeftIcon';
+import AngleDoubleRightIcon from '@icons/AngleDoubleRightIcon';
+import AngleLeftIcon from '@icons/AngleLeftIcon';
+import AngleRightIcon from '@icons/AngleRightIcon';
+import BlogCategoryHeader from '@pages/Blog/BlogComponents/BlogCategoryHeader';
 
 interface Props {
   userData?: UserResponse;
   blogPostsData?: BlogPostRes;
   blogCategoryData?: BlogCategoryRes;
-  categoryInfo: { name: string };
-  error: any;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  onChangeCategoryInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  categoryPages: number[];
+  categoryPageNum: number;
+  totalPageCount: number;
+  onClickPageNum: (v: number) => void;
+  onClickFirstPage: () => void;
+  onClickLastPage: () => void;
+  onClickPrevFirstPage: () => void;
+  onClickNextFirstPage: () => void;
 }
+
+const CATEGORYCOUNT = 4;
+const InitialCategoryCardArr = Array.from({ length: CATEGORYCOUNT }, (_v, index) => index);
 
 const BlogCategoryPresenter = ({
   userData,
   blogPostsData,
   blogCategoryData,
-  categoryInfo,
-  error,
-  onSubmit,
-  onChangeCategoryInput,
+  categoryPages,
+  categoryPageNum,
+  totalPageCount,
+  onClickPageNum,
+  onClickFirstPage,
+  onClickLastPage,
+  onClickPrevFirstPage,
+  onClickNextFirstPage,
 }: Props) => {
-  const { name } = categoryInfo;
-
   return (
     <>
       <Head>
@@ -40,27 +51,62 @@ const BlogCategoryPresenter = ({
         <SubFrame>
           <BlogHeader />
           <DIV.Content>
-            {/* 카테고리 생성 바 (admin) */}
-            {userData?.user?.role === 'admin' && (
-              <form onSubmit={onSubmit}>
-                <InputBox name="category" value={name} onChange={onChangeCategoryInput} />
-                <Button variant="create" type="submit" text="Create" />
-                {/* 에러 메세지 */}
-                {error && <p>{error.data.msg}</p>}
-              </form>
-            )}
+            <BlogCategoryHeader userData={userData} />
 
-            {/* 카테고리 카드들 웨퍼 */}
-            <div>
-              {blogCategoryData?.categories?.map((category) => (
-                <BlogCategoryCard
-                  key={category._id}
-                  category={category}
-                  userData={userData}
-                  blogPostsData={blogPostsData}
-                />
+            <DIV.CategoryCardGroup>
+              {/* 새로고침시 빈 사격형 넣기 */}
+              {blogCategoryData ? (
+                <>
+                  {blogCategoryData.categories?.map((category) => (
+                    <BlogCategoryCard
+                      key={category._id}
+                      category={category}
+                      userData={userData}
+                      blogPostsData={blogPostsData}
+                    />
+                  ))}
+                </>
+              ) : (
+                <>
+                  {InitialCategoryCardArr.map((v) => (
+                    <DIV.InitialCategoryCard key={v}>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </DIV.InitialCategoryCard>
+                  ))}
+                </>
+              )}
+            </DIV.CategoryCardGroup>
+
+            <DIV.PageBtnGroup>
+              <button onClick={onClickFirstPage} className={categoryPageNum <= 1 ? 'disabled' : ''}>
+                <AngleDoubleLeftIcon />
+              </button>
+              <button onClick={onClickPrevFirstPage} className={categoryPages[0] <= 1 ? 'disabled' : ''}>
+                <AngleLeftIcon />
+              </button>
+
+              {categoryPages.map((pageNum) => (
+                <BTN.PageNumBtn
+                  key={pageNum}
+                  onClick={() => onClickPageNum(pageNum)}
+                  className={categoryPageNum === pageNum ? 'aa' : ''}
+                >
+                  {pageNum}
+                </BTN.PageNumBtn>
               ))}
-            </div>
+
+              <button
+                onClick={onClickNextFirstPage}
+                className={categoryPages[categoryPages.length - 1] >= totalPageCount ? 'disabled' : ''}
+              >
+                <AngleRightIcon />
+              </button>
+              <button onClick={onClickLastPage} className={categoryPageNum >= totalPageCount ? 'disabled' : ''}>
+                <AngleDoubleRightIcon />
+              </button>
+            </DIV.PageBtnGroup>
           </DIV.Content>
         </SubFrame>
       </SECTION.Frame>

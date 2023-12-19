@@ -28,9 +28,6 @@ interface Props {
   setModalOpen: (isModalOpen: boolean) => void;
 }
 
-//수정버튼(input) > 저장버튼 (admin)
-//삭제버튼 > 모달 (admin)
-//저장버튼
 const BlogCategoryCardPresenter = ({
   userData,
   category,
@@ -56,7 +53,7 @@ const BlogCategoryCardPresenter = ({
             src={postsByCategoryName[postsByCategoryName.length - 1]?.thumbnail as string}
             alt="category-card-image"
             layout="fill"
-            objectFit="cover" //이미지를 틀에 맞게 맞추기
+            objectFit="contain" //이미지를 틀에 맞게 맞추기
             priority
           />
         ) : (

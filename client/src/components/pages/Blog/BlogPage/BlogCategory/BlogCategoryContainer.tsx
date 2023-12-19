@@ -1,45 +1,70 @@
-import React, { ChangeEvent, FormEvent, useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import BlogCategoryPresenter from './BlogCategoryPresenter';
 import { useGetUserDataQuery } from '@app/services/user/userApi';
-import { useGetBlogCategoriesQuery, useCreateBlogCategoryMutation } from '@app/services/blog/categoryApi';
+import { useGetBlogCategoriesQuery } from '@app/services/blog/categoryApi';
 import { useGetBlogPostsQuery } from '@app/services/blog/postApi';
 
 const BlogCategoryContainer = () => {
   const { data: userData } = useGetUserDataQuery();
-  const { data: blogCategoryData /* , isLoading, isSuccess, error */ } = useGetBlogCategoriesQuery();
   const { data: blogPostsData } = useGetBlogPostsQuery();
-  const [createBlogCategory, { error }] = useCreateBlogCategoryMutation();
 
-  //Craete Category
-  const initialState = { name: '' };
-  const [categoryInfo, setCategoryInfo] = useState(initialState);
+  //Paging Category
+  const [categoryPageNum, setCategoryPageNum] = useState(1);
+  const { data: blogCategoryData /* , isLoading, isSuccess, error */ } = useGetBlogCategoriesQuery(categoryPageNum);
+  const [currPageIndex, setCurrPageIndex] = useState(0);
+  const visiblePageCount = 5;
+  const totalPageCount = blogCategoryData?.totalPages as number;
+  const pageRemainder = totalPageCount % visiblePageCount;
 
-  //Create Category
-  const onSubmit = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+  const categoryPages = useMemo(() => {
+    const categoryPagesArr = Array.from({ length: totalPageCount }, (_v, index) => index + 1).slice(
+      currPageIndex,
+      currPageIndex + visiblePageCount,
+    );
+    return categoryPagesArr;
+  }, [totalPageCount, currPageIndex]);
 
-      createBlogCategory({ categoryInfo, token: userData?.access_token });
-
-      setCategoryInfo({ name: '' });
-    },
-    [categoryInfo, createBlogCategory, userData?.access_token],
-  );
-
-  //Create Input
-  const onChangeCategoryInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setCategoryInfo({ name: e.target.value });
+  const onClickPageNum = useCallback((pageNum) => {
+    setCategoryPageNum(pageNum);
   }, []);
+
+  const onClickFirstPage = useCallback(() => {
+    if (categoryPageNum <= 1) return;
+    setCurrPageIndex(0);
+    setCategoryPageNum(1);
+  }, [categoryPageNum]);
+
+  const onClickLastPage = useCallback(() => {
+    if (categoryPageNum >= totalPageCount) return;
+    setCurrPageIndex(totalPageCount - (pageRemainder > 0 ? pageRemainder : visiblePageCount));
+    setCategoryPageNum(totalPageCount);
+  }, [categoryPageNum, pageRemainder, totalPageCount]);
+
+  const onClickPrevFirstPage = useCallback(() => {
+    if (categoryPages[0] <= 1) return;
+    setCurrPageIndex(currPageIndex - visiblePageCount);
+    setCategoryPageNum(currPageIndex + 1 - visiblePageCount);
+  }, [categoryPages, currPageIndex]);
+
+  const onClickNextFirstPage = useCallback(() => {
+    if (categoryPages[categoryPages.length - 1] >= totalPageCount) return;
+    setCurrPageIndex(currPageIndex + visiblePageCount);
+    setCategoryPageNum(currPageIndex + 1 + visiblePageCount);
+  }, [categoryPages, totalPageCount, currPageIndex]);
 
   return (
     <BlogCategoryPresenter
       userData={userData}
       blogPostsData={blogPostsData}
       blogCategoryData={blogCategoryData}
-      categoryInfo={categoryInfo}
-      error={error}
-      onSubmit={onSubmit}
-      onChangeCategoryInput={onChangeCategoryInput}
+      categoryPages={categoryPages}
+      categoryPageNum={categoryPageNum}
+      totalPageCount={totalPageCount}
+      onClickPageNum={onClickPageNum}
+      onClickFirstPage={onClickFirstPage}
+      onClickLastPage={onClickLastPage}
+      onClickPrevFirstPage={onClickPrevFirstPage}
+      onClickNextFirstPage={onClickNextFirstPage}
     />
   );
 };
