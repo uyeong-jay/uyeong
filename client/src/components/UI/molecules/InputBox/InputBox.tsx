@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ForwardedRef, forwardRef, memo } from 'react';
+import React, { ChangeEvent, ForwardedRef, forwardRef } from 'react';
 import styled from '@_settings/styled';
 
 interface Props {
@@ -88,4 +88,4 @@ const InputBox = (
   );
 };
 
-export default memo(forwardRef(InputBox));
+export default forwardRef(InputBox);
