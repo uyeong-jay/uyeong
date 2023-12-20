@@ -1,5 +1,5 @@
 import { BlogCommentRes } from '@app/services/blog/commentApi';
-import { DIV, SECTION } from './BlogPostCommentsStyle';
+import { DIV, SECTION } from './BlogPostFooterStyle';
 import BlogPostComment from '../BlogPostComment';
 import BlogPostCommentWrite from '../BlogPostCommentWrite';
 import { memo } from 'react';
@@ -9,7 +9,7 @@ interface Props {
   blogCommentsData?: BlogCommentRes;
 }
 
-const BlogPostCommentsPresenter = ({ postId, blogCommentsData }: Props) => {
+const BlogPostFooterPresenter = ({ postId, blogCommentsData }: Props) => {
   return (
     <SECTION.Frame>
       <DIV.CommentWriteBlock>
@@ -26,4 +26,4 @@ const BlogPostCommentsPresenter = ({ postId, blogCommentsData }: Props) => {
   );
 };
 
-export default memo(BlogPostCommentsPresenter);
+export default memo(BlogPostFooterPresenter);
