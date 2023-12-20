@@ -1,14 +1,16 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import TagsSummaryPresenter from './TagsSummaryPresenter';
 import { useAppDispatch } from '@app/hooks';
-import { useGetBlogPostsQuery } from '@app/services/blog/postApi';
+import { BlogPostRes } from '@app/services/blog/postApi';
 import { getTagName } from '@pages/Blog/BlogSlice';
 import { TagWithCount } from '@pages/Blog/BlogPage/BlogContainer';
 import { useRouter } from 'next/router';
 
-const TagsSummaryContainer = () => {
-  const { data: blogPostsData } = useGetBlogPostsQuery(); //모든 태그들 보여주기 위해 가져옴 > 20개 넘어가지 않게 보여주기
+interface Props {
+  blogPostsData?: BlogPostRes;
+}
 
+const TagsSummaryContainer = ({ blogPostsData }: Props) => {
   const [clickedTag, setClickedTag] = useState(''); //클릭할 태크
 
   const dispatch = useAppDispatch();

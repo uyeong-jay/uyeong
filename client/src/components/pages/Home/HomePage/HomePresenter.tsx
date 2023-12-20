@@ -29,7 +29,7 @@ const HomePresenter = ({ blogPostsData }: Props) => {
             <DIV.SummaryBlock>
               <AboutSummary />
               <BlogSummary blogPostsData={blogPostsData} />
-              <TagsSummary />
+              <TagsSummary blogPostsData={blogPostsData} />
             </DIV.SummaryBlock>
           </DIV.ContainerHeight>
         </DIV.ContainerWidth>
