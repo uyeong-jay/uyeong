@@ -4,7 +4,7 @@ import BlogPostToc from '@pages/Blog/BlogComponents/BlogPostToc';
 import { StyledBlogPost } from './BlogPostStyle';
 import Image from 'next/image';
 import MarkdownViewer from '@organisms/MarkdownViewer';
-import BlogPostComments from '@pages/Blog/BlogComponents/BlogPostComments';
+import BlogPostFooter from '@pages/Blog/BlogComponents/BlogPostFooter';
 import BlogPostHeader from '@pages/Blog/BlogComponents/BlogPostHeader';
 
 interface Props {
@@ -36,7 +36,7 @@ const BlogPostPresenter = ({ blogPost }: Props) => {
           <MarkdownViewer content={content ?? ''} />
         </div>
       </article>
-      <BlogPostComments postId={_id} />
+      <BlogPostFooter postId={_id} />
     </StyledBlogPost>
   );
 };
