@@ -46,7 +46,7 @@ const getPostsBySearch = async (req: Request, res: Response) => {
 
     if (!posts.length) return res.status(200).json({ matchingPosts: false, msg: "No Posts" });
 
-    // 각 포스트에 대한 댓글 수를 가져오기
+    // 각 포스트에 대한 댓글 수를 가져오기 (post 4개씩 적용됨)
     const postsWithCommentCounts = await Promise.all(
       posts.map(async (post) => {
         const commentCount = await Comments.countDocuments({ post_title: post.title });
