@@ -83,7 +83,7 @@ const BlogPosts = ({ blogPostsBySearch }: Propss) => {
       ) : blogPostsBySearch?.matchingPosts === false ? (
         <DIV.NoPostsFound>- No posts found in the search -</DIV.NoPostsFound>
       ) : (
-        //새로고침시 보이는 화면 (dynamic 적용 전)
+        //새로고침시 보이는 화면
         <>
           {InitialPostsCardArr.map((cardCountIndex) => (
             <DIV.InitialPostsCard key={cardCountIndex}></DIV.InitialPostsCard>
