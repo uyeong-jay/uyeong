@@ -77,10 +77,15 @@ const BlogPosts = ({ blogPostsBySearch }: Propss) => {
   return (
     <DIV.BlogPostsWrapper>
       {blogPostsBySearch?.posts ? (
-        blogPostsBySearch?.posts?.map((post) =>
-          post ? <BlogPostCard key={post._id} post={post} /> : <div key={uuid()}></div>,
+        blogPostsBySearch.posts.map((post) =>
+          //불러온 post 갯수가 limit 수와 딱맞아 떨어지고 더이상 불러올 post가 없을때
+          post ? (
+            <BlogPostCard key={post._id} post={post} />
+          ) : (
+            <DIV.NoMorePosts key={uuid()}>- No more posts -</DIV.NoMorePosts>
+          ),
         )
-      ) : blogPostsBySearch?.matchingPosts === false ? (
+      ) : blogPostsBySearch?.hasMatchingPost === false ? (
         <DIV.NoPostsFound>- No posts found in the search -</DIV.NoPostsFound>
       ) : (
         //새로고침시 보이는 화면
@@ -90,7 +95,7 @@ const BlogPosts = ({ blogPostsBySearch }: Propss) => {
           ))}
         </>
       )}
-      {!blogPostsBySearch?.next_cursor && blogPostsBySearch?.matchingPosts && (
+      {!blogPostsBySearch?.next_cursor && blogPostsBySearch?.hasMatchingPost && (
         <DIV.NoMorePosts>- No more posts -</DIV.NoMorePosts>
       )}
     </DIV.BlogPostsWrapper>

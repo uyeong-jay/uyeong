@@ -5,13 +5,6 @@ import { useGetBlogPostsBySearchQuery } from '@app/services/blog/postApi';
 import { getPostsBySearch, getMorePostsBySearch, getTagName } from '@pages/Blog/BlogSlice';
 import React from 'react';
 import { useIntersect } from '@hooks/useIntersect';
-// import dynamic from 'next/dynamic';
-// import Loader from '@modals/Loader';
-
-// const BlogPresenter = dynamic(() => import('./BlogPresenter'), {
-//   loading: () => <Loader />, // 로딩 중에 표시할 UI
-//   ssr: false, // 서버 사이드 렌더링 비활성화
-// });
 
 export interface TagWithCount {
   name: string;
@@ -30,7 +23,7 @@ const BlogContainer = () => {
     searchWord: '',
   };
   const [searchInfo, setSearchInfo] = useState(initialSearchInfo);
-  const { data: blogPostsDataBySearch } = useGetBlogPostsBySearchQuery(searchInfo);
+  const { data: blogPostsDataBySearch, isFetching } = useGetBlogPostsBySearchQuery(searchInfo);
 
   const tagName = useAppSelector((state) => state.blog.tagName);
 
@@ -42,70 +35,67 @@ const BlogContainer = () => {
   const [isTagClicked, setTagClicked] = useState(false);
   const [tagUnderline, setTagUnderline] = useState('');
 
-  const [loadMore, setLoadMore] = useState(false);
+  const [canLoadMore, setCanLoadMore] = useState(false);
   const [isIntersectionEnded, setIntersectionEnded] = useState(false);
+  const [isLoadingPost, setLoadingPost] = useState(false);
 
   useEffect(() => {
-    //초기화 이후 코드
-    //새로고침 및 post 탭으로 복귀시 바로 초기화
-    if (!tagName && !isTagClicked && !isInputFocused && !loadMore) {
+    //새로고침, post 탭으로 복귀(초기화된 이후)
+    if (!tagName && !isTagClicked && !isInputFocused && !canLoadMore) {
       dispatch(getPostsBySearch(blogPostsDataBySearch));
-      // console.log('1');
     }
-    //초기화 이후 코드
-    if (tagName && !loadMore) {
-      setSearchWordInput(tagName); //검색어 보여주기
+    //tagName 통해서 왔을때(초기화된 이후)
+    if (tagName && !canLoadMore) {
+      setSearchWordInput(tagName);
       setSearchInfo({
         nextPageId: '',
         searchWord: tagName,
-      }); //loadmore 이 안되는 상태에선 포함 가능한 데이터
+      }); //canLoadmore 이 안되는 상태에서 넣을 수 있는 데이터
       dispatch(getPostsBySearch(blogPostsDataBySearch));
-      // console.log('2');
     }
 
     //한번에 여러번 바뀌지 않게 시간 지연 시켜두기
     // (+ 한박자 늦게 바뀌도록 설정)
-    if (isTagClicked && !isSearchStarted) {
+    if (isTagClicked && !isSearchStarted && !canLoadMore) {
       const timer = setTimeout(() => {
         dispatch(getPostsBySearch(blogPostsDataBySearch));
         setIntersectionEnded(false);
-        // console.log('3');
       }, 500);
       return () => {
         clearTimeout(timer);
       };
     }
-    if (isSearchStarted) {
+    if (isSearchStarted && !canLoadMore) {
       const timer = setTimeout(() => {
         dispatch(getPostsBySearch(blogPostsDataBySearch));
         setIntersectionEnded(false);
         setSearchStarted(false);
-        // console.log('4-1');
       }, 300);
       return () => {
         clearTimeout(timer);
       };
     }
-    if (loadMore) {
+    if (canLoadMore) {
       const timer = setTimeout(() => {
         dispatch(getMorePostsBySearch(blogPostsDataBySearch));
         setIntersectionEnded(false);
-        // console.log('5');
+        setLoadingPost(false);
       }, 500);
       return () => {
         clearTimeout(timer);
       };
     }
-  }, [blogPostsDataBySearch, dispatch, isTagClicked, isInputFocused, isSearchStarted, loadMore, tagName]);
+  }, [blogPostsDataBySearch, dispatch, isTagClicked, isInputFocused, isSearchStarted, canLoadMore, tagName]);
 
   const onClickTag = useCallback(
     (tag: string) => {
+      setCanLoadMore(false);
       dispatch(getTagName(''));
       setInputFocused(false);
       setSearchStarted(false);
-      setLoadMore(false);
       setTagClicked(true);
       setTagUnderline(tag);
+      setSearchWordInput(tag);
       setSearchInfo({
         nextPageId: '',
         searchWord: tag,
@@ -135,13 +125,15 @@ const BlogContainer = () => {
   const delayedSearchInfoUpdate = useMemo(
     () =>
       debounce((value: string) => {
-        setSearchStarted(true); //검색 연속동작을 위해 여기 고정
+        setSearchStarted(true); //검색 연속동작 가능
+        setIntersectionEnded(true);
+        setSearchWordInput(value);
         setTagUnderline('');
+        setTagClicked(false);
         setSearchInfo({
           nextPageId: '',
           searchWord: value,
         });
-        // console.log('4-0');
       }, 700),
     [setSearchInfo],
   );
@@ -151,16 +143,14 @@ const BlogContainer = () => {
     (e) => {
       setSearchWordInput(e.target.value);
       delayedSearchInfoUpdate(e.target.value);
-      setLoadMore(false);
-      setIntersectionEnded(true);
+      setCanLoadMore(false);
     },
     [delayedSearchInfoUpdate],
   );
 
   const onFocusInput = useCallback(() => {
     dispatch(getTagName(''));
-    setTagClicked(false);
-    setLoadMore(false);
+    setCanLoadMore(false);
     setInputFocused(true);
   }, [dispatch]);
 
@@ -174,11 +164,11 @@ const BlogContainer = () => {
     async (entry, observer) => {
       observer.unobserve(entry.target);
       //서버에서 받아온 next_cursor 가 있을때 실행
-      if (blogPostsDataBySearch?.next_cursor && !isIntersectionEnded) {
-        // console.log('a');
-        setIntersectionEnded(true);
-        setLoadMore(true);
+      if (!isFetching && blogPostsDataBySearch?.next_cursor && !isIntersectionEnded) {
         setTagClicked(false);
+        setIntersectionEnded(true);
+        setCanLoadMore(true);
+        setLoadingPost(true);
         setSearchInfo({
           ...searchInfo,
           nextPageId: blogPostsDataBySearch.next_cursor,
@@ -190,7 +180,7 @@ const BlogContainer = () => {
       rootMargin: '0px',
       threshold: 0.5,
     },
-    'intersection_target',
+    'posts_intersection_target',
   );
 
   return (
@@ -205,6 +195,7 @@ const BlogContainer = () => {
       inputRef={inputRef}
       onClickTag={onClickTag}
       isTagClicked={isTagClicked}
+      isLoadingPost={isLoadingPost}
     />
   );
 };

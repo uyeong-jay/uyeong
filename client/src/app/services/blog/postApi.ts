@@ -19,7 +19,7 @@ export interface BlogPostRes {
   postsByCategory?: BlogPost[];
   post?: BlogPost;
   next_cursor?: string;
-  matchingPosts?: boolean;
+  hasMatchingPost?: boolean;
   msg?: string;
 }
 

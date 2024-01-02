@@ -13,14 +13,12 @@ const getPostsBySearch = async (req: Request, res: Response) => {
     // "-": 가장 최근 포스트가 먼저 보이도록 정렬 - same with sort({ createdAt: -1 })
 
     if (!searchQuery) {
-      // blog 검색 전 (첫 페이지)
       posts = await Posts.find({
         _id: nextId ? { $lt: nextId } : { $exists: true },
       })
         .limit(limit)
         .sort(sort);
     } else {
-      // blog 검색 후
       posts = await Posts.find({
         $and: [
           {
@@ -44,10 +42,10 @@ const getPostsBySearch = async (req: Request, res: Response) => {
 
     const next_cursor = posts[limit - 1]?._id.toString() || undefined;
 
-    if (!posts.length) return res.status(200).json({ matchingPosts: false, msg: "No Posts" });
+    if (!posts.length) return res.status(200).json({ hasMatchingPost: false, msg: "No Posts" });
 
     // 각 포스트에 대한 댓글 수를 가져오기 (post 4개씩 적용됨)
-    const postsWithCommentCounts = await Promise.all(
+    const postsWithCommentCount = await Promise.all(
       posts.map(async (post) => {
         const commentCount = await Comments.countDocuments({ post_title: post.title });
         return {
@@ -57,7 +55,7 @@ const getPostsBySearch = async (req: Request, res: Response) => {
       })
     );
 
-    res.status(200).json({ posts: postsWithCommentCounts, next_cursor, matchingPosts: true, msg: "Searched!" });
+    res.status(200).json({ posts: postsWithCommentCount, next_cursor, hasMatchingPost: true, msg: "Searched!" });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });
   }

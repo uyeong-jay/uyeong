@@ -7,21 +7,22 @@ import { SubFrame } from '@templates/SubFrame';
 import InputBox from '@molecules/InputBox/InputBox';
 import SearchIcon from '@icons/SearchIcon';
 import BlogTags from '../BlogComponents/BlogTags';
-// import BlogPosts from '@pages/Blog/BlogComponents/BlogPosts';
-import { DIV as DIV_POSTS } from '../BlogComponents/BlogPosts/BlogPosts';
-import { InitialPostsCardArr } from '../BlogComponents/BlogPosts/BlogPosts';
-import dynamic from 'next/dynamic';
+import BlogPosts from '@pages/Blog/BlogComponents/BlogPosts';
+// import { DIV as DIV_POSTS } from '../BlogComponents/BlogPosts/BlogPosts';
+// import { InitialPostsCardArr } from '../BlogComponents/BlogPosts/BlogPosts';
+// import dynamic from 'next/dynamic';
+import MiniLoader from '@modals/MiniLoader';
 
-const BlogPosts = dynamic(() => import('../BlogComponents/BlogPosts/BlogPosts'), {
-  loading: () => (
-    <DIV_POSTS.BlogPostsWrapper>
-      {InitialPostsCardArr.map((v) => (
-        <DIV_POSTS.InitialPostsCard key={v}></DIV_POSTS.InitialPostsCard>
-      ))}
-    </DIV_POSTS.BlogPostsWrapper>
-  ),
-  ssr: false,
-});
+// const BlogPosts = dynamic(() => import('../BlogComponents/BlogPosts/BlogPosts'), {
+//   loading: () => (
+//     <DIV_POSTS.BlogPostsWrapper>
+//       {InitialPostsCardArr.map((v) => (
+//         <DIV_POSTS.InitialPostsCard key={v}></DIV_POSTS.InitialPostsCard>
+//       ))}
+//     </DIV_POSTS.BlogPostsWrapper>
+//   ),
+//   ssr: false,
+// });
 
 interface Props {
   targetRef: RefObject<HTMLDivElement>;
@@ -34,6 +35,7 @@ interface Props {
   inputRef?: RefObject<HTMLInputElement>;
   onClickTag: (tagName: string) => void;
   isTagClicked: boolean;
+  isLoadingPost: boolean;
 }
 
 const BlogPresenter: React.FC<Props> = ({
@@ -47,6 +49,7 @@ const BlogPresenter: React.FC<Props> = ({
   inputRef,
   onClickTag,
   isTagClicked,
+  isLoadingPost,
 }) => {
   return (
     <>
@@ -72,7 +75,9 @@ const BlogPresenter: React.FC<Props> = ({
                 <SearchIcon />
               </DIV.SearchBar>
               <BlogPosts blogPostsBySearch={blogPostsBySearch} />
-              <DIV.IntersectionTarget id="intersection_target" ref={targetRef}></DIV.IntersectionTarget>
+              <DIV.IntersectionTarget id="posts_intersection_target" ref={targetRef}>
+                {isLoadingPost && <MiniLoader />}
+              </DIV.IntersectionTarget>
             </SECTION.BlogMain>
           </DIV.BlogBlock>
         </SubFrame>
