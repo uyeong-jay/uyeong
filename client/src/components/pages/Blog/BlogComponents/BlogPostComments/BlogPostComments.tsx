@@ -2,6 +2,7 @@ import { BlogCommentRes } from '@app/services/blog/commentApi';
 import React from 'react';
 import BlogPostComment from '../BlogPostComment';
 import styled from '@_settings/styled';
+import { useGetUserDataQuery } from '@app/services/user/userApi';
 
 interface Props {
   postId?: string;
@@ -15,10 +16,12 @@ DIV.CommentMdViewerGroup = styled.div`
 `;
 
 const BlogPostComments = ({ postId, blogCommentsData }: Props) => {
+  const { data: userData } = useGetUserDataQuery();
+
   return (
     <DIV.CommentMdViewerGroup>
       {blogCommentsData?.comments?.map((comment) => (
-        <BlogPostComment key={comment._id} postId={postId} comment={comment} />
+        <BlogPostComment key={comment._id} userData={userData} postId={postId} comment={comment} />
       ))}
     </DIV.CommentMdViewerGroup>
   );

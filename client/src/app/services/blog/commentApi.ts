@@ -32,7 +32,16 @@ export interface BlogComment {
 export interface BlogCommentRes {
   comments?: BlogComment[];
   totalCommentCount?: number;
+  commentCountToShow?: number;
+  // next_cursor?: string;
+  // hasMatchingPost?: boolean;
   msg?: string;
+}
+
+export interface BlogCommentPagingReq {
+  postTitle?: string | string[];
+  // nextPageId: string;
+  pageNum: number;
 }
 
 export interface BlogCommentReq {
@@ -52,9 +61,9 @@ export interface BlogCommentReqWithToken {
 export const commentApi = api.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
-    getBlogComments: builder.query<BlogCommentRes, string>({
-      query: (slug) => ({
-        url: `/api/comment/blog/${slug}`,
+    getBlogComments: builder.query<BlogCommentRes, BlogCommentPagingReq>({
+      query: (data) => ({
+        url: `/api/comment/blog/${data.postTitle}?page=${data.pageNum}`,
         method: 'get',
       }),
       providesTags: ['BlogComment'],

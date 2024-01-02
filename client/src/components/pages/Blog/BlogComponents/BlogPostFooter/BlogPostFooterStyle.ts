@@ -19,6 +19,21 @@ DIV.CommentWriteBlock = styled.div`
   }
 `;
 
-DIV.CommentMdViewerGroup = styled.div`
-  // border: 1px solid blue;
+DIV.UnderComments = styled.div`
+  // border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  color: ${({ theme }) => theme.FONT_C};
+`;
+
+DIV.IntersectionTarget = styled.div`
+  // border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 100%;
 `;

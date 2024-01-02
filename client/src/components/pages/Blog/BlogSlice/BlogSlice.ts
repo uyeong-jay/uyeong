@@ -1,15 +1,18 @@
+import { BlogCommentRes } from '@app/services/blog/commentApi';
 import { BlogPostRes } from '@app/services/blog/postApi';
 import { createSlice } from '@reduxjs/toolkit';
 
 //initialState type
 interface initialState {
   blogPostsBySearch: BlogPostRes | null;
+  blogComments: BlogCommentRes | null;
   tagName: string;
 }
 
 //initialState
 const initialState: initialState = {
   blogPostsBySearch: null,
+  blogComments: null,
   tagName: '',
 };
 

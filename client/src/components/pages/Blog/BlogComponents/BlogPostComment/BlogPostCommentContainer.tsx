@@ -1,16 +1,15 @@
 import { BlogComment } from '@app/services/blog/commentApi';
-import { useGetUserDataQuery } from '@app/services/user/userApi';
+import { UserResponse } from '@app/services/user/userApi';
 import { useMemo } from 'react';
 import BlogPostCommentPresenter from './BlogPostCommentPresenter';
 
 interface Props {
+  userData?: UserResponse;
   postId?: string;
   comment: BlogComment;
 }
 
-const BlogPostCommentContainer = ({ postId, comment }: Props) => {
-  const { data: userData } = useGetUserDataQuery();
-
+const BlogPostCommentContainer = ({ userData, postId, comment }: Props) => {
   const userMatch = useMemo(() => {
     return !!(userData?.user?._id === comment.user._id || userData?.user?.role === 'admin');
   }, [comment.user._id, userData?.user?._id, userData?.user?.role]);

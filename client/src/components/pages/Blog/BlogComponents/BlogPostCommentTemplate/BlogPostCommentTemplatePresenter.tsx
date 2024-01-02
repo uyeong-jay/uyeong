@@ -147,7 +147,7 @@ const BlogPostCommentTemplatePresenter = ({
       </DIV.Right>
       <Modal
         type="delete"
-        msg="Are you sure you want to delete the comment?"
+        msg={`Are you sure you want to delete this ${reply ? `reply` : `comment`}?`}
         isOpen={isModalOpen}
         setOpen={setModalOpen}
         callback={() => onClickDelete(true)}
