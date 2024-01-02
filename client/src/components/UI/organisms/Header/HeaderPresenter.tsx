@@ -12,12 +12,13 @@ import Logo from '@icons/Logo';
 
 interface Props {
   userData?: UserResponse;
+  getUserDataLoading: boolean;
   getUserDataError: any;
   logoutError: any;
   onClickLogout: () => void;
 }
 
-const HeaderPresenter = ({ userData, getUserDataError, logoutError, onClickLogout }: Props) => {
+const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logoutError, onClickLogout }: Props) => {
   const dropdownBoxRef = useRef(null);
   const [isProfileOpen, setProfileOpen] = useState(false);
 
@@ -129,7 +130,6 @@ const HeaderPresenter = ({ userData, getUserDataError, logoutError, onClickLogou
   if (getUserDataError || logoutError) return <NotFound />;
   return (
     <>
-      {/* 로딩화면 */}
       {/* {getUserDataLoading && <Loader />} */}
       <HEADER.Frame scrollDirection={scrollDirection}>
         <NAV.HeaderNav isMenuIconClicked={isMenuIconClicked} render={render}>
@@ -192,9 +192,19 @@ const HeaderPresenter = ({ userData, getUserDataError, logoutError, onClickLogou
                   ))}
               </li>
             ) : (
-              <NavLinkBox href="/login" passHref={true}>
-                <Button variant="login" text="Login" />
-              </NavLinkBox>
+              <>
+                {getUserDataLoading ? (
+                  //새로고침시 초기 로딩 UI
+                  <li>
+                    <div style={{ width: '30px' }}></div>
+                    <CaretDownIcon />
+                  </li>
+                ) : (
+                  <NavLinkBox href="/login" passHref={true}>
+                    <Button variant="login" text="Login" />
+                  </NavLinkBox>
+                )}
+              </>
             )}
 
             {/* 4 */}
