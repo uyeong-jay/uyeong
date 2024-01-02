@@ -17,8 +17,8 @@ export const useIntersect = (onIntersect: IntersectHandler, options?: Intersecti
 
   useEffect(() => {
     if (!ref.current) {
-      //다른 페이지에서 새로고침 후 해당 페이지로 올때 실행됨
-      //next/dynamic 적용시 필요
+      //next/dynamic 적용시
+      //다른 페이지에서 새로고침 후 해당 페이지로 올때 필요
       const ElementById = document.getElementById(elementId || '') as SetStateAction<HTMLDivElement | null>;
       const handleScroll = () => {
         if (!isScrolled) {
@@ -38,3 +38,29 @@ export const useIntersect = (onIntersect: IntersectHandler, options?: Intersecti
 
   return ref;
 };
+
+//사용법
+
+// <div id="posts_intersection_target" ref={targetRef}></div>
+
+// const [isIntersectionEnded, setIntersectionEnded] = useState(false);
+
+// const targetRef = useIntersect(
+//   async (entry, observer) => {
+//     observer.unobserve(entry.target);
+//     //서버에서 받아온 next_cursor 가 있을때 실행
+//     if (blogPostsDataBySearch?.next_cursor && !isIntersectionEnded) {
+//       setIntersectionEnded(true);
+//       setSearchInfo({
+//         ...searchInfo,
+//         nextPageId: blogPostsDataBySearch.next_cursor,
+//       });
+//     }
+//   },
+//   {
+//     root: null,
+//     rootMargin: '0px',
+//     threshold: 0.5,
+//   },
+//   'posts_intersection_target',
+// );

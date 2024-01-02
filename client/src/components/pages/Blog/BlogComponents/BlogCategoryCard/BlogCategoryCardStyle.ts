@@ -87,8 +87,6 @@ DIV.CardContentMain = styled.div`
   & > span {
     // border: 1px solid red;
     width: 90%;
-
-    //텍스트 오버 되면 ... 으로 대체
     overflow: hidden;
     text-overflow: ellipsis;
 

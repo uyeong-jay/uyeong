@@ -58,7 +58,7 @@ const Loader = () => {
     <StyledLoader>
       {loadingLetters.map((v, i) => {
         return (
-          //state값이 아닌 외부함수의 리턴값을 넣으니 map의 모든 value값에  각각 서로 다르게 적용이 가능하게 됨
+          //state값이 아닌 외부함수의 리턴값을 넣으면 map의 모든 value값에  각각 서로 다르게 적용이 가능하게 됨
           <span style={{ color: `${shuffle(colors)[randomNum]}` }} key={i}>
             {v}
           </span>
