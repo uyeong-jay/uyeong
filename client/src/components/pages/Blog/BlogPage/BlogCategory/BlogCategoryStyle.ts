@@ -71,15 +71,13 @@ DIV.InitialCategoryCard = styled.div`
   }
 
   & > div:nth-of-type(2) {
-    // border: 1px solid black;
-    background-color: ${({ theme }) => theme.INITIAL_BG_C};
+    border-bottom: 3px solid ${({ theme }) => theme.BD_C};
     margin-top: 10px;
     height: 20px;
   }
 
   & > div:nth-of-type(3) {
-    // border: 1px solid black;
-    background-color: ${({ theme }) => theme.INITIAL_BG_C};
+    border-bottom: 3px solid ${({ theme }) => theme.BD_C};
     margin: 10px 0;
     height: 20px;
   }
