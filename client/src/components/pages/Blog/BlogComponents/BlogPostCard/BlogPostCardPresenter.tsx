@@ -73,13 +73,13 @@ const BlogPostCardPresenter = ({ post }: Props) => {
           )}
           {tags.length ? <DIV.MidLine thumbnail={thumbnail}></DIV.MidLine> : <></>}
           <DIV.CardDescription thumbnail={thumbnail}>
-            <p>{description ? cardContent : cardContent}</p>
+            <p>{description ? description : cardContent}</p>
           </DIV.CardDescription>
         </DIV.ContentMiddle>
 
         <DIV.ContentBottom>
           <P.CardDate>{formatDate(createdAt)}</P.CardDate>
-          <P.CardComment>{commentCount} Comments</P.CardComment>
+          <P.CardComment>{commentCount > 1 ? `${commentCount} Comments` : `${commentCount} Comment`}</P.CardComment>
         </DIV.ContentBottom>
       </DIV.Content>
     </ARTICLE.Frame>

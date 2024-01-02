@@ -25,10 +25,13 @@ const BlogPostFooterPresenter = ({
   hasNoComment,
 }: Props) => {
   const currCommentCount = blogCommentsData?.comments?.length;
+  const totalCommentCount = blogCommentsData?.totalCommentCount;
   return (
     <SECTION.Frame>
       <DIV.CommentWriteBlock>
-        <div>{blogCommentsData?.totalCommentCount ?? 0} Comments</div>
+        <div>
+          {totalCommentCount ?? 0} {(totalCommentCount as number) > 1 ? ` Comments` : ` Comment`}
+        </div>
         <BlogPostCommentWrite postId={postId} />
       </DIV.CommentWriteBlock>
 
