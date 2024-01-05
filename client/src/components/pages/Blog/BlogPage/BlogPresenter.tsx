@@ -35,7 +35,7 @@ interface Props {
   inputRef?: RefObject<HTMLInputElement>;
   onClickTag: (tagName: string) => void;
   isTagClicked: boolean;
-  isLoadingPost: boolean;
+  isLoadingPosts: boolean;
 }
 
 const BlogPresenter: React.FC<Props> = ({
@@ -49,7 +49,7 @@ const BlogPresenter: React.FC<Props> = ({
   inputRef,
   onClickTag,
   isTagClicked,
-  isLoadingPost,
+  isLoadingPosts,
 }) => {
   return (
     <>
@@ -76,7 +76,12 @@ const BlogPresenter: React.FC<Props> = ({
               </DIV.SearchBar>
               <BlogPosts blogPostsBySearch={blogPostsBySearch} />
               <DIV.IntersectionTarget id="posts_intersection_target" ref={targetRef}>
-                {isLoadingPost && <MiniLoader />}
+                {isLoadingPosts ? (
+                  <MiniLoader />
+                ) : (
+                  !blogPostsBySearch?.next_cursor &&
+                  blogPostsBySearch?.hasMatchingPost && <DIV.NoMorePosts>- No more posts -</DIV.NoMorePosts>
+                )}
               </DIV.IntersectionTarget>
             </SECTION.BlogMain>
           </DIV.BlogBlock>

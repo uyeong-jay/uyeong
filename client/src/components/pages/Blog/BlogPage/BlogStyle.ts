@@ -104,3 +104,13 @@ DIV.IntersectionTarget = styled.div`
   height: 50px;
   width: 100%;
 `;
+
+DIV.NoMorePosts = styled.div`
+  // border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.FONT_C};
+  font-weight: bold;
+  font-size: 14px;
+`;

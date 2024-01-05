@@ -23,7 +23,7 @@ const BlogContainer = () => {
     searchWord: '',
   };
   const [searchInfo, setSearchInfo] = useState(initialSearchInfo);
-  const { data: blogPostsDataBySearch, isFetching } = useGetBlogPostsBySearchQuery(searchInfo);
+  const { data: blogPostsDataBySearch, isFetching: isFetchingPosts } = useGetBlogPostsBySearchQuery(searchInfo);
 
   const tagName = useAppSelector((state) => state.blog.tagName);
 
@@ -37,7 +37,7 @@ const BlogContainer = () => {
 
   const [canLoadMore, setCanLoadMore] = useState(false);
   const [isIntersectionEnded, setIntersectionEnded] = useState(false);
-  const [isLoadingPost, setLoadingPost] = useState(false);
+  const [isLoadingPosts, setLoadingPosts] = useState(false);
 
   useEffect(() => {
     //새로고침, post 탭으로 복귀(초기화된 이후)
@@ -79,7 +79,7 @@ const BlogContainer = () => {
       const timer = setTimeout(() => {
         dispatch(getMorePostsBySearch(blogPostsDataBySearch));
         setIntersectionEnded(false);
-        setLoadingPost(false);
+        setLoadingPosts(false);
       }, 500);
       return () => {
         clearTimeout(timer);
@@ -164,11 +164,11 @@ const BlogContainer = () => {
     async (entry, observer) => {
       observer.unobserve(entry.target);
       //서버에서 받아온 next_cursor 가 있을때 실행
-      if (!isFetching && blogPostsDataBySearch?.next_cursor && !isIntersectionEnded) {
+      if (!isFetchingPosts && blogPostsDataBySearch?.next_cursor && !isIntersectionEnded) {
         setTagClicked(false);
         setIntersectionEnded(true);
         setCanLoadMore(true);
-        setLoadingPost(true);
+        setLoadingPosts(true);
         setSearchInfo({
           ...searchInfo,
           nextPageId: blogPostsDataBySearch.next_cursor,
@@ -195,7 +195,7 @@ const BlogContainer = () => {
       inputRef={inputRef}
       onClickTag={onClickTag}
       isTagClicked={isTagClicked}
-      isLoadingPost={isLoadingPost}
+      isLoadingPosts={isLoadingPosts}
     />
   );
 };
