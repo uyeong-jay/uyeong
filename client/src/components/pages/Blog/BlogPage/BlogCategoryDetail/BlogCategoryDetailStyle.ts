@@ -69,7 +69,7 @@ DIV.PostCard = styled.div`
   }
 
   & .blog-post-card-image-wrapper {
-    // border: 1px solid black;
+    // border: 3px solid transparent;
     display: inline-flex;
     position: relative;
     width: 100%;
@@ -115,10 +115,10 @@ DIV.PostCard = styled.div`
   & > h3 {
     // border: 1px solid red;
     position: absolute;
-    top: -30px;
+    top: -40px;
     left: 0px;
     width: 100%;
-    font-size: 20px;
+    font-size: 25px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -134,5 +134,52 @@ DIV.PostCard = styled.div`
     position: absolute;
     bottom: -20px;
     right: 0px;
+    font-size: 15px;
+    color: ${({ theme }) => theme.FONT_C};
   }
+`;
+DIV.InitialPostsCard = styled.div`
+  // border: 1px solid black;
+  position: relative;
+
+  // w:h = 3:2
+  width: 300px; //MOBILE also
+  height: 200px;
+  margin: 80px 50px; //MOBILE also
+
+  @media screen and (min-width: calc(${({ theme }) => theme.BP.MOBILE} + 200px)) {
+    margin: 100px;
+    width: 400px;
+    height: 265px;
+  }
+  @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 200px)) {
+    margin: 100px 70px;
+
+    width: 360px;
+    height: 240px;
+  }
+  @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
+    margin: 100px 80px;
+
+    width: 440px;
+    height: 290px;
+  }
+`;
+DIV.IntersectionTarget = styled.div`
+  // border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  aglin-items: center;
+  height: 50px;
+  width: 100%;
+`;
+
+DIV.NoMorePosts = styled.div`
+  // border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.FONT_C};
+  font-weight: bold;
+  font-size: 14px;
 `;

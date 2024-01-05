@@ -39,6 +39,11 @@ export interface BlogPostSearchReq {
   searchWord: string;
 }
 
+export interface BlogPostByCategoryReq {
+  categoryTitle?: string | string[];
+  nextPageId: string;
+}
+
 export interface BlogPostId {
   _id: string | string[] | undefined;
 }
@@ -66,9 +71,9 @@ export const postApi = api.injectEndpoints({
       providesTags: ['BlogPost'],
     }),
 
-    getBlogPostsByCategory: builder.query<BlogPostRes, string>({
-      query: (slug) => ({
-        url: `/api/blog/category/${slug}`,
+    getBlogPostsByCategory: builder.query<BlogPostRes, BlogPostByCategoryReq>({
+      query: (data) => ({
+        url: `/api/blog/category/${data.categoryTitle}?page=${data.nextPageId}`,
         method: 'get',
       }),
       providesTags: ['BlogPost'],

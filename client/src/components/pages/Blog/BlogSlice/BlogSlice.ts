@@ -1,18 +1,17 @@
-import { BlogCommentRes } from '@app/services/blog/commentApi';
 import { BlogPostRes } from '@app/services/blog/postApi';
 import { createSlice } from '@reduxjs/toolkit';
 
 //initialState type
 interface initialState {
   blogPostsBySearch: BlogPostRes | null;
-  blogComments: BlogCommentRes | null;
+  blogPostsByCategory: BlogPostRes | null;
   tagName: string;
 }
 
 //initialState
 const initialState: initialState = {
   blogPostsBySearch: null,
-  blogComments: null,
+  blogPostsByCategory: null,
   tagName: '',
 };
 
@@ -30,6 +29,15 @@ const blogSlice = createSlice({
         posts: state.blogPostsBySearch?.posts?.concat(action.payload.posts),
       };
     },
+    getPostsByCategory: (state, action) => {
+      state.blogPostsByCategory = action.payload;
+    },
+    getMorePostsByCategory: (state, action) => {
+      state.blogPostsByCategory = {
+        ...action.payload,
+        postsByCategory: state.blogPostsByCategory?.postsByCategory?.concat(action.payload.postsByCategory),
+      };
+    },
     getTagName: (state, action) => {
       state.tagName = action.payload;
     },
@@ -38,4 +46,5 @@ const blogSlice = createSlice({
 
 //reducer, actions 내보내기
 export default blogSlice.reducer;
-export const { getPostsBySearch, getMorePostsBySearch, getTagName } = blogSlice.actions;
+export const { getPostsBySearch, getMorePostsBySearch, getPostsByCategory, getMorePostsByCategory, getTagName } =
+  blogSlice.actions;
