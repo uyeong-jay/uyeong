@@ -53,8 +53,8 @@ const BlogCategoryCardPresenter = ({
             src={postsByCategoryName[postsByCategoryName.length - 1]?.thumbnail as string}
             alt="category-card-image"
             layout="fill"
-            objectFit="contain" //이미지를 틀에 맞게 맞추기
-            priority
+            objectFit="contain"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
           <div>
