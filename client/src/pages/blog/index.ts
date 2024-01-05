@@ -1,4 +1,4 @@
-import { GetStaticProps /* GetStaticProps */ } from 'next';
+import { GetStaticProps } from 'next';
 import wrapper from '@app/store';
 import axios from 'axios';
 import { getRunningOperationPromises } from '@app/services/api';

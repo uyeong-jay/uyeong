@@ -54,6 +54,7 @@ DIV.InitialPostsCard = styled.div`
     height: 300px;
     min-height: 300px;
   }
+
   @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
     width: 800px;
     height: 400px;
@@ -94,9 +95,6 @@ const BlogPosts = ({ blogPostsBySearch }: Propss) => {
             <DIV.InitialPostsCard key={cardCountIndex}></DIV.InitialPostsCard>
           ))}
         </>
-      )}
-      {!blogPostsBySearch?.next_cursor && blogPostsBySearch?.hasMatchingPost && (
-        <DIV.NoMorePosts>- No more posts -</DIV.NoMorePosts>
       )}
     </DIV.BlogPostsWrapper>
   );
