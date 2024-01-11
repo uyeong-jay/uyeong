@@ -24,13 +24,13 @@ const validUserInfo = (userUpdateInfo: userUpdateInfoProps, userData?: userDataP
   if (!email) return 'Please add your email.';
 
   //old_password 에러
-  if (0 < old_password.length && old_password.length < 6) return 'Your old password must be 6 characters or more.';
+  if (0 < old_password.length && old_password.length < 6) return 'Your current password must be 6 characters or more.';
 
   //new_password 에러
   if (0 < new_password.length && new_password.length < 6) return 'Your new password must be 6 characters or more.';
 
   //cf_new_password 에러
-  if (new_password !== cf_new_password) return 'Your new password and confirm new password should be same.';
+  if (new_password !== cf_new_password) return 'Your new password and confirm password should be same.';
 
   //변경 된게 없을때
   if (!avatar && nickname && nickname === userNickname && email && !old_password && !new_password && !cf_new_password)
@@ -39,12 +39,11 @@ const validUserInfo = (userUpdateInfo: userUpdateInfoProps, userData?: userDataP
   //password 입력 에러
   //(다 있는상태 외 나머지 와 다 없는상태 외 나머지 의 합집합)
   if (!(old_password && new_password && cf_new_password) && !(!old_password && !new_password && !cf_new_password))
-    return 'Please add all password field';
+    return 'Please add all password fields';
 
   //password 일치 에러
   if (old_password && new_password && old_password === new_password)
-    return 'Your old password and new password are same';
-
+    return 'Your current password and new password must be different';
   return '';
 };
 
