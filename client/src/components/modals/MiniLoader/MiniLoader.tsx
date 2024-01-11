@@ -1,22 +1,29 @@
 import React from 'react';
 import styled from '@_settings/styled';
 
-const StyledMiniLoader = styled.div`
+interface Props {
+  w: string;
+  h: string;
+}
+
+interface MiniLoaderProps {
+  width: string;
+  height: string;
+}
+
+const StyledMiniLoader = styled.div<MiniLoaderProps>`
   // border: 1px solid black;
   position: relative;
-  height: 35px;
-  width: 35px;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
 
   .spinner {
     // border: 1px solid black;
     animation: rotate 2s linear infinite;
     z-index: 2;
     position: absolute;
-    top: 80%;
-    left: 80%;
-    margin: -25px 0 0 -25px;
-    width: 30px;
-    height: 30px;
+    top: 0;
+    left: 0;
 
     & > .path {
       stroke: ${({ theme }) => theme.BD_C};
@@ -47,9 +54,9 @@ const StyledMiniLoader = styled.div`
   }
 `;
 
-const MiniLoader = () => {
+const MiniLoader = ({ w, h }: Props) => {
   return (
-    <StyledMiniLoader>
+    <StyledMiniLoader width={w} height={h}>
       <svg className="spinner" viewBox="0 0 50 50">
         <circle className="path" cx="25" cy="25" r="20" fill="none" strokeWidth="5"></circle>
       </svg>
