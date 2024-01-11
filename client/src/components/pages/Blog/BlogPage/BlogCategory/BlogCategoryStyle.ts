@@ -56,9 +56,7 @@ DIV.InitialCategoryCard = styled.div`
   }
 
   & > div:nth-of-type(1) {
-    border: 3px solid ${({ theme }) => theme.BD_C};
-    height: 200px;
-
+    // border: 1px solid black;
     @media screen and (min-width: calc(${({ theme }) => theme.BP.MOBILE} + 200px)) {
       height: 240px;
     }
@@ -71,15 +69,20 @@ DIV.InitialCategoryCard = styled.div`
   }
 
   & > div:nth-of-type(2) {
-    border-bottom: 3px solid ${({ theme }) => theme.BD_C};
+    // border: 1px solid black;
+    background-color: ${({ theme }) => theme.INITIAL_BG_C};
+    width: 50%;
     margin-top: 10px;
     height: 20px;
+    border-radius: 30px;
   }
 
   & > div:nth-of-type(3) {
-    border-bottom: 3px solid ${({ theme }) => theme.BD_C};
+    // border: 1px solid black;
+    background-color: ${({ theme }) => theme.INITIAL_BG_C};
     margin: 10px 0;
     height: 20px;
+    border-radius: 30px;
   }
 `;
 
