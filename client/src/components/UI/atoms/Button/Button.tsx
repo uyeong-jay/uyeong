@@ -10,10 +10,15 @@ interface Props {
 
 interface ButtonProps {
   variant: string;
+  disabled: boolean;
 }
 
 const StyledButton = styled.button<ButtonProps>`
   font-weight: bold;
+
+  ${(props) => {
+    if (props.disabled) return `opacity: 0.5;`;
+  }}
 
   ${(props) => {
     switch (props.variant) {
@@ -31,26 +36,18 @@ const StyledButton = styled.button<ButtonProps>`
         `;
       case 'login':
         return `
-          // border: 1px solid magenta;
-          // background-color: rgb(238, 130, 238, 0.6);
-          // border: 1px solid #333333;
-          background-color: transparent;
           color: ${props.theme.FONT_C};
-          font-weight: bold;
         `;
       case 'logout':
         return `
-          // border: 1px solid black;
-          background-color: white;
+          color: ${props.theme.FONT_C};
         `;
       default:
         return `
-          // border: 1px solid black;
-          background-color: white;
+          color: ${props.theme.FONT_C};
         `;
     }
   }}};
-  
 `;
 
 const Button = ({ variant, text, type, onClick, disabled }: Props) => {

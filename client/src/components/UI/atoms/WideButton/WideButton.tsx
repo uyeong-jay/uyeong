@@ -10,38 +10,51 @@ interface Props {
 
 interface WideButtonProps {
   variant: string;
+  disabled: boolean;
 }
 
 const StyledWideButton = styled.button<WideButtonProps>`
   width: 100%;
-  margin-top: 10px;
-  padding-left: 30px;
-  text-align: left;
+  text-align: center;
+  font-weight: bold;
+
+  ${(props) => {
+    if (props.disabled)
+      return `
+      opacity: 0.5;
+    `;
+  }}
+
   ${(props) => {
     switch (props.variant) {
       case 'create':
         return `
-          background-color: blue;
-          color: red;
+          color: ${props.theme.FONT_C};
         `;
-      case 'delate':
+      case 'delete':
         return `
-          background-color: red;
+          color: ${props.theme.FONT_C_DANGER};
         `;
       case 'update':
         return `
-          border: 1px solid limegreen;
-          background-color: rgb(127, 255, 0, 0.6);
+          color: ${props.theme.FONT_C_UPDATE};
         `;
       case 'login':
         return `
-          border: 1px solid red;
-          background-color: rgb(255, 105, 180, 0.5);
+          color: ${props.theme.FONT_C};
+        `;
+      case 'logout':
+        return `
+          color: ${props.theme.FONT_C};
         `;
       case 'join':
         return `
           border: 1px solid teal;
           background-color: rgb(0, 255, 255, 0.5);
+        `;
+      default:
+        return `
+          color: ${props.theme.FONT_C};
         `;
     }
   }}
@@ -49,7 +62,7 @@ const StyledWideButton = styled.button<WideButtonProps>`
 
 const WideButton = ({ variant, text, type, onClick, disabled }: Props) => {
   return (
-    <StyledWideButton variant={variant} type={type} onClick={onClick} disabled={disabled}>
+    <StyledWideButton variant={variant} type={type} onClick={onClick} disabled={disabled ? true : false}>
       {text}
     </StyledWideButton>
   );

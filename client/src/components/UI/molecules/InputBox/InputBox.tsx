@@ -11,10 +11,13 @@ interface Props {
   onClick?: () => void;
   onFocus?: () => void;
   placeholder?: string;
-  // ref?: RefObject<HTMLInputElement>;
   disabled?: boolean;
   readOnly?: boolean;
   required?: boolean;
+}
+
+interface InputProps {
+  disabled: boolean;
 }
 
 const StyledInputBox = styled.div`
@@ -24,14 +27,13 @@ const StyledInputBox = styled.div`
 
 const StyledLabel = styled.label`
   margin-right: 10px;
-  color: darkslategray;
-  // white-space: pre-line;
+  color: ${({ theme }) => theme.FONT_C};
+  letter-spacing: 0.5px;
 `;
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<InputProps>`
   // border-bottom: 1px solid black;
   background-color: ${({ theme }) => theme.BG_C};
-  // margin: 5px 0 30px 0;
   margin: 0;
   width: 100%;
   height: 40px;
@@ -39,15 +41,13 @@ const StyledInput = styled.input`
   color: ${({ theme }) => theme.FONT_C};
   border: none;
   outline: none;
-
-  &:autofill {
-    box-shadow: 0 0 0 1000px ${({ theme }) => theme.BG_C} inset;
-    text-fill-color: ${({ theme }) => theme.FONT_C};
-  }
-  &:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px ${({ theme }) => theme.BG_C} inset;
-    -webkit-text-fill-color: ${({ theme }) => theme.FONT_C};
-  }
+  ${(props) => {
+    if (props.disabled) {
+      return `
+        opacity: 0.6;
+      `;
+    }
+  }}
 `;
 
 const InputBox = (
