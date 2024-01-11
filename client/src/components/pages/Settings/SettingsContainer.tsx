@@ -16,7 +16,7 @@ export interface IUserUpdateInfo {
 
 const SettingsContainer = () => {
   const { data: userData } = useGetUserDataQuery();
-  const [update, { isLoading: userUpdateLoading, error: authErr }] = useUpdateMutation();
+  const [update, { isLoading: userUpdateLoading, isSuccess: userUpdateSuccess, error: authErr }] = useUpdateMutation();
 
   const initialState = {
     avatar: '',
@@ -48,7 +48,6 @@ const SettingsContainer = () => {
 
       //에러 없으면 유저 데이터 업데이트
       if (!errMsg[0]) {
-        // 데이터: {유저데이터, access토큰}
         const data = {
           userUpdateInfo: {
             ...userUpdateInfo,
@@ -101,6 +100,7 @@ const SettingsContainer = () => {
       userData={userData}
       fileObj={fileObj}
       userUpdateLoading={userUpdateLoading}
+      userUpdateSuccess={userUpdateSuccess}
       settingErrMsg={settingErrMsg}
       authErr={authErr}
       onSubmit={onSubmit}

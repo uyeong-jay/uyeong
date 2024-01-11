@@ -1,21 +1,22 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Head from 'next/head';
-import { StyledSttings } from './SettingsStyle';
+import { SECTION, DIV, FORM } from './SettingsStyle';
 import Button from '@atoms/Button';
-import WideButton from '@atoms/WideButton';
 import InputBox from '@molecules/InputBox';
 import Image from 'next/image';
 import { UserResponse } from '@app/services/user/userApi';
 import NotFound from '@src/pages/404';
-import Loader from '@modals/Loader';
 import { IUserUpdateInfo } from './SettingsContainer';
 import CameraIcon from '@icons/CameraIcon';
+import WideButton from '@atoms/WideButton';
+import MiniLoader from '@modals/MiniLoader';
 
 interface Props {
   userUpdateInfo: IUserUpdateInfo;
   userData?: UserResponse;
   fileObj?: File;
   userUpdateLoading: boolean;
+  userUpdateSuccess: boolean;
   settingErrMsg: string;
   authErr: any;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -28,6 +29,7 @@ const SettingsPresenter = ({
   userData,
   fileObj,
   userUpdateLoading,
+  userUpdateSuccess,
   settingErrMsg,
   authErr,
   onSubmit,
@@ -35,9 +37,9 @@ const SettingsPresenter = ({
   onChangeAvatar,
 }: Props) => {
   const { nickname, email, old_password, new_password, cf_new_password } = userUpdateInfo;
-  const [oldPasswordType, setOldPasswordType] = useState(true);
-  const [newPasswordType, setNewPasswordType] = useState(true);
-  const [cfNewPasswordType, setCfNewPasswordType] = useState(true);
+  const [isOldPasswordType, setOldPasswordType] = useState(false);
+  const [isNewPasswordType, setNewPasswordType] = useState(false);
+  const [isCfNewPasswordType, setCfNewPasswordType] = useState(false);
 
   // URL.revokeObjectURL() 정상 실행을 위해 추가한 코드
   const [fileUrl, setFileUrl] = useState('/');
@@ -55,11 +57,11 @@ const SettingsPresenter = ({
         <title>UYeong | Settings</title>
       </Head>
       {/* 로딩중 */}
-      {userUpdateLoading && <Loader />}
+      <SECTION.Frame>
+        <h1>Settings</h1>
 
-      <StyledSttings>
-        {/* 프로필 사진 바꾸기 */}
-        <div>
+        {/* 프로필 사진 수정 */}
+        <DIV.SettingsTop>
           <div className="settings-user-avatar-wrapper settings-user-avatar">
             <Image
               className="settings-user-avatar"
@@ -69,8 +71,8 @@ const SettingsPresenter = ({
                 URL.revokeObjectURL(fileUrl);
               }}
               alt="user avater"
-              width={130}
-              height={130}
+              width={100}
+              height={100}
             />
           </div>
 
@@ -79,88 +81,83 @@ const SettingsPresenter = ({
             <p>Upload</p>
             <input type="file" name="file" accept=".jpg, .jpeg, .png, .gif" onChange={onChangeAvatar} />
           </span>
-        </div>
+        </DIV.SettingsTop>
 
         {/* 정보 수정하기 */}
-        <form onSubmit={onSubmit}>
-          {/* nickname */}
+        <FORM.SettingsMainForm onSubmit={onSubmit}>
+          <h3>Personal Information</h3>
           <div>
             <InputBox labelText="Nickname" name="nickname" value={nickname} onChange={onChangeInput} />
           </div>
-
-          {/* email - disabled */}
           <div>
             <InputBox labelText="Email" type="email" name="email" defaultValue={email} disabled />
           </div>
 
-          {/* old_password */}
+          <h3>Password</h3>
           <div>
             <InputBox
-              labelText="Old password"
+              labelText="Current password"
               name="old_password"
-              type={oldPasswordType ? 'password' : 'text'}
+              type={!isOldPasswordType ? 'password' : 'text'}
               value={old_password}
               onChange={onChangeInput}
             />
             <Button
               variant="primary"
-              text={oldPasswordType ? 'Show' : 'Hide'}
+              text={!isOldPasswordType ? 'Show' : 'Hide'}
               type="button"
-              onClick={() => setOldPasswordType(!oldPasswordType)}
+              onClick={() => setOldPasswordType(!isOldPasswordType)}
               disabled={old_password ? false : true}
             />
           </div>
-
-          {/* new_password */}
           <div>
             <InputBox
               labelText="New password"
               name="new_password"
-              type={newPasswordType ? 'password' : 'text'}
+              type={!isNewPasswordType ? 'password' : 'text'}
               value={new_password}
               onChange={onChangeInput}
             />
             <Button
               variant="primary"
-              text={newPasswordType ? 'Show' : 'Hide'}
+              text={!isNewPasswordType ? 'Show' : 'Hide'}
               type="button"
-              onClick={() => setNewPasswordType(!newPasswordType)}
+              onClick={() => setNewPasswordType(!isNewPasswordType)}
               disabled={new_password ? false : true}
             />
           </div>
-
-          {/* cf_new_password */}
           <div>
             <InputBox
               labelText={'Confirm \n new password'}
               name="cf_new_password"
-              type={cfNewPasswordType ? 'password' : 'text'}
+              type={!isCfNewPasswordType ? 'password' : 'text'}
               value={cf_new_password}
               onChange={onChangeInput}
             />
-
             <Button
               variant="primary"
-              text={cfNewPasswordType ? 'Show' : 'Hide'}
+              text={!isCfNewPasswordType ? 'Show' : 'Hide'}
               type="button"
-              onClick={() => setCfNewPasswordType(!cfNewPasswordType)}
+              onClick={() => setCfNewPasswordType(!isCfNewPasswordType)}
               disabled={cf_new_password ? false : true}
             />
           </div>
 
-          {/* 에러 메시지 */}
-          {(settingErrMsg || authErr) && (
-            <div style={{ color: 'red' }}>{settingErrMsg ? settingErrMsg : authErr.data.msg}</div>
-          )}
+          <DIV.FormBtnWrapper>
+            {userUpdateLoading ? (
+              <MiniLoader w="20px" h="20px" />
+            ) : (
+              <WideButton variant="update" text="UPDATE" type="submit" />
+            )}
+          </DIV.FormBtnWrapper>
 
-          <WideButton
-            variant="update"
-            text="Update"
-            type="submit"
-            // disabled={nickname && email && new_password && cf_new_password ? false : true}
-          />
-        </form>
-      </StyledSttings>
+          {settingErrMsg || authErr ? (
+            <DIV.ErrMsg>{settingErrMsg ? settingErrMsg : authErr.data.msg}</DIV.ErrMsg>
+          ) : (
+            userUpdateSuccess && <DIV.SuccessMsg>Update successfully completed!</DIV.SuccessMsg>
+          )}
+        </FORM.SettingsMainForm>
+      </SECTION.Frame>
     </>
   );
 };
