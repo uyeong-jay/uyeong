@@ -115,6 +115,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
 
       & .header-user-avatar-wrapper {
         // border: 2px solid #555555;
+        background-color: ${({ theme }) => theme.INITIAL_BG_C};
         display: inline-flex;
         width: 30px;
       }
