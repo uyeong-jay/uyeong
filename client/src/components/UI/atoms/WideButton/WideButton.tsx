@@ -21,8 +21,9 @@ const StyledWideButton = styled.button<WideButtonProps>`
   ${(props) => {
     if (props.disabled)
       return `
-      opacity: 0.5;
-    `;
+        opacity: 0.5;
+        cursor: default;
+      `;
   }}
 
   ${(props) => {
@@ -49,8 +50,7 @@ const StyledWideButton = styled.button<WideButtonProps>`
         `;
       case 'join':
         return `
-          border: 1px solid teal;
-          background-color: rgb(0, 255, 255, 0.5);
+          color: ${props.theme.FONT_C};
         `;
       default:
         return `
