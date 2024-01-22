@@ -1,4 +1,5 @@
 import styled from '@_settings/styled';
+import { memo } from 'react';
 
 interface Props {
   variant: string;
@@ -64,4 +65,4 @@ Button.defaultProps = {
   variant: '',
 };
 
-export default Button;
+export default memo(Button);
