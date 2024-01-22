@@ -1,13 +1,17 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { StyledJoin } from './JoinStyle';
+import { DIV, FORM, P } from './JoinStyle';
 import Head from 'next/head';
 import Link from 'next/link';
 // import Loader from '@modals/Loader';
 import InputBox from '@molecules/InputBox';
 import Button from '@atoms/Button';
-import WideButton from '@atoms/WideButton';
 import { UserRequest, UserResponse } from '@app/services/user/userApi';
 import NotFound from '@src/pages/404';
+import { SECTION } from '@templates/SectionFrame';
+import PageTitle from '@atoms/PageTitle';
+import FormButton from '@molecules/FormButton';
+import Modal from '@modals/Modal';
+import PartyPopper from '@icons/PartyPopper';
 
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -16,6 +20,9 @@ interface Props {
   userData?: UserResponse;
   isSuccess: boolean;
   isLoading: boolean;
+  isModalOpen: boolean;
+  setModalOpen: (isModalOpen: boolean) => void;
+  isJoinError: boolean;
   error: any;
 }
 
@@ -25,7 +32,11 @@ const JoinPresenter = ({
   userJoinInfo,
   userData,
   isSuccess,
-  /* isLoading, */ error,
+  isLoading,
+  isModalOpen,
+  setModalOpen,
+  isJoinError,
+  error,
 }: Props) => {
   const { nickname, email, password, cf_password } = userJoinInfo;
   const [passwordType, setPasswordType] = useState(true);
@@ -35,16 +46,31 @@ const JoinPresenter = ({
   return (
     <>
       <Head>
-        <title>UYeong | Join</title>
+        <title>UYeong | Sign up</title>
       </Head>
-      {/* 로딩화면 */}
-      {/* {isLoading && <Loader />} */}
 
       {isSuccess ? (
-        <div>가입이 완료 되었습니다. 로그인을 해주세요.</div>
+        <SECTION.Frame>
+          <DIV.JoinSuccess>
+            <div>
+              <PartyPopper />
+              <h1>Congratulation!</h1>
+              <PartyPopper />
+            </div>
+            <p>
+              Your account has been successfully created. <br />
+              Please click the button below to log in to your account!
+            </p>
+            <Link href="/login" passHref>
+              Login
+            </Link>
+          </DIV.JoinSuccess>
+        </SECTION.Frame>
       ) : (
-        <StyledJoin>
-          <form onSubmit={onSubmit}>
+        <SECTION.Frame>
+          <PageTitle text="Create your account" />
+
+          <FORM.JoinForm onSubmit={onSubmit}>
             <div>
               <InputBox labelText="Nickname" name="nickname" value={nickname} onChange={onChangeInput} />
             </div>
@@ -87,23 +113,23 @@ const JoinPresenter = ({
               />
             </div>
 
-            {/* 에러 메시지 */}
-            {error && <div style={{ color: 'red' }}>{error.data.msg}</div>}
-
-            <WideButton
+            <FormButton
               variant="join"
-              text="Join"
-              type="submit"
-              // disabled={nickname && email && password && cf_password ? false : true}
+              text="Create"
+              formIsLoading={isLoading}
+              disabled={nickname && email && password && cf_password ? false : true}
             />
-          </form>
+          </FORM.JoinForm>
 
-          <p>
-            비밀번호를 잊어버리셨나요? ( <Link href="/fotget_password">Forget password?</Link> )
-            <br />
-            이미 가입이 되어 있나요? ( <Link href="/login">Login now!</Link> )
-          </p>
-        </StyledJoin>
+          <P.JoinFooter>
+            Already have an account? <Link href="/login">Login here!</Link>
+          </P.JoinFooter>
+
+          {/* 에러 메시지 */}
+          {isJoinError && (
+            <Modal type="alert" msg={error.data.msg} isOpen={isModalOpen} setOpen={setModalOpen} shakeAlert />
+          )}
+        </SECTION.Frame>
       )}
     </>
   );
