@@ -1,17 +1,17 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { StyledLogin } from './LoginStyle';
+import { FORM, P } from './LoginStyle';
 import Head from 'next/head';
 import Link from 'next/link';
-// import Loader from '@modals/Loader';
 import Button from '@atoms/Button';
-import WideButton from '@atoms/WideButton';
 import InputBox from '@molecules/InputBox';
 import { UserResponse } from '@app/services/user/userApi';
 import NotFound from '@src/pages/404';
+import PageTitle from '@atoms/PageTitle';
+import { SECTION } from '@templates/SectionFrame';
+import FormButton from '@molecules/FormButton';
+import Modal from '@modals/Modal';
 
 interface Props {
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
   userLoginInfo: {
     email: string;
     password: string;
@@ -19,19 +19,27 @@ interface Props {
   userData?: UserResponse;
   loginSuccess: boolean;
   loginLoading: boolean;
+  isModalOpen: boolean;
+  setModalOpen: (isModalOpen: boolean) => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  isLoginError: boolean;
   error: any;
 }
 
 const LoginPresenter = ({
-  onSubmit,
-  onChangeInput,
   userLoginInfo,
   userData,
   loginSuccess,
-  /* loginLoading, */
+  loginLoading,
+  isModalOpen,
+  setModalOpen,
+  onSubmit,
+  onChangeInput,
+  isLoginError,
   error,
 }: Props) => {
-  const [passwordType, setPasswordType] = useState(true);
+  const [isPasswordType, setPasswordType] = useState(true);
   const { email, password } = userLoginInfo;
 
   //!loginSuccess: loginSuccess가 일회성(페이지가 바뀔때마다 새로고침을 실행하기 때문)인 걸 활용하여 url로 검색하여 들어왔을때는 이미 false인 상태이기 때문에 로그인페이지 에러 화면이 보이도록 함
@@ -44,8 +52,10 @@ const LoginPresenter = ({
       {/* 로딩화면 */}
       {/* {loginLoading && <Loader />} */}
 
-      <StyledLogin>
-        <form onSubmit={onSubmit}>
+      <SECTION.Frame>
+        <PageTitle text="Login" />
+
+        <FORM.LoginForm onSubmit={onSubmit}>
           <div>
             <InputBox labelText="Email" type="email" name="email" value={email} onChange={onChangeInput} />
           </div>
@@ -54,32 +64,36 @@ const LoginPresenter = ({
             <InputBox
               labelText="Password"
               name="password"
-              type={passwordType ? 'password' : 'text'}
+              type={isPasswordType ? 'password' : 'text'}
               value={password}
               onChange={onChangeInput}
             />
             <Button
               variant="primary"
-              text={passwordType ? 'Show' : 'Hide'}
+              text={isPasswordType ? 'Show' : 'Hide'}
               type="button"
-              onClick={() => setPasswordType(!passwordType)}
+              onClick={() => setPasswordType(!isPasswordType)}
               disabled={password ? false : true}
             />
           </div>
 
-          {/* 에러 메시지 */}
-          {error && <div style={{ color: 'red' }}>{error.data.msg}</div>}
+          <FormButton
+            variant="login"
+            text="Login"
+            formIsLoading={loginLoading}
+            disabled={email && password ? false : true}
+          />
+        </FORM.LoginForm>
 
-          {/* widebutton >> atoms 에서 가져오기 */}
-          <WideButton variant="login" text="Login" type="submit" /* disabled={email && password ? false : true} */ />
-        </form>
+        <P.LoginFooter>
+          Don&#39;t have an account yet? <Link href="/join">Create one here!</Link>
+        </P.LoginFooter>
 
-        <p>
-          비밀번호를 잊어버리셨나요? ( <Link href="/fotget_password">Forget password?</Link> )
-          <br />
-          가입이 안 되어 있나요? ( <Link href="/join">Wanna join?</Link> )
-        </p>
-      </StyledLogin>
+        {/* 에러 메시지 */}
+        {isLoginError && (
+          <Modal type="alert" msg={error.data.msg} isOpen={isModalOpen} setOpen={setModalOpen} shakeAlert />
+        )}
+      </SECTION.Frame>
     </>
   );
 };

@@ -35,18 +35,18 @@ const SettingsContainer = () => {
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      //에러 모아 놓기
+      //valid를 한번만 실행하기 위해 만든 배열
       const errMsg = [];
 
       //form에러
       errMsg.push(validUserInfo(userUpdateInfo, userData?.user));
 
-      //토큰 만료 에러 만들기
+      //토큰 만료 에러 만들기?
 
       //에러 보여주기
       setSettingErrMsg(errMsg[0]);
 
-      //에러 없으면 유저 데이터 업데이트
+      //에러가 없으면 유저 데이터 업데이트
       if (!errMsg[0]) {
         const data = {
           userUpdateInfo: {

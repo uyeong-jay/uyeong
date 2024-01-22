@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Head from 'next/head';
-import { SECTION, DIV, FORM } from './SettingsStyle';
+import { DIV, FORM } from './SettingsStyle';
 import Button from '@atoms/Button';
 import InputBox from '@molecules/InputBox';
 import Image from 'next/image';
@@ -8,8 +8,9 @@ import { UserResponse } from '@app/services/user/userApi';
 import NotFound from '@src/pages/404';
 import { IUserUpdateInfo } from './SettingsContainer';
 import CameraIcon from '@icons/CameraIcon';
-import WideButton from '@atoms/WideButton';
-import MiniLoader from '@modals/MiniLoader';
+import PageTitle from '@atoms/PageTitle';
+import { SECTION } from '@templates/SectionFrame';
+import FormButton from '@molecules/FormButton';
 
 interface Props {
   userUpdateInfo: IUserUpdateInfo;
@@ -58,7 +59,7 @@ const SettingsPresenter = ({
       </Head>
       {/* 로딩중 */}
       <SECTION.Frame>
-        <h1>Settings</h1>
+        <PageTitle text="Settings" />
 
         {/* 프로필 사진 수정 */}
         <DIV.SettingsTop>
@@ -143,13 +144,7 @@ const SettingsPresenter = ({
             />
           </div>
 
-          <DIV.FormBtnWrapper>
-            {userUpdateLoading ? (
-              <MiniLoader w="20px" h="20px" />
-            ) : (
-              <WideButton variant="update" text="UPDATE" type="submit" />
-            )}
-          </DIV.FormBtnWrapper>
+          <FormButton variant="update" text="UPDATE" formIsLoading={userUpdateLoading} />
 
           {settingErrMsg || authErr ? (
             <DIV.ErrMsg>{settingErrMsg ? settingErrMsg : authErr.data.msg}</DIV.ErrMsg>

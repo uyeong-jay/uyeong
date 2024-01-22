@@ -1,27 +1,7 @@
 import styled from '@_settings/styled';
 
-export const SECTION = {} as any;
 export const DIV = {} as any;
 export const FORM = {} as any;
-
-SECTION.Frame = styled.section`
-  // border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 50px 25px 100px 25px;
-  color: ${({ theme }) => theme.FONT_C};
-  margin-bottom: 100px;
-
-  & > h1 {
-    // border: 1px solid black;
-    width: 100%;
-    max-width: calc(${({ theme }) => theme.BP.TABLET} - 60px);
-    margin: 60px 0 80px 0;
-  }
-`;
 
 DIV.SettingsTop = styled.div`
   // border: 1px solid black;
@@ -76,8 +56,8 @@ DIV.SettingsTop = styled.div`
   }
 `;
 FORM.SettingsMainForm = styled.form`
-  max-width: 700px;
   width: 100%;
+  max-width: 700px;
 
   & > h3 {
     // border: 1px solid red;
@@ -95,7 +75,7 @@ FORM.SettingsMainForm = styled.form`
       margin-bottom: 40px;
 
       & > input {
-        // border-bottom: 2px solid ${({ theme }) => theme.BD_C};
+        // border: 1px solid black;
         background-color: ${({ theme }) => theme.INITIAL_BG_C};
         margin-top: 10px;
         border-radius: 10px;
@@ -109,32 +89,6 @@ FORM.SettingsMainForm = styled.form`
       right: 10px;
       z-index: 1;
     }
-  }
-`;
-
-DIV.FormBtnWrapper = styled.div`
-  border: 2px solid ${({ theme }) => theme.BD_C};
-  width: 100%;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  //MiniLoader
-  & > div:last-of-type {
-    // border: 1px solid black;
-    margin-bottom: 0px;
-  }
-
-  //WideButton
-  & > button:last-of-type {
-    // border: 1px solid black;
-    position: relative;
-    top: 0px;
-    right: 0px;
-    color: ${({ theme }) => theme.FONT_C};
-    padding: 5px;
-    letter-spacing: 3px;
   }
 `;
 
