@@ -6,7 +6,7 @@ interface HeaderFrameProps {
 
 interface HeaderNavProps {
   isMenuIconClicked: boolean;
-  render: boolean;
+  isShowingMenuAni: boolean;
 }
 
 export const HEADER = {} as any;
@@ -115,7 +115,6 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
 
       & .header-user-avatar-wrapper {
         // border: 2px solid #555555;
-        background-color: ${({ theme }) => theme.INITIAL_BG_C};
         display: inline-flex;
         width: 30px;
       }
@@ -141,31 +140,39 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
 
       & > ul {
         // border: 1px solid red;
+        background-color: ${({ theme }) => theme.INITIAL_BG_C};
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
         position: absolute;
         top: 40px;
         right: -5px;
         width: 130px;
-        height: 200px;
         border-radius: 10px;
-        background-color: white;
 
         & > li {
+          // border: 1px solid red;
           width: 100%;
-          height: 100%;
+          height: 60px;
+          position: relative;
 
           & > button,
           a {
-            // border: 1px solid black;
             display: flex;
             justify-content: start;
             align-items: center;
-            padding-left: 7px;
+            padding-left: 15px;
             width: 100%;
             height: 100%;
-            border-radius: 10px;
+            color: ${({ theme }) => theme.FONT_C};
+            font-weight: bold;
           }
+        }
+
+        & > span {
+          border-bottom: 1px solid ${({ theme }) => theme.BD_C};
+          width: 75%;
         }
       }
     }
@@ -200,7 +207,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
           color: ${({ theme }) => theme.FONT_C};
 
           ${(props) => {
-            if (props.render && props.isMenuIconClicked) {
+            if (props.isShowingMenuAni && props.isMenuIconClicked) {
               return `
                 animation: down-list-bar 0.5s ease-out 0s forwards;
                 @keyframes down-list-bar {
@@ -213,7 +220,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
                 }
   
               `;
-            } else if (props.render && !props.isMenuIconClicked) {
+            } else if (props.isShowingMenuAni && !props.isMenuIconClicked) {
               return `
                 animation: up-list-bar 0.4s ease-out 0s forwards;
                 @keyframes up-list-bar {
@@ -263,7 +270,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
               }
 
               ${(props) => {
-                if (props.render && !props.isMenuIconClicked) {
+                if (props.isShowingMenuAni && !props.isMenuIconClicked) {
                   return `
                     animation: bar-font-color 0.1s ease-out 0s forwards;
                     @keyframes bar-font-color {

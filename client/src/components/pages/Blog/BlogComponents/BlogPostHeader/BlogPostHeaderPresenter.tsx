@@ -54,6 +54,7 @@ const BlogPostHeaderPresenter = ({ userData, blogPost, onClickDeletePost, isModa
         isOpen={isModalOpen}
         setOpen={setModalOpen}
         callback={() => onClickDeletePost(true)}
+        shakeAlert
       />
     </>
   );

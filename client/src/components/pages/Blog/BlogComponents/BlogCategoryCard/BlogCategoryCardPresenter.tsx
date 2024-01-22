@@ -117,6 +117,7 @@ const BlogCategoryCardPresenter = ({
         isOpen={isModalOpen}
         setOpen={setModalOpen}
         callback={() => onClickDelete(cardName, true)}
+        shakeAlert
       />
     </DIV.Frame>
   );

@@ -151,6 +151,7 @@ const BlogPostCommentTemplatePresenter = ({
         isOpen={isModalOpen}
         setOpen={setModalOpen}
         callback={() => onClickDelete(true)}
+        shakeAlert
       />
     </SECTION.Frame>
   );

@@ -32,12 +32,13 @@ const WriteFooterPresenter = ({
         <AngleLeftIcon />
         나가기
       </button>
-      {/* <button>임시저장</button> */}
       <button className="done-button" onClick={onClickDone}>
         완료 <AngleUpIcon />
       </button>
-      <Modal type="alert" msg={writeErrMsg} isOpen={isModalOpen} setOpen={setModalOpen} />
+
       <Publish userData={userData} blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
+
+      <Modal type="alert" msg={writeErrMsg} isOpen={isModalOpen} setOpen={setModalOpen} shakeAlert />
     </StyledWriteFooter>
   );
 };

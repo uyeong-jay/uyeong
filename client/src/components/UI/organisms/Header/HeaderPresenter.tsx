@@ -9,31 +9,45 @@ import useOnClickOutside from '@hooks/useOnClickOutside';
 import CaretDownIcon from '@icons/CaretDownIcon';
 import CaretUpIcon from '@icons/CaretUpIcon';
 import Logo from '@icons/Logo';
+import { useAppSelector } from '@app/hooks';
 
 interface Props {
   userData?: UserResponse;
-  getUserDataLoading: boolean;
-  getUserDataError: any;
-  logoutError: any;
+  isFetchingUserData: boolean;
+  isLoggingout: boolean;
+  isUserDataError: boolean;
+  isLogoutError: boolean;
   onClickLogout: () => void;
 }
 
-const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logoutError, onClickLogout }: Props) => {
+export let scrollDir = '';
+let prevScrollY = 0;
+
+const HeaderPresenter = ({
+  userData,
+  isFetchingUserData,
+  isLoggingout,
+  isUserDataError,
+  isLogoutError,
+  onClickLogout,
+}: Props) => {
+  const [scrollDirection, setScrollDirection] = useState('');
+
+  const scrollDirForModal = useAppSelector((state) => state.header.scrollDirForModal);
+
   const dropdownBoxRef = useRef(null);
   const [isProfileOpen, setProfileOpen] = useState(false);
 
   const [isMenuIconClicked, setMenuIconClicked] = useState(false);
 
-  const [render, setRender] = useState(false);
-
-  const [scrollDirection, setScrollDirection] = useState('');
-  const [prevScrollY, setPrevScrollY] = useState(0);
+  const [isShowingMenuAni, setShowingMenuAni] = useState(false);
+  // 뱐수 명 바꾸기
 
   //width가 833px 보다 커지면 메뉴 클릭 animation 없애기
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth > 833) {
-        setRender(false);
+        setShowingMenuAni(false);
         setMenuIconClicked(false);
       }
     };
@@ -53,12 +67,24 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
       setMenuIconClicked(false);
       setProfileOpen(false);
 
-      if (currentScrollY > prevScrollY) {
-        setScrollDirection('down');
-      } else {
-        setScrollDirection('up');
+      //modal 스크롤
+      if (scrollDirForModal === 'up') setScrollDirection('up');
+      if (scrollDirForModal === 'down') setScrollDirection('down');
+      if (scrollDirForModal === '') {
+        //header 스크롤
+        if (currentScrollY > prevScrollY) {
+          if (scrollDir !== 'down') {
+            setScrollDirection('down'); // 헤더 올림
+            scrollDir = 'down';
+          }
+        } else {
+          if (scrollDir !== 'up') {
+            setScrollDirection('up'); // 헤더 내림
+            scrollDir = 'up';
+          }
+        }
       }
-      setPrevScrollY(currentScrollY);
+      prevScrollY = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -66,7 +92,7 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [prevScrollY]);
+  }, [scrollDirForModal, scrollDirection]);
 
   //Dropdown
   const onClickUser = useCallback(() => {
@@ -82,7 +108,7 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
   useOnClickOutside(dropdownBoxRef, onClickOutside);
 
   const onClickMenu = useCallback(() => {
-    setRender(false); //애니메이션 실행없이 바로 닫기
+    setShowingMenuAni(false); //애니메이션 실행없이 바로 닫기
 
     const timer = setTimeout(() => {
       setMenuIconClicked(false); //아이콘 애니메이션 실행시간 추가
@@ -93,7 +119,7 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
   }, []);
 
   const onClickDownMenuIcon = useCallback(() => {
-    setRender(true); //render가 계속 true로 유지되고 있어야 닫는 애니메이션 실행가능
+    setShowingMenuAni(true); //isShowingMenuAni가 계속 true로 유지되고 있어야 닫는 애니메이션 실행가능
     if (!isMenuIconClicked) {
       setMenuIconClicked(true);
     } else if (isMenuIconClicked) {
@@ -127,37 +153,37 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
     }
   }, [isMenuIconClicked]);
 
-  if (getUserDataError || logoutError) return <NotFound />;
+  if (isUserDataError || isLogoutError) return <NotFound />;
   return (
     <>
-      {/* {getUserDataLoading && <Loader />} */}
       <HEADER.Frame scrollDirection={scrollDirection}>
-        <NAV.HeaderNav isMenuIconClicked={isMenuIconClicked} render={render}>
+        <NAV.HeaderNav isMenuIconClicked={isMenuIconClicked} isShowingMenuAni={isShowingMenuAni}>
           <ul>
-            {/* 1 */}
+            {/* 1. 대표로고 */}
             <NavLinkBox href="/">
               <Logo />
             </NavLinkBox>
 
-            {/* 2 */}
+            {/* 2. 헤더 메뉴 */}
             <li>
               <div>
                 <ul onClick={onClickMenu}>
-                  <NavLinkBox href="/about" delay={render ? 500 : 0}>
+                  <NavLinkBox href="/about" delay={isShowingMenuAni ? 500 : 0}>
                     About
                   </NavLinkBox>
-                  <NavLinkBox href="/blog" delay={render ? 500 : 0}>
+                  <NavLinkBox href="/blog" delay={isShowingMenuAni ? 500 : 0}>
                     Blog
                   </NavLinkBox>
-                  <NavLinkBox href="/contact" delay={render ? 500 : 0}>
+                  <NavLinkBox href="/contact" delay={isShowingMenuAni ? 500 : 0}>
                     Contact
                   </NavLinkBox>
                 </ul>
               </div>
             </li>
 
-            {/* 3 */}
+            {/* 3. 프로필 */}
             {userData?.user ? (
+              //로그인 후
               <li onClick={onClickUser} ref={dropdownBoxRef}>
                 {/* 프로필 이미지 */}
                 <div className="header-user-avatar-wrapper header-user-avatar">
@@ -167,6 +193,7 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
                     alt="user avater"
                     width={30}
                     height={30}
+                    priority
                   />
                 </div>
                 {/* 아래 화살표 */}
@@ -174,17 +201,21 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
                 {/* 아래 화살표 클릭시 오픈 */}
                 {isProfileOpen &&
                   (userData?.user.role === 'admin' ? (
+                    //프로필 메뉴(admin)
                     <ul>
                       <NavLinkBox href="/write">New post</NavLinkBox>
+                      <span></span>
                       <NavLinkBox href="/settings">Settings</NavLinkBox>
+                      <span></span>
                       <li>
                         <Button variant="logout" onClick={onClickLogout} text="Logout" />
                       </li>
                     </ul>
                   ) : (
+                    //프로필 메뉴(user)
                     <ul>
-                      <NavLinkBox href="/settings">Your activity</NavLinkBox>
                       <NavLinkBox href="/settings">Settings</NavLinkBox>
+                      <span></span>
                       <li>
                         <Button variant="logout" onClick={onClickLogout} text="Logout" />
                       </li>
@@ -193,13 +224,13 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
               </li>
             ) : (
               <>
-                {getUserDataLoading ? (
-                  //새로고침시 초기 로딩 UI
+                {/* 새로고침시 화면 */}
+                {isFetchingUserData || isLoggingout ? (
                   <li>
-                    <div style={{ width: '30px' }}></div>
-                    <CaretDownIcon />
+                    <div></div>
                   </li>
                 ) : (
+                  //로그인 전
                   <NavLinkBox href="/login" passHref={true}>
                     <Button variant="login" text="Login" />
                   </NavLinkBox>
@@ -207,7 +238,7 @@ const HeaderPresenter = ({ userData, getUserDataLoading, getUserDataError, logou
               </>
             )}
 
-            {/* 4 */}
+            {/* 4. 헤더 메뉴 아이콘 (반응형) */}
             <li onClick={onClickDownMenuIcon}>
               <div>
                 <span></span>
