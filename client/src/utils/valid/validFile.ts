@@ -14,7 +14,7 @@ const validFile = (file?: File) => {
       file.type !== 'image/png' &&
       file.type !== 'image/gif'
     ) {
-      alert('Please choose other image extension');
+      alert('Please select a different image extension.');
       return;
     }
   }

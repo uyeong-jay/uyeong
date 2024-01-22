@@ -4,10 +4,10 @@ const categorySchema = new Schema(
   {
     name: {
       type: String,
-      required: [true, "Please add your category name."],
+      required: [true, "Please enter your category name."],
       trim: true,
       unique: true,
-      maxLength: [20, "Name is up to 20 chars long.)"],
+      maxLength: [20, "Category name must be less than 20 characters."],
     },
   },
   { timestamps: true }

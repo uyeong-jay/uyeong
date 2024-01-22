@@ -10,7 +10,7 @@ const login = async (req: Request, res: Response) => {
 
     //email 조회
     const user = await Users.findOne({ email });
-    if (!user) return res.status(400).json({ msg: "This account doesn't exists." });
+    if (!user) return res.status(400).json({ msg: "This account doesn't exist." });
 
     //password 조회(bcrypt)
     const isMatch = await bcrypt.compare(password, user.password);

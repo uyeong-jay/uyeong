@@ -5,20 +5,20 @@ const userSchema = new Schema(
   {
     nickname: {
       type: String,
-      required: [true, "Please add your name."],
+      required: [true, "Please enter your nickname."],
       trim: true,
-      maxLength: [20, "Your name must be 20 chars or less.)"],
+      maxLength: [20, "Your nickname must be between 2 and 10 characters."],
     },
     email: {
       type: String,
-      required: [true, "Please add your email."],
+      required: [true, "Please enter your email."],
       trim: true,
       unique: true,
     },
     password: {
       type: String,
-      required: [true, "Please add your password."],
-      minLength: [6, "Your password must be 6 chars or more."],
+      required: [true, "Please enter your password."],
+      minLength: [6, "Your password must be 6 characters or more."],
     },
     avatar: {
       type: String,

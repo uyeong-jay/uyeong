@@ -21,7 +21,7 @@ const refresh = async (req: Request, res: Response) => {
 
     //디코드된 _id로 유저 데이터 가져오기(findById)
     const user = await Users.findById(decoded.id).select("-password +rf_token"); //비번빼고 가져오기
-    if (!user) return res.status(400).json({ msg: "This account doesn't exists." });
+    if (!user) return res.status(400).json({ msg: "This account doesn't exist." });
 
     //다른 브라우저에서 로그인시 re_token이 달라져 이전 브라우저에선 에러내기
     if (rf_token !== user.rf_token) return res.status(400).json({ msg: "Please login first" });

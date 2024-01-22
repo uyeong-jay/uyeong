@@ -13,7 +13,7 @@ const updateUser = async (req: IReqAuth, res: Response) => {
 
     //email 조회
     const user = await Users.findOne({ email });
-    if (!user) return res.status(400).json({ msg: "This account doesn't exists." });
+    if (!user) return res.status(400).json({ msg: "This account doesn't exist." });
 
     //password를 바꾸지 않을때
     if (!new_password) {

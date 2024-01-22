@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
 //이메일 유효성 검사
-//https://stackoverflow.com/questions/46155
 export const validateEmail = (email: string) => {
   const regex =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -17,20 +16,20 @@ const valid = (req: Request, res: Response, next: NextFunction) => {
   const errors = [];
 
   //nickname 에러
-  if (!nickname) errors.push("Please add your nickname.");
+  if (!nickname) errors.push("Please enter your nickname.");
   else if (nickname.length < 2 || nickname.length > 10)
     errors.push("Your nickname must be between 2 and 10 characters.");
 
   //email 에러
-  if (!email) errors.push("Please add your email.");
+  if (!email) errors.push("Please enter your email.");
   else if (!validateEmail(email)) errors.push("Please enter your email correctly.");
 
   //password 에러
-  if (!password) errors.push("Please add your password.");
-  else if (password.length < 6) errors.push("Your password must be 6 chars or more.");
+  if (!password) errors.push("Please enter your password.");
+  else if (password.length < 6) errors.push("Your password must be 6 characters or more.");
 
   //cf_password 에러
-  if (!cf_password) errors.push("Please add your confirm password.");
+  if (!cf_password) errors.push("Please enter your confirm password.");
   else if (password !== cf_password) errors.push("Your password and confirm password should be same.");
 
   //가장 첫번째 에러 내보내기

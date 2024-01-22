@@ -1,4 +1,4 @@
-interface userUpdateInfoProps {
+interface userUpdateInfoType {
   avatar?: string | File;
   nickname?: string;
   email?: string;
@@ -7,21 +7,21 @@ interface userUpdateInfoProps {
   cf_new_password: string;
 }
 
-interface userDataProps {
+interface userDataType {
   nickname: string;
 }
 
-const validUserInfo = (userUpdateInfo: userUpdateInfoProps, userData?: userDataProps) => {
+const validUserInfo = (userUpdateInfo: userUpdateInfoType, userData?: userDataType) => {
   const { avatar, nickname, email, old_password, new_password, cf_new_password } = userUpdateInfo;
 
   const userNickname = userData?.nickname;
 
   //nickname 에러
-  if (!nickname) return 'Please add your nickname.';
+  if (!nickname) return 'Please enter your nickname.';
   else if (nickname.length < 2 || nickname.length > 10) return 'Your nickname must be between 2 and 10 characters.';
 
   //email 에러
-  if (!email) return 'Please add your email.';
+  if (!email) return 'Please enter your email.';
 
   //old_password 에러
   if (0 < old_password.length && old_password.length < 6) return 'Your current password must be 6 characters or more.';
@@ -39,11 +39,12 @@ const validUserInfo = (userUpdateInfo: userUpdateInfoProps, userData?: userDataP
   //password 입력 에러
   //(다 있는상태 외 나머지 와 다 없는상태 외 나머지 의 합집합)
   if (!(old_password && new_password && cf_new_password) && !(!old_password && !new_password && !cf_new_password))
-    return 'Please add all password fields';
+    return 'Please enter all password fields';
 
   //password 일치 에러
   if (old_password && new_password && old_password === new_password)
     return 'Your current password and new password must be different';
+
   return '';
 };
 
