@@ -26,21 +26,44 @@ const StyledInputBox = styled.div`
 `;
 
 const StyledLabel = styled.label`
-  margin-right: 10px;
+  // border: 1px solid black;
   color: ${({ theme }) => theme.FONT_C};
   letter-spacing: 0.5px;
+  font-weight: bold;
 `;
 
 const StyledInput = styled.input<InputProps>`
-  // border-bottom: 1px solid black;
+  // border: 1px solid red;
+  border: none;
   background-color: ${({ theme }) => theme.BG_C};
   margin: 0;
   width: 100%;
   height: 40px;
   text-align: center;
+  font-size: 15px;
   color: ${({ theme }) => theme.FONT_C};
-  border: none;
   outline: none;
+
+  &:autofill,
+  &:autofill:hover,
+  &:autofill:focus,
+  &:autofill:active {
+    background-clip: text;
+    text-fill-color: ${({ theme }) => theme.FONT_C};
+    box-shadow: inset 0 0 0 50px ${({ theme }) => theme.INITIAL_BG_C};
+    transition: background-color 5000s ease-in-out 0s; //구 크롬 브라우저에서만 적용
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: ${({ theme }) => theme.FONT_C};
+    box-shadow: inset 0 0 0 50px ${({ theme }) => theme.INITIAL_BG_C};
+    transition: background-color 5000s ease-in-out 0s; //구 크롬 브라우저에서만 적용
+  }
+
   ${(props) => {
     if (props.disabled) {
       return `
