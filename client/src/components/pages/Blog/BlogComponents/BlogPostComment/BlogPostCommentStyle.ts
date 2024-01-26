@@ -12,15 +12,7 @@ DIV.ReplyGourp = styled.div`
   // border: 1px solid red;
   padding: 20px 5px 0 30px;
 
-  @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
-    padding: 20px 5px 0 8vw;
-  }
-
-  @media screen and (min-width: calc(${({ theme }) => theme.BP.MOBILE} + 200px)) {
-    padding: 20px 0 0 43px;
-  }
-
   @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
-    padding: 20px 0 0 53px;
+    padding: 20px 0 0 40px;
   }
 `;

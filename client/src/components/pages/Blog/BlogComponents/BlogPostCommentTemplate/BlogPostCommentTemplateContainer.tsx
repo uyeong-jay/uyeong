@@ -44,7 +44,7 @@ const BlogPostCommentTemplateContainer = ({
     }
   }, [reply, userData?.user?.nickname]);
 
-  const onClickUpdate = useCallback(() => {
+  const onClickEdit = useCallback(() => {
     setEditComment(true);
     // const regex = /<span style="background-color: pink; color:red;">(.*?)<\/span>/;
     // const matches = regex.exec(reply?.content as string);
@@ -94,7 +94,7 @@ const BlogPostCommentTemplateContainer = ({
       setModalOpen={setModalOpen}
       onClickReply={onClickReply}
       onClickReplies={onClickReplies}
-      onClickUpdate={onClickUpdate}
+      onClickEdit={onClickEdit}
       onClickDelete={onClickDelete}
     />
   );

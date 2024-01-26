@@ -8,6 +8,11 @@ import CaretUpIcon from '@icons/CaretUpIcon';
 import BlogPostCommentWrite from '../BlogPostCommentWrite';
 import { UserResponse } from '@app/services/user/userApi';
 import Modal from '@modals/Modal';
+import useOnClickOutside from '@hooks/useOnClickOutside';
+import { useCallback, useRef, useState } from 'react';
+import EllipsisVerticalIcon from '@icons/EllipsisVerticalIcon';
+import EditIcon from '@icons/EditIcon';
+import TrashIcon from '@icons/TrashIcon';
 
 interface Props {
   postId?: string;
@@ -31,7 +36,7 @@ interface Props {
   setModalOpen: (isModalOpen: boolean) => void;
   onClickReply: () => void;
   onClickReplies?: () => void;
-  onClickUpdate: () => void;
+  onClickEdit: () => void;
   onClickDelete: (isCallback?: boolean) => void;
 }
 
@@ -57,15 +62,28 @@ const BlogPostCommentTemplatePresenter = ({
   setModalOpen,
   onClickReply,
   onClickReplies,
-  onClickUpdate,
+  onClickEdit,
   onClickDelete,
 }: Props) => {
   const { user, content, replies, createdAt } = comment;
 
+  const dropdownBoxRef = useRef(null);
+  const [isCommentMenuOpen, setCommentMenuOpen] = useState(false);
+
+  const onClickCommentMenu = useCallback(() => {
+    setCommentMenuOpen((prev) => !prev);
+  }, []);
+
+  const onClickOutside = useCallback(() => {
+    setCommentMenuOpen(false);
+  }, []);
+
+  useOnClickOutside(dropdownBoxRef, onClickOutside);
+
   return (
     <SECTION.Frame>
       {/* 프로필 이미지 */}
-      <DIV.Left>
+      <DIV.CommentTop>
         <div className="comment-user-avatar-warpper comment-user-avatar">
           <Image
             className="comment-user-avatar"
@@ -73,27 +91,37 @@ const BlogPostCommentTemplatePresenter = ({
             alt="user-avatar"
             layout="fill"
             objectFit="cover"
-            priority
           />
         </div>
-      </DIV.Left>
-
-      <DIV.Right>
-        <DIV.RightTop>
+        <DIV.CommentTopRight>
           <DIV.CommentInfo>
             <P.Nickname>{reply ? reply.user.nickname : user.nickname}</P.Nickname>
-            <P.CreatedDate>ㆍ{reply ? formatDate(reply.createdAt) : formatDate(createdAt)}</P.CreatedDate>
+            <span>·</span>
+            <P.CreatedDate>{reply ? formatDate(reply.createdAt) : formatDate(createdAt)}</P.CreatedDate>
           </DIV.CommentInfo>
 
           {(userMatch || (reply && userData?.user?._id === reply?.user._id) || userData?.user?.role === 'admin') && (
-            <DIV.CommentSideBtnGroup>
-              {!editComment && <BTN.CommentUpdateBtn onClick={onClickUpdate}>Edit</BTN.CommentUpdateBtn>}
-              <BTN.CommentDeleteBtn onClick={() => onClickDelete()}>Delete</BTN.CommentDeleteBtn>
-            </DIV.CommentSideBtnGroup>
+            <DIV.CommentMenu ref={dropdownBoxRef} onClick={onClickCommentMenu}>
+              <EllipsisVerticalIcon />
+              {isCommentMenuOpen && (
+                <DIV.CommentMenuBtns>
+                  <BTN.CommentEditBtn onClick={onClickEdit}>
+                    <EditIcon />
+                    Edit
+                  </BTN.CommentEditBtn>
+                  <BTN.CommentDeleteBtn onClick={() => onClickDelete()}>
+                    <TrashIcon />
+                    Delete
+                  </BTN.CommentDeleteBtn>
+                </DIV.CommentMenuBtns>
+              )}
+            </DIV.CommentMenu>
           )}
-        </DIV.RightTop>
+        </DIV.CommentTopRight>
+      </DIV.CommentTop>
 
-        <DIV.RightMiddle>
+      <DIV.CommentMain>
+        <DIV.CommentMainContent>
           {!editComment ? (
             <MarkdownViewer
               content={
@@ -114,9 +142,9 @@ const BlogPostCommentTemplatePresenter = ({
               setReplyContent={setReplyContent}
             />
           )}
-        </DIV.RightMiddle>
+        </DIV.CommentMainContent>
 
-        <DIV.RightBottom>
+        <DIV.CommentMainReply>
           {!reply &&
             (replies.length > 0 ? (
               <>
@@ -133,7 +161,8 @@ const BlogPostCommentTemplatePresenter = ({
           <BTN.CommentReplyBtn onClick={onClickReply} writeReply={writeReply}>
             Reply
           </BTN.CommentReplyBtn>
-        </DIV.RightBottom>
+        </DIV.CommentMainReply>
+
         {writeReply && (
           <BlogPostCommentWrite
             postId={postId}
@@ -144,7 +173,7 @@ const BlogPostCommentTemplatePresenter = ({
             setOpenReplies={setOpenReplies}
           />
         )}
-      </DIV.Right>
+      </DIV.CommentMain>
       <Modal
         type="delete"
         msg={`Are you sure you want to delete this ${reply ? `reply` : `comment`}?`}
