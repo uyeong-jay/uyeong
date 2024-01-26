@@ -11,22 +11,13 @@ SECTION.Frame = styled.section`
 DIV.CommentWriteBlock = styled.div`
   // border: 1px solid green;
   width: 100%;
+  margin-bottom: 50px;
 
   & > div {
     // border: 1px solid red;
     font-size: 15px;
     color: ${({ theme }) => theme.FONT_C};
   }
-`;
-
-DIV.UnderComments = styled.div`
-  // border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  width: 100%;
-  color: ${({ theme }) => theme.FONT_C};
 `;
 
 DIV.IntersectionTarget = styled.div`
@@ -36,4 +27,14 @@ DIV.IntersectionTarget = styled.div`
   align-items: center;
   height: 50px;
   width: 100%;
+`;
+
+DIV.TargetMsg = styled.div`
+  // border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  color: ${({ theme }) => theme.FONT_C};
 `;
