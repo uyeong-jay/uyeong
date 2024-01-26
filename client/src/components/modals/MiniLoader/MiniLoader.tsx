@@ -2,25 +2,43 @@ import React from 'react';
 import styled from '@_settings/styled';
 
 interface Props {
-  w: string;
-  h: string;
+  w: number;
+  h: number;
+  responsive?: boolean;
 }
 
 interface MiniLoaderProps {
-  width: string;
-  height: string;
+  width: number;
+  height: number;
+  responsive: boolean;
 }
 
 const StyledMiniLoader = styled.div<MiniLoaderProps>`
   // border: 1px solid black;
   position: relative;
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
+
+  ${(props) => {
+    if (props.responsive) {
+      return `
+        width: ${props.width - 10}px;
+        height: ${props.width - 10}px;
+
+        @media screen and (min-width: ${props.theme.BP.TABLET}) {
+          width: ${props.width}px;
+          height: ${props.height}px;
+        }  
+      `;
+    } else {
+      return `
+        width: ${props.width}px;
+        height: ${props.width}px;
+      `;
+    }
+  }}
 
   .spinner {
     // border: 1px solid black;
     animation: rotate 2s linear infinite;
-    z-index: 2;
     position: absolute;
     top: 0;
     left: 0;
@@ -54,9 +72,9 @@ const StyledMiniLoader = styled.div<MiniLoaderProps>`
   }
 `;
 
-const MiniLoader = ({ w, h }: Props) => {
+const MiniLoader = ({ w, h, responsive }: Props) => {
   return (
-    <StyledMiniLoader width={w} height={h}>
+    <StyledMiniLoader width={w} height={h} responsive={responsive ? true : false}>
       <svg className="spinner" viewBox="0 0 50 50">
         <circle className="path" cx="25" cy="25" r="20" fill="none" strokeWidth="5"></circle>
       </svg>

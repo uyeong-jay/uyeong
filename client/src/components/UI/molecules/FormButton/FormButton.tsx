@@ -5,7 +5,7 @@ import WideButton from '@atoms/WideButton';
 
 interface Props {
   formIsLoading: boolean;
-  variant: string;
+  variant?: string;
   text: string;
   disabled?: boolean;
 }
@@ -46,7 +46,7 @@ const FormButton = ({ formIsLoading, variant, text, disabled }: Props) => {
   return (
     <StyledFormButton>
       {formIsLoading ? (
-        <MiniLoader w="20px" h="20px" />
+        <MiniLoader w={20} h={20} />
       ) : (
         <WideButton variant={variant} text={text} type="submit" disabled={disabled ? true : false} />
       )}

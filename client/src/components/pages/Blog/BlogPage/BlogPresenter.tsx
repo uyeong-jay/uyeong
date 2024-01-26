@@ -71,13 +71,14 @@ const BlogPresenter: React.FC<Props> = ({
                   onFocus={onFocusInput}
                   ref={inputRef}
                   placeholder=""
+                  autofill={false}
                 />
                 <SearchIcon />
               </DIV.SearchBar>
               <BlogPosts blogPostsBySearch={blogPostsBySearch} />
               <DIV.IntersectionTarget id="posts_intersection_target" ref={targetRef}>
                 {isLoadingPosts ? (
-                  <MiniLoader w="35px" h="35px" />
+                  <MiniLoader w={35} h={35} responsive />
                 ) : (
                   !blogPostsBySearch?.next_cursor &&
                   blogPostsBySearch?.hasMatchingPost && <DIV.NoMorePosts>- No more posts -</DIV.NoMorePosts>
