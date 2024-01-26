@@ -8,7 +8,6 @@ interface AppLayoutProps {
 
 const StyledAppLayout = styled.div`
   // border: 1px solid red;
-  // width: 100%;
   position: relative;
   min-width: 320px;
   min-height: 100%;

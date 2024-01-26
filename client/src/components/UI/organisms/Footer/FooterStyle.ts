@@ -2,7 +2,7 @@ import styled from '@_settings/styled';
 
 export const StyledFooter = styled.footer`
   border-top: 2px solid ${({ theme }) => theme.BD_C};
-  // background-color: #dfe2e8;
+  boackground-color: ${({ theme }) => theme.BG_C};
   padding: 20px;
   position: absolute;
   left: 50%;

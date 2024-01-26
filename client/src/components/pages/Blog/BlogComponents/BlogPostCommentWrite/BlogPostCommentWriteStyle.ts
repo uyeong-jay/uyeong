@@ -9,19 +9,19 @@ FORM.CommentWriteForm = styled.form`
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin-bottom: 50px;
+  // width: 100%;
 
   & > textarea {
-    // border: 1px solid green;
+    // border: 1px solid blue;
     border: none;
-    background-color: #fffcf6;
+    background-color: ${({ theme }) => theme.INITIAL_BG_C};
     width: 100%;
     height: 150px;
     margin-top: 10px;
     padding: 15px 20px;
     border-radius: 10px;
     overflow: hidden;
-    resize: none; //textarea 크기조절 막기
+    resize: none;
     font-size: 11px;
     @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
       font-size: 13px;

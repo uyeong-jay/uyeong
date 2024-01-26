@@ -57,6 +57,7 @@ const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props)
   const onClickDelete = useCallback(
     (cardName: string, isCallback?: boolean) => {
       if (!isCallback) return setModalOpen(true);
+
       deleteBlogCategory({
         categoryInfo: { name: cardName },
         token: userData?.access_token,

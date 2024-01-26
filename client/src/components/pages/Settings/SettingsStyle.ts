@@ -87,7 +87,6 @@ FORM.SettingsMainForm = styled.form`
       position: absolute;
       top: 37px;
       right: 10px;
-      z-index: 1;
     }
   }
 `;

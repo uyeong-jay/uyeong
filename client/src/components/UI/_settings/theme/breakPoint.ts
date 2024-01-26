@@ -11,3 +11,5 @@ export const breakpoint = {
   TABLET: '768px',
   MOBILE: '320px',
 };
+
+//breakpoint 수정시 globalStyle body 확인

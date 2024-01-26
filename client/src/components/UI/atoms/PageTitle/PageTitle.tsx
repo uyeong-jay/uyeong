@@ -10,7 +10,7 @@ const StyledPageTitle = styled.h1`
   width: 100%;
   max-width: calc(${({ theme }) => theme.BP.TABLET} - 60px);
   margin: 60px 0 80px 0;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 `;
 
 const PageTitle = ({ text }: Props) => {
