@@ -14,7 +14,7 @@ const login = async (req: Request, res: Response) => {
 
     //password 조회(bcrypt)
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: "Password is incorrect" });
+    if (!isMatch) return res.status(400).json({ msg: "Password is incorrect." });
 
     const access_token = generateAccessToken({ id: user._id });
     const refresh_token = generateRefreshToken({ id: user._id }, res);

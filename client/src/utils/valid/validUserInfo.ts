@@ -34,16 +34,16 @@ const validUserInfo = (userUpdateInfo: userUpdateInfoType, userData?: userDataTy
 
   //변경 된게 없을때
   if (!avatar && nickname && nickname === userNickname && email && !old_password && !new_password && !cf_new_password)
-    return 'Already up to date';
+    return 'Already up to date.';
 
   //password 입력 에러
   //(다 있는상태 외 나머지 와 다 없는상태 외 나머지 의 합집합)
   if (!(old_password && new_password && cf_new_password) && !(!old_password && !new_password && !cf_new_password))
-    return 'Please enter all password fields';
+    return 'Please enter all password fields.';
 
   //password 일치 에러
   if (old_password && new_password && old_password === new_password)
-    return 'Your current password and new password must be different';
+    return 'Your current password and new password must be different.';
 
   return '';
 };
