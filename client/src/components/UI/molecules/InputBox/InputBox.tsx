@@ -14,10 +14,12 @@ interface Props {
   disabled?: boolean;
   readOnly?: boolean;
   required?: boolean;
+  autofill?: boolean;
 }
 
 interface InputProps {
   disabled: boolean;
+  autofill?: boolean;
 }
 
 const StyledInputBox = styled.div`
@@ -50,8 +52,15 @@ const StyledInput = styled.input<InputProps>`
   &:autofill:active {
     background-clip: text;
     text-fill-color: ${({ theme }) => theme.FONT_C};
-    box-shadow: inset 0 0 0 50px ${({ theme }) => theme.INITIAL_BG_C};
-    transition: background-color 5000s ease-in-out 0s; //구 크롬 브라우저에서만 적용
+    ${(props) => {
+      if (props.autofill) {
+        return `
+          box-shadow: inset 0 0 0 50px ${props.theme.INITIAL_BG_C};
+          transition: background-color 5000s ease-in-out 0s; //구 크롬 
+        `;
+      }
+    }}
+    브라우저에서만 적용
   }
 
   &:-webkit-autofill,
@@ -60,8 +69,14 @@ const StyledInput = styled.input<InputProps>`
   &:-webkit-autofill:active {
     -webkit-background-clip: text;
     -webkit-text-fill-color: ${({ theme }) => theme.FONT_C};
-    box-shadow: inset 0 0 0 50px ${({ theme }) => theme.INITIAL_BG_C};
-    transition: background-color 5000s ease-in-out 0s; //구 크롬 브라우저에서만 적용
+    ${(props) => {
+      if (props.autofill) {
+        return `
+          box-shadow: inset 0 0 0 50px ${props.theme.INITIAL_BG_C};
+          transition: background-color 5000s ease-in-out 0s; //구 크롬 
+        `;
+      }
+    }}
   }
 
   ${(props) => {
@@ -87,6 +102,7 @@ const InputBox = (
     disabled,
     readOnly,
     required,
+    autofill = true,
   }: Props,
   ref?: ForwardedRef<HTMLInputElement>,
 ) => {
@@ -106,6 +122,8 @@ const InputBox = (
         disabled={disabled ? true : false}
         readOnly={readOnly ? true : false}
         required={required ? true : false}
+        autofill={autofill ? true : false}
+        spellCheck={false}
       />
     </StyledInputBox>
   );

@@ -70,7 +70,13 @@ const BlogCategoryCardPresenter = ({
           {isUpdate ? (
             userData?.user?.role === 'admin' && (
               <>
-                <input type="text" value={categoryName.name} onChange={onChangeCategoryNameInput} autoFocus />
+                <input
+                  type="text"
+                  value={categoryName.name}
+                  onChange={onChangeCategoryNameInput}
+                  autoFocus
+                  spellCheck={false}
+                />
                 <Button
                   variant="update"
                   text="Save"

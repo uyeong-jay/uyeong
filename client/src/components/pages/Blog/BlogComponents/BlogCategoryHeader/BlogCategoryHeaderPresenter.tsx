@@ -20,7 +20,7 @@ const BlogCategoryHeaderPresenter = ({ userData, categoryInfo, error, onSubmit, 
       {/* 카테고리 생성 바 (admin) */}
       {userData?.user?.role === 'admin' && (
         <FORM.CategoryNameFrom onSubmit={onSubmit}>
-          <InputBox name="category" value={name} onChange={onChangeCategoryName} />
+          <InputBox name="category" value={name} onChange={onChangeCategoryName} autofill={false} />
           <Button variant="create" type="submit" text="Create" />
           {/* 에러 메세지 */}
           {error && <p>{error.data.msg}</p>}
