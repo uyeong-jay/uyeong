@@ -9,7 +9,6 @@ import useOnClickOutside from '@hooks/useOnClickOutside';
 import CaretDownIcon from '@icons/CaretDownIcon';
 import CaretUpIcon from '@icons/CaretUpIcon';
 import Logo from '@icons/Logo';
-import { useAppSelector } from '@app/hooks';
 
 interface Props {
   userData?: UserResponse;
@@ -32,8 +31,6 @@ const HeaderPresenter = ({
   onClickLogout,
 }: Props) => {
   const [scrollDirection, setScrollDirection] = useState('');
-
-  const scrollDirForModal = useAppSelector((state) => state.header.scrollDirForModal);
 
   const dropdownBoxRef = useRef(null);
   const [isProfileOpen, setProfileOpen] = useState(false);
@@ -67,23 +64,18 @@ const HeaderPresenter = ({
       setMenuIconClicked(false);
       setProfileOpen(false);
 
-      //modal 스크롤
-      if (scrollDirForModal === 'up') setScrollDirection('up');
-      if (scrollDirForModal === 'down') setScrollDirection('down');
-      if (scrollDirForModal === '') {
-        //header 스크롤
-        if (currentScrollY > prevScrollY) {
-          if (scrollDir !== 'down') {
-            setScrollDirection('down'); // 헤더 올림
-            scrollDir = 'down';
-          }
-        } else {
-          if (scrollDir !== 'up') {
-            setScrollDirection('up'); // 헤더 내림
-            scrollDir = 'up';
-          }
+      if (currentScrollY > prevScrollY) {
+        if (scrollDir !== 'down') {
+          setScrollDirection('down'); // 헤더 올림
+          scrollDir = 'down';
+        }
+      } else {
+        if (scrollDir !== 'up') {
+          setScrollDirection('up'); // 헤더 내림
+          scrollDir = 'up';
         }
       }
+
       prevScrollY = currentScrollY;
     };
 
@@ -92,10 +84,10 @@ const HeaderPresenter = ({
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [scrollDirForModal, scrollDirection]);
+  }, [scrollDirection]);
 
   //Dropdown
-  const onClickUser = useCallback(() => {
+  const onClickProfile = useCallback(() => {
     setProfileOpen((prev) => !prev);
   }, []);
 
@@ -184,7 +176,7 @@ const HeaderPresenter = ({
             {/* 3. 프로필 */}
             {userData?.user ? (
               //로그인 후
-              <li onClick={onClickUser} ref={dropdownBoxRef}>
+              <li onClick={onClickProfile} ref={dropdownBoxRef}>
                 {/* 프로필 이미지 */}
                 <div className="header-user-avatar-wrapper header-user-avatar">
                   <Image

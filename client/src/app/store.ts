@@ -7,7 +7,6 @@ import { api } from '@app/services/api';
 //reducers
 import writeReducer from '@pages/Write/WriteSlice';
 import blogReducer from '@pages/Blog/BlogSlice';
-import headerReducer from '@organisms/Header/HeaderSlice';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -23,7 +22,6 @@ const createStore = () => {
       [api.reducerPath]: api.reducer,
       write: writeReducer,
       blog: blogReducer,
-      header: headerReducer,
     },
     middleware,
     devTools: isDev,

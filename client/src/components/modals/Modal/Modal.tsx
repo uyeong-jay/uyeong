@@ -1,7 +1,4 @@
 import styled from '@_settings/styled';
-import { useAppDispatch } from '@app/hooks';
-import { scrollDir } from '@organisms/Header/HeaderPresenter';
-import { scrollDownForModal, scrollUpForModal, scrollResetForModal } from '@organisms/Header/HeaderSlice';
 import { useCallback, useEffect, useState } from 'react';
 
 interface ModalProps {
@@ -19,6 +16,7 @@ interface StyledModalProps {
 
 const StyledModal = styled.div<StyledModalProps>`
   // border: 1px solid black;
+  background-color: transparent;
   display: flex;
   justify-content: center;
   position: fixed;
@@ -27,27 +25,44 @@ const StyledModal = styled.div<StyledModalProps>`
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background-color: transparent;
   user-select: none;
 
   & > div {
-    border: 1px solid lightgray;
+    // border: 1px solid red;
+    background-color: ${({ theme }) => theme.INITIAL_BG_C};
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 350px;
-    height: 150px;
+    width: 280px;
+    height: 130px;
     position: absolute;
-    background-color: white;
-    // background-color: paleturquoise;
     border-radius: 10px;
-    // box-shadow: 0 3px 10px rgb(0, 0, 0, 0.3);
+    color: ${({ theme }) => theme.FONT_C};
+    font-size: 13px;
+    box-shadow: 0 2px 10px rgb(0, 0, 0, 0.3);
+
+    @media screen and (min-width: calc(${({ theme }) => theme.BP.MOBILE} + 30px)) {
+      width: 300px;
+      height: 150px;
+      font-size: 14px;
+    }
+
+    @media screen and (min-width: calc(${({ theme }) => theme.BP.MOBILE} + 80px)) {
+      width: 350px;
+      height: 170px;
+    }
+
+    @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 80px)) {
+      width: 380px;
+      height: 180px;
+      font-size: 15px;
+    }
 
     animation: ${(props) => props.animationName}
       ${(props) => {
         if (props.animationName === 'shake-alert') return '2s linear';
-        else if (props.animationName === 'up-alert') return '0.2s ease-in-out';
+        else if (props.animationName === 'down-alert') return '0.2s ease-in-out';
         else return '0.2s ease-in-out';
       }}
       0s forwards;
@@ -105,84 +120,69 @@ const StyledModal = styled.div<StyledModalProps>`
     & p {
       // border: 1px solid blue;
       width: 100%;
-      height: 65%;
+      height: 70%;
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 20px;
     }
 
     & div {
-      // border: 1px solid black;
+      border-top: 1px solid ${({ theme }) => theme.BD_C};
       display: flex;
-      justify-content: end;
+      justify-content: center;
       align-items: center;
-      width: 100%;
-      height: 35%;
+      width: 90%;
+      height: 30%;
 
       & button {
-        // border: 1px solid red;
-        width: 70px;
-        height: 30px;
-        border-radius: 10px;
-        margin-right: 10px;
+        // border: 1px solid ${({ theme }) => theme.BD_C};
+        width: 100%;
+        height: 100%;
+        color: ${({ theme }) => theme.FONT_C};
       }
 
-      & .alert-button {
-        background-color: lightsteelblue;
-      }
-
-      & .confirm-button {
-        background-color: lightslategray;
+      & > span {
+        border-right: 1px solid ${({ theme }) => theme.BD_C};
+        height: 60%;
       }
 
       & .delete-button {
-        background-color: indianred;
+        color: ${({ theme }) => theme.FONT_C_DANGER};
+      }
+
+      & .alert-button {
+        // border: 1px solid black;
+      }
+
+      & .confirm-button {
+        // border: 1px solid black;
       }
 
       & .cancel-button {
-        background-color: gray;
+        // border: 1px solid black;
       }
     }
   }
 `;
 
+const OK = 'OK';
+const DELETE = 'Delete';
+const CANCEL = 'Cancel';
+
 const Modal = ({ type, msg, isOpen, setOpen, callback, shakeAlert }: ModalProps) => {
   const [render, setRender] = useState(isOpen);
-  const dispatch = useAppDispatch();
 
   //헤더 스크롤 방지
   useEffect(() => {
     if (isOpen) {
-      if (scrollDir === 'down') dispatch(scrollDownForModal());
-      if (scrollDir === 'up') dispatch(scrollUpForModal());
       setRender(true);
     }
-  }, [dispatch, isOpen]);
+  }, [isOpen]);
 
   const onAnimationEnd = useCallback(() => {
     if (!isOpen) {
-      dispatch(scrollResetForModal());
       setRender(false);
-    }
-  }, [dispatch, isOpen]);
-
-  useEffect(() => {
-    if (isOpen) {
-      //modal이 열릴때
-      document.body.style.cssText = `
-        position: fixed;
-        top: -${window.scrollY}px;
-        overflow-y: scroll;
-        width: 100%;
-      `;
-      //top: -${window.scrollY}px; 현재 위치로 스크롤 이동
-
-      //modal이 닫힐때(언마운트 될때)
-      return () => {
-        const scrollY = document.body.style.top;
-        document.body.style.cssText = '';
-        window.scrollTo(0, (parseInt(scrollY || '0', 10) - 0.5) * -1); //원래 위치로 스크롤 이동 //0.5px이 밀려 -0.5 추가
-      };
     }
   }, [isOpen]);
 
@@ -194,7 +194,7 @@ const Modal = ({ type, msg, isOpen, setOpen, callback, shakeAlert }: ModalProps)
             <p>{msg}</p>
             <div>
               <button className="alert-button" onClick={() => setOpen(false)}>
-                확인
+                {OK}
               </button>
             </div>
           </div>
@@ -205,9 +205,6 @@ const Modal = ({ type, msg, isOpen, setOpen, callback, shakeAlert }: ModalProps)
           <div>
             <p>{msg}</p>
             <div>
-              <button className="cancel-button" onClick={() => setOpen(false)}>
-                취소
-              </button>
               <button
                 className="confirm-button"
                 onClick={() => {
@@ -215,7 +212,11 @@ const Modal = ({ type, msg, isOpen, setOpen, callback, shakeAlert }: ModalProps)
                   setOpen(false);
                 }}
               >
-                확인
+                {OK}
+              </button>
+              <span></span>
+              <button className="cancel-button" onClick={() => setOpen(false)}>
+                Cancel
               </button>
             </div>
           </div>
@@ -227,8 +228,9 @@ const Modal = ({ type, msg, isOpen, setOpen, callback, shakeAlert }: ModalProps)
             <p>{msg}</p>
             <div>
               <button className="cancel-button" onClick={() => setOpen(false)}>
-                취소
+                {CANCEL}
               </button>
+              <span></span>
               <button
                 className="delete-button"
                 onClick={() => {
@@ -236,7 +238,7 @@ const Modal = ({ type, msg, isOpen, setOpen, callback, shakeAlert }: ModalProps)
                   setOpen(false);
                 }}
               >
-                삭제
+                {DELETE}
               </button>
             </div>
           </div>
@@ -246,9 +248,11 @@ const Modal = ({ type, msg, isOpen, setOpen, callback, shakeAlert }: ModalProps)
         return (
           <div>
             <p>{msg}</p>
-            <button className="default-button" onClick={() => setOpen(false)}>
-              확인
-            </button>
+            <div>
+              <button className="default-button" onClick={() => setOpen(false)}>
+                {OK}
+              </button>
+            </div>
           </div>
         );
       }
