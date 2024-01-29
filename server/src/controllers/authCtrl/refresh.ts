@@ -24,7 +24,7 @@ const refresh = async (req: Request, res: Response) => {
     if (!user) return res.status(400).json({ msg: "This account doesn't exist." });
 
     //다른 브라우저에서 로그인시 re_token이 달라져 이전 브라우저에선 에러내기
-    if (rf_token !== user.rf_token) return res.status(400).json({ msg: "Please login first" });
+    if (rf_token !== user.rf_token) return res.status(400).json({ msg: "Please login first." });
     // {
     //   _id: '-',
     //   nickname: '-',

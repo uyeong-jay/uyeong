@@ -7,7 +7,7 @@ const categorySchema = new Schema(
       required: [true, "Please enter your category name."],
       trim: true,
       unique: true,
-      maxLength: [20, "Category name must be less than 20 characters."],
+      maxLength: [20, "the category name must be less than 20 characters."],
     },
   },
   { timestamps: true }

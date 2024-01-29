@@ -18,7 +18,8 @@ const validUserInfo = (userUpdateInfo: userUpdateInfoType, userData?: userDataTy
 
   //nickname 에러
   if (!nickname) return 'Please enter your nickname.';
-  else if (nickname.length < 2 || nickname.length > 10) return 'Your nickname must be between 2 and 10 characters.';
+  else if (nickname.length < 2 || nickname.length > 10)
+    return 'Your nickname must be between 2 and 10 characters long.';
 
   //email 에러
   if (!email) return 'Please enter your email.';
@@ -30,7 +31,7 @@ const validUserInfo = (userUpdateInfo: userUpdateInfoType, userData?: userDataTy
   if (0 < new_password.length && new_password.length < 6) return 'Your new password must be 6 characters or more.';
 
   //cf_new_password 에러
-  if (new_password !== cf_new_password) return 'Your new password and confirm password should be same.';
+  if (new_password !== cf_new_password) return 'Your new password and confirm password must be same.';
 
   //변경 된게 없을때
   if (!avatar && nickname && nickname === userNickname && email && !old_password && !new_password && !cf_new_password)

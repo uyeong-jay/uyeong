@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 //이메일 유효성 검사
-export const validateEmail = (email: string) => {
+export const validEmail = (email: string) => {
   const regex =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -18,11 +18,11 @@ const valid = (req: Request, res: Response, next: NextFunction) => {
   //nickname 에러
   if (!nickname) errors.push("Please enter your nickname.");
   else if (nickname.length < 2 || nickname.length > 10)
-    errors.push("Your nickname must be between 2 and 10 characters.");
+    errors.push("Your nickname must be between 2 and 10 characters long.");
 
   //email 에러
   if (!email) errors.push("Please enter your email.");
-  else if (!validateEmail(email)) errors.push("Please enter your email correctly.");
+  else if (!validEmail(email)) errors.push("Please enter your email in the correct format.");
 
   //password 에러
   if (!password) errors.push("Please enter your password.");

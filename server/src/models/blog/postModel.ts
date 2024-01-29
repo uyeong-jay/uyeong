@@ -23,7 +23,7 @@ const postSchema = new Schema(
     description: {
       type: String,
       trim: true,
-      maxLength: [200, "Description is up to 200 characters long."],
+      maxLength: [200, "the description is up to 200 characters long."],
     },
     thumbnail: {
       type: String,
@@ -31,7 +31,7 @@ const postSchema = new Schema(
     category: {
       type: String,
       trim: true,
-      maxLength: [20, "Category name must be less than 20 characters."],
+      maxLength: [20, "the category name must be less than 20 characters."],
     },
     privacy: {
       type: Boolean,
