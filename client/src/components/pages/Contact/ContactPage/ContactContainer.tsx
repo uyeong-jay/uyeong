@@ -21,9 +21,9 @@ const ContactContainer = () => {
   const form = useRef(null);
 
   const [isModalOpen, setModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [sendSuccess, setSendSuccess] = useState(false);
-  const [contactErrmsg, setContactErrmsg] = useState('');
+  const [isSendingMsg, setSendingMsg] = useState(false);
+  const [isMsgSentSuccess, setMsgSentSuccess] = useState(false);
+  const [sendErrorMsg, setSendErrorMsg] = useState('');
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -38,7 +38,6 @@ const ContactContainer = () => {
     }
   }, []);
 
-  //수정 버튼 클릭시 textarea 높이 변경
   useEffect(() => {
     resizeHeight();
   }, [resizeHeight]);
@@ -51,35 +50,20 @@ const ContactContainer = () => {
 
       //유효성 검사
       if (user_name.length < 2) {
-        setContactErrmsg('Please enter a name with at least 2 characters');
+        setSendErrorMsg('Please enter a name with more than 2 characters.');
         return setModalOpen(true);
       }
       if (!validEmail(user_email)) {
-        setContactErrmsg('Please input the email format correctly');
+        setSendErrorMsg('Please enter the email in the correct format.');
         return setModalOpen(true);
       }
       if (message.length < 10) {
-        setContactErrmsg('Please enter a message with at least 10 characters');
+        setSendErrorMsg('Please enter a message with more than 10 characters.');
         return setModalOpen(true);
       }
 
       try {
-        setIsLoading(true);
-
-        const timer = setTimeout(() => {
-          setIsLoading(false);
-
-          //값 초기화
-          setUserContactInfo({
-            user_name: '',
-            user_email: '',
-            message: '',
-          });
-
-          setContactErrmsg('');
-          setSendSuccess(true);
-          setModalOpen(true);
-        }, 1500);
+        setSendingMsg(true);
 
         const result = await emailjs.sendForm(
           process.env.EMAILJS_SERVICE_ID,
@@ -88,13 +72,26 @@ const ContactContainer = () => {
           process.env.EMAILJS_PUBLIC_KEY,
         );
 
-        return () => clearTimeout(timer);
-
         //성공시
         console.log(result.text);
+        if (result.text) {
+          //값 초기화
+          setUserContactInfo({
+            user_name: '',
+            user_email: '',
+            message: '',
+          });
+
+          setSendErrorMsg('');
+          setMsgSentSuccess(true);
+          setModalOpen(true);
+          setSendingMsg(false);
+        }
       } catch (error: any) {
-        setContactErrmsg('Sending failed! Please try again.');
+        setSendErrorMsg('Sending failed! Please try again.');
+        setMsgSentSuccess(false);
         setModalOpen(true);
+        setSendingMsg(false);
       }
     },
     [userContactInfo],
@@ -121,11 +118,11 @@ const ContactContainer = () => {
     <ContactPresenter
       form={form}
       userContactInfo={userContactInfo}
-      sendSuccess={sendSuccess}
-      contactErrmsg={contactErrmsg}
+      isMsgSentSuccess={isMsgSentSuccess}
+      sendErrorMsg={sendErrorMsg}
       textareaRef={textareaRef}
+      isSendingMsg={isSendingMsg}
       isModalOpen={isModalOpen}
-      isLoading={isLoading}
       setModalOpen={setModalOpen}
       onSubmit={onSubmit}
       onChangeInput={onChangeInput}

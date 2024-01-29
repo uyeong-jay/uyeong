@@ -1,60 +1,39 @@
 import styled from '@_settings/styled';
 
-export const DIV = {} as any;
+export const FORM = {} as any;
 
-DIV.Layout = styled.div`
+FORM.ContactForm = styled.form`
   // border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  max-width: 700px;
   width: 100%;
-  padding: 50px 25px 100px 25px;
 
-  & > h1 {
+  & > div {
     // border: 1px solid black;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+
+    & > input {
+      // border: 1px solid black;
+      background-color: ${({ theme }) => theme.INITIAL_BG_C};
+      margin-top: 10px;
+      border-radius: 10px;
+    }
   }
 
-  & > form {
-    // border: 1px solid black;
-    max-width: 700px;
+  & > label {
+    color: ${({ theme }) => theme.FONT_C};
+    letter-spacing: 0.5px;
+    font-weight: bold;
+  }
+
+  & > textarea {
+    border: none;
+    background-color: ${({ theme }) => theme.INITIAL_BG_C};
     width: 100%;
-    color: darkslategray;
-
-    & > textarea {
-      border: none;
-      width: 100%;
-      resize: none; //textarea 크기조절 막기
-      height: 150px;
-      overflow: hidden;
-      margin: 10px 0;
-      padding: 15px 8px;
-      color: darkslategray;
-    }
-
-    & > button {
-      // border: 1px solid black;
-      float: right;
-      padding-right: 5px;
-      color: darkslategray;
-    }
-
-    & > span {
-      // border: 1px solid black;
-      float: right;
-      padding-right: 5px;
-      color: darkslategray;
-      cursor: wait;
-    }
+    height: 150px;
+    margin: 10px 0 20px 0;
+    padding: 15px 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    resize: none;
   }
 `;
-
-// DIV.SuccessMsg = styled.div`
-//   // border: 1px solid black;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 100%;
-//   padding: 20px 0;
-// `;

@@ -1,7 +1,7 @@
 import styled from '@_settings/styled';
 
 interface Props {
-  variant: string;
+  variant?: string;
   text: string;
   type?: 'button' | 'submit';
   onClick?: () => void;
@@ -60,7 +60,7 @@ const StyledWideButton = styled.button<WideButtonProps>`
   }}
 `;
 
-const WideButton = ({ variant, text, type, onClick, disabled }: Props) => {
+const WideButton = ({ variant = '', text, type, onClick, disabled }: Props) => {
   return (
     <StyledWideButton variant={variant} type={type} onClick={onClick} disabled={disabled ? true : false}>
       {text}

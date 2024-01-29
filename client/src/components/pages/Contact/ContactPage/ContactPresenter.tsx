@@ -3,16 +3,19 @@ import Head from 'next/head';
 import { UserContactInfo } from './ContactContainer';
 import { ChangeEvent, FormEvent, MutableRefObject, RefObject } from 'react';
 import Modal from '@modals/Modal';
-import { DIV } from './ContactStyle';
+import { FORM } from './ContactStyle';
+import PageTitle from '@atoms/PageTitle';
+import { SECTION } from '@templates/SectionFrame';
+import FormButton from '@molecules/FormButton';
 
 interface Props {
   form: MutableRefObject<null>;
   userContactInfo: UserContactInfo;
-  sendSuccess: boolean;
-  contactErrmsg: string;
+  isMsgSentSuccess: boolean;
+  sendErrorMsg: string;
   textareaRef: RefObject<HTMLTextAreaElement>;
+  isSendingMsg: boolean;
   isModalOpen: boolean;
-  isLoading: boolean;
   setModalOpen: (isModalOpen: boolean) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -22,11 +25,11 @@ interface Props {
 const ContactPresenter = ({
   form,
   userContactInfo,
-  sendSuccess,
-  contactErrmsg,
+  isMsgSentSuccess,
+  sendErrorMsg,
   textareaRef,
   isModalOpen,
-  isLoading,
+  isSendingMsg,
   setModalOpen,
   onSubmit,
   onChangeInput,
@@ -35,42 +38,50 @@ const ContactPresenter = ({
   const { user_name, user_email, message } = userContactInfo;
 
   return (
-    <DIV.Layout>
+    <>
       <Head>
         <title>UYeong | Contact</title>
       </Head>
-      <h1>Contact</h1>
-      <form ref={form} onSubmit={onSubmit}>
-        <InputBox labelText="Name" type="text" name="user_name" value={user_name} onChange={onChangeInput} required />
-        <InputBox
-          labelText="Email"
-          type="email"
-          name="user_email"
-          value={user_email}
-          onChange={onChangeInput}
-          required
-        />
+      <SECTION.Frame>
+        <PageTitle text="Contact" />
+        <FORM.ContactForm ref={form} onSubmit={onSubmit}>
+          <InputBox labelText="Name" type="text" name="user_name" value={user_name} onChange={onChangeInput} required />
+          <InputBox
+            labelText="Email"
+            type="email"
+            name="user_email"
+            value={user_email}
+            onChange={onChangeInput}
+            required
+          />
 
-        <label>Message</label>
-        <textarea name="message" value={message} onChange={onChangeTextarea} required ref={textareaRef}></textarea>
+          <label>Message</label>
+          <textarea
+            name="message"
+            value={message}
+            onChange={onChangeTextarea}
+            required
+            ref={textareaRef}
+            spellCheck={false}
+          ></textarea>
 
-        {isLoading ? <span>Loading</span> : <button type="submit">Send</button>}
-      </form>
+          <FormButton text="Send" formIsLoading={isSendingMsg} disabled={message ? false : true} />
+        </FORM.ContactForm>
 
-      {/* {sendSuccess && <DIV.SuccessMsg>Sent! I&apos;ll reply to you as soon as possible.</DIV.SuccessMsg>} */}
-      {sendSuccess && contactErrmsg.length < 1 && (
-        <Modal
-          type="alert"
-          msg="Sent! I'll reply to you as soon as possible."
-          isOpen={isModalOpen}
-          setOpen={setModalOpen}
-          defaultAni
-        />
-      )}
-      {contactErrmsg.length > 0 && (
-        <Modal type="alert" msg={contactErrmsg} isOpen={isModalOpen} setOpen={setModalOpen} />
-      )}
-    </DIV.Layout>
+        {isMsgSentSuccess && !sendErrorMsg && (
+          <Modal
+            type="alert"
+            msg="Message sent! I'll get back to you as soon as possible."
+            isOpen={isModalOpen}
+            setOpen={setModalOpen}
+          />
+        )}
+
+        {sendErrorMsg && (
+          <Modal type="alert" msg={sendErrorMsg} isOpen={isModalOpen} setOpen={setModalOpen} shakeAlert />
+        )}
+      </SECTION.Frame>
+    </>
   );
 };
 
