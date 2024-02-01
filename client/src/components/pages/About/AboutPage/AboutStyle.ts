@@ -1,6 +1,5 @@
 import styled from '@_settings/styled';
 
-export const SECTION = {} as any;
 export const DIV = {} as any;
 
 const rightBorder = (color: string) => `
@@ -9,35 +8,24 @@ const rightBorder = (color: string) => `
     position: absolute;
     top: -20px;
     left: 20px;
-    width: 1.7px; //border: 2px;
     height: 80%;
-    background-color: ${color};
+    border-left: 2px solid ${color}; //일반 border 하면 너무 두꺼워짐
   }
 `;
 
-SECTION.Frame = styled.section`
+DIV.AboutMeAvatar = styled.div`
   // border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  color: ${({ theme }) => theme.FONT_C};
+  margin-bottom: 120px;
 `;
 
-DIV.AboutPart1 = styled.div`
-  // border: 1px solid black;
-  width: auto;
-  height: 400px;
-`;
-
-DIV.AboutPart2 = styled.div`
+DIV.AboutMe = styled.div`
   // border: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: auto;
+  font-size: 14px;
 
   & > div:nth-of-type(1) {
     border-top: 2px solid ${({ theme }) => theme.BD_C};
@@ -55,6 +43,13 @@ DIV.AboutPart2 = styled.div`
     & p {
       // border: 1px solid black;
       // margin-top: 5px;
+    }
+    & > a {
+      color: ${({ theme }) => theme.FONT_C};
+
+      &:hover {
+        opacity: 0.5;
+      }
     }
   }
 
@@ -162,10 +157,10 @@ DIV.AboutPart2 = styled.div`
   }
 `;
 
-DIV.AboutPart3 = styled.div`
+DIV.AboutMeQuote = styled.div`
   border-top: 2px solid ${({ theme }) => theme.BD_C};
   width: auto;
-  margin: 150px 0;
+  margin: 160px 0 150px 0;
 
   & > div {
     // border: 1px solid black;
@@ -173,8 +168,6 @@ DIV.AboutPart3 = styled.div`
     justify-content: center;
     align-items: flex-start;
     position: relative;
-    width: 100%;
-    height: auto;
     min-width: 300px;
     min-height: 50px;
     padding-top: 30px;
@@ -194,6 +187,8 @@ DIV.AboutPart3 = styled.div`
 
     & > p {
       // border: 1px solid black;
+      width: 260px;
+      height: 140px;
       font-family: 'Square Peg', cursive;
       font-weight: 600;
       font-size: 25px;
@@ -203,16 +198,12 @@ DIV.AboutPart3 = styled.div`
         font-size: 15px;
       }
     }
-  }
 
-  @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
-    & > div {
+    @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
       width: 300px;
     }
-  }
 
-  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
-    & > div {
+    @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
       width: 400px;
 
       & > p {
@@ -223,16 +214,14 @@ DIV.AboutPart3 = styled.div`
         }
       }
     }
-  }
 
-  @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
-    & > div {
+    @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
       width: 600px;
     }
   }
 `;
 
-DIV.AboutPart4 = styled.div`
+DIV.AboutMeDetail = styled.div`
   // border-top: 2px solid ${({ theme }) => theme.BD_C};
   display: flex;
   flex-direction: column;
@@ -240,6 +229,7 @@ DIV.AboutPart4 = styled.div`
   align-items: center;
   width: auto;
   padding-bottom: 50px;
+  font-size: 14px;
 
   & > div:nth-of-type(1) {
     border-top: 2px solid ${({ theme }) => theme.BD_C};

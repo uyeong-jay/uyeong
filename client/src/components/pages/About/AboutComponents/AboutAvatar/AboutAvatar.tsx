@@ -4,11 +4,11 @@ import styled from '@_settings/styled';
 
 const DIV = {} as any;
 
-DIV.Frame = styled.div`
+DIV.AboutAvatarBox = styled.div`
   // border: 1px solid red;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
@@ -17,6 +17,7 @@ DIV.Frame = styled.div`
   & .about-avatar-wrapper {
     // border: 1px solid red;
     display: inline-flex;
+    background-color: ${({ theme }) => theme.INITIAL_BG_C};
   }
 
   & .about-avatar {
@@ -26,15 +27,17 @@ DIV.Frame = styled.div`
 
   & p {
     // border: 1px solid black;
-    margin-top: 5px;
-    font-size: 15px;
+    margin-top: 10px;
     letter-spacing: 2px;
+    font-family: 'Square Peg', cursive;
+    font-size: 25px;
+    font-weight: 600;
   }
 `;
 
 const AboutAvatar = () => {
   return (
-    <DIV.Frame>
+    <DIV.AboutAvatarBox>
       <div className="about-avatar-wrapper about-avatar">
         <Image
           className="about-avatar"
@@ -43,10 +46,11 @@ const AboutAvatar = () => {
           objectFit="cover"
           width={100}
           height={140}
+          priority
         />
       </div>
       <p>UYeong</p>
-    </DIV.Frame>
+    </DIV.AboutAvatarBox>
   );
 };
 

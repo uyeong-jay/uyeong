@@ -20,6 +20,7 @@ const Badges = () => {
                     height={20}
                     alt={v.logoName}
                     src={`https://img.shields.io/badge/${v.name}-${v.color}?style=plastic&logo=${v.logoName}&logoColor=white`}
+                    priority
                   />
                 </div>
               ))}
