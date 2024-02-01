@@ -1,4 +1,7 @@
 import styled from '@_settings/styled';
+import { useAppDispatch } from '@app/hooks';
+import { scrollAct, scrollDir } from '@organisms/Header/HeaderPresenter';
+import { scrollDownForModal, scrollResetForModal, scrollUpForModal } from '@organisms/Header/HeaderSlice';
 import { useCallback, useEffect, useState } from 'react';
 
 interface ModalProps {
@@ -34,8 +37,6 @@ const StyledModal = styled.div<StyledModalProps>`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 280px;
-    height: 130px;
     position: absolute;
     border-radius: 10px;
     color: ${({ theme }) => theme.FONT_C};
@@ -43,19 +44,10 @@ const StyledModal = styled.div<StyledModalProps>`
     box-shadow: 0 2px 10px rgb(0, 0, 0, 0.3);
 
     @media screen and (min-width: calc(${({ theme }) => theme.BP.MOBILE} + 30px)) {
-      width: 300px;
-      height: 150px;
       font-size: 14px;
     }
 
-    @media screen and (min-width: calc(${({ theme }) => theme.BP.MOBILE} + 80px)) {
-      width: 350px;
-      height: 170px;
-    }
-
     @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 80px)) {
-      width: 380px;
-      height: 180px;
       font-size: 15px;
     }
 
@@ -119,32 +111,51 @@ const StyledModal = styled.div<StyledModalProps>`
 
     & p {
       // border: 1px solid blue;
-      width: 100%;
-      height: 70%;
       display: flex;
       justify-content: center;
       align-items: center;
+      // w:h = 2.5: 1
+      width: 280px;
+      min-height: 100px;
       padding: 20px;
+      word-break: keep-all;
+      overflow: hidden;
+
+      @media screen and (min-width: calc(${({ theme }) => theme.BP.MOBILE} + 30px)) {
+        width: 300px;
+        min-height: 110px;
+      }
+
+      @media screen and (min-width: calc(${({ theme }) => theme.BP.MOBILE} + 80px)) {
+        width: 320px;
+        min-height: 120px;
+      }
+
+      @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 80px)) {
+        width: 340px;
+        min-height: 130px;
+      }
     }
 
     & div {
       border-top: 1px solid ${({ theme }) => theme.BD_C};
+      // border: 1px solid black;
       display: flex;
       justify-content: center;
       align-items: center;
       width: 90%;
-      height: 30%;
 
       & button {
-        // border: 1px solid ${({ theme }) => theme.BD_C};
+        // border: 1px solid black;
         width: 100%;
-        height: 100%;
+        height: 45px;
         color: ${({ theme }) => theme.FONT_C};
       }
 
       & > span {
         border-right: 1px solid ${({ theme }) => theme.BD_C};
-        height: 60%;
+        // border: 1px solid black;
+        height: 25px;
       }
 
       & .delete-button {
@@ -172,18 +183,72 @@ const CANCEL = 'Cancel';
 
 const Modal = ({ type, msg, isOpen, setOpen, callback, shakeAlert }: ModalProps) => {
   const [render, setRender] = useState(isOpen);
+  const dispatch = useAppDispatch();
 
-  //헤더 스크롤 방지
   useEffect(() => {
     if (isOpen) {
       setRender(true);
+
+      //헤더 움직임 방지
+      if (scrollDir === scrollAct.DOWN) dispatch(scrollDownForModal());
+      if (scrollDir === scrollAct.UP) dispatch(scrollUpForModal());
     }
-  }, [isOpen]);
+  }, [dispatch, isOpen]);
 
   const onAnimationEnd = useCallback(() => {
     if (!isOpen) {
       setRender(false);
+
+      //헤더 움직임 방지
+      dispatch(scrollResetForModal());
     }
+  }, [dispatch, isOpen]);
+
+  //스크롤 방지 (ui)
+  useEffect(() => {
+    if (isOpen) {
+      // 뷰포트 높이
+      const viewportHeight = window.innerHeight;
+
+      // 문서 전체 높이
+      const documentHeight = Math.min(document.body.scrollHeight, document.documentElement.scrollHeight); //둘중 작은값 저장
+
+      //스크롤이 보이지 않으면 리턴
+      if (viewportHeight >= documentHeight) return;
+
+      //modal이 열릴때
+      document.body.style.cssText = `
+        position: fixed;
+        top: -${window.scrollY}px;
+        overflow-y: scroll;
+        width: 100%;
+      `;
+      //top: -${window.scrollY}px; 현재 위치로 스크롤 이동
+
+      //modal이 닫힐때(언마운트 될때)
+      return () => {
+        const scrollY = document.body.style.top;
+        document.body.style.cssText = '';
+        window.scrollTo(0, (parseInt(scrollY || '0', 10) - 0.5) * -1); //원래 위치로 스크롤 이동 //스크롤이 조금 밀려 0.5 줄임
+      };
+    }
+  }, [isOpen]);
+
+  //스크롤 방지 (event)
+  useEffect(() => {
+    const handleScroll = (event: { preventDefault: () => void }) => {
+      event.preventDefault();
+    };
+
+    if (isOpen) {
+      window.addEventListener('wheel', handleScroll, { passive: false });
+      window.addEventListener('touchmove', handleScroll, { passive: false });
+    }
+
+    return () => {
+      window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('touchmove', handleScroll);
+    };
   }, [isOpen]);
 
   const modalContent = () => {

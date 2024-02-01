@@ -9,6 +9,7 @@ import useOnClickOutside from '@hooks/useOnClickOutside';
 import CaretDownIcon from '@icons/CaretDownIcon';
 import CaretUpIcon from '@icons/CaretUpIcon';
 import Logo from '@icons/Logo';
+import { useAppSelector } from '@app/hooks';
 
 interface Props {
   userData?: UserResponse;
@@ -20,6 +21,12 @@ interface Props {
 }
 
 export let scrollDir = '';
+export const scrollAct = {
+  UP: 'up',
+  DOWN: 'down',
+  RESET: '',
+};
+const { UP, DOWN, RESET } = scrollAct;
 let prevScrollY = 0;
 
 const HeaderPresenter = ({
@@ -31,6 +38,7 @@ const HeaderPresenter = ({
   onClickLogout,
 }: Props) => {
   const [scrollDirection, setScrollDirection] = useState('');
+  const scrollDirForModal = useAppSelector((state) => state.header.scrollDirForModal);
 
   const dropdownBoxRef = useRef(null);
   const [isProfileOpen, setProfileOpen] = useState(false);
@@ -64,18 +72,23 @@ const HeaderPresenter = ({
       setMenuIconClicked(false);
       setProfileOpen(false);
 
-      if (currentScrollY > prevScrollY) {
-        if (scrollDir !== 'down') {
-          setScrollDirection('down'); // 헤더 올림
-          scrollDir = 'down';
-        }
-      } else {
-        if (scrollDir !== 'up') {
-          setScrollDirection('up'); // 헤더 내림
-          scrollDir = 'up';
+      //modal 스크롤
+      if (scrollDirForModal === UP) setScrollDirection(UP);
+      if (scrollDirForModal === DOWN) setScrollDirection(DOWN);
+      if (scrollDirForModal === RESET) {
+        //header 스크롤
+        if (currentScrollY > prevScrollY) {
+          if (scrollDir !== DOWN) {
+            setScrollDirection(DOWN); // 헤더 올림
+            scrollDir = DOWN;
+          }
+        } else {
+          if (scrollDir !== UP) {
+            setScrollDirection(UP); // 헤더 내림
+            scrollDir = UP;
+          }
         }
       }
-
       prevScrollY = currentScrollY;
     };
 
@@ -84,7 +97,7 @@ const HeaderPresenter = ({
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [scrollDirection]);
+  }, [scrollDirForModal, scrollDirection]);
 
   //Dropdown
   const onClickProfile = useCallback(() => {
