@@ -7,9 +7,9 @@ import InputBox from '@molecules/InputBox';
 import { UserResponse } from '@app/services/user/userApi';
 import NotFound from '@src/pages/404';
 import PageTitle from '@atoms/PageTitle';
-import { SECTION } from '@templates/SectionFrame';
 import FormButton from '@molecules/FormButton';
 import Modal from '@modals/Modal';
+import PageFrame from '@templates/PageFrame';
 
 interface Props {
   userLoginInfo: {
@@ -17,8 +17,8 @@ interface Props {
     password: string;
   };
   userData?: UserResponse;
-  loginSuccess: boolean;
-  loginLoading: boolean;
+  isLoginSuccess: boolean;
+  isLoggingIn: boolean;
   isModalOpen: boolean;
   setModalOpen: (isModalOpen: boolean) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -30,8 +30,8 @@ interface Props {
 const LoginPresenter = ({
   userLoginInfo,
   userData,
-  loginSuccess,
-  loginLoading,
+  isLoginSuccess,
+  isLoggingIn,
   isModalOpen,
   setModalOpen,
   onSubmit,
@@ -42,17 +42,17 @@ const LoginPresenter = ({
   const [isPasswordType, setPasswordType] = useState(true);
   const { email, password } = userLoginInfo;
 
-  //!loginSuccess: loginSuccess가 일회성(페이지가 바뀔때마다 새로고침을 실행하기 때문)인 걸 활용하여 url로 검색하여 들어왔을때는 이미 false인 상태이기 때문에 로그인페이지 에러 화면이 보이도록 함
-  if (userData?.user && !loginSuccess) return <NotFound />;
+  //!isLoginSuccess: isLoginSuccess가 일회성(페이지가 바뀔때마다 새로고침을 실행하기 때문)인 걸 활용하여 url로 검색하여 들어왔을때는 이미 false인 상태이기 때문에 로그인페이지 에러 화면이 보이도록 함
+  if (userData?.user && !isLoginSuccess) return <NotFound />;
   return (
     <>
       <Head>
         <title>UYeong | Login</title>
       </Head>
       {/* 로딩화면 */}
-      {/* {loginLoading && <Loader />} */}
+      {/* {isLoggingIn && <Loader />} */}
 
-      <SECTION.Frame>
+      <PageFrame>
         <PageTitle text="Login" />
 
         <FORM.LoginForm onSubmit={onSubmit}>
@@ -80,7 +80,7 @@ const LoginPresenter = ({
           <FormButton
             variant="login"
             text="Login"
-            formIsLoading={loginLoading}
+            formIsLoading={isLoggingIn}
             disabled={email && password ? false : true}
           />
         </FORM.LoginForm>
@@ -93,7 +93,7 @@ const LoginPresenter = ({
         {isLoginError && (
           <Modal type="alert" msg={error.data.msg} isOpen={isModalOpen} setOpen={setModalOpen} shakeAlert />
         )}
-      </SECTION.Frame>
+      </PageFrame>
     </>
   );
 };

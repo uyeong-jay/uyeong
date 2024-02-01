@@ -7,19 +7,19 @@ import InputBox from '@molecules/InputBox';
 import Button from '@atoms/Button';
 import { UserRequest, UserResponse } from '@app/services/user/userApi';
 import NotFound from '@src/pages/404';
-import { SECTION } from '@templates/SectionFrame';
 import PageTitle from '@atoms/PageTitle';
 import FormButton from '@molecules/FormButton';
 import Modal from '@modals/Modal';
 import PartyPopper from '@icons/PartyPopper';
+import PageFrame from '@templates/PageFrame';
 
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
   userJoinInfo: UserRequest;
   userData?: UserResponse;
-  isSuccess: boolean;
-  isLoading: boolean;
+  joinSuccess: boolean;
+  isjoining: boolean;
   isModalOpen: boolean;
   setModalOpen: (isModalOpen: boolean) => void;
   isJoinError: boolean;
@@ -31,8 +31,8 @@ const JoinPresenter = ({
   onChangeInput,
   userJoinInfo,
   userData,
-  isSuccess,
-  isLoading,
+  joinSuccess,
+  isjoining,
   isModalOpen,
   setModalOpen,
   isJoinError,
@@ -42,15 +42,15 @@ const JoinPresenter = ({
   const [passwordType, setPasswordType] = useState(true);
   const [cfPasswordType, setCfPasswordType] = useState(true);
 
-  if (userData?.user && !isSuccess) return <NotFound joinError />;
+  if (userData?.user && !joinSuccess) return <NotFound joinError />;
   return (
     <>
       <Head>
         <title>UYeong | Sign up</title>
       </Head>
 
-      {isSuccess ? (
-        <SECTION.Frame>
+      {joinSuccess ? (
+        <PageFrame>
           <DIV.JoinSuccess>
             <div>
               <PartyPopper />
@@ -65,9 +65,9 @@ const JoinPresenter = ({
               Login
             </Link>
           </DIV.JoinSuccess>
-        </SECTION.Frame>
+        </PageFrame>
       ) : (
-        <SECTION.Frame>
+        <PageFrame>
           <PageTitle text="Create your account" />
 
           <FORM.JoinForm onSubmit={onSubmit}>
@@ -116,7 +116,7 @@ const JoinPresenter = ({
             <FormButton
               variant="join"
               text="Create"
-              formIsLoading={isLoading}
+              formIsLoading={isjoining}
               disabled={nickname && email && password && cf_password ? false : true}
             />
           </FORM.JoinForm>
@@ -129,7 +129,7 @@ const JoinPresenter = ({
           {isJoinError && (
             <Modal type="alert" msg={error.data.msg} isOpen={isModalOpen} setOpen={setModalOpen} shakeAlert />
           )}
-        </SECTION.Frame>
+        </PageFrame>
       )}
     </>
   );

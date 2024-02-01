@@ -3,15 +3,14 @@ import { DIV, SECTION } from './BlogStyle';
 import Head from 'next/head';
 import BlogHeader from '@pages/Blog/BlogComponents/BlogHeader';
 import { BlogPostRes } from '@app/services/blog/postApi';
-import { SubFrame } from '@templates/SubFrame';
 import InputBox from '@molecules/InputBox/InputBox';
 import SearchIcon from '@icons/SearchIcon';
 import BlogTags from '../BlogComponents/BlogTags';
 import BlogPosts from '@pages/Blog/BlogComponents/BlogPosts';
+import MiniLoader from '@modals/MiniLoader';
 // import { DIV as DIV_POSTS } from '../BlogComponents/BlogPosts/BlogPosts';
 // import { InitialPostsCardArr } from '../BlogComponents/BlogPosts/BlogPosts';
 // import dynamic from 'next/dynamic';
-import MiniLoader from '@modals/MiniLoader';
 
 // const BlogPosts = dynamic(() => import('../BlogComponents/BlogPosts/BlogPosts'), {
 //   loading: () => (
@@ -58,35 +57,33 @@ const BlogPresenter: React.FC<Props> = ({
       </Head>
       <SECTION.Frame>
         <BlogHeader />
-        <SubFrame>
-          <DIV.BlogBlock>
-            <BlogTags tagUnderline={tagUnderline} onClickTag={onClickTag} isTagClicked={isTagClicked} />
-            <SECTION.BlogMain>
-              <DIV.SearchBar>
-                <InputBox
-                  type="text"
-                  value={searchWordInput}
-                  onChange={onChangeInput}
-                  onClick={onClickInput}
-                  onFocus={onFocusInput}
-                  ref={inputRef}
-                  placeholder=""
-                  autofill={false}
-                />
-                <SearchIcon />
-              </DIV.SearchBar>
-              <BlogPosts blogPostsBySearch={blogPostsBySearch} />
-              <DIV.IntersectionTarget id="posts_intersection_target" ref={targetRef}>
-                {isLoadingPosts ? (
-                  <MiniLoader w={35} h={35} responsive />
-                ) : (
-                  !blogPostsBySearch?.next_cursor &&
-                  blogPostsBySearch?.hasMatchingPost && <DIV.NoMorePosts>- No more posts -</DIV.NoMorePosts>
-                )}
-              </DIV.IntersectionTarget>
-            </SECTION.BlogMain>
-          </DIV.BlogBlock>
-        </SubFrame>
+        <DIV.BlogBlock>
+          <BlogTags tagUnderline={tagUnderline} onClickTag={onClickTag} isTagClicked={isTagClicked} />
+          <SECTION.BlogMain>
+            <DIV.SearchBar>
+              <InputBox
+                type="text"
+                value={searchWordInput}
+                onChange={onChangeInput}
+                onClick={onClickInput}
+                onFocus={onFocusInput}
+                ref={inputRef}
+                placeholder=""
+                autofill={false}
+              />
+              <SearchIcon />
+            </DIV.SearchBar>
+            <BlogPosts blogPostsBySearch={blogPostsBySearch} />
+            <DIV.IntersectionTarget id="posts_intersection_target" ref={targetRef}>
+              {isLoadingPosts ? (
+                <MiniLoader w={35} h={35} responsive />
+              ) : (
+                !blogPostsBySearch?.next_cursor &&
+                blogPostsBySearch?.hasMatchingPost && <DIV.NoMorePosts>- No more posts -</DIV.NoMorePosts>
+              )}
+            </DIV.IntersectionTarget>
+          </SECTION.BlogMain>
+        </DIV.BlogBlock>
       </SECTION.Frame>
     </>
   );

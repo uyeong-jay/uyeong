@@ -1,8 +1,9 @@
 import styled from '@_settings/styled';
 
+export const SECTION = {} as any;
 export const DIV = {} as any;
 
-DIV.Frame = styled.div`
+SECTION.Frame = styled.div`
   // border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -12,24 +13,14 @@ DIV.Frame = styled.div`
   min-height: 1000px;
   padding-top: 100px;
 
-  //sub frame
-  & > div {
-    // border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-
-    & > h1 {
-      border-bottom: 2px solid ${({ theme }) => theme.BD_C};
-      width: 80%;
-      padding-bottom: 10px;
-      padding-left: 30px;
-      margin-bottom: 70px;
-      color: ${({ theme }) => theme.FONT_C};
-      max-width: ${({ theme }) => theme.BP.TABLET};
-    }
+  & > h1 {
+    border-bottom: 2px solid ${({ theme }) => theme.BD_C};
+    width: 80%;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    margin-bottom: 70px;
+    color: ${({ theme }) => theme.FONT_C};
+    max-width: ${({ theme }) => theme.BP.TABLET};
   }
 `;
 
@@ -69,7 +60,7 @@ DIV.PostCard = styled.div`
   }
 
   & .blog-post-card-image-wrapper {
-    // border: 3px solid transparent;
+    // border: 3px solid black;
     display: inline-flex;
     position: relative;
     width: 100%;
@@ -140,6 +131,7 @@ DIV.PostCard = styled.div`
 `;
 DIV.InitialPostsCard = styled.div`
   // border: 1px solid black;
+  // border: 3px solid ${({ theme }) => theme.BD_C};
   position: relative;
 
   // w:h = 3:2

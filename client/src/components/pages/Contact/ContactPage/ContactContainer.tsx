@@ -88,7 +88,9 @@ const ContactContainer = () => {
           setSendingMsg(false);
         }
       } catch (error: any) {
-        setSendErrorMsg('Sending failed! Please try again.');
+        setSendErrorMsg(
+          'Sending failed.. If you could resend your message to the email at the bottom of the current page, I would greatly appreciate it!',
+        );
         setMsgSentSuccess(false);
         setModalOpen(true);
         setSendingMsg(false);

@@ -5,8 +5,8 @@ import { ChangeEvent, FormEvent, MutableRefObject, RefObject } from 'react';
 import Modal from '@modals/Modal';
 import { FORM } from './ContactStyle';
 import PageTitle from '@atoms/PageTitle';
-import { SECTION } from '@templates/SectionFrame';
 import FormButton from '@molecules/FormButton';
+import PageFrame from '@templates/PageFrame';
 
 interface Props {
   form: MutableRefObject<null>;
@@ -42,7 +42,7 @@ const ContactPresenter = ({
       <Head>
         <title>UYeong | Contact</title>
       </Head>
-      <SECTION.Frame>
+      <PageFrame>
         <PageTitle text="Contact" />
         <FORM.ContactForm ref={form} onSubmit={onSubmit}>
           <InputBox labelText="Name" type="text" name="user_name" value={user_name} onChange={onChangeInput} required />
@@ -65,7 +65,11 @@ const ContactPresenter = ({
             spellCheck={false}
           ></textarea>
 
-          <FormButton text="Send" formIsLoading={isSendingMsg} disabled={message ? false : true} />
+          <FormButton
+            text="Send"
+            formIsLoading={isSendingMsg}
+            disabled={user_name && user_email && message ? false : true}
+          />
         </FORM.ContactForm>
 
         {isMsgSentSuccess && !sendErrorMsg && (
@@ -80,7 +84,7 @@ const ContactPresenter = ({
         {sendErrorMsg && (
           <Modal type="alert" msg={sendErrorMsg} isOpen={isModalOpen} setOpen={setModalOpen} shakeAlert />
         )}
-      </SECTION.Frame>
+      </PageFrame>
     </>
   );
 };

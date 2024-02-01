@@ -56,7 +56,10 @@ DIV.InitialCategoryCard = styled.div`
   }
 
   & > div:nth-of-type(1) {
-    // border: 1px solid black;
+    // border: 3px solid ${({ theme }) => theme.BD_C};
+    background-color: ${({ theme }) => theme.INITIAL_BG_C};
+    height: 200px;
+
     @media screen and (min-width: calc(${({ theme }) => theme.BP.MOBILE} + 200px)) {
       height: 240px;
     }

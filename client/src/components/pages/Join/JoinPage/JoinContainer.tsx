@@ -7,7 +7,7 @@ const JoinContainer = () => {
   const [userJoinInfo, setUserJoinInfo] = useState(initialState);
 
   const { data: userData } = useGetUserDataQuery();
-  const [join, { isSuccess, isLoading, isError: isJoinError, error }] = useJoinMutation();
+  const [join, { isSuccess: joinSuccess, isLoading: isjoining, isError: isJoinError, error }] = useJoinMutation();
   const [isModalOpen, setModalOpen] = useState(false);
 
   //modal로 인해 error만 따로 빼두기
@@ -41,8 +41,8 @@ const JoinContainer = () => {
       onChangeInput={onChangeInput}
       userJoinInfo={userJoinInfo}
       userData={userData}
-      isSuccess={isSuccess}
-      isLoading={isLoading}
+      joinSuccess={joinSuccess}
+      isjoining={isjoining}
       isModalOpen={isModalOpen}
       setModalOpen={setModalOpen}
       isJoinError={isJoinError}

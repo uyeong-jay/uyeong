@@ -8,7 +8,7 @@ const LoginContainer = () => {
   const [userLoginInfo, setUserLoginInfo] = useState(initialState);
 
   const { data: userData } = useGetUserDataQuery();
-  const [login, { isSuccess: loginSuccess, isLoading: loginLoading, isError: isLoginError, error }] =
+  const [login, { isSuccess: isLoginSuccess, isLoading: isLoggingIn, isError: isLoginError, error }] =
     useLoginMutation();
 
   const router = useRouter();
@@ -23,10 +23,10 @@ const LoginContainer = () => {
   }, [isLoginError]);
 
   useEffect(() => {
-    if (loginSuccess) router.replace('/');
+    if (isLoginSuccess) router.replace('/');
     //router.push > window.history에 push()에 넣은 새로운 url 추가
     //router.replace > 현 페이지를 repalce()에 넣은 url로 대체 (로그인시 자주 사용)
-  }, [loginSuccess, router]);
+  }, [isLoginSuccess, router]);
 
   const onChangeInput = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,8 +52,8 @@ const LoginContainer = () => {
       onChangeInput={onChangeInput}
       userLoginInfo={userLoginInfo}
       userData={userData}
-      loginSuccess={loginSuccess}
-      loginLoading={loginLoading}
+      isLoginSuccess={isLoginSuccess}
+      isLoggingIn={isLoggingIn}
       isModalOpen={isModalOpen}
       setModalOpen={setModalOpen}
       isLoginError={isLoginError}

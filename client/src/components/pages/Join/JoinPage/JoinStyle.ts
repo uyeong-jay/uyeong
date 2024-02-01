@@ -89,7 +89,7 @@ FORM.JoinForm = styled.form`
 
 P.JoinFooter = styled.p`
   // border: 1px solid black;
-  margin-top: 5px;
+  margin-top: 13px;
   max-width: 700px;
   width: 100%;
   font-size: 14px;

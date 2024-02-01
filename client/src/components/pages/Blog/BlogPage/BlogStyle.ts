@@ -4,22 +4,13 @@ export const SECTION = {} as any;
 export const DIV = {} as any;
 
 SECTION.Frame = styled.section`
-  // border: 1px solid black;
+  // border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   width: 100%;
   margin-bottom: 100px;
-
-  //subFrame
-  & > div {
-    width: 100%;
-
-    @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
-      width: auto;
-    }
-  }
 `;
 
 DIV.BlogBlock = styled.div`
@@ -30,7 +21,7 @@ DIV.BlogBlock = styled.div`
   align-items: cneter;
   position: relative;
   width: 100%;
-  margin-top: 70px;
+  margin: 70px auto 0 auto;
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
     flex-direction: row;

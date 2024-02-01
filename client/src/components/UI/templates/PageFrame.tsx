@@ -1,8 +1,12 @@
+import React from 'react';
+
 import styled from '@_settings/styled';
 
-export const SECTION = {} as any;
+interface PageFrameProps {
+  children: React.ReactNode;
+}
 
-SECTION.Frame = styled.section`
+const StyeldPageFrame = styled.section`
   // border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -13,3 +17,9 @@ SECTION.Frame = styled.section`
   margin-bottom: 100px;
   color: ${({ theme }) => theme.FONT_C};
 `;
+
+const PageFrame = ({ children }: PageFrameProps) => {
+  return <StyeldPageFrame>{children}</StyeldPageFrame>;
+};
+
+export default PageFrame;

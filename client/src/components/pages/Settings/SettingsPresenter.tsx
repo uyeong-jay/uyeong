@@ -9,8 +9,8 @@ import NotFound from '@src/pages/404';
 import { IUserUpdateInfo } from './SettingsContainer';
 import CameraIcon from '@icons/CameraIcon';
 import PageTitle from '@atoms/PageTitle';
-import { SECTION } from '@templates/SectionFrame';
 import FormButton from '@molecules/FormButton';
+import PageFrame from '@templates/PageFrame';
 
 interface Props {
   userUpdateInfo: IUserUpdateInfo;
@@ -58,7 +58,7 @@ const SettingsPresenter = ({
         <title>UYeong | Settings</title>
       </Head>
       {/* 로딩중 */}
-      <SECTION.Frame>
+      <PageFrame>
         <PageTitle text="Settings" />
 
         {/* 프로필 사진 수정 */}
@@ -152,7 +152,7 @@ const SettingsPresenter = ({
             userUpdateSuccess && <DIV.SuccessMsg>Update successfully completed!</DIV.SuccessMsg>
           )}
         </FORM.SettingsMainForm>
-      </SECTION.Frame>
+      </PageFrame>
     </>
   );
 };
