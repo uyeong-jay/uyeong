@@ -72,7 +72,7 @@ FORM.JoinForm = styled.form`
 
       & > input {
         // border: 1px solid black;
-        background-color: ${({ theme }) => theme.INITIAL_BG_C};
+        background-color: ${({ theme }) => theme.LIGHT_BG_C};
         margin-top: 10px;
         border-radius: 10px;
       }

@@ -55,7 +55,7 @@ const StyledInput = styled.input<InputProps>`
     ${(props) => {
       if (props.autofill) {
         return `
-          box-shadow: inset 0 0 0 50px ${props.theme.INITIAL_BG_C};
+          box-shadow: inset 0 0 0 50px ${props.theme.LIGHT_BG_C};
           transition: background-color 5000s ease-in-out 0s; //구 크롬 
         `;
       }
@@ -72,7 +72,7 @@ const StyledInput = styled.input<InputProps>`
     ${(props) => {
       if (props.autofill) {
         return `
-          box-shadow: inset 0 0 0 50px ${props.theme.INITIAL_BG_C};
+          box-shadow: inset 0 0 0 50px ${props.theme.LIGHT_BG_C};
           transition: background-color 5000s ease-in-out 0s; //구 크롬 
         `;
       }

@@ -26,7 +26,7 @@ DIV.CommentTop = styled.div`
 
   & .comment-user-avatar-warpper {
     // border: 1px solid black;
-    background-color: ${({ theme }) => theme.INITIAL_BG_C};
+    background-color: ${({ theme }) => theme.LIGHT_BG_C};
     display: inline-flex;
     position: relative;
     width: 9vw;
@@ -117,7 +117,7 @@ DIV.CommentMenu = styled.div`
 
 DIV.CommentMenuBtns = styled.div`
   // border: 1px solid black;
-  background-color: ${({ theme }) => theme.INITIAL_BG_C};
+  background-color: ${({ theme }) => theme.LIGHT_BG_C};
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -32,7 +32,7 @@ const StyledModal = styled.div<StyledModalProps>`
 
   & > div {
     // border: 1px solid red;
-    background-color: ${({ theme }) => theme.INITIAL_BG_C};
+    background-color: ${({ theme }) => theme.LIGHT_BG_C};
     display: flex;
     flex-direction: column;
     justify-content: center;

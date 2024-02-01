@@ -17,7 +17,7 @@ DIV.AboutAvatarBox = styled.div`
   & .about-avatar-wrapper {
     // border: 1px solid red;
     display: inline-flex;
-    background-color: ${({ theme }) => theme.INITIAL_BG_C};
+    background-color: ${({ theme }) => theme.LIGHT_BG_C};
   }
 
   & .about-avatar {

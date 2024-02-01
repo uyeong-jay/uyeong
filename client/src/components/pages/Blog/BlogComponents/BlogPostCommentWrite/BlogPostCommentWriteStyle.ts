@@ -14,7 +14,7 @@ FORM.CommentWriteForm = styled.form`
   & > textarea {
     // border: 1px solid blue;
     border: none;
-    background-color: ${({ theme }) => theme.INITIAL_BG_C};
+    background-color: ${({ theme }) => theme.LIGHT_BG_C};
     width: 100%;
     height: 150px;
     margin-top: 10px;

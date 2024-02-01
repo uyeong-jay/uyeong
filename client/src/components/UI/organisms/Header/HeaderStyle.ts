@@ -140,7 +140,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
 
       & > ul {
         // border: 1px solid red;
-        background-color: ${({ theme }) => theme.INITIAL_BG_C};
+        background-color: ${({ theme }) => theme.LIGHT_BG_C};
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -196,7 +196,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
 
         & > div {
           // border: 1px solid red;
-          background-color: ${({ theme }) => theme.HEADER_BG_C};
+          background-color: ${({ theme }) => theme.LIGHT_BG_C};
           box-shadow: 0 4px 4px rgb(237, 236, 234); //#EDECEA
           display: flex;
           align-items: flex-end;

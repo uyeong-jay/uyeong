@@ -13,7 +13,7 @@ DIV.SettingsTop = styled.div`
   padding-bottom: 60px;
 
   & .settings-user-avatar-wrapper {
-    background-color: ${({ theme }) => theme.INITIAL_BG_C};
+    background-color: ${({ theme }) => theme.LIGHT_BG_C};
     display: inline-flex;
   }
 
@@ -24,7 +24,7 @@ DIV.SettingsTop = styled.div`
 
   & > span {
     // border: 1px solid forestgreen;
-    background-color: ${({ theme }) => theme.INITIAL_BG_C};
+    background-color: ${({ theme }) => theme.LIGHT_BG_C};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,7 +76,7 @@ FORM.SettingsMainForm = styled.form`
 
       & > input {
         // border: 1px solid black;
-        background-color: ${({ theme }) => theme.INITIAL_BG_C};
+        background-color: ${({ theme }) => theme.LIGHT_BG_C};
         margin-top: 10px;
         border-radius: 10px;
       }
