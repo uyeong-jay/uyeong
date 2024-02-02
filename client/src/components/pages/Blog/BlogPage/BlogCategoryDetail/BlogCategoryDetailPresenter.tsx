@@ -11,27 +11,29 @@ import { v4 as uuid } from 'uuid';
 interface Props {
   blogPostsByCategory: BlogPostRes;
   categoryTitle: string | string[] | undefined;
-  targetRef: RefObject<HTMLDivElement>;
+  isFetchingPosts: boolean;
   canLoadMore: boolean;
   isLoadingPosts: boolean;
+  targetRef: RefObject<HTMLDivElement>;
 }
 
-const POSTCOUNT = 6;
+const POSTCOUNT = 2;
 export const InitialPostsCardArr = Array.from({ length: POSTCOUNT }, (_v, index) => index);
 
 const BlogCategoryDetailPresenter = ({
   blogPostsByCategory,
   categoryTitle,
-  targetRef,
+  isFetchingPosts,
   canLoadMore,
   isLoadingPosts,
+  targetRef,
 }: Props) => {
   const headerTitle = categoryTitle ? (categoryTitle as string) : '';
+
   return (
     <SECTION.Frame>
-      {/* 카테고리 제목 */}
       <h1>{headerTitle.charAt(0).toUpperCase() + headerTitle.slice(1)}</h1>
-      <DIV.PostCardBlcok>
+      <DIV.PostCardBlcok hasPost={blogPostsByCategory?.postsByCategory ? true : false}>
         {blogPostsByCategory?.postsByCategory ? (
           blogPostsByCategory.postsByCategory.map((post) =>
             post ? (
@@ -67,13 +69,14 @@ const BlogCategoryDetailPresenter = ({
               <div key={uuid()}></div>
             ),
           )
+        ) : isFetchingPosts ? (
+          //첫화면 or 새로고침시
+          <DIV.LoaderWrapper>
+            <MiniLoader w={35} h={35} responsive />
+          </DIV.LoaderWrapper>
         ) : (
-          //새로고침시 or 포스트가 없을때 보이는 화면
-          <>
-            {/* {InitialPostsCardArr.map((cardCountIndex) => (
-                <DIV.InitialPostsCard key={cardCountIndex}></DIV.InitialPostsCard>
-              ))} */}
-          </>
+          // 포스트 없을때
+          <h1>No post yet</h1>
         )}
       </DIV.PostCardBlcok>
       <DIV.IntersectionTarget id="posts_by_category_intersection_target" ref={targetRef}>

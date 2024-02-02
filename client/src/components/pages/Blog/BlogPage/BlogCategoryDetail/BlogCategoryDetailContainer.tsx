@@ -67,6 +67,7 @@ const BlogCategoryDetailContainer = () => {
     <BlogCategoryDetailPresenter
       blogPostsByCategory={blogPostsByCategory}
       categoryTitle={categoryTitle}
+      isFetchingPosts={isFetchingPosts}
       canLoadMore={canLoadMore}
       isLoadingPosts={isLoadingPosts}
       targetRef={targetRef}
