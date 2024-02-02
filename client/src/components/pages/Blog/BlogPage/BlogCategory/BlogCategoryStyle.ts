@@ -56,7 +56,7 @@ DIV.InitialCategoryCard = styled.div`
   }
 
   & > div:nth-of-type(1) {
-    // border: 3px solid ${({ theme }) => theme.BD_C};
+    // border: 1px solid black;
     background-color: ${({ theme }) => theme.INITIAL_BG_C};
     height: 200px;
 
