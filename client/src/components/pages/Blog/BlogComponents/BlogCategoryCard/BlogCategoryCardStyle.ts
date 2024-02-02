@@ -41,6 +41,11 @@ DIV.Frame = styled.div`
       height: 250px;
     }
 
+    //이미지있는 곳에만 배경색 추가
+    & .blog-category-card-image {
+      background-color: ${({ theme }) => theme.INITIAL_BG_C};
+    }
+
     //LOGO Wrapper
     & > div {
       border: 3px solid ${({ theme }) => theme.BD_C};

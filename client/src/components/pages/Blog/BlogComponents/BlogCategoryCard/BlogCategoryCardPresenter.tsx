@@ -47,14 +47,15 @@ const BlogCategoryCardPresenter = ({
     <DIV.Frame>
       {/* 카드 포스트 썸네일 */}
       <div className="blog-category-card-image-wrapper blog-category-card-image">
-        {postsByCategoryName?.[postsByCategoryName.length - 1]?.thumbnail ? (
+        {postsByCategoryName?.[0]?.thumbnail ? (
           <Image
             className="blog-category-card-image"
             src={postsByCategoryName[postsByCategoryName.length - 1]?.thumbnail as string}
             alt="category-card-image"
             layout="fill"
-            objectFit="contain"
+            objectFit="cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority
           />
         ) : (
           <div>
