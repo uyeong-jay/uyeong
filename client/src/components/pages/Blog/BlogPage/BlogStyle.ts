@@ -7,34 +7,46 @@ SECTION.Frame = styled.section`
   // border: 1px solid red;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
   width: 100%;
   margin-bottom: 100px;
+  color: ${({ theme }) => theme.FONT_C};
 `;
 
 DIV.BlogBlock = styled.div`
-  // border: 1px solid red;
+  // border: 1px solid blue;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: cneter;
   position: relative;
   width: 100%;
-  margin: 70px auto 0 auto;
+  margin-bottom: 100px;
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
+    width: auto;
+    min-height: 1000px;
+    margin-top: 50px;
     border-left: 2px solid ${({ theme }) => theme.BD_C};
-    border-right: 2px solid ${({ theme }) => theme.BD_C};
-    // width:
+    // border-right: 2px solid ${({ theme }) => theme.BD_C};
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 200px;
+      height: 100%;
+      border-left: 2px solid ${({ theme }) => theme.BD_C};
+    }
   }
 `;
 
 SECTION.BlogMain = styled.section`
-  // border: 1px solid black;
+  // border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -44,7 +56,6 @@ SECTION.BlogMain = styled.section`
   padding-top: 50px;
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
-    border-left: 2px solid ${({ theme }) => theme.BD_C};
     min-width: 800px;
   }
   @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {

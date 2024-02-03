@@ -59,14 +59,20 @@ DIV.Title = styled.div<TitleProps>`
     position: relative;
     width: 100%;
     height: 25%;
-    padding: 20px;
     font-size: 15px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 
     & > a {
+      // border: 1px solid blue;
+      display: inline-block;
+      padding: 20px;
       color: ${({ theme }) => theme.FONT_C};
+
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 
@@ -76,11 +82,12 @@ DIV.Title = styled.div<TitleProps>`
     //w:h = 3:2
     width: 280px;
     height: 185px;
-    margin: 25px 0;
+    margin: 20px 0 40px 0;
   }
 
   & .blog-card-image {
     // border: 1px solid black;
+    background-color: ${({ theme }) => theme.INITIAL_BG_C};
   }
 
   @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
@@ -148,7 +155,6 @@ DIV.Content = styled.div<ContentProps>`
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
     border-top: none;
-
     width: 100%;
     height: 80%;
 
@@ -165,7 +171,7 @@ DIV.Content = styled.div<ContentProps>`
 `;
 
 DIV.ContentTop = styled.div`
-  // border: 1px solid black;
+  // border: 1px solid red;
   width: auto;
   position: absolute;
   top: -30px;
@@ -231,7 +237,7 @@ DIV.CardTags = styled.div<CardTagsProps>`
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 5%;
+  padding: 8% 5%;
   text-align: center;
   line-height: 2;
 
@@ -258,6 +264,8 @@ DIV.CardTags = styled.div<CardTagsProps>`
   }
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
+    padding: 5%;
+
     & > p {
       ${(props) => {
         if (!props.thumbnail) {
@@ -307,7 +315,7 @@ DIV.CardDescription = styled.div<CardDescriptionProps>`
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 5%;
+  padding: 8% 5%;
 
   & > p {
     // border: 1px solid black;
@@ -321,6 +329,8 @@ DIV.CardDescription = styled.div<CardDescriptionProps>`
   }
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
+    padding: 5%;
+
     & > p {
       ${(props) => {
         if (!props.thumbnail) {

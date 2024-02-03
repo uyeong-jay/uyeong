@@ -24,7 +24,7 @@ const BlogPostCardPresenter = ({ post }: Props) => {
     commentCount,
   } = post;
 
-  // 설명 , 내용 모두 200자만 제한해서 보여주기
+  // 보여줄 설명, 내용 200자 제한
   const cardContent = useMemo(() => {
     const editContent = content.slice(0, 200);
     return removeMd(editContent);
@@ -44,8 +44,9 @@ const BlogPostCardPresenter = ({ post }: Props) => {
                 src={thumbnail as string}
                 alt="blog-card-image"
                 layout="fill"
-                objectFit="contain"
+                objectFit="cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority
               />
             }
           </div>

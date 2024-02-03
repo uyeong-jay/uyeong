@@ -80,10 +80,8 @@ DIV.HeaderBlock = styled.div<HeaderBlockProps>`
         // border: 1px solid black;
         cursor: pointer;
         border-radius: 20px;
-        font-weight: 600;
+        font-weight: bold;
       }
-
-      
     }
   }
 
@@ -98,7 +96,7 @@ DIV.HeaderBlock = styled.div<HeaderBlockProps>`
       margin: 5px 25px 5px 5px;
       font-family: 'Square Peg', cursive;
       font-size: 25px;
-      font-weight: 600;
+      font-weight: bold;
 
 
       ${(props) => {

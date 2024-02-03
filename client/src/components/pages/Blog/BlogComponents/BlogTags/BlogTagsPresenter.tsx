@@ -20,6 +20,7 @@ const BlogTagsPresenter = ({ allTags, tagUnderline, onClickTag, isTagClicked }: 
 
   return (
     <ASIDE.BlogTags>
+      <h3>Tags</h3>
       <div className="tags-wrapper">
         {allTags.map((tag, index) => (
           <DIV.BlogTag

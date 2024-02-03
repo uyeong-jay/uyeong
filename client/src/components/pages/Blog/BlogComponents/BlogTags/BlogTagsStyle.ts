@@ -18,6 +18,11 @@ ASIDE.BlogTags = styled.aside`
   width: 100%;
   min-width: ${({ theme }) => theme.BP.MOBILE};
   max-width: ${({ theme }) => theme.BP.TABLET};
+  background-color: transparents;
+
+  & > h3 {
+    display: none;
+  }
 
   & > .tags-wrapper {
     // border: 1px solid black;
@@ -31,25 +36,38 @@ ASIDE.BlogTags = styled.aside`
 
     ::-webkit-scrollbar {
       // border: 1px solid black;
-      height: 7px;
+      height: 3px;
     }
     ::-webkit-scrollbar-track {
-      // border: 1px solid black;
+      background-color: ${({ theme }) => theme.INITIAL_BG_C};
       margin: 1px 0;
       border-radius: 10px;
     }
     ::-webkit-scrollbar-thumb {
       // border: 1px solid black;
-      background: ${({ theme }) => theme.BD_C};
+      background-color: ${({ theme }) => theme.BD_C};
       border-radius: 10px;
     }
   }
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
+    // border: 2px solid ${({ theme }) => theme.BD_C};
     min-width: 200px;
     position: static;
     left: 0;
     transform: translateX(0);
+    // background-color: ${({ theme }) => theme.INITIAL_BG_C};
+    border-radius: 20px;
+
+    & > h3 {
+      // border: 2px solid black;
+      display: flex;
+      position: absolute;
+      top: 15px;
+      left: 35px;
+      font-size: 20px;
+      letter-spacing: 0.5px;
+    }
 
     & > .tags-wrapper {
       display: block;

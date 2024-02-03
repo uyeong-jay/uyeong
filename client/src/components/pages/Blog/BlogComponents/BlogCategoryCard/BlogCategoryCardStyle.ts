@@ -75,7 +75,7 @@ DIV.CardContentMain = styled.div`
   // border: 1px solid black;
   display: flex;
   justify-content: space-between;
-  margin: 10px 10px;
+  margin: 10px 5px;
 
   & > input {
     // border: 1px solid red;
@@ -83,22 +83,31 @@ DIV.CardContentMain = styled.div`
     border-bottom: 2px solid ${({ theme }) => theme.BD_C};
     background-color: ${({ theme }) => theme.BG_C};
     width: 85%;
+    padding: 4px 0;
     outline: none;
     color: ${({ theme }) => theme.FONT_C};
-    font-size: 14.5px; // 편집시 전체 카드 움직임 방지
+    font-size: 17px; // 편집시 전체 카드 움직임 방지
     font-weight: bold;
   }
 
   & > span {
     // border: 1px solid red;
-    width: 90%;
     overflow: hidden;
+    width: 90%;
     text-overflow: ellipsis;
 
     & > a {
+      // border: 1px solid red;
+      display: inline-block;
+      width: 100%;
+      padding: 5px 0;
       font-size: 17px;
       font-weight: bold;
       color: ${({ theme }) => theme.FONT_C};
+
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 `;
@@ -120,7 +129,8 @@ DIV.CardContentFooter = styled.div`
   justify-content: space-between;
   align-items: center;
   color: ${({ theme }) => theme.FONT_C};
-  padding: 0 10px;
+  padding: 0 5px;
+
   font-weight: bold;
 
   & > span {

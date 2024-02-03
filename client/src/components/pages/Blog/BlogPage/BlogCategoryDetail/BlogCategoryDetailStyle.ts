@@ -25,7 +25,8 @@ SECTION.Frame = styled.div`
     width: 80%;
     padding-bottom: 10px;
     padding-left: 50px;
-    margin-bottom: 70px;
+    margin-top: 50px;
+    margin-bottom: 130px;
     max-width: ${({ theme }) => theme.BP.TABLET};
 
     &::after {
@@ -87,6 +88,29 @@ DIV.PostCard = styled.div`
     margin: 100px 80px;
   }
 
+  //post title
+  & > h3 {
+    // border: 1px solid red;
+    position: absolute;
+    top: -40px;
+    left: 0px;
+    width: 100%;
+    font-size: 25px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    & > a {
+      display: inline-block;
+      width: 100%;
+      color: ${({ theme }) => theme.FONT_C};
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+
   & .blog-post-card-image-wrapper {
     // border: 3px solid black;
     display: inline-flex;
@@ -131,23 +155,6 @@ DIV.PostCard = styled.div`
         transform: translateY(7px);
         fill: ${({ theme }) => theme.LOGO_C};
       }
-    }
-  }
-
-  //post title
-  & > h3 {
-    // border: 1px solid red;
-    position: absolute;
-    top: -40px;
-    left: 0px;
-    width: 100%;
-    font-size: 25px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    & > a {
-      color: ${({ theme }) => theme.FONT_C};
     }
   }
 
