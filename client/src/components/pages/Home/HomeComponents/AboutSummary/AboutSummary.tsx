@@ -2,41 +2,26 @@ import React from 'react';
 import styled from '@_settings/styled';
 import DetailButton from '@molecules/DetailButton';
 import AboutAvatar from '@pages/About/AboutComponents/AboutAvatar/AboutAvatar';
+import SummaryTitle from '../SummaryTitle';
 
 const SECTION = {} as any;
 const DIV = {} as any;
 
 SECTION.Frame = styled.section`
   // border: 1px solid red;
-  width: 100%; //400px;
+  width: 100%;
   height: 100%;
-  position: relative;
-`;
-
-DIV.ASTitleWrapper = styled.div`
-  // border: 1px solid blue;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 25%;
-
-  & > h3 {
-    // border: 1px solid black;
-    font-size: 30px;
-    font-weight: 400;
-    color: ${({ theme }) => theme.FONT_C};
-    // letter-spacing: 1px;
 `;
 
 DIV.ASContentWarpper = styled.div`
-  // border: 1px solid black;
-  height: 65%;
+  // border: 1px solid green;
+  height: 60%;
   overflow: hidden;
 
   & > button {
     // border: 1px solid black;
     position: absolute;
-    right: 10px;
+    right: 15px;
     bottom: 10px;
   }
 `;
@@ -44,9 +29,7 @@ DIV.ASContentWarpper = styled.div`
 const AboutSummary = () => {
   return (
     <SECTION.Frame>
-      <DIV.ASTitleWrapper>
-        <h3>ABOUT</h3>
-      </DIV.ASTitleWrapper>
+      <SummaryTitle text="ABOUT" />
       <DIV.ASContentWarpper>
         <AboutAvatar />
         <DetailButton link="/about" />

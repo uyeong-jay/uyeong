@@ -9,48 +9,34 @@ import 'slick-carousel/slick/slick-theme.css';
 import ArrowRightIcon from '@icons/ArrowRightIcon';
 import ArrowLeftIcon from '@icons/ArrowLefttIcon';
 import DetailButton from '@molecules/DetailButton';
+import SummaryTitle from '../SummaryTitle';
 
-const ARTICLE = {} as any;
+const SECTION = {} as any;
 const DIV = {} as any;
 
-ARTICLE.Frame = styled.article`
+SECTION.Frame = styled.section`
   // border: 1px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
   width: 100%;
   height: 100%;
-  margin: 50px 0;
 `;
 
-DIV.BSTitleWrapper = styled.div`
-  // border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 25%;
-
-  & > h3 {
-    // border: 1px solid black;
-    font-size: 30px;
-    font-weight: 400;
-    color: ${({ theme }) => theme.FONT_C};
-  }
-`;
 DIV.SliderWrapper = styled.div`
-  // border: 1px solid black;
-  // background-color: black;
-  width: 70%;
-  height: auto;
-  // transform: scale(0.8);
+  border: 1px solid / blue;
+  width: 230px;
+  margin-top: 25px;
 
   & > button {
     // border: 1px solid black;
     position: absolute;
-    right: 10px;
+    right: 15px;
     bottom: 10px;
+  }
+
+  @media screen and (min-height: 500px) and (min-width: 850px) {
+    margin-top: -10px;
   }
 `;
 
@@ -61,21 +47,13 @@ interface Props {
 function NextArrow(props: any) {
   const { className, style, onClick } = props;
   return (
-    <ArrowRightIcon
-      className={`${className}`}
-      onClick={onClick}
-      style={{ ...style, display: 'none' /*  fill: 'gray' */ }}
-    />
+    <ArrowRightIcon className={className} onClick={onClick} style={{ ...style, display: 'none' /* , fill: 'red' */ }} />
   );
 }
 function PrevArrow(props: any) {
   const { className, style, onClick } = props;
   return (
-    <ArrowLeftIcon
-      className={`${className}`}
-      onClick={onClick}
-      style={{ ...style, display: 'none' /*  fill: 'gray' */ }}
-    />
+    <ArrowLeftIcon className={className} onClick={onClick} style={{ ...style, display: 'none' /* , fill: 'red' */ }} />
   );
 }
 
@@ -92,10 +70,8 @@ const settings = {
 
 const BlogSummary = ({ blogPostsData }: Props) => {
   return (
-    <ARTICLE.Frame>
-      <DIV.BSTitleWrapper>
-        <h3>BLOG</h3>
-      </DIV.BSTitleWrapper>
+    <SECTION.Frame>
+      <SummaryTitle text="BLOG" />
       <DIV.SliderWrapper>
         <Slider {...settings}>
           {blogPostsData?.posts?.map((post) => (
@@ -104,7 +80,7 @@ const BlogSummary = ({ blogPostsData }: Props) => {
         </Slider>
         <DetailButton link="/blog" />
       </DIV.SliderWrapper>
-    </ARTICLE.Frame>
+    </SECTION.Frame>
   );
 };
 

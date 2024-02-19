@@ -9,46 +9,33 @@ export const DIV = {} as any;
 
 SECTION.Frame = styled.section`
   // border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
-`;
-
-DIV.TSTitleWrapper = styled.div`
-  // border: 1px solid black;
-  width: 100%;
-  height: 25%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  & > h1 {
-    // border: 1px solid black;
-    font-size: 30px;
-    font-weight: 400;
-    color: ${({ theme }) => theme.FONT_C};
-  }
 `;
 
 DIV.TagsWrapper = styled.div`
   // border: 1px solid black;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  height: 75%;
+  height: 65%;
+  padding: 20px 20px 15px 20px;
+  overflow: hidden;
+
+  @media screen and (min-height: 500px) and (min-width: 850px) {
+    padding: 0px 10px;
+  }
 `;
 
 DIV.TagWrapper = styled.div<TagWrapperProps>`
   // border: 1px solid black;
   width: auto;
-  // margin: 10px;
-  overflow: hidden;
-  cursor: pointer;
   padding: 8px 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
   color: #514e2e;
   font-size: ${(props) => {
     switch (props.tagCount) {
@@ -64,6 +51,6 @@ DIV.TagWrapper = styled.div<TagWrapperProps>`
   }}
 
   &:hover {
-    color: rgba(0, 0, 0, 0.5);
+    opacity: 0.5;
   }
 `;

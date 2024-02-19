@@ -3,6 +3,7 @@ import { BlogPost } from '@app/services/blog/postApi';
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Logo from '@icons/Logo';
 
 interface Props {
   post: BlogPost;
@@ -19,12 +20,38 @@ DIV.Frame = styled.div`
   justify-content: space-around;
   width: 100%; //3(가):2(세)
   height: 200px;
-  // margin: 10px auto;
   padding: 10px 15px;
+
+  & a {
+    // border: 1px solid red;
+    position: relative;
+    width: 200px;
+    height: 135px;
+
+    //LOGO Wrapper
+    & > div {
+      border: 3px solid ${({ theme }) => theme.BD_C};
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & .logo {
+        // border: 1px solid black;
+        width: 30px;
+        height: 60px;
+        transform: translateY(7px);
+        fill: ${({ theme }) => theme.LOGO_C};
+      }
+    }
+  }
 `;
 
 P.SlickPostTitle = styled.p`
   // border: 1px solid black;
+  position: relative;
   width: 100%;
   font-size: 20px;
   overflow: hidden;
@@ -32,7 +59,7 @@ P.SlickPostTitle = styled.p`
   white-space: nowrap;
 
   & > a {
-    // border: 1px solid black;
+    // border: 1px solid green;
     color: #333333;
     margin-left: 3px;
     overflow: hidden;
@@ -41,12 +68,6 @@ P.SlickPostTitle = styled.p`
 
 IMG.PostImage = styled(Image)`
   border-radius: 10px;
-`;
-
-P.SlickPostCategory = styled.p`
-  // border: 1px solid black;
-  color: #333333;
-  margin-left: 5px;
 `;
 
 const MiniBlogPostCard = ({ post }: Props) => {
@@ -60,24 +81,34 @@ const MiniBlogPostCard = ({ post }: Props) => {
     // description,
     // privacy,
     // createdAt,
-    category,
+    // category,
   } = post;
 
   return (
     <DIV.Frame>
-      {thumbnail && (
-        <Link href={`/blog/${titleForUrl}`} rel="noopener noreferrer" passHref>
-          <a>
-            <IMG.PostImage src={thumbnail as string} alt="post-image" width={200} height={135} priority />
-          </a>
-        </Link>
-      )}
+      <Link href={`/blog/${titleForUrl}`} rel="noopener noreferrer" passHref>
+        <a>
+          {thumbnail ? (
+            <IMG.PostImage
+              src={thumbnail as string}
+              alt="post-image"
+              layout="fill"
+              objectFit="cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority
+            />
+          ) : (
+            <div>
+              <Logo />
+            </div>
+          )}
+        </a>
+      </Link>
       <P.SlickPostTitle>
         <Link href={`/blog/${titleForUrl}`} rel="noopener noreferrer">
           {title}
         </Link>
       </P.SlickPostTitle>
-      <P.SlickPostCategory>{category}</P.SlickPostCategory>
     </DIV.Frame>
   );
 };
