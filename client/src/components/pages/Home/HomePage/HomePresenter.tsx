@@ -5,16 +5,21 @@ import AboutSummary from '@pages/Home/HomeComponents/AboutSummary';
 import BlogSummary from '@pages/Home/HomeComponents/BlogSummary';
 import { BlogPostRes } from '@app/services/blog/postApi';
 import TagsSummary from '../HomeComponents/TagsSummary';
-
-// import type { NextPage } from 'next';
-// import Image from 'next/image';
-// import styles from '../styles/Home.module.css';
+import { useState } from 'react';
 
 interface Props {
   blogPostsData?: BlogPostRes;
 }
 
+const activeBtnArr = Array.from({ length: 3 }, (_v, index) => index);
+
 const HomePresenter = ({ blogPostsData }: Props) => {
+  const [activeBtnNum, setActiveBtnNum] = useState(1);
+
+  const onClickActiveBtn = (btnNum: number) => {
+    setActiveBtnNum(btnNum);
+  };
+
   return (
     <>
       <Head>
@@ -27,9 +32,18 @@ const HomePresenter = ({ blogPostsData }: Props) => {
               <Banner />
             </DIV.BannerBlock>
             <DIV.SummaryBlock>
-              <AboutSummary />
-              <BlogSummary blogPostsData={blogPostsData} />
-              <TagsSummary blogPostsData={blogPostsData} />
+              {activeBtnNum === 1 && <AboutSummary />}
+              {activeBtnNum === 2 && <BlogSummary blogPostsData={blogPostsData} />}
+              {activeBtnNum === 3 && <TagsSummary blogPostsData={blogPostsData} />}
+              <DIV.ActiveBtns>
+                {activeBtnArr.map((_v, i) => (
+                  <button
+                    className={activeBtnNum === i + 1 ? 'active' : ''}
+                    key={i}
+                    onClick={() => onClickActiveBtn(i + 1)}
+                  ></button>
+                ))}
+              </DIV.ActiveBtns>
             </DIV.SummaryBlock>
           </DIV.ContainerHeight>
         </DIV.ContainerWidth>

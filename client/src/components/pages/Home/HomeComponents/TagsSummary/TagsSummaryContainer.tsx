@@ -39,7 +39,7 @@ const TagsSummaryContainer = ({ blogPostsData }: Props) => {
         } else tagList.push({ name: postTag, count: 1 });
       });
     });
-    return tagList.slice(0, 15);
+    return tagList.slice(0, 25);
   }, [blogPostsData?.posts]);
 
   return <TagsSummaryPresenter allTags={allTags} onClickTag={onClickTag} />;

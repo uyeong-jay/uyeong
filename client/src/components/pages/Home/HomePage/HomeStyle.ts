@@ -4,84 +4,73 @@ export const MAIN = {} as any;
 export const DIV = {} as any;
 
 MAIN.Frame = styled.main`
-  // border: 1px solid black;
+  // border: 1px solid blue;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
-  top: -50px;
-  width: 100%; //가로 스크롤 방지
   min-width: 320px;
-  margin: 0 auto;
-  height: 100vh;
+  min-height: 750px;
+  margin-bottom: 250px;
 
-  @media screen and (max-width: calc(${({ theme }) => theme.BP.PC} - 0.5px)) {
-    min-height: 900px;
+  @media screen and (min-height: 500px) and (min-width: 850px) {
+    align-items: center;
+    top: -70px;
+    width: 100%; //가로 스크롤 방지
+    height: 100vh;
+    min-width: 0px;
+    min-height: 0px;
+    margin-bottom: 100px;
   }
 `;
 
 DIV.ContainerWidth = styled.div`
-  border-top: 1px solid ${({ theme }) => theme.BD_C};
-  border-bottom: 1px solid ${({ theme }) => theme.BD_C};
+  // border: 1px solid black;
   position: relative;
-  // w : h = 2 : 5
-  width: 800px;
-  height: 320px;
+  width: 100%;
+  height: 100%;
 
-  @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
-    border-top: 1px solid ${({ theme }) => theme.BD_C};
-    border-bottom: 1px solid ${({ theme }) => theme.BD_C};
-    transform: rotate(90deg);
-  }
-
-  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+  @media screen and (min-height: 500px) and (min-width: 850px) {
     border-top: 3px solid ${({ theme }) => theme.BD_C};
     border-bottom: 3px solid ${({ theme }) => theme.BD_C};
-    top: 40px;
-    transform: rotate(88deg);
-  }
-
-  @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
-    top: 20px;
+    top: 30px;
+    width: 800px;
+    height: 320px;
     transform: rotate(-2deg);
   }
 `;
 
 DIV.ContainerHeight = styled.div`
-  border-right: 1px solid ${({ theme }) => theme.BD_C};
-  border-left: 1px solid ${({ theme }) => theme.BD_C};
-  width: 90%;
-  height: 125%;
-  position: relative;
-  top: -12.5%;
-  left: 5%;
+  // border: 1px solid blue;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform: rotate(0deg);
+  position: relative;
+  width: 100%;
+  height: 100%;
 
   &::after {
     content: '';
     position: absolute;
-    top: 0;
-    right: 55%;
-    width: 0.5px; //border: 1px;
-    height: 100%;
-    background-color: ${({ theme }) => theme.BD_C};
+    border-top: none;
   }
 
-  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+  @media screen and (min-height: 500px) and (min-width: 850px) {
     border-right: 3px solid ${({ theme }) => theme.BD_C};
     border-left: 3px solid ${({ theme }) => theme.BD_C};
+    flex-direction: row;
+    top: -12.5%;
+    left: 5%;
+    width: 90%;
+    height: 125%;
 
     &::after {
-      width: 2.3px; //border: 3px
-    }
-  }
-
-  @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
-    &::after {
+      border-left: 3px solid ${({ theme }) => theme.BD_C};
+      top: 0;
       right: 45%;
+      width: 0%;
+      height: 100%;
     }
   }
 `;
@@ -89,49 +78,94 @@ DIV.ContainerHeight = styled.div`
 DIV.BannerBlock = styled.div`
   // border: 1px solid red;
   position: relative;
-  left: -5%;
-  width: 55%;
-  height: 80%;
-  transform: rotate(-90deg);
+  width: 100%;
+  height: 90vh;
 
-  @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    // border-top: 2px solid ${({ theme }) => theme.BD_C};
+    width: 90%;
+  }
+
+  @media screen and (min-height: 500px) and (min-width: 850px) {
     left: 0;
     width: 55%;
     height: 80%;
-    transform: rotate(0deg);
+
+    &::after {
+      display: none;
+    }
   }
 `;
 
 DIV.SummaryBlock = styled.div`
-  // border: 1px solid red;
+  // border: 1px solid black;
+  background-color: ${({ theme }) => theme.INITIAL_BG_C};
   position: relative;
-  left: -5%;
-  width: 44.5%; //scroll 크기 딱 맞게 조정
-  height: 99%; //튀어 나가는 부분 없이 조정
-  transform: rotate(-90deg);
+  width: 80%;
+  height: 400px;
+  min-height: 400px;
+  margin-top: 50px;
+  border-radius: 20px;
 
-  overflow-y: scroll;
-  overflow-x: hidden;
-
-  ::-webkit-scrollbar {
-    border-radius: 50%;
-    width: 5px;
-  }
-  ::-webkit-scrollbar-track {
-    // border: 1px solid black;
-    margin: 1px 0;
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.BD_C};
-    border-radius: 10px;
-  }
-
-  @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
+  @media screen and (min-height: 500px) and (min-width: 850px) {
+    background-color: transparent;
     left: 0%;
     width: 45%;
     height: 80%;
+    min-height: auto;
     margin-left: 1px; //scoll 오른쪽에 뜨는 공간 없앰
+    margin-top: 0px;
     transform: rotate(0deg);
+    border-radius: 0px;
+  }
+
+  & > section {
+    animation: active-summary 0.25s ease-in-out 0s forwards;
+
+    @keyframes active-summary {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+`;
+
+DIV.ActiveBtns = styled.div`
+  // border: 1px solid black;
+  position: absolute;
+  bottom: -45px;
+  right: 50%;
+  transform: translateX(50%);
+
+  & > button {
+    border: 2px solid ${({ theme }) => theme.BD_C};
+    background-color: ${({ theme }) => theme.INITIAL_BG_C};
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 0 10px;
+    transition: background-color 0.25s ease-in-out;
+
+    &.active {
+      background-color: ${({ theme }) => theme.BD_C};
+    }
+  }
+
+  @media screen and (min-height: 500px) and (min-width: 850px) {
+    bottom: -35px;
+    right: 10px;
+    transform: translateX(0%);
+
+    & > button {
+      border: 3px solid ${({ theme }) => theme.BD_C};
+    }
   }
 `;

@@ -30,8 +30,12 @@ DIV.TagsWrapper = styled.div`
 
 DIV.TagWrapper = styled.div<TagWrapperProps>`
   // border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: auto;
-  padding: 8px 15px;
+  height: 40px;
+  padding: 0 10px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -42,13 +46,28 @@ DIV.TagWrapper = styled.div<TagWrapperProps>`
       case 1:
         return `15px;`;
       case 2:
-        return `20px;`;
+        return `16px;`;
       case 3:
-        return `25px;`;
+        return `17px;`;
       default:
-        return `30px;`;
+        return `18px;`;
     }
-  }}
+  }};
+
+  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+    font-size: ${(props) => {
+      switch (props.tagCount) {
+        case 1:
+          return `15px;`;
+        case 2:
+          return `17px;`;
+        case 3:
+          return `19px;`;
+        default:
+          return `21px;`;
+      }
+    }};
+  }
 
   &:hover {
     opacity: 0.5;
