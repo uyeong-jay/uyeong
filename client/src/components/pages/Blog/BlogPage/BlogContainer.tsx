@@ -18,14 +18,14 @@ const BlogContainer = () => {
   const blogPostsBySearch = useAppSelector((state) => state.blog.blogPostsBySearch);
 
   //검색
+  const tagName = useAppSelector((state) => state.blog.tagName);
+
   const initialSearchInfo = {
     nextPageId: '',
-    searchWord: '',
+    searchWord: tagName ?? '',
   };
   const [searchInfo, setSearchInfo] = useState(initialSearchInfo);
   const { data: blogPostsDataBySearch, isFetching: isFetchingPosts } = useGetBlogPostsBySearchQuery(searchInfo);
-
-  const tagName = useAppSelector((state) => state.blog.tagName);
 
   const [searchWordInput, setSearchWordInput] = useState('');
   const [isSearchStarted, setSearchStarted] = useState(false);
@@ -44,13 +44,10 @@ const BlogContainer = () => {
     if (!tagName && !isTagClicked && !isInputFocused && !canLoadMore) {
       dispatch(getPostsBySearch(blogPostsDataBySearch));
     }
+
     //tagName 통해서 왔을때(초기화된 이후)
     if (tagName && !canLoadMore) {
       setSearchWordInput(tagName);
-      setSearchInfo({
-        nextPageId: '',
-        searchWord: tagName,
-      }); //canLoadmore 이 안되는 상태에서 넣을 수 있는 데이터
       dispatch(getPostsBySearch(blogPostsDataBySearch));
     }
 
@@ -60,7 +57,7 @@ const BlogContainer = () => {
       const timer = setTimeout(() => {
         dispatch(getPostsBySearch(blogPostsDataBySearch));
         setIntersectionEnded(false);
-      }, 500);
+      }, 300);
       return () => {
         clearTimeout(timer);
       };
@@ -105,7 +102,7 @@ const BlogContainer = () => {
     [dispatch],
   );
 
-  //검색 with debounce
+  //검색 debounce
   const debounce = (func: (value: string) => void, delay: number) => {
     let timeoutId: NodeJS.Timeout;
 
@@ -120,7 +117,7 @@ const BlogContainer = () => {
     };
   };
 
-  //검색 with debounce
+  //검색
   //사용자의 마지막 입력이 끝난 후 0.7초 뒤 실헹
   const delayedSearchInfoUpdate = useMemo(
     () =>
