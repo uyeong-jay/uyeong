@@ -72,16 +72,16 @@ const BlogCategoryDetailPresenter = ({
         ) : isFetchingPosts ? (
           //첫화면 or 새로고침시
           <DIV.LoaderWrapper>
-            <MiniLoader w={35} h={35} responsive />
+            <MiniLoader w={30} h={30} responsive />
           </DIV.LoaderWrapper>
         ) : (
           // 포스트 없을때
-          <h1>No post yet</h1>
+          <div>- No post yet -</div>
         )}
       </DIV.PostCardBlcok>
       <DIV.IntersectionTarget id="posts_by_category_intersection_target" ref={targetRef}>
         {isLoadingPosts ? (
-          <MiniLoader w={35} h={35} responsive />
+          <MiniLoader w={30} h={30} responsive />
         ) : canLoadMore ? (
           //limit 와 가져온 post 개수가 서로 딱 맞아 떨어질때
           !blogPostsByCategory?.next_cursor && <DIV.NoMorePosts>- No more posts -</DIV.NoMorePosts>

@@ -64,12 +64,15 @@ DIV.PostCardBlcok = styled.div<PostCardBlcokProps>`
   }
 
   //포스트 없을때
-  & > h1 {
+  & > div {
     // border: 1px solid black;
     position: absolute;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
+    color: ${({ theme }) => theme.FONT_C};
+    font-weight: bold;
+    font-size: 20px;
   }
 `;
 

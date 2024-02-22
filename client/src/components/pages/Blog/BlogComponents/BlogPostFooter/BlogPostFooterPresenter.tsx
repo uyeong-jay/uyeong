@@ -39,7 +39,7 @@ const BlogPostFooterPresenter = ({
 
       <DIV.IntersectionTarget id="comments_intersection_target" ref={targetRef}>
         {isLoadingComments || isFetchingComments ? (
-          <MiniLoader w={35} h={35} responsive />
+          <MiniLoader w={30} h={30} responsive />
         ) : !currCommentCount && hasNoComment ? (
           <DIV.TargetMsg>- No comment yet -</DIV.TargetMsg>
         ) : hasNoMoreComments ? (

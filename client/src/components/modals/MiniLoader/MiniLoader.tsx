@@ -20,8 +20,8 @@ const StyledMiniLoader = styled.div<MiniLoaderProps>`
   ${(props) => {
     if (props.responsive) {
       return `
-        width: ${props.width - 10}px;
-        height: ${props.width - 10}px;
+        width: ${props.width - 5}px;
+        height: ${props.width - 5}px;
 
         @media screen and (min-width: ${props.theme.BP.TABLET}) {
           width: ${props.width}px;
