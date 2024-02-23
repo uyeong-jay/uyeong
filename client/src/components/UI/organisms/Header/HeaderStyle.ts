@@ -22,7 +22,7 @@ HEADER.Frame = styled.header<HeaderFrameProps>`
   align-items: center;
   position: sticky; //banner에 그림을 넣을수도 있어서 sticky로 설정
   top: 0;
-  z-index: 1;
+  z-index: 2; //modal 다음으로 높은 레벨
   width: 100%;
   height: 50px;
 
@@ -106,20 +106,22 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
       // border: 1px solid black;
       position: relative;
       display: flex;
-      // justify-content: center;
+      justify-content: center;
       align-items: center;
       cursor: pointer;
-      width: 40px;
+      width: 50px;
       height: 30px;
-      margin-right: 25px;
+      white-space: nowrap;
+      margin-right: 50px;
 
       & .header-user-avatar-wrapper {
-        // border: 2px solid #555555;
+        // border: 1px solid red;
         display: inline-flex;
         width: 30px;
       }
 
       & .header-user-avatar {
+        // border: 1px solid blue;
         border-radius: 50%;
         object-fit: cover; //원본크기로 넣기
       }

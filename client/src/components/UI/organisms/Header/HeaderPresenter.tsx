@@ -13,7 +13,7 @@ import { useAppSelector } from '@app/hooks';
 
 interface Props {
   userData?: UserResponse;
-  isFetchingUserData: boolean;
+  isLoadingUserData: boolean;
   isLoggingout: boolean;
   isUserDataError: boolean;
   isLogoutError: boolean;
@@ -31,7 +31,7 @@ let prevScrollY = 0;
 
 const HeaderPresenter = ({
   userData,
-  isFetchingUserData,
+  isLoadingUserData,
   isLoggingout,
   isUserDataError,
   isLogoutError,
@@ -135,9 +135,14 @@ const HeaderPresenter = ({
   //header menu의 높이(70vh)보다 아래부분 클릭시 메뉴닫힘기능 추가
   useEffect(() => {
     if (isMenuIconClicked) {
-      const handleClick = (event: MouseEvent) => {
-        // 클릭 이벤트가 발생한 지점의 Y 좌표
-        const clickY = event.clientY;
+      const handleInteraction = (event: MouseEvent | TouchEvent) => {
+        // 클릭or터치 이벤트가 발생한 지점의 Y 좌표
+        let clientY;
+        if (event.type === 'touchend') {
+          clientY = (event as TouchEvent).changedTouches[0].clientY;
+        } else {
+          clientY = (event as MouseEvent).clientY;
+        }
 
         // 뷰포트의 높이
         const viewportHeight = window.innerHeight;
@@ -145,15 +150,17 @@ const HeaderPresenter = ({
         // 뷰포트 하단에서부터 30%높이( <=> 70vh: 내려오는 헤더 높이) 지점 계산
         const thresholdY = viewportHeight - viewportHeight * 0.3;
 
-        // 만약 클릭 지점이 기준 높이 이상이라면 동작 수행
-        if (clickY >= thresholdY) {
+        // 만약 클릭or터치 지점이 기준 높이 이상이라면 동작 수행
+        if (clientY >= thresholdY) {
           setMenuIconClicked(false);
         }
       };
-      document.addEventListener('click', handleClick);
+      document.addEventListener('click', handleInteraction);
+      document.addEventListener('touchend', handleInteraction);
 
       return () => {
-        document.removeEventListener('click', handleClick);
+        document.removeEventListener('click', handleInteraction);
+        document.removeEventListener('touchend', handleInteraction);
       };
     }
   }, [isMenuIconClicked]);
@@ -213,7 +220,7 @@ const HeaderPresenter = ({
                       <NavLinkBox href="/settings">Settings</NavLinkBox>
                       <span></span>
                       <li>
-                        <Button variant="logout" onClick={onClickLogout} text="Logout" />
+                        <Button variant="logout" onClick={onClickLogout} text="Log out" />
                       </li>
                     </ul>
                   ) : (
@@ -222,7 +229,7 @@ const HeaderPresenter = ({
                       <NavLinkBox href="/settings">Settings</NavLinkBox>
                       <span></span>
                       <li>
-                        <Button variant="logout" onClick={onClickLogout} text="Logout" />
+                        <Button variant="logout" onClick={onClickLogout} text="Log out" />
                       </li>
                     </ul>
                   ))}
@@ -230,14 +237,14 @@ const HeaderPresenter = ({
             ) : (
               <>
                 {/* 새로고침시 화면 */}
-                {isFetchingUserData || isLoggingout ? (
+                {isLoadingUserData || isLoggingout ? (
                   <li>
                     <div></div>
                   </li>
                 ) : (
                   //로그인 전
                   <NavLinkBox href="/login" passHref={true}>
-                    <Button variant="login" text="Login" />
+                    <Button variant="login" text="Log in" />
                   </NavLinkBox>
                 )}
               </>
