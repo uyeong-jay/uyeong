@@ -18,7 +18,7 @@ const getCategories = async (req: Request, res: Response) => {
       // 카테고리 페이지 외 사용
       categories = await Categories.find().limit(limit).sort(sort);
     } else {
-      // 카테고리 페이지 내 사용 (ssr x)
+      // 카테고리 페이지 내 사용
       categories = await Categories.find().skip(skip).limit(limit).sort(sort);
     }
 
