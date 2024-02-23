@@ -1,9 +1,5 @@
 import styled from '@_settings/styled';
 
-export const ARTICLE = {} as any;
-export const DIV = {} as any;
-export const P = {} as any;
-
 interface ThumbnailProps {
   thumbnail: string | File;
 }
@@ -14,6 +10,10 @@ type ContentMiddleProps = ThumbnailProps;
 type CardTagsProps = ThumbnailProps;
 type MidLineProps = ThumbnailProps;
 type CardDescriptionProps = ThumbnailProps;
+
+export const ARTICLE = {} as any;
+export const DIV = {} as any;
+export const P = {} as any;
 
 ARTICLE.Frame = styled.article`
   border: 2px solid ${({ theme }) => theme.BD_C};
@@ -55,23 +55,23 @@ DIV.Title = styled.div<TitleProps>`
   height: 100%;
 
   & > h3 {
-    // border: 1px solid blue;
+    // border: 1px solid red;
     position: relative;
     width: 100%;
-    height: 25%;
-    font-size: 15px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    font-size: 20px;
 
     & > a {
-      // border: 1px solid blue;
-      display: inline-block;
-      padding: 20px;
+      // border: 1px solid red;
+      display: block;
+      height: auto;
+      padding: 15px 20px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       color: ${({ theme }) => theme.FONT_C};
 
       &:hover {
-        opacity: 0.7;
+        opacity: 0.5;
       }
     }
   }
@@ -100,8 +100,6 @@ DIV.Title = styled.div<TitleProps>`
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
     & > h3 {
-      font-size: 20px;
-
       ${(props) => {
         if (props.thumbnail) {
           return `
@@ -122,7 +120,7 @@ DIV.Title = styled.div<TitleProps>`
     }
 
     & .blog-card-image-wrapper {
-      top: 28%;
+      top: 25%;
       width: 90%;
       height: 60%;
       margin: 0;
@@ -154,9 +152,12 @@ DIV.Content = styled.div<ContentProps>`
   }};
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
+    // border: 1px solid green;
+    position: relative;
+    bottom: -5%;
     border-top: none;
     width: 100%;
-    height: 80%;
+    height: 55%;
 
     ${(props) => {
       if (!props.thumbnail) {
@@ -164,6 +165,7 @@ DIV.Content = styled.div<ContentProps>`
           // border: 1px solid black;
           border: none;
           position: absolute;
+          bottom: 17%;
         `;
       }
     }}
@@ -171,59 +173,47 @@ DIV.Content = styled.div<ContentProps>`
 `;
 
 DIV.ContentTop = styled.div`
-  // border: 1px solid red;
-  width: auto;
+  // border: 1px solid green;
   position: absolute;
   top: -30px;
-  right: 5px;
+  right: 15px;
 
   //카테고리
   & > span {
     // border: 1px solid red;
-    width: 100%;
     font-size: 15px;
     color: ${({ theme }) => theme.FONT_C};
     font-weight: bold;
   }
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
-    position: static;
-    width: 100%;
-    height: 25%;
-
-    & > span {
-      display: inline-block;
-      float: right;
-      width: auto;
-      position: relative;
-      top: -65px;
-      right: 5px;
-    }
+    top: -110px;
   }
   @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
-    & > span {
-      top: -75px;
-    }
+    top: -140px;
   }
 `;
 DIV.ContentMiddle = styled.div<ContentMiddleProps>`
-  // border: 1px solid black;
+  // border: 1px solid blue;
   display: flex;
   flex-direction: column;
-  justify-contents: center;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 65%;
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
-    border-left: 1px solid black;
+    border-left: 1px solid ${({ theme }) => theme.BD_C};
     height: 70%;
+    height: 100%;
 
     ${(props) => {
       if (!props.thumbnail) {
         return `
-          border-left: none;
           flex-direction: row;
+          border-left: none;
+          height: 70%;
+          height: 100%;
         `;
       }
     }}
@@ -239,20 +229,26 @@ DIV.CardTags = styled.div<CardTagsProps>`
   height: 100%;
   padding: 8% 5%;
   text-align: center;
-  line-height: 2;
+  // line-height: 2;
 
   & > p {
     // border: 1px solid black;
-    overflow: hidden;
-    word-break: break-all; // 긴 단어도 줄 바꿈하여 표시
-    text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 3; // 표시될 줄 수 지정
+    overflow: hidden;
     -webkit-box-orient: vertical;
+    // text-overflow: ellipsis;
+    word-break: break-word;
 
     & > span {
       // border: 1px solid black;
+      display: inline-block;
       margin: 0 7px;
+      max-width: 200px;
+      max-height: 25px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       color: ${({ theme }) => theme.FONT_C};
 
       & > span {
@@ -264,7 +260,7 @@ DIV.CardTags = styled.div<CardTagsProps>`
   }
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
-    padding: 5%;
+    padding: 0 5%;
 
     & > p {
       ${(props) => {
@@ -275,7 +271,7 @@ DIV.CardTags = styled.div<CardTagsProps>`
           `;
         } else {
           return `
-            font-size: 12px;
+            font-size: 14px;
             -webkit-line-clamp: 2;
           `;
         }
@@ -286,6 +282,14 @@ DIV.CardTags = styled.div<CardTagsProps>`
   @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
     & > p {
       -webkit-line-clamp: 3;
+
+      ${(props) => {
+        if (!props.thumbnail) {
+          return `
+            font-size: 18px;
+          `;
+        }
+      }}
     }
   }
 `;
@@ -293,7 +297,7 @@ DIV.CardTags = styled.div<CardTagsProps>`
 DIV.MidLine = styled.div<MidLineProps>`
   border-top: 1px solid ${({ theme }) => theme.BD_C};
   width: 25%;
-  height: 0%;
+  height: 0px;
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
     ${(props) => {
@@ -319,28 +323,28 @@ DIV.CardDescription = styled.div<CardDescriptionProps>`
 
   & > p {
     // border: 1px solid black;
-    overflow: hidden;
-    word-break: break-all; // 긴 단어도 줄 바꿈하여 표시
-    text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 3; // 표시될 줄 수 지정
+    overflow: hidden;
+    // text-overflow: ellipsis;
     -webkit-box-orient: vertical;
+    word-break: break-word;
     color: ${({ theme }) => theme.FONT_C};
   }
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
-    padding: 5%;
+    padding: 0 5%;
 
     & > p {
+      font-size: 15px;
+
       ${(props) => {
         if (!props.thumbnail) {
           return `
-            font-size: 15px;
             -webkit-line-clamp: 3;
           `;
         } else {
           return `
-            font-size: 12px;
             -webkit-line-clamp: 2;
           `;
         }
@@ -351,12 +355,20 @@ DIV.CardDescription = styled.div<CardDescriptionProps>`
   @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
     & > p {
       -webkit-line-clamp: 3;
+
+      ${(props) => {
+        if (!props.thumbnail) {
+          return `
+            font-size: 18px;
+          `;
+        }
+      }}
     }
   }
 `;
 
 DIV.ContentBottom = styled.div`
-  // border: 1px solid black;
+  // border: 1px solid green;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -370,11 +382,19 @@ DIV.ContentBottom = styled.div`
   }
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
-    height: 5%;
+    height: 0px;
+    bottom: -40px;
 
     & > p {
-      position: relative;
-      padding: 15px 10px;
+      padding: 0 15px;
+    }
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
+    bottom: -55px;
+
+    & > p {
+      padding: 0 20px;
     }
   }
 `;

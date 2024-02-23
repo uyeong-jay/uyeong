@@ -79,15 +79,15 @@ const BlogPosts = ({ blogPostsBySearch }: Propss) => {
     <DIV.BlogPostsWrapper>
       {blogPostsBySearch?.posts ? (
         blogPostsBySearch.posts.map((post) =>
-          //불러온 post 갯수가 limit 수와 딱맞아 떨어지고 더이상 불러올 post가 없을때
           post ? (
             <BlogPostCard key={post._id} post={post} />
           ) : (
+            //불러온 post갯수가 limit갯수와 같고 더이상 불러올 post가 없을때
             <DIV.NoMorePosts key={uuid()}>- No more posts -</DIV.NoMorePosts>
           ),
         )
       ) : blogPostsBySearch?.hasMatchingPost === false ? (
-        <DIV.NoPostsFound>- No posts found in the search -</DIV.NoPostsFound>
+        <DIV.NoPostsFound>- No results found for your search -</DIV.NoPostsFound>
       ) : (
         //새로고침시 보이는 화면
         <>
