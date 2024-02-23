@@ -42,11 +42,11 @@ const JoinPresenter = ({
   const [passwordType, setPasswordType] = useState(true);
   const [cfPasswordType, setCfPasswordType] = useState(true);
 
-  if (userData?.user && !joinSuccess) return <NotFound joinError />;
+  if (userData?.user && !joinSuccess) return <NotFound />;
   return (
     <>
       <Head>
-        <title>UYeong | Sign up</title>
+        <title>UYeong | Join</title>
       </Head>
 
       {joinSuccess ? (
@@ -62,7 +62,7 @@ const JoinPresenter = ({
               Please click the button below to log in to your account!
             </p>
             <Link href="/login" passHref>
-              Login
+              Log in
             </Link>
           </DIV.JoinSuccess>
         </PageFrame>
@@ -122,7 +122,7 @@ const JoinPresenter = ({
           </FORM.JoinForm>
 
           <P.JoinFooter>
-            Already have an account? <Link href="/login">Login here!</Link>
+            Already have an account? <Link href="/login">Log in here!</Link>
           </P.JoinFooter>
 
           {/* 에러 메시지 */}

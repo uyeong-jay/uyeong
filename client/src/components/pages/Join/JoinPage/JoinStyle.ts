@@ -21,10 +21,10 @@ DIV.JoinSuccess = styled.div`
       // border: 1px solid black;
     }
 
-    & > svg {
+    & > .party-popper-icon {
       // border: 1px solid black;
       margin-left: 10px;
-      transform: translate(2px, -5px);
+      transform: translate(2px, -2px);
       width: 60px;
       height: 50px;
     }
@@ -42,7 +42,7 @@ DIV.JoinSuccess = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 90%;
+    width: 100%;
     height: 30px;
     margin-top: 20px;
     font-size: 15px;
