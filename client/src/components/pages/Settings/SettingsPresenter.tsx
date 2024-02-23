@@ -51,7 +51,7 @@ const SettingsPresenter = ({
     }
   }, [fileObj]);
 
-  if (!userData?.user) return <NotFound loginError />;
+  if (!userData?.user) return <NotFound />;
   return (
     <>
       <Head>
