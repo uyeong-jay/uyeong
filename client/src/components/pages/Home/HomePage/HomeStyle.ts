@@ -108,7 +108,6 @@ DIV.SummaryBlock = styled.div`
   position: relative;
   width: 80%;
   height: 400px;
-  min-height: 400px;
   margin-top: 50px;
   border-radius: 20px;
 
@@ -117,7 +116,6 @@ DIV.SummaryBlock = styled.div`
     left: 0%;
     width: 45%;
     height: 80%;
-    min-height: auto;
     margin-left: 1px; //scoll 오른쪽에 뜨는 공간 없앰
     margin-top: 0px;
     transform: rotate(0deg);

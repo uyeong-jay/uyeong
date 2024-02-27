@@ -20,16 +20,13 @@ const StyledDetailButton = styled.button`
   height: 30px;
 
   & > a {
-    color: gray;
+    color: ${({ theme }) => theme.FONT_C};
   }
 
   & .arrow-right-icon {
     width: 7px;
-    position: relative;
-    top: 1px;
-    left: 0;
+    fill: ${({ theme }) => theme.FONT_C};
     transition: transform 0.3s;
-    fill: gray;
   }
 
   &:hover {

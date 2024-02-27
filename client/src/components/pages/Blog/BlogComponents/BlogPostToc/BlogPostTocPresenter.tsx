@@ -110,7 +110,6 @@ const BlogPostTocPresenter = ({ headings }: Props) => {
     <NAV.Frame>
       <ul>
         {headings.map(({ id, text, level }) => {
-          // console.log(id);
           return (
             <LI.Heading key={id} headingLevel={level} headingId={id} activeId={isMarkdownScrolling ? activeId : ''}>
               <a href={`#${id?.toLowerCase().replace(/\s+/g, '-')}`}>{text}</a>

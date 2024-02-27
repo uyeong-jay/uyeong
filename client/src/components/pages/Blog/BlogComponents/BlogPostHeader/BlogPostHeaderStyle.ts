@@ -86,5 +86,7 @@ DIV.Bottom = styled.div`
     // border: 1px solid black;
     margin: 10px;
     font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;

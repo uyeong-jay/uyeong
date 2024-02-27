@@ -8,7 +8,7 @@ DIV.AboutAvatarBox = styled.div`
   // border: 1px solid red;
   display: flex;
   flex-direction: column;
-  // justify-content: center;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;

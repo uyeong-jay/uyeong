@@ -34,7 +34,7 @@ const GlobalStyle = () => {
           line-height: 1.5; //줄 높이 글자 크기의 1.5배
           font-family: 'Noto Sans KR', sans-serif;
           -webkit-font-smoothing: antialiased;
-          font-size: 12px;
+          font-size: 14px;
         }
 
         /* 텍스트 삐져나감 방지 */

@@ -18,29 +18,27 @@ DIV.TagsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  height: 65%;
+  max-height: 250px;
   padding: 20px 20px 15px 20px;
   overflow: hidden;
 
   @media screen and (min-height: 500px) and (min-width: 850px) {
     padding: 0px 10px;
+    max-height: 200px;
   }
 `;
 
 DIV.TagWrapper = styled.div<TagWrapperProps>`
   // border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: auto;
+  display: block;
   height: 40px;
-  padding: 0 10px;
+  line-height: 40px;
+  padding: 0px 10px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   cursor: pointer;
-  color: #514e2e;
+  color: ${({ theme }) => theme.FONT_C};
   font-size: ${(props) => {
     switch (props.tagCount) {
       case 1:
