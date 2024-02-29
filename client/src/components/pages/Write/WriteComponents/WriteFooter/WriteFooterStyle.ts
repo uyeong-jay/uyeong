@@ -4,13 +4,13 @@ export const StyledWriteFooter = styled.div`
   // border: 1px solid black;
   display: flex;
   justify-content: space-between;
-  position: absolute;
+  position: relative;
   bottom: 0;
-  left: 0;
-  width: 50%;
+  left: -25px;
+  width: calc(100% + 25px);
   height: 60px;
   padding: 15px;
-  background-color: #dadada;
+  background-color: ${({ theme }) => theme.INITIAL_BG_C};
 
   & > button {
     // border: 1px solid black;
@@ -24,11 +24,13 @@ export const StyledWriteFooter = styled.div`
     justify-content: start;
     align-items: center;
 
-    & .angle-left-icon {
+    & .arrow-left-icon {
       // border: 1px solid black;
-      width: 9.5px;
+      width: 9px;
       margin-right: 10px;
       fill: ${({ theme }) => theme.FONT_C};
+      opacity: 0.7;
+      transform: translateY(-1px);
     }
   }
 
@@ -38,11 +40,12 @@ export const StyledWriteFooter = styled.div`
     justify-content: end;
     align-items: center;
 
-    & .angle-up-icon {
+    & .arrow-up-icon {
       // border: 1px solid black;
-      width: 14px;
+      width: 16px;
       margin-left: 10px;
       fill: ${({ theme }) => theme.FONT_C};
+      opacity: 0.7;
     }
   }
 `;

@@ -7,7 +7,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ArrowRightIcon from '@icons/ArrowRightIcon';
-import ArrowLeftIcon from '@icons/ArrowLefttIcon';
+import ArrowLeftIcon from '@icons/ArrowLeftIcon';
 import DetailButton from '@molecules/DetailButton';
 import SummaryTitle from '../SummaryTitle';
 

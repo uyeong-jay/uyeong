@@ -1,11 +1,11 @@
 import { BlogPostReq } from '@app/services/blog/postApi';
 import { UserResponse } from '@app/services/user/userApi';
 import Modal from '@modals/Modal';
-import AngleLeftIcon from '@icons/AngleLeftIcon';
-import AngleUpIcon from '@icons/AngleUpIcon';
 import React from 'react';
 import Publish from '../Publish';
 import { StyledWriteFooter } from './WriteFooterStyle';
+import ArrowLeftIcon from '@icons/ArrowLeftIcon';
+import ArrowUpIcon from '@icons/ArrowUpIcon';
 
 interface Props {
   userData?: UserResponse;
@@ -29,11 +29,11 @@ const WriteFooterPresenter = ({
   return (
     <StyledWriteFooter>
       <button className="back-button">
-        <AngleLeftIcon />
-        나가기
+        <ArrowLeftIcon />
+        Exit
       </button>
       <button className="done-button" onClick={onClickDone}>
-        완료 <AngleUpIcon />
+        Done <ArrowUpIcon />
       </button>
 
       <Publish userData={userData} blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />

@@ -16,12 +16,12 @@ const WriteContainer = () => {
   const { id } = router.query;
 
   const initialState = {
-    title: '', //o
-    tags: [], //o
-    content: '', //o
-    thumbnail: '', //o
-    description: '', //o
-    category: '', //o
+    title: '',
+    tags: [],
+    content: '',
+    thumbnail: '',
+    description: '',
+    category: '',
     privacy: false,
   };
 

@@ -5,6 +5,6 @@ export const StyledWriteMDViewer = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: white;
+  background-color: ${({ theme }) => theme.LIGHT_BG_C};
   padding: 30px;
 `;

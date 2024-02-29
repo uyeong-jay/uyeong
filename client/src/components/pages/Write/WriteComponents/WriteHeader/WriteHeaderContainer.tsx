@@ -10,6 +10,7 @@ interface Props {
 const WriteHeaderContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
   const { tags } = blogPostInfo;
   const [currTag, setCurrTag] = useState('');
+  const [isOver20Tags, setOver20Tags] = useState(false);
 
   //Title 작성 input
   const onChangeTitleInput = useCallback(
@@ -28,13 +29,21 @@ const WriteHeaderContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
   const onSubmitTag = useCallback(
     (e) => {
       e.preventDefault();
+
       //입력하지 않았거나 이미 존재할 경우
       if (!currTag || tags.find((tag) => tag === currTag)) {
         setCurrTag('');
         return;
       }
+
+      //최대 20개까지 생성 가능
+      if (tags.length >= 20) {
+        setOver20Tags(true);
+        return;
+      }
+
       //중복 존재하지 않을 경우
-      const postTags = [...tags]; //props 직접 변경 불가 > 복사 후 변경 하기
+      const postTags = [...tags]; //props 직접 변경 불가 > 복사 후 변경
       postTags.push(currTag);
 
       setBlogPostInfo({ ...blogPostInfo, tags: postTags });
@@ -60,6 +69,8 @@ const WriteHeaderContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
       onChangeTagInput={onChangeTagInput}
       onSubmitTag={onSubmitTag}
       onClickTag={onClickTag}
+      isOver20Tags={isOver20Tags}
+      setOver20Tags={setOver20Tags}
     />
   );
 };

@@ -14,7 +14,7 @@ const WriteMDEditerPresenter = ({ blogPostInfo, memoizedContent, onChangeTextare
       <TextareaBox
         value={!memoizedContent ? blogPostInfo.content : memoizedContent}
         onChange={onChangeTextarea}
-        placeholder="Write your story"
+        placeholder="Write your story..."
         spellCheck="false"
       />
     </StyledWriteMDEditer>

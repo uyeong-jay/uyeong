@@ -6,7 +6,7 @@ import WriteMDEditer from '../WriteComponents/WriteMDEditer';
 import WriteMDViewer from '../WriteComponents/WriteMDViewer';
 import WriteFooter from '../WriteComponents/WriteFooter';
 import NotFound from '@src/pages/404';
-import { StyledWrite } from './WriteStyle';
+import { DIV } from './WriteStyle';
 import useScrollBlock from '@hooks/useScrollBlock';
 
 interface Props {
@@ -25,8 +25,8 @@ const WritePresenter = ({ userData, blogPostsData, blogPostInfo, setBlogPostInfo
       <Head>
         <title>UYeong | Write</title>
       </Head>
-      <StyledWrite>
-        <div className="write-right-group">
+      <DIV.WriteFrame>
+        <DIV.WriteLeftGroup>
           <WriteHeader blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
           <WriteMDEditer blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
           <WriteFooter
@@ -35,11 +35,11 @@ const WritePresenter = ({ userData, blogPostsData, blogPostInfo, setBlogPostInfo
             blogPostsData={blogPostsData}
             setBlogPostInfo={setBlogPostInfo}
           />
-        </div>
-        <div className="write-left-group">
+        </DIV.WriteLeftGroup>
+        <DIV.WriteRightGroup>
           <WriteMDViewer blogPostInfo={blogPostInfo} />
-        </div>
-      </StyledWrite>
+        </DIV.WriteRightGroup>
+      </DIV.WriteFrame>
     </>
   );
 };

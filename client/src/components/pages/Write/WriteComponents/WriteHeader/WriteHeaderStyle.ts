@@ -4,85 +4,119 @@ interface WriteHeaderProps {
   animationName: string;
 }
 
-export const StyledWriteHeader = styled.div`
-  // border: 1px solid black;
+export const DIV = {} as any;
+
+DIV.WriteHeader = styled.div`
+  // border: 1px solid green;
   display: flex;
   flex-direction: column;
-  height: 200px;
+  margin-bottom: 20px;
 
-  //Title input
+  //블로그 제목
   & > input {
-    // border: 1px solid black;
-    background-color: #eff1f3;
     border: none;
+    // border: 1px solid black;
+    background-color: ${({ theme }) => theme.BG_C};
     outline: none;
-    height: 80px;
+    padding: 15px 2px;
+    height: 70px;
     font-size: xx-large;
+    color: ${({ theme }) => theme.FONT_C};
+    letter-spacing: 0.5px;
   }
+`;
 
-  & > .write-header-tag-group {
+DIV.WriteHeaderTagGroup = styled.div`
+  // border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+
+  //블로그 태그
+  & > ul {
     // border: 1px solid black;
     display: flex;
     flex-wrap: wrap;
-    position: relative;
+    max-height: 150px;
+    padding: 5px 0;
+    margin-right: 1px;
 
-    & > ul {
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    ::-webkit-scrollbar {
+      border-radius: 50%;
+      width: 3px;
+    }
+    ::-webkit-scrollbar-track {
       // border: 1px solid black;
-      display: flex;
-      flex-wrap: wrap;
-      overflow: hidden;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: ${({ theme }) => theme.BD_C};
+      border-radius: 10px;
+    }
 
-      & > li {
-        // border: 1px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 35px;
-        margin: 5px;
-        padding: 0 10px;
-        background-color: #eff1f3;
-        border-radius: 15px;
-        cursor: pointer;
+    &:hover {
+      :-webkit-scrollbar {
+        border-radius: 50%;
+        width: 5px;
       }
     }
 
-    & > form {
+    & > li {
       // border: 1px solid black;
-      height: 50px;
+      height: 35px;
+      line-height: 35px;
+      margin: 5px 12px 5px 0;
+      padding: 0 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      background-color: ${({ theme }) => theme.LIGHT_BG_C};
+      border-radius: 15px;
+      cursor: pointer;
+      color: ${({ theme }) => theme.FONT_C};
+    }
+  }
 
-      & > input {
-        // border: 1px solid black;
-        background-color: #eff1f3;
-        border: none;
-        outline: none;
-        width: 100%;
-        height: 100%;
-        font-size: large;
-        padding-left: 5px;
-        padding-bottom: 10px;
-      }
+  //블로그 태그 입력
+  & > form {
+    // border: 1px solid blue;
+    position: relative;
+
+    & > input {
+      border: none;
+      // border: 1px solid black;
+      background-color: ${({ theme }) => theme.BG_C};
+      outline: none;
+      width: 100%;
+      height: 50px;
+      font-size: large;
+      padding-left: 5px;
     }
   }
 `;
 
-export const StyledDropdownMsg = styled.div<WriteHeaderProps>`
+DIV.DropdownMsg = styled.div<WriteHeaderProps>`
   // border: 1px solid black;
   position: absolute;
-  width: 290px;
   padding: 10px;
   font-size: small;
-  background-color: #eff1f3;
+  white-space: pre-line;
+  background-color: ${({ theme }) => theme.LIGHT_BG_C};
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgb(0, 0, 0, 0.3);
+  color: ${({ theme }) => theme.FONT_C};
 
   animation: ${(props) => props.animationName} 0.25s ease-out 0s forwards;
 
   @keyframes down-msg {
     from {
-      bottom: -45px;
+      top: 45px;
       opacity: 0;
       z-index: -1;
     }
     to {
-      bottom: -55px;
+      top: 55px;
       opacity: 1;
       z-index: 1;
     }
@@ -90,12 +124,12 @@ export const StyledDropdownMsg = styled.div<WriteHeaderProps>`
 
   @keyframes up-msg {
     from {
-      bottom: -55px;
+      top: 55px;
       opacity: 1;
       z-index: 1;
     }
     to {
-      bottom: -45px;
+      top: 45px;
       display: none;
       opacity: 0;
       z-index: -1;
