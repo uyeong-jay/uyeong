@@ -36,7 +36,7 @@ const updateUser = async (req: IReqAuth, res: Response) => {
     }
 
     //성공
-    res.status(200).json({ msg: "Update successfully completed" });
+    res.status(200).json({ msg: "Update successfully completed!" });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });
   }

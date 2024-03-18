@@ -7,7 +7,7 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Please enter your nickname."],
       trim: true,
-      maxLength: [20, "Your nickname must be between 2 and 10 characters long."],
+      maxLength: [20, "Your nickname must be between 2 and 20 characters long."],
     },
     email: {
       type: String,

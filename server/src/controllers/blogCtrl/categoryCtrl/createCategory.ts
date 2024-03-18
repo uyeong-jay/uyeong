@@ -13,7 +13,7 @@ const createCategory = async (req: IReqAuth, res: Response) => {
     const name = req.body.name;
 
     //category 조회
-    //catrgory > unique = true
+    //catrgory model > required, unique, maxLength
 
     //데이터 생성
     const newCategory = new Categories({ name });

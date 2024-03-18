@@ -31,7 +31,7 @@ const postSchema = new Schema(
     category: {
       type: String,
       trim: true,
-      maxLength: [20, "the category name must be less than 20 characters."],
+      maxLength: [20, "The category name must be less than 20 characters."],
     },
     privacy: {
       type: Boolean,

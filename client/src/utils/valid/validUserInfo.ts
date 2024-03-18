@@ -18,8 +18,8 @@ const validUserInfo = (userUpdateInfo: userUpdateInfoType, userData?: userDataTy
 
   //nickname 에러
   if (!nickname) return 'Please enter your nickname.';
-  else if (nickname.length < 2 || nickname.length > 10)
-    return 'Your nickname must be between 2 and 10 characters long.';
+  else if (nickname.length < 2 || nickname.length > 20)
+    return 'Your nickname must be between 2 and 20 characters long.';
 
   //email 에러
   if (!email) return 'Please enter your email.';

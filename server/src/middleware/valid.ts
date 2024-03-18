@@ -17,8 +17,8 @@ const valid = (req: Request, res: Response, next: NextFunction) => {
 
   //nickname 에러
   if (!nickname) errors.push("Please enter your nickname.");
-  else if (nickname.length < 2 || nickname.length > 10)
-    errors.push("Your nickname must be between 2 and 10 characters long.");
+  else if (nickname.length < 2 || nickname.length > 20)
+    errors.push("Your nickname must be between 2 and 20 characters long.");
 
   //email 에러
   if (!email) errors.push("Please enter your email.");

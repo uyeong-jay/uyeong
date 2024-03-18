@@ -3,8 +3,7 @@ const validFile = (file?: File) => {
   if (file) {
     //파일 크기 에러
     if (file.size > 1024 * 1024) {
-      alert('Image size must be less than 1MB.');
-      return;
+      return 'The image size should be less than 1MB.';
     }
 
     //파일 확장자 에러
@@ -14,10 +13,11 @@ const validFile = (file?: File) => {
       file.type !== 'image/png' &&
       file.type !== 'image/gif'
     ) {
-      alert('Please select a different image extension.');
-      return;
+      return 'Please select a different image file extension.';
     }
   }
+
+  return '';
 };
 
 export default validFile;

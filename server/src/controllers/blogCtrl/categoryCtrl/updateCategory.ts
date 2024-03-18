@@ -14,6 +14,9 @@ const updateCategory = async (req: IReqAuth, res: Response) => {
     //client 데이터 가져오기
     const { name: oldName, currName } = req.body;
 
+    if (currName.length > 20)
+      return res.status(400).json({ msg: "The category name must be less than 20 characters." });
+
     //category 조회(중복 조회)
     const category = await Categories.findOne({ name: currName });
     if (category) return res.status(400).json({ msg: "This category name already exists." });
