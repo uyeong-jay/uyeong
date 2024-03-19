@@ -19,7 +19,8 @@ const WriteFooterContainer = ({ userData, blogPostsData, blogPostInfo, setBlogPo
 
   const { title, content } = blogPostInfo;
   const [writeErrMsg, setWriteErrMsg] = useState('');
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isPostModalOpen, setPostModalOpen] = useState(false);
+  const [isExitModalOpen, setExitModalOpen] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -34,13 +35,21 @@ const WriteFooterContainer = ({ userData, blogPostsData, blogPostInfo, setBlogPo
     const blogTitleErr = validBlogTitle();
     const blogErr = validBlog({ title, content });
     if (blogTitleErr) {
-      setWriteErrMsg('동일한 포스트 제목이 존재합니다.');
-      return setModalOpen(true);
+      setWriteErrMsg('The same post title already exists. Please change the title.');
+      return setPostModalOpen(true);
     } else if (blogErr) {
       setWriteErrMsg(blogErr);
-      return setModalOpen(true);
+      return setPostModalOpen(true);
     } else dispatch(startPuslishing());
   }, [content, dispatch, title, validBlogTitle]);
+
+  const onClickExit = useCallback(
+    (isCallback?: boolean) => {
+      if (!isCallback) return setExitModalOpen(true);
+      router.back();
+    },
+    [router],
+  );
 
   return (
     <WriteFooterPresenter
@@ -48,9 +57,12 @@ const WriteFooterContainer = ({ userData, blogPostsData, blogPostInfo, setBlogPo
       blogPostInfo={blogPostInfo}
       setBlogPostInfo={setBlogPostInfo}
       writeErrMsg={writeErrMsg}
-      isModalOpen={isModalOpen}
-      setModalOpen={setModalOpen}
+      isPostModalOpen={isPostModalOpen}
+      setPostModalOpen={setPostModalOpen}
       onClickDone={onClickDone}
+      isExitModalOpen={isExitModalOpen}
+      setExitModalOpen={setExitModalOpen}
+      onClickExit={onClickExit}
     />
   );
 };

@@ -12,9 +12,12 @@ interface Props {
   blogPostInfo: BlogPostReq;
   setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
   writeErrMsg: string;
-  isModalOpen: boolean;
-  setModalOpen: (isModalOpen: boolean) => void;
+  isPostModalOpen: boolean;
+  setPostModalOpen: (isPostModalOpen: boolean) => void;
   onClickDone: () => void;
+  isExitModalOpen: boolean;
+  setExitModalOpen: (isPostModalOpen: boolean) => void;
+  onClickExit: (isCallback?: boolean) => void;
 }
 
 const WriteFooterPresenter = ({
@@ -22,13 +25,16 @@ const WriteFooterPresenter = ({
   blogPostInfo,
   setBlogPostInfo,
   writeErrMsg,
-  isModalOpen,
-  setModalOpen,
+  isPostModalOpen,
+  setPostModalOpen,
   onClickDone,
+  isExitModalOpen,
+  setExitModalOpen,
+  onClickExit,
 }: Props) => {
   return (
     <StyledWriteFooter>
-      <button className="back-button">
+      <button className="back-button" onClick={() => onClickExit()}>
         <ArrowLeftIcon />
         Exit
       </button>
@@ -38,7 +44,16 @@ const WriteFooterPresenter = ({
 
       <Publish userData={userData} blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
 
-      <Modal type="alert" msg={writeErrMsg} isOpen={isModalOpen} setOpen={setModalOpen} shakeAlert />
+      <Modal type="alert" msg={writeErrMsg} isOpen={isPostModalOpen} setOpen={setPostModalOpen} shakeAlert />
+
+      <Modal
+        type="confirm"
+        msg={`The newly entered content will be lost. \n Are you sure you want to exit?`}
+        isOpen={isExitModalOpen}
+        setOpen={setExitModalOpen}
+        callback={() => onClickExit(true)}
+        shakeAlert
+      />
     </StyledWriteFooter>
   );
 };

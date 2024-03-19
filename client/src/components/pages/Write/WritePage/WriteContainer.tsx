@@ -31,7 +31,7 @@ const WriteContainer = () => {
     if (id) {
       const postData = blogPostsData?.posts?.find((v) => v._id === id);
 
-      if (!postData) return setBlogPostInfo(null);
+      if (!postData) setBlogPostInfo(null);
 
       dispatch(getPostById(postData));
 
