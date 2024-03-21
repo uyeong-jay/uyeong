@@ -1,6 +1,7 @@
 import { BlogPost } from '@app/services/blog/postApi';
 import React from 'react';
-import { StyledPublishActionButtons } from './PublishActionButtonsStyle';
+import { DIV } from './PublishActionButtonsStyle';
+import MiniLoader from '@modals/MiniLoader';
 
 interface Props {
   postId: string | string[] | undefined;
@@ -8,6 +9,7 @@ interface Props {
   onClickCancel: () => void;
   onClickPost: () => void;
   onClickUpdate: () => void;
+  isClicked: boolean;
 }
 
 const PublishActionButtonsPresenter = ({
@@ -16,24 +18,23 @@ const PublishActionButtonsPresenter = ({
   onClickCancel,
   onClickPost,
   onClickUpdate,
+  isClicked,
 }: Props) => {
   return (
-    <StyledPublishActionButtons>
-      <div className="action-buttons-block">
-        <button className="cancel-button" onClick={onClickCancel}>
-          Cancel
-        </button>
-        {postId && blogPostDataById?._id === postId ? (
-          <button className="post-button" onClick={onClickUpdate}>
-            Update
+    <DIV.PublishActionButtons>
+      <div>
+        <button onClick={onClickCancel}>Cancel</button>
+        {isClicked ? (
+          <button style={{ cursor: 'default' }}>
+            <MiniLoader w={20} h={20} />
           </button>
+        ) : postId && blogPostDataById?._id === postId ? (
+          <button onClick={onClickUpdate}>Update</button>
         ) : (
-          <button className="post-button" onClick={onClickPost}>
-            Post
-          </button>
+          <button onClick={onClickPost}>Post</button>
         )}
       </div>
-    </StyledPublishActionButtons>
+    </DIV.PublishActionButtons>
   );
 };
 

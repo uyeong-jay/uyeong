@@ -3,7 +3,7 @@ import PublishCategory from '../PublishCategory';
 import PublishPreview from '../PublishPreview';
 import PublishPrivacy from '../PublishPrivacy';
 import PublishURL from '../PublishURL';
-import { StyledPublish } from './PublishStyle';
+import { DIV } from './PublishStyle';
 import useAnimation from '@hooks/useAnimation';
 import { BlogPostReq } from '@app/services/blog/postApi';
 import { UserResponse } from '@app/services/user/userApi';
@@ -21,19 +21,23 @@ const PublishPresenter = ({ userData, blogPostInfo, setBlogPostInfo, isPublishin
   return (
     <>
       {render && (
-        <StyledPublish animationName={show ? 'up-publish' : 'down-publish'} onAnimationEnd={() => onAnimationEnd}>
-          <div className="publish-block">
-            <div className="publish-right-group">
+        <DIV.PublishFrame animationName={show ? 'up-publish' : 'down-publish'} onAnimationEnd={() => onAnimationEnd}>
+          <DIV.PublishGroup>
+            <DIV.PublishLeftGroup>
+              <h3>Post Preview</h3>
               <PublishPreview blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
-            </div>
-            <div className="publish-left-group">
-              <PublishCategory blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
-              <PublishPrivacy blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
-              <PublishURL blogPostInfo={blogPostInfo} />
+            </DIV.PublishLeftGroup>
+            <DIV.PublishRightGroup>
+              <h3>Post Settings</h3>
+              <DIV.PublishRightMain>
+                <PublishCategory blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
+                <PublishPrivacy blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
+                <PublishURL blogPostInfo={blogPostInfo} />
+              </DIV.PublishRightMain>
               <PublishActionButtons userData={userData} blogPostInfo={blogPostInfo} />
-            </div>
-          </div>
-        </StyledPublish>
+            </DIV.PublishRightGroup>
+          </DIV.PublishGroup>
+        </DIV.PublishFrame>
       )}
     </>
   );

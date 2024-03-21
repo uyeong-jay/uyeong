@@ -5,12 +5,14 @@ import { createSlice } from '@reduxjs/toolkit';
 interface initialState {
   isPublishing: boolean;
   blogPostDataById: BlogPost | null;
+  hasFile: boolean;
 }
 
 //initialState
 const initialState: initialState = {
   isPublishing: false,
   blogPostDataById: null,
+  hasFile: false,
 };
 
 //slice
@@ -27,9 +29,12 @@ const writeSlice = createSlice({
     getPostById: (state, action) => {
       state.blogPostDataById = action.payload;
     },
+    checkHavingFile: (state, action) => {
+      state.hasFile = action.payload;
+    },
   },
 });
 
 //reducer, actions 내보내기
 export default writeSlice.reducer;
-export const { startPuslishing, cancelPublishing, getPostById } = writeSlice.actions;
+export const { startPuslishing, cancelPublishing, getPostById, checkHavingFile } = writeSlice.actions;

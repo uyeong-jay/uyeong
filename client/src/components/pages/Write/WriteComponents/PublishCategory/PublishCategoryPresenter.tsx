@@ -1,19 +1,17 @@
-import { StyledOpenedCategory, StyledPublishCategory } from './PublishCategoryStyle';
+import { DIV, LI } from './PublishCategoryStyle';
 import useAnimation from '@hooks/useAnimation';
 import { BlogCategoryRes } from '@app/services/blog/categoryApi';
 import { MouseEventHandler } from 'react';
 import { BlogPostReq } from '@app/services/blog/postApi';
 import ListIcon from '@icons/ListIcon';
 import CheckIcon from '@icons/CheckIcon';
+import ArrowDownIcon from '@icons/ArrowDownIcon';
 
 interface Props {
   blogCategoryData?: BlogCategoryRes;
   blogPostInfo: BlogPostReq;
   isOpenedCategory: boolean;
-  // isCategoryClicked: boolean;
   onClickChooseCtegory: () => void;
-  // onClickCancel: () => void;
-  onClickDone: () => void;
   onClickCategory: MouseEventHandler<HTMLLIElement>;
 }
 
@@ -21,54 +19,53 @@ const PublishCategoryPresenter = ({
   blogCategoryData,
   blogPostInfo,
   isOpenedCategory,
-  // isCategoryClicked,
   onClickChooseCtegory,
-  // onClickCancel,
-  onClickDone,
   onClickCategory,
 }: Props) => {
   const [show, render, onAnimationEnd] = useAnimation(isOpenedCategory);
 
   return (
-    <StyledPublishCategory>
-      <button type="button" onClick={onClickChooseCtegory}>
-        <ListIcon />
-        Choose a category
-      </button>
-      {render && (
-        <StyledOpenedCategory
-          animationName={show ? 'down-category' : 'up-category'}
-          onAnimationEnd={() => onAnimationEnd}
-        >
-          {/* 카테고리 옵션 */}
-          <ul className="category-list-block">
-            {blogCategoryData?.categories?.map((category) => (
-              <li key={category._id} value={category.name} onClick={onClickCategory}>
-                {category.name}
-                {/* isCategoryClicked &&  */ category.name === blogPostInfo.category ? <CheckIcon /> : null}
-              </li>
-            ))}
-          </ul>
-
-          <div className="button-group">
-            {/* 취소 버튼 */}
-            {/* <button className="cancel-button" type="button" onClick={onClickCancel}>
-              Cancel
-            </button> */}
-
-            {/* 완료 버튼 */}
-            <button
-              className="done-button"
-              type="button"
-              onClick={onClickDone}
-              // style={isCategoryClicked ? { backgroundColor: 'gray', border: 'none', color: 'white' } : undefined}
-            >
-              Done
-            </button>
-          </div>
-        </StyledOpenedCategory>
-      )}
-    </StyledPublishCategory>
+    <DIV.PublishCategory isOpenedCategory={isOpenedCategory}>
+      <div>
+        <div>
+          <span>[</span>
+          <span>
+            {blogPostInfo.category ? (
+              blogPostInfo.category
+            ) : (
+              <>
+                <ListIcon /> Select a category
+              </>
+            )}
+          </span>
+          <span>]</span>
+        </div>
+        {render && (
+          <DIV.OpenedCategory
+            animationName={show ? 'down-category' : 'up-category'}
+            onAnimationEnd={() => onAnimationEnd}
+          >
+            {/* 카테고리 옵션 */}
+            <ul>
+              {blogCategoryData?.categories?.map((category) => (
+                <LI.CategoryList
+                  isCategoryClicked={category.name === blogPostInfo.category ? true : false}
+                  key={category._id}
+                  value={category.name}
+                  onClick={onClickCategory}
+                >
+                  {category.name}
+                  {category.name === blogPostInfo.category ? <CheckIcon /> : <></>}
+                </LI.CategoryList>
+              ))}
+            </ul>
+          </DIV.OpenedCategory>
+        )}
+        <button type="button" onClick={onClickChooseCtegory}>
+          <ArrowDownIcon />
+        </button>
+      </div>
+    </DIV.PublishCategory>
   );
 };
 

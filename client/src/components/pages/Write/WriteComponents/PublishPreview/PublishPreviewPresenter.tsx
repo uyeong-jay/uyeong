@@ -1,44 +1,53 @@
 import { BlogPostReq } from '@app/services/blog/postApi';
 import CameraIcon from '@icons/CameraIcon';
 import Image from 'next/image';
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { StyledPublishPreview } from './PublishPreviewStyle';
+import React, { ChangeEvent, useEffect } from 'react';
+import { DIV } from './PublishPreviewStyle';
+import XMarkIcon from '@icons/XMarkIcon';
+import RotateIcon from '@icons/RotateIcon';
 
 interface Props {
   blogPostInfo: BlogPostReq;
   fileObj?: File;
   onChangeThumbnail: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeTextarea: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onClickDeleteImg: () => void;
+  onClickRestoreImg: () => void;
+  fileUrl: string;
+  setFileUrl: (fileUrl: string) => void;
+  isToggled: boolean;
 }
 
-const PublishPreviewPresenter = ({ blogPostInfo, fileObj, onChangeThumbnail, onChangeTextarea }: Props) => {
+const PublishPreviewPresenter = ({
+  blogPostInfo,
+  fileObj,
+  onChangeThumbnail,
+  onChangeTextarea,
+  onClickDeleteImg,
+  onClickRestoreImg,
+  fileUrl,
+  setFileUrl,
+  isToggled,
+}: Props) => {
   const { description, thumbnail } = blogPostInfo;
-
-  // URL.revokeObjectURL() 정상 실행을 위해 추가한 코드
-  const [fileUrl, setFileUrl] = useState('/');
 
   useEffect(() => {
     if (fileObj) {
+      //업로드 후
       setFileUrl(URL.createObjectURL(fileObj));
+    } else if (!fileObj && thumbnail && typeof thumbnail === 'string' && thumbnail !== '') {
+      // 초기(update)
+      setFileUrl(thumbnail as string);
+    } else {
+      // 초기(post) or 제거 후
+      setFileUrl('');
     }
-  }, [fileObj]);
+  }, [fileObj, setFileUrl, thumbnail]);
 
   return (
-    <StyledPublishPreview>
-      <div className="post-thumbnail-wrapper-with-image post-thumbnail-wrapper post-thumbnail ">
-        {/* 블로그 수정시 이미지  */}
-        {thumbnail && !fileObj && (
-          <Image
-            className="post-thumbnail non-clickable-image"
-            src={thumbnail as string}
-            alt="post thumbnail"
-            width={300}
-            height={200}
-          />
-        )}
-
-        {/* 블로그 만들때의 이미지 */}
-        {fileObj && (
+    <DIV.PublishPreview>
+      <div className="post-thumbnail-wrapper-with-image post-thumbnail-wrapper post-thumbnail">
+        {fileUrl ? (
           <Image
             className="post-thumbnail non-clickable-image"
             src={fileUrl}
@@ -46,17 +55,50 @@ const PublishPreviewPresenter = ({ blogPostInfo, fileObj, onChangeThumbnail, onC
               URL.revokeObjectURL(fileUrl);
             }}
             alt="post thumbnail"
-            width={300}
-            height={200}
+            layout="fill"
+            objectFit="cover"
           />
+        ) : (
+          <></>
         )}
         <input type="file" name="file" accept=".jpg, .jpeg, .png, .gif" onChange={onChangeThumbnail} />
-        <CameraIcon />
-        <button>Upload thumbnail</button>
+
+        <button>
+          <CameraIcon />
+          <span>Upload thumbnail</span>
+        </button>
       </div>
-      <textarea value={description} onChange={onChangeTextarea} placeholder="간단히 소개하기" />
-      <small>{description.length}/150</small>
-    </StyledPublishPreview>
+      <DIV.PublishPreviewBtns>
+        {fileUrl && (
+          <button className="preview-upload-btn">
+            <CameraIcon />
+            <span>Upload</span>
+            <input type="file" name="file" accept=".jpg, .jpeg, .png, .gif" onChange={onChangeThumbnail} />
+          </button>
+        )}
+
+        <div className={`preview-active-btns ${!fileUrl && 'extend'}`}>
+          {!isToggled ? (
+            <button onClick={onClickDeleteImg} disabled={fileObj || thumbnail ? false : true}>
+              <XMarkIcon />
+            </button>
+          ) : (
+            <button onClick={onClickRestoreImg}>
+              <RotateIcon />
+            </button>
+          )}
+        </div>
+      </DIV.PublishPreviewBtns>
+
+      <textarea
+        value={description}
+        onChange={onChangeTextarea}
+        maxLength={200}
+        rows={6}
+        placeholder="Provide a brief summary of the blog post..."
+      />
+      <span>{description.length}/200</span>
+    </DIV.PublishPreview>
   );
 };
 

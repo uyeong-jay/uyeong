@@ -1,64 +1,90 @@
 import styled from '@_settings/styled';
 
-const flexible = `
+interface PublicButtonProps {
+  isPublicClicked: boolean;
+}
+
+interface PrivateButtonProps {
+  isPrivateClicked: boolean;
+}
+
+export const DIV = {} as any;
+export const BTN = {} as any;
+
+DIV.PublishPrivacy = styled.div`
+  // border: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-export const StyledPublishPrivacy = styled.div`
-  ${flexible}
-  // border: 1px solid black;
   width: 100%;
-  height: 100%;
 
-  & .privacy-block {
+  & > div {
     // border: 1px solid black;
-    ${flexible}
-    justify-content: space-between;
-    width: 300px;
-    height: 100px;
+    display: flex;
+    width: 100%;
 
-    & .public-button,
-    .private-button {
+    & > button {
       // border: 1px solid black;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #eff1f3;
-      width: 140px;
-      height: 50%;
+      background-color: ${({ theme }) => theme.LIGHT_BG_C};
+      width: 100%;
+      height: 50px;
       border-radius: 20px;
-    }
-
-    & .public-button,
-    .private-button {
-      color: gray;
-    }
-
-    & .earth-icon,
-    .lock-icon {
-      width: 20px;
-      fill: gray;
-      margin-right: 10px;
-    }
-
-    //한박자 늦게 적용됨
-    // & .clicked {
-    //   background-color: silver;
-    //   pointer-events: none; //hover가 바로 안없어짐
-    //   user-select: none;
-    //   color: black;
-    // }
-
-    & .public-button:hover,
-    .private-button:hover {
-      color: rgba(128, 128, 128, 0.5);
+      color: ${({ theme }) => theme.FONT_C};
 
       & .earth-icon,
       .lock-icon {
-        fill: rgba(128, 128, 128, 0.5);
+        width: 20px;
+        fill: ${({ theme }) => theme.FONT_C};
+        margin-right: 10px;
       }
     }
   }
+`;
+
+BTN.PublicButton = styled.button<PublicButtonProps>`
+  border: 2px solid ${({ theme }) => theme.LIGHT_BG_C};
+  margin-right: 8%;
+
+  ${(props) => {
+    if (props.isPublicClicked) {
+      return `
+        border: 2px solid ${props.theme.BD_C};
+      `;
+    } else {
+      return `
+        &:hover {
+          color: rgba(0,0,0, 0.5);
+
+          .earth-icon {
+            opacity: 0.5;
+          }
+        }
+      `;
+    }
+  }}
+`;
+
+BTN.PrivateButton = styled.button<PrivateButtonProps>`
+  border: 2px solid ${({ theme }) => theme.LIGHT_BG_C};
+
+  ${(props) => {
+    if (props.isPrivateClicked) {
+      return `
+        border: 2px solid ${props.theme.BD_C};
+      `;
+    } else {
+      return `
+        &:hover {
+          color: rgba(0,0,0, 0.5);
+
+          .lock-icon {
+            opacity: 0.5;
+          }
+        }
+      `;
+    }
+  }}
 `;

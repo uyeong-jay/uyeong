@@ -1,6 +1,6 @@
 import { BlogPostReq } from '@app/services/blog/postApi';
 import React from 'react';
-import { StyledPublishURL } from './PublishURLStyle';
+import { DIV } from './PublishURLStyle';
 
 interface Props {
   blogPostInfo: BlogPostReq;
@@ -9,13 +9,16 @@ interface Props {
 const PublishURLPresenter = ({ blogPostInfo }: Props) => {
   const { title } = blogPostInfo;
   return (
-    <StyledPublishURL>
+    <DIV.PublishURL>
       <div>
-        URL
+        <span>URL</span>
         <span>|</span>
-        <span>/blog/{title ?? ''}</span>
+        <span>/</span>
+        <span>blog</span>
+        <span>/</span>
+        <span>{title ?? ''}</span>
       </div>
-    </StyledPublishURL>
+    </DIV.PublishURL>
   );
 };
 

@@ -1,164 +1,264 @@
 import styled from '@_settings/styled';
 
 interface PublishCategpryProps {
+  isOpenedCategory: boolean;
+}
+
+interface OpenedCategoryProps {
   animationName: string;
 }
 
-export const StyledPublishCategory = styled.div`
+interface CategoryListProps {
+  isCategoryClicked: boolean;
+}
+
+export const DIV = {} as any;
+export const LI = {} as any;
+
+DIV.PublishCategory = styled.div<PublishCategpryProps>`
   // border: 1px solid black;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  position: relative;
   width: 100%;
-  height: 100%;
+  height: 100px;
 
-  & > button {
-    // border: 1px solid black;
-    background-color: #eff1f3;
-    width: 75%;
-    height: 50px;
-    margin: 0 auto;
+  & > div {
+    // border: 1px solid blue;
+    background-color: ${({ theme }) => theme.LIGHT_BG_C};
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100%;
     border-radius: 20px;
     color: ${({ theme }) => theme.FONT_C};
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    letter-spacing: 0.3px;
+    transition: height 0.5s ease-in-out;
 
-    & .list-icon {
-      // border: 1px solid black;
-      width: 13.5px;
-      margin-right: 7px;
-      transform: translateY(8%);
-      fill: ${({ theme }) => theme.FONT_C};
+    ${(props) => {
+      if (props.isOpenedCategory) {
+        return `
+          height: 380px;
+        `;
+      } else {
+        return `
+          height: 100px;
+        `;
+      }
+    }};
+
+    //Select a category
+    & > div:nth-of-type(1) {
+      // border: 1px solid red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      //합 50px 맞춤
+      height: 35px;
+      margin-top: 15px;
+
+      & > span:first-of-type,
+      span:last-of-type {
+        // border: 1px solid blue;
+        font-size: 20px;
+        height: 100%;
+        transform: translateY(1px);
+      }
+
+      & > span:not(:first-of-type):not(:last-of-type) {
+        // border: 1px solid blue;
+        display: block;
+        max-width: 200px;
+        margin: 0 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        & .list-icon {
+          // border: 1px solid black;
+          display: inline-block;
+          width: 13px;
+          margin-right: 7px;
+          transform: translateY(1.5px);
+          fill: ${({ theme }) => theme.FONT_C};
+        }
+      }
     }
-  }
 
-  & > button:hover {
-    color: rgba(105, 105, 105, 0.5);
+    & > button {
+      // border: 1px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 50px;
+      border-radius: 20px;
 
-    & .list-icon {
-      fill: rgba(105, 105, 105, 0.5);
+      & .arrow-down-icon {
+        // border: 1px solid black;
+        width: 15px;
+        height: 100%;
+        opacity: 0.8;
+        fill: ${({ theme }) => theme.FONT_C};
+        transition: transform 0.25s ease-in-out;
+        transform-origin: center center; //회전 중심점을 정중앙으로 지정
+
+        ${(props) => {
+          if (props.isOpenedCategory) {
+            return `
+            transform: translateY(5px) rotateX(180deg);
+            `;
+          } else {
+            return `
+            transform: translateY(-5px) rotateX(0deg);
+            `;
+          }
+        }};
+      }
+
+      &:hover {
+        & .arrow-down-icon {
+          ${(props) => {
+            if (props.isOpenedCategory) {
+              return `
+              transform: translateY(-5px) rotateX(180deg);
+              `;
+            } else {
+              return `
+              transform: translateY(5px) rotateX(0deg);
+              `;
+            }
+          }};
+        }
+      }
     }
   }
 `;
 
-export const StyledOpenedCategory = styled.div<PublishCategpryProps>`
-  background-color: #eff1f3;
+DIV.OpenedCategory = styled.div<OpenedCategoryProps>`
+  // border: 1px solid red;
+  background-color: ${({ theme }) => theme.LIGHT_BG_C};
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   position: absolute;
-  top: 37px;
-  width: 400px;
-  height: 500px;
-  border-radius: 20px;
+  top: 50px;
+  width: 100%;
+  margin-top: 20px;
 
-  //애니매이션을 넣을때 내부는 px로 고정시키는게 미세 움직들이 없다
   animation: ${(props) => props.animationName} 0.5s ease-out 0s forwards;
 
   @keyframes down-category {
     from {
+      opacity: 0;
       height: 0;
-      bottom: 400px;
-      overflow: hidden;
       pointer-events: none;
     }
     to {
-      height: 400px;
-      bottom: 0;
+      opacity: 1;
+      height: 260px;
     }
   }
 
   @keyframes up-category {
     from {
-      height: 400px;
-      bottom: 0;
+      opacity: 1;
+      height: 260px;
     }
     to {
+      opacity: 0;
       height: 0;
-      bottom: 400px;
-      overflow: hidden;
+      // overflow: hidden;
       pointer-events: none;
     }
   }
 
-  & > .category-list-block {
-    border: 1px solid gray;
-    margin-top: 50px;
-    height: 300px;
-    width: 250px;
+  & > ul {
+    border: 4px solid ${({ theme }) => theme.BG_C};
+    height: 100%;
+    width: 230px;
     border-radius: 10px;
-    overflow: hidden;
+    padding: 0 3px;
 
-    & > li {
-      // border: 1px solid black;
-      position: relative;
-      border-bottom: 1px solid gray;
-      margin: 40px 0 40px 20px;
-      // width: 250px;
-      width: 200px;
-      padding-left: 10px;
-      cursor: pointer;
-
-      & .check-icon {
-        // border: 1px solid black;
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 15px;
-        fill: ${({ theme }) => theme.FONT_C};
+    //스크롤
+    ${(props) => {
+      if (props.animationName === 'down-category') {
+        return `
+          animation: show-scroll 0s ease-out 0.5s forwards;
+          @keyframes show-scroll {
+            from {
+              overflow: hidden;
+            }
+            to {
+              overflow-y: scroll;
+              overflow-x: hidden;
+              padding-right: 0;
+            }
+          }
+        `;
+      } else {
+        return `
+          animation: hide-scroll 0s ease-out 0s forwards;
+          @keyframes hide-scroll {
+            from {
+              overflow-y: scroll;
+              overflow-x: hidden;
+            }
+            to {
+              overflow: hidden;
+            }
+          }
+        `;
       }
-    }
-
-    // & > li:hover {
-    //   color: rgba(0, 0, 0, 0.5);
-    //   border-bottom: 1px solid rgba(105, 105, 105, 0.5);
-    // }
-  }
-
-  & > .category-list-block:hover {
-    //스크롤 디자인
-    overflow-y: scroll;
-
-    overflow-x: hidden;
+    }}
 
     ::-webkit-scrollbar {
       border-radius: 50%;
-      width: 5px;
+      width: 3px;
     }
     ::-webkit-scrollbar-track {
+      // border: 1px solid red;
       margin-top: 10px;
       margin-bottom: 10px;
-      border-radius: 50%;
+      border-radius: 20%;
     }
     ::-webkit-scrollbar-thumb {
-      background: ${({ theme }) => theme.FONT_C};
+      // border: 1px solid gray;
+      background-color: ${({ theme }) => theme.BD_C};
       border-radius: 10px;
     }
   }
+`;
 
-  & > .button-group {
+LI.CategoryList = styled.li<CategoryListProps>`
+  // border: 1px solid black;
+  position: relative;
+  border-bottom: 2px solid ${({ theme }) => theme.BG_C};
+  margin: 30px 20px;
+  padding: 0 20px 0 10px;
+  cursor: pointer;
+
+  ${(props) => {
+    if (props.isCategoryClicked) {
+      return `
+        border-bottom: 2px solid ${props.theme.BD_C};
+      `;
+    }
+  }}
+
+  & .check-icon {
     // border: 1px solid black;
-    width: 250px;
-    height: 42px;
-    display: flex;
-    justify-content: end;
-    margin-top: 15px;
-    margin-bottom: 15px;
-
-    & > .done-button {
-      // border: 1px solid ${({ theme }) => theme.FONT_C};
-      background-color: gainsboro;
-      width: 100px;
-      border-radius: 10px;
-      color: black;
-    }
-
-    &>.done-button: hover {
-      color: rgba(0, 0, 0, 0.5);
-    }
-
-    // & > .cancel-button {
-    //   margin-right: 15px;
-    // }
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    fill: ${({ theme }) => theme.FONT_C};
   }
 `;

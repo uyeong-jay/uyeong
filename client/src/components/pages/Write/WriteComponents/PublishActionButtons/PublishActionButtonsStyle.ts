@@ -1,41 +1,41 @@
 import styled from '@_settings/styled';
 
-export const StyledPublishActionButtons = styled.div`
+export const DIV = {} as any;
+
+DIV.PublishActionButtons = styled.div`
   // border: 1px solid black;
   display: flex;
   justify-content: center;
-  align-items: end;
+  align-items: flex-end;
   width: 100%;
-  height: 100%;
 
-  & > .action-buttons-block {
+  & > div {
     // border: 1px solid black;
     display: flex;
     justify-content: end;
     align-items: end;
-    width: 300px;
-    height: 100px;
-    // padding-left: 20px;
+    width: 100%;
 
     & > button {
       // border: 1px solid black;
-      background-color: #eff1f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: ${({ theme }) => theme.LIGHT_BG_C};
       height: 45px;
       border-radius: 15px;
       color: ${({ theme }) => theme.FONT_C};
+      letter-spacing: 0.5px;
+      width: 80px;
     }
 
-    & .cancel-button {
-      width: 70px;
-    }
-
-    & .post-button {
-      width: 100px;
-      margin-left: 25px;
+    & > button:nth-of-type(1) {
+      // border: 1px solid black;
+      margin-right: 25px;
     }
 
     & > button:hover {
-      color: rgba(105, 105, 105, 0.5);
+      color: rgba(0, 0, 0, 0.5);
     }
   }
 `;
