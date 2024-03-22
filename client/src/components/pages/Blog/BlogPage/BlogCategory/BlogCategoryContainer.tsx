@@ -10,7 +10,8 @@ const BlogCategoryContainer = () => {
 
   //Paging Category
   const [categoryPageNum, setCategoryPageNum] = useState(1);
-  const { data: blogCategoryData /* , isLoading, isSuccess, error */ } = useGetBlogCategoriesQuery(categoryPageNum);
+  const { data: blogCategoryData, isLoading: isLoadingCategories /*, isSuccess, error */ } =
+    useGetBlogCategoriesQuery(categoryPageNum);
   const [currPageIndex, setCurrPageIndex] = useState(0);
   const visiblePageCount = 5;
   const totalPageCount = blogCategoryData?.totalPages as number;
@@ -65,6 +66,7 @@ const BlogCategoryContainer = () => {
       onClickLastPage={onClickLastPage}
       onClickPrevFirstPage={onClickPrevFirstPage}
       onClickNextFirstPage={onClickNextFirstPage}
+      isLoadingCategories={isLoadingCategories}
     />
   );
 };

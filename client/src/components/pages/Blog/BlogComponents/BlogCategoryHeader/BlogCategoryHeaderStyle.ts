@@ -43,7 +43,7 @@ FORM.CategoryNameFrom = styled.form`
   & > p {
     // border: 1px solid red;
     position: absolute;
-    bottom: -25px;
+    top: 45px;
     left: 0;
     color: ${({ theme }) => theme.FONT_C_DANGER};
     font-weight: bold;

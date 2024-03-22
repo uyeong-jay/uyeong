@@ -21,7 +21,10 @@ export const StyledBlogPost = styled.div`
     min-height: 300px;
     width: 100%;
     position: relative;
-    margin-bottom: 200px;
+    margin-bottom: 100px;
+    @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+      margin-bottom: 200px;
+    }
 
     & .blog-post-image-wrapper {
       // border: 1px solid black;
@@ -36,11 +39,13 @@ export const StyledBlogPost = styled.div`
     }
 
     & #markdown-content {
-      line-height: 1.7;
-      letter-spacing: -0.004em;
+      // border: 1px solid black;
+      padding: 50px 0;
+      overflow: hidden;
       word-break: keep-all;
       font-size: 1rem;
-      padding: 50px 0;
+      line-height: 1.7;
+      letter-spacing: -0.004em;
 
       @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
         font-size: 1.1rem;

@@ -118,7 +118,7 @@ P.CardTitleError = styled.p`
   position: relative;
   bottom: 5px;
   left: 0;
-  padding-left: 10px;
+  padding-left: 5px;
   font-weight: bold;
   color: ${({ theme }) => theme.FONT_C_DANGER};
 `;

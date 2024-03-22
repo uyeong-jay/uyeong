@@ -63,7 +63,7 @@ LI.Heading = styled.li<HeadingListProps>`
     font-weight: bold;
     color: ${({ theme }) => theme.BD_C};
     margin-left: 0;
-    transition: all 0.3s ease-out;
+    transition: all 0.25s ease-out;
 
     ${(props) => {
       if (props.headingId === props.activeId) {

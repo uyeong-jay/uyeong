@@ -24,6 +24,7 @@ DIV.CategoryCardGroup = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   justify-content: center;
+  position: relative;
   width: ${({ theme }) => theme.BP.MOBILE}; //MOBILE also
   margin-bottom: 80px;
 
@@ -87,6 +88,23 @@ DIV.InitialCategoryCard = styled.div`
     height: 20px;
     border-radius: 30px;
   }
+`;
+
+DIV.NoCategory = styled.div`
+  // border: 1px solid black;
+  background-color: ${({ theme }) => theme.BG_C};
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 200px;
+  margin-top: 50px;
+  color: ${({ theme }) => theme.FONT_C};
+  font-weight: bold;
 `;
 
 DIV.PageBtnGroup = styled.div`

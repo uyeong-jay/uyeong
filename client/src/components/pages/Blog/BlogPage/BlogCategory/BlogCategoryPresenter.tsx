@@ -23,6 +23,7 @@ interface Props {
   onClickLastPage: () => void;
   onClickPrevFirstPage: () => void;
   onClickNextFirstPage: () => void;
+  isLoadingCategories: boolean;
 }
 
 const CATEGORYCOUNT = 4;
@@ -40,6 +41,7 @@ const BlogCategoryPresenter = ({
   onClickLastPage,
   onClickPrevFirstPage,
   onClickNextFirstPage,
+  isLoadingCategories,
 }: Props) => {
   return (
     <>
@@ -52,7 +54,6 @@ const BlogCategoryPresenter = ({
           <BlogCategoryHeader userData={userData} />
 
           <DIV.CategoryCardGroup>
-            {/* 새로고침시 빈 사격형 넣기 */}
             {blogCategoryData ? (
               <>
                 {blogCategoryData.categories?.map((category) => (
@@ -64,7 +65,7 @@ const BlogCategoryPresenter = ({
                   />
                 ))}
               </>
-            ) : (
+            ) : isLoadingCategories ? (
               <>
                 {InitialCategoryCardArr.map((v) => (
                   <DIV.InitialCategoryCard key={v}>
@@ -74,6 +75,8 @@ const BlogCategoryPresenter = ({
                   </DIV.InitialCategoryCard>
                 ))}
               </>
+            ) : (
+              <DIV.NoCategory>- No Category yet -</DIV.NoCategory>
             )}
           </DIV.CategoryCardGroup>
 
