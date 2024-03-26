@@ -9,10 +9,14 @@ interface Props {
 
 const PublishPrivacyContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
   const onClickPublic = () => {
-    setBlogPostInfo({ ...blogPostInfo, privacy: false });
+    if (blogPostInfo.privacy) {
+      setBlogPostInfo({ ...blogPostInfo, privacy: false });
+    }
   };
   const onClickPrivate = () => {
-    setBlogPostInfo({ ...blogPostInfo, privacy: true });
+    if (!blogPostInfo.privacy) {
+      setBlogPostInfo({ ...blogPostInfo, privacy: true });
+    }
   };
 
   return (

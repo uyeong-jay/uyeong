@@ -26,9 +26,10 @@ const WriteFooterContainer = ({ userData, blogPostsData, blogPostInfo, setBlogPo
 
   //동일한 포스트 제목 생성 막는 유효성 검사
   const validBlogTitle = useCallback(() => {
-    const sameBlogTitle = blogPostsData?.posts?.find((post) => post.title === title);
-    if (!router.query.id && sameBlogTitle) return true;
-    else return false;
+    const duplicateBlogTitle = blogPostsData?.posts?.find((post) => post.title === title);
+    if (!router.query.id && duplicateBlogTitle) {
+      return true;
+    } else return false;
   }, [blogPostsData?.posts, router.query, title]);
 
   const onClickDone = useCallback(() => {

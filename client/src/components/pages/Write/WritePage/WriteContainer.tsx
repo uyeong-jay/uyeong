@@ -4,12 +4,13 @@ import { useGetUserDataQuery } from '@app/services/user/userApi';
 import { BlogPostReq, useGetBlogPostsQuery } from '@app/services/blog/postApi';
 import { useRouter } from 'next/router';
 import NotFound from '@src/pages/404';
-import { useAppDispatch } from '@app/hooks';
-import { getPostById } from '../WriteSlice';
+import { useAppDispatch, useAppSelector } from '@app/hooks';
+import { cancelPublishing, getPostById, setFileUnchanged } from '../WriteSlice';
 
 const WriteContainer = () => {
   const { data: userData } = useGetUserDataQuery();
   const { data: blogPostsData } = useGetBlogPostsQuery();
+  const isPublishing = useAppSelector((state) => state.write.isPublishing);
   const dispatch = useAppDispatch();
 
   const router = useRouter();
@@ -48,6 +49,16 @@ const WriteContainer = () => {
       });
     }
   }, [blogPostsData?.posts, dispatch, id]);
+
+  useEffect(() => {
+    //언마운트시 실행
+    return () => {
+      if (isPublishing) {
+        dispatch(setFileUnchanged());
+        dispatch(cancelPublishing());
+      }
+    };
+  }, [dispatch, isPublishing]);
 
   return (
     <>

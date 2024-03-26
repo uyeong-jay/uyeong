@@ -6,6 +6,7 @@ import { BlogPostReq, useCreateBlogPostMutation, useUpdateBlogPostMutation } fro
 import getUploadImageUrl from '@utils/uploadImage';
 import { UserResponse } from '@app/services/user/userApi';
 import { useRouter } from 'next/router';
+import { fileStatus } from '@pages/Write/WriteSlice';
 
 interface Props {
   userData?: UserResponse;
@@ -17,7 +18,8 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
   const [updateBlogPost] = useUpdateBlogPostMutation();
 
   const blogPostDataById = useAppSelector((state) => state.write.blogPostDataById);
-  const hasFile = useAppSelector((state) => state.write.hasFile);
+  const fileState = useAppSelector((state) => state.write.fileState);
+  const { unchanged, modified } = fileStatus;
   const dispatch = useAppDispatch();
 
   const router = useRouter();
@@ -37,7 +39,12 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
         ...blogPostInfo,
         //포스트시 클라우드에 이미지 업로드 하기
         //사용자가 이미지를 제거했는지 복구했는지 확인 후 업로드
-        thumbnail: hasFile ? await getUploadImageUrl(blogPostInfo.thumbnail as File) : '',
+        thumbnail:
+          fileState === unchanged
+            ? blogPostInfo.thumbnail
+            : fileState === modified
+            ? await getUploadImageUrl(blogPostInfo.thumbnail as File)
+            : '',
       },
       token: userData?.access_token,
     };
@@ -45,7 +52,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
     await router.push(`/blog/${blogPostInfo.title.replace(/\s+/g, '-')}`);
 
     dispatch(cancelPublishing());
-  }, [blogPostInfo, createBlogPost, dispatch, hasFile, router, userData?.access_token]);
+  }, [blogPostInfo, createBlogPost, dispatch, fileState, modified, router, unchanged, userData?.access_token]);
 
   const onClickUpdate = useCallback(async () => {
     setClicked(true);
@@ -56,15 +63,27 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
         _id: blogPostDataById?._id,
         //포스트시 클라우드에 이미지 업로드 하기
         //사용자가 이미지를 제거했는지 복구했는지 확인 후 업로드
-        thumbnail: hasFile ? await getUploadImageUrl(blogPostInfo.thumbnail as File) : '',
+        thumbnail:
+          fileState === unchanged
+            ? blogPostInfo.thumbnail
+            : fileState === modified
+            ? await getUploadImageUrl(blogPostInfo.thumbnail as File)
+            : '',
       },
       token: userData?.access_token,
     };
     await updateBlogPost(data);
     await router.push(`/blog/${blogPostInfo.title.replace(/\s+/g, '-')}`);
-
-    dispatch(cancelPublishing());
-  }, [blogPostDataById?._id, blogPostInfo, dispatch, hasFile, router, updateBlogPost, userData?.access_token]);
+  }, [
+    blogPostDataById?._id,
+    blogPostInfo,
+    fileState,
+    modified,
+    router,
+    unchanged,
+    updateBlogPost,
+    userData?.access_token,
+  ]);
   return (
     <PublishActionButtonsPresenter
       postId={postId}

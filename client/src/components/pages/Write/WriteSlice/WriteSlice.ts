@@ -5,14 +5,20 @@ import { createSlice } from '@reduxjs/toolkit';
 interface initialState {
   isPublishing: boolean;
   blogPostDataById: BlogPost | null;
-  hasFile: boolean;
+  fileState: string;
 }
+
+export const fileStatus = {
+  unchanged: 'unchanged',
+  modified: 'modified',
+  removed: 'removed',
+};
 
 //initialState
 const initialState: initialState = {
   isPublishing: false,
   blogPostDataById: null,
-  hasFile: false,
+  fileState: fileStatus.unchanged,
 };
 
 //slice
@@ -29,12 +35,19 @@ const writeSlice = createSlice({
     getPostById: (state, action) => {
       state.blogPostDataById = action.payload;
     },
-    checkHavingFile: (state, action) => {
-      state.hasFile = action.payload;
+    setFileUnchanged: (state) => {
+      state.fileState = fileStatus.unchanged;
+    },
+    setFileModified: (state) => {
+      state.fileState = fileStatus.modified;
+    },
+    setFileRemoved: (state) => {
+      state.fileState = fileStatus.removed;
     },
   },
 });
 
 //reducer, actions 내보내기
 export default writeSlice.reducer;
-export const { startPuslishing, cancelPublishing, getPostById, checkHavingFile } = writeSlice.actions;
+export const { startPuslishing, cancelPublishing, getPostById, setFileUnchanged, setFileModified, setFileRemoved } =
+  writeSlice.actions;

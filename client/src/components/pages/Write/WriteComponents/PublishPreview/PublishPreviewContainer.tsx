@@ -4,7 +4,7 @@ import validFile from '@utils/valid/validFile';
 import { ChangeEvent, useCallback, useState } from 'react';
 import PublishPreviewPresenter from './PublishPreviewPresenter';
 import { useAppDispatch } from '@app/hooks';
-import { checkHavingFile } from '@pages/Write/WriteSlice';
+import { setFileModified, setFileRemoved, setFileUnchanged } from '@pages/Write/WriteSlice';
 
 interface Props {
   blogPostInfo: BlogPostReq;
@@ -13,9 +13,8 @@ interface Props {
 
 const PublishPreviewContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
   const [isToggled, setToggled] = useState(false);
-  const [fileObj, setFileObj] = useState<File>(); //file
-  // URL.revokeObjectURL()를 위해 추가한 코드
-  const [fileUrl, setFileUrl] = useState(''); //url
+  const [fileObj, setFileObj] = useState<File>(); //obj: 클라우드에 없는 새로운 이미지
+  const [fileUrl, setFileUrl] = useState(''); //url: 클라우드에 이미 존재하는 이미지
 
   const dispatch = useAppDispatch();
 
@@ -27,12 +26,11 @@ const PublishPreviewContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
       validFile(file);
 
       if (file) {
-        // URL.revokeObjectURL()를 위해 추가한 코드
         setFileObj(file);
-        dispatch(checkHavingFile(true));
+        dispatch(setFileModified());
         setToggled(false);
 
-        // 이미지를 넣을때마다 cloud에 올리는게 아닌 잠시 file을 보관해두기
+        // 이미지를 넣을때마다 클라우드에 올리는게 아닌 잠시 보관만 해두기
         setBlogPostInfo({ ...blogPostInfo, thumbnail: file });
       }
     },
@@ -53,16 +51,21 @@ const PublishPreviewContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
   );
 
   const onClickDeleteImg = useCallback(() => {
-    if (fileObj) setFileObj(undefined); //file
-    if (!fileObj) setFileUrl(''); //url
-    dispatch(checkHavingFile(false));
+    if (fileObj) setFileObj(undefined);
+    if (!fileObj) setFileUrl('');
+    dispatch(setFileRemoved());
     setToggled((prev) => !prev);
   }, [dispatch, fileObj]);
 
   const onClickRestoreImg = useCallback(() => {
-    if (typeof blogPostInfo.thumbnail === 'object') setFileObj(blogPostInfo.thumbnail); //file
-    if (typeof blogPostInfo.thumbnail === 'string') setFileUrl(blogPostInfo.thumbnail); //url
-    dispatch(checkHavingFile(true));
+    if (typeof blogPostInfo.thumbnail === 'object') {
+      setFileObj(blogPostInfo.thumbnail);
+      dispatch(setFileModified()); //새로운 이미지(obj)일 경우만 클라우드에 업로드
+    }
+    if (typeof blogPostInfo.thumbnail === 'string') {
+      setFileUrl(blogPostInfo.thumbnail);
+      dispatch(setFileUnchanged());
+    }
     setToggled((prev) => !prev);
   }, [blogPostInfo.thumbnail, dispatch]);
 

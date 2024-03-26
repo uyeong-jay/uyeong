@@ -184,7 +184,8 @@ DIV.OpenedCategory = styled.div<OpenedCategoryProps>`
     height: 100%;
     width: 230px;
     border-radius: 10px;
-    padding: 0 3px;
+    padding: 0 3px; //스크롤바 너비만큼 남겨놓기
+    overflow: hidden; //하단 animation 보다 먼저 미리 넣어 두기
 
     //스크롤
     ${(props) => {
@@ -193,12 +194,11 @@ DIV.OpenedCategory = styled.div<OpenedCategoryProps>`
           animation: show-scroll 0s ease-out 0.5s forwards;
           @keyframes show-scroll {
             from {
-              overflow: hidden;
             }
             to {
               overflow-y: scroll;
               overflow-x: hidden;
-              padding-right: 0;
+              padding-right: 0; //스크롤바 너비만큼 제거하기
             }
           }
         `;
@@ -211,7 +211,6 @@ DIV.OpenedCategory = styled.div<OpenedCategoryProps>`
               overflow-x: hidden;
             }
             to {
-              overflow: hidden;
             }
           }
         `;
