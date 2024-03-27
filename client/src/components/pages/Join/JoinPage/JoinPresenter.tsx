@@ -20,6 +20,7 @@ interface Props {
   userData?: UserResponse;
   joinSuccess: boolean;
   isjoining: boolean;
+  isjoiningFirst: boolean;
   isModalOpen: boolean;
   setModalOpen: (isModalOpen: boolean) => void;
   isJoinError: boolean;
@@ -33,6 +34,7 @@ const JoinPresenter = ({
   userData,
   joinSuccess,
   isjoining,
+  isjoiningFirst,
   isModalOpen,
   setModalOpen,
   isJoinError,
@@ -116,7 +118,7 @@ const JoinPresenter = ({
             <FormButton
               variant="join"
               text="Create"
-              formIsLoading={isjoining}
+              formIsLoading={isjoiningFirst || isjoining}
               disabled={nickname && email && password && cf_password ? false : true}
             />
           </FORM.JoinForm>

@@ -8,12 +8,15 @@ const JoinContainer = () => {
 
   const { data: userData } = useGetUserDataQuery();
   const [join, { isSuccess: joinSuccess, isLoading: isjoining, isError: isJoinError, error }] = useJoinMutation();
+  const [isjoiningFirst, setjoiningFirst] = useState(false);
+
   const [isModalOpen, setModalOpen] = useState(false);
 
   //modal로 인해 error만 따로 빼두기
   useEffect(() => {
     if (isJoinError) {
       setModalOpen(true);
+      setjoiningFirst(false);
     }
   }, [isJoinError]);
 
@@ -30,6 +33,8 @@ const JoinContainer = () => {
       e.preventDefault();
       if (isModalOpen) return;
 
+      setjoiningFirst(true); //에러가 났을 경우를 제외하면 false로 바꿀 필요 없음
+
       join(userJoinInfo);
     },
     [isModalOpen, join, userJoinInfo],
@@ -43,6 +48,7 @@ const JoinContainer = () => {
       userData={userData}
       joinSuccess={joinSuccess}
       isjoining={isjoining}
+      isjoiningFirst={isjoiningFirst}
       isModalOpen={isModalOpen}
       setModalOpen={setModalOpen}
       isJoinError={isJoinError}

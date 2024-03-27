@@ -19,6 +19,7 @@ interface Props {
   userData?: UserResponse;
   isLoginSuccess: boolean;
   isLoggingIn: boolean;
+  isLoggingInFirst: boolean;
   isModalOpen: boolean;
   setModalOpen: (isModalOpen: boolean) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -32,6 +33,7 @@ const LoginPresenter = ({
   userData,
   isLoginSuccess,
   isLoggingIn,
+  isLoggingInFirst,
   isModalOpen,
   setModalOpen,
   onSubmit,
@@ -53,7 +55,7 @@ const LoginPresenter = ({
       {/* {isLoggingIn && <Loader />} */}
 
       <PageFrame>
-        <PageTitle text="Login" />
+        <PageTitle text="Log in" />
 
         <FORM.LoginForm onSubmit={onSubmit}>
           <div>
@@ -80,7 +82,7 @@ const LoginPresenter = ({
           <FormButton
             variant="login"
             text="Log in"
-            formIsLoading={isLoggingIn}
+            formIsLoading={isLoggingInFirst || isLoggingIn}
             disabled={email && password ? false : true}
           />
         </FORM.LoginForm>

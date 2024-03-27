@@ -10,6 +10,7 @@ const LoginContainer = () => {
   const { data: userData } = useGetUserDataQuery();
   const [login, { isSuccess: isLoginSuccess, isLoading: isLoggingIn, isError: isLoginError, error }] =
     useLoginMutation();
+  const [isLoggingInFirst, setLoggingInFirst] = useState(false);
 
   const router = useRouter();
 
@@ -19,6 +20,7 @@ const LoginContainer = () => {
   useEffect(() => {
     if (isLoginError) {
       setModalOpen(true);
+      setLoggingInFirst(false);
     }
   }, [isLoginError]);
 
@@ -41,6 +43,8 @@ const LoginContainer = () => {
       e.preventDefault();
       if (isModalOpen) return;
 
+      setLoggingInFirst(true); //에러가 났을 경우를 제외하면 false로 바꿀 필요 없음
+
       await login(userLoginInfo);
     },
     [isModalOpen, login, userLoginInfo],
@@ -54,6 +58,7 @@ const LoginContainer = () => {
       userData={userData}
       isLoginSuccess={isLoginSuccess}
       isLoggingIn={isLoggingIn}
+      isLoggingInFirst={isLoggingInFirst}
       isModalOpen={isModalOpen}
       setModalOpen={setModalOpen}
       isLoginError={isLoginError}
