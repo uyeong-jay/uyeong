@@ -119,6 +119,7 @@ const StyledModal = styled.div<StyledModalProps>`
       min-height: 100px;
       padding: 20px;
       word-break: keep-all;
+      white-space: pre-line;
       overflow: hidden;
 
       @media screen and (min-width: calc(${({ theme }) => theme.BP.MOBILE} + 30px)) {
@@ -198,8 +199,6 @@ const Modal = ({ type, msg, isOpen, setOpen, callback, shakeAlert }: ModalProps)
   const onAnimationEnd = useCallback(() => {
     if (!isOpen) {
       setRender(false);
-
-      //헤더 움직임 방지
       dispatch(scrollResetForModal());
     }
   }, [dispatch, isOpen]);
@@ -273,8 +272,8 @@ const Modal = ({ type, msg, isOpen, setOpen, callback, shakeAlert }: ModalProps)
               <button
                 className="confirm-button"
                 onClick={() => {
-                  callback?.();
                   setOpen(false);
+                  callback?.();
                 }}
               >
                 {OK}
@@ -299,8 +298,8 @@ const Modal = ({ type, msg, isOpen, setOpen, callback, shakeAlert }: ModalProps)
               <button
                 className="delete-button"
                 onClick={() => {
-                  callback?.();
                   setOpen(false);
+                  callback?.();
                 }}
               >
                 {DELETE}
