@@ -81,7 +81,7 @@ export const postApi = api.injectEndpoints({
 
     getBlogPost: builder.query<BlogPostRes, string>({
       query: (slug) => ({
-        url: `/api/blog/${slug}`,
+        url: `/api/blog/${encodeURIComponent(slug)}`,
         method: 'get',
       }),
       providesTags: ['BlogPost'],
