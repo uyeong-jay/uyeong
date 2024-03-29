@@ -18,7 +18,7 @@ const BlogCategoryContainer = () => {
   const pageRemainder = totalPageCount % visiblePageCount;
 
   const categoryPages = useMemo(() => {
-    const categoryPagesArr = Array.from({ length: totalPageCount }, (_v, index) => index + 1).slice(
+    const categoryPagesArr = Array.from({ length: totalPageCount }, (_, index) => index + 1).slice(
       currPageIndex,
       currPageIndex + visiblePageCount,
     );

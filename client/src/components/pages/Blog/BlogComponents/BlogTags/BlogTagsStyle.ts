@@ -1,13 +1,13 @@
 import styled from '@_settings/styled';
 
-export const DIV = {} as any;
-export const ASIDE = {} as any;
-
 interface BlogTagProps {
   tagUnderline: string;
   tagName: string;
   isTagClicked: boolean;
 }
+
+export const DIV = {} as any;
+export const ASIDE = {} as any;
 
 ASIDE.BlogTags = styled.aside`
   // border: 1px solid black;

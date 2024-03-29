@@ -1,17 +1,14 @@
 import { Request } from "express";
 import { Types } from "mongoose";
 
-const ObjectId = Types.ObjectId;
-
 export interface IUser extends Document {
-  _id: typeof ObjectId;
+  _id: Types.ObjectId;
   nickname: string;
   email: string;
   password: string;
   cf_password: string;
   avatar?: string;
   role: string;
-  // type: string;
   rf_token?: string;
   _doc: object;
 }
@@ -29,7 +26,7 @@ export interface IDecodedToken {
 }
 
 export interface IPost extends Document {
-  _id: typeof ObjectId;
+  _id: Types.ObjectId;
   user: string;
   title: string;
   tags: [String];
@@ -49,5 +46,4 @@ export interface IComment extends Document {
   reply: string;
   replies: [object];
   _doc: object;
-  // comment_root: string;
 }

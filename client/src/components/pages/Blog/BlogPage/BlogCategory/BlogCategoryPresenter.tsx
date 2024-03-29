@@ -26,8 +26,8 @@ interface Props {
   isLoadingCategories: boolean;
 }
 
-const CATEGORYCOUNT = 4;
-const InitialCategoryCardArr = Array.from({ length: CATEGORYCOUNT }, (_v, index) => index);
+const CATEGORY_COUNT = 4;
+const InitialCategoryCardArr = Array.from({ length: CATEGORY_COUNT }, (_, index) => index);
 
 const BlogCategoryPresenter = ({
   userData,
@@ -90,6 +90,7 @@ const BlogCategoryPresenter = ({
 
             {categoryPages.map((pageNum) => (
               <BTN.PageNumBtn
+                pageNum={pageNum}
                 key={pageNum}
                 onClick={() => onClickPageNum(pageNum)}
                 className={categoryPageNum === pageNum ? 'aa' : ''}

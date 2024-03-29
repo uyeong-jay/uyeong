@@ -18,7 +18,7 @@ interface Props {
 }
 
 const POSTCOUNT = 2;
-export const InitialPostsCardArr = Array.from({ length: POSTCOUNT }, (_v, index) => index);
+export const InitialPostsCardArr = Array.from({ length: POSTCOUNT }, (_, index) => index);
 
 const BlogCategoryDetailPresenter = ({
   blogPostsByCategory,

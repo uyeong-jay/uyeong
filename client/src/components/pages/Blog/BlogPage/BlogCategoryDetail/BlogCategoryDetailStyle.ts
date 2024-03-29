@@ -1,11 +1,11 @@
 import styled from '@_settings/styled';
 
-export const SECTION = {} as any;
-export const DIV = {} as any;
-
 interface PostCardBlcokProps {
   hasPost: boolean;
 }
+
+export const SECTION = {} as any;
+export const DIV = {} as any;
 
 SECTION.Frame = styled.div`
   // border: 1px solid black;
