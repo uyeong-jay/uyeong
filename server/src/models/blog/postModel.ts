@@ -7,6 +7,8 @@ const postSchema = new Schema(
       type: String,
       required: true,
       trim: true,
+      unique: true,
+      maxLength: [100, "The title must be 100 characters or less."],
     },
     titleForUrl: {
       type: String,
