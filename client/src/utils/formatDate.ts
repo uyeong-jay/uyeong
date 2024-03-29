@@ -12,7 +12,12 @@ const formatDate = (date: string) => {
     // 1분 미만
     return 'Just now';
   }
-  return formatDistanceToNowStrict(newDate) + ' ago';
+
+  try {
+    return formatDistanceToNowStrict(newDate) + ' ago';
+  } catch {
+    return ' ago';
+  }
 };
 
 export default formatDate;
