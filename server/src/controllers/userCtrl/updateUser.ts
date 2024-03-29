@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 
 const updateUser = async (req: IReqAuth, res: Response) => {
   try {
-    //user가 middleware auth를 잘통과 했는지 확인
+    //user가 middleware auth를 통과 했는지 확인
     if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
 
     //client 데이터 가져오기

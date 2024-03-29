@@ -4,8 +4,7 @@ import Comments from "@models/blog/commentModel";
 
 const getPosts = async (req: Request, res: Response) => {
   try {
-    //Posts를 가장 최근에 생성된것이 가장 첫번째에 오도록 가져오기
-    const posts = await Posts.find().sort({ createdAt: -1 });
+    const posts = await Posts.find().sort({ createdAt: -1 }); //최근에 생성된것이 처음에 오도록
 
     res.status(200).json({ posts: posts });
   } catch (err: any) {

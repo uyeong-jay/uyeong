@@ -43,7 +43,7 @@ const refresh = async (req: Request, res: Response) => {
     res.status(200).json({
       access_token,
       user,
-      msg: "Refresh success!",
+      msg: "Refreshed successfully!",
     });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });

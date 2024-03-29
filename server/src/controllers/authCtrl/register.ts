@@ -41,7 +41,7 @@ const register = async (req: Request, res: Response) => {
     //db에 저장
     await newUser.save();
 
-    res.status(200).json({ msg: "Join Success!" });
+    res.status(200).json({ msg: "Joined successfully!" });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });
   }

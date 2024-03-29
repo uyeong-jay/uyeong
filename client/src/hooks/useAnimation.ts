@@ -20,9 +20,7 @@ export default useAnimation;
 // 사용 예시
 // const [isOpen, setOpen] = useState(boolean값)
 
-// const [show, render, onAnimationEnd] = useAnimation(isOpen);
-// or
-// const [show, render, onAnimationEnd] = useAnimation(boolean값);
+// const [show, render, onAnimationEnd] = useAnimation(isOpen or boolean값);
 
 //
 // {render && (
@@ -32,7 +30,7 @@ export default useAnimation;
 //  }
 
 //+styled
-// interface PublishCategpryProps {
+// interface PublishCategoryProps {
 //   animationName: string;
 // }
 
@@ -57,4 +55,3 @@ export default useAnimation;
 //      top: 100%;
 //    }
 //  }
-//`

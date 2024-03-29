@@ -38,9 +38,6 @@ export type AppDispatch = AppStore['dispatch'];
 
 const wrapper = createWrapper<AppStore>(createStore, {
   debug: isDev,
-  //https://github.com/kirill-konshin/next-redux-wrapper/issues/276
-  // serializeState: (state) => JSON.stringify(state),
-  // deserializeState: (state) => JSON.parse(state),
 });
 
 export default wrapper;

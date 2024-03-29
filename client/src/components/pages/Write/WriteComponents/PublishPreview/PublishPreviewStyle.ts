@@ -184,7 +184,7 @@ DIV.PublishPreviewBtns = styled.div`
       height: 100%;
 
       &:disabled {
-        opacity: 0.5; /* 투명도 설정 */
+        opacity: 0.5;
         cursor: default;
       }
 

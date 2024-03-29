@@ -5,7 +5,7 @@ import Posts from "@models/blog/postModel";
 
 const deletePost = async (req: IReqAuth, res: Response) => {
   try {
-    //user가 middleware auth를 잘통과 했는지 확인
+    //user가 middleware auth를 통과 했는지 확인
     if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
 
     //admin 인지 확인
@@ -22,7 +22,7 @@ const deletePost = async (req: IReqAuth, res: Response) => {
     const comment = await Comments.deleteMany({ post_id: postId });
     if (!comment) return res.status(400).json({ msg: "Invalid Authentication." });
 
-    res.status(200).json({ msg: "Delete Success!" });
+    res.status(200).json({ msg: "Deleted successfully!" });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });
   }

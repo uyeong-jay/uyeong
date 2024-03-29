@@ -51,7 +51,7 @@ const WriteContainer = () => {
   }, [blogPostsData?.posts, dispatch, id]);
 
   useEffect(() => {
-    //언마운트시 실행
+    //write page 언마운트시 실행
     return () => {
       if (isPublishing) {
         dispatch(setFileUnchanged());

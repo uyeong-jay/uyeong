@@ -46,9 +46,6 @@ const BlogPostCommentTemplateContainer = ({
 
   const onClickEdit = useCallback(() => {
     setEditComment(true);
-    // const regex = /<span style="background-color: pink; color:red;">(.*?)<\/span>/;
-    // const matches = regex.exec(reply?.content as string);
-    // const result = matches?.[1];
     const regex = /\*\*@(.*?)\*\*/;
     const matches = regex.exec(reply?.content as string);
     const result = matches?.[1];

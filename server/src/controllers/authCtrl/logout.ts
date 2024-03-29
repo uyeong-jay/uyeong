@@ -14,7 +14,7 @@ const logout = async (req: Request, res: Response) => {
 
     //성공
     res.status(200).json({
-      msg: "Logout success!",
+      msg: "Logged out successfully!",
     });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });

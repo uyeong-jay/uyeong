@@ -4,17 +4,16 @@ import Comments from "@models/blog/commentModel";
 
 const deleteComment = async (req: IReqAuth, res: Response) => {
   try {
-    //user가 middleware auth를 잘통과 했는지 확인
+    //user가 middleware auth를 통과 했는지 확인
     if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
 
     //client 데이터 가져오기
     const { comment_id } = req.body;
 
     // comment는 Role에 관계없이 삭제(admin 체크 안함)
-    // (client 에서 삭제 버튼이 보이면 삭제 가능)
     let query: { _id: string; user?: object } = { _id: req.params.id };
 
-    // 만약의 상황에서 사용자가 Admin이 아닌 경우,
+    // 사용자가 Admin이 아닌 경우,
     // user 필드를 추가해 해당 user 가 아니면 지울수 없게 만들기
     if (req.user.role !== "admin") {
       query.user = req.user._id;
@@ -24,7 +23,7 @@ const deleteComment = async (req: IReqAuth, res: Response) => {
     const comment = await Comments.findOneAndDelete(query);
 
     if (!comment) {
-      return res.status(400).json({ msg: "Comment does not exist." });
+      return res.status(400).json({ msg: "The comment doesn't exist." });
     }
 
     if (comment_id) {
@@ -43,7 +42,7 @@ const deleteComment = async (req: IReqAuth, res: Response) => {
       );
     }
 
-    res.status(200).json({ msg: "Delete Success!" });
+    res.status(200).json({ msg: "Deleted successfully!" });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });
   }
