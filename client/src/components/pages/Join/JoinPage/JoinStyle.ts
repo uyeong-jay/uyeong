@@ -81,7 +81,7 @@ FORM.JoinForm = styled.form`
     & > button {
       // border: 1px solid black;
       position: absolute;
-      top: 37px;
+      top: 40px;
       right: 10px;
     }
   }
