@@ -1,9 +1,11 @@
-import React, { useState, useCallback, ChangeEvent, FormEvent } from 'react';
+import React, { useState, useCallback, ChangeEvent, FormEvent, useEffect } from 'react';
 import SettingsPresenter from './SettingsPresenter';
 import { useGetUserDataQuery, useUpdateMutation } from '@app/services/user/userApi';
 import validUserInfo from '@utils/valid/validUserInfo';
 import getUploadImageUrl from '@utils/uploadImage';
 import validFile from '@utils/valid/validFile';
+import { useAppDispatch, useAppSelector } from '@app/hooks';
+import { fileStatus, setFileModified, setFileRemoved, setFileUnchanged } from '@pages/Write/WriteSlice';
 
 export interface IUserUpdateInfo {
   avatar?: string | File;
@@ -16,20 +18,42 @@ export interface IUserUpdateInfo {
 
 const SettingsContainer = () => {
   const { data: userData } = useGetUserDataQuery();
-  const [update, { isLoading: userUpdateLoading, isSuccess: userUpdateSuccess, error: authErr }] = useUpdateMutation();
+  const [update, { isLoading: isUpdatingUserData, isSuccess: userUpdateSuccess, error: UserUpdateErr }] =
+    useUpdateMutation();
 
   const initialState = {
-    avatar: '',
+    avatar: userData?.user?.avatar ?? '',
     email: userData?.user?.email,
     nickname: userData?.user?.nickname,
     old_password: '',
     new_password: '',
     cf_new_password: '',
   };
-
   const [userUpdateInfo, setUserUpdateInfo] = useState<IUserUpdateInfo>(initialState);
-  const [fileObj, setFileObj] = useState<File>();
   const [settingErrMsg, setSettingErrMsg] = useState('');
+  const [isUpdatingUserInfo, setUpdatingUserInfo] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const fileState = useAppSelector((state) => state.write.fileState);
+  const { unchanged, modified, removed } = fileStatus;
+
+  const [fileObj, setFileObj] = useState<File>(); //obj: 클라우드에 없는 새로운 이미지
+  const [fileUrl, setFileUrl] = useState(''); //url: 클라우드에 이미 존재하는 이미지
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isToggled, setToggled] = useState(false);
+  const [isClickedUpload, setClickedUpload] = useState(false);
+
+  useEffect(() => {
+    if (!isUpdatingUserData) setUpdatingUserInfo(false);
+  }, [isUpdatingUserData]);
+
+  useEffect(() => {
+    //settings page 언마운트시 실행
+    return () => {
+      dispatch(setFileUnchanged());
+    };
+  }, [dispatch]);
 
   const onSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
@@ -38,20 +62,27 @@ const SettingsContainer = () => {
       //valid를 한번만 실행하기 위해 만든 배열
       const errMsg = [];
 
-      //form에러
-      errMsg.push(validUserInfo(userUpdateInfo, userData?.user));
+      const isUnchangedAvatar = ((fileObj || fileUrl) && fileState === removed) || fileState === unchanged;
 
-      //토큰 만료 에러 만들기?
+      //form에러
+      errMsg.push(validUserInfo(userUpdateInfo, userData?.user, isUnchangedAvatar));
 
       //에러 보여주기
       setSettingErrMsg(errMsg[0]);
 
-      //에러가 없으면 유저 데이터 업데이트
+      // 에러가 없으면 유저 데이터 업데이트
       if (!errMsg[0]) {
+        setUpdatingUserInfo(true);
+
         const data = {
           userUpdateInfo: {
             ...userUpdateInfo,
-            avatar: userUpdateInfo.avatar && fileObj ? await getUploadImageUrl(fileObj) : userData?.user?.avatar,
+            avatar:
+              fileState === unchanged
+                ? userUpdateInfo.avatar
+                : fileState === modified
+                ? await getUploadImageUrl(userUpdateInfo.avatar as File)
+                : '',
           },
           token: userData?.access_token,
         };
@@ -59,11 +90,37 @@ const SettingsContainer = () => {
         //유저 데이터 업데이트
         await update(data);
 
-        // 유저 데이터 초기화 (보여지는 nickname, email 제외)
-        setUserUpdateInfo({ ...userUpdateInfo, avatar: '', old_password: '', new_password: '', cf_new_password: '' });
+        // 유저 데이터 초기화 (nickname, avatar, email 제외)
+        setUserUpdateInfo({
+          ...userUpdateInfo,
+          old_password: '',
+          new_password: '',
+          cf_new_password: '',
+        });
+
+        // if (!(fileObj || fileUrl)) {
+        //   setFileObj(undefined);
+        //   setToggled(false);
+        // }
+
+        dispatch(setFileUnchanged());
+        setClickedUpload(false);
+        setModalOpen(true);
       }
     },
-    [fileObj, update, userData?.access_token, userData?.user, userUpdateInfo],
+    [
+      dispatch,
+      fileObj,
+      fileState,
+      fileUrl,
+      modified,
+      removed,
+      unchanged,
+      update,
+      userData?.access_token,
+      userData?.user,
+      userUpdateInfo,
+    ],
   );
 
   const onChangeInput = useCallback(
@@ -75,37 +132,78 @@ const SettingsContainer = () => {
     [userUpdateInfo],
   );
 
+  const onClickUpload = useCallback(() => {
+    setClickedUpload(true);
+  }, []);
+
   const onChangeAvatar = useCallback(
     async (e: ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
 
-      //파일 에러
-      validFile(file);
+      //valid를 한번만 실행하기 위해 만든 배열
+      const errMsg = [];
 
-      //파일 에러
-      if (file) {
-        // URL.revokeObjectURL() 정상 실행을 위해 추가한 코드
+      //file 에러
+      errMsg.push(validFile(file));
+
+      //파일을 선택 안했을때는 alert 되지 않도록 따로 빼서 작성
+      if (errMsg[0]) alert(errMsg[0]);
+
+      //에러가 없으면 avatar 업데이트
+      if (!errMsg[0] && file) {
         setFileObj(file);
+        dispatch(setFileModified());
+        setToggled(false);
 
-        // 이미지를 넣을때마다 cloud에 올라가는걸 방지 하려고 잠시 file을 넣어두기
+        // 이미지를 넣을때마다 cloud에 올리는게 아닌 잠시 file을 보관해두기
         setUserUpdateInfo({ ...userUpdateInfo, avatar: file });
       }
     },
-    [userUpdateInfo],
+    [dispatch, userUpdateInfo],
   );
+
+  const onClickDeleteImg = useCallback(() => {
+    if (fileObj) setFileObj(undefined);
+    if (!fileObj) setFileUrl('');
+    dispatch(setFileRemoved());
+    setToggled(true);
+  }, [dispatch, fileObj]);
+
+  const onClickRestoreImg = useCallback(() => {
+    if (typeof userUpdateInfo.avatar === 'object') {
+      setFileObj(userUpdateInfo.avatar);
+      if (isClickedUpload) {
+        dispatch(setFileModified()); //새로운 이미지(obj)일 경우만 클라우드에 업로드
+      }
+    }
+    if (typeof userUpdateInfo.avatar === 'string') {
+      setFileUrl(userUpdateInfo.avatar);
+      dispatch(setFileUnchanged());
+    }
+    setToggled(false);
+  }, [dispatch, isClickedUpload, userUpdateInfo.avatar]);
 
   return (
     <SettingsPresenter
       userUpdateInfo={userUpdateInfo}
       userData={userData}
       fileObj={fileObj}
-      userUpdateLoading={userUpdateLoading}
+      fileUrl={fileUrl}
+      setFileUrl={setFileUrl}
+      isUpdatingUserData={isUpdatingUserData}
+      isUpdatingUserInfo={isUpdatingUserInfo}
       userUpdateSuccess={userUpdateSuccess}
       settingErrMsg={settingErrMsg}
-      authErr={authErr}
+      UserUpdateErr={UserUpdateErr}
+      isModalOpen={isModalOpen}
+      setModalOpen={setModalOpen}
       onSubmit={onSubmit}
+      onClickUpload={onClickUpload}
       onChangeInput={onChangeInput}
       onChangeAvatar={onChangeAvatar}
+      onClickDeleteImg={onClickDeleteImg}
+      onClickRestoreImg={onClickRestoreImg}
+      isToggled={isToggled}
     />
   );
 };

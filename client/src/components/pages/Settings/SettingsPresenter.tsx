@@ -11,45 +11,69 @@ import CameraIcon from '@icons/CameraIcon';
 import PageTitle from '@atoms/PageTitle';
 import FormButton from '@molecules/FormButton';
 import PageFrame from '@templates/PageFrame';
+import Modal from '@modals/Modal';
+import XMarkIcon from '@icons/XMarkIcon';
+import UserIcon from '@icons/UserIcon';
+import RotateIcon from '@icons/RotateIcon';
 
 interface Props {
   userUpdateInfo: IUserUpdateInfo;
   userData?: UserResponse;
   fileObj?: File;
-  userUpdateLoading: boolean;
+  fileUrl: string;
+  setFileUrl: (fileUrl: string) => void;
+  isUpdatingUserData: boolean;
+  isUpdatingUserInfo: boolean;
   userUpdateSuccess: boolean;
   settingErrMsg: string;
-  authErr: any;
+  UserUpdateErr: any;
+  isModalOpen: boolean;
+  setModalOpen: (isModalOpen: boolean) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  onClickUpload: () => void;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeAvatar: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClickDeleteImg: () => void;
+  onClickRestoreImg: () => void;
+  isToggled: boolean;
 }
 
 const SettingsPresenter = ({
   userUpdateInfo,
   userData,
   fileObj,
-  userUpdateLoading,
+  fileUrl,
+  setFileUrl,
+  isUpdatingUserData,
+  isUpdatingUserInfo,
   userUpdateSuccess,
   settingErrMsg,
-  authErr,
+  UserUpdateErr,
+  isModalOpen,
+  setModalOpen,
   onSubmit,
+  onClickUpload,
   onChangeInput,
   onChangeAvatar,
+  onClickDeleteImg,
+  onClickRestoreImg,
+  isToggled,
 }: Props) => {
-  const { nickname, email, old_password, new_password, cf_new_password } = userUpdateInfo;
+  const { nickname, avatar, email, old_password, new_password, cf_new_password } = userUpdateInfo;
   const [isOldPasswordType, setOldPasswordType] = useState(false);
   const [isNewPasswordType, setNewPasswordType] = useState(false);
   const [isCfNewPasswordType, setCfNewPasswordType] = useState(false);
 
-  // URL.revokeObjectURL() 정상 실행을 위해 추가한 코드
-  const [fileUrl, setFileUrl] = useState('/');
   useEffect(() => {
     if (fileObj) {
       // console.log('만들어짐:', fileObj);
-      setFileUrl(URL.createObjectURL(fileObj));
+      return setFileUrl(URL.createObjectURL(fileObj));
+    } else if (!fileObj && avatar && typeof avatar === 'string') {
+      return setFileUrl(avatar as string);
+    } else {
+      setFileUrl('');
     }
-  }, [fileObj]);
+  }, [fileObj, avatar, setFileUrl]);
 
   if (!userData?.user) return <NotFound />;
   return (
@@ -64,24 +88,49 @@ const SettingsPresenter = ({
         {/* 프로필 사진 수정 */}
         <DIV.SettingsTop>
           <div className="settings-user-avatar-wrapper settings-user-avatar">
-            <Image
-              className="settings-user-avatar"
-              src={fileObj ? fileUrl : userData?.user?.avatar}
-              onLoad={() => {
-                // console.log('지워짐:', fileUrl);
-                URL.revokeObjectURL(fileUrl);
-              }}
-              alt="user avater"
-              width={100}
-              height={100}
-            />
+            {/* Ani 적용을 위해 "!" 단위 분리 */}
+            {fileUrl && (
+              <Image
+                className="settings-user-avatar"
+                src={fileUrl}
+                onLoad={() => {
+                  // console.log('지워짐:', fileUrl);
+                  URL.revokeObjectURL(fileUrl);
+                }}
+                alt="user avater"
+                width={100}
+                height={100}
+                priority
+              />
+            )}
+            {!fileUrl && (
+              <>
+                <UserIcon />
+              </>
+            )}
           </div>
 
-          <span>
-            <CameraIcon />
-            <p>Upload</p>
-            <input type="file" name="file" accept=".jpg, .jpeg, .png, .gif" onChange={onChangeAvatar} />
-          </span>
+          <DIV.SettingsTopBtns>
+            <button onClick={onClickUpload}>
+              <CameraIcon />
+              <span>Upload</span>
+              <input type="file" name="file" accept=".jpg, .jpeg, .png, .gif" onChange={onChangeAvatar} />
+            </button>
+
+            <DIV.ToggleBtnWrapper>
+              {/* Ani 적용을 위해 "!" 단위 분리 */}
+              {!isToggled && (
+                <button onClick={onClickDeleteImg} disabled={fileObj || avatar ? false : true}>
+                  <XMarkIcon />
+                </button>
+              )}
+              {isToggled && (
+                <button onClick={onClickRestoreImg}>
+                  <RotateIcon />
+                </button>
+              )}
+            </DIV.ToggleBtnWrapper>
+          </DIV.SettingsTopBtns>
         </DIV.SettingsTop>
 
         {/* 정보 수정하기 */}
@@ -144,14 +193,16 @@ const SettingsPresenter = ({
             />
           </div>
 
-          <FormButton variant="update" text="UPDATE" formIsLoading={userUpdateLoading} />
+          <FormButton variant="update" text="UPDATE" formIsLoading={isUpdatingUserInfo || isUpdatingUserData} />
 
-          {settingErrMsg || authErr ? (
-            <DIV.ErrMsg>{settingErrMsg ? settingErrMsg : authErr.data.msg}</DIV.ErrMsg>
-          ) : (
-            userUpdateSuccess && <DIV.SuccessMsg>Update successfully completed!</DIV.SuccessMsg>
+          {(settingErrMsg || UserUpdateErr) && (
+            <DIV.ErrMsg>{settingErrMsg ? settingErrMsg : UserUpdateErr.data.msg}</DIV.ErrMsg>
           )}
         </FORM.SettingsMainForm>
+
+        {userUpdateSuccess && (
+          <Modal type="alert" msg="Update successfully completed!" isOpen={isModalOpen} setOpen={setModalOpen} />
+        )}
       </PageFrame>
     </>
   );

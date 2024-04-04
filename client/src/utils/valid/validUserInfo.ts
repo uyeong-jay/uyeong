@@ -11,8 +11,8 @@ interface userDataType {
   nickname: string;
 }
 
-const validUserInfo = (userUpdateInfo: userUpdateInfoType, userData?: userDataType) => {
-  const { avatar, nickname, email, old_password, new_password, cf_new_password } = userUpdateInfo;
+const validUserInfo = (userUpdateInfo: userUpdateInfoType, userData?: userDataType, isUnchangedAvatar?: boolean) => {
+  const { nickname, email, old_password, new_password, cf_new_password } = userUpdateInfo;
 
   const userNickname = userData?.nickname;
 
@@ -34,7 +34,15 @@ const validUserInfo = (userUpdateInfo: userUpdateInfoType, userData?: userDataTy
   if (new_password !== cf_new_password) return 'Your new password and confirm password must be same.';
 
   //변경 된게 없을때
-  if (!avatar && nickname && nickname === userNickname && email && !old_password && !new_password && !cf_new_password)
+  if (
+    isUnchangedAvatar &&
+    nickname &&
+    nickname === userNickname &&
+    email &&
+    !old_password &&
+    !new_password &&
+    !cf_new_password
+  )
     return 'Already up to date.';
 
   //password 입력 에러
