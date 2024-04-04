@@ -116,8 +116,18 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
 
       & .header-user-avatar-wrapper {
         // border: 1px solid red;
-        display: inline-flex;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 30px;
+        height: 30px;
+        // background-color: ${({ theme }) => theme.LIGHT_BG_C};
+
+        & .user-icon {
+          // border: 1px solid red;
+          width: 17px;
+          fill: ${({ theme }) => theme.BD_C}B2; //B2: opacity 0.7
+        }
       }
 
       & .header-user-avatar {

@@ -13,6 +13,7 @@ import { useCallback, useRef, useState } from 'react';
 import EllipsisVerticalIcon from '@icons/EllipsisVerticalIcon';
 import EditIcon from '@icons/EditIcon';
 import TrashIcon from '@icons/TrashIcon';
+import UserIcon from '@icons/UserIcon';
 
 interface Props {
   postId?: string;
@@ -85,13 +86,19 @@ const BlogPostCommentTemplatePresenter = ({
       {/* 프로필 이미지 */}
       <DIV.CommentTop>
         <div className="comment-user-avatar-warpper comment-user-avatar">
-          <Image
-            className="comment-user-avatar"
-            src={reply ? reply.user.avatar : user.avatar}
-            alt="user-avatar"
-            layout="fill"
-            objectFit="cover"
-          />
+          {reply?.user.avatar || user.avatar ? (
+            <Image
+              className="comment-user-avatar"
+              src={reply ? reply.user.avatar : user.avatar}
+              alt="user-avatar"
+              layout="fill"
+              objectFit="cover"
+            />
+          ) : (
+            <>
+              <UserIcon />
+            </>
+          )}
         </div>
         <DIV.CommentTopRight>
           <DIV.CommentInfo>

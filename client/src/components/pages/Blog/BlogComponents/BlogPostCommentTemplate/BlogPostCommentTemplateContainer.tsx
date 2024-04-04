@@ -56,6 +56,7 @@ const BlogPostCommentTemplateContainer = ({
   const onClickDelete = useCallback(
     (isCallback?: boolean) => {
       if (!isCallback) return setModalOpen(true);
+
       const data = {
         commentInfo: {
           id: reply?.comment_id ? reply?._id : comment?._id, //댓글, 답글 삭제용

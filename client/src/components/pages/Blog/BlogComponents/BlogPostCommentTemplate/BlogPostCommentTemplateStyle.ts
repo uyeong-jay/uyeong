@@ -1,13 +1,13 @@
 import styled from '@_settings/styled';
 
+interface CommentReplyBtnProps {
+  writeReply: boolean;
+}
+
 export const SECTION = {} as any;
 export const DIV = {} as any;
 export const BTN = {} as any;
 export const P = {} as any;
-
-interface CommentReplyBtnProps {
-  writeReply: boolean;
-}
 
 SECTION.Frame = styled.section`
   // border: 1px solid green;
@@ -27,7 +27,9 @@ DIV.CommentTop = styled.div`
   & .comment-user-avatar-warpper {
     // border: 1px solid black;
     background-color: ${({ theme }) => theme.LIGHT_BG_C};
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     width: 9vw;
     min-width: 25px;
@@ -36,6 +38,13 @@ DIV.CommentTop = styled.div`
     min-height: 25px;
     max-height: 40px;
     border-radius: 50%;
+
+    & .user-icon {
+      // border: 1px solid red;
+      width: 45%;
+      fill: ${({ theme }) => theme.BD_C}7F; //7F: opacity 0.5
+    }
+  }
 
   & .comment-user-avatar {
     // border: 1px solid black;
@@ -130,6 +139,11 @@ DIV.CommentMenuBtns = styled.div`
   z-index: 1;
   border-radius: 10px;
   box-shadow: 0 2px 7px rgb(0, 0, 0, 0.2);
+
+  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+    width: 120px;
+    left: -110px;
+  }
 
   & > button {
     display: flex;

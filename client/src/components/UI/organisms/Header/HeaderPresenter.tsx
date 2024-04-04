@@ -10,6 +10,7 @@ import CaretDownIcon from '@icons/CaretDownIcon';
 import CaretUpIcon from '@icons/CaretUpIcon';
 import Logo from '@icons/Logo';
 import { useAppSelector } from '@app/hooks';
+import UserIcon from '@icons/UserIcon';
 
 interface Props {
   userData?: UserResponse;
@@ -89,6 +90,7 @@ const HeaderPresenter = ({
           }
         }
       }
+      //추적
       prevScrollY = currentScrollY;
     };
 
@@ -199,14 +201,20 @@ const HeaderPresenter = ({
               <li onClick={onClickProfile} ref={dropdownBoxRef}>
                 {/* 프로필 이미지 */}
                 <div className="header-user-avatar-wrapper header-user-avatar">
-                  <Image
-                    className="header-user-avatar"
-                    src={userData?.user?.avatar}
-                    alt="user avater"
-                    width={30}
-                    height={30}
-                    priority
-                  />
+                  {userData?.user?.avatar ? (
+                    <Image
+                      className="header-user-avatar"
+                      src={userData?.user?.avatar}
+                      alt="user avater"
+                      width={30}
+                      height={30}
+                      priority
+                    />
+                  ) : (
+                    <>
+                      <UserIcon />
+                    </>
+                  )}
                 </div>
                 {/* 아래 화살표 */}
                 {isProfileOpen ? <CaretUpIcon /> : <CaretDownIcon />}
