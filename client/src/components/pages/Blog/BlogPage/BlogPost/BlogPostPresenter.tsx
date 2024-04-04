@@ -14,7 +14,7 @@ interface Props {
 const BlogPostPresenter = ({ blogPost }: Props) => {
   const { _id, thumbnail, content } = blogPost || {};
 
-  if (!blogPost) return <NotFound />;
+  if (!_id) return <NotFound />;
   return (
     <StyledBlogPost>
       <BlogPostToc />
