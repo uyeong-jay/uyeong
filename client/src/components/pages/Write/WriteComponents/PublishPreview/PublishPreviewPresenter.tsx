@@ -9,24 +9,24 @@ import RotateIcon from '@icons/RotateIcon';
 interface Props {
   blogPostInfo: BlogPostReq;
   fileObj?: File;
+  fileUrl: string;
+  setFileUrl: (fileUrl: string) => void;
   onChangeThumbnail: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeTextarea: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   onClickDeleteImg: () => void;
   onClickRestoreImg: () => void;
-  fileUrl: string;
-  setFileUrl: (fileUrl: string) => void;
   isToggled: boolean;
 }
 
 const PublishPreviewPresenter = ({
   blogPostInfo,
   fileObj,
+  fileUrl,
+  setFileUrl,
   onChangeThumbnail,
   onChangeTextarea,
   onClickDeleteImg,
   onClickRestoreImg,
-  fileUrl,
-  setFileUrl,
   isToggled,
 }: Props) => {
   const { description, thumbnail } = blogPostInfo;
@@ -35,7 +35,7 @@ const PublishPreviewPresenter = ({
     if (fileObj) {
       //업로드 후
       setFileUrl(URL.createObjectURL(fileObj));
-    } else if (!fileObj && thumbnail && typeof thumbnail === 'string' && thumbnail !== '') {
+    } else if (!fileObj && thumbnail && typeof thumbnail === 'string') {
       // 초기(update)
       setFileUrl(thumbnail as string);
     } else {
@@ -96,6 +96,7 @@ const PublishPreviewPresenter = ({
         maxLength={200}
         rows={6}
         placeholder="Provide a brief summary of the blog post..."
+        spellCheck={false}
       />
       <span>{description.length}/200</span>
     </DIV.PublishPreview>

@@ -39,13 +39,14 @@ const PublishPreviewContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
 
   const onChangeTextarea = useCallback(
     (e: ChangeEvent<HTMLTextAreaElement>) => {
-      //띄어쓰기 막기
       const inputValue = e.target.value;
-      const newValue = inputValue.replace(/\n/g, '');
+      const newValue = inputValue.replace(/\n/g, ''); //줄바꿈 제거
 
-      if (newValue.length > 200) return;
-
-      setBlogPostInfo({ ...blogPostInfo, description: newValue });
+      if (newValue.length <= 200) {
+        setBlogPostInfo({ ...blogPostInfo, description: newValue });
+      } else {
+        return;
+      }
     },
     [blogPostInfo, setBlogPostInfo],
   );
@@ -73,12 +74,12 @@ const PublishPreviewContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
     <PublishPreviewPresenter
       blogPostInfo={blogPostInfo}
       fileObj={fileObj}
+      fileUrl={fileUrl}
+      setFileUrl={setFileUrl}
       onChangeThumbnail={onChangeThumbnail}
       onChangeTextarea={onChangeTextarea}
       onClickDeleteImg={onClickDeleteImg}
       onClickRestoreImg={onClickRestoreImg}
-      fileUrl={fileUrl}
-      setFileUrl={setFileUrl}
       isToggled={isToggled}
     />
   );
