@@ -194,11 +194,19 @@ const Modal = ({ type, msg, isOpen, setOpen, callback, shakeAlert }: ModalProps)
       if (scrollDir === scrollAct.DOWN) dispatch(scrollDownForModal());
       if (scrollDir === scrollAct.UP) dispatch(scrollUpForModal());
     }
+
+    return () => {
+      if (!isOpen) {
+        //delete or confirm 시 (callback o)
+        dispatch(scrollResetForModal());
+      }
+    };
   }, [dispatch, isOpen]);
 
   const onAnimationEnd = useCallback(() => {
     if (!isOpen) {
       setRender(false);
+      //cancel or alert 시 (callback x)
       dispatch(scrollResetForModal());
     }
   }, [dispatch, isOpen]);
