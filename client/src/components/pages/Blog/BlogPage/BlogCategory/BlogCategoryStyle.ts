@@ -1,5 +1,9 @@
 import styled from '@_settings/styled';
 
+interface PageNumBtnProps {
+  pageNum: number;
+}
+
 export const SECTION = {} as any;
 export const DIV = {} as any;
 export const BTN = {} as any;
@@ -148,7 +152,7 @@ DIV.PageBtnGroup = styled.div`
   }
 `;
 
-BTN.PageNumBtn = styled.button`
+BTN.PageNumBtn = styled.button<PageNumBtnProps>`
   // border: 1px solid blue;
   font-size: 18px;
   font-weight: bold;
@@ -168,6 +172,14 @@ BTN.PageNumBtn = styled.button`
       height: 2.5px;
       background-color: ${({ theme }) => theme.BD_C};
       border-radius: 20px;
+
+      ${(props) => {
+        if (props.pageNum < 10) {
+          return `
+            width: 30%;
+          `;
+        }
+      }}
     }
   }
 `;
