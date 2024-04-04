@@ -11,7 +11,7 @@ interface Props {
   blogPostsData?: BlogPostRes;
 }
 
-const activeBtnArr = Array.from({ length: 3 }, (_v, index) => index);
+const activeBtnArr = Array.from({ length: 3 }, (_, index) => index);
 
 const HomePresenter = ({ blogPostsData }: Props) => {
   const [activeBtnNum, setActiveBtnNum] = useState(1);
@@ -36,7 +36,7 @@ const HomePresenter = ({ blogPostsData }: Props) => {
               {activeBtnNum === 2 && <BlogSummary blogPostsData={blogPostsData} />}
               {activeBtnNum === 3 && <TagsSummary blogPostsData={blogPostsData} />}
               <DIV.ActiveBtns>
-                {activeBtnArr.map((_v, i) => (
+                {activeBtnArr.map((_, i) => (
                   <button
                     className={activeBtnNum === i + 1 ? 'active' : ''}
                     key={i}
