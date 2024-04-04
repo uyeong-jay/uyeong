@@ -12,7 +12,7 @@ interface Props {
 
 const BlogPostCardPresenter = ({ post }: Props) => {
   const {
-    /* _id, privacy, */
+    /* _id, */
     titleForUrl,
     title,
     tags,
@@ -22,9 +22,10 @@ const BlogPostCardPresenter = ({ post }: Props) => {
     createdAt,
     category,
     commentCount,
+    privacy,
   } = post;
 
-  // 보여줄 설명, 내용 200자 제한
+  // 보여줄 설명 or 내용 200자 제한
   const cardContent = useMemo(() => {
     const editContent = content.slice(0, 200);
     return removeMd(editContent);
@@ -32,6 +33,7 @@ const BlogPostCardPresenter = ({ post }: Props) => {
 
   return (
     <ARTICLE.Frame>
+      <DIV.Lock>{privacy && <span>Private</span>}</DIV.Lock>
       <DIV.Title thumbnail={thumbnail}>
         <h3>
           <Link href={`/blog/${titleForUrl}`}>{title.charAt(0).toUpperCase() + title.slice(1)}</Link>

@@ -3,8 +3,10 @@ import { BlogPostRes } from '@app/services/blog/postApi';
 import BlogPostCard from '../BlogPostCard';
 import styled from '@_settings/styled';
 import { v4 as uuid } from 'uuid';
+import { UserResponse } from '@app/services/user/userApi';
 
 interface Propss {
+  userData?: UserResponse;
   blogPostsBySearch?: BlogPostRes;
 }
 
@@ -72,15 +74,19 @@ DIV.NoMorePosts = styled.div`
 `;
 
 const POSTCOUNT = 4;
-export const InitialPostsCardArr = Array.from({ length: POSTCOUNT }, (_v, index) => index);
+export const InitialPostsCardArr = Array.from({ length: POSTCOUNT }, (_, index) => index);
 
-const BlogPosts = ({ blogPostsBySearch }: Propss) => {
+const BlogPosts = ({ userData, blogPostsBySearch }: Propss) => {
   return (
     <DIV.BlogPostsWrapper>
       {blogPostsBySearch?.posts ? (
         blogPostsBySearch.posts.map((post) =>
           post ? (
-            <BlogPostCard key={post._id} post={post} />
+            userData?.user?.role === 'admin' ? (
+              <BlogPostCard key={post._id} post={post} />
+            ) : (
+              !post.privacy && <BlogPostCard key={post._id} post={post} />
+            )
           ) : (
             //불러온 post갯수가 limit갯수와 같고 더이상 불러올 post가 없을때
             <DIV.NoMorePosts key={uuid()}>- No more posts -</DIV.NoMorePosts>

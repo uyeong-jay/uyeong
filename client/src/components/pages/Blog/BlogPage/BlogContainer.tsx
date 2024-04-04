@@ -5,6 +5,7 @@ import { useGetBlogPostsBySearchQuery } from '@app/services/blog/postApi';
 import { getPostsBySearch, getMorePostsBySearch, getTagName } from '@pages/Blog/BlogSlice';
 import React from 'react';
 import { useIntersect } from '@hooks/useIntersect';
+import { useGetUserDataQuery } from '@app/services/user/userApi';
 
 export interface TagWithCount {
   name: string;
@@ -12,6 +13,8 @@ export interface TagWithCount {
 }
 
 const BlogContainer = () => {
+  const { data: userData } = useGetUserDataQuery();
+
   const dispatch = useAppDispatch();
 
   //포스트
@@ -182,16 +185,17 @@ const BlogContainer = () => {
 
   return (
     <BlogPresenter
-      targetRef={targetRef}
+      userData={userData}
       blogPostsBySearch={blogPostsBySearch}
-      tagUnderline={tagUnderline}
       searchWordInput={searchWordInput}
+      inputRef={inputRef}
       onChangeInput={onChangeInput}
       onClickInput={onClickInput}
       onFocusInput={onFocusInput}
-      inputRef={inputRef}
       onClickTag={onClickTag}
+      tagUnderline={tagUnderline}
       isTagClicked={isTagClicked}
+      targetRef={targetRef}
       isLoadingPosts={isLoadingPosts}
     />
   );

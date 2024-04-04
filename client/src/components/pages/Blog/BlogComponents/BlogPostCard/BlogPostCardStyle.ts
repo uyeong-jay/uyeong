@@ -44,6 +44,18 @@ ARTICLE.Frame = styled.article`
   }
 `;
 
+DIV.Lock = styled.div`
+  // border: 1px solid black;
+  position: absolute;
+  bottom: -25px;
+  left: 10px;
+
+  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+    bottom: -30px;
+    font-size: 16px;
+  }
+`;
+
 DIV.Title = styled.div<TitleProps>`
   // border: 1px solid black;
   display: flex;
@@ -177,13 +189,20 @@ DIV.ContentTop = styled.div`
   position: absolute;
   top: -30px;
   right: 15px;
+  width: 90%;
 
   //카테고리
   & > span {
     // border: 1px solid red;
+    display: block;
+    width: 100%;
+    text-align: right;
     font-size: 15px;
     color: ${({ theme }) => theme.FONT_C};
     font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
@@ -193,6 +212,7 @@ DIV.ContentTop = styled.div`
     top: -140px;
   }
 `;
+
 DIV.ContentMiddle = styled.div<ContentMiddleProps>`
   // border: 1px solid blue;
   display: flex;
@@ -373,15 +393,17 @@ DIV.ContentBottom = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   position: relative;
-  width: 100%;
+  width: 113%;
   height: 20%;
 
   & > p {
-    padding: 15px 0;
+    // border: 1px solid green;
+    padding: 10px 0;
     width: auto;
   }
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
+    width: 100%;
     height: 0px;
     bottom: -40px;
 
@@ -401,13 +423,8 @@ DIV.ContentBottom = styled.div`
 
 P.CardDate = styled.p`
   // border: 1px solid black;
-  bottom: -35px;
-  left: 10px;
 `;
 
 P.CardComment = styled.p`
   // border: 1px solid black;
-  bottom: -35px;
-  right: 10px;
-  text-align: end;
 `;

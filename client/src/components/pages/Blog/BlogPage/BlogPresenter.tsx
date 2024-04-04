@@ -8,6 +8,7 @@ import SearchIcon from '@icons/SearchIcon';
 import BlogTags from '../BlogComponents/BlogTags';
 import BlogPosts from '@pages/Blog/BlogComponents/BlogPosts';
 import MiniLoader from '@modals/MiniLoader';
+import { UserResponse } from '@app/services/user/userApi';
 // import { DIV as DIV_POSTS } from '../BlogComponents/BlogPosts/BlogPosts';
 // import { InitialPostsCardArr } from '../BlogComponents/BlogPosts/BlogPosts';
 // import dynamic from 'next/dynamic';
@@ -24,30 +25,32 @@ import MiniLoader from '@modals/MiniLoader';
 // });
 
 interface Props {
-  targetRef: RefObject<HTMLDivElement>;
+  userData?: UserResponse;
   blogPostsBySearch?: BlogPostRes;
-  tagUnderline: string;
   searchWordInput?: string;
+  inputRef?: RefObject<HTMLInputElement>;
   onChangeInput?: (e: ChangeEvent<HTMLInputElement>) => void;
   onClickInput?: () => void;
   onFocusInput?: () => void;
-  inputRef?: RefObject<HTMLInputElement>;
   onClickTag: (tagName: string) => void;
   isTagClicked: boolean;
+  tagUnderline: string;
+  targetRef: RefObject<HTMLDivElement>;
   isLoadingPosts: boolean;
 }
 
 const BlogPresenter: React.FC<Props> = ({
-  targetRef,
+  userData,
   blogPostsBySearch,
-  tagUnderline,
   searchWordInput,
+  inputRef,
   onChangeInput,
   onClickInput,
   onFocusInput,
-  inputRef,
   onClickTag,
+  tagUnderline,
   isTagClicked,
+  targetRef,
   isLoadingPosts,
 }) => {
   return (
@@ -73,7 +76,7 @@ const BlogPresenter: React.FC<Props> = ({
               />
               <SearchIcon />
             </DIV.SearchBar>
-            <BlogPosts blogPostsBySearch={blogPostsBySearch} />
+            <BlogPosts userData={userData} blogPostsBySearch={blogPostsBySearch} />
             <DIV.IntersectionTarget id="posts_intersection_target" ref={targetRef}>
               {isLoadingPosts ? (
                 <MiniLoader w={30} h={30} responsive />
