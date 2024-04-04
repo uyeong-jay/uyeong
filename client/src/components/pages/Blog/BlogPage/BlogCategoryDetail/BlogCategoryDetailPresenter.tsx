@@ -32,7 +32,11 @@ const BlogCategoryDetailPresenter = ({
 
   return (
     <SECTION.Frame>
-      <h1>{headerTitle.charAt(0).toUpperCase() + headerTitle.slice(1)}</h1>
+      <h1>
+        <span>{headerTitle.charAt(0).toUpperCase() + headerTitle.slice(1)}</span>
+      </h1>
+      <span></span>
+
       <DIV.PostCardBlcok hasPost={blogPostsByCategory?.postsByCategory ? true : false}>
         {blogPostsByCategory?.postsByCategory ? (
           blogPostsByCategory.postsByCategory.map((post) =>
@@ -65,7 +69,7 @@ const BlogCategoryDetailPresenter = ({
                 <span>{formatDate(post.createdAt)}</span>
               </DIV.PostCard>
             ) : (
-              //limit 와 가져온 post 개수가 서로 딱 맞아 떨어질때
+              //limit 와 가져온 post 개수가 서로 같을때
               <div key={uuid()}></div>
             ),
           )
@@ -76,14 +80,14 @@ const BlogCategoryDetailPresenter = ({
           </DIV.LoaderWrapper>
         ) : (
           // 포스트 없을때
-          <div>- No post yet -</div>
+          <DIV.NoPost>- No post yet -</DIV.NoPost>
         )}
       </DIV.PostCardBlcok>
       <DIV.IntersectionTarget id="posts_by_category_intersection_target" ref={targetRef}>
         {isLoadingPosts ? (
           <MiniLoader w={30} h={30} responsive />
         ) : canLoadMore ? (
-          //limit 와 가져온 post 개수가 서로 딱 맞아 떨어질때
+          //limit 와 가져온 post 개수가 서로 같을때
           !blogPostsByCategory?.next_cursor && <DIV.NoMorePosts>- No more posts -</DIV.NoMorePosts>
         ) : (
           //새로고침 후

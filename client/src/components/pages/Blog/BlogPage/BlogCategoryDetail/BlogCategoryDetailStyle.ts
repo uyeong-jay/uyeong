@@ -29,6 +29,13 @@ SECTION.Frame = styled.div`
     margin-bottom: 130px;
     max-width: ${({ theme }) => theme.BP.TABLET};
 
+    & > span {
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
     &::after {
       border-left: 3px solid ${({ theme }) => theme.BD_C};
       content: '';
@@ -62,22 +69,10 @@ DIV.PostCardBlcok = styled.div<PostCardBlcokProps>`
   @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
     width: 1200px;
   }
-
-  //포스트 없을때
-  & > div {
-    // border: 1px solid black;
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: ${({ theme }) => theme.FONT_C};
-    font-weight: bold;
-    font-size: 20px;
-  }
 `;
 
 DIV.PostCard = styled.div`
-  // border: 1px solid black;
+  // border: 1px solid red;
   margin: 80px 50px; //MOBILE also
   position: relative;
 
@@ -99,13 +94,13 @@ DIV.PostCard = styled.div`
     left: 0px;
     width: 100%;
     font-size: 25px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 
     & > a {
       display: inline-block;
       width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       color: ${({ theme }) => theme.FONT_C};
 
       &:hover {
@@ -182,6 +177,17 @@ DIV.LoaderWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+DIV.NoPost = styled.div`
+  // border: 1px solid black;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: ${({ theme }) => theme.FONT_C};
+  font-weight: bold;
+  font-size: 20px;
 `;
 
 DIV.IntersectionTarget = styled.div`
