@@ -1,9 +1,12 @@
 import { BlogCommentReq } from '@app/services/blog/commentApi';
 import React, { ChangeEvent, FormEvent, RefObject } from 'react';
 import { BTN, DIV, FORM } from './BlogPostCommentWriteStyle';
+import useAnimation from '@hooks/useAnimation';
+import Link from 'next/link';
 
 interface Props {
   textareaRef: RefObject<HTMLTextAreaElement>;
+  isNotLoggedIn: boolean;
   blogCommentInfo: BlogCommentReq;
   writeReply?: boolean;
   editComment?: boolean;
@@ -17,6 +20,7 @@ interface Props {
 
 const BlogPostCommentWritePresenter = ({
   textareaRef,
+  isNotLoggedIn,
   blogCommentInfo,
   writeReply,
   editComment,
@@ -27,15 +31,25 @@ const BlogPostCommentWritePresenter = ({
   onClickEditCancel,
   onClickEditSave,
 }: Props) => {
+  const [show, render, onAnimationEnd] = useAnimation(isNotLoggedIn);
+
   return (
-    <FORM.CommentWriteForm onSubmit={onSubmit}>
-      <textarea
-        ref={textareaRef}
-        value={blogCommentInfo.content}
-        onChange={onChangeComment}
-        placeholder="Add a comment..."
-        spellCheck="false"
-      ></textarea>
+    <FORM.CommentWriteForm onSubmit={onSubmit} isNotLoggedIn={isNotLoggedIn}>
+      <div>
+        <textarea
+          ref={textareaRef}
+          value={blogCommentInfo.content}
+          onChange={onChangeComment}
+          placeholder="Add a comment..."
+          spellCheck="false"
+        />
+        {render && (
+          <DIV.CommentLoginBox animationName={show && 'up'} onAnimationEnd={() => onAnimationEnd}>
+            Please log in first!
+            <Link href="/login">Log in</Link>
+          </DIV.CommentLoginBox>
+        )}
+      </div>
 
       {writeReply ? (
         <DIV.ReplyBtnGroup>

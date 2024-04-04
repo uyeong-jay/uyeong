@@ -46,6 +46,8 @@ const BlogPostCommentWriteContainer = ({
   const [createReply] = useCreateBlogReplyMutation();
   const [updateComment] = useUpdateBlogCommentMutation();
 
+  const [isNotLoggedIn, setNotLoggedIn] = useState(false);
+
   //댓글or답글 내용 regex사용 편집
   const regexEditComment = useCallback((content: string, taggedNickname = '') => {
     let markdownContent = content;
@@ -116,7 +118,11 @@ const BlogPostCommentWriteContainer = ({
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      if (!blogCommentInfo.content) return;
+      if (!userData?.access_token || !blogCommentInfo.content) {
+        if (isNotLoggedIn) return;
+        setNotLoggedIn(true);
+        return;
+      }
 
       const data = {
         commentInfo: {
@@ -128,7 +134,7 @@ const BlogPostCommentWriteContainer = ({
       };
       createComment(data);
 
-      //comment후 높이 원복
+      //댓글 작성 후 높이 원복
       if (textareaRef.current !== null) {
         textareaRef.current.style.height = '150px';
       }
@@ -136,12 +142,16 @@ const BlogPostCommentWriteContainer = ({
       //내용 초기화
       setBlogCommentInfo({ ...blogCommentInfo, content: '' });
     },
-    [blogCommentInfo, createComment, regexEditComment, userData?.access_token],
+    [blogCommentInfo, createComment, isNotLoggedIn, regexEditComment, userData?.access_token],
   );
 
   //답글 달기
   const onClickReply = useCallback(() => {
-    if (!blogCommentInfo.content) return;
+    if (!userData?.access_token || !blogCommentInfo.content) {
+      if (isNotLoggedIn) return;
+      setNotLoggedIn(true);
+      return;
+    }
 
     const data = {
       commentInfo: {
@@ -166,6 +176,7 @@ const BlogPostCommentWriteContainer = ({
     blogCommentInfo,
     comment?._id,
     createReply,
+    isNotLoggedIn,
     regexEditComment,
     setOpenReplies,
     setWriteReply,
@@ -176,10 +187,16 @@ const BlogPostCommentWriteContainer = ({
   //댓글or답글 입력
   const onChangeComment = useCallback(
     (e) => {
-      resizeHeight();
-      setBlogCommentInfo({ ...blogCommentInfo, content: e.target.value });
+      if (userData?.access_token) {
+        resizeHeight();
+        setBlogCommentInfo({ ...blogCommentInfo, content: e.target.value });
+      } else {
+        if (isNotLoggedIn) return;
+        setNotLoggedIn(true);
+        return;
+      }
     },
-    [blogCommentInfo, resizeHeight],
+    [blogCommentInfo, isNotLoggedIn, resizeHeight, userData?.access_token],
   );
 
   //댓글or답글 입력 취소
@@ -189,7 +206,12 @@ const BlogPostCommentWriteContainer = ({
 
   //댓글or답글 수정
   const onClickEditSave = useCallback(() => {
-    if (!blogCommentInfo.content) return;
+    if (!userData?.access_token || !blogCommentInfo.content) {
+      if (isNotLoggedIn) return;
+      setNotLoggedIn(true);
+      return;
+    }
+
     const editContent = regexEditComment(blogCommentInfo.content, regexTaggedNickname);
     const data = {
       commentInfo: {
@@ -211,6 +233,7 @@ const BlogPostCommentWriteContainer = ({
   }, [
     blogCommentInfo.content,
     comment?._id,
+    isNotLoggedIn,
     regexEditComment,
     regexTaggedNickname,
     reply?._id,
@@ -230,6 +253,7 @@ const BlogPostCommentWriteContainer = ({
   return (
     <BlogPostCommentWritePresenter
       textareaRef={textareaRef}
+      isNotLoggedIn={isNotLoggedIn}
       blogCommentInfo={blogCommentInfo}
       writeReply={writeReply}
       editComment={editComment}
