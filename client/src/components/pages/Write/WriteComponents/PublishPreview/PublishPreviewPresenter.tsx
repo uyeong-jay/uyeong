@@ -1,7 +1,7 @@
 import { BlogPostReq } from '@app/services/blog/postApi';
 import CameraIcon from '@icons/CameraIcon';
 import Image from 'next/image';
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { ChangeEvent } from 'react';
 import { DIV } from './PublishPreviewStyle';
 import XMarkIcon from '@icons/XMarkIcon';
 import RotateIcon from '@icons/RotateIcon';
@@ -10,7 +10,6 @@ interface Props {
   blogPostInfo: BlogPostReq;
   fileObj?: File;
   fileUrl: string;
-  setFileUrl: (fileUrl: string) => void;
   onChangeThumbnail: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeTextarea: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   onClickDeleteImg: () => void;
@@ -22,7 +21,6 @@ const PublishPreviewPresenter = ({
   blogPostInfo,
   fileObj,
   fileUrl,
-  setFileUrl,
   onChangeThumbnail,
   onChangeTextarea,
   onClickDeleteImg,
@@ -30,19 +28,6 @@ const PublishPreviewPresenter = ({
   isToggled,
 }: Props) => {
   const { description, thumbnail } = blogPostInfo;
-
-  useEffect(() => {
-    if (fileObj) {
-      //업로드 후
-      setFileUrl(URL.createObjectURL(fileObj));
-    } else if (!fileObj && thumbnail && typeof thumbnail === 'string') {
-      // 초기(update)
-      setFileUrl(thumbnail as string);
-    } else {
-      // 초기(post) or 제거 후
-      setFileUrl('');
-    }
-  }, [fileObj, setFileUrl, thumbnail]);
 
   return (
     <DIV.PublishPreview>

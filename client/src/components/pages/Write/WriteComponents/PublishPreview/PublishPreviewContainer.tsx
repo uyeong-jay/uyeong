@@ -1,7 +1,6 @@
 import { BlogPostReq } from '@app/services/blog/postApi';
-// import getUploadImageUrl from '@utils/uploadImage';
 import validFile from '@utils/valid/validFile';
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import PublishPreviewPresenter from './PublishPreviewPresenter';
 import { useAppDispatch } from '@app/hooks';
 import { setFileModified, setFileRemoved, setFileUnchanged } from '@pages/Write/WriteSlice';
@@ -17,6 +16,21 @@ const PublishPreviewContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
   const [fileUrl, setFileUrl] = useState(''); //url: 클라우드에 이미 존재하는 이미지
 
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const postThumbnail = blogPostInfo.thumbnail;
+
+    if (fileObj) {
+      //업로드 후
+      setFileUrl(URL.createObjectURL(fileObj));
+    } else if (!fileObj && postThumbnail && typeof postThumbnail === 'string') {
+      // 초기(update)
+      setFileUrl(postThumbnail as string);
+    } else {
+      // 초기(post) or 제거 후
+      setFileUrl('');
+    }
+  }, [blogPostInfo.thumbnail, fileObj]);
 
   const onChangeThumbnail = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +89,6 @@ const PublishPreviewContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
       blogPostInfo={blogPostInfo}
       fileObj={fileObj}
       fileUrl={fileUrl}
-      setFileUrl={setFileUrl}
       onChangeThumbnail={onChangeThumbnail}
       onChangeTextarea={onChangeTextarea}
       onClickDeleteImg={onClickDeleteImg}

@@ -55,6 +55,18 @@ const SettingsContainer = () => {
     };
   }, [dispatch]);
 
+  useEffect(() => {
+    const userAvatar = userUpdateInfo.avatar;
+
+    if (fileObj) {
+      return setFileUrl(URL.createObjectURL(fileObj));
+    } else if (!fileObj && userAvatar && typeof userAvatar === 'string') {
+      return setFileUrl(userAvatar as string);
+    } else {
+      setFileUrl('');
+    }
+  }, [fileObj, setFileUrl, userUpdateInfo.avatar]);
+
   const onSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -189,7 +201,6 @@ const SettingsContainer = () => {
       userData={userData}
       fileObj={fileObj}
       fileUrl={fileUrl}
-      setFileUrl={setFileUrl}
       isUpdatingUserData={isUpdatingUserData}
       isUpdatingUserInfo={isUpdatingUserInfo}
       userUpdateSuccess={userUpdateSuccess}

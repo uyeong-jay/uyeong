@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import Head from 'next/head';
 import { DIV, FORM } from './SettingsStyle';
 import Button from '@atoms/Button';
@@ -21,7 +21,6 @@ interface Props {
   userData?: UserResponse;
   fileObj?: File;
   fileUrl: string;
-  setFileUrl: (fileUrl: string) => void;
   isUpdatingUserData: boolean;
   isUpdatingUserInfo: boolean;
   userUpdateSuccess: boolean;
@@ -43,7 +42,6 @@ const SettingsPresenter = ({
   userData,
   fileObj,
   fileUrl,
-  setFileUrl,
   isUpdatingUserData,
   isUpdatingUserInfo,
   userUpdateSuccess,
@@ -64,17 +62,6 @@ const SettingsPresenter = ({
   const [isNewPasswordType, setNewPasswordType] = useState(false);
   const [isCfNewPasswordType, setCfNewPasswordType] = useState(false);
 
-  useEffect(() => {
-    if (fileObj) {
-      // console.log('만들어짐:', fileObj);
-      return setFileUrl(URL.createObjectURL(fileObj));
-    } else if (!fileObj && avatar && typeof avatar === 'string') {
-      return setFileUrl(avatar as string);
-    } else {
-      setFileUrl('');
-    }
-  }, [fileObj, avatar, setFileUrl]);
-
   if (!userData?.user) return <NotFound />;
   return (
     <>
@@ -94,7 +81,6 @@ const SettingsPresenter = ({
                 className="settings-user-avatar"
                 src={fileUrl}
                 onLoad={() => {
-                  // console.log('지워짐:', fileUrl);
                   URL.revokeObjectURL(fileUrl);
                 }}
                 alt="user avater"
