@@ -1,4 +1,11 @@
-interface userUpdateInfoType {
+interface userJoinInfoProps {
+  nickname: string;
+  email: string;
+  password: string;
+  cf_password: string;
+}
+
+interface userUpdateInfoProps {
   avatar?: string | File;
   nickname?: string;
   email?: string;
@@ -7,31 +14,76 @@ interface userUpdateInfoType {
   cf_new_password: string;
 }
 
-interface userDataType {
+interface userDataProps {
   nickname: string;
 }
 
-const validUserInfo = (userUpdateInfo: userUpdateInfoType, userData?: userDataType, isUnchangedAvatar?: boolean) => {
+const validNickname = (nickname?: string) => {
+  if (!nickname) return 'Please enter your nickname.';
+  else if (nickname.length < 2 || nickname.length > 20)
+    return 'Your nickname must be between 2 and 20 characters long.';
+  return '';
+};
+
+const validEmail = (email?: string) => {
+  if (!email) return 'Please enter your email.';
+  return '';
+};
+
+const validPassword = (password: string, passwordName: string) => {
+  if (0 < password.length && password.length < 6) return `Your ${passwordName} must be 6 characters or more.`;
+  return '';
+};
+
+const validPasswordMatch = (password: string, cf_password: string, passwordName: string, cfPasswordName: string) => {
+  if (password !== cf_password) return `Your ${passwordName} and ${cfPasswordName} must be same.`;
+  return '';
+};
+
+export const validUserJoinInfo = (userJoinInfo: userJoinInfoProps) => {
+  const { nickname, email, password, cf_password } = userJoinInfo;
+
+  const nicknameError = validNickname(nickname);
+  if (nicknameError) return nicknameError;
+
+  const emailError = validEmail(email);
+  if (emailError) return emailError;
+
+  const passwordError = validPassword(password, 'password');
+  if (passwordError) return passwordError;
+
+  const cfPasswordError = validPassword(password, 'confirm password');
+  if (cfPasswordError) return cfPasswordError;
+
+  const passwordMatchError = validPasswordMatch(password, cf_password, 'password', 'confirm password');
+  if (passwordMatchError) return passwordMatchError;
+
+  return '';
+};
+
+export const validUserUpdateInfo = (
+  userUpdateInfo: userUpdateInfoProps,
+  userData?: userDataProps,
+  isUnchangedAvatar?: boolean,
+) => {
   const { nickname, email, old_password, new_password, cf_new_password } = userUpdateInfo;
 
   const userNickname = userData?.nickname;
 
-  //nickname 에러
-  if (!nickname) return 'Please enter your nickname.';
-  else if (nickname.length < 2 || nickname.length > 20)
-    return 'Your nickname must be between 2 and 20 characters long.';
+  const nicknameError = validNickname(nickname);
+  if (nicknameError) return nicknameError;
 
-  //email 에러
-  if (!email) return 'Please enter your email.';
+  const emailError = validEmail(email);
+  if (emailError) return emailError;
 
-  //old_password 에러
-  if (0 < old_password.length && old_password.length < 6) return 'Your current password must be 6 characters or more.';
+  const oldPassword = validPassword(old_password, 'current password');
+  if (oldPassword) return oldPassword;
 
-  //new_password 에러
-  if (0 < new_password.length && new_password.length < 6) return 'Your new password must be 6 characters or more.';
+  const newPassword = validPassword(old_password, 'new password');
+  if (newPassword) return newPassword;
 
-  //cf_new_password 에러
-  if (new_password !== cf_new_password) return 'Your new password and confirm password must be same.';
+  const passwordMatchError = validPasswordMatch(new_password, cf_new_password, 'new password', 'confirm password');
+  if (passwordMatchError) return passwordMatchError;
 
   //변경 된게 없을때
   if (
@@ -50,21 +102,19 @@ const validUserInfo = (userUpdateInfo: userUpdateInfoType, userData?: userDataTy
   if (!(old_password && new_password && cf_new_password) && !(!old_password && !new_password && !cf_new_password))
     return 'Please enter all password fields.';
 
-  //password 일치 에러
+  //password 일치 방지 에러
   if (old_password && new_password && old_password === new_password)
     return 'Your current password and new password must be different.';
 
   return '';
 };
 
-export default validUserInfo;
-
 //사용법
 
 //에러 모아 놓기
 // const errMsg = [];
 
-// errMsg.push(validUserInfo(userUpdateInfo, userData?.user));
+// errMsg.push(validUserInfo(userUpdateInfo));
 
 //에러 보여주기
 // setSettingErrMsg(errMsg[0]);

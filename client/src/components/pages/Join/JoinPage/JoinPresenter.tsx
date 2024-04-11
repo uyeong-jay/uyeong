@@ -1,8 +1,7 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, MouseEventHandler, useState } from 'react';
 import { DIV, FORM, P } from './JoinStyle';
 import Head from 'next/head';
 import Link from 'next/link';
-// import Loader from '@modals/Loader';
 import InputBox from '@molecules/InputBox';
 import Button from '@atoms/Button';
 import { UserRequest, UserResponse } from '@app/services/user/userApi';
@@ -14,6 +13,7 @@ import PartyPopper from '@icons/PartyPopper';
 import PageFrame from '@templates/PageFrame';
 
 interface Props {
+  onClickBtn: MouseEventHandler<HTMLButtonElement>;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
   userJoinInfo: UserRequest;
@@ -24,10 +24,12 @@ interface Props {
   isModalOpen: boolean;
   setModalOpen: (isModalOpen: boolean) => void;
   isJoinError: boolean;
+  joinErrMsg: string;
   error: any;
 }
 
 const JoinPresenter = ({
+  onClickBtn,
   onSubmit,
   onChangeInput,
   userJoinInfo,
@@ -38,6 +40,7 @@ const JoinPresenter = ({
   isModalOpen,
   setModalOpen,
   isJoinError,
+  joinErrMsg,
   error,
 }: Props) => {
   const { nickname, email, password, cf_password } = userJoinInfo;
@@ -76,10 +79,13 @@ const JoinPresenter = ({
             <div>
               <InputBox labelText="Nickname" name="nickname" value={nickname} onChange={onChangeInput} />
             </div>
-
             <div>
               <InputBox labelText="Email" type="email" name="email" value={email} onChange={onChangeInput} />
             </div>
+
+            <button onClick={onClickBtn} style={{ border: '1px solid black', width: '100px', height: '50px' }}>
+              asdasd
+            </button>
 
             <div>
               <InputBox
@@ -97,10 +103,9 @@ const JoinPresenter = ({
                 disabled={password ? false : true}
               />
             </div>
-
             <div>
               <InputBox
-                labelText={'Confirm \n password'}
+                labelText={'Confirm password'}
                 name="cf_password"
                 type={cfPasswordType ? 'password' : 'text'}
                 value={cf_password}
@@ -114,7 +119,6 @@ const JoinPresenter = ({
                 disabled={cf_password ? false : true}
               />
             </div>
-
             <FormButton
               variant="join"
               text="Create"
@@ -128,9 +132,13 @@ const JoinPresenter = ({
           </P.JoinFooter>
 
           {/* 에러 메시지 */}
-          {isJoinError && (
-            <Modal type="alert" msg={error.data.msg} isOpen={isModalOpen} setOpen={setModalOpen} shakeAlert />
-          )}
+          <Modal
+            type="alert"
+            msg={joinErrMsg || (isJoinError && error.data.msg)}
+            isOpen={isModalOpen}
+            setOpen={setModalOpen}
+            shakeAlert
+          />
         </PageFrame>
       )}
     </>

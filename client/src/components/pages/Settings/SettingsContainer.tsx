@@ -1,7 +1,7 @@
 import React, { useState, useCallback, ChangeEvent, FormEvent, useEffect } from 'react';
 import SettingsPresenter from './SettingsPresenter';
 import { useGetUserDataQuery, useUpdateMutation } from '@app/services/user/userApi';
-import validUserInfo from '@utils/valid/validUserInfo';
+import { validUserUpdateInfo } from '@utils/valid/validUserInfo';
 import getUploadImageUrl from '@utils/uploadImage';
 import validFile from '@utils/valid/validFile';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
@@ -77,7 +77,7 @@ const SettingsContainer = () => {
       const isUnchangedAvatar = ((fileObj || fileUrl) && fileState === removed) || fileState === unchanged;
 
       //form에러
-      errMsg.push(validUserInfo(userUpdateInfo, userData?.user, isUnchangedAvatar));
+      errMsg.push(validUserUpdateInfo(userUpdateInfo, userData?.user, isUnchangedAvatar));
 
       //에러 보여주기
       setSettingErrMsg(errMsg[0]);
@@ -102,18 +102,19 @@ const SettingsContainer = () => {
         //유저 데이터 업데이트
         await update(data);
 
-        // 유저 데이터 초기화 (nickname, avatar, email 제외)
+        // 유저 데이터 초기화 (nickname, email 제외)
         setUserUpdateInfo({
           ...userUpdateInfo,
+          avatar: !(fileObj || fileUrl) ? '' : userUpdateInfo.avatar,
           old_password: '',
           new_password: '',
           cf_new_password: '',
         });
 
-        // if (!(fileObj || fileUrl)) {
-        //   setFileObj(undefined);
-        //   setToggled(false);
-        // }
+        if (!(fileObj || fileUrl)) {
+          setFileObj(undefined);
+          setToggled(false);
+        }
 
         dispatch(setFileUnchanged());
         setClickedUpload(false);

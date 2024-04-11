@@ -75,7 +75,6 @@ const SettingsPresenter = ({
         {/* 프로필 사진 수정 */}
         <DIV.SettingsTop>
           <div className="settings-user-avatar-wrapper settings-user-avatar">
-            {/* Ani 적용을 위해 "!" 단위 분리 */}
             {fileUrl && (
               <Image
                 className="settings-user-avatar"
@@ -104,7 +103,6 @@ const SettingsPresenter = ({
             </button>
 
             <DIV.ToggleBtnWrapper>
-              {/* Ani 적용을 위해 "!" 단위 분리 */}
               {!isToggled && (
                 <button onClick={onClickDeleteImg} disabled={fileObj || avatar ? false : true}>
                   <XMarkIcon />
