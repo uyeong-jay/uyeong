@@ -9,23 +9,28 @@ const updateUser = async (req: IReqAuth, res: Response) => {
     if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
 
     //client 데이터 가져오기
-    const { avatar, email, nickname, old_password, new_password } = req.body;
+    const { /* _id */ avatar, /* email */ nickname, old_password, new_password } = req.body;
 
-    //email 조회
-    const user = await Users.findOne({ email });
-    if (!user) return res.status(400).json({ msg: "This account doesn't exist." });
+    //nickname 중복 조회
+    const userByNickname = await Users.findOne({ nickname });
+    if (userByNickname && userByNickname._id !== req.user._id)
+      return res.status(400).json({ msg: "This nickname already exists." });
 
-    //password를 바꾸지 않을때
+    //유저 조회 by id //비번번경 유저 확인시 사용
+    const userById = await Users.findOne({ _id: req.user._id });
+    if (!userById) return res.status(400).json({ msg: "This account doesn't exist." });
+
+    //password 바꾸지 않음
     if (!new_password) {
       //업데이트 하기
       await Users.findOneAndUpdate({ _id: req.user._id }, { avatar, nickname });
     }
 
-    //password를 바꿀때
+    //password 바꿈
     if (new_password) {
       //password 조회(bcrypt)
-      const isMatch = await bcrypt.compare(old_password, user.password);
-      if (!isMatch) return res.status(400).json({ msg: "Current password is incorrect" });
+      const isMatch = await bcrypt.compare(old_password, userById.password);
+      if (!isMatch) return res.status(400).json({ msg: "Current password is incorrect." });
 
       //password 암호화
       const salt = await bcrypt.genSalt(5); //솔트 추가
