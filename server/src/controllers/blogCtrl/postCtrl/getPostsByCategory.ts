@@ -27,7 +27,6 @@ const getPostsByCategory = async (req: Request, res: Response) => {
       .sort(sort);
 
     const next_cursor = postsByCategory[limit - 1]?._id.toString() || undefined;
-    console.log(next_cursor);
 
     if (!postsByCategory.length) return res.status(200).json({ hasMatchingPost: false, msg: "No posts" });
 
