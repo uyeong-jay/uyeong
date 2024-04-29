@@ -41,7 +41,7 @@ const StyledInput = styled.input<InputProps>`
   margin: 0;
   width: 100%;
   height: 40px;
-  text-align: center;
+  padding: 0 10px;
   font-size: 15px;
   color: ${({ theme }) => theme.FONT_C};
   outline: none;
@@ -60,7 +60,6 @@ const StyledInput = styled.input<InputProps>`
         `;
       }
     }}
-    브라우저에서만 적용
   }
 
   &:-webkit-autofill,

@@ -179,9 +179,10 @@ FORM.SettingsMainForm = styled.form`
   }
 `;
 
-DIV.ErrMsg = styled.div`
+DIV.SettingsErrMsg = styled.div`
   // border: 1px solid black;
+  height: 30px;
   font-size: 14px;
-  margin: 10px 0 0 5px;
+  margin: 7px 0 0 5px;
   color: ${({ theme }) => theme.FONT_C_DANGER};
 `;
