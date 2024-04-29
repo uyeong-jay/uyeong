@@ -1,5 +1,5 @@
 import authRouter from "./authRouter";
-import userRouter from "./uerRouter";
+import userRouter from "./userRouter";
 import blogCategoryRouter from "./blog/categoryRouter";
 import blogPostRouter from "./blog/postRouter";
 import blogCommentRouter from "./blog/commentRouter";
