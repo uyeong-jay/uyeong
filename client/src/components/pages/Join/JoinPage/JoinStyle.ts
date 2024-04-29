@@ -19,14 +19,23 @@ DIV.JoinSuccess = styled.div`
 
     & > h1 {
       // border: 1px solid black;
+      letter-spacing: 7px;
+
+      @media screen and (max-width: ${({ theme }) => theme.BP.TABLET}) {
+        letter-spacing: 3px;
+      }
     }
 
     & > .party-popper-icon {
       // border: 1px solid black;
       margin-left: 10px;
-      transform: translate(2px, -2px);
+      transform: rotate(-7deg) translate(-8px, 0px);
       width: 60px;
       height: 50px;
+    }
+    & > .party-popper-icon:nth-of-type(2) {
+      // border: 1px solid black;
+      transform: rotate(-85deg) translate(0px, -8px);
     }
   }
   & > p {
@@ -62,13 +71,15 @@ FORM.JoinForm = styled.form`
     letter-spacing: 0.5px;
   }
 
-  & > div {
+  //마지막 form btn 제외
+  & > div:not(:last-of-type) {
     // border: 1px solid red;
     position: relative;
+    margin-bottom: 40px;
 
     & > div {
       // border: 1px solid black;
-      margin-bottom: 40px;
+      position: relative;
 
       & > input {
         // border: 1px solid black;
@@ -76,13 +87,94 @@ FORM.JoinForm = styled.form`
         margin-top: 10px;
         border-radius: 10px;
       }
+
+      &.count-down-timer {
+        // border: 1px solid red;
+        position: absolute;
+        top: 20px;
+        right: 75px;
+        font-weight: bold;
+      }
     }
 
-    & > button {
+    & > span,
+    button {
       // border: 1px solid black;
       position: absolute;
-      top: 40px;
-      right: 10px;
+      border-radius: 10px;
+      height: 40px;
+      top: 31px;
+      right: 5px;
+    }
+
+    //loader
+    & > span {
+      background-color: ${({ theme }) => theme.BG_C};
+      border: 5px solid ${({ theme }) => theme.LIGHT_BG_C};
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      right: -5px;
+      width: 110px;
+    }
+
+    & > .verify-email-btn,
+    .verify-code-btn {
+      border: 5px solid ${({ theme }) => theme.LIGHT_BG_C};
+      background-color: ${({ theme }) => theme.BG_C};
+      right: 0px;
+      color: ${({ theme }) => theme.FONT_C}D8; //opacity: 85%
+      font-weight: bold;
+
+      &:disabled {
+        color: ${({ theme }) => theme.FONT_C}66; //opacity: 40%
+        cursor: default;
+      }
+    }
+
+    //responsive
+    & > span,
+    .verify-email-btn {
+      width: 110px;
+
+      @media screen and (max-width: ${({ theme }) => theme.BP.TABLET}) {
+        position: relative;
+        top: 10px;
+        left: 0;
+        width: 100%;
+      }
+    }
+
+    & > .verify-code-btn {
+      padding: 0 10px;
+      top: 10px;
+    }
+  }
+
+  & > .verify-code-input {
+    // border: 1px solid black;
+    margin-top: -40px;
+
+    @media screen and (max-width: ${({ theme }) => theme.BP.TABLET}) {
+      margin-top: -30px;
+    }
+  }
+`;
+
+DIV.EmailErrMsg = styled.div`
+  // border: 1px solid black;
+  position: relative;
+  top: -5px;
+  left: 0;
+  font-size: 14px;
+  margin: 10px 0 0 5px;
+  color: ${({ theme }) => theme.FONT_C_DANGER};
+
+  @media screen and (max-width: ${({ theme }) => theme.BP.TABLET}) {
+    top: 5px;
+
+    &.verify-code-err {
+      top: -2px;
     }
   }
 `;

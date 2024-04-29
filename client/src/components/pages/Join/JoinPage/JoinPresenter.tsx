@@ -11,16 +11,25 @@ import FormButton from '@molecules/FormButton';
 import Modal from '@modals/Modal';
 import PartyPopper from '@icons/PartyPopper';
 import PageFrame from '@templates/PageFrame';
+import MiniLoader from '@modals/MiniLoader';
+import CountdownTimer from '@atoms/CountdownTimer';
 
 interface Props {
-  onClickBtn: MouseEventHandler<HTMLButtonElement>;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClickVerifyEmail: MouseEventHandler<HTMLButtonElement>;
+  onClickVerify: MouseEventHandler<HTMLButtonElement>;
+  onTimeout: () => void;
   userJoinInfo: UserRequest;
   userData?: UserResponse;
-  joinSuccess: boolean;
+  joinData?: UserResponse;
+  isJoinSuccess: boolean;
   isjoining: boolean;
   isjoiningFirst: boolean;
+  isSendingEmail: boolean;
+  isVerifiedEmail: boolean;
+  isVerified: boolean;
+  isTimeout: boolean;
   isModalOpen: boolean;
   setModalOpen: (isModalOpen: boolean) => void;
   isJoinError: boolean;
@@ -29,37 +38,44 @@ interface Props {
 }
 
 const JoinPresenter = ({
-  onClickBtn,
   onSubmit,
   onChangeInput,
+  onClickVerifyEmail,
+  onClickVerify,
+  onTimeout,
   userJoinInfo,
   userData,
-  joinSuccess,
+  joinData,
+  isJoinSuccess,
   isjoining,
   isjoiningFirst,
+  isSendingEmail,
+  isVerifiedEmail,
+  isVerified,
+  isTimeout,
   isModalOpen,
   setModalOpen,
   isJoinError,
   joinErrMsg,
   error,
 }: Props) => {
-  const { nickname, email, password, cf_password } = userJoinInfo;
+  const { nickname, email, emailCode, password, cf_password } = userJoinInfo;
   const [passwordType, setPasswordType] = useState(true);
   const [cfPasswordType, setCfPasswordType] = useState(true);
 
-  if (userData?.user && !joinSuccess) return <NotFound />;
+  if (userData?.user && !isJoinSuccess) return <NotFound />;
   return (
     <>
       <Head>
         <title>UYeong | Join</title>
       </Head>
 
-      {joinSuccess ? (
+      {isJoinSuccess && joinData?.refresh_token && isVerifiedEmail && isVerified ? (
         <PageFrame>
           <DIV.JoinSuccess>
             <div>
               <PartyPopper />
-              <h1>Congratulation!</h1>
+              <h1>CONGRATS!</h1>
               <PartyPopper />
             </div>
             <p>
@@ -80,12 +96,55 @@ const JoinPresenter = ({
               <InputBox labelText="Nickname" name="nickname" value={nickname} onChange={onChangeInput} />
             </div>
             <div>
-              <InputBox labelText="Email" type="email" name="email" value={email} onChange={onChangeInput} />
+              <InputBox
+                labelText="Email"
+                type="email"
+                name="email"
+                value={email}
+                onChange={onChangeInput}
+                readOnly={isVerifiedEmail ? true : false}
+                disabled={isVerifiedEmail ? true : false}
+              />
+              {isSendingEmail ? (
+                <span>
+                  <MiniLoader w={20} h={20} />
+                </span>
+              ) : (
+                <button
+                  className="verify-email-btn"
+                  type="button"
+                  onClick={onClickVerifyEmail}
+                  disabled={email && !isVerifiedEmail ? false : true}
+                >
+                  Verify Email
+                </button>
+              )}
+              {!isVerifiedEmail && !isTimeout && joinErrMsg && <DIV.EmailErrMsg>{joinErrMsg}</DIV.EmailErrMsg>}
             </div>
-
-            <button onClick={onClickBtn} style={{ border: '1px solid black', width: '100px', height: '50px' }}>
-              asdasd
-            </button>
+            {isVerifiedEmail && (
+              <div className="verify-code-input">
+                <InputBox
+                  type="text"
+                  name="emailCode"
+                  value={emailCode}
+                  onChange={onChangeInput}
+                  readOnly={isVerified ? true : false}
+                  disabled={isVerified ? true : false}
+                />
+                {isVerifiedEmail && !isVerified && <CountdownTimer initialTime={5 * 60} onTimeout={onTimeout} />}
+                <button
+                  className="verify-code-btn"
+                  type="button"
+                  onClick={onClickVerify}
+                  disabled={isVerified ? true : false}
+                >
+                  {isVerified ? 'Verified' : 'Verify'}
+                </button>
+                {isVerifiedEmail && !isVerified && joinErrMsg && (
+                  <DIV.EmailErrMsg className="verify-code-err">{joinErrMsg}</DIV.EmailErrMsg>
+                )}
+              </div>
+            )}
 
             <div>
               <InputBox
@@ -122,8 +181,8 @@ const JoinPresenter = ({
             <FormButton
               variant="join"
               text="Create"
-              formIsLoading={isjoiningFirst || isjoining}
-              disabled={nickname && email && password && cf_password ? false : true}
+              formIsLoading={isVerifiedEmail && isVerified && (isjoiningFirst || isjoining)}
+              disabled={isVerifiedEmail && isVerified && nickname && email && password && cf_password ? false : true}
             />
           </FORM.JoinForm>
 
@@ -132,13 +191,29 @@ const JoinPresenter = ({
           </P.JoinFooter>
 
           {/* 에러 메시지 */}
-          <Modal
-            type="alert"
-            msg={joinErrMsg || (isJoinError && error.data.msg)}
-            isOpen={isModalOpen}
-            setOpen={setModalOpen}
-            shakeAlert
-          />
+          {(joinErrMsg || isJoinError) && (
+            <Modal
+              type="alert"
+              msg={joinErrMsg || (isJoinError && error.data.msg)}
+              isOpen={isModalOpen}
+              setOpen={setModalOpen}
+              shakeAlert
+            />
+          )}
+
+          {/* 이메일 인증 성공 메시지 */}
+          {isVerifiedEmail && !isVerified && !isTimeout && isJoinSuccess && (
+            <Modal
+              type="alert"
+              msg={
+                isJoinSuccess &&
+                `We've successfully sent the email! 
+                Please confirm your email address and enter the verification code we sent!`
+              }
+              isOpen={isModalOpen}
+              setOpen={setModalOpen}
+            />
+          )}
         </PageFrame>
       )}
     </>

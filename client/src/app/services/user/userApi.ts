@@ -2,6 +2,8 @@ import { api } from '../api';
 
 export interface UserResponse {
   msg: string;
+  verificationCode?: number;
+  verifiedEmail?: string;
   access_token?: string;
   refresh_token?: string;
   user?: {
@@ -17,6 +19,7 @@ export interface UserResponse {
 export interface UserRequest {
   nickname?: string;
   email?: string;
+  emailCode?: string;
   password?: string;
   cf_password?: string;
 }
