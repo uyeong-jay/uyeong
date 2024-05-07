@@ -14,11 +14,11 @@ const updateUser = async (req: IReqAuth, res: Response) => {
     //nickname 중복 조회
     const userByNickname = await Users.findOne({ nickname });
     if (userByNickname && userByNickname._id !== req.user._id)
-      return res.status(400).json({ msg: "This nickname already exists." });
+      return res.status(400).json({ msg: "Your nickname already exists." });
 
     //유저 조회 by id //비번번경 유저 확인시 사용
     const userById = await Users.findOne({ _id: req.user._id });
-    if (!userById) return res.status(400).json({ msg: "This account doesn't exist." });
+    if (!userById) return res.status(400).json({ msg: "Your account doesn't exist." });
 
     //password 바꾸지 않음
     if (!new_password) {
