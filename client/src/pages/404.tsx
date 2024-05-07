@@ -1,6 +1,12 @@
 import styled from '@_settings/styled';
+import { useLogoutMutation } from '@app/services/user/userApi';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect } from 'react';
+
+interface Props {
+  isUserFetchError?: boolean;
+}
 
 const StyledErrorPage = styled.div`
   // border: 1px solid black;
@@ -35,7 +41,8 @@ const StyledErrorPage = styled.div`
     // border: 1px solid black;
   }
 
-  & a {
+  & a,
+  button {
     // border: 1px solid black;
     background-color: ${({ theme }) => theme.BD_C};
     padding: 6px 10px;
@@ -48,7 +55,18 @@ const StyledErrorPage = styled.div`
   }
 `;
 
-const NotFound = () => {
+const NotFound = ({ isUserFetchError }: Props) => {
+  const [logout, { isSuccess: isLoggedOut }] = useLogoutMutation();
+  const router = useRouter();
+
+  const onClickLogout = useCallback(async () => {
+    await logout(null);
+  }, [logout]);
+
+  useEffect(() => {
+    if (isLoggedOut) router.replace('/');
+  }, [isLoggedOut, router]);
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
@@ -62,7 +80,7 @@ const NotFound = () => {
     <StyledErrorPage>
       <h1>404</h1>
       <p>Oops... looks like you got lost</p>
-      <Link href="/">Back to home</Link>
+      {isUserFetchError ? <button onClick={onClickLogout}>Back to home</button> : <Link href="/">Back to home</Link>}
     </StyledErrorPage>
   );
 };

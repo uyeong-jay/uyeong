@@ -3,14 +3,14 @@ import Users from "@models/userModel";
 
 const logout = async (req: Request, res: Response) => {
   try {
-    //refresh_token 쿠키 삭제하기
     const rf_token = req.cookies.refresh_token;
 
     if (rf_token) {
+      //쿠키만 삭제해서 로그아웃이 된 경우 실행되지 않음
       await Users.findOneAndUpdate({ rf_token }, { rf_token: "" });
     }
 
-    res.clearCookie("refresh_token", { path: "/" }); //프론트쪽 path
+    res.clearCookie("refresh_token", { path: "/" }); //client path
 
     //성공
     res.status(200).json({

@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 
 const HeaderContainer = () => {
   const { data: userData, isLoading: isLoadingUserData, isError: isUserDataError } = useGetUserDataQuery();
-  const [logout, { isLoading: isLoggingout, isError: isLogoutError }] = useLogoutMutation();
+  const [logout, { isLoading: isLoggingOut, isError: isLogoutError }] = useLogoutMutation();
 
   const onClickLogout = useCallback(async () => {
     await logout(null);
@@ -14,7 +14,7 @@ const HeaderContainer = () => {
     <HeaderPresenter
       userData={userData}
       isLoadingUserData={isLoadingUserData}
-      isLoggingout={isLoggingout}
+      isLoggingOut={isLoggingOut}
       isUserDataError={isUserDataError}
       isLogoutError={isLogoutError}
       onClickLogout={onClickLogout}

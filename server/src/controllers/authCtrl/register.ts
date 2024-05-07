@@ -1,9 +1,8 @@
 import { Request, Response } from "express"; //types
 import Users from "@models/userModel";
-import nodemailer from "nodemailer";
 import bcrypt from "bcrypt";
-import { /* generateAccessToken */ generateRefreshToken } from "@utils/generateToken";
 import { generateRandomNumber, sendEmail } from "@utils/authEmail";
+import { generateAccessToken } from "@utils/generateToken";
 
 const register = async (req: Request, res: Response) => {
   try {
@@ -11,18 +10,16 @@ const register = async (req: Request, res: Response) => {
     //client 데이터 가져오기
     const { nickname, email, emailCode, password } = req.body;
 
-    console.log("email: ", email, "emailCode: ", emailCode);
-
     //nickname 조회
     const userNickname = await Users.findOne({ nickname });
     if (userNickname) {
-      return res.status(400).json({ msg: "This nickname already exists." });
+      return res.status(400).json({ msg: "Your nickname already exists." });
     }
 
     //email 조회
     const userEmail = await Users.findOne({ email });
     if (userEmail) {
-      return res.status(400).json({ msg: "This email already exists." });
+      return res.status(400).json({ msg: "Your email already exists." });
     }
 
     if (!emailCode) {
@@ -30,7 +27,7 @@ const register = async (req: Request, res: Response) => {
 
       //인증 코드 전송
       const messageId = sendEmail(email, verificationCode);
-      // 이메일 보내기 실패시
+      // 이메일 전송 실패시
       if (!messageId) {
         return res.status(400).json({ msg: "Failed to send email. Please try again." });
       }
@@ -48,14 +45,12 @@ const register = async (req: Request, res: Response) => {
         password: passwordHash,
       });
 
-      const refresh_token = generateRefreshToken({ id: newUser._id }, res);
-
-      newUser.rf_token = refresh_token;
+      const access_token = generateAccessToken({ id: newUser._id }); //join 확인용
 
       //db에 저장
       await newUser.save();
 
-      res.status(200).json({ refresh_token, msg: "Joined successfully!" });
+      res.status(200).json({ access_token, msg: "Joined successfully!" });
     }
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });

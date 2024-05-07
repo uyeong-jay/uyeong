@@ -9,29 +9,39 @@ const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     //email 조회
-    const user = await Users.findOne({ email });
-    if (!user) return res.status(400).json({ msg: "This account doesn't exist." });
+    const user = await Users.findOne({ email }).select("+password +rf_token");
+    if (!user) return res.status(400).json({ msg: "Account doesn't exist." });
 
     //password 조회(bcrypt)
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ msg: "Password is incorrect." });
 
-    const access_token = generateAccessToken({ id: user._id });
+    if (user.rf_token) {
+      //로그아웃 페이지 통해 로그아웃이 되지 않았을때
+      await Users.findOneAndUpdate({ _id: user._id }, { rf_token: "" });
+
+      return res.status(400).json({
+        msg: "Since the previous logout wasn't completed successfully for your account, please log in again to ensure proper access.",
+      });
+    }
+
     const refresh_token = generateRefreshToken({ id: user._id }, res);
 
     await Users.findOneAndUpdate({ _id: user._id }, { rf_token: refresh_token });
 
-    //refresh token쿠키 생성하기(프론트서버로 보내질 쿠키)
+    //refresh token 쿠키 생성(client)
     res.cookie("refresh_token", refresh_token, {
-      path: "/", //프론트쪽 path
+      path: "/", //client path
       httpOnly: true,
-      maxAge: 30 * 24 * 60 * 60 * 1000, // day*hour*min*sec*ms //30days
+      maxAge: 7 * 24 * 60 * 60 * 1000, // day*hour*min*sec*ms //7days
     });
+
+    const access_token = generateAccessToken({ id: user._id });
 
     //성공
     res.status(200).json({
       access_token,
-      user: { ...user._doc, password: "" }, //비번빼고 가져오기 //IUser type(with _doc) model에 필요
+      user: { ...user._doc, password: "" }, //비번 제외(IUser type(with _doc) model)
       msg: "Logged in successfully!",
     });
   } catch (err: any) {

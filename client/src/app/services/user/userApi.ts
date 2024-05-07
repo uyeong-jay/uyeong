@@ -5,7 +5,6 @@ export interface UserResponse {
   verificationCode?: number;
   verifiedEmail?: string;
   access_token?: string;
-  refresh_token?: string;
   user?: {
     _id: string;
     role: string;

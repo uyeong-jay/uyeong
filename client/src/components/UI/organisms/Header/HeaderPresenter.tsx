@@ -15,7 +15,7 @@ import UserIcon from '@icons/UserIcon';
 interface Props {
   userData?: UserResponse;
   isLoadingUserData: boolean;
-  isLoggingout: boolean;
+  isLoggingOut: boolean;
   isUserDataError: boolean;
   isLogoutError: boolean;
   onClickLogout: () => void;
@@ -33,7 +33,7 @@ let prevScrollY = 0;
 const HeaderPresenter = ({
   userData,
   isLoadingUserData,
-  isLoggingout,
+  isLoggingOut,
   isUserDataError,
   isLogoutError,
   onClickLogout,
@@ -167,7 +167,7 @@ const HeaderPresenter = ({
     }
   }, [isMenuIconClicked]);
 
-  if (isUserDataError || isLogoutError) return <NotFound />;
+  if (isUserDataError || isLogoutError) return <NotFound isUserFetchError={isUserDataError} />;
   return (
     <>
       <HEADER.Frame scrollDirection={scrollDirection}>
@@ -245,7 +245,7 @@ const HeaderPresenter = ({
             ) : (
               <>
                 {/* 새로고침시 화면 */}
-                {isLoadingUserData || isLoggingout ? (
+                {isLoadingUserData || isLoggingOut ? (
                   <li>
                     <div></div>
                   </li>

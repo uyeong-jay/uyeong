@@ -4,38 +4,28 @@ import Users from "@models/userModel";
 import { IDecodedToken } from "@_types/types";
 import { generateAccessToken } from "@utils/generateToken";
 
-//새로고침 되었을때 유저 확인 + 토큰 새로 발급해주기
+//유저확인
 const refresh = async (req: Request, res: Response) => {
   try {
-    //refresh_token(유저의 _id) 쿠키 가져오기
+    //refresh_token 쿠키 확인
     const rf_token = req.cookies.refresh_token;
-    if (!rf_token) return res.status(200).json({ msg: "Please login first." });
+    if (!rf_token) return res.status(200).json({ msg: "User not logged in." });
 
-    //토큰 없으면 리프레쉬 토큰도 로그아웃 처럼 '' 로 바꾸기??
-
-    //디코드 하기(jwt)
+    //디코드 with jwt
     const decoded = <IDecodedToken>jwt.verify(rf_token, `${process.env.REFRESH_TOKEN_SECRET}`);
-    if (!decoded) return res.status(400).json({ msg: "Please login first." });
-    // console.log(decoded);
-    // { id: '628c484bd2b44d75c5515c18', iat: 1653360788, exp: 1655952788 }
+    if (!decoded) return res.status(400).json({ msg: "Please login again." });
 
-    //디코드된 _id로 유저 데이터 가져오기(findById)
-    const user = await Users.findById(decoded.id).select("-password +rf_token"); //비번빼고 가져오기
-    if (!user) return res.status(400).json({ msg: "This account doesn't exist." });
+    //디코드된 _id로 유저 데이터 확인
+    const user = await Users.findById(decoded.id).select("-password +rf_token");
+    if (!user) return res.status(400).json({ msg: "Account doesn't exist." });
 
-    //다른 브라우저에서 로그인시 re_token이 달라져 이전 브라우저에선 에러내기
-    if (rf_token !== user.rf_token) return res.status(400).json({ msg: "Please login first." });
-    // {
-    //   _id: '-',
-    //   nickname: '-',
-    //   email: '-',
-    //   avatar: '-',
-    //   role: 'user',
-    //   re_token: '-',
-    //   createdAt: '-',
-    //   updatedAt: '-',
-    //   __v: 0
-    // }
+    //로그인 페이지를 통해 직접 로그인하지 않은 경우(rf_token: 로그인시 생성됨 > 쿠키 및 access_token 만으로는 이용 불가)
+    if (!user.rf_token) return res.status(400).json({ msg: "Please login first." });
+
+    //다른곳에서 이미 로그인이 되어 있을때
+    if (rf_token !== user.rf_token) {
+      return res.status(400).json({ msg: "You're already logged in elsewhere." });
+    }
 
     const access_token = generateAccessToken({ id: user?._id });
 

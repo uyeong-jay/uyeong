@@ -70,7 +70,7 @@ const JoinPresenter = ({
         <title>UYeong | Join</title>
       </Head>
 
-      {isJoinSuccess && joinData?.refresh_token && isVerifiedEmail && isVerified ? (
+      {isJoinSuccess && joinData?.access_token && isVerifiedEmail && isVerified ? (
         <PageFrame>
           <DIV.JoinSuccess>
             <div>
