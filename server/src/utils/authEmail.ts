@@ -20,7 +20,7 @@ export async function sendEmail(toEmail: string, verificationCode: number) {
       from: `${process.env.NODEMAILER_USER_EMAIL}`,
       to: toEmail,
       subject: "Uyeong Blog - Email Verification Code",
-      text: `${verificationCode} is your verification code.`,
+      text: `"${verificationCode}" is your verification code.`,
     });
 
     console.log("Message sent!,", `Verification code: ${verificationCode},`, "Msg id:", mailOptions.messageId);

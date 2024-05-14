@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser"; // 쿠키 헤더 분석 후 req.cookie
 
 // dotenv
 import dotenv from "dotenv"; // 환경변수 관리
-dotenv.config(); //mongodb가 connect 되기 전의 자리에 위치해야함
+dotenv.config(); //mongodb가 connect 되기 전의 자리에 위치
 
 import "@config/connect";
 import routes from "@routes/index";
@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(
     cors({
       origin: true,
-      credentials: true, //백,프 간 쿠키 공유도되록 만들기
+      credentials: true, //백,프 간 쿠키 공유
     })
   );
   app.use(morgan("dev"));

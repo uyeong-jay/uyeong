@@ -83,7 +83,7 @@ const WriteHeaderPresenter = ({
             <DIV.DropdownMsg animationName={show ? 'down-msg' : 'up-msg'} onAnimationEnd={() => onAnimationEnd}>
               {isOver20Tags
                 ? 'You can add up to 20 tags.'
-                : "You can add a tag by pressing 'Enter'." + '\n' + 'And the tag can be deleted by clicking on them.'}
+                : 'You can add a tag by pressing "Enter".' + '\n' + 'And the tag can be deleted by clicking on them.'}
             </DIV.DropdownMsg>
           )}
         </form>

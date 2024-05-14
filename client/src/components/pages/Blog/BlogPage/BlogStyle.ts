@@ -83,7 +83,7 @@ DIV.SearchBar = styled.div`
     & > input {
       // border: 1px solid black;
       width: 100%;
-      padding-left: 40px; //svg width랑 맞추기
+      padding-left: 10px;
     }
   }
 

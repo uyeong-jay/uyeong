@@ -93,7 +93,7 @@ const BlogPosts = ({ userData, blogPostsBySearch }: Propss) => {
           ),
         )
       ) : blogPostsBySearch?.hasMatchingPost === false ? (
-        <DIV.NoPostsFound>- No results found for your search -</DIV.NoPostsFound>
+        <DIV.NoPostsFound>- No results found -</DIV.NoPostsFound>
       ) : (
         //새로고침시 보이는 화면
         <>
