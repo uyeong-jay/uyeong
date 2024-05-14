@@ -3,9 +3,9 @@ import NotFound from '@src/pages/404';
 import BlogPostToc from '@pages/Blog/BlogComponents/BlogPostToc';
 import { StyledBlogPost } from './BlogPostStyle';
 import Image from 'next/image';
-import MarkdownViewer from '@organisms/MarkdownViewer';
 import BlogPostFooter from '@pages/Blog/BlogComponents/BlogPostFooter';
 import BlogPostHeader from '@pages/Blog/BlogComponents/BlogPostHeader';
+import MarkdownViewer from '@organisms/MarkdownViewer';
 
 interface Props {
   blogPost?: BlogPost;

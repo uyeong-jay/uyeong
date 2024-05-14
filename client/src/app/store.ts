@@ -37,7 +37,7 @@ export type RootState = ReturnType<AppStore['getState']>;
 export type AppDispatch = AppStore['dispatch'];
 
 const wrapper = createWrapper<AppStore>(createStore, {
-  debug: isDev,
+  // debug: isDev,
 });
 
 export default wrapper;

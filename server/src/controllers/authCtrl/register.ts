@@ -7,14 +7,9 @@ import { generateAccessToken } from "@utils/generateToken";
 const register = async (req: Request, res: Response) => {
   try {
     //valid 미들웨어 통과 후
+
     //client 데이터 가져오기
     const { nickname, email, emailCode, password } = req.body;
-
-    //nickname 조회
-    const userNickname = await Users.findOne({ nickname });
-    if (userNickname) {
-      return res.status(400).json({ msg: "Your nickname already exists." });
-    }
 
     //email 조회
     const userEmail = await Users.findOne({ email });
@@ -34,6 +29,12 @@ const register = async (req: Request, res: Response) => {
 
       res.status(200).json({ verifiedEmail: email, verificationCode, msg: "Email sent!" });
     } else {
+      //nickname 조회
+      const userNickname = await Users.findOne({ nickname: nickname.toLowerCase() });
+      if (userNickname) {
+        return res.status(400).json({ msg: "Your nickname already exists." });
+      }
+
       //password 암호화 하기
       const salt = await bcrypt.genSalt(5); //솔트 추가
       const passwordHash = await bcrypt.hash(password, salt); //비번 해싱
