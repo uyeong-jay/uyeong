@@ -5,7 +5,6 @@ import Button from '@atoms/Button';
 import InputBox from '@molecules/InputBox';
 import Image from 'next/image';
 import { UserResponse } from '@app/services/user/userApi';
-import NotFound from '@src/pages/404';
 import { IUserUpdateInfo } from './SettingsContainer';
 import CameraIcon from '@icons/CameraIcon';
 import PageTitle from '@atoms/PageTitle';
@@ -15,6 +14,7 @@ import Modal from '@modals/Modal';
 import XMarkIcon from '@icons/XMarkIcon';
 import UserIcon from '@icons/UserIcon';
 import RotateIcon from '@icons/RotateIcon';
+import MiniLoader from '@modals/MiniLoader';
 
 interface Props {
   userUpdateInfo: IUserUpdateInfo;
@@ -62,7 +62,12 @@ const SettingsPresenter = ({
   const [isNewPasswordType, setNewPasswordType] = useState(false);
   const [isCfNewPasswordType, setCfNewPasswordType] = useState(false);
 
-  if (!userData?.user) return <NotFound />;
+  if (!userData?.user)
+    return (
+      <DIV.ErrorPage>
+        <MiniLoader w={30} h={30} />
+      </DIV.ErrorPage>
+    );
   return (
     <>
       <Head>

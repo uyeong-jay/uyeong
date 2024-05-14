@@ -6,6 +6,7 @@ import getUploadImageUrl from '@utils/uploadImage';
 import validFile from '@utils/valid/validFile';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { fileStatus, setFileModified, setFileRemoved, setFileUnchanged } from '@pages/Write/WriteSlice';
+import { useRouter } from 'next/router';
 
 export interface IUserUpdateInfo {
   avatar?: string | File;
@@ -20,6 +21,7 @@ const SettingsContainer = () => {
   const { data: userData } = useGetUserDataQuery();
   const [update, { isLoading: isUpdatingUserData, isSuccess: userUpdateSuccess, error: UserUpdateErr }] =
     useUpdateMutation();
+  const router = useRouter();
 
   const initialState = {
     avatar: userData?.user?.avatar ?? '',
@@ -43,6 +45,10 @@ const SettingsContainer = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isToggled, setToggled] = useState(false);
   const [isClickedUpload, setClickedUpload] = useState(false);
+
+  useEffect(() => {
+    if (!userData?.user) router.replace('/');
+  }, [router, userData?.user]);
 
   useEffect(() => {
     if (!isUpdatingUserData) setUpdatingUserInfo(false);

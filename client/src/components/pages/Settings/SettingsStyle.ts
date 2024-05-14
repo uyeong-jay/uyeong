@@ -186,3 +186,14 @@ DIV.SettingsErrMsg = styled.div`
   margin: 7px 0 0 5px;
   color: ${({ theme }) => theme.FONT_C_DANGER};
 `;
+
+DIV.ErrorPage = styled.div`
+  // border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 80vh;
+  margin-bottom: 70px;
+`;
