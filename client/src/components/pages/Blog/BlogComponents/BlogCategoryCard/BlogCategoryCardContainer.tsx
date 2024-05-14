@@ -16,8 +16,8 @@ interface Props {
 }
 
 const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props) => {
-  const [updateBlogCategory, { isSuccess, error }] = useUpdateBlogCategoryMutation();
-  const [deleteBlogCategory] = useDeleteBlogCategoryMutation();
+  const [updateBlogCategory, { isSuccess, error: updateBlogCategoryError }] = useUpdateBlogCategoryMutation();
+  const [deleteBlogCategory, { error: deleteBlogCategoryError }] = useDeleteBlogCategoryMutation();
   const { name: cardName } = category;
 
   const [isUpdate, setIsUpdate] = useState(false);
@@ -26,6 +26,12 @@ const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props)
   const [categoryName, setCategoryName] = useState({ name: cardName });
 
   const [isModalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (deleteBlogCategoryError) {
+      setModalOpen(true);
+    }
+  }, [deleteBlogCategoryError]);
 
   //카테고리별 포스트
   const postsByCategoryName = useMemo(() => {
@@ -82,13 +88,14 @@ const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props)
       categoryName={categoryName}
       postsByCategoryName={postsByCategoryName}
       isUpdate={isUpdate}
-      error={error}
       onClickEdit={onClickEdit}
       onClickDelete={onClickDelete}
       onClickSave={onClickSave}
       onChangeCategoryNameInput={onChangeCategoryNameInput}
       isModalOpen={isModalOpen}
       setModalOpen={setModalOpen}
+      updateBlogCategoryError={updateBlogCategoryError}
+      deleteBlogCategoryError={deleteBlogCategoryError}
     />
   );
 };

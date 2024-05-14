@@ -9,6 +9,7 @@ import BlogTags from '../BlogComponents/BlogTags';
 import BlogPosts from '@pages/Blog/BlogComponents/BlogPosts';
 import MiniLoader from '@modals/MiniLoader';
 import { UserResponse } from '@app/services/user/userApi';
+import Modal from '@modals/Modal';
 // import { DIV as DIV_POSTS } from '../BlogComponents/BlogPosts/BlogPosts';
 // import { InitialPostsCardArr } from '../BlogComponents/BlogPosts/BlogPosts';
 // import dynamic from 'next/dynamic';
@@ -37,6 +38,9 @@ interface Props {
   tagUnderline: string;
   targetRef: RefObject<HTMLDivElement>;
   isLoadingPosts: boolean;
+  isModalOpen: boolean;
+  setModalOpen: (isModalOpen: boolean) => void;
+  deleteBlogPostError: any;
 }
 
 const BlogPresenter: React.FC<Props> = ({
@@ -52,6 +56,9 @@ const BlogPresenter: React.FC<Props> = ({
   isTagClicked,
   targetRef,
   isLoadingPosts,
+  isModalOpen,
+  setModalOpen,
+  deleteBlogPostError,
 }) => {
   return (
     <>
@@ -87,6 +94,16 @@ const BlogPresenter: React.FC<Props> = ({
             </DIV.IntersectionTarget>
           </SECTION.BlogMain>
         </DIV.BlogBlock>
+
+        {deleteBlogPostError && (
+          <Modal
+            type="alert"
+            msg={deleteBlogPostError.data.msg}
+            isOpen={isModalOpen}
+            setOpen={setModalOpen}
+            shakeAlert
+          />
+        )}
       </SECTION.Frame>
     </>
   );

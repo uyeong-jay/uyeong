@@ -1,6 +1,6 @@
 import { BlogComment, BlogReply, useDeleteBlogCommentMutation } from '@app/services/blog/commentApi';
 import { UserResponse } from '@app/services/user/userApi';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import BlogPostCommentTemplatePresenter from './BlogPostCommentTemplatePresenter';
 
 interface Props {
@@ -24,7 +24,7 @@ const BlogPostCommentTemplateContainer = ({
   setOpenReplies,
   onClickReplies,
 }: Props) => {
-  const [deleteComment] = useDeleteBlogCommentMutation();
+  const [deleteComment, { error: deleteCommentError }] = useDeleteBlogCommentMutation();
 
   const [editComment, setEditComment] = useState(false);
   const [writeReply, setWriteReply] = useState(false);
@@ -36,6 +36,12 @@ const BlogPostCommentTemplateContainer = ({
   //이름 수정시 잠시 이전 이름이 노출되는 이슈 해결차 추가
   const [commentContent, setCommentContent] = useState('');
   const [replyContent, setReplyContent] = useState('');
+
+  useEffect(() => {
+    if (deleteCommentError) {
+      setModalOpen(true);
+    }
+  }, [deleteCommentError]);
 
   const onClickReply = useCallback(() => {
     setWriteReply(true);
@@ -94,6 +100,7 @@ const BlogPostCommentTemplateContainer = ({
       onClickReplies={onClickReplies}
       onClickEdit={onClickEdit}
       onClickDelete={onClickDelete}
+      deleteCommentError={deleteCommentError}
     />
   );
 };

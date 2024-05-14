@@ -1,8 +1,10 @@
 import BlogPostHeaderPresenter from './BlogPostHeaderPresenter';
-import { BlogPost, useDeleteBlogPostMutation, useGetBlogPostQuery } from '@app/services/blog/postApi';
+import { BlogPost, useGetBlogPostQuery } from '@app/services/blog/postApi';
 import { useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGetUserDataQuery } from '@app/services/user/userApi';
+import { useAppDispatch } from '@app/hooks';
+import { setPostAuthInfo } from '@pages/Blog/BlogSlice';
 
 interface Props {
   blogPost?: BlogPost;
@@ -11,9 +13,9 @@ interface Props {
 const BlogPostHeaderContainer = ({ blogPost }: Props) => {
   const router = useRouter();
   const { slug: postTitle } = router.query;
+  const dispatch = useAppDispatch();
 
   const { data: userData } = useGetUserDataQuery();
-  const [deleteBlogPost] = useDeleteBlogPostMutation();
   const { data: blogPostData } = useGetBlogPostQuery(postTitle as string);
   const { _id } = blogPostData?.post || {};
 
@@ -22,16 +24,17 @@ const BlogPostHeaderContainer = ({ blogPost }: Props) => {
   const onClickDeletePost = useCallback(
     async (isCallback?: boolean) => {
       if (!isCallback) return setModalOpen(true);
-      await router.push('/');
+
       const data = {
         blogPostInfo: {
           _id,
         },
         token: userData?.access_token,
       };
-      await deleteBlogPost(data);
+      dispatch(setPostAuthInfo(data));
+      await router.replace('/blog');
     },
-    [_id, deleteBlogPost, router, userData?.access_token],
+    [_id, dispatch, router, userData?.access_token],
   );
 
   return (

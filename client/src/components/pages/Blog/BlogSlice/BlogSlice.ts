@@ -6,13 +6,27 @@ interface initialState {
   blogPostsBySearch: BlogPostRes | null;
   blogPostsByCategory: BlogPostRes | null;
   tagName: string;
+  postAuthInfo: {
+    blogPostInfo: {
+      _id: string | null;
+    };
+    token: string | null;
+  };
 }
+
+export const initialPostAuthInfo = {
+  blogPostInfo: {
+    _id: null,
+  },
+  token: null,
+};
 
 //initialState
 const initialState: initialState = {
   blogPostsBySearch: null,
   blogPostsByCategory: null,
   tagName: '',
+  postAuthInfo: initialPostAuthInfo,
 };
 
 //slice
@@ -41,10 +55,19 @@ const blogSlice = createSlice({
     getTagName: (state, action) => {
       state.tagName = action.payload;
     },
+    setPostAuthInfo: (state, action) => {
+      state.postAuthInfo = action.payload;
+    },
   },
 });
 
 //reducer, actions 내보내기
 export default blogSlice.reducer;
-export const { getPostsBySearch, getMorePostsBySearch, getPostsByCategory, getMorePostsByCategory, getTagName } =
-  blogSlice.actions;
+export const {
+  getPostsBySearch,
+  getMorePostsBySearch,
+  getPostsByCategory,
+  getMorePostsByCategory,
+  getTagName,
+  setPostAuthInfo,
+} = blogSlice.actions;

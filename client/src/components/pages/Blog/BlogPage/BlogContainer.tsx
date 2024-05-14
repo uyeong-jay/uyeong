@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useRef, useState, useMemo } from 'react';
 import BlogPresenter from './BlogPresenter';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
-import { useGetBlogPostsBySearchQuery } from '@app/services/blog/postApi';
+import { useDeleteBlogPostMutation, useGetBlogPostsBySearchQuery } from '@app/services/blog/postApi';
 import { getPostsBySearch, getMorePostsBySearch, getTagName } from '@pages/Blog/BlogSlice';
 import React from 'react';
 import { useIntersect } from '@hooks/useIntersect';
 import { useGetUserDataQuery } from '@app/services/user/userApi';
+import { setPostAuthInfo } from '@pages/Blog/BlogSlice';
+import { initialPostAuthInfo } from '../BlogSlice/BlogSlice';
 
 export interface TagWithCount {
   name: string;
@@ -14,14 +16,10 @@ export interface TagWithCount {
 
 const BlogContainer = () => {
   const { data: userData } = useGetUserDataQuery();
+  const [deleteBlogPost, { error: deleteBlogPostError }] = useDeleteBlogPostMutation();
 
+  const { tagName, postAuthInfo, blogPostsBySearch } = useAppSelector((state) => state.blog);
   const dispatch = useAppDispatch();
-
-  //포스트
-  const blogPostsBySearch = useAppSelector((state) => state.blog.blogPostsBySearch);
-
-  //검색
-  const tagName = useAppSelector((state) => state.blog.tagName);
 
   const initialSearchInfo = {
     nextPageId: '',
@@ -41,6 +39,30 @@ const BlogContainer = () => {
   const [canLoadMore, setCanLoadMore] = useState(false);
   const [isIntersectionEnded, setIntersectionEnded] = useState(false);
   const [isLoadingPosts, setLoadingPosts] = useState(false);
+
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  //포스트 삭제
+  useEffect(() => {
+    //페이지 첫 렌더링시 연속 2번 렌더링 막기(setTimeout)
+    const timer = setTimeout(() => {
+      if (postAuthInfo.token) {
+        deleteBlogPost(postAuthInfo);
+        dispatch(setPostAuthInfo(initialPostAuthInfo));
+      }
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [deleteBlogPost, dispatch, postAuthInfo]);
+
+  //포스트 삭제 에러
+  useEffect(() => {
+    if (deleteBlogPostError) {
+      setModalOpen(true);
+      dispatch(setPostAuthInfo(initialPostAuthInfo));
+    }
+  }, [deleteBlogPostError, dispatch]);
 
   useEffect(() => {
     //새로고침, post 탭으로 복귀(초기화된 이후)
@@ -197,6 +219,9 @@ const BlogContainer = () => {
       isTagClicked={isTagClicked}
       targetRef={targetRef}
       isLoadingPosts={isLoadingPosts}
+      isModalOpen={isModalOpen}
+      setModalOpen={setModalOpen}
+      deleteBlogPostError={deleteBlogPostError}
     />
   );
 };

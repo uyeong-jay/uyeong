@@ -19,13 +19,14 @@ interface Props {
   };
   postsByCategoryName?: BlogPost[] | undefined;
   isUpdate: boolean;
-  error: any;
   onClickEdit: () => void;
   onClickDelete: (cardName: string, isCallback?: boolean) => void;
   onClickSave: (cardName: string, currName: string) => void;
   onChangeCategoryNameInput: (e: ChangeEvent<HTMLInputElement>) => void;
   isModalOpen: boolean;
   setModalOpen: (isModalOpen: boolean) => void;
+  updateBlogCategoryError: any;
+  deleteBlogCategoryError: any;
 }
 
 const BlogCategoryCardPresenter = ({
@@ -35,13 +36,14 @@ const BlogCategoryCardPresenter = ({
   categoryName,
   postsByCategoryName,
   isUpdate,
-  error,
   onClickEdit,
   onClickDelete,
   onClickSave,
   onChangeCategoryNameInput,
   isModalOpen,
   setModalOpen,
+  updateBlogCategoryError,
+  deleteBlogCategoryError,
 }: Props) => {
   return (
     <DIV.Frame>
@@ -109,7 +111,7 @@ const BlogCategoryCardPresenter = ({
         </DIV.CardContentMain>
 
         {/* 에러 메시지 */}
-        {error && <P.CardTitleError>{error.data.msg}</P.CardTitleError>}
+        {updateBlogCategoryError && <P.CardTitleError>{updateBlogCategoryError.data.msg}</P.CardTitleError>}
 
         {/* 포스트 개수, 최근 업데이트 날짜 */}
         <DIV.CardContentFooter>
@@ -126,6 +128,16 @@ const BlogCategoryCardPresenter = ({
         callback={() => onClickDelete(cardName, true)}
         shakeAlert
       />
+
+      {deleteBlogCategoryError && (
+        <Modal
+          type="alert"
+          msg={deleteBlogCategoryError.data.msg}
+          isOpen={isModalOpen}
+          setOpen={setModalOpen}
+          shakeAlert
+        />
+      )}
     </DIV.Frame>
   );
 };

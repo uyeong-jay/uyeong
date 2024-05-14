@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import Users from "@models/userModel";
 import { IDecodedToken } from "@_types/types";
 import { generateAccessToken } from "@utils/generateToken";
+import { authToken } from "@utils/authToken";
 
 //유저확인
 const refresh = async (req: Request, res: Response) => {
@@ -12,8 +13,11 @@ const refresh = async (req: Request, res: Response) => {
     if (!rf_token) return res.status(200).json({ msg: "User not logged in." });
 
     //디코드 with jwt
-    const decoded = <IDecodedToken>jwt.verify(rf_token, `${process.env.REFRESH_TOKEN_SECRET}`);
-    if (!decoded) return res.status(400).json({ msg: "Please login again." });
+    const { decoded } = authToken(rf_token, `${process.env.REFRESH_TOKEN_SECRET}`);
+    if (!decoded.id)
+      return res
+        .status(400)
+        .json({ msg: "Sorry, your login authentication has expired. Please log out and log in again." });
 
     //디코드된 _id로 유저 데이터 확인
     const user = await Users.findById(decoded.id).select("-password +rf_token");

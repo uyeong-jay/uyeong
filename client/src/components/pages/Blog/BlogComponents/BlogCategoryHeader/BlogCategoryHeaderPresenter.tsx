@@ -7,12 +7,18 @@ import { FORM } from './BlogCategoryHeaderStyle';
 interface Props {
   userData?: UserResponse;
   categoryInfo: { name: string };
-  error: any;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeCategoryName: (e: ChangeEvent<HTMLInputElement>) => void;
+  createBlogCategoryError: any;
 }
 
-const BlogCategoryHeaderPresenter = ({ userData, categoryInfo, error, onSubmit, onChangeCategoryName }: Props) => {
+const BlogCategoryHeaderPresenter = ({
+  userData,
+  categoryInfo,
+  onSubmit,
+  onChangeCategoryName,
+  createBlogCategoryError,
+}: Props) => {
   const { name } = categoryInfo;
 
   return (
@@ -23,7 +29,7 @@ const BlogCategoryHeaderPresenter = ({ userData, categoryInfo, error, onSubmit, 
           <InputBox name="category" value={name} onChange={onChangeCategoryName} autofill={false} />
           <Button variant="create" type="submit" text="Create" />
           {/* 에러 메세지 */}
-          {error && <p>{error.data.msg}</p>}
+          {createBlogCategoryError && <p>{createBlogCategoryError.data.msg}</p>}
         </FORM.CategoryNameFrom>
       )}
     </>

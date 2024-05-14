@@ -39,6 +39,7 @@ interface Props {
   onClickReplies?: () => void;
   onClickEdit: () => void;
   onClickDelete: (isCallback?: boolean) => void;
+  deleteCommentError: any;
 }
 
 const BlogPostCommentTemplatePresenter = ({
@@ -65,6 +66,7 @@ const BlogPostCommentTemplatePresenter = ({
   onClickReplies,
   onClickEdit,
   onClickDelete,
+  deleteCommentError,
 }: Props) => {
   const { user, content, replies, createdAt } = comment;
 
@@ -189,6 +191,9 @@ const BlogPostCommentTemplatePresenter = ({
         callback={() => onClickDelete(true)}
         shakeAlert
       />
+      {deleteCommentError && (
+        <Modal type="alert" msg={deleteCommentError.data.msg} isOpen={isModalOpen} setOpen={setModalOpen} shakeAlert />
+      )}
     </SECTION.Frame>
   );
 };

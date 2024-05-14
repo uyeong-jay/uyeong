@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PublishActionButtonsPresenter from './PublishActionButtonsPresenter';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { cancelPublishing } from '@pages/Write/WriteSlice';
@@ -14,8 +14,8 @@ interface Props {
 }
 
 const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
-  const [createBlogPost] = useCreateBlogPostMutation();
-  const [updateBlogPost] = useUpdateBlogPostMutation();
+  const [createBlogPost, { error: createBlogPostError }] = useCreateBlogPostMutation();
+  const [updateBlogPost, { error: updateBlogPostError }] = useUpdateBlogPostMutation();
 
   const blogPostDataById = useAppSelector((state) => state.write.blogPostDataById);
   const fileState = useAppSelector((state) => state.write.fileState);
@@ -26,6 +26,13 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
   const { id: postId } = router.query;
 
   const [isClicked, setClicked] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (createBlogPostError || updateBlogPostError) {
+      setModalOpen(true);
+    }
+  }, [createBlogPostError, updateBlogPostError]);
 
   const onClickCancel = useCallback(() => {
     dispatch(cancelPublishing());
@@ -92,6 +99,10 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
       onClickPost={onClickPost}
       onClickUpdate={onClickUpdate}
       isClicked={isClicked}
+      createBlogPostError={createBlogPostError}
+      updateBlogPostError={updateBlogPostError}
+      isModalOpen={isModalOpen}
+      setModalOpen={setModalOpen}
     />
   );
 };

@@ -9,7 +9,7 @@ interface Props {
 
 const BlogCategoryHeaderContainer = ({ userData }: Props) => {
   //Craeting Category
-  const [createBlogCategory, { error }] = useCreateBlogCategoryMutation();
+  const [createBlogCategory, { error: createBlogCategoryError }] = useCreateBlogCategoryMutation();
   const initialState = { name: '' };
   const [categoryInfo, setCategoryInfo] = useState(initialState);
 
@@ -32,9 +32,9 @@ const BlogCategoryHeaderContainer = ({ userData }: Props) => {
     <BlogCategoryHeaderPresenter
       userData={userData}
       categoryInfo={categoryInfo}
-      error={error}
       onSubmit={onSubmit}
       onChangeCategoryName={onChangeCategoryName}
+      createBlogCategoryError={createBlogCategoryError}
     />
   );
 };

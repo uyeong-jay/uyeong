@@ -42,11 +42,18 @@ const BlogPostCommentWriteContainer = ({
   const router = useRouter();
   const { slug: postTitle } = router.query;
   const { data: userData } = useGetUserDataQuery();
-  const [createComment] = useCreateBlogCommentMutation();
-  const [createReply] = useCreateBlogReplyMutation();
-  const [updateComment] = useUpdateBlogCommentMutation();
+  const [createComment, { error: createCommentError }] = useCreateBlogCommentMutation();
+  const [createReply, { error: createReplyError }] = useCreateBlogReplyMutation();
+  const [updateComment, { error: updateCommentError }] = useUpdateBlogCommentMutation();
 
   const [isNotLoggedIn, setNotLoggedIn] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (createCommentError || createReplyError || updateCommentError) {
+      setModalOpen(true);
+    }
+  }, [createCommentError, createReplyError, updateCommentError]);
 
   //댓글or답글 내용 regex사용 편집
   const regexEditComment = useCallback((content: string, taggedNickname = '') => {
@@ -120,8 +127,7 @@ const BlogPostCommentWriteContainer = ({
       e.preventDefault();
       if (!userData?.access_token || !blogCommentInfo.content) {
         if (isNotLoggedIn) return;
-        setNotLoggedIn(true);
-        return;
+        return setNotLoggedIn(true);
       }
 
       const data = {
@@ -263,6 +269,11 @@ const BlogPostCommentWriteContainer = ({
       onClickReplyCancel={onClickReplyCancel}
       onClickEditCancel={onClickEditCancel}
       onClickEditSave={onClickEditSave}
+      isModalOpen={isModalOpen}
+      setModalOpen={setModalOpen}
+      createCommentError={createCommentError}
+      createReplyError={createReplyError}
+      updateCommentError={updateCommentError}
     />
   );
 };

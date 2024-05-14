@@ -5,4 +5,5 @@ export {
   getPostsByCategory,
   getMorePostsByCategory,
   getTagName,
+  setPostAuthInfo,
 } from './BlogSlice';
