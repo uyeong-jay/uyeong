@@ -34,7 +34,7 @@ interface Props {
   setModalOpen: (isModalOpen: boolean) => void;
   isJoinError: boolean;
   joinErrMsg: string;
-  error: any;
+  joinError: any;
 }
 
 const JoinPresenter = ({
@@ -57,7 +57,7 @@ const JoinPresenter = ({
   setModalOpen,
   isJoinError,
   joinErrMsg,
-  error,
+  joinError,
 }: Props) => {
   const { nickname, email, emailCode, password, cf_password } = userJoinInfo;
   const [passwordType, setPasswordType] = useState(true);
@@ -194,7 +194,7 @@ const JoinPresenter = ({
           {(joinErrMsg || isJoinError) && (
             <Modal
               type="alert"
-              msg={joinErrMsg || (isJoinError && error.data.msg)}
+              msg={joinErrMsg || (isJoinError && joinError.data.msg)}
               isOpen={isModalOpen}
               setOpen={setModalOpen}
               shakeAlert
@@ -207,8 +207,8 @@ const JoinPresenter = ({
               type="alert"
               msg={
                 isJoinSuccess &&
-                `We've successfully sent the email! 
-                Please confirm your email address and enter the verification code we sent!`
+                `We've successfully sent the email. 
+                Please confirm your email address and enter the verification code we sent.`
               }
               isOpen={isModalOpen}
               setOpen={setModalOpen}

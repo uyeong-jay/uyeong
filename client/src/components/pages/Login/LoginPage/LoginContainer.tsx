@@ -8,7 +8,7 @@ const LoginContainer = () => {
   const [userLoginInfo, setUserLoginInfo] = useState(initialState);
 
   const { data: userData } = useGetUserDataQuery();
-  const [login, { isSuccess: isLoginSuccess, isLoading: isLoggingIn, isError: isLoginError, error }] =
+  const [login, { isSuccess: isLoginSuccess, isLoading: isLoggingIn, isError: isLoginError, error: loginError }] =
     useLoginMutation();
   const [isLoggingInFirst, setLoggingInFirst] = useState(false);
 
@@ -60,7 +60,7 @@ const LoginContainer = () => {
       isModalOpen={isModalOpen}
       setModalOpen={setModalOpen}
       isLoginError={isLoginError}
-      error={error}
+      loginError={loginError}
     />
   );
 };

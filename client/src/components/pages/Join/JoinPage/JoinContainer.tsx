@@ -6,8 +6,10 @@ import validEmail from '@utils/valid/validEmail';
 
 const JoinContainer = () => {
   const { data: userData } = useGetUserDataQuery();
-  const [join, { data: joinData, isSuccess: isJoinSuccess, isLoading: isjoining, isError: isJoinError, error }] =
-    useJoinMutation();
+  const [
+    join,
+    { data: joinData, isSuccess: isJoinSuccess, isLoading: isjoining, isError: isJoinError, error: joinError },
+  ] = useJoinMutation();
 
   const initialState = { nickname: '', email: '', emailCode: '', password: '', cf_password: '' };
   const [userJoinInfo, setUserJoinInfo] = useState(initialState);
@@ -154,7 +156,7 @@ const JoinContainer = () => {
       setModalOpen={setModalOpen}
       isJoinError={isJoinError}
       joinErrMsg={joinErrMsg}
-      error={error}
+      joinError={joinError}
     />
   );
 };

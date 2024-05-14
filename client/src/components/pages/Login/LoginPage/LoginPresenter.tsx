@@ -25,7 +25,7 @@ interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
   isLoginError: boolean;
-  error: any;
+  loginError: any;
 }
 
 const LoginPresenter = ({
@@ -39,7 +39,7 @@ const LoginPresenter = ({
   onSubmit,
   onChangeInput,
   isLoginError,
-  error,
+  loginError,
 }: Props) => {
   const [isPasswordType, setPasswordType] = useState(true);
   const { email, password } = userLoginInfo;
@@ -93,7 +93,7 @@ const LoginPresenter = ({
 
         {/* 에러 메시지 */}
         {isLoginError && (
-          <Modal type="alert" msg={error.data.msg} isOpen={isModalOpen} setOpen={setModalOpen} shakeAlert />
+          <Modal type="alert" msg={loginError.data.msg} isOpen={isModalOpen} setOpen={setModalOpen} shakeAlert />
         )}
       </PageFrame>
     </>
