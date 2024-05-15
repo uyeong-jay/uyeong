@@ -44,6 +44,7 @@ const PublishActionButtonsPresenter = ({
             <button onClick={onClickPost}>Post</button>
           )}
         </div>
+        {isClicked && <DIV.PublishActionLoading></DIV.PublishActionLoading>}
       </DIV.PublishActionButtons>
 
       {(createBlogPostError || updateBlogPostError) && (
