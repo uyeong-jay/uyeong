@@ -249,7 +249,8 @@ P.Replies = styled.p`
 BTN.CommentReplyBtn = styled.button<CommentReplyBtnProps>`
   // border: 1px solid black;
   margin-left: -4px;
-  color: ${({ theme }) => theme.FONT_C};
+  color: ${({ theme }) => theme.FONT_C}B2; //B2: opacity: 0.7;
+  font-weight: bold;
 
   ${(props) => {
     if (props.writeReply) {

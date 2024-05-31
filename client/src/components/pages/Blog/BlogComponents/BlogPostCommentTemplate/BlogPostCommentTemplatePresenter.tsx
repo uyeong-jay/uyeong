@@ -88,10 +88,53 @@ const BlogPostCommentTemplatePresenter = ({
       {/* 프로필 이미지 */}
       <DIV.CommentTop>
         <div className="comment-user-avatar-warpper comment-user-avatar">
-          {reply?.user.avatar || user.avatar ? (
+          {reply ? (
+            //userData 변경 되면 바로 적용
+            userData?.user?._id === reply.user._id ? (
+              userData.user.avatar ? (
+                <Image
+                  className="comment-user-avatar"
+                  src={userData.user.avatar}
+                  alt="user-avatar"
+                  layout="fill"
+                  objectFit="cover"
+                />
+              ) : (
+                <>
+                  <UserIcon />
+                </>
+              )
+            ) : reply.user.avatar ? (
+              <Image
+                className="comment-user-avatar"
+                src={reply.user.avatar}
+                alt="user-avatar"
+                layout="fill"
+                objectFit="cover"
+              />
+            ) : (
+              <>
+                <UserIcon />
+              </>
+            )
+          ) : userData?.user?._id === user._id ? (
+            userData.user.avatar ? (
+              <Image
+                className="comment-user-avatar"
+                src={userData.user.avatar}
+                alt="user-avatar"
+                layout="fill"
+                objectFit="cover"
+              />
+            ) : (
+              <>
+                <UserIcon />
+              </>
+            )
+          ) : user.avatar ? (
             <Image
               className="comment-user-avatar"
-              src={reply ? reply.user.avatar : user.avatar}
+              src={user.avatar}
               alt="user-avatar"
               layout="fill"
               objectFit="cover"
@@ -104,7 +147,16 @@ const BlogPostCommentTemplatePresenter = ({
         </div>
         <DIV.CommentTopRight>
           <DIV.CommentInfo>
-            <P.Nickname>{reply ? reply.user.nickname : user.nickname}</P.Nickname>
+            <P.Nickname>
+              {/* userData 변경 되면 바로 적용 */}
+              {reply
+                ? userData?.user?._id === reply.user._id
+                  ? userData.user.nickname
+                  : reply.user.nickname
+                : userData?.user?._id === user._id
+                ? userData.user.nickname
+                : user.nickname}
+            </P.Nickname>
             <span>·</span>
             <P.CreatedDate>{reply ? formatDate(reply.createdAt) : formatDate(createdAt)}</P.CreatedDate>
           </DIV.CommentInfo>
@@ -134,7 +186,7 @@ const BlogPostCommentTemplatePresenter = ({
           {!editComment ? (
             <MarkdownViewer
               content={
-                //이름 저장시 잠시 이전 이름이 노출되는 이슈 해결차 추가
+                //저장시 잠시 이전 내용이 노출되는 이슈 해결차 추가
                 // client data: replyContent, commentContent
                 // server data: reply.content, content
                 reply ? (replyContent ? replyContent : reply.content) : commentContent ? commentContent : content
