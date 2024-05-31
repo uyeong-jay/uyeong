@@ -57,9 +57,10 @@ DIV.CommentLoginBox = styled.div<CommentLoginBoxProps>`
   position: absolute;
   width: 100%;
   height: 150px;
-  background-color: ${({ theme }) => theme.BG_C}7F; // 7F: opacity 0.5 추가
+  background-color: ${({ theme }) => theme.BG_C}7F; //7F: opacity 0.5
+  border-radius: 10px;
   backdrop-filter: blur(5px);
-  color: ${({ theme }) => theme.FONT_C}CC; // CC: opacity 0.8 추가
+  color: ${({ theme }) => theme.FONT_C}CC; //CC: opacity 0.8
   font-size: 15px;
 
   @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
@@ -79,20 +80,20 @@ DIV.CommentLoginBox = styled.div<CommentLoginBoxProps>`
 
   & > a {
     border: 2px solid ${({ theme }) => theme.BD_C};
-    width: 120px;
+    width: 100px;
     margin-top: 10px;
     text-align: center;
     color: ${({ theme }) => theme.FONT_C};
-    opacity: 0.7;
+    opacity: 0.8;
     border-radius: 5px;
     font-weight: bold;
 
     &:hover {
-      color: ${({ theme }) => theme.FONT_C}7C;
+      color: ${({ theme }) => theme.FONT_C}7F; //7F: opacity 0.5
     }
 
     @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
-      width: 140px;
+      width: 120px;
     }
   }
 `;

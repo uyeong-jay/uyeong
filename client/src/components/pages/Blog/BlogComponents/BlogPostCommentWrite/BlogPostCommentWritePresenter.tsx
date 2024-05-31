@@ -85,10 +85,11 @@ const BlogPostCommentWritePresenter = ({
           <BTN.CommentBtn type="submit">Comment</BTN.CommentBtn>
         )}
       </FORM.CommentWriteForm>
+
       {(createCommentError || createReplyError || updateCommentError) && (
         <Modal
           type="alert"
-          msg={createCommentError.data.msg || createReplyError.data.msg || updateCommentError.data.msg}
+          msg={createCommentError?.data?.msg || createReplyError?.data?.msg || updateCommentError?.data?.msg}
           isOpen={isModalOpen}
           setOpen={setModalOpen}
           shakeAlert

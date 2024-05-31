@@ -125,7 +125,9 @@ const BlogPostCommentWriteContainer = ({
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      if (!userData?.access_token || !blogCommentInfo.content) {
+      if (!blogCommentInfo.content) return;
+
+      if (!userData?.access_token) {
         if (isNotLoggedIn) return;
         return setNotLoggedIn(true);
       }
@@ -153,7 +155,9 @@ const BlogPostCommentWriteContainer = ({
 
   //답글 달기
   const onClickReply = useCallback(() => {
-    if (!userData?.access_token || !blogCommentInfo.content) {
+    if (!blogCommentInfo.content) return;
+
+    if (!userData?.access_token) {
       if (isNotLoggedIn) return;
       setNotLoggedIn(true);
       return;
@@ -212,7 +216,9 @@ const BlogPostCommentWriteContainer = ({
 
   //댓글or답글 수정
   const onClickEditSave = useCallback(() => {
-    if (!userData?.access_token || !blogCommentInfo.content) {
+    if (!blogCommentInfo.content) return;
+
+    if (!userData?.access_token) {
       if (isNotLoggedIn) return;
       setNotLoggedIn(true);
       return;
