@@ -19,6 +19,7 @@ const BlogPostFooterContainer = ({ postId }: Props) => {
   };
   const [commentPagingInfo, setCommentPagingInfo] = useState(initialCommentPagingInfo);
   const { data: blogCommentsData, isFetching: isFetchingComments } = useGetBlogCommentsQuery(commentPagingInfo);
+
   const { comments, totalCommentCount, commentCountToShow } = blogCommentsData || {};
 
   const [hasNoMoreComments, setNoMoreComments] = useState(false);

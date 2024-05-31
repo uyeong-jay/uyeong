@@ -36,7 +36,7 @@ const WriteFooterContainer = ({ userData, blogPostsData, blogPostInfo, setBlogPo
     const blogTitleErr = validBlogTitle();
     const blogErr = validBlog({ title, content });
     if (blogTitleErr) {
-      setWriteErrMsg('The same post title already exists. Please change the title.');
+      setWriteErrMsg('The post title already exists. Please change the title.');
       return setPostModalOpen(true);
     } else if (blogErr) {
       setWriteErrMsg(blogErr);

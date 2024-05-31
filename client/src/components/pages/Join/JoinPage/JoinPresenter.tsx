@@ -79,8 +79,8 @@ const JoinPresenter = ({
               <PartyPopper />
             </div>
             <p>
-              Your account has been successfully created. <br />
-              Please click the button below to log in to your account!
+              Your account has been successfully created! <br />
+              Please click the button below to log in to your account.
             </p>
             <Link href="/login" passHref>
               Log in
@@ -194,7 +194,7 @@ const JoinPresenter = ({
           {(joinErrMsg || isJoinError) && (
             <Modal
               type="alert"
-              msg={joinErrMsg || (isJoinError && joinError.data.msg)}
+              msg={joinErrMsg || joinError?.data?.msg}
               isOpen={isModalOpen}
               setOpen={setModalOpen}
               shakeAlert
@@ -205,11 +205,8 @@ const JoinPresenter = ({
           {isVerifiedEmail && !isVerified && !isTimeout && isJoinSuccess && (
             <Modal
               type="alert"
-              msg={
-                isJoinSuccess &&
-                `We've successfully sent the email. 
-                Please confirm your email address and enter the verification code we sent.`
-              }
+              msg={`We've successfully sent the email! 
+              Please confirm your email address and enter the verification code we sent.`}
               isOpen={isModalOpen}
               setOpen={setModalOpen}
             />
