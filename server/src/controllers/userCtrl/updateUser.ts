@@ -9,11 +9,11 @@ const updateUser = async (req: IReqAuth, res: Response) => {
     if (!req.user) return res.status(400).json({ msg: "Invalid Authorization." });
 
     //client 데이터 가져오기
-    const { /* _id */ avatar, /* email */ nickname, old_password, new_password } = req.body;
+    const { /* _id */ /* email */ avatar, nickname, old_password, new_password } = req.body;
 
     //nickname 중복 조회
-    const userByNickname = await Users.findOne({ nickname });
-    if (userByNickname && userByNickname._id !== req.user._id)
+    const userByNickname = await Users.findOne({ nickname: new RegExp(`^${nickname}$`, "i") }); //대소문자 구분x
+    if (userByNickname && userByNickname._id.toString() !== req.user._id.toString())
       return res.status(400).json({ msg: "Your nickname already exists." });
 
     //유저 조회 by id //비번번경 유저 확인시 사용

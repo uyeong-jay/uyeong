@@ -30,7 +30,7 @@ const register = async (req: Request, res: Response) => {
       res.status(200).json({ verifiedEmail: email, verificationCode, msg: "Email sent!" });
     } else {
       //nickname 조회
-      const userNickname = await Users.findOne({ nickname: nickname.toLowerCase() });
+      const userNickname = await Users.findOne({ nickname: new RegExp(`^${nickname}$`, "i") }); //대소문자 구분x
       if (userNickname) {
         return res.status(400).json({ msg: "Your nickname already exists." });
       }
