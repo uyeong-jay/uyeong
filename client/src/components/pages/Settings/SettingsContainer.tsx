@@ -2,7 +2,7 @@ import React, { useState, useCallback, ChangeEvent, FormEvent, useEffect } from 
 import SettingsPresenter from './SettingsPresenter';
 import { useGetUserDataQuery, useUpdateMutation } from '@app/services/user/userApi';
 import { validUserUpdateInfo } from '@utils/valid/validUserInfo';
-import { deleteImage, uploadImage } from '@utils/uploadImage';
+import { deleteImage, uploadImage } from '@utils/imageUtils';
 import validFile from '@utils/valid/validFile';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { fileStatus, setFileModified, setFileRemoved, setFileUnchanged } from '@pages/Write/WriteSlice';

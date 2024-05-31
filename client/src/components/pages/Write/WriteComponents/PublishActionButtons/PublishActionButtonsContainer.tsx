@@ -3,7 +3,7 @@ import PublishActionButtonsPresenter from './PublishActionButtonsPresenter';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { cancelPublishing } from '@pages/Write/WriteSlice';
 import { BlogPostReq, useCreateBlogPostMutation, useUpdateBlogPostMutation } from '@app/services/blog/postApi';
-import { uploadImage } from '@utils/uploadImage';
+import { uploadImage } from '@utils/imageUtils';
 import { UserResponse } from '@app/services/user/userApi';
 import { useRouter } from 'next/router';
 import { fileStatus } from '@pages/Write/WriteSlice';
