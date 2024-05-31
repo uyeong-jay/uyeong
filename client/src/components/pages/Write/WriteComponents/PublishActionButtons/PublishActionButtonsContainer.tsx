@@ -3,7 +3,7 @@ import PublishActionButtonsPresenter from './PublishActionButtonsPresenter';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { cancelPublishing } from '@pages/Write/WriteSlice';
 import { BlogPostReq, useCreateBlogPostMutation, useUpdateBlogPostMutation } from '@app/services/blog/postApi';
-import getUploadImageUrl from '@utils/uploadImage';
+import { uploadImage } from '@utils/uploadImage';
 import { UserResponse } from '@app/services/user/userApi';
 import { useRouter } from 'next/router';
 import { fileStatus } from '@pages/Write/WriteSlice';
@@ -14,8 +14,8 @@ interface Props {
 }
 
 const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
-  const [createBlogPost, { error: createBlogPostError }] = useCreateBlogPostMutation();
-  const [updateBlogPost, { error: updateBlogPostError }] = useUpdateBlogPostMutation();
+  const [createBlogPost, { isSuccess: isPostCreated, error: postNotCreatedError }] = useCreateBlogPostMutation();
+  const [updateBlogPost, { isSuccess: isPostUpdated, error: postNotUpdatedError }] = useUpdateBlogPostMutation();
 
   const blogPostDataById = useAppSelector((state) => state.write.blogPostDataById);
   const fileState = useAppSelector((state) => state.write.fileState);
@@ -25,72 +25,72 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
   const router = useRouter();
   const { id: postId } = router.query;
 
-  const [isClicked, setClicked] = useState(false);
+  const [isPosting, setPosting] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    if (createBlogPostError || updateBlogPostError) {
+    if (isPostCreated || isPostUpdated) {
+      router.push(`/blog/${blogPostInfo.title.replace(/\s+/g, '-')}`);
+    }
+    if (postNotCreatedError || postNotUpdatedError) {
       setModalOpen(true);
     }
-  }, [createBlogPostError, updateBlogPostError]);
+  }, [blogPostInfo.title, isPostCreated, isPostUpdated, postNotCreatedError, postNotUpdatedError, router]);
 
   const onClickCancel = useCallback(() => {
     dispatch(cancelPublishing());
   }, [dispatch]);
 
   const onClickPost = useCallback(async () => {
-    setClicked(true);
+    setPosting(true);
 
     const data = {
       blogPostInfo: {
         ...blogPostInfo,
-        //포스트시 클라우드에 이미지 업로드 하기
-        //사용자가 이미지를 제거했는지 복구했는지 확인 후 업로드
-        thumbnail:
-          fileState === unchanged
-            ? blogPostInfo.thumbnail
-            : fileState === modified
-            ? await getUploadImageUrl(blogPostInfo.thumbnail as File)
-            : '',
       },
       token: userData?.access_token,
     };
+
+    //포스트시 클라우드에 이미지 업로드 하기
+    //사용자가 이미지를 제거했는지 복구했는지 확인 후 업로드
+    if (fileState === unchanged) {
+      data.blogPostInfo.thumbnail = blogPostInfo.thumbnail;
+    } else if (fileState === modified) {
+      const uploadedImageData = await uploadImage(blogPostInfo.thumbnail as File);
+      data.blogPostInfo.thumbnail = uploadedImageData?.url;
+    } else {
+      data.blogPostInfo.thumbnail = '';
+    }
+
     await createBlogPost(data);
-    await router.push(`/blog/${blogPostInfo.title.replace(/\s+/g, '-')}`);
 
     dispatch(cancelPublishing());
-  }, [blogPostInfo, createBlogPost, dispatch, fileState, modified, router, unchanged, userData?.access_token]);
+  }, [blogPostInfo, createBlogPost, dispatch, fileState, modified, unchanged, userData?.access_token]);
 
   const onClickUpdate = useCallback(async () => {
-    setClicked(true);
+    setPosting(true);
 
     const data = {
       blogPostInfo: {
         ...blogPostInfo,
         _id: blogPostDataById?._id,
-        //포스트시 클라우드에 이미지 업로드 하기
-        //사용자가 이미지를 제거했는지 복구했는지 확인 후 업로드
-        thumbnail:
-          fileState === unchanged
-            ? blogPostInfo.thumbnail
-            : fileState === modified
-            ? await getUploadImageUrl(blogPostInfo.thumbnail as File)
-            : '',
       },
       token: userData?.access_token,
     };
+
+    //포스트시 클라우드에 이미지 업로드 하기
+    //사용자가 이미지를 제거했는지 복구했는지 확인 후 업로드
+    if (fileState === unchanged) {
+      data.blogPostInfo.thumbnail = blogPostInfo.thumbnail;
+    } else if (fileState === modified) {
+      const uploadedImageData = await uploadImage(blogPostInfo.thumbnail as File);
+      data.blogPostInfo.thumbnail = uploadedImageData?.url;
+    } else {
+      data.blogPostInfo.thumbnail = '';
+    }
+
     await updateBlogPost(data);
-    await router.push(`/blog/${blogPostInfo.title.replace(/\s+/g, '-')}`);
-  }, [
-    blogPostDataById?._id,
-    blogPostInfo,
-    fileState,
-    modified,
-    router,
-    unchanged,
-    updateBlogPost,
-    userData?.access_token,
-  ]);
+  }, [blogPostDataById?._id, blogPostInfo, fileState, modified, unchanged, updateBlogPost, userData?.access_token]);
   return (
     <PublishActionButtonsPresenter
       postId={postId}
@@ -98,9 +98,9 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
       onClickCancel={onClickCancel}
       onClickPost={onClickPost}
       onClickUpdate={onClickUpdate}
-      isClicked={isClicked}
-      createBlogPostError={createBlogPostError}
-      updateBlogPostError={updateBlogPostError}
+      isPosting={isPosting}
+      postNotCreatedError={postNotCreatedError}
+      postNotUpdatedError={postNotUpdatedError}
       isModalOpen={isModalOpen}
       setModalOpen={setModalOpen}
     />

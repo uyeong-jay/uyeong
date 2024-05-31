@@ -8,9 +8,10 @@ DIV.PublishActionButtons = styled.div`
   justify-content: center;
   align-items: flex-end;
   width: 100%;
+  height: 28%;
 
   & > div {
-    // border: 1px solid black;
+    // border: 1px solid red;
     display: flex;
     justify-content: end;
     align-items: end;

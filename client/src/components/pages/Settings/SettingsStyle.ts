@@ -149,7 +149,7 @@ FORM.SettingsMainForm = styled.form`
 
   & > h3 {
     // border: 1px solid red;
-    margin: 80px 0 10px 0;
+    margin: 80px 0 15px 0;
     font-size: 18px;
     letter-spacing: 0.5px;
   }

@@ -2,7 +2,7 @@ import React, { useState, useCallback, ChangeEvent, FormEvent, useEffect } from 
 import SettingsPresenter from './SettingsPresenter';
 import { useGetUserDataQuery, useUpdateMutation } from '@app/services/user/userApi';
 import { validUserUpdateInfo } from '@utils/valid/validUserInfo';
-import getUploadImageUrl from '@utils/uploadImage';
+import { deleteImage, uploadImage } from '@utils/uploadImage';
 import validFile from '@utils/valid/validFile';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { fileStatus, setFileModified, setFileRemoved, setFileUnchanged } from '@pages/Write/WriteSlice';
@@ -45,6 +45,8 @@ const SettingsContainer = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isToggled, setToggled] = useState(false);
   const [isClickedUpload, setClickedUpload] = useState(false);
+  const [imageData, setImageData] = useState('');
+  const [isImageUploaded, setImageUploaded] = useState(false);
 
   useEffect(() => {
     if (!userData?.user) router.replace('/');
@@ -60,6 +62,14 @@ const SettingsContainer = () => {
       dispatch(setFileUnchanged());
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    if (UserUpdateErr && isImageUploaded) {
+      deleteImage(imageData);
+      setImageData('');
+      setImageUploaded(false);
+    }
+  }, [UserUpdateErr, imageData, isImageUploaded]);
 
   useEffect(() => {
     const userAvatar = userUpdateInfo.avatar;
@@ -95,15 +105,20 @@ const SettingsContainer = () => {
         const data = {
           userUpdateInfo: {
             ...userUpdateInfo,
-            avatar:
-              fileState === unchanged
-                ? userUpdateInfo.avatar
-                : fileState === modified
-                ? await getUploadImageUrl(userUpdateInfo.avatar as File)
-                : '',
           },
           token: userData?.access_token,
         };
+
+        if (fileState === unchanged) {
+          data.userUpdateInfo.avatar = userUpdateInfo.avatar;
+        } else if (fileState === modified) {
+          const uploadedImageData = await uploadImage(userUpdateInfo.avatar as File);
+          data.userUpdateInfo.avatar = uploadedImageData?.url;
+          setImageData(uploadedImageData?.id);
+          setImageUploaded(true);
+        } else {
+          data.userUpdateInfo.avatar = '';
+        }
 
         //유저 데이터 업데이트
         await update(data);

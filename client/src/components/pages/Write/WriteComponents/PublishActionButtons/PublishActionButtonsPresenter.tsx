@@ -10,11 +10,11 @@ interface Props {
   onClickCancel: () => void;
   onClickPost: () => void;
   onClickUpdate: () => void;
-  isClicked: boolean;
+  isPosting: boolean;
   isModalOpen: boolean;
   setModalOpen: (isModalOpen: boolean) => void;
-  createBlogPostError: any;
-  updateBlogPostError: any;
+  postNotCreatedError: any;
+  postNotUpdatedError: any;
 }
 
 const PublishActionButtonsPresenter = ({
@@ -23,18 +23,19 @@ const PublishActionButtonsPresenter = ({
   onClickCancel,
   onClickPost,
   onClickUpdate,
-  isClicked,
+  isPosting,
   isModalOpen,
   setModalOpen,
-  createBlogPostError,
-  updateBlogPostError,
+  postNotCreatedError,
+  postNotUpdatedError,
 }: Props) => {
+  console.log(postNotCreatedError, postNotUpdatedError);
   return (
     <>
       <DIV.PublishActionButtons>
         <div>
           <button onClick={onClickCancel}>Cancel</button>
-          {isClicked ? (
+          {isPosting ? (
             <button style={{ cursor: 'default' }}>
               <MiniLoader w={20} h={20} />
             </button>
@@ -44,13 +45,13 @@ const PublishActionButtonsPresenter = ({
             <button onClick={onClickPost}>Post</button>
           )}
         </div>
-        {isClicked && <DIV.PublishActionLoading></DIV.PublishActionLoading>}
+        {isPosting && <DIV.PublishActionLoading></DIV.PublishActionLoading>}
       </DIV.PublishActionButtons>
 
-      {(createBlogPostError || updateBlogPostError) && (
+      {(postNotCreatedError || postNotUpdatedError) && (
         <Modal
           type="alert"
-          msg={createBlogPostError.data.msg || updateBlogPostError.data.msg}
+          msg={postNotCreatedError?.data?.msg || postNotUpdatedError?.data?.msg}
           isOpen={isModalOpen}
           setOpen={setModalOpen}
           shakeAlert
