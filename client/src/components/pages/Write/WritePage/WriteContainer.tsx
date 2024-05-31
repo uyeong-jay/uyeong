@@ -28,6 +28,7 @@ const WriteContainer = () => {
 
   const [blogPostInfo, setBlogPostInfo] = useState<BlogPostReq | null>(initialState);
 
+  //post 업데이트 시
   useEffect(() => {
     if (id) {
       const postData = blogPostsData?.posts?.find((v) => v._id === id);

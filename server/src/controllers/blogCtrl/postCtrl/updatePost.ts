@@ -13,9 +13,8 @@ const updatePost = async (req: IReqAuth, res: Response) => {
     //client 데이터 가져오기
     const { _id: postId, title, tags, content, thumbnail, description, category, privacy } = req.body;
 
-    if (!title) return res.status(400).json({ msg: "The title must be more than 1 character." });
-
-    if (title.length > 100) return res.status(400).json({ msg: "The category name must be less than 100 characters." });
+    if (!title) return res.status(400).json({ msg: "Please enter the title." });
+    if (title.length > 100) return res.status(400).json({ msg: "The title must be 100 characters or less." });
 
     //post 조회 후 업데이트
     const post = await Posts.findOneAndUpdate(
