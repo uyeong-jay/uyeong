@@ -29,7 +29,6 @@ const PublishActionButtonsPresenter = ({
   postNotCreatedError,
   postNotUpdatedError,
 }: Props) => {
-  console.log(postNotCreatedError, postNotUpdatedError);
   return (
     <>
       <DIV.PublishActionButtons>

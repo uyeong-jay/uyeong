@@ -42,28 +42,22 @@ const SettingsContainer = () => {
   const [fileObj, setFileObj] = useState<File>(); //obj: 클라우드에 없는 새로운 이미지
   const [fileUrl, setFileUrl] = useState(''); //url: 클라우드에 이미 존재하는 이미지
 
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [isToggled, setToggled] = useState(false);
   const [isClickedUpload, setClickedUpload] = useState(false);
   const [imageId, setImageId] = useState('');
   const [isImageUploaded, setImageUploaded] = useState(false);
   const [prevAvatarImage, setPrevAvatarImage] = useState('');
 
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isToggled, setToggled] = useState(false);
+
   useEffect(() => {
     if (!userData?.user) router.replace('/');
   }, [router, userData?.user]);
 
+  //로딩 종료
   useEffect(() => {
     if (!isUpdatingUserData) setUpdatingUserInfo(false);
   }, [isUpdatingUserData]);
-
-  useEffect(() => {
-    if (userUpdateSuccess && prevAvatarImage && userData?.user?.avatar !== prevAvatarImage) {
-      const publicId = getPublicIdFromUrl(prevAvatarImage);
-      if (publicId) deleteImage(publicId);
-      setPrevAvatarImage('');
-    }
-  }, [prevAvatarImage, userData?.user?.avatar, userUpdateSuccess]);
 
   useEffect(() => {
     //settings page 언마운트시 실행
@@ -72,6 +66,16 @@ const SettingsContainer = () => {
     };
   }, [dispatch]);
 
+  //유저 업데이트 성공시 이전 업로드된 이미지 삭제
+  useEffect(() => {
+    if (userUpdateSuccess && prevAvatarImage && userData?.user?.avatar !== prevAvatarImage) {
+      const publicId = getPublicIdFromUrl(prevAvatarImage);
+      if (publicId) deleteImage(publicId);
+      setPrevAvatarImage('');
+    }
+  }, [prevAvatarImage, userData?.user?.avatar, userUpdateSuccess]);
+
+  //유저 업데이트 실패시 업로드된 이미지 삭제
   useEffect(() => {
     if (UserUpdateErr && isImageUploaded) {
       deleteImage(imageId);
@@ -80,6 +84,7 @@ const SettingsContainer = () => {
     }
   }, [UserUpdateErr, imageId, isImageUploaded]);
 
+  //이미지 구분하여 임시 저장
   useEffect(() => {
     const userAvatar = userUpdateInfo.avatar;
 
