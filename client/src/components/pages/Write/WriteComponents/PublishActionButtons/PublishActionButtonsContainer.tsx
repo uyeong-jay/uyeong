@@ -3,7 +3,7 @@ import PublishActionButtonsPresenter from './PublishActionButtonsPresenter';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { cancelPublishing } from '@pages/Write/WriteSlice';
 import { BlogPostReq, useCreateBlogPostMutation, useUpdateBlogPostMutation } from '@app/services/blog/postApi';
-import { uploadImage } from '@utils/imageUtils';
+import { deleteImage, getPublicIdFromUrl, uploadImage } from '@utils/imageUtils';
 import { UserResponse } from '@app/services/user/userApi';
 import { useRouter } from 'next/router';
 import { fileStatus } from '@pages/Write/WriteSlice';
@@ -14,19 +14,29 @@ interface Props {
 }
 
 const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
+  const router = useRouter();
+  const { id: postId } = router.query;
+
   const [createBlogPost, { isSuccess: isPostCreated, error: postNotCreatedError }] = useCreateBlogPostMutation();
   const [updateBlogPost, { isSuccess: isPostUpdated, error: postNotUpdatedError }] = useUpdateBlogPostMutation();
 
   const blogPostDataById = useAppSelector((state) => state.write.blogPostDataById);
   const fileState = useAppSelector((state) => state.write.fileState);
-  const { unchanged, modified } = fileStatus;
   const dispatch = useAppDispatch();
-
-  const router = useRouter();
-  const { id: postId } = router.query;
 
   const [isPosting, setPosting] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [prevPostImage, setPrevPostImage] = useState('');
+  const { unchanged, modified } = fileStatus;
+
+  //유저 업데이트 성공시 이전 업로드된 이미지 삭제
+  useEffect(() => {
+    if (isPostUpdated && prevPostImage && blogPostDataById.thumbnail !== prevPostImage) {
+      const publicId = getPublicIdFromUrl(prevPostImage);
+      if (publicId) deleteImage(publicId);
+      setPrevPostImage('');
+    }
+  }, [blogPostDataById.thumbnail, isPostUpdated, prevPostImage]);
 
   useEffect(() => {
     if (isPostCreated || isPostUpdated) {
@@ -69,6 +79,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
 
   const onClickUpdate = useCallback(async () => {
     setPosting(true);
+    setPrevPostImage(blogPostDataById.thumbnail ?? '');
 
     const data = {
       blogPostInfo: {
@@ -90,7 +101,16 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
     }
 
     await updateBlogPost(data);
-  }, [blogPostDataById?._id, blogPostInfo, fileState, modified, unchanged, updateBlogPost, userData?.access_token]);
+  }, [
+    blogPostDataById?._id,
+    blogPostDataById.thumbnail,
+    blogPostInfo,
+    fileState,
+    modified,
+    unchanged,
+    updateBlogPost,
+    userData?.access_token,
+  ]);
   return (
     <PublishActionButtonsPresenter
       postId={postId}
