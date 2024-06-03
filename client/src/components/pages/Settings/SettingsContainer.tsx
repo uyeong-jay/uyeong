@@ -2,7 +2,7 @@ import React, { useState, useCallback, ChangeEvent, FormEvent, useEffect } from 
 import SettingsPresenter from './SettingsPresenter';
 import { useGetUserDataQuery, useUpdateMutation } from '@app/services/user/userApi';
 import { validUserUpdateInfo } from '@utils/valid/validUserInfo';
-import { deleteImage, uploadImage } from '@utils/imageUtils';
+import { deleteImage, getPublicIdFromUrl, uploadImage } from '@utils/imageUtils';
 import validFile from '@utils/valid/validFile';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { fileStatus, setFileModified, setFileRemoved, setFileUnchanged } from '@pages/Write/WriteSlice';
@@ -45,8 +45,9 @@ const SettingsContainer = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isToggled, setToggled] = useState(false);
   const [isClickedUpload, setClickedUpload] = useState(false);
-  const [imageData, setImageData] = useState('');
+  const [imageId, setImageId] = useState('');
   const [isImageUploaded, setImageUploaded] = useState(false);
+  const [prevAvatarImage, setPrevAvatarImage] = useState('');
 
   useEffect(() => {
     if (!userData?.user) router.replace('/');
@@ -57,6 +58,14 @@ const SettingsContainer = () => {
   }, [isUpdatingUserData]);
 
   useEffect(() => {
+    if (userUpdateSuccess && prevAvatarImage && userData?.user?.avatar !== prevAvatarImage) {
+      const publicId = getPublicIdFromUrl(prevAvatarImage);
+      if (publicId) deleteImage(publicId);
+      setPrevAvatarImage('');
+    }
+  }, [prevAvatarImage, userData?.user?.avatar, userUpdateSuccess]);
+
+  useEffect(() => {
     //settings page 언마운트시 실행
     return () => {
       dispatch(setFileUnchanged());
@@ -65,11 +74,11 @@ const SettingsContainer = () => {
 
   useEffect(() => {
     if (UserUpdateErr && isImageUploaded) {
-      deleteImage(imageData);
-      setImageData('');
+      deleteImage(imageId);
+      setImageId('');
       setImageUploaded(false);
     }
-  }, [UserUpdateErr, imageData, isImageUploaded]);
+  }, [UserUpdateErr, imageId, isImageUploaded]);
 
   useEffect(() => {
     const userAvatar = userUpdateInfo.avatar;
@@ -101,6 +110,7 @@ const SettingsContainer = () => {
       // 에러가 없으면 유저 데이터 업데이트
       if (!errMsg[0]) {
         setUpdatingUserInfo(true);
+        setPrevAvatarImage(userData?.user?.avatar ?? '');
 
         const data = {
           userUpdateInfo: {
@@ -114,13 +124,12 @@ const SettingsContainer = () => {
         } else if (fileState === modified) {
           const uploadedImageData = await uploadImage(userUpdateInfo.avatar as File);
           data.userUpdateInfo.avatar = uploadedImageData?.url;
-          setImageData(uploadedImageData?.id);
+          setImageId(uploadedImageData?.id);
           setImageUploaded(true);
         } else {
           data.userUpdateInfo.avatar = '';
         }
 
-        //유저 데이터 업데이트
         await update(data);
 
         // 유저 데이터 초기화 (nickname, email 제외)

@@ -17,6 +17,12 @@ export const uploadImage = async (file: File) => {
   return { id: public_id, url: secure_url };
 };
 
+export const getPublicIdFromUrl = (url: string | undefined) => {
+  const regex = /(?<=\/)[^\/]+\/[^\/]+(?=\.[^\/.]+$)/;
+  const match = url?.match(regex);
+  return match ? match[0] : null;
+};
+
 const generateSHA1 = (data: any) => {
   const hash = crypto.createHash('sha1');
   hash.update(data);
@@ -45,6 +51,5 @@ export const deleteImage = async (id: string) => {
   });
 
   const data = await res.json();
-
   return data;
 };
