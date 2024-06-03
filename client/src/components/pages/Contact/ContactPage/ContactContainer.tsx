@@ -73,7 +73,7 @@ const ContactContainer = () => {
         );
 
         //성공시
-        console.log(result.text);
+        // console.log(result.text);
         if (result.text) {
           //값 초기화
           setUserContactInfo({

@@ -23,7 +23,7 @@ export async function sendEmail(toEmail: string, verificationCode: number) {
       text: `"${verificationCode}" is your verification code.`,
     });
 
-    console.log("Message sent!,", `Verification code: ${verificationCode},`, "Msg id:", mailOptions.messageId);
+    // console.log("Message sent!,", `Verification code: ${verificationCode},`, "Msg id:", mailOptions.messageId);
 
     return mailOptions.messageId;
   } catch {
