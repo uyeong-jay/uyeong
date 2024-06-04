@@ -66,6 +66,12 @@ const SettingsContainer = () => {
     };
   }, [dispatch]);
 
+  useEffect(() => {
+    if (userUpdateSuccess) {
+      dispatch(setFileUnchanged());
+    }
+  }, [dispatch, userUpdateSuccess]);
+
   //유저 업데이트 성공시 이전 업로드된 이미지 삭제
   useEffect(() => {
     if (userUpdateSuccess && prevAvatarImage && userData?.user?.avatar !== prevAvatarImage) {
@@ -137,7 +143,7 @@ const SettingsContainer = () => {
 
         await update(data);
 
-        // 유저 데이터 초기화 (nickname, email 제외)
+        // 유저 데이터 초기화
         setUserUpdateInfo({
           ...userUpdateInfo,
           avatar: !(fileObj || fileUrl) ? '' : userUpdateInfo.avatar,
@@ -151,13 +157,11 @@ const SettingsContainer = () => {
           setToggled(false);
         }
 
-        dispatch(setFileUnchanged());
         setClickedUpload(false);
         setModalOpen(true);
       }
     },
     [
-      dispatch,
       fileObj,
       fileState,
       fileUrl,
