@@ -113,7 +113,7 @@ export const validUserUpdateInfo = (
     return 'Already up to date.';
 
   //password 입력 에러
-  //(다 있는상태 외 나머지 와 다 없는상태 외 나머지 의 합집합)
+  //(다 있는상태 외 나머지 와 다 없는상태 외 나머지)
   if (!(old_password && new_password && cf_new_password) && !(!old_password && !new_password && !cf_new_password))
     return 'Please enter all password fields.';
 
