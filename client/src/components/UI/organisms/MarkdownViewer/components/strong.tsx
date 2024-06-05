@@ -13,7 +13,6 @@ const StyledStrong = styled.strong<StrongProps>`
       return `
         border-bottom: 2px solid ${props.theme.FONT_C};
         color: ${props.theme.FONT_C};
-
       `;
     } else {
       return `color: black;`;

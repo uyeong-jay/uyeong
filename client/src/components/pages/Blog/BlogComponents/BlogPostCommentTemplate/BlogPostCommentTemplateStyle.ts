@@ -203,12 +203,21 @@ DIV.CommentMainContent = styled.div`
   line-height: 1.7;
   letter-spacing: -0.004em;
   font-size: 11px;
+  & > p > strong {
+    font-size: 10px;
+  }
 
   @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
     font-size: 13px;
+    & > p > strong {
+      font-size: 12px;
+    }
   }
   @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
     font-size: 17px;
+    & > p > strong {
+      font-size: 15px;
+    }
   }
 
   & > p > img {
