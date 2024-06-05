@@ -18,14 +18,24 @@ interface userDataProps {
   nickname: string;
 }
 
-//> replace("\", "@") 사용후 /[^\w\uAC00-\uD7A3]/ 로 특수문자 있는지(한글은 완성된 한글만 가능함) test(nickname) 로 테스트 후 true 나오면 빨간줄 에러(특수문자 및 띄어쓰기를 제외한 한글, 영어 숫자로만 가능합니다.)
-
 const validNickname = (nickname?: string) => {
   if (!nickname) return 'Please enter your nickname.';
-  else if (nickname.length < 2 || nickname.length > 20)
-    return 'Your nickname must be between 2 and 20 characters long.';
+  if (nickname.length < 2 || nickname.length > 20) return 'Nicknames must be between 2 and 20 characters long.';
 
-  // const newNickname = nickname.replace("\\", "@")
+  const regex = /[^\w\uAC00-\uD7A3]/; //영문자, 숫자, 밑줄, 한글을 제외한 다른 모든 문자 확인 정규식
+  const nicknameGuidelinesText =
+    'Nicknames can only include Korean characters, English letters, numbers, and underscores (_).';
+
+  if (regex.test(nickname)) return nicknameGuidelinesText;
+  else if (nickname.includes('\\')) return nicknameGuidelinesText; // 문자 '\' 포함 확인
+
+  const koreanRegex = /[\uAC00-\uD7A3]/;
+  const englishRegex = /[a-zA-Z]/;
+  const containsKorean = koreanRegex.test(nickname);
+  const containsEnglish = englishRegex.test(nickname);
+
+  if (!(containsKorean || containsEnglish))
+    return `Please make sure your nickname includes either a Korean character or English letters.`;
 
   return '';
 };
