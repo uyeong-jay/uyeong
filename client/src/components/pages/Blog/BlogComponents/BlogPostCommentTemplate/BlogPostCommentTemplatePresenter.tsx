@@ -186,7 +186,7 @@ const BlogPostCommentTemplatePresenter = ({
           {!editComment ? (
             <MarkdownViewer
               content={
-                //저장시 잠시 이전 내용이 노출되는 이슈 해결차 추가
+                //저장시 잠시 이전 내용이 노출되어 분리
                 // client data: replyContent, commentContent
                 // server data: reply.content, content
                 reply ? (replyContent ? replyContent : reply.content) : commentContent ? commentContent : content

@@ -5,10 +5,11 @@ interface BlockQuoteProps {
 }
 
 const StyledBlockquote = styled.blockquote`
-  color: #666;
+  border-left: 0.3em ${({ theme }) => theme.BD_C}BF solid; //BF: opacity 75%
   margin: 0;
   padding-left: 3em;
-  border-left: 0.5em #6ff9ff solid;
+  font-weight: bold;
+  color: ${({ theme }) => theme.FONT_C}BF; //BF: opacity 75%
 `;
 
 const Blockquote = ({ children }: BlockQuoteProps) => {

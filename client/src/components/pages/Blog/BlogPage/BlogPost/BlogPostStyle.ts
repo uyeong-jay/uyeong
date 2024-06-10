@@ -64,8 +64,41 @@ export const StyledBlogPost = styled.div`
         margin-bottom: 15px;
       }
 
-      & > p > img {
+      & > p a {
+        color: ${({ theme }) => theme.FONT_C};
+        padding-bottom: 2px;
+        border-bottom: 1px solid ${({ theme }) => theme.FONT_C};
+      }
+
+      & p img {
         margin: 1rem auto;
+        border-radius: 15px;
+      }
+
+      & > pre > code > div {
+        border: 3px solid ${({ theme }) => theme.BD_C}4C; //4C: opacity 30%
+        background-color: ${({ theme }) => theme.BG_C} !important;
+        border-radius: 20px;
+
+        overflow-x: scroll;
+        overflow-y: hidden;
+
+        ::-webkit-scrollbar {
+          border-radius: 50%;
+          height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+          margin: 0 15px;
+          border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: ${({ theme }) => theme.BD_C}4C; //4C: opacity 30%
+          border-radius: 10px;
+        }
+
+        & > code > span {
+          background-color: transparent !important;
+        }
       }
     }
   }
