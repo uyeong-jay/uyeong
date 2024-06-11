@@ -17,7 +17,7 @@ const refresh = async (req: Request, res: Response) => {
     if (!decoded.id)
       return res
         .status(400)
-        .json({ msg: "Sorry, your login authentication has expired. Please log out and log in again." });
+        .json({ msg: "Sorry, your session has expired. Please log out and log in again to continue." });
 
     //디코드된 _id로 유저 데이터 확인
     const user = await Users.findById(decoded.id).select("-password +rf_token");

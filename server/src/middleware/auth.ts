@@ -14,7 +14,7 @@ const auth = async (req: IReqAuth, res: Response, next: NextFunction) => {
     if (!decoded.id)
       return res
         .status(400)
-        .json({ msg: "Sorry, your authentication session has expired. Please refresh the current page" });
+        .json({ msg: "Sorry, your session has expired. Please refresh the current page to continue." });
 
     //디코드된 _id로 유저 데이터 가져오기(findOne)
     const user = await Users.findOne({ _id: decoded.id }).select("-password +rf_token"); //비번제거
