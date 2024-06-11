@@ -11,6 +11,7 @@ import CaretUpIcon from '@icons/CaretUpIcon';
 import Logo from '@icons/Logo';
 import { useAppSelector } from '@app/hooks';
 import UserIcon from '@icons/UserIcon';
+import PageLoader from '@modals/PageLoader';
 
 interface Props {
   userData?: UserResponse;
@@ -45,9 +46,8 @@ const HeaderPresenter = ({
   const [isProfileOpen, setProfileOpen] = useState(false);
 
   const [isMenuIconClicked, setMenuIconClicked] = useState(false);
-
   const [isShowingMenuAni, setShowingMenuAni] = useState(false);
-  // 뱐수 명 바꾸기
+  const [isPageLoading, setPageLoading] = useState(false);
 
   //width가 833px 보다 커지면 메뉴 클릭 animation 없애기
   useEffect(() => {
@@ -182,13 +182,13 @@ const HeaderPresenter = ({
             <li>
               <div>
                 <ul onClick={onClickMenu}>
-                  <NavLinkBox href="/about" delay={isShowingMenuAni ? 500 : 0}>
+                  <NavLinkBox href="/about" delay={isShowingMenuAni ? 500 : 0} setNavigating={setPageLoading}>
                     About
                   </NavLinkBox>
-                  <NavLinkBox href="/blog" delay={isShowingMenuAni ? 500 : 0}>
+                  <NavLinkBox href="/blog" delay={isShowingMenuAni ? 500 : 0} setNavigating={setPageLoading}>
                     Blog
                   </NavLinkBox>
-                  <NavLinkBox href="/contact" delay={isShowingMenuAni ? 500 : 0}>
+                  <NavLinkBox href="/contact" delay={isShowingMenuAni ? 500 : 0} setNavigating={setPageLoading}>
                     Contact
                   </NavLinkBox>
                 </ul>
@@ -268,6 +268,8 @@ const HeaderPresenter = ({
           </ul>
         </NAV.HeaderNav>
       </HEADER.Frame>
+
+      {isPageLoading && <PageLoader />}
     </>
   );
 };
