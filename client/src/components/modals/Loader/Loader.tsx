@@ -13,8 +13,8 @@ const StyledLoader = styled.div`
   height: 100%;
   z-index: 9999;
   background-color: rgba(204, 207, 209, 0.5);
-  user-select: none;
   font-size: 30px;
+  user-select: none;
 `;
 
 // 재사용 가능성(o)

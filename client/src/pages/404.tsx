@@ -25,7 +25,6 @@ const StyledErrorPage = styled.div`
   font-family: Consolas, 'Courier New', monospace;
   font-size: 15px;
   color: ${({ theme }) => theme.FONT_C};
-  user-select: none;
 
   & > h1 {
     // border: 1px solid black;
