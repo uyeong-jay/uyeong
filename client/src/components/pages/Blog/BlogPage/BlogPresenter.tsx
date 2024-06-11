@@ -86,7 +86,7 @@ const BlogPresenter: React.FC<Props> = ({
             <BlogPosts userData={userData} blogPostsBySearch={blogPostsBySearch} />
             <DIV.IntersectionTarget id="posts_intersection_target" ref={targetRef}>
               {isLoadingPosts ? (
-                <MiniLoader w={30} h={30} responsive />
+                <MiniLoader w={30} responsive />
               ) : (
                 !blogPostsBySearch?.next_cursor &&
                 blogPostsBySearch?.hasMatchingPost && <DIV.NoMorePosts>- No more posts -</DIV.NoMorePosts>

@@ -46,7 +46,7 @@ const FormButton = ({ formIsLoading, variant, text, disabled }: Props) => {
   return (
     <StyledFormButton>
       {formIsLoading ? (
-        <MiniLoader w={20} h={20} />
+        <MiniLoader w={20} />
       ) : (
         <WideButton variant={variant} text={text} type="submit" disabled={disabled ? true : false} />
       )}

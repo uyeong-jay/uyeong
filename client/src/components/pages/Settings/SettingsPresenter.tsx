@@ -65,7 +65,7 @@ const SettingsPresenter = ({
   if (!userData?.user)
     return (
       <DIV.ErrorPage>
-        <MiniLoader w={30} h={30} />
+        <MiniLoader w={30} />
       </DIV.ErrorPage>
     );
   return (

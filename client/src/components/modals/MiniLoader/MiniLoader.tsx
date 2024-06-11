@@ -3,13 +3,11 @@ import styled from '@_settings/styled';
 
 interface Props {
   w: number;
-  h: number;
   responsive?: boolean;
 }
 
 interface MiniLoaderProps {
   width: number;
-  height: number;
   responsive: boolean;
 }
 
@@ -25,7 +23,7 @@ const StyledMiniLoader = styled.div<MiniLoaderProps>`
 
         @media screen and (min-width: ${props.theme.BP.TABLET}) {
           width: ${props.width}px;
-          height: ${props.height}px;
+          height: ${props.width}px;
         }  
       `;
     } else {
@@ -72,9 +70,9 @@ const StyledMiniLoader = styled.div<MiniLoaderProps>`
   }
 `;
 
-const MiniLoader = ({ w, h, responsive }: Props) => {
+const MiniLoader = ({ w, responsive }: Props) => {
   return (
-    <StyledMiniLoader width={w} height={h} responsive={responsive ? true : false}>
+    <StyledMiniLoader width={w} responsive={responsive ? true : false}>
       <svg className="spinner" viewBox="0 0 50 50">
         <circle className="path" cx="25" cy="25" r="20" fill="none" strokeWidth="5"></circle>
       </svg>

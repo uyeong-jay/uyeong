@@ -36,7 +36,7 @@ const PublishActionButtonsPresenter = ({
           <button onClick={onClickCancel}>Cancel</button>
           {isPosting ? (
             <button style={{ cursor: 'default' }}>
-              <MiniLoader w={20} h={20} />
+              <MiniLoader w={20} />
             </button>
           ) : postId && blogPostDataById?._id === postId ? (
             <button onClick={onClickUpdate}>Update</button>

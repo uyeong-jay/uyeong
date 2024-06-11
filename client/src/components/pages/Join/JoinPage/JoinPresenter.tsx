@@ -107,7 +107,7 @@ const JoinPresenter = ({
               />
               {isSendingEmail ? (
                 <span>
-                  <MiniLoader w={20} h={20} />
+                  <MiniLoader w={20} />
                 </span>
               ) : (
                 <button
