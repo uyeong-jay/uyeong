@@ -23,7 +23,7 @@ interface Props {
   fileUrl: string;
   isUpdatingUserData: boolean;
   isUpdatingUserInfo: boolean;
-  userUpdateSuccess: boolean;
+  isUserDataUpdated: boolean;
   settingErrMsg: string;
   UserUpdateErr: any;
   isModalOpen: boolean;
@@ -44,7 +44,7 @@ const SettingsPresenter = ({
   fileUrl,
   isUpdatingUserData,
   isUpdatingUserInfo,
-  userUpdateSuccess,
+  isUserDataUpdated,
   settingErrMsg,
   UserUpdateErr,
   isModalOpen,
@@ -190,7 +190,7 @@ const SettingsPresenter = ({
           </DIV.SettingsErrMsg>
         </FORM.SettingsMainForm>
 
-        {userUpdateSuccess && (
+        {isUserDataUpdated && (
           <Modal type="alert" msg="Update successfully completed!" isOpen={isModalOpen} setOpen={setModalOpen} />
         )}
       </PageFrame>

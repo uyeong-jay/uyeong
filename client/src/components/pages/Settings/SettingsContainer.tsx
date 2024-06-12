@@ -19,7 +19,7 @@ export interface IUserUpdateInfo {
 
 const SettingsContainer = () => {
   const { data: userData } = useGetUserDataQuery();
-  const [update, { isLoading: isUpdatingUserData, isSuccess: userUpdateSuccess, error: UserUpdateErr }] =
+  const [update, { isLoading: isUpdatingUserData, isSuccess: isUserDataUpdated, error: UserUpdateErr }] =
     useUpdateMutation();
   const router = useRouter();
 
@@ -67,19 +67,19 @@ const SettingsContainer = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (userUpdateSuccess) {
+    if (isUserDataUpdated) {
       dispatch(setFileUnchanged());
     }
-  }, [dispatch, userUpdateSuccess]);
+  }, [dispatch, isUserDataUpdated]);
 
   //유저 업데이트 성공시 이전 업로드된 이미지 삭제
   useEffect(() => {
-    if (userUpdateSuccess && prevAvatarImage && userData?.user?.avatar !== prevAvatarImage) {
+    if (isUserDataUpdated && prevAvatarImage && userData?.user?.avatar !== prevAvatarImage) {
       const publicId = getPublicIdFromUrl(prevAvatarImage);
       if (publicId) deleteImage(publicId);
       setPrevAvatarImage('');
     }
-  }, [prevAvatarImage, userData?.user?.avatar, userUpdateSuccess]);
+  }, [prevAvatarImage, userData?.user?.avatar, isUserDataUpdated]);
 
   //유저 업데이트 실패시 업로드된 이미지 삭제
   useEffect(() => {
@@ -243,7 +243,7 @@ const SettingsContainer = () => {
       fileUrl={fileUrl}
       isUpdatingUserData={isUpdatingUserData}
       isUpdatingUserInfo={isUpdatingUserInfo}
-      userUpdateSuccess={userUpdateSuccess}
+      isUserDataUpdated={isUserDataUpdated}
       settingErrMsg={settingErrMsg}
       UserUpdateErr={UserUpdateErr}
       isModalOpen={isModalOpen}
