@@ -5,7 +5,7 @@ import MiniLoader from '@modals/MiniLoader';
 export const DIV = {} as any;
 
 DIV.Loader = styled.div`
-  border: 1px solid red;
+  // border: 1px solid red;
   position: fixed;
   bottom: 0;
   right: 0;

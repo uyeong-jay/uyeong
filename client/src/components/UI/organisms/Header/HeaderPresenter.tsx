@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import { HEADER, NAV } from './HeaderStyle';
 import Button from '@atoms/Button';
 import NavLinkBox from '@molecules/NavLinkBox';
@@ -48,6 +49,36 @@ const HeaderPresenter = ({
   const [isMenuIconClicked, setMenuIconClicked] = useState(false);
   const [isShowingMenuAni, setShowingMenuAni] = useState(false);
   const [isPageLoading, setPageLoading] = useState(false);
+
+  const router = useRouter();
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  //페이지 로딩시 로더 보여주기
+  useEffect(() => {
+    const onStartPageLoading = () => {
+      timerRef.current = setTimeout(() => {
+        setPageLoading(true);
+      }, 500);
+    };
+
+    const onCompletePageLoading = () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+      setPageLoading(false);
+    };
+
+    router.events.on('routeChangeStart', onStartPageLoading);
+    router.events.on('routeChangeComplete', onCompletePageLoading);
+    router.events.on('routeChangeError', onCompletePageLoading);
+
+    return () => {
+      router.events.off('routeChangeStart', onStartPageLoading);
+      router.events.off('routeChangeComplete', onCompletePageLoading);
+      router.events.off('routeChangeError', onCompletePageLoading);
+    };
+  }, [router]);
 
   //width가 833px 보다 커지면 메뉴 클릭 animation 없애기
   useEffect(() => {
@@ -182,15 +213,9 @@ const HeaderPresenter = ({
             <li>
               <div>
                 <ul onClick={onClickMenu}>
-                  <NavLinkBox href="/about" delay={isShowingMenuAni ? 500 : 0} setNavigating={setPageLoading}>
-                    About
-                  </NavLinkBox>
-                  <NavLinkBox href="/blog" delay={isShowingMenuAni ? 500 : 0} setNavigating={setPageLoading}>
-                    Blog
-                  </NavLinkBox>
-                  <NavLinkBox href="/contact" delay={isShowingMenuAni ? 500 : 0} setNavigating={setPageLoading}>
-                    Contact
-                  </NavLinkBox>
+                  <NavLinkBox href="/about">About</NavLinkBox>
+                  <NavLinkBox href="/blog">Blog</NavLinkBox>
+                  <NavLinkBox href="/contact">Contact</NavLinkBox>
                 </ul>
               </div>
             </li>
