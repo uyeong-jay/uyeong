@@ -13,7 +13,7 @@ const BlogTagsPresenter = ({ allTags, tagUnderline, onClickTag, isTagClicked }: 
   const tagNameLength = useCallback((tagName: string) => {
     const cutTagName = tagName.slice(0, 13);
 
-    const finalTagName = tagName.length > 13 ? cutTagName + '..' : cutTagName;
+    const finalTagName = tagName.length > 13 ? cutTagName + '...' : cutTagName;
 
     return finalTagName;
   }, []);
@@ -30,7 +30,8 @@ const BlogTagsPresenter = ({ allTags, tagUnderline, onClickTag, isTagClicked }: 
             tagName={tag.name}
             isTagClicked={isTagClicked}
           >
-            {tagNameLength(tag.name)} ({tag.count})
+            <span>{tagNameLength(tag.name)}</span>
+            <span>({tag.count})</span>
           </DIV.BlogTag>
         ))}
       </div>
