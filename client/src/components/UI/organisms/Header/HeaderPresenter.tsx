@@ -56,12 +56,14 @@ const HeaderPresenter = ({
   //페이지 로딩시 로더 보여주기
   useEffect(() => {
     const onStartPageLoading = () => {
+      //0.5초 뒤 실행
       timerRef.current = setTimeout(() => {
         setPageLoading(true);
       }, 500);
     };
 
     const onCompletePageLoading = () => {
+      //시간에 상관없이 타이머 clear
       if (timerRef.current) {
         clearTimeout(timerRef.current);
         timerRef.current = null;

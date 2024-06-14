@@ -1,23 +1,16 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ARTICLE, DIV, P } from './BlogPostCardStyle';
 import { BlogPost } from '@app/services/blog/postApi';
 import formatDate from '@utils/formatDate';
 import removeMd from 'remove-markdown';
-import PageLoader from '@modals/PageLoader';
 
 interface Props {
   post: BlogPost;
 }
 
 const BlogPostCardPresenter = ({ post }: Props) => {
-  const [isPageLoading, setPageLoading] = useState(false);
-
-  const onClickTitle = () => {
-    setPageLoading(true);
-  };
-
   const {
     /* _id, */
     titleForUrl,
@@ -42,7 +35,7 @@ const BlogPostCardPresenter = ({ post }: Props) => {
     <ARTICLE.Frame>
       <DIV.Lock>{privacy && <span>Private</span>}</DIV.Lock>
       <DIV.Title thumbnail={thumbnail}>
-        <h3 onClick={onClickTitle}>
+        <h3>
           <Link href={`/blog/${titleForUrl}`}>{title.charAt(0).toUpperCase() + title.slice(1)}</Link>
         </h3>
         {thumbnail && (
@@ -93,8 +86,6 @@ const BlogPostCardPresenter = ({ post }: Props) => {
           <P.CardComment>{commentCount > 1 ? `${commentCount} Comments` : `${commentCount} Comment`}</P.CardComment>
         </DIV.ContentBottom>
       </DIV.Content>
-
-      {isPageLoading && <PageLoader />}
     </ARTICLE.Frame>
   );
 };
