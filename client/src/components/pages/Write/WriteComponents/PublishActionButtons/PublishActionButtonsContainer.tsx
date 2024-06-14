@@ -36,7 +36,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
       if (publicId) deleteImage(publicId);
       setPrevPostImage('');
     }
-  }, [blogPostDataById.thumbnail, isPostUpdated, prevPostImage]);
+  }, [blogPostDataById?.thumbnail, isPostUpdated, prevPostImage]);
 
   useEffect(() => {
     if (isPostCreated || isPostUpdated) {
@@ -73,9 +73,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
     }
 
     await createBlogPost(data);
-
-    dispatch(cancelPublishing());
-  }, [blogPostInfo, createBlogPost, dispatch, fileState, modified, unchanged, userData?.access_token]);
+  }, [blogPostInfo, createBlogPost, fileState, modified, unchanged, userData?.access_token]);
 
   const onClickUpdate = useCallback(async () => {
     setPosting(true);
@@ -103,7 +101,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
     await updateBlogPost(data);
   }, [
     blogPostDataById?._id,
-    blogPostDataById.thumbnail,
+    blogPostDataById?.thumbnail,
     blogPostInfo,
     fileState,
     modified,
