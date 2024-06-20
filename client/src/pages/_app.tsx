@@ -20,29 +20,15 @@ function MyApp({ Component, theme: themeInCookie, ...rest }: Props) {
   const { store, props } = wrapper.useWrappedStore(rest);
 
   const [cookies, setCookie] = useCookies(['theme']);
-  const theme = useMemo(() => cookies.theme ?? themeInCookie, [cookies.theme, themeInCookie]);
+  const theme = useMemo(() => cookies.theme || themeInCookie, [cookies.theme, themeInCookie]);
 
   const onClickDarkMode = useCallback(() => {
-    setCookie('theme', theme === LIGHT_THEME ? DARK_THEME : LIGHT_THEME);
+    setCookie('theme', theme === LIGHT_THEME ? DARK_THEME : LIGHT_THEME, { path: '/' });
   }, [setCookie, theme]);
 
   useEffect(() => {
-    if (!cookies.theme) return setCookie('theme', LIGHT_THEME);
-
-    // 특정 이름을 포함하는 쿠키 가져오기
-    const getCookiesByName = (name: string) => {
-      const cookies = document.cookie.split('; ');
-      const filteredCookies = cookies.filter((cookie) => cookie.includes(name));
-      return filteredCookies;
-    };
-
-    //쿠키 중복 생성될시 현재 쿠키 가져오기
-    const themeCookies = getCookiesByName('theme');
-    const currThemeCookie = themeCookies[themeCookies.length - 1].split('=')[1];
-    setCookie('theme', currThemeCookie);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!cookies.theme) return setCookie('theme', LIGHT_THEME, { path: '/' });
+  }, [cookies.theme, setCookie]);
 
   return (
     <>
