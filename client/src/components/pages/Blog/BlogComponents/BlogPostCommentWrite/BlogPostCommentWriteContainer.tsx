@@ -58,12 +58,7 @@ const BlogPostCommentWriteContainer = ({
   //댓글or답글 내용 regex사용 편집
   const regexEditComment = useCallback((content: string, taggedNickname = '') => {
     let markdownContent = content;
-
-    markdownContent = markdownContent.replace(/(\r\n|\n){4,}/g, '&nbsp;\n\n&nbsp;\n\n&nbsp;\n\n'); //엔터4번 이상을 줄바꿈 3번으로 대체 - 엔터수 제한 하기
-
-    markdownContent = markdownContent.replace(/(\r\n|\n)/g, '&nbsp;\n\n'); //엔터한번을 \n\n로 대체
-
-    markdownContent = markdownContent.replaceAll('```&nbsp;', '```'); //code 마크다운이 연장되는 이슈해결 정규식
+    markdownContent.replace(/\n/g, '\n');
 
     //태그된 닉네임 스타일 변경
     if (taggedNickname) {
@@ -75,20 +70,15 @@ const BlogPostCommentWriteContainer = ({
 
   //답글 regex사용 재편집
   const regexReply = () => {
-    let replayContent = reply?.content.replaceAll('&nbsp;', '');
-    replayContent = replayContent?.replace(/(\r\n\n|\n\n)/g, '\n'); //엔터두번을 \n로 대체
-
+    let replayContent = reply?.content.replace(/\n/g, '\n');
     replayContent = replayContent?.replace('**@', '@');
     replayContent = replayContent?.replace('**', '');
-
     return replayContent;
   };
 
   //댓글 regex사용 재편집
   const regexComment = () => {
-    let commentContent = comment?.content.replaceAll('&nbsp;', '');
-    commentContent = commentContent?.replace(/(\r\n\n|\n\n)/g, '\n'); //엔터두번을 \n로 대체
-
+    const commentContent = comment?.content.replace(/\n/g, '\n');
     return commentContent;
   };
 
