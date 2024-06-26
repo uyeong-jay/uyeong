@@ -40,9 +40,9 @@ DIV.AboutMe = styled.div`
     padding: 10px 10px 0 50px;
     ${({ theme }) => rightBorder(theme.BD_C)}
 
-    & p {
+    & p:nth-of-type(2) {
       // border: 1px solid black;
-      // margin-top: 5px;
+      margin-bottom: 30px;
     }
     & > a {
       color: ${({ theme }) => theme.FONT_C};
@@ -78,7 +78,7 @@ DIV.AboutMe = styled.div`
         .location-icon {
           // border: 1px solid black;
           width: 13px;
-          fill: #444444;
+          fill: ${({ theme }) => theme.FONT_C};
           margin-right: 7px;
         }
 
@@ -87,17 +87,17 @@ DIV.AboutMe = styled.div`
 
           .envelope-icon {
             width: 13px;
-            fill: #444444;
+            fill: ${({ theme }) => theme.FONT_C};
             margin-right: 7px;
           }
           .github-icon {
             width: 14px;
-            fill: #444444;
+            fill: ${({ theme }) => theme.FONT_C};
             margin-right: 7px;
           }
           .instagram-icon {
             width: 13px;
-            fill: #444444;
+            fill: ${({ theme }) => theme.FONT_C};
             margin-right: 7px;
           }
         }

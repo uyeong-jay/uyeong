@@ -35,8 +35,7 @@ function MyApp({ Component, theme: themeInCookie, ...rest }: Props) {
       <ThemeProvider theme={theme === LIGHT_THEME ? lightTheme : darkTheme}>
         <Provider store={store}>
           <GlobalStyle />
-          <AppLayout>
-            <button onClick={onClickDarkMode}>Toggle</button>
+          <AppLayout isDarkTheme={theme === DARK_THEME} onClickDarkMode={onClickDarkMode}>
             <Component {...props.pageProps} />
           </AppLayout>
         </Provider>

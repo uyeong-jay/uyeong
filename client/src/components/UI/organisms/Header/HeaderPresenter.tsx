@@ -13,6 +13,7 @@ import Logo from '@icons/Logo';
 import { useAppSelector } from '@app/hooks';
 import UserIcon from '@icons/UserIcon';
 import PageLoader from '@modals/PageLoader';
+import DarkModeButton from '@atoms/DarkModeButton';
 
 interface Props {
   userData?: UserResponse;
@@ -21,6 +22,8 @@ interface Props {
   isUserDataError: boolean;
   isLogoutError: boolean;
   onClickLogout: () => void;
+  isDarkTheme: boolean;
+  onClickDarkMode: () => void;
 }
 
 export let scrollDir = '';
@@ -39,6 +42,8 @@ const HeaderPresenter = ({
   isUserDataError,
   isLogoutError,
   onClickLogout,
+  isDarkTheme,
+  onClickDarkMode,
 }: Props) => {
   const [scrollDirection, setScrollDirection] = useState('');
   const scrollDirForModal = useAppSelector((state) => state.header.scrollDirForModal);
@@ -205,6 +210,7 @@ const HeaderPresenter = ({
     <>
       <HEADER.Frame scrollDirection={scrollDirection}>
         <NAV.HeaderNav isMenuIconClicked={isMenuIconClicked} isShowingMenuAni={isShowingMenuAni}>
+          <DarkModeButton isDarkTheme={isDarkTheme} onClickDarkMode={onClickDarkMode} />
           <ul>
             {/* 1. 대표로고 */}
             <NavLinkBox href="/">

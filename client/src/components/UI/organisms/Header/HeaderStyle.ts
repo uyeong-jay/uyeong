@@ -60,6 +60,7 @@ HEADER.Frame = styled.header<HeaderFrameProps>`
 
 NAV.HeaderNav = styled.nav<HeaderNavProps>`
   // border: 1px solid green;
+  position: relative;
   max-width: ${({ theme }) => theme.BP.PC};
   width: 100%;
   height: 100%;
@@ -121,7 +122,6 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
         align-items: center;
         width: 30px;
         height: 30px;
-        // background-color: ${({ theme }) => theme.LIGHT_BG_C};
 
         & .user-icon {
           // border: 1px solid red;
@@ -140,14 +140,14 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
         // border: 1px solid black;
         width: 10px;
         margin-left: 5px;
-        fill: #555555;
+        fill: ${({ theme }) => theme.BD_C};
       }
 
       & .caret-up-icon {
         // border: 1px solid black;
         width: 10px;
         margin-left: 5px;
-        fill: #555555;
+        fill: ${({ theme }) => theme.BD_C};
       }
 
       & > ul {
@@ -208,8 +208,8 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
 
         & > div {
           // border: 1px solid red;
-          background-color: ${({ theme }) => theme.LIGHT_BG_C};
-          box-shadow: 0 4px 4px rgb(237, 236, 234); //#EDECEA
+          background-color: ${({ theme }) => theme.HEADER_BG_C};
+          box-shadow: ${({ theme }) => theme.HEADER_SHADOW};
           display: flex;
           align-items: flex-end;
           position: absolute;
@@ -326,8 +326,8 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
           position: relative;
 
           & span {
-            border: 1px solid #555555;
-            background-color: #555555;
+            border: 1px solid ${({ theme }) => theme.BD_C};
+            background-color: ${({ theme }) => theme.BD_C};
             display: block;
             width: 100%;
             height: 2px;

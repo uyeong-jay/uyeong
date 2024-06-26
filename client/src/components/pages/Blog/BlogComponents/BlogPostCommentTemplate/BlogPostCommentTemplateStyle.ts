@@ -27,6 +27,7 @@ DIV.CommentTop = styled.div`
   & .comment-user-avatar-warpper {
     // border: 1px solid black;
     background-color: ${({ theme }) => theme.LIGHT_BG_C};
+    transition: background-color 0.25s linear; // for theme mode
     display: flex;
     justify-content: center;
     align-items: center;
@@ -196,13 +197,28 @@ DIV.CommentMain = styled.div`
 
 //마크다운 내용
 DIV.CommentMainContent = styled.div`
-  // border: 1px solid black;
+  border: 1px solid transparents; //코드블륵 주변 높이 고정
   padding: 12px 0px 12px 10px;
-  word-break: keep-all;
   overflow: hidden;
-  line-height: 1.7;
-  letter-spacing: -0.004em;
   font-size: 11px;
+
+  & h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+  }
+
+  & p {
+    white-space: pre-wrap; //for multiple line breaking
+  }
+
+  & pre code div {
+    margin: 0 0 20px 0;
+  }
+
   & > p > strong {
     font-size: 10px;
   }
@@ -219,15 +235,12 @@ DIV.CommentMainContent = styled.div`
       font-size: 15px;
     }
   }
-
-  & > p > img {
-    margin: 1rem auto;
-  }
 `;
 
 DIV.CommentMainReply = styled.div`
   // border: 1px solid black;
   display: flex;
+  margin-top: -16px;
 
   & > span {
     margin: 0 7px 0 5px;

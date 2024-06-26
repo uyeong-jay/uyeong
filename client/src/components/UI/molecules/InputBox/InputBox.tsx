@@ -38,12 +38,14 @@ const StyledInput = styled.input<InputProps>`
   // border: 1px solid red;
   border: none;
   background-color: ${({ theme }) => theme.BG_C};
+  transition: background-color 0.25s linear; // for theme mode
   margin: 0;
   width: 100%;
   height: 40px;
   padding: 0 10px;
   font-size: 15px;
   color: ${({ theme }) => theme.FONT_C};
+  caret-color: ${({ theme }) => theme.FONT_C};
   outline: none;
 
   &:autofill,
@@ -56,7 +58,7 @@ const StyledInput = styled.input<InputProps>`
       if (props.autofill) {
         return `
           box-shadow: inset 0 0 0 50px ${props.theme.LIGHT_BG_C};
-          transition: background-color 5000s ease-in-out 0s; //구 크롬 
+          transition: box-shadow 0.25s linear, background-color 5000s ease-in-out 0s; //구 크롬 
         `;
       }
     }}
@@ -72,7 +74,7 @@ const StyledInput = styled.input<InputProps>`
       if (props.autofill) {
         return `
           box-shadow: inset 0 0 0 50px ${props.theme.LIGHT_BG_C};
-          transition: background-color 5000s ease-in-out 0s; //구 크롬 
+          transition: box-shadow 0.25s linear, background-color 5000s ease-in-out 0s; //구 크롬 
         `;
       }
     }}
@@ -107,7 +109,7 @@ const InputBox = (
 ) => {
   return (
     <StyledInputBox>
-      <StyledLabel>{labelText}</StyledLabel>
+      {labelText && <StyledLabel>{labelText}</StyledLabel>}
       <StyledInput
         type={type}
         name={name}

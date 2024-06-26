@@ -4,6 +4,8 @@ import Header from '@organisms/Header';
 
 interface AppLayoutProps {
   children: React.ReactNode;
+  isDarkTheme: boolean;
+  onClickDarkMode: () => void;
 }
 
 const StyledAppLayout = styled.div`
@@ -13,12 +15,13 @@ const StyledAppLayout = styled.div`
   min-height: 100%;
   padding-bottom: 200px;
   background-color: ${({ theme }) => theme.BG_C};
+  transition: background-color 0.25s linear; // for theme mode
 `;
 
-const AppLayout = ({ children }: AppLayoutProps) => {
+const AppLayout = ({ children, isDarkTheme, onClickDarkMode }: AppLayoutProps) => {
   return (
     <StyledAppLayout>
-      <Header />
+      <Header isDarkTheme={isDarkTheme} onClickDarkMode={onClickDarkMode} />
       {children}
       <Footer />
     </StyledAppLayout>

@@ -24,9 +24,9 @@ DIV.Loader = styled.div`
     width: 60px;
     height: 60px;
     margin: 0 30px 25px 0;
-    background-color: ${({ theme }) => theme.LIGHT_BG_C};
+    background-color: ${({ theme }) => theme.LOADER_BG_C};
     border-radius: 15px;
-    box-shadow: 0 2px 7px rgb(0, 0, 0, 0.2);
+    box-shadow: ${({ theme }) => theme.LOADER_SHADOW};
 
     @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
       margin: 0 50px 30px 0;

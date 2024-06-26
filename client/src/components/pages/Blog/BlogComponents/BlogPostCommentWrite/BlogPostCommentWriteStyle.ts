@@ -25,6 +25,7 @@ FORM.CommentWriteForm = styled.form`
       // border: 1px solid blue;
       border: none;
       background-color: ${({ theme }) => theme.LIGHT_BG_C};
+      transition: background-color 0.25s linear; // for theme mode
       width: 100%;
       height: 150px;
       padding: 15px;
@@ -32,6 +33,8 @@ FORM.CommentWriteForm = styled.form`
       overflow: hidden;
       resize: none;
       font-size: 11px;
+      color: ${({ theme }) => theme.FONT_C_POST};
+      caret-color: ${({ theme }) => theme.FONT_C};
 
       @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
         font-size: 13px;
@@ -58,6 +61,7 @@ DIV.CommentLoginBox = styled.div<CommentLoginBoxProps>`
   width: 100%;
   height: 150px;
   background-color: ${({ theme }) => theme.BG_C}7F; //7F: opacity 0.5
+  transition: background-color 0.25s linear; // for theme mode
   border-radius: 10px;
   backdrop-filter: blur(5px);
   color: ${({ theme }) => theme.FONT_C}CC; //CC: opacity 0.8

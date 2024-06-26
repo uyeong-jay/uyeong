@@ -2,7 +2,12 @@ import HeaderPresenter from './HeaderPresenter';
 import { useGetUserDataQuery, useLogoutMutation } from '@app/services/user/userApi';
 import { useCallback } from 'react';
 
-const HeaderContainer = () => {
+interface HeaderProps {
+  isDarkTheme: boolean;
+  onClickDarkMode: () => void;
+}
+
+const HeaderContainer = ({ isDarkTheme, onClickDarkMode }: HeaderProps) => {
   const { data: userData, isLoading: isLoadingUserData, isError: isUserDataError } = useGetUserDataQuery();
   const [logout, { isLoading: isLoggingOut, isError: isLogoutError }] = useLogoutMutation();
 
@@ -18,6 +23,8 @@ const HeaderContainer = () => {
       isUserDataError={isUserDataError}
       isLogoutError={isLogoutError}
       onClickLogout={onClickLogout}
+      isDarkTheme={isDarkTheme}
+      onClickDarkMode={onClickDarkMode}
     />
   );
 };
