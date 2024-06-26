@@ -1,7 +1,7 @@
 import { BlogPostReq } from '@app/services/blog/postApi';
 import React, { ChangeEvent } from 'react';
 import { StyledWriteMDEditer } from './WriteMDEditerStyle';
-import TextareaBox from '@molecules/textareaBox/textareaBox';
+import TextareaBox from '@molecules/TextareaBox';
 
 interface Props {
   blogPostInfo: BlogPostReq;
@@ -15,7 +15,7 @@ const WriteMDEditerPresenter = ({ blogPostInfo, memoizedContent, onChangeTextare
         value={!memoizedContent ? blogPostInfo.content : memoizedContent}
         onChange={onChangeTextarea}
         placeholder="Write your story..."
-        spellCheck="false"
+        spellCheck={false}
       />
     </StyledWriteMDEditer>
   );

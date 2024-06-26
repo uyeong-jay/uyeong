@@ -13,27 +13,26 @@ FORM.ContactForm = styled.form`
 
     & > input {
       // border: 1px solid black;
-      background-color: ${({ theme }) => theme.LIGHT_BG_C};
+      background-color: ${({ theme }) => theme.CONTACT_FIELD_C};
       margin-top: 10px;
       border-radius: 10px;
     }
-  }
 
-  & > label {
-    color: ${({ theme }) => theme.FONT_C};
-    letter-spacing: 0.5px;
-    font-weight: bold;
-  }
+    & > label {
+      color: ${({ theme }) => theme.FONT_C};
+      letter-spacing: 0.5px;
+      font-weight: bold;
+    }
 
-  & > textarea {
-    border: none;
-    background-color: ${({ theme }) => theme.LIGHT_BG_C};
-    width: 100%;
-    height: 150px;
-    margin: 10px 0 20px 0;
-    padding: 15px 20px;
-    border-radius: 10px;
-    overflow: hidden;
-    resize: none;
+    & > textarea {
+      background-color: ${({ theme }) => theme.CONTACT_FIELD_C};
+      width: 100%;
+      height: 150px;
+      margin: 10px 0 20px 0;
+      padding: 15px 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: -20px;
+    }
   }
 `;

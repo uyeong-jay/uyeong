@@ -7,6 +7,7 @@ import { FORM } from './ContactStyle';
 import PageTitle from '@atoms/PageTitle';
 import FormButton from '@molecules/FormButton';
 import PageFrame from '@templates/PageFrame';
+import TextareaBox from '@molecules/TextareaBox';
 
 interface Props {
   form: MutableRefObject<null>;
@@ -55,15 +56,15 @@ const ContactPresenter = ({
             required
           />
 
-          <label>Message</label>
-          <textarea
+          <TextareaBox
             name="message"
+            labelText="message"
             value={message}
             onChange={onChangeTextarea}
-            required
             ref={textareaRef}
             spellCheck={false}
-          ></textarea>
+            required
+          />
 
           <FormButton
             text="Send"

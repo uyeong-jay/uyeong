@@ -7,12 +7,17 @@ export const StyledWriteMDEditer = styled.div`
   width: 100%;
   height: 100%;
 
-  & > textarea {
-    // border: 1px solid red;
-    background-color: ${({ theme }) => theme.BG_C};
-    border: none;
-    padding-right: 20px;
+  & > div {
+    // border: 1px solid blue;
+    width: 100%;
     height: 95%;
-    resize: none; //textarea 크기조절 막기
+
+    & > textarea {
+      // border: 1px solid red;
+      width: 100%;
+      height: 100%;
+      padding-right: 20px;
+      color: ${({ theme }) => theme.FONT_C_POST};
+    }
   }
 `;
