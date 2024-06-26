@@ -40,65 +40,12 @@ export const StyledBlogPost = styled.div`
 
     & #markdown-content {
       // border: 1px solid black;
-      padding: 50px 0;
       overflow: hidden;
-      word-break: keep-all;
-      font-size: 1rem;
-      line-height: 1.7;
-      letter-spacing: -0.004em;
+      padding: 50px 0;
 
+      font-size: 1rem;
       @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
         font-size: 1.1rem;
-      }
-
-      & > h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        margin: 40px 0 8px 0;
-      }
-
-      & > p {
-        margin-bottom: 15px;
-      }
-
-      & > p a {
-        color: ${({ theme }) => theme.FONT_C};
-        padding-bottom: 2px;
-        border-bottom: 1px solid ${({ theme }) => theme.FONT_C};
-      }
-
-      & p img {
-        margin: 1rem auto;
-        border-radius: 15px;
-      }
-
-      & > pre > code > div {
-        border: 3px solid ${({ theme }) => theme.BD_C}4C; //4C: opacity 30%
-        background-color: ${({ theme }) => theme.BG_C} !important;
-        border-radius: 20px;
-
-        overflow-x: scroll;
-        overflow-y: hidden;
-
-        ::-webkit-scrollbar {
-          border-radius: 50%;
-          height: 5px;
-        }
-        ::-webkit-scrollbar-track {
-          margin: 0 15px;
-          border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-          background: ${({ theme }) => theme.BD_C}4C; //4C: opacity 30%
-          border-radius: 10px;
-        }
-
-        & > code > span {
-          background-color: transparent !important;
-        }
       }
     }
   }
