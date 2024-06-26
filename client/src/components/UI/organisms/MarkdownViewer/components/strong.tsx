@@ -15,7 +15,7 @@ const StyledStrong = styled.strong<StrongProps>`
         color: ${props.theme.FONT_C};
       `;
     } else {
-      return `color: black;`;
+      return `color: ${props.theme.FONT_C_POST};`;
     }
   }}
 `;

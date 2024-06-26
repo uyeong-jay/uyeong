@@ -10,7 +10,7 @@ const Heading = (props: { level: number; children: React.ReactChildren[] }) => {
 
 export default Heading;
 
-// 제목에 링크 붙히고 싶으면 활용하기
+// 제목에 링크 붙일때
 // const StyledAnchor = styled.a`
 //   color: black;
 

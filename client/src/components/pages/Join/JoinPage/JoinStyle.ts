@@ -104,7 +104,7 @@ FORM.JoinForm = styled.form`
       border-radius: 10px;
       height: 40px;
       top: 31px;
-      right: 5px;
+      right: 10px;
     }
 
     //loader
@@ -122,6 +122,7 @@ FORM.JoinForm = styled.form`
     .verify-code-btn {
       border: 5px solid ${({ theme }) => theme.LIGHT_BG_C};
       background-color: ${({ theme }) => theme.BG_C};
+      transition: border 0.25s linear, background-color 0.25s linear; // for theme mode
       right: 0px;
       color: ${({ theme }) => theme.FONT_C}D8; //opacity: 85%
       font-weight: bold;
