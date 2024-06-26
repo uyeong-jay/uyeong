@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import wrapper from '@app/store';
 import axios from 'axios';
 import { getRunningOperationPromises } from '@app/services/api';
@@ -8,7 +8,7 @@ import { getBlogPosts } from '@app/services/blog/postApi';
 export { default } from '@pages/Blog/BlogPage';
 
 //Static, ServerSide 비교
-export const getStaticProps: GetStaticProps = wrapper.getStaticProps((store) => async ({ req }: any) => {
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async ({ req }: any) => {
   const cookie = req ? req.headers.cookie : '';
   axios.defaults.headers.common.Cookie = '';
   if (req && cookie) {
