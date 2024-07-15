@@ -20,21 +20,19 @@ const GlobalStyle = () => {
           height: 100%;
         }
 
-        body {
-          overflow-x: hidden;
-        }
-        @media screen and (max-width: 320px) {
-          body {
-            overflow-x: visible;
-          }
-        }
-
         /* 줄 높이 지정, 글꼴 지정, 텍스트 렌더링 개선 */
         body {
+          overflow-x: hidden;
           line-height: 1.5; //줄 높이 글자 크기의 1.5배
           font-family: 'Noto Sans KR', sans-serif;
           -webkit-font-smoothing: antialiased;
           font-size: 14px;
+        }
+
+        @media screen and (max-width: 320px) {
+          body {
+            overflow-x: visible;
+          }
         }
 
         /* 텍스트 삐져나감 방지 */
