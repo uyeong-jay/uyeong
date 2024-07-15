@@ -17,9 +17,6 @@ interface Props {
   targetRef: RefObject<HTMLDivElement>;
 }
 
-const POSTCOUNT = 2;
-export const InitialPostsCardArr = Array.from({ length: POSTCOUNT }, (_, index) => index);
-
 const BlogCategoryDetailPresenter = ({
   blogPostsByCategory,
   categoryTitle,
