@@ -14,15 +14,15 @@ const StyledDarkModeButton = styled.div`
     border-radius: 9px;
     position: absolute;
     top: 0;
-    right: 110px;
+    right: 115px;
     height: 100%;
     color: ${({ theme }) => theme.FONT_C};
 
     @media screen and (min-width: calc(${({ theme }) => theme.BP.MOBILE} + 150px)) {
-      right: 120px;
+      right: 125px;
     }
 
-    @media screen and (min-width: 833px) {
+    @media screen and (min-width: 833.5px) {
       right: 110px;
     }
   }
