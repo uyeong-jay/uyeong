@@ -13,7 +13,7 @@ FORM.ContactForm = styled.form`
 
     & > input {
       // border: 1px solid black;
-      background-color: ${({ theme }) => theme.CONTACT_FIELD_C};
+      background-color: ${({ theme }) => theme.LIGHT_BG_C};
       margin-top: 10px;
       border-radius: 10px;
     }
@@ -25,7 +25,7 @@ FORM.ContactForm = styled.form`
     }
 
     & > textarea {
-      background-color: ${({ theme }) => theme.CONTACT_FIELD_C};
+      background-color: ${({ theme }) => theme.LIGHT_BG_C};
       width: 100%;
       height: 150px;
       margin: 10px 0 20px 0;

@@ -3,9 +3,8 @@ import { breakpoint } from './breakPoint';
 export const darkTheme = {
   BD_C: '#F0EDCC',
   BG_C: '#273540',
-  // BG_C: '#000033',
   LIGHT_BG_C: '#314351',
-  INITIAL_BG_C: '#314351',
+  INITIAL_BG_C: '#273C4F',
   FONT_C: '#F0EDCC',
   FONT_C_DANGER: '#FF5733',
   FONT_C_UPDATE: '#1CA0FF',
@@ -13,9 +12,8 @@ export const darkTheme = {
   LOGO_C: '#F0EDCC',
   HEADER_BG_C: '#314351',
   HEADER_SHADOW: '0 4px 4px rgb(39, 53, 64)',
-  LOADER_BG_C: '#3b5060',
+  LOADER_BG_C: '#314351',
   LOADER_SHADOW: '0px 2px 7px rgb(0, 0, 0, 0.5)',
-  CONTACT_FIELD_C: '#3b5060',
 
   CODE_MAYBE_CLASS: '#FCD468', //진노랑
   CODE_IMPORTS: '#C0A6F0', //연보라

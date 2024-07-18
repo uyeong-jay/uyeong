@@ -14,7 +14,6 @@ export const lightTheme = {
   HEADER_SHADOW: '0 4px 4px rgb(237, 236, 234)',
   LOADER_BG_C: '#fffcf6',
   LOADER_SHADOW: '0px 2px 7px rgb(0, 0, 0, 0.3)',
-  CONTACT_FIELD_C: '#fffcf6',
 
   CODE_MAYBE_CLASS: '#f76767', //연빨강
   CODE_IMPORTS: '#967bdc', //연보라

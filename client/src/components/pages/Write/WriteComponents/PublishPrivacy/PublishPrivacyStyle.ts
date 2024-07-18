@@ -56,7 +56,7 @@ BTN.PublicButton = styled.button<PublicButtonProps>`
     } else {
       return `
         &:hover {
-          color: rgba(0,0,0, 0.5);
+          color: ${props.theme.FONT_C}7F; //7F: opacity 50%
 
           .earth-icon {
             opacity: 0.5;
@@ -78,7 +78,7 @@ BTN.PrivateButton = styled.button<PrivateButtonProps>`
     } else {
       return `
         &:hover {
-          color: rgba(0,0,0, 0.5);
+          color: ${props.theme.FONT_C}7F; //7F: opacity 50%
 
           .lock-icon {
             opacity: 0.5;

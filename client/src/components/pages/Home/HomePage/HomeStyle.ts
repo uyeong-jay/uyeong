@@ -105,6 +105,7 @@ DIV.BannerBlock = styled.div`
 DIV.SummaryBlock = styled.div`
   // border: 1px solid black;
   background-color: ${({ theme }) => theme.INITIAL_BG_C};
+  transition: background-color 0.25s linear; // for theme mode
   position: relative;
   width: 80%;
   height: 400px;

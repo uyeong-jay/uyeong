@@ -36,7 +36,7 @@ DIV.PublishActionButtons = styled.div`
     }
 
     & > button:hover {
-      color: rgba(0, 0, 0, 0.5);
+      color: ${({ theme }) => theme.FONT_C}7F; //7F: opacity 50%
     }
   }
 `;

@@ -60,7 +60,7 @@ P.SlickPostTitle = styled.p`
 
   & > a {
     // border: 1px solid green;
-    color: #333333;
+    color: ${({ theme }) => theme.FONT_C};
     margin-left: 3px;
     overflow: hidden;
   }
