@@ -8,7 +8,7 @@ import { darkTheme, lightTheme } from '@_settings/theme';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useCookies } from 'react-cookie';
 import cookieParser from '@utils/cookieParser';
-import '@_settings/fontStyle.css';
+import '@_settings/fontStyles.css';
 
 const LIGHT_THEME = 'light';
 const DARK_THEME = 'dark';
