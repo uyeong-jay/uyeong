@@ -67,10 +67,29 @@ DIV.SearchBar = styled.div`
   // border: 1px solid black;
   border-bottom: 2px solid ${({ theme }) => theme.BD_C};
   display: flex;
-  margin-bottom: 100px;
+  position: relative;
   min-width: 300px;
+  margin-bottom: 100px;
+
+  & > span {
+    // border: 2px solid black;
+    display: flex;
+    height: 27px;
+    cursor: pointer;
+    position: absolute;
+    top: 7px;
+    right: 45px;
+
+    & > svg {
+      // border: 1px solid black;
+      fill: ${({ theme }) => theme.BD_C};
+      width: 27px;
+      padding: 5px;
+    }
+  }
 
   & > svg {
+    // border: 2px solid black;
     fill: ${({ theme }) => theme.BD_C};
     width: 40px;
     padding: 0 10px;

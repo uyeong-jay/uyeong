@@ -10,6 +10,7 @@ import BlogPosts from '@pages/Blog/BlogComponents/BlogPosts';
 import MiniLoader from '@modals/MiniLoader';
 import { UserResponse } from '@app/services/user/userApi';
 import Modal from '@modals/Modal';
+import XMarkIcon from '@icons/XMarkIcon';
 // import { DIV as DIV_POSTS } from '../BlogComponents/BlogPosts/BlogPosts';
 // import { InitialPostsCardArr } from '../BlogComponents/BlogPosts/BlogPosts';
 // import dynamic from 'next/dynamic';
@@ -33,6 +34,7 @@ interface Props {
   onChangeInput?: (e: ChangeEvent<HTMLInputElement>) => void;
   onClickInput?: () => void;
   onFocusInput?: () => void;
+  onClickClearInput?: () => void;
   onClickTag: (tagName: string) => void;
   isTagClicked: boolean;
   tagUnderline: string;
@@ -51,6 +53,7 @@ const BlogPresenter: React.FC<Props> = ({
   onChangeInput,
   onClickInput,
   onFocusInput,
+  onClickClearInput,
   onClickTag,
   tagUnderline,
   isTagClicked,
@@ -81,6 +84,11 @@ const BlogPresenter: React.FC<Props> = ({
                 placeholder=""
                 autofill={false}
               />
+              {searchWordInput && (
+                <span onClick={onClickClearInput}>
+                  <XMarkIcon />
+                </span>
+              )}
               <SearchIcon />
             </DIV.SearchBar>
             <BlogPosts userData={userData} blogPostsBySearch={blogPostsBySearch} />

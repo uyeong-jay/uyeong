@@ -176,6 +176,15 @@ const BlogContainer = () => {
     setInputFocused(true);
   }, [dispatch]);
 
+  const onClickClearInput = useCallback(() => {
+    if (!searchWordInput) return;
+    dispatch(getTagName(''));
+    setCanLoadMore(false);
+    setInputFocused(true);
+    setSearchWordInput('');
+    delayedSearchInfoUpdate('');
+  }, [searchWordInput, delayedSearchInfoUpdate, dispatch]);
+
   //Input 클릭시 검색어 전체 선택
   const onClickInput = useCallback(() => {
     inputRef.current?.select();
@@ -214,6 +223,7 @@ const BlogContainer = () => {
       onChangeInput={onChangeInput}
       onClickInput={onClickInput}
       onFocusInput={onFocusInput}
+      onClickClearInput={onClickClearInput}
       onClickTag={onClickTag}
       tagUnderline={tagUnderline}
       isTagClicked={isTagClicked}
