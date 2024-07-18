@@ -45,7 +45,7 @@ const TextareaBox = (
         onChange={onChange}
         placeholder={placeholder}
         required={required ? true : false}
-        spellCheck={spellCheck ? false : true}
+        spellCheck={spellCheck ? true : false}
         ref={ref}
       />
     </StyledTextareaBox>
