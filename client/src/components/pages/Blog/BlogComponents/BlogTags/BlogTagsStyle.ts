@@ -80,7 +80,7 @@ ASIDE.BlogTags = styled.aside`
 DIV.BlogTag = styled.div<BlogTagProps>`
   // border: 1px solid red;
   margin: 0 20px 0 0;
-  padding: 0 0 3px 0;
+  height: 25px;
   cursor: pointer;
 
   & > span:nth-of-type(1) {
@@ -104,15 +104,7 @@ DIV.BlogTag = styled.div<BlogTagProps>`
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
     // border: 1px solid red;
     display: inline-block;
-    margin: 0 0 12px 0;
-
-    ${(props) => {
-      if (props.tagUnderline === props.tagName) {
-        return `
-          margin: 0 0 10px 0;
-        `;
-      }
-    }};
+    margin: 0 0 15px 0;
 
     & > span {
       // border: 1px solid blue;
