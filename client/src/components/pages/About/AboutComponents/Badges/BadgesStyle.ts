@@ -9,14 +9,14 @@ interface BadgesProps {
 DIV.Frame = styled.div<BadgesProps>`
   // border: 1px solid black;
   padding: 0 10px 10px 10px;
-  // min-width: 100%;
 
   & > button {
     border: 2px solid ${({ theme }) => theme.BD_C};
     position: absolute;
     top: -25px;
     height: 15px;
-    border-radius: 50%;
+    // width: 5px;
+    border-radius: 25%;
   }
 
   & > button:nth-of-type(1) {
@@ -64,10 +64,6 @@ DIV.Frame = styled.div<BadgesProps>`
             display: flex;
             justify-content: center;
             align-items: center;
-
-            &:hover {
-              color: ${({ theme }) => theme.FONT_C}99; //99: opacity 60%;
-            }
           }
         }
       }
