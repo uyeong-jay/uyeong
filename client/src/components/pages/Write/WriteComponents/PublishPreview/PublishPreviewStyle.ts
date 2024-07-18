@@ -98,6 +98,23 @@ DIV.PublishPreview = styled.div`
     padding: 15px;
     resize: none; //textarea 크기조절 막기
     border-radius: 15px;
+    color: ${({ theme }) => theme.FONT_C};
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    ::-webkit-scrollbar {
+      border-radius: 50%;
+      width: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      margin: 10px 0;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: ${({ theme }) => theme.BD_C}4C; //4C: opacity 30%
+      border-radius: 10px;
+    }
 
     &::placeholder {
       color: ${({ theme }) => theme.FONT_C};
