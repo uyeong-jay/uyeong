@@ -260,8 +260,6 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
             // border: 1px solid black;
             display: flex;
             flex-direction: column;
-            // justify-content: center;
-            // align-items: center;
             height: 100%;
 
             & > li {
@@ -278,7 +276,6 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
                 height: 100%;
                 font-size: 25px;
                 font-weight: 600;
-                // letter-spacing: 0.01em;
               }
 
               ${(props) => {

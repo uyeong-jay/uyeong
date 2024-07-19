@@ -111,11 +111,11 @@ DIV.PublishCategory = styled.div<PublishCategpryProps>`
         ${(props) => {
           if (props.isOpenedCategory) {
             return `
-            transform: translateY(5px) rotateX(180deg);
+              transform: translateY(5px) rotateX(180deg);
             `;
           } else {
             return `
-            transform: translateY(-5px) rotateX(0deg);
+              transform: translateY(-5px) rotateX(0deg);
             `;
           }
         }};
@@ -126,11 +126,11 @@ DIV.PublishCategory = styled.div<PublishCategpryProps>`
           ${(props) => {
             if (props.isOpenedCategory) {
               return `
-              transform: translateY(-5px) rotateX(180deg);
+                transform: translateY(-5px) rotateX(180deg);
               `;
             } else {
               return `
-              transform: translateY(5px) rotateX(0deg);
+                transform: translateY(5px) rotateX(0deg);
               `;
             }
           }};
@@ -180,7 +180,7 @@ DIV.OpenedCategory = styled.div<OpenedCategoryProps>`
   }
 
   & > ul {
-    border: 4px solid ${({ theme }) => theme.BG_C};
+    border: 2px solid ${({ theme }) => theme.BD_C}7F;
     height: 100%;
     width: 230px;
     border-radius: 10px;
@@ -229,7 +229,7 @@ DIV.OpenedCategory = styled.div<OpenedCategoryProps>`
     }
     ::-webkit-scrollbar-thumb {
       // border: 1px solid gray;
-      background-color: ${({ theme }) => theme.BD_C};
+      background-color: ${({ theme }) => theme.BD_C}CC; //CC: opacity 80%
       border-radius: 10px;
     }
   }
@@ -238,18 +238,10 @@ DIV.OpenedCategory = styled.div<OpenedCategoryProps>`
 LI.CategoryList = styled.li<CategoryListProps>`
   // border: 1px solid black;
   position: relative;
-  border-bottom: 2px solid ${({ theme }) => theme.BG_C};
+  border-bottom: 2px solid ${({ theme }) => theme.BD_C}7F;
   margin: 30px 20px;
   padding: 0 20px 0 10px;
   cursor: pointer;
-
-  ${(props) => {
-    if (props.isCategoryClicked) {
-      return `
-        border-bottom: 2px solid ${props.theme.BD_C};
-      `;
-    }
-  }}
 
   & .check-icon {
     // border: 1px solid black;
