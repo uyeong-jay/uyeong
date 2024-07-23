@@ -42,7 +42,7 @@ const StyledInput = styled.input<InputProps>`
   margin: 0;
   width: 100%;
   height: 40px;
-  padding: 0 10px;
+  padding: 0 13px;
   font-size: 15px;
   color: ${({ theme }) => theme.FONT_C};
   caret-color: ${({ theme }) => theme.FONT_C};
