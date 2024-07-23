@@ -1,6 +1,6 @@
 import styled from '@_settings/styled';
 
-interface AboutBlogPropss {
+interface AboutBlogProps {
   isKorean: boolean;
 }
 
@@ -170,7 +170,7 @@ DIV.AboutMe = styled.div`
   }
 `;
 
-DIV.AboutBlog = styled.div<AboutBlogPropss>`
+DIV.AboutBlog = styled.div<AboutBlogProps>`
   // border: 1px solid black;
   display: flex;
   justify-content: center;
