@@ -44,7 +44,7 @@ const LoginPresenter = ({
   const [isPasswordType, setPasswordType] = useState(true);
   const { email, password } = userLoginInfo;
 
-  //!isLoginSuccess: isLoginSuccess는 페이지가 바뀔때마다 초기화 되어 url로 검색하여 들어왔을때는 이미 false인 상태이기 때문에 로그인페이지에 에러 화면이 보이도록 가능
+  //!isLoginSuccess: isLoginSuccess는 페이지가 바뀔때마다 초기화 되어 url로 검색하여 들어왔을때는 이미 false인 상태로 로그인페이지에 에러 화면이 보이도록 가능
   if (userData?.user && !isLoginSuccess) return <NotFound />;
   return (
     <>

@@ -7,7 +7,6 @@ import { setAxiosCookie } from '@utils/setAxiosCookie';
 
 export { default } from '@pages/Blog/BlogPage';
 
-//Static, ServerSide 비교
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async ({ req }: any) => {
   setAxiosCookie(req);
 
