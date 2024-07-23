@@ -346,7 +346,7 @@ const Modal = ({ type, msg, isOpen, setOpen, callback, shakeAlert }: ModalProps)
 
 export default Modal;
 
-//사용법
+//사용
 
 //const [isModalOpen, setModalOpen] = useState(false);
 

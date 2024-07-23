@@ -39,7 +39,7 @@ export const useIntersect = (onIntersect: IntersectHandler, options?: Intersecti
   return ref;
 };
 
-//사용법
+//사용
 
 // <div id="posts_intersection_target" ref={targetRef}></div>
 

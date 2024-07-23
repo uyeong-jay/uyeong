@@ -124,7 +124,7 @@ export const validUserUpdateInfo = (
   return '';
 };
 
-//사용법
+//사용
 
 //에러 모아 놓기
 // const errMsg = [];

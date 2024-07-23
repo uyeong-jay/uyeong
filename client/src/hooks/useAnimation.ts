@@ -17,7 +17,7 @@ const useAnimation = (show: boolean) => {
 
 export default useAnimation;
 
-// 사용 예시
+// 사용
 // const [isOpen, setOpen] = useState(boolean값)
 
 // const [show, render, onAnimationEnd] = useAnimation(isOpen or boolean값);

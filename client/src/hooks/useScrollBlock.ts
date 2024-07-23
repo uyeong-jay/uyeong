@@ -22,4 +22,4 @@ const useScrollBlock = () => {
 };
 
 export default useScrollBlock;
-//사용법: useScrollBlock();
+//사용: useScrollBlock();

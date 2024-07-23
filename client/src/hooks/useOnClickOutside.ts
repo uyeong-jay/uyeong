@@ -25,7 +25,7 @@ const useOnClickOutside = <T extends HTMLElement = HTMLElement>(ref: RefObject<T
 
 export default useOnClickOutside;
 
-//사용법
+//사용
 // import { useRef } from 'react';
 
 // const [isOpen, setOpen] = useState(false);
