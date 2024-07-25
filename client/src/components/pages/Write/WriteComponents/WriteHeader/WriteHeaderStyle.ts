@@ -45,21 +45,14 @@ DIV.WriteHeaderTagGroup = styled.div`
 
     ::-webkit-scrollbar {
       border-radius: 50%;
-      width: 3px;
+      width: 4px;
     }
     ::-webkit-scrollbar-track {
       // border: 1px solid black;
     }
     ::-webkit-scrollbar-thumb {
-      background-color: ${({ theme }) => theme.BD_C};
+      background-color: ${({ theme }) => theme.BD_C}CC;
       border-radius: 10px;
-    }
-
-    &:hover {
-      :-webkit-scrollbar {
-        border-radius: 50%;
-        width: 5px;
-      }
     }
 
     & > li {
@@ -92,6 +85,7 @@ DIV.WriteHeaderTagGroup = styled.div`
       height: 50px;
       font-size: large;
       padding-left: 5px;
+      color: ${({ theme }) => theme.FONT_C};
     }
   }
 `;

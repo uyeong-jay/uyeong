@@ -55,11 +55,11 @@ const WriteHeaderPresenter = ({
 
   return (
     <DIV.WriteHeader>
-      {/* 블로그 제목 */}
+      {/* 제목 */}
       <input type="text" name="title" value={title} onChange={onChangeTitleInput} placeholder="Title" />
 
       <DIV.WriteHeaderTagGroup>
-        {/* 블로그 태그 */}
+        {/* 태그 */}
         <ul>
           {tags?.map((tag, i) => (
             <li key={i} onClick={() => onClickTag(tag)}>
@@ -68,7 +68,7 @@ const WriteHeaderPresenter = ({
           ))}
         </ul>
 
-        {/* 블로그 태그 입력 */}
+        {/* 태그 입력 */}
         <form onSubmit={onSubmitTag}>
           <input
             type="text"
@@ -77,8 +77,9 @@ const WriteHeaderPresenter = ({
             onClick={onClickTagInput}
             placeholder="Add tag"
             ref={dropdownBoxRef}
+            spellCheck={false}
           />
-          {/* 블로그 태그 메세지 */}
+          {/* 태그 메세지 */}
           {render && (
             <DIV.DropdownMsg animationName={show ? 'down-msg' : 'up-msg'} onAnimationEnd={() => onAnimationEnd}>
               {isOver20Tags
