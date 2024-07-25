@@ -1,6 +1,8 @@
 import styled from '@_settings/styled';
 
-export const StyledWriteMDViewer = styled.div`
+export const DIV = {} as any;
+
+DIV.WriteMDViewerFrame = styled.div`
   // border: 1px solid black;
   width: 100%;
   height: 100%;

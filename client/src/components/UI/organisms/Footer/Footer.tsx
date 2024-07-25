@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyledFooter } from './FooterStyle';
+import { FOOTER } from './FooterStyle';
 import NavLinkBox from '@molecules/NavLinkBox';
 import Logo from '@icons/Logo';
 
 const Footer = () => {
   return (
-    <StyledFooter>
+    <FOOTER.Frame>
       <div>
         <Logo />
       </div>
@@ -18,8 +18,8 @@ const Footer = () => {
           github.com/william-jacob
         </NavLinkBox>
       </ul>
-      <p>Copyright ⓒ 2023 UYeong Jang All rights reserved.</p>
-    </StyledFooter>
+      <p>Copyright ⓒ 2024 UYeong Jang All rights reserved.</p>
+    </FOOTER.Frame>
   );
 };
 

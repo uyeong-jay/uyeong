@@ -182,7 +182,7 @@ const SettingsPresenter = ({
             />
           </div>
 
-          <FormButton variant="update" text="UPDATE" formIsLoading={isUpdatingUserInfo || isUpdatingUserData} />
+          <FormButton variant="update" text="Update" formIsLoading={isUpdatingUserInfo || isUpdatingUserData} />
 
           {/* 서버에서 받아온 에러는 깜빡 거려서 div에 조건 걸지 않고 작성 */}
           <DIV.SettingsErrMsg>

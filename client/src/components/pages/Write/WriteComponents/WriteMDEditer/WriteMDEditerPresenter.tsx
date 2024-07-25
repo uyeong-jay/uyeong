@@ -1,6 +1,6 @@
 import { BlogPostReq } from '@app/services/blog/postApi';
 import React, { ChangeEvent } from 'react';
-import { StyledWriteMDEditer } from './WriteMDEditerStyle';
+import { DIV } from './WriteMDEditerStyle';
 import TextareaBox from '@molecules/TextareaBox';
 
 interface Props {
@@ -10,14 +10,14 @@ interface Props {
 }
 const WriteMDEditerPresenter = ({ blogPostInfo, memoizedContent, onChangeTextarea }: Props) => {
   return (
-    <StyledWriteMDEditer>
+    <DIV.WriteMDEditerFrame>
       <TextareaBox
         value={!memoizedContent ? blogPostInfo.content : memoizedContent}
         onChange={onChangeTextarea}
         placeholder="Write your story..."
         spellCheck={false}
       />
-    </StyledWriteMDEditer>
+    </DIV.WriteMDEditerFrame>
   );
 };
 

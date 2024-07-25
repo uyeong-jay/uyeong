@@ -1,6 +1,8 @@
 import styled from '@_settings/styled';
 
-export const StyledWriteMDEditer = styled.div`
+export const DIV = {} as any;
+
+DIV.WriteMDEditerFrame = styled.div`
   // border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -18,6 +20,21 @@ export const StyledWriteMDEditer = styled.div`
       height: 100%;
       padding-right: 20px;
       color: ${({ theme }) => theme.FONT_C_POST};
+
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      ::-webkit-scrollbar {
+        border-radius: 50%;
+        width: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        // border: 1px solid black;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: ${({ theme }) => theme.BD_C}CC;
+        border-radius: 10px;
+      }
     }
   }
 `;

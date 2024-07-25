@@ -1,7 +1,7 @@
 import { BlogPost } from '@app/services/blog/postApi';
 import NotFound from '@src/pages/404';
 import BlogPostToc from '@pages/Blog/BlogComponents/BlogPostToc';
-import { StyledBlogPost } from './BlogPostStyle';
+import { SECTION } from './BlogPostStyle';
 import Image from 'next/image';
 import BlogPostFooter from '@pages/Blog/BlogComponents/BlogPostFooter';
 import BlogPostHeader from '@pages/Blog/BlogComponents/BlogPostHeader';
@@ -16,7 +16,7 @@ const BlogPostPresenter = ({ blogPost }: Props) => {
 
   if (!_id) return <NotFound />;
   return (
-    <StyledBlogPost>
+    <SECTION.Frame>
       <BlogPostToc />
       <BlogPostHeader blogPost={blogPost} />
       <article>
@@ -37,7 +37,7 @@ const BlogPostPresenter = ({ blogPost }: Props) => {
         </div>
       </article>
       <BlogPostFooter postId={_id} />
-    </StyledBlogPost>
+    </SECTION.Frame>
   );
 };
 

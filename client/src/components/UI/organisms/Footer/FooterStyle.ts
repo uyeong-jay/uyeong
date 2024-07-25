@@ -1,6 +1,8 @@
 import styled from '@_settings/styled';
 
-export const StyledFooter = styled.footer`
+export const FOOTER = {} as any;
+
+FOOTER.Frame = styled.footer`
   border-top: 2px solid ${({ theme }) => theme.BD_C};
   boackground-color: ${({ theme }) => theme.BG_C};
   padding: 20px;

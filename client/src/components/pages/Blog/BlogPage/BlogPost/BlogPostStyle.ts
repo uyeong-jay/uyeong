@@ -1,6 +1,8 @@
 import styled from '@_settings/styled';
 
-export const StyledBlogPost = styled.div`
+export const SECTION = {} as any;
+
+SECTION.Frame = styled.section`
   // border: 1px solid black;
   display: flex;
   flex-direction: column;

@@ -8,7 +8,9 @@ interface Props {
   isUserFetchError?: boolean;
 }
 
-const StyledErrorPage = styled.div`
+const MAIN = {} as any;
+
+MAIN.frame = styled.main`
   // border: 1px solid black;
   background-color: ${({ theme }) => theme.BG_C};
   display: flex;
@@ -34,6 +36,7 @@ const StyledErrorPage = styled.div`
     font-family: 'Baloo Bhaijaan 2', sans-serif;
     font-optical-sizing: auto;
     font-size: 6rem;
+    letter-spacing: 5px;
   }
 
   & > p {
@@ -76,11 +79,11 @@ const NotFound = ({ isUserFetchError }: Props) => {
   }, []);
 
   return (
-    <StyledErrorPage>
+    <MAIN.frame>
       <h1>404</h1>
       <p>Oops... looks like you got lost</p>
       {isUserFetchError ? <button onClick={onClickLogout}>Back to home</button> : <Link href="/">Back to home</Link>}
-    </StyledErrorPage>
+    </MAIN.frame>
   );
 };
 

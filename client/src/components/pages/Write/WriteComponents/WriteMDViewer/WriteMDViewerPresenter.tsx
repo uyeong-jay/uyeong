@@ -1,4 +1,4 @@
-import { StyledWriteMDViewer } from './WriteMDViewerStyle';
+import { DIV } from './WriteMDViewerStyle';
 import { BlogPostReq } from '@app/services/blog/postApi';
 import Loader from '@modals/Loader';
 // import MarkdownViewer from '@organisms/MarkdownViewer';
@@ -17,9 +17,9 @@ interface Props {
 
 const WriteMDViewerPresenter = ({ blogPostInfo, memoizedContent }: Props) => {
   return (
-    <StyledWriteMDViewer>
+    <DIV.WriteMDViewerFrame>
       <MarkdownViewer content={!memoizedContent ? blogPostInfo.content : memoizedContent} />
-    </StyledWriteMDViewer>
+    </DIV.WriteMDViewerFrame>
   );
 };
 

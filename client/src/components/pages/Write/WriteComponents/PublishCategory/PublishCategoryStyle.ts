@@ -192,6 +192,7 @@ DIV.OpenedCategory = styled.div<OpenedCategoryProps>`
       if (props.animationName === 'down-category') {
         return `
           animation: show-scroll 0s ease-out 0.5s forwards;
+          
           @keyframes show-scroll {
             from {
             }
@@ -205,6 +206,7 @@ DIV.OpenedCategory = styled.div<OpenedCategoryProps>`
       } else {
         return `
           animation: hide-scroll 0s ease-out 0s forwards;
+
           @keyframes hide-scroll {
             from {
               overflow-y: scroll;

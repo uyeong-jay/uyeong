@@ -7,7 +7,7 @@ interface PostCardBlcokProps {
 export const SECTION = {} as any;
 export const DIV = {} as any;
 
-SECTION.Frame = styled.div`
+SECTION.Frame = styled.section`
   // border: 1px solid black;
   display: flex;
   flex-direction: column;

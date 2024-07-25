@@ -1,6 +1,8 @@
 import styled from '@_settings/styled';
 
-export const StyledWriteFooter = styled.div`
+export const DIV = {} as any;
+
+DIV.WriteFooterFrame = styled.div`
   // border: 1px solid black;
   display: flex;
   justify-content: space-between;

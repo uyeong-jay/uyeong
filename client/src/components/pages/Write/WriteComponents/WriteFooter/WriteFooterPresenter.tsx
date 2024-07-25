@@ -3,7 +3,7 @@ import { UserResponse } from '@app/services/user/userApi';
 import Modal from '@modals/Modal';
 import React from 'react';
 import Publish from '../Publish';
-import { StyledWriteFooter } from './WriteFooterStyle';
+import { DIV } from './WriteFooterStyle';
 import ArrowLeftIcon from '@icons/ArrowLeftIcon';
 import ArrowUpIcon from '@icons/ArrowUpIcon';
 
@@ -33,7 +33,7 @@ const WriteFooterPresenter = ({
   onClickExit,
 }: Props) => {
   return (
-    <StyledWriteFooter>
+    <DIV.WriteFooterFrame>
       <button className="back-button" onClick={() => onClickExit()}>
         <ArrowLeftIcon />
         Exit
@@ -54,7 +54,7 @@ const WriteFooterPresenter = ({
         callback={() => onClickExit(true)}
         shakeAlert
       />
-    </StyledWriteFooter>
+    </DIV.WriteFooterFrame>
   );
 };
 
