@@ -6,7 +6,7 @@ export const darkTheme = {
   LIGHT_BG_C: '#314351',
   INITIAL_BG_C: '#273C4F',
   FONT_C: '#F0EDCC',
-  FONT_C_DANGER: '#FF5733',
+  FONT_C_DANGER: '#FFA500',
   FONT_C_UPDATE: '#1CA0FF',
   FONT_C_POST: '#D1D1CF',
   LOGO_C: '#F0EDCC',
