@@ -12,7 +12,7 @@ import useOnClickOutside from '@hooks/useOnClickOutside';
 import { useCallback, useRef, useState } from 'react';
 import EllipsisVerticalIcon from '@icons/EllipsisVerticalIcon';
 import EditIcon from '@icons/EditIcon';
-import TrashIcon from '@icons/TrashIcon';
+import TrashCanIcon from '@icons/TrashCanIcon';
 import UserIcon from '@icons/UserIcon';
 
 interface Props {
@@ -171,7 +171,7 @@ const BlogPostCommentTemplatePresenter = ({
                     Edit
                   </BTN.CommentEditBtn>
                   <BTN.CommentDeleteBtn onClick={() => onClickDelete()}>
-                    <TrashIcon />
+                    <TrashCanIcon />
                     Delete
                   </BTN.CommentDeleteBtn>
                 </DIV.CommentMenuBtns>
