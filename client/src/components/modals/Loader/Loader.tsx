@@ -36,7 +36,7 @@ const colors = [
 ];
 
 const getRandomColorIndexes = (): number[] => {
-  const indexes = loadingLetters.map((_, index) => index % colors.length);
+  const indexes = loadingLetters.map((_, index) => index);
 
   // Fisher-Yates Shuffle
   for (let i = indexes.length - 1; i > 0; i--) {
