@@ -1,6 +1,10 @@
+import { GetServerSideProps } from 'next';
+import { useState, useEffect } from 'react';
 import styled from '@_settings/styled';
-import React, { useState } from 'react';
-import useInterval from '@hooks/useInterval';
+
+interface LoaderProps {
+  initialColorIndexes?: number[] | undefined;
+}
 
 const StyledLoader = styled.div`
   display: flex;
@@ -17,56 +21,67 @@ const StyledLoader = styled.div`
   user-select: none;
 `;
 
-// 재사용 가능성(o)
-// 피셔-예이츠 셔플
-function shuffle(array: string[]) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
-// [loading...] 문자 모아 놓음
 const loadingLetters = ['L', 'O', 'A', 'D', 'I', 'N', 'G', '.', '.', '.'];
+const colors = [
+  '#DC143C' /* crimson */,
+  '#D02090' /* violetred */,
+  '#FF69B4' /* hotPink */,
+  '#FF1493' /* deepPink */,
+  '#DB7093' /* palevioletRed */,
+  '#C71585' /* mediumvioletRed */,
+  '#FF00FF' /* fuchsia */,
+  '#E30B5D' /* raspberry */,
+  '#F08080' /* lightcoral */,
+  '#FFC0CB' /* pink */,
+];
 
-//pink color와 비슷한 색 종류별로 모아 놓음
-const pinkColors = ['pink', 'lightpink', 'hotpink', 'deeppink', 'palevioletred', 'mediumvioletred'];
+const getRandomColorIndexes = (): number[] => {
+  const indexes = loadingLetters.map((_, index) => index % colors.length);
 
-//color가 1초마다 바뀌도록 하기
-const Loader = () => {
-  const [randomNum, setRandomNum] = useState(0);
+  // Fisher-Yates Shuffle
+  for (let i = indexes.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
+  }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [colors, setColors] = useState(pinkColors);
+  return indexes;
+};
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [delay, setDelay] = useState(500);
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isRunning, setIsRunning] = useState(true);
-
-  // 0.5초 마다 다른 random 숫자 가져오기
-  useInterval(
-    () => {
-      setRandomNum(Math.floor(Math.random() * colors.length));
+export const getServerSideProps: GetServerSideProps<LoaderProps> = async () => {
+  const initialColorIndexes = getRandomColorIndexes();
+  return {
+    props: {
+      initialColorIndexes,
     },
-    isRunning ? delay : null,
+  };
+};
+
+const Loader: React.FC<LoaderProps> = ({ initialColorIndexes }) => {
+  const [colorIndexes, setColorIndexes] = useState<number[] | undefined>(
+    initialColorIndexes || loadingLetters.map((_, index) => index),
   );
+
+  useEffect(() => {
+    if (!initialColorIndexes) {
+      setColorIndexes(getRandomColorIndexes());
+    }
+
+    const interval = setInterval(() => {
+      setColorIndexes(getRandomColorIndexes());
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, [initialColorIndexes]);
 
   return (
     <StyledLoader>
-      {loadingLetters.map((v, i) => {
-        return (
-          //state값이 아닌 외부함수의 리턴값을 넣으면 map의 모든 value값에  각각 서로 다르게 적용이 가능하게 됨
-          <span style={{ color: `${shuffle(colors)[randomNum]}` }} key={i}>
-            {v}
-          </span>
-        );
-      })}
+      {loadingLetters.map((letter, index) => (
+        <span key={index} style={{ color: colorIndexes && colors[colorIndexes[index]], fontSize: '24px' }}>
+          {letter}
+        </span>
+      ))}
     </StyledLoader>
   );
 };
 
 export default Loader;
-//로딩이 오래 걸릴만한곳을 찾아서 주로 쓰기
