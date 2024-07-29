@@ -2,7 +2,7 @@ import InputBox from '@molecules/InputBox';
 import Head from 'next/head';
 import { UserContactInfo } from './ContactContainer';
 import { ChangeEvent, FormEvent, MutableRefObject, RefObject } from 'react';
-import Modal from '@modals/Modal';
+import Modal from '@organisms/Modal';
 import { FORM } from './ContactStyle';
 import PageTitle from '@atoms/PageTitle';
 import FormButton from '@molecules/FormButton';

@@ -2,7 +2,7 @@ import { DIV, HEADER } from './BlogPostHeaderStyle';
 import formatDate from '@utils/formatDate';
 import { BlogPost } from '@app/services/blog/postApi';
 import Link from 'next/link';
-import Modal from '@modals/Modal';
+import Modal from '@organisms/Modal';
 import { UserResponse } from '@app/services/user/userApi';
 import Button from '@atoms/Button';
 

@@ -9,7 +9,7 @@ import BlogTags from '../BlogComponents/BlogTags';
 import BlogPosts from '@pages/Blog/BlogComponents/BlogPosts';
 import MiniLoader from '@atoms/MiniLoader';
 import { UserResponse } from '@app/services/user/userApi';
-import Modal from '@modals/Modal';
+import Modal from '@organisms/Modal';
 import XMarkIcon from '@icons/XMarkIcon';
 // import { DIV as DIV_POSTS } from '../BlogComponents/BlogPosts/BlogPosts';
 // import { InitialPostsCardArr } from '../BlogComponents/BlogPosts/BlogPosts';

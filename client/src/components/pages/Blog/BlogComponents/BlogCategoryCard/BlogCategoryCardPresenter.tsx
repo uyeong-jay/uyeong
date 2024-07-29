@@ -8,7 +8,7 @@ import { BlogCategory } from '@app/services/blog/categoryApi';
 import { BlogPost } from '@app/services/blog/postApi';
 import Link from 'next/link';
 import Logo from '@icons/Logo';
-import Modal from '@modals/Modal';
+import Modal from '@organisms/Modal';
 
 interface Props {
   userData?: UserResponse;

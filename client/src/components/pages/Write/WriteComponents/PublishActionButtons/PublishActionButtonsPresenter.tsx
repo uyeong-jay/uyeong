@@ -2,7 +2,7 @@ import { BlogPost } from '@app/services/blog/postApi';
 import React from 'react';
 import { DIV } from './PublishActionButtonsStyle';
 import MiniLoader from '@atoms/MiniLoader';
-import Modal from '@modals/Modal';
+import Modal from '@organisms/Modal';
 
 interface Props {
   postId: string | string[] | undefined;

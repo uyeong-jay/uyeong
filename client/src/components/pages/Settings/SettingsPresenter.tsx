@@ -10,7 +10,7 @@ import CameraIcon from '@icons/CameraIcon';
 import PageTitle from '@atoms/PageTitle';
 import FormButton from '@molecules/FormButton';
 import PageFrame from '@templates/PageFrame';
-import Modal from '@modals/Modal';
+import Modal from '@organisms/Modal';
 import XMarkIcon from '@icons/XMarkIcon';
 import UserIcon from '@icons/UserIcon';
 import RotateIcon from '@icons/RotateIcon';

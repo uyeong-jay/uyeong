@@ -7,7 +7,7 @@ import CaretDownIcon from '@icons/CaretDownIcon';
 import CaretUpIcon from '@icons/CaretUpIcon';
 import BlogPostCommentWrite from '../BlogPostCommentWrite';
 import { UserResponse } from '@app/services/user/userApi';
-import Modal from '@modals/Modal';
+import Modal from '@organisms/Modal';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import { useCallback, useRef, useState } from 'react';
 import EllipsisVerticalIcon from '@icons/EllipsisVerticalIcon';

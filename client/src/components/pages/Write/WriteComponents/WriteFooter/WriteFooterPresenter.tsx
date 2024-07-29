@@ -1,6 +1,6 @@
 import { BlogPostReq } from '@app/services/blog/postApi';
 import { UserResponse } from '@app/services/user/userApi';
-import Modal from '@modals/Modal';
+import Modal from '@organisms/Modal';
 import React from 'react';
 import Publish from '../Publish';
 import { DIV } from './WriteFooterStyle';

@@ -8,7 +8,7 @@ import { UserResponse } from '@app/services/user/userApi';
 import NotFound from '@src/pages/404';
 import PageTitle from '@atoms/PageTitle';
 import FormButton from '@molecules/FormButton';
-import Modal from '@modals/Modal';
+import Modal from '@organisms/Modal';
 import PageFrame from '@templates/PageFrame';
 
 interface Props {

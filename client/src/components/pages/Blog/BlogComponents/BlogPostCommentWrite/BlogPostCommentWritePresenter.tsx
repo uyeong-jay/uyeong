@@ -3,7 +3,7 @@ import React, { ChangeEvent, FormEvent, RefObject } from 'react';
 import { BTN, DIV, FORM } from './BlogPostCommentWriteStyle';
 import useAnimation from '@hooks/useAnimation';
 import Link from 'next/link';
-import Modal from '@modals/Modal';
+import Modal from '@organisms/Modal';
 
 interface Props {
   textareaRef: RefObject<HTMLTextAreaElement>;
