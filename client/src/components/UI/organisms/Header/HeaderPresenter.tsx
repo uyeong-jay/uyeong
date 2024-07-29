@@ -12,7 +12,7 @@ import CaretUpIcon from '@icons/CaretUpIcon';
 import Logo from '@icons/Logo';
 import { useAppSelector } from '@app/hooks';
 import UserIcon from '@icons/UserIcon';
-import PageLoader from '@modals/PageLoader';
+import PageLoader from '@molecules/PageLoader';
 import DarkModeButton from '@atoms/DarkModeButton';
 
 interface Props {
