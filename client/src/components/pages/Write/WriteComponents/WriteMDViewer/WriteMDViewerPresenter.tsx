@@ -1,6 +1,6 @@
 import { DIV } from './WriteMDViewerStyle';
 import { BlogPostReq } from '@app/services/blog/postApi';
-import Loader from '@modals/Loader';
+import Loader from '@modals/ScreenLoader';
 // import MarkdownViewer from '@organisms/MarkdownViewer';
 
 import dynamic from 'next/dynamic';
