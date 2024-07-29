@@ -3,7 +3,7 @@ import { DIV, SECTION } from './BlogPostFooterStyle';
 import BlogPostCommentWrite from '../BlogPostCommentWrite';
 import BlogPostComments from '../BlogPostComments';
 import { RefObject } from 'react';
-import MiniLoader from '@modals/MiniLoader';
+import MiniLoader from '@atoms/MiniLoader';
 
 interface Props {
   postId?: string;

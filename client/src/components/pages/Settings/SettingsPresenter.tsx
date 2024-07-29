@@ -14,7 +14,7 @@ import Modal from '@modals/Modal';
 import XMarkIcon from '@icons/XMarkIcon';
 import UserIcon from '@icons/UserIcon';
 import RotateIcon from '@icons/RotateIcon';
-import MiniLoader from '@modals/MiniLoader';
+import MiniLoader from '@atoms/MiniLoader';
 
 interface Props {
   userUpdateInfo: IUserUpdateInfo;

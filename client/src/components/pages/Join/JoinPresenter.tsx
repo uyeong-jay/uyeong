@@ -11,7 +11,7 @@ import FormButton from '@molecules/FormButton';
 import Modal from '@modals/Modal';
 import PartyPopper from '@icons/PartyPopper';
 import PageFrame from '@templates/PageFrame';
-import MiniLoader from '@modals/MiniLoader';
+import MiniLoader from '@atoms/MiniLoader';
 import CountdownTimer from '@atoms/CountdownTimer';
 
 interface Props {

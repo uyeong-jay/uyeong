@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import formatDate from '@utils/formatDate';
 import Logo from '@icons/Logo';
-import MiniLoader from '@modals/MiniLoader';
+import MiniLoader from '@atoms/MiniLoader';
 import { v4 as uuid } from 'uuid';
 
 interface Props {

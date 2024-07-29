@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@_settings/styled';
-import MiniLoader from '@modals/MiniLoader';
+import MiniLoader from '@atoms/MiniLoader';
 
 export const DIV = {} as any;
 

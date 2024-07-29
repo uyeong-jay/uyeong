@@ -1,7 +1,7 @@
 import { BlogPost } from '@app/services/blog/postApi';
 import React from 'react';
 import { DIV } from './PublishActionButtonsStyle';
-import MiniLoader from '@modals/MiniLoader';
+import MiniLoader from '@atoms/MiniLoader';
 import Modal from '@modals/Modal';
 
 interface Props {
