@@ -1,12 +1,12 @@
 import { DIV } from './WriteMDViewerStyle';
 import { BlogPostReq } from '@app/services/blog/postApi';
-import Loader from '@organisms/ScreenLoader';
+import ScreenLoader from '@organisms/ScreenLoader';
 // import MarkdownViewer from '@organisms/MarkdownViewer';
 
 import dynamic from 'next/dynamic';
 
 const MarkdownViewer = dynamic(() => import('@organisms/MarkdownViewer'), {
-  loading: () => <Loader />, // 로딩 중에 표시할 UI
+  loading: () => <ScreenLoader />, // 로딩 중에 표시할 UI
   ssr: false, // 서버 사이드 렌더링 비활성화
 });
 

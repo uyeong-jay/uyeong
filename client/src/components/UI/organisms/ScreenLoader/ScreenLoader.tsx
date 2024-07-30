@@ -2,11 +2,11 @@ import { GetServerSideProps } from 'next';
 import { useState, useEffect } from 'react';
 import styled from '@_settings/styled';
 
-interface LoaderProps {
+interface ScreenLoaderProps {
   initialColorIndexes?: number[] | undefined;
 }
 
-const StyledLoader = styled.div`
+const StyledScreenLoader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,7 +47,7 @@ const getRandomColorIndexes = (): number[] => {
   return indexes;
 };
 
-export const getServerSideProps: GetServerSideProps<LoaderProps> = async () => {
+export const getServerSideProps: GetServerSideProps<ScreenLoaderProps> = async () => {
   const initialColorIndexes = getRandomColorIndexes();
   return {
     props: {
@@ -56,7 +56,7 @@ export const getServerSideProps: GetServerSideProps<LoaderProps> = async () => {
   };
 };
 
-const Loader: React.FC<LoaderProps> = ({ initialColorIndexes }) => {
+const ScreenLoader: React.FC<ScreenLoaderProps> = ({ initialColorIndexes }) => {
   const [colorIndexes, setColorIndexes] = useState<number[] | undefined>(
     initialColorIndexes || loadingLetters.map((_, index) => index),
   );
@@ -74,14 +74,14 @@ const Loader: React.FC<LoaderProps> = ({ initialColorIndexes }) => {
   }, [initialColorIndexes]);
 
   return (
-    <StyledLoader>
+    <StyledScreenLoader>
       {loadingLetters.map((letter, index) => (
         <span key={index} style={{ color: colorIndexes && colors[colorIndexes[index]], fontSize: '24px' }}>
           {letter}
         </span>
       ))}
-    </StyledLoader>
+    </StyledScreenLoader>
   );
 };
 
-export default Loader;
+export default ScreenLoader;
