@@ -5,7 +5,18 @@ import { SECTION } from './BlogPostStyle';
 import Image from 'next/image';
 import BlogPostFooter from '@pages/Blog/BlogComponents/BlogPostFooter';
 import BlogPostHeader from '@pages/Blog/BlogComponents/BlogPostHeader';
-import MarkdownViewer from '@organisms/MarkdownViewer';
+// import MarkdownViewer from '@organisms/MarkdownViewer';
+import dynamic from 'next/dynamic';
+import MiniLoader from '@atoms/MiniLoader';
+
+const MarkdownViewer = dynamic(() => import('@organisms/MarkdownViewer'), {
+  loading: () => (
+    <div className="mini-loader-wrapper">
+      <MiniLoader w={25} />
+    </div>
+  ), // 로딩 중에 표시할 UI
+  ssr: false, // 서버 사이드 렌더링 비활성화
+});
 
 interface Props {
   blogPost?: BlogPost;

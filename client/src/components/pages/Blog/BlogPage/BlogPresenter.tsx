@@ -6,25 +6,25 @@ import { BlogPostRes } from '@app/services/blog/postApi';
 import InputBox from '@molecules/InputBox/InputBox';
 import SearchIcon from '@icons/SearchIcon';
 import BlogTags from '../BlogComponents/BlogTags';
-import BlogPosts from '@pages/Blog/BlogComponents/BlogPosts';
 import MiniLoader from '@atoms/MiniLoader';
 import { UserResponse } from '@app/services/user/userApi';
 import Modal from '@organisms/Modal';
 import XMarkIcon from '@icons/XMarkIcon';
-// import { DIV as DIV_POSTS } from '../BlogComponents/BlogPosts/BlogPosts';
-// import { InitialPostsCardArr } from '../BlogComponents/BlogPosts/BlogPosts';
-// import dynamic from 'next/dynamic';
+import { DIV as DIV_POSTS } from '../BlogComponents/BlogPosts/BlogPosts';
+import { InitialPostsCardArr } from '../BlogComponents/BlogPosts/BlogPosts';
+// import BlogPosts from '@pages/Blog/BlogComponents/BlogPosts';
+import dynamic from 'next/dynamic';
 
-// const BlogPosts = dynamic(() => import('../BlogComponents/BlogPosts/BlogPosts'), {
-//   loading: () => (
-//     <DIV_POSTS.BlogPostsWrapper>
-//       {InitialPostsCardArr.map((v) => (
-//         <DIV_POSTS.InitialPostsCard key={v}></DIV_POSTS.InitialPostsCard>
-//       ))}
-//     </DIV_POSTS.BlogPostsWrapper>
-//   ),
-//   ssr: false,
-// });
+const BlogPosts = dynamic(() => import('../BlogComponents/BlogPosts/BlogPosts'), {
+  loading: () => (
+    <DIV_POSTS.BlogPostsWrapper>
+      {InitialPostsCardArr.map((v) => (
+        <DIV_POSTS.InitialPostsCard key={v}></DIV_POSTS.InitialPostsCard>
+      ))}
+    </DIV_POSTS.BlogPostsWrapper>
+  ),
+  ssr: false,
+});
 
 interface Props {
   userData?: UserResponse;

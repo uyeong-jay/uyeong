@@ -49,6 +49,14 @@ SECTION.Frame = styled.section`
       @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
         font-size: 1.1rem;
       }
+
+      & > .mini-loader-wrapper {
+        // border: 1px solid red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+      }
     }
   }
 `;
