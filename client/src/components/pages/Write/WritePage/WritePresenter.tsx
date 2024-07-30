@@ -28,7 +28,7 @@ const WritePresenter = ({ userData, blogPostsData, blogPostInfo, setBlogPostInfo
       <DIV.WriteFrame>
         <DIV.WriteLeftGroup>
           <WriteHeader blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
-          <WriteMDEditer blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
+          <WriteMDEditer blogPostContent={blogPostInfo.content} setBlogPostInfo={setBlogPostInfo} />
           <WriteFooter
             userData={userData}
             blogPostInfo={blogPostInfo}
