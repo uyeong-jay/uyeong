@@ -14,8 +14,8 @@ const MarkdownViewer = dynamic(() => import('@organisms/MarkdownViewer'), {
     <div className="mini-loader-wrapper">
       <MiniLoader w={25} />
     </div>
-  ), // 로딩 중에 표시할 UI
-  ssr: false, // 서버 사이드 렌더링 비활성화
+  ),
+  ssr: false,
 });
 
 interface Props {
