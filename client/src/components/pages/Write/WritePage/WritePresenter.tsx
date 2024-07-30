@@ -37,7 +37,7 @@ const WritePresenter = ({ userData, blogPostsData, blogPostInfo, setBlogPostInfo
           />
         </DIV.WriteLeftGroup>
         <DIV.WriteRightGroup>
-          <WriteMDViewer blogPostInfo={blogPostInfo} />
+          <WriteMDViewer blogPostContent={blogPostInfo.content} />
         </DIV.WriteRightGroup>
       </DIV.WriteFrame>
     </>
