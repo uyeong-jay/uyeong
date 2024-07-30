@@ -54,8 +54,8 @@ SECTION.Frame = styled.section`
         // border: 1px solid red;
         display: flex;
         justify-content: center;
-        align-items: center;
-        height: 200px;
+        height: 65vh;
+        padding-top: 200px;
       }
     }
   }
