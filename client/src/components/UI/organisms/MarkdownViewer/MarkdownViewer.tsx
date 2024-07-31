@@ -21,6 +21,20 @@ const MarkdownWrapper = styled.div`
     margin: 40px 0 8px 0;
   }
 
+  & > ul {
+    list-style: disc;
+    margin: 0 0 20px 40px;
+
+    & li {
+      margin: 5px 0 0 -10px;
+
+      & ul {
+        list-style: disc;
+        margin: 0 0 20px 35px;
+      }
+    }
+  }
+
   & > p {
     margin-bottom: 15px;
   }
