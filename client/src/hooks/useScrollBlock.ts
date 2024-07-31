@@ -1,8 +1,8 @@
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 
 // 마운트시 body로 부터 scroll bar 숨기기
 const useScrollBlock = () => {
-  useLayoutEffect(() => {
+  useEffect(() => {
     const { overflowX, overflowY } = getComputedStyle(document.body);
 
     const prevStyles = {
