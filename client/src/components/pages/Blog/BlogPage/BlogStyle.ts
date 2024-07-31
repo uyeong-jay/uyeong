@@ -100,9 +100,10 @@ DIV.SearchBar = styled.div`
     width: 100%;
 
     & > input {
-      // border: 1px solid black;
+      // border: 1px solid red;
       width: 100%;
       padding-left: 10px;
+      padding-right: 40px;
     }
   }
 
