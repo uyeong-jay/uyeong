@@ -176,7 +176,7 @@ const BlogContainer = () => {
     setInputFocused(true);
   }, [dispatch]);
 
-  const onClickClearInput = useCallback(() => {
+  const onClearInput = useCallback(() => {
     if (!searchWordInput) return;
     dispatch(getTagName(''));
     setCanLoadMore(false);
@@ -223,7 +223,7 @@ const BlogContainer = () => {
       onChangeInput={onChangeInput}
       onClickInput={onClickInput}
       onFocusInput={onFocusInput}
-      onClickClearInput={onClickClearInput}
+      onClearInput={onClearInput}
       onClickTag={onClickTag}
       tagUnderline={tagUnderline}
       isTagClicked={isTagClicked}

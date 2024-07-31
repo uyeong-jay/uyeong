@@ -34,7 +34,7 @@ interface Props {
   onChangeInput?: (e: ChangeEvent<HTMLInputElement>) => void;
   onClickInput?: () => void;
   onFocusInput?: () => void;
-  onClickClearInput?: () => void;
+  onClearInput?: () => void;
   onClickTag: (tagName: string) => void;
   isTagClicked: boolean;
   tagUnderline: string;
@@ -53,7 +53,7 @@ const BlogPresenter: React.FC<Props> = ({
   onChangeInput,
   onClickInput,
   onFocusInput,
-  onClickClearInput,
+  onClearInput,
   onClickTag,
   tagUnderline,
   isTagClicked,
@@ -85,7 +85,7 @@ const BlogPresenter: React.FC<Props> = ({
                 autofill={false}
               />
               {searchWordInput && (
-                <span onClick={onClickClearInput}>
+                <span onClick={onClearInput}>
                   <XMarkIcon />
                 </span>
               )}
