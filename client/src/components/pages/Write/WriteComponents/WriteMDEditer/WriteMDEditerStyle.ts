@@ -26,7 +26,11 @@ DIV.WriteMDEditerFrame = styled.div`
 
       ::-webkit-scrollbar {
         border-radius: 50%;
-        width: 4px;
+        width: 6px;
+
+        @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+          width: 10px;
+        }
       }
       ::-webkit-scrollbar-track {
         // border: 1px solid black;
