@@ -46,7 +46,7 @@ const BlogCategoryPresenter = ({
   return (
     <>
       <Head>
-        <title>UYeong | Blog</title>
+        <title>Blog | Category - UYeong</title>
       </Head>
       <SECTION.Frame>
         <BlogHeader />

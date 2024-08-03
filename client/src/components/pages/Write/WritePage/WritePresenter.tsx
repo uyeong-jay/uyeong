@@ -23,7 +23,7 @@ const WritePresenter = ({ userData, blogPostsData, blogPostInfo, setBlogPostInfo
   return (
     <>
       <Head>
-        <title>UYeong | Write</title>
+        <title>UYeong |{!blogPostInfo.title ? ' New Post' : ` Writing...`}</title>
       </Head>
       <DIV.WriteFrame>
         <DIV.WriteLeftGroup>
