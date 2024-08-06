@@ -31,7 +31,10 @@ const BlogCategoryDetailPresenter = ({
   return (
     <>
       <Head>
-        <title>Blog | Category | {headerTitle ? headerTitle : '...'} - UYeong</title>
+        <title>
+          Category | {headerTitle ? (headerTitle.length > 25 ? headerTitle.slice(0, 25) + '...' : headerTitle) : '...'}{' '}
+          - UYeong
+        </title>
       </Head>
       <SECTION.Frame>
         <h1>
