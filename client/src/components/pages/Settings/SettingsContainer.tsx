@@ -207,7 +207,7 @@ const SettingsContainer = () => {
         dispatch(setFileModified());
         setToggled(false);
 
-        // 이미지를 넣을때마다 cloud에 올리는게 아닌 잠시 file을 보관해두기
+        // 이미지를 넣을때마다 cloud에 올리는게 아닌 잠시 file을 보관
         setUserUpdateInfo({ ...userUpdateInfo, avatar: file });
       }
     },

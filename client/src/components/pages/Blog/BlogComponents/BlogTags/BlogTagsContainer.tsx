@@ -16,8 +16,7 @@ export interface Props {
 const BlogTagsContainer = ({ tagUnderline, onClickTag, isTagClicked }: Props) => {
   const { data: blogPostsData } = useGetBlogPostsQuery();
 
-  // 모든 태그 > 많은 순 정렬
-  // +50개 로 끊기 (+더보기)
+  // 모든 태그 > 많은 순 정렬 (50개 까지)
   const allTags = useMemo(() => {
     const tagList: TagWithCount[] = [];
     blogPostsData?.posts?.forEach((post) => {

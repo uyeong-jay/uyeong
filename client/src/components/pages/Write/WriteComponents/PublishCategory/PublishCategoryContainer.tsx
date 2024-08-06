@@ -19,7 +19,7 @@ const PublishCategoryContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
 
   const onClickCategory = useCallback(
     (e) => {
-      //똑같은거 한번더 클릭하면 다시 '' 로 대체
+      //똑같은걸 한번더 클릭시 다시 '' 로 대체
       const clickedCategory = e.target.getAttribute('value');
       if (blogPostInfo.category === clickedCategory) setBlogPostInfo({ ...blogPostInfo, category: '' });
       else setBlogPostInfo({ ...blogPostInfo, category: clickedCategory });

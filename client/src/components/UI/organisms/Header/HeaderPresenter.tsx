@@ -87,7 +87,7 @@ const HeaderPresenter = ({
     };
   }, [router]);
 
-  //width가 833px 보다 커지면 메뉴 클릭 animation 없애기
+  //width가 833px 보다 커지면 메뉴 클릭 animation false
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth > 833) {

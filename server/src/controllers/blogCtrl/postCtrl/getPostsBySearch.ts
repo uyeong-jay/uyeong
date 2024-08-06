@@ -26,8 +26,8 @@ const getPostsBySearch = async (req: Request, res: Response) => {
           },
           {
             $or: [
-              //$regex: 부분일치도 검색되도록 함
-              //$in: 완전일치만 검색되도록 함
+              //$regex: 부분일치도 검색
+              //$in: 완전일치만 검색
               { title: { $regex: req.query.q } },
               { content: { $regex: req.query.q } },
               { description: { $regex: req.query.q } },

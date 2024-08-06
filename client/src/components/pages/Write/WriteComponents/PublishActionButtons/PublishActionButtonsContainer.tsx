@@ -61,7 +61,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
       token: userData?.access_token,
     };
 
-    //포스트시 클라우드에 이미지 업로드 하기
+    //포스트시 클라우드에 이미지 업로드
     //사용자가 이미지를 제거했는지 복구했는지 확인 후 업로드
     if (fileState === unchanged) {
       data.blogPostInfo.thumbnail = blogPostInfo.thumbnail;
@@ -87,7 +87,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
       token: userData?.access_token,
     };
 
-    //포스트시 클라우드에 이미지 업로드 하기
+    //포스트시 클라우드에 이미지 업로드
     //사용자가 이미지를 제거했는지 복구했는지 확인 후 업로드
     if (fileState === unchanged) {
       data.blogPostInfo.thumbnail = blogPostInfo.thumbnail;

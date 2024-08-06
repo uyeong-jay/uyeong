@@ -76,7 +76,7 @@ const BlogContainer = () => {
       dispatch(getPostsBySearch(blogPostsDataBySearch));
     }
 
-    //한번에 여러번 바뀌지 않게 시간 지연 시켜두기
+    //한번에 여러번 바뀌지 않게 시간 지연
     // (+ 한박자 늦게 바뀌도록 설정)
     if (isTagClicked && !isSearchStarted && !canLoadMore) {
       const timer = setTimeout(() => {

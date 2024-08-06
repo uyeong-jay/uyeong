@@ -54,7 +54,7 @@ const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props)
     [categoryName, updateBlogCategory, userData?.access_token],
   );
 
-  //제목을 바꿀수 있는 경우만 save 되게 함
+  //제목을 바꿀수 있는 경우만 save
   useEffect(() => {
     if (isSuccess) setIsUpdate(false);
   }, [isSuccess]);

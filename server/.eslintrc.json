@@ -26,7 +26,7 @@
         "endOfLine": "auto"
       },
       2,
-      { "useTabs": true } //쌍다옴표(prettierrc.json에도 설정해주기)
+      { "useTabs": true } //쌍따옴표(prettierrc.json에도 설정)
     ],
     "import/extensions": "off",
     "import/no-unresolved": "error",

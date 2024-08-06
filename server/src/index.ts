@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors"; // Connect/Express middleware 제공
 import morgan from "morgan"; // 로그관리
-import cookieParser from "cookie-parser"; // 쿠키 헤더 분석 후 req.cookies에 넣어줌
+import cookieParser from "cookie-parser"; // 쿠키 헤더 분석 후 req.cookies에 넣음
 
 // dotenv
 import dotenv from "dotenv"; // 환경변수 관리

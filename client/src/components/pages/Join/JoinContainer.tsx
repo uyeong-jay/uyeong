@@ -126,7 +126,7 @@ const JoinContainer = () => {
       if (!errMsg[0]) {
         // 에러가 없으면 유저 데이터 업데이트
         join({ ...userJoinInfo, email: verifiedEmailAddr, emailCode: verifiedEmailCode }); //verifiedEmailAddr, verifiedEmailCode > input 강제 수정 방지 데이터
-        setjoiningFirst(true); //에러가 났을 경우를 제외하면 false로 바꿀 필요 없음
+        setjoiningFirst(true); //에러가 났을 경우를 제외하면 false로 바꿀 필요x
         setJoinErrMsg('');
       } else {
         setModalOpen(true);

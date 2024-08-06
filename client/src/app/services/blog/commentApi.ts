@@ -1,4 +1,3 @@
-// import { socket } from '@pages/Blog/BlogPage/BlogPost/BlogPostContainer';
 import { api } from '../api';
 
 export interface BlogReply {
@@ -33,14 +32,11 @@ export interface BlogCommentRes {
   comments?: BlogComment[];
   totalCommentCount?: number;
   commentCountToShow?: number;
-  // next_cursor?: string;
-  // hasMatchingPost?: boolean;
   msg?: string;
 }
 
 export interface BlogCommentPagingReq {
   postTitle?: string | string[];
-  // nextPageId: string;
   pageNum: number;
 }
 

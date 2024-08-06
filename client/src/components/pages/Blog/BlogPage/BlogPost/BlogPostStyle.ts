@@ -11,7 +11,7 @@ SECTION.Frame = styled.section`
   position: relative; // for TOC
   width: 100%;
   max-width: calc(${({ theme }) => theme.BP.TABLET} + 40px); //약 양쪽 패딩 크기 만큼 더 추가
-  margin: 0 auto 250px auto; // post toc top값 정도를 더 bottom에 추가 함
+  margin: 0 auto 250px auto; // post toc top값 정도를 bottom에 더  추가
   padding: 50px 25px 100px 25px;
   font-size: 12px;
   @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {

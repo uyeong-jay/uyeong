@@ -44,7 +44,7 @@ const PublishPreviewContainer = ({ blogPostInfo, setBlogPostInfo }: Props) => {
         dispatch(setFileModified());
         setToggled(false);
 
-        // 이미지를 넣을때마다 클라우드에 올리는게 아닌 잠시 보관만 해두기
+        // 이미지를 넣을때마다 클라우드에 올리는게 아닌 잠시 보관
         setBlogPostInfo({ ...blogPostInfo, thumbnail: file });
       }
     },

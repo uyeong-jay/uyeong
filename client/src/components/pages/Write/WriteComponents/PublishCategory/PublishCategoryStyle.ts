@@ -184,8 +184,8 @@ DIV.OpenedCategory = styled.div<OpenedCategoryProps>`
     height: 100%;
     width: 230px;
     border-radius: 10px;
-    padding: 0 3px; //스크롤바 너비만큼 남겨놓기
-    overflow: hidden; //하단 animation 보다 먼저 미리 넣어 두기
+    padding: 0 3px; //스크롤바 너비만큼 남김
+    overflow: hidden; //하단 animation 보다 먼저 미리 넣음
 
     //스크롤
     ${(props) => {
@@ -199,7 +199,7 @@ DIV.OpenedCategory = styled.div<OpenedCategoryProps>`
             to {
               overflow-y: scroll;
               overflow-x: hidden;
-              padding-right: 0; //스크롤바 너비만큼 제거하기
+              padding-right: 0; //스크롤바 너비만큼 제거
             }
           }
         `;

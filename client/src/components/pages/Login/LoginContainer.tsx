@@ -41,7 +41,7 @@ const LoginContainer = () => {
       e.preventDefault();
       if (isModalOpen) return;
 
-      setLoggingInFirst(true); //에러가 났을 경우를 제외하면 false로 바꿀 필요 없음
+      setLoggingInFirst(true); //에러가 났을 경우를 제외하면 false로 바꿀 필요x
 
       await login(userLoginInfo);
     },

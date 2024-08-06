@@ -1,7 +1,7 @@
 import { BaseQueryFn } from '@reduxjs/toolkit/query/react';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
-axios.defaults.withCredentials = true; //백,프 간 쿠키 공유도되록 만들기
+axios.defaults.withCredentials = true; // 백,프 간 쿠키 공유도되록
 
 export const axiosBaseQuery =
   (

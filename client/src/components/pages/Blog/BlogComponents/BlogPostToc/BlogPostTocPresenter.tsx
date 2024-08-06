@@ -13,7 +13,7 @@ const BlogPostTocPresenter = ({ headings }: Props) => {
 
   //TOC heaading 추적
   useEffect(() => {
-    const postHeaderOffestHeight = document.getElementById('blog-post-header-frame')?.offsetHeight; //썸넬 이미지는 높이는 포함이 안되서 고려안해줘도 됨
+    const postHeaderOffestHeight = document.getElementById('blog-post-header-frame')?.offsetHeight; //썸넬 이미지는 높이는 포함이 안되서 고려x
 
     const handleScroll = () => {
       // 현재 스크롤 위치를 가져오기
@@ -88,7 +88,7 @@ const BlogPostTocPresenter = ({ headings }: Props) => {
         // markdown-content 엘리먼트가 화면에 보이는지 확인
         const rect = markdownContent.getBoundingClientRect();
 
-        //markdownContent의 상단이 뷰포트의 상단을 지나가고 하단을 지나갈대까지 markdownVisible을 true로 설정 아니면 false
+        //markdownContent의 상단이 뷰포트의 상단을 지나가고 하단을 지나갈때까지 markdownVisible을 true로 설정 아니면 false
         const markdownVisible = rect.top < 0 && rect.bottom > 0;
 
         if (markdownVisible) {

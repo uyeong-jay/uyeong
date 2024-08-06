@@ -18,7 +18,7 @@ const TagsSummaryContainer = ({ blogPostsData }: Props) => {
 
   useEffect(() => {
     if (clickedTag) {
-      dispatch(getTagName(clickedTag)); //클릭된 태그가 포함시킴 > 이동시 이미 검색되어 있도록 함
+      dispatch(getTagName(clickedTag)); //클릭된 태그가 포함시킴 > 이동시 이미 검색되어 있도록 하기 위함
       router.push('/blog');
     }
   }, [clickedTag, dispatch, router]);
