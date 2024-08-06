@@ -50,8 +50,9 @@ SECTION.Frame = styled.section`
         font-size: 1.1rem;
       }
 
-      & > .mini-loader-wrapper {
-        // border: 1px solid red;
+      //포스트 로딩 화면
+      & > div > .mini-loader-wrapper {
+        // border: 1px solid blue;
         display: flex;
         justify-content: center;
         height: 65vh;

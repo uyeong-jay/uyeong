@@ -1,10 +1,22 @@
-import ReactMarkdown from 'react-markdown';
 import components from './components';
 import styled from '@_settings/styled';
+import MiniLoader from '@atoms/MiniLoader';
+import dynamic from 'next/dynamic';
+// import ReactMarkdown from 'react-markdown';
 
 interface Props {
   content: string;
 }
+
+// 동적 import > ReactMarkdown 코드 스플릿
+const ReactMarkdown = dynamic(() => import('react-markdown'), {
+  loading: () => (
+    <div className="mini-loader-wrapper">
+      <MiniLoader w={25} />
+    </div>
+  ),
+  ssr: false, // ssr비활성화 (client에서만 로드)
+});
 
 const MarkdownWrapper = styled.div`
   line-height: 1.7;
@@ -73,6 +85,10 @@ const MarkdownWrapper = styled.div`
       background: ${({ theme }) => theme.BD_C}4C; //4C: opacity 30%
       border-radius: 10px;
     }
+  }
+
+  & > .mini-loader-wrapper {
+    display: none;
   }
 `;
 

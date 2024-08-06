@@ -1,23 +1,12 @@
 import { BlogPost } from '@app/services/blog/postApi';
+import Head from 'next/head';
 import NotFound from '@src/pages/404';
 import BlogPostToc from '@pages/Blog/BlogComponents/BlogPostToc';
 import { SECTION } from './BlogPostStyle';
 import Image from 'next/image';
 import BlogPostFooter from '@pages/Blog/BlogComponents/BlogPostFooter';
 import BlogPostHeader from '@pages/Blog/BlogComponents/BlogPostHeader';
-// import MarkdownViewer from '@organisms/MarkdownViewer';
-import dynamic from 'next/dynamic';
-import MiniLoader from '@atoms/MiniLoader';
-import Head from 'next/head';
-
-const MarkdownViewer = dynamic(() => import('@organisms/MarkdownViewer'), {
-  loading: () => (
-    <div className="mini-loader-wrapper">
-      <MiniLoader w={25} />
-    </div>
-  ),
-  ssr: false,
-});
+import MarkdownViewer from '@organisms/MarkdownViewer';
 
 interface Props {
   blogPost?: BlogPost;
