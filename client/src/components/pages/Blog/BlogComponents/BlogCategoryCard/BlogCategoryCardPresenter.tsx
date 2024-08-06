@@ -52,7 +52,7 @@ const BlogCategoryCardPresenter = ({
         {postsByCategoryName?.[0]?.thumbnail ? (
           <Image
             className="blog-category-card-image"
-            src={postsByCategoryName[postsByCategoryName.length - 1]?.thumbnail as string}
+            src={postsByCategoryName[0]?.thumbnail as string}
             alt="category-card-image"
             layout="fill"
             objectFit="cover"
