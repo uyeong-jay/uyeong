@@ -10,37 +10,56 @@ export interface HeadingType {
 const BlogPostTocContainer = () => {
   const [headings, setHeadings] = useState<HeadingType[]>([]);
 
+  const updateHeadings = (markdownContent: HTMLElement) => {
+    const idCountMap = new Map();
+
+    Array.from(markdownContent.querySelectorAll('h1, h2, h3')).forEach((heading) => {
+      const originalId = heading.id;
+      let newId = originalId;
+      let count = 1;
+
+      while (idCountMap.has(newId)) {
+        count++;
+        newId = `${originalId}-${count}`;
+      }
+
+      idCountMap.set(newId, count);
+
+      if (originalId !== newId) {
+        heading.id = newId;
+      }
+    });
+
+    const headingEls = Array.from(markdownContent.querySelectorAll('h1, h2, h3')).map((headingEl) => ({
+      id: headingEl.id,
+      text: headingEl.textContent ?? '',
+      level: Number(headingEl.tagName.substring(1)),
+    }));
+
+    setHeadings(headingEls);
+  };
+
   useEffect(() => {
     const markdownContent = document.getElementById('markdown-content');
     if (markdownContent) {
-      //제목 중복 체크 후 id 변경 해놓기
-      const idCountMap = new Map();
-      Array.from(markdownContent.querySelectorAll('h1, h2, h3')).forEach((heading) => {
-        const originalId = heading.id;
-        let newId = originalId;
-        let count = 1;
-
-        //제목 중복 체크
-        while (idCountMap.has(newId)) {
-          count++;
-          newId = `${originalId}-${count}`;
-        }
-
-        // idCountMap에서 count 업데이트 하기
-        idCountMap.set(newId, count);
-
-        // id가 바뀌었으면 요소의 heading id 업데이트하기
-        if (originalId !== newId) {
-          heading.id = newId;
+      //MutationObserver: DOM이 변할 때마다 콜백 함수를 실행
+      const observer = new MutationObserver((mutations, observer) => {
+        const headingsExist = markdownContent.querySelector('h1, h2, h3');
+        if (headingsExist) {
+          updateHeadings(markdownContent);
+          observer.disconnect(); // 한번 업데이트 후 더 이상 감지하지 않음
         }
       });
 
-      const headingEls = Array.from(markdownContent.querySelectorAll('h1, h2, h3')).map((headingEl) => ({
-        id: headingEl.id,
-        text: headingEl.textContent ?? '',
-        level: Number(headingEl.tagName.substring(1)),
-      }));
-      setHeadings(headingEls);
+      observer.observe(markdownContent, { childList: true, subtree: true });
+
+      // 초기에도 확인
+      updateHeadings(markdownContent);
+
+      return () => {
+        //DOM 변화 감지 해제
+        observer.disconnect();
+      };
     }
   }, []);
 
