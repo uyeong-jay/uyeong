@@ -205,7 +205,7 @@ const JoinPresenter = ({
           {isVerifiedEmail && !isVerified && !isTimeout && isJoinSuccess && (
             <Modal
               type="alert"
-              msg={`We've successfully sent the email! 
+              msg={`We've successfully sent the email. 
               Please confirm your email address and enter the verification code we sent.`}
               isOpen={isModalOpen}
               setOpen={setModalOpen}
