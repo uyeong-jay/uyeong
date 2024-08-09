@@ -21,7 +21,7 @@ const login = async (req: Request, res: Response) => {
       await Users.findOneAndUpdate({ _id: user._id }, { rf_token: "" });
 
       return res.status(400).json({
-        msg: "Since the previous logout wasn't completed successfully for your account, please log in again to ensure proper access.",
+        msg: "Since your last logout wasn’t completed successfully, please log in again to ensure you have proper access to your account.",
       });
     }
 

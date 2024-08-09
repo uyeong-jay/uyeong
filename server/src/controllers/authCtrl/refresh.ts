@@ -28,7 +28,7 @@ const refresh = async (req: Request, res: Response) => {
 
     //다른곳에서 이미 로그인이 되어 있을때
     if (rf_token !== user.rf_token) {
-      return res.status(400).json({ msg: "You're already logged in elsewhere." });
+      return res.status(400).json({ msg: "You’re currently logged in somewhere else. Please log in again here." });
     }
 
     const access_token = generateAccessToken({ id: user?._id });
