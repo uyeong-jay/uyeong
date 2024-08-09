@@ -13,4 +13,5 @@ export const Primary = Template.bind({});
 Primary.args = {
   name: 'name',
   type: 'text',
+  labelText: 'labelText',
 };

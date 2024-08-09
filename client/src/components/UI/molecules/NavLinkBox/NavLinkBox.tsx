@@ -21,7 +21,7 @@ const StyledNavLinkBox = styled.li`
   }
 `;
 
-const NavLinkBox = ({ href, passHref, target, rel, children }: Props): ReactElement => {
+const NavLinkBox = ({ href = '', passHref, target, rel, children }: Props): ReactElement => {
   return (
     <StyledNavLinkBox>
       <Link href={href} passHref={passHref ? true : false}>

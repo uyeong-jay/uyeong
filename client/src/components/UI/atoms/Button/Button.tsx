@@ -5,7 +5,7 @@ interface Props {
   variant: string;
   text: string;
   type: 'button' | 'submit';
-  onClick?: () => void; //아무것도 반환하지 않는 함수(undefined를 반환 하는 함수)에 사용하는 타입
+  onClick?: () => void;
   disabled: boolean;
 }
 
@@ -15,6 +15,7 @@ interface ButtonProps {
 }
 
 const StyledButton = styled.button<ButtonProps>`
+  text-align: center;
   font-weight: bold;
 
   ${(props) => {
@@ -40,6 +41,10 @@ const StyledButton = styled.button<ButtonProps>`
           color: ${props.theme.FONT_C};
         `;
       case 'logout':
+        return `
+          color: ${props.theme.FONT_C};
+        `;
+      case 'join':
         return `
           color: ${props.theme.FONT_C};
         `;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@_settings/styled';
 import MiniLoader from '@atoms/MiniLoader';
-import WideButton from '@atoms/WideButton';
+import Button from '@atoms/Button';
 
 interface Props {
   formIsLoading: boolean;
@@ -28,16 +28,16 @@ const StyledFormButton = styled.div<FormButtonProps>`
     margin-bottom: 0px;
   }
 
-  //WideButton
+  //(Wide)Button
   & > button:last-of-type {
     // border: 1px solid black;
     position: relative;
     top: 0px;
     right: 0px;
+    width: 100%;
     color: ${({ theme }) => theme.FONT_C};
     padding: 5px;
     letter-spacing: 1px;
-    font-weight: bold;
     font-size: 14px;
   }
 `;
@@ -48,7 +48,7 @@ const FormButton = ({ formIsLoading, variant, text, disabled }: Props) => {
       {formIsLoading ? (
         <MiniLoader w={20} />
       ) : (
-        <WideButton variant={variant} text={text} type="submit" disabled={disabled ? true : false} />
+        <Button variant={variant} text={text} type="submit" disabled={disabled ? true : false} />
       )}
     </StyledFormButton>
   );

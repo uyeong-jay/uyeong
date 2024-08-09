@@ -36,7 +36,7 @@ const StyledDetailButton = styled.button`
   }
 `;
 
-const DetailButton = ({ text = 'See more', link, passHref, target, rel }: Props) => {
+const DetailButton = ({ text = 'See more', link = '', passHref, target, rel }: Props) => {
   return (
     <StyledDetailButton>
       <Link href={link} passHref={passHref ? true : false}>
