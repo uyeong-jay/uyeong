@@ -8,16 +8,16 @@ SVG.PartyPopper = styled.svg`
   height: 80px;
 
   .conf0 {
-    fill: #f9b732;
+    fill: #f9b732; //진노랑
   }
   .conf1 {
     fill: #f9b732;
   }
   .conf2 {
-    fill: #ef3c8a;
+    fill: #ef3c8a; //진분홍
   }
   .conf3 {
-    fill: #974cbe;
+    fill: #974cbe; //진보라
   }
   .conf4 {
     fill: #ef3c8a;
