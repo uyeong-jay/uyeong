@@ -1,6 +1,7 @@
 import { IReqAuth } from "@_types/types";
 import { Response } from "express";
 import Posts from "@models/blog/postModel";
+import { makeUrlFriendly } from "@utils/urlFriendly";
 
 const createPost = async (req: IReqAuth, res: Response) => {
   try {
@@ -18,7 +19,7 @@ const createPost = async (req: IReqAuth, res: Response) => {
 
     //데이터 생성
     const newPost = new Posts({
-      titleForUrl: title.replace(/\s+/g, "-"),
+      titleForUrl: makeUrlFriendly(title),
       title,
       tags,
       content,

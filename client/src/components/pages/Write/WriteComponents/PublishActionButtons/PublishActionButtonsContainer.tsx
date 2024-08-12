@@ -7,6 +7,7 @@ import { deleteImage, getPublicIdFromUrl, uploadImage } from '@utils/imageUtils'
 import { UserResponse } from '@app/services/user/userApi';
 import { useRouter } from 'next/router';
 import { fileStatus } from '@pages/Write/WriteSlice';
+import { makeUrlFriendly } from '@utils/urlFriendly';
 
 interface Props {
   userData?: UserResponse;
@@ -40,7 +41,8 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
 
   useEffect(() => {
     if (isPostCreated || isPostUpdated) {
-      router.push(`/blog/${blogPostInfo.title.replace(/\s+/g, '-')}`);
+      const urlFriendlyTitle = makeUrlFriendly(blogPostInfo.title);
+      router.push(`/blog/${urlFriendlyTitle}`);
     }
     if (postNotCreatedError || postNotUpdatedError) {
       setModalOpen(true);

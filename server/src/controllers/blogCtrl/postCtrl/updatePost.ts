@@ -1,6 +1,7 @@
 import { IReqAuth } from "@_types/types";
 import { Response } from "express";
 import Posts from "@models/blog/postModel";
+import { makeUrlFriendly } from "@utils/urlFriendly";
 
 const updatePost = async (req: IReqAuth, res: Response) => {
   try {
@@ -20,7 +21,7 @@ const updatePost = async (req: IReqAuth, res: Response) => {
     const post = await Posts.findOneAndUpdate(
       { _id: postId },
       {
-        titleForUrl: title.replace(/\s+/g, "-"),
+        titleForUrl: makeUrlFriendly(title),
         title,
         tags,
         content,
