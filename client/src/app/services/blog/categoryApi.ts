@@ -29,6 +29,7 @@ export interface BlogCategoryReq {
 }
 
 export const categoryApi = api.injectEndpoints({
+  overrideExisting: true,
   endpoints: (builder) => ({
     getBlogCategories: builder.query<BlogCategoryRes, number | void>({
       query: (query) => ({
