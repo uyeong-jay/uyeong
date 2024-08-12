@@ -50,15 +50,15 @@ const ContactContainer = () => {
 
       //유효성 검사
       if (user_name.length < 2) {
-        setSendErrorMsg('Please enter a name with more than 2 characters.');
+        setSendErrorMsg('Please enter your name with more than 2 characters.');
         return setModalOpen(true);
       }
       if (!validEmail(user_email)) {
-        setSendErrorMsg('Please enter the email in the correct format.');
+        setSendErrorMsg('Please enter your email in the correct format.');
         return setModalOpen(true);
       }
       if (message.length < 10) {
-        setSendErrorMsg('Please enter a message with more than 10 characters.');
+        setSendErrorMsg('Please enter your message with more than 10 characters.');
         return setModalOpen(true);
       }
 
@@ -89,7 +89,7 @@ const ContactContainer = () => {
         }
       } catch (error: any) {
         setSendErrorMsg(
-          'Sending failed.. If you could resend your message to the email at the bottom of the current page, I would greatly appreciate it!',
+          'Sorry, the email failed to send because the token expired. Please click the email link at the bottom of the page to try sending it again. Thank you!',
         );
         setMsgSentSuccess(false);
         setModalOpen(true);

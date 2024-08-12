@@ -46,9 +46,16 @@ const ContactPresenter = ({
       <PageFrame>
         <PageTitle text="Contact" />
         <FORM.ContactForm ref={form} onSubmit={onSubmit}>
-          <InputBox labelText="Name" type="text" name="user_name" value={user_name} onChange={onChangeInput} required />
           <InputBox
-            labelText="Email"
+            labelText="Your name"
+            type="text"
+            name="user_name"
+            value={user_name}
+            onChange={onChangeInput}
+            required
+          />
+          <InputBox
+            labelText="Your email"
             type="email"
             name="user_email"
             value={user_email}
@@ -58,7 +65,7 @@ const ContactPresenter = ({
 
           <TextareaBox
             name="message"
-            labelText="message"
+            labelText="Message"
             value={message}
             onChange={onChangeTextarea}
             ref={textareaRef}
