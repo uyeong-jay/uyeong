@@ -1,5 +1,7 @@
 import express from "express";
+import hpp from "hpp";
 import cors from "cors"; // Connect/Express middleware 제공
+import helmet from "helmet";
 import morgan from "morgan"; // 로그관리
 import cookieParser from "cookie-parser"; // 쿠키 헤더 분석 후 req.cookies에 넣음
 
@@ -14,13 +16,15 @@ const app = express();
 
 // Middelware
 if (process.env.NODE_ENV === "production") {
-  // app.use(morgan("combined"));
-  // app.use(hpp());
-  // app.use(helmet({ contentSecurityPolicy: false }));
-  // app.use(cors({
-  //   origin: 'url',
-  //   credentials: true,
-  // }));
+  app.use(morgan("combined")); // 상세 로그 기록
+  app.use(hpp()); // HTTP 파라미터 오염 방지 활성화
+  app.use(helmet({ contentSecurityPolicy: false })); // 콘텐츠 보안 정책 설정 비활성화 (필요시 설정)
+  app.use(
+    cors({
+      origin: "url", // 프론트엔드 도메인 설정
+      credentials: true, // 백,프 간 쿠키 공유
+    })
+  );
 } else {
   // app.use(cors());
   app.use(
