@@ -29,7 +29,7 @@ FORM.ContactForm = styled.form`
       width: 100%;
       height: 150px;
       margin: 10px 0 20px 0;
-      padding: 15px 20px;
+      padding: 10px 12px;
       border-radius: 10px;
       overflow: hidden;
       margin-bottom: -20px;
