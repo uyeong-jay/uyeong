@@ -19,7 +19,7 @@ const BlogPostPresenter = ({ blogPost }: Props) => {
   return (
     <>
       <Head>
-        <title>Blog | {title ? (title.length > 25 ? title.slice(0, 25) + '...' : title) : '...'} - UYeong</title>
+        <title>{`Blog | ${title ? (title.length > 25 ? title.slice(0, 25) + '...' : title) : '...'} - UYeong`}</title>
       </Head>
       <SECTION.Frame>
         <BlogPostToc />

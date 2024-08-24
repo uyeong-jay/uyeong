@@ -32,8 +32,9 @@ const BlogCategoryDetailPresenter = ({
     <>
       <Head>
         <title>
-          Category | {headerTitle ? (headerTitle.length > 25 ? headerTitle.slice(0, 25) + '...' : headerTitle) : '...'}{' '}
-          - UYeong
+          {`Category | ${
+            headerTitle ? (headerTitle.length > 25 ? headerTitle.slice(0, 25) + '...' : headerTitle) : '...'
+          } - UYeong`}
         </title>
       </Head>
       <SECTION.Frame>
