@@ -1,5 +1,5 @@
 {
-  "name": "my-blog-front-server",
+  "name": "uyeong-blog-client",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
