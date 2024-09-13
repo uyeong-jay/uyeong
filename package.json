@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "uyeong's blog",
   "main": "index.js",
-  "repository": "https://github.com/william-jacob/uyeong-blog.git",
-  "author": "william-jacob <wjacob2103@gmail.com>",
+  "repository": "https://github.com/uyeong-jang/uyeong.git",
+  "author": "uyeong-jang <wjacob2103@gmail.com>",
   "license": "MIT",
   "scripts": {
     "client": "cd ./client && yarn dev",
