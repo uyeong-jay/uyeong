@@ -31,9 +31,6 @@ const userSchema = new Schema(
     rf_token: { type: String, select: false },
   },
   { timestamps: true }
-  //timestamps - mogoose
-  //1. 해당 스키마에 createdAt, updatedAt를  자동 추가 및 업데이트
-  //2. 타입은 Date
 );
 
 //Model 생성
