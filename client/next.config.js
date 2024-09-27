@@ -1,6 +1,13 @@
 /** @type {import('next').NextConfig} */
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 const prod = process.env.NODE_ENV === 'production';
-module.exports = {
+
+module.exports = withBundleAnalyzer({
   reactStrictMode: true,
 
   env: {
@@ -22,4 +29,13 @@ module.exports = {
   experimental: {
     scrollRestoration: true,
   },
-};
+  output: 'standalone',
+
+  webpack(config) {
+    return {
+      ...config,
+      mode: prod ? 'production' : 'development',
+      devtool: prod ? 'hidden-source-map' : 'eval-source-map',
+    };
+  },
+});
