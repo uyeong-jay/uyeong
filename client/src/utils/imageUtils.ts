@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import sha256 from 'crypto-js/sha256';
 
 export const uploadImage = async (file: File) => {
   if (!file) return;
@@ -23,10 +23,9 @@ export const getPublicIdFromUrl = (url: string | undefined) => {
   return match ? match[0] : null;
 };
 
-const generateSHA1 = (data: any) => {
-  const hash = crypto.createHash('sha1');
-  hash.update(data);
-  return hash.digest('hex');
+const generateSHA256 = (data: any) => {
+  const hashDigest = sha256(data);
+  return hashDigest.toString();
 };
 
 const generateSignature = (publicId: string, apiSecret: string) => {
@@ -37,7 +36,8 @@ const generateSignature = (publicId: string, apiSecret: string) => {
 export const deleteImage = async (id: string) => {
   if (!id) return;
   const timestamp = new Date().getTime().toString();
-  const signature = generateSHA1(generateSignature(id, process.env.CLOUDINARY_API_SECRET));
+  const signature = generateSHA256(generateSignature(id, process.env.CLOUDINARY_API_SECRET));
+  console.log(signature);
 
   const formData = new FormData();
   formData.append('public_id', id);
