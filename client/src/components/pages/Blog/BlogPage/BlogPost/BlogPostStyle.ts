@@ -3,7 +3,7 @@ import styled from '@_settings/styled';
 export const SECTION = {} as any;
 
 SECTION.Frame = styled.section`
-  // border: 1px solid black;
+  // border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: center;

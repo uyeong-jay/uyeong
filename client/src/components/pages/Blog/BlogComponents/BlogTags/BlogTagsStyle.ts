@@ -10,7 +10,7 @@ export const DIV = {} as any;
 export const ASIDE = {} as any;
 
 ASIDE.BlogTags = styled.aside`
-  // border: 1px solid black;
+  // border: 1px solid red;
   padding: 50px 0;
   position: relative;
   left: 50%;
@@ -27,9 +27,9 @@ ASIDE.BlogTags = styled.aside`
   & > .tags-wrapper {
     // border: 1px solid black;
     display: flex;
-    width: 100%;
-    // height: 100%;
-    padding: 20px 40px;
+    // width: 100%;
+    height: 70px;
+    padding: 20px 20px 20px 40px;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
@@ -51,8 +51,8 @@ ASIDE.BlogTags = styled.aside`
   }
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
-    // border: 1px solid black;
-    min-width: 200px;
+    // border: 1px solid blue;
+    min-width: 225px;
     position: static;
     left: 0;
     transform: translateX(0);
@@ -69,6 +69,7 @@ ASIDE.BlogTags = styled.aside`
 
     & > .tags-wrapper {
       // border: 1px solid black;
+      height: auto;
       max-width: 225px;
       display: inline-block;
       overflow: hidden;
@@ -116,10 +117,6 @@ DIV.BlogTag = styled.div<BlogTagProps>`
       max-width: 120px;
       white-space: nowrap;
       text-overflow: ellipsis;
-    }
-
-    & > span:nth-of-type(2) {
-      max-width: 35px;
     }
   }
 `;

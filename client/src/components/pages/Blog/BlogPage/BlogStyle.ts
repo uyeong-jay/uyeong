@@ -32,16 +32,7 @@ DIV.BlogBlock = styled.div`
     min-height: 1000px;
     margin-top: 50px;
     border-left: 2px solid ${({ theme }) => theme.BD_C};
-    // border-right: 2px solid ${({ theme }) => theme.BD_C};
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 200px;
-      height: 100%;
-      border-left: 2px solid ${({ theme }) => theme.BD_C};
-    }
+    border-right: 2px solid ${({ theme }) => theme.BD_C};
   }
 `;
 
@@ -56,6 +47,7 @@ SECTION.BlogMain = styled.section`
   padding-top: 50px;
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
+    border-left: 2px solid ${({ theme }) => theme.BD_C};
     min-width: 800px;
   }
   @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
