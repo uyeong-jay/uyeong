@@ -41,12 +41,12 @@ const AboutPresenter = () => {
                 <LocationIcon />
                 &nbsp;Republic of Korea
               </li>
-              <NavLinkBox href="mailto: wjacob2103@gmail.com" passHref={true} target="_blank" rel="noopener noreferrer">
+              <NavLinkBox href="mailto: uyeong.jay@gmail.com" passHref={true} target="_blank" rel="noopener noreferrer">
                 <EnvelopeIcon />
-                &nbsp;wjacob2103@gmail.com
+                &nbsp;uyeong.jay@gmail.com
               </NavLinkBox>
               <NavLinkBox
-                href="https://github.com/william-jacob"
+                href="https://github.com/uyeong-jay"
                 passHref={true}
                 target="_blank"
                 rel="noopener noreferrer"
