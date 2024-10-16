@@ -17,9 +17,9 @@ export async function sendEmail(toEmail: string, verificationCode: number) {
     });
 
     let mailOptions = await transporter.sendMail({
-      from: `${process.env.NODEMAILER_USER_EMAIL}`,
+      from: `UYeong ${process.env.NODEMAILER_USER_EMAIL}`,
       to: toEmail,
-      subject: "Uyeong Blog - Email Verification Code",
+      subject: "[UYeong Blog] Confirm your email address",
       text: `"${verificationCode}" is your verification code.`,
     });
 
