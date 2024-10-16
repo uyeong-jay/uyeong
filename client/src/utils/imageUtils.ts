@@ -37,7 +37,6 @@ export const deleteImage = async (id: string) => {
   if (!id) return;
   const timestamp = new Date().getTime().toString();
   const signature = generateSHA256(generateSignature(id, process.env.CLOUDINARY_API_SECRET));
-  console.log(signature);
 
   const formData = new FormData();
   formData.append('public_id', id);

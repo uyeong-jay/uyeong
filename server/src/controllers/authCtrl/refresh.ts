@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
 import Users from "@models/userModel";
-import { IDecodedToken } from "@_types/types";
 import { generateAccessToken } from "@utils/generateToken";
 import { authToken } from "@utils/authToken";
 
@@ -9,7 +7,9 @@ import { authToken } from "@utils/authToken";
 const refresh = async (req: Request, res: Response) => {
   try {
     //refresh_token 쿠키 확인
+
     const rf_token = req.cookies.refresh_token;
+
     if (!rf_token) return res.status(200).json({ msg: "User not logged in." });
 
     //디코드 with jwt

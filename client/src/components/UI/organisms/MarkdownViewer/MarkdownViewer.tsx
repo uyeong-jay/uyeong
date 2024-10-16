@@ -15,7 +15,7 @@ const ReactMarkdown = dynamic(() => import('react-markdown'), {
       <MiniLoader w={25} />
     </div>
   ),
-  ssr: false, // ssr비활성화 (client에서만 로드)
+  ssr: false, // ssr비활성화 (client측 로드)
 });
 
 const MarkdownWrapper = styled.div`
