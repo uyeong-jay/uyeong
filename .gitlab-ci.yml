@@ -7,8 +7,8 @@ build-image:
     - main
   stage: build
   script:
-    - echo "Building the docker image..."
-    - echo "Tagging the docker image..."
+    - echo "Building the docker image.."
+    - echo "Tagging the docker image.."
 
 push-image:
   only:
