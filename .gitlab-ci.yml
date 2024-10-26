@@ -1,0 +1,28 @@
+stages:
+  - build
+  - deploy
+
+build-image:
+  only:
+    - main
+  stage: build
+  script:
+    - echo "Building the docker image..."
+    - echo "Tagging the docker image..."
+
+push-image:
+  only:
+    - main
+  stage: build
+  needs:
+    - build-image
+  script:
+    - echo "Logging into docker registry..."
+    - echo "Pushing docker image to registry..."
+
+deploy-image:
+  only:
+    - main
+  stage: deploy
+  script:
+    - echo "Deploying docker image..."
