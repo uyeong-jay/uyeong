@@ -1,3 +1,8 @@
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH != "main"
+      when: never
+
 stages:
   - build
   - deploy
@@ -6,6 +11,8 @@ build-image:
   only:
     - main
   stage: build
+  tags:
+    - docker
   script:
     - echo "Building the docker image.."
     - echo "Tagging the docker image.."
@@ -14,6 +21,8 @@ push-image:
   only:
     - main
   stage: build
+  tags:
+    - docker
   needs:
     - build-image
   script:
@@ -24,5 +33,7 @@ deploy-image:
   only:
     - main
   stage: deploy
+  tags:
+    - docker
   script:
     - echo "Deploying docker image..."
