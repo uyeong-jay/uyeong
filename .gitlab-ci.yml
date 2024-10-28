@@ -8,29 +8,32 @@ stages:
   - build
   - deploy
 
-build-image:
+build:
   only:
     - main
   stage: build
   tags:
     - docker
+  before_script:
+    - echo [INFO] Logging in to the GitLab Docker registry...
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - echo "Building the docker image.."
     - echo "Tagging the docker image.."
 
-push-image:
+push:
   only:
     - main
   stage: build
   tags:
     - docker
   needs:
-    - build-image
+    - build
   script:
     - echo "Logging into docker registry..."
     - echo "Pushing docker image to registry..."
 
-deploy-image:
+deploy:
   only:
     - main
   stage: deploy
