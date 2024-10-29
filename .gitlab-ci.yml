@@ -5,40 +5,21 @@ workflow:
     - when: always
 
 stages:
-  - build
   - deploy
 
-build:
+deploy:
+  stage: deploy
   only:
     - main
-  stage: build
   tags:
     - docker
   before_script:
-    - echo [INFO] Logging in to the GitLab Docker registry...
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - echo [INFO] Checking Docker and Docker Compose...
+    - docker version
+    - docker-compose version
 
   script:
-    - echo "Building the docker image.."
-    - echo "Tagging the docker image.."
-
-push:
-  only:
-    - main
-  stage: build
-  tags:
-    - docker
-  needs:
-    - build
-  script:
-    - echo "Logging into docker registry..."
-    - echo "Pushing docker image to registry..."
-
-deploy:
-  only:
-    - main
-  stage: deploy
-  tags:
-    - docker
-  script:
-    - echo "Deploying docker image..."
+    - echo [INFO] Starting deployment on AWS EC2 instance with Docker socket
+    # - docker-compose -f docker-compose.prod.yml down
+    # - docker-compose -f docker-compose.prod.yml up -d --build
+    # - docker rmi $(docker images -f dangling=true -q) # dangling 이미지 정리
