@@ -15,8 +15,8 @@ deploy:
     - docker
   before_script:
     - echo [INFO] Checking Docker and Docker Compose...
-    - docker version
-    - docker-compose version
+    - docker --version
+    - docker-compose --version
 
   script:
     - echo [INFO] Starting deployment on AWS EC2 instance with Docker socket
