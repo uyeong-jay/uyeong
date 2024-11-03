@@ -17,9 +17,25 @@ deploy:
     - echo [INFO] Checking Docker and Docker Compose...
     - docker --version
     - docker-compose --version
+    - echo [INFO] Setting environment files...
+    # - echo "$ENV_FILE_CLIENT" > ./client/.env.local
+    - echo "$ENV_FILE_SERVER" > ./server/.env
+    - echo "$ENV_FILE_SERVER"
 
   script:
-    - echo [INFO] Starting deployment on AWS EC2 instance with Docker socket
+    - echo [INFO] Deployment started.
+
+    # - echo "Cleaning up previous containers and networks..."
     # - docker-compose -f docker-compose.prod.yml down
-    # - docker-compose -f docker-compose.prod.yml up -d --build
-    # - docker rmi $(docker images -f dangling=true -q) # dangling 이미지 정리
+
+    # - echo "Pruning unused volumes..."
+    # - docker volume prune -f
+
+    # - echo "Starting new containers..."
+    # - docker-compose -f docker-compose.prod.yml up --build -d
+
+    # - echo "Removing unused images..."
+    # - docker rmi $(docker images -f dangling=true -q)
+
+  after_script:
+    - echo [INFO] Deployment completed.
