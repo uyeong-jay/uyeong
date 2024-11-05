@@ -71,13 +71,11 @@ SECTION.Frame = styled.section`
 const Banner = () => {
   return (
     <SECTION.Frame>
-      {/* <div></div> */}
       <div className="scrolling-words-box">
         <ul>
           <li>Hi there !</li>
           <li>I&apos;m UYeong</li>
           <li>Thank you for visiting my blog</li>
-          {/* dark: 악기, light: logo  */}
           <li>
             <HeartIcon />
           </li>

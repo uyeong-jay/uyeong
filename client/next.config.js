@@ -3,7 +3,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
-  // openAnalyzer: false,
+  openAnalyzer: false, //브라우저로 확인이 필요할때 true로 재설정 하기
 });
 
 const prod = process.env.NODE_ENV === 'production';
