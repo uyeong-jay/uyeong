@@ -1,9 +1,3 @@
-workflow:
-  rules:
-    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/'
-      when: always
-    - when: never
-
 stages:
   - deploy
 
@@ -14,10 +8,10 @@ deploy:
   tags:
     - docker
   before_script:
-    - echo [INFO] Checking Docker and Docker Compose...
+    - echo [INFO] Current version - $CI_COMMIT_TAG
+    - echo [INFO] Checking Docker and Docker Compose..
     - docker --version
     - docker-compose --version
-    - echo "The current tag is - $CI_COMMIT_TAG"
 
   script:
     - echo [INFO] Deployment started.
