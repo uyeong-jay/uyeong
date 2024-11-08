@@ -1,0 +1,37 @@
+# prod
+# Stage 1: build
+FROM node:18-alpine AS base
+
+FROM base AS build
+WORKDIR /app
+
+COPY package.json yarn.lock* ./
+RUN \
+  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
+
+COPY . .
+RUN \
+  if [ -f yarn.lock ]; then yarn run build; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
+
+# Stage 2: prod
+FROM base AS prod
+WORKDIR /app
+
+RUN yarn global add pm2
+
+RUN chown -R node:node /app
+
+USER node
+
+COPY --chown=node:node --from=build /app/dist ./dist
+COPY --chown=node:node --from=build /app/package.json /app/yarn.lock* ./
+
+RUN yarn install --production --frozen-lockfile
+
+# EXPOSE 5000
+
+CMD ["yarn", "start:prod"]
