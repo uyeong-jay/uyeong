@@ -1,0 +1,7 @@
+apps:
+  - name: uyblog-back
+    script: ./dist/src/index.js
+    instances: max
+    exec_mode: cluster
+    env_production:
+      NODE_ENV: production

@@ -1,0 +1,5 @@
+apps:
+  - name: uyblog-front
+    script: server.js
+    env_production:
+      NODE_ENV: production
