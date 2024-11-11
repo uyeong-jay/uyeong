@@ -22,17 +22,7 @@
     "no-console": "off",
     "prettier/prettier": ["warn"],
     "import/extensions": "off",
-    "import/no-unresolved": "error",
-    "import/order": [
-      "error",
-      {
-        "newlines-between": "never",
-        "groups": [
-          ["builtin", "external"],
-          ["internal", "parent", "sibling", "index"]
-        ]
-      }
-    ]
+    "import/no-unresolved": "error"
   },
   "settings": {
     "import/parsers": {
