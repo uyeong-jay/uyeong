@@ -51,4 +51,4 @@ Dockerfile*
 *.pem
 README.md
 _memo.txt
-/reusableFiles
+/reusable_files
