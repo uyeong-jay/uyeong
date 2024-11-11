@@ -9,5 +9,10 @@
   "scripts": {
     "client": "cd ./client && yarn dev",
     "server": "cd ./server && yarn start:dev"
+  },
+  "devDependencies": {
+    "lint-staged": "^12.1.7",
+    "prettier": "^2.5.1",
+    "prettier-plugin-nginx": "^1.0.3"
   }
 }

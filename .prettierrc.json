@@ -4,5 +4,6 @@
   "semi": true,
   "printWidth": 120,
   "singleQuote": false,
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "plugins": ["prettier-plugin-nginx"]
 }

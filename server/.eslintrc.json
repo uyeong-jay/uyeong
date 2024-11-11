@@ -20,14 +20,7 @@
   "plugins": ["@typescript-eslint", "prettier", "import"],
   "rules": {
     "no-console": "off",
-    "prettier/prettier": [
-      "warn",
-      {
-        "endOfLine": "auto"
-      },
-      2,
-      { "useTabs": true } //쌍따옴표(prettierrc.json에도 설정)
-    ],
+    "prettier/prettier": ["warn"],
     "import/extensions": "off",
     "import/no-unresolved": "error",
     "import/order": [
