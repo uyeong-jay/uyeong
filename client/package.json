@@ -4,14 +4,7 @@
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "cross-env ANALYZE=true next build",
-    "start": "next start",
-    "lint": "next lint",
-    "prepare": "cd .. && husky install client/.husky",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "start": "next start"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
