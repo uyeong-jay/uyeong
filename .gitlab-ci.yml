@@ -16,17 +16,17 @@ deploy:
   script:
     - echo [INFO] Deployment started.
 
-    # - echo "Cleaning up previous containers and networks..."
-    # - docker-compose -f docker-compose.prod.yml down
+    - echo "Cleaning up previous containers and networks..."
+    - docker-compose -f docker-compose.prod.yml down
 
-    # - echo "Pruning unused volumes..."
-    # - docker volume prune -f
+    - echo "Pruning unused volumes..."
+    - docker volume prune -f
 
-    # - echo "Starting new containers..."
-    # - docker-compose -f docker-compose.prod.yml up --build -d
+    - echo "Starting new containers..."
+    - docker-compose -f docker-compose.prod.yml up --build -d
 
-    # - echo "Removing unused images..."
-    # - docker rmi $(docker images -f dangling=true -q)
+    - echo "Removing unused images..."
+    - docker rmi $(docker images -f dangling=true -q)
 
   after_script:
     - echo [INFO] Deployment completed.
