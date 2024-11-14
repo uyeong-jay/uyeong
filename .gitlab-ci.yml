@@ -13,6 +13,10 @@ deploy:
     - docker --version
     - docker-compose --version
 
+    - echo [INFO] Setting up environment variables...
+    - cp ${SERVER_ENV_FILE} server/.env.local
+    - cp ${CLIENT_ENV_FILE} client/.env.local
+
   script:
     - echo [INFO] Deployment started.
 
