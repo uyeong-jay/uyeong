@@ -16,8 +16,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Linting 비활성화 설정 추가
-ENV NEXT_DISABLE_ESLINT=1
+# # Linting 비활성화 설정 추가
+# ENV NEXT_DISABLE_ESLINT=1
 
 RUN if [ -f yarn.lock ]; then yarn run build; \
     else echo "Lockfile not found." && exit 1; \
