@@ -14,7 +14,7 @@ deploy:
     - docker-compose --version
 
     - echo [INFO] Setting up environment variables...
-    - cp ${SERVER_ENV_FILE} server/.env.local
+    - cp ${SERVER_ENV_FILE} server/.env
     - cp ${CLIENT_ENV_FILE} client/.env.local
 
   script:
