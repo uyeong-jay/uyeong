@@ -34,7 +34,7 @@ const StyledTextarea = styled.textarea`
 
 const TextareaBox = (
   { labelText, name, value, onChange, placeholder, required, spellCheck }: Props,
-  ref?: ForwardedRef<HTMLTextAreaElement>,
+  ref?: ForwardedRef<HTMLTextAreaElement>
 ) => {
   return (
     <StyledTextareaBox>
