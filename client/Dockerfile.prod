@@ -13,16 +13,16 @@ RUN if [ -f yarn.lock ]; then yarn --frozen-lockfile --network-timeout 600000; \
 # Stage 3: Build the Next.js application
 FROM base AS builder
 WORKDIR /app
+
+ARG EMAILJS_SERVICE_ID
+ENV EMAILJS_SERVICE_ID=${EMAILJS_SERVICE_ID}
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-COPY .env.local .env.local
 
 RUN if [ -f yarn.lock ]; then yarn run build; \
     else echo "Lockfile not found." && exit 1; \
     fi
-
-RUN rm .env.local
 
 # Stage 4: Node.js for SSR & API
 FROM base AS runner
