@@ -14,10 +14,9 @@ deploy:
     - docker-compose --version
 
     - echo [INFO] Setting up environment variables...
-    # - cp ${SERVER_ENV_FILE} server/.env
-    # - cp ${CLIENT_ENV_FILE} client/.env.local
-    - echo "$SERVER_ENV_FILE" > "server/.env"
-    - echo "$CLIENT_ENV_FILE" > "client/.env.local"
+    - echo "EMAILJS_SERVICE_ID=$EMAILJS_SERVICE_ID" >> client/.env.local
+    - cat client/.env.local
+    # - echo "$CLIENT_ENV_FILE" > "client/.env.local"
 
   script:
     - echo [INFO] Deployment started.
