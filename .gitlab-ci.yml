@@ -15,7 +15,9 @@ deploy:
 
     - echo [INFO] Setting up environment variables...
     - echo "EMAILJS_SERVICE_ID=$EMAILJS_SERVICE_ID" >> client/.env.local
+    - echo "NODEMAILER_USER_EMAIL=$NODEMAILER_USER_EMAIL" >> server/.env
     - cat client/.env.local
+    - cat server/.env
     # - echo "$CLIENT_ENV_FILE" > "client/.env.local"
 
   script:
