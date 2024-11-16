@@ -83,7 +83,7 @@ const ContactPresenter = ({
         {isMsgSentSuccess && !sendErrorMsg && (
           <Modal
             type="alert"
-            msg="Message sent! I'll get back to you as soon as possible."
+            msg="Message sent! I will respond to your email as promptly as possible."
             isOpen={isModalOpen}
             setOpen={setModalOpen}
           />
