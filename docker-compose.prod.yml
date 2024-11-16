@@ -7,8 +7,6 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile.prod
-      args:
-        EMAILJS_SERVICE_ID: ${EMAILJS_SERVICE_ID}
     ports:
       - 5000:5000
     env_file:
