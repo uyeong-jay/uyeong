@@ -9,7 +9,15 @@ export interface UserContactInfo {
   message: string;
 }
 
-const ContactContainer = () => {
+interface Props {
+  emailjsConfig: {
+    serviceId: string;
+    templateId: string;
+    publicKey: string;
+  };
+}
+
+const ContactContainer = ({ emailjsConfig }: Props) => {
   const initialState = {
     user_name: '',
     user_email: '',
@@ -66,10 +74,10 @@ const ContactContainer = () => {
         setSendingMsg(true);
 
         const result = await emailjs.sendForm(
-          process.env.EMAILJS_SERVICE_ID,
-          process.env.EMAILJS_TEMPLATE_ID,
+          emailjsConfig.serviceId,
+          emailjsConfig.templateId,
           form.current !== null ? form.current : '',
-          process.env.EMAILJS_PUBLIC_KEY,
+          emailjsConfig.publicKey
         );
 
         //성공시
@@ -89,14 +97,14 @@ const ContactContainer = () => {
         }
       } catch (error: any) {
         setSendErrorMsg(
-          'Sorry, the email failed to send because the token expired. Please click the email link at the bottom of the page to try sending it again. Thank you!',
+          'Sorry, the email failed to send because the token expired. Please click the email link at the bottom of the page to try sending it again. Thank you!'
         );
         setMsgSentSuccess(false);
         setModalOpen(true);
         setSendingMsg(false);
       }
     },
-    [userContactInfo],
+    [emailjsConfig.publicKey, emailjsConfig.serviceId, emailjsConfig.templateId, userContactInfo]
   );
 
   const onChangeInput = useCallback(
@@ -104,7 +112,7 @@ const ContactContainer = () => {
       const { name, value } = e.target;
       setUserContactInfo({ ...userContactInfo, [name]: value });
     },
-    [userContactInfo],
+    [userContactInfo]
   );
 
   const onChangeTextArea = useCallback(
@@ -113,7 +121,7 @@ const ContactContainer = () => {
       resizeHeight();
       setUserContactInfo({ ...userContactInfo, message: e.target.value });
     },
-    [resizeHeight, userContactInfo],
+    [resizeHeight, userContactInfo]
   );
 
   return (

@@ -7,6 +7,12 @@ import { setAxiosCookie } from '@utils/setAxiosCookie';
 export { default } from '@pages/Contact';
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
+  const emailjsConfig = {
+    serviceId: process.env.EMAILJS_SERVICE_ID,
+    templateId: process.env.EMAILJS_TEMPLATE_ID,
+    publicKey: process.env.EMAILJS_PUBLIC_KEY,
+  };
+
   setAxiosCookie(req);
 
   if (req.headers.cookie) {
@@ -16,6 +22,6 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   await Promise.all(getRunningOperationPromises());
 
   return {
-    props: {},
+    props: { emailjsConfig },
   };
 });
