@@ -22,6 +22,8 @@
     "no-console": "off",
     "prettier/prettier": ["warn"],
     "import/extensions": "off",
+    "import/first": "off",
+    "import/newline-after-import": "off",
     "import/no-unresolved": "error"
   },
   "settings": {

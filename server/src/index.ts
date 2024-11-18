@@ -5,13 +5,11 @@ import helmet from "helmet";
 import morgan from "morgan"; // 로그관리
 import cookieParser from "cookie-parser"; // 쿠키 헤더 분석 후 req.cookies로 받아옴
 
-// dotenv
-import dotenv from "dotenv"; // mongodb가 connect 되기 전의 자리에 위치
+import dotenv from "dotenv";
+dotenv.config(); // mongodb가 connect 되기 전의 자리에 위치
 
 import "@config/connect";
 import routes from "@routes/index";
-// 환경변수 관리
-dotenv.config();
 
 const app = express();
 const prod = process.env.NODE_ENV === "production";
