@@ -8,13 +8,15 @@ import { UserResponse } from '@app/services/user/userApi';
 import { useRouter } from 'next/router';
 import { fileStatus } from '@pages/Write/WriteSlice';
 import { makeUrlFriendly } from '@utils/urlFriendly';
+import { CloudinaryTypes } from '@src/pages/settings';
 
 interface Props {
   userData?: UserResponse;
   blogPostInfo: BlogPostReq;
+  cloudinaryConfig: CloudinaryTypes;
 }
 
-const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
+const PublishActionButtonsContainer = ({ userData, blogPostInfo, cloudinaryConfig }: Props) => {
   const router = useRouter();
   const { id: postId } = router.query;
 
@@ -34,10 +36,10 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
   useEffect(() => {
     if (isPostUpdated && prevPostImage && blogPostDataById.thumbnail !== prevPostImage) {
       const publicId = getPublicIdFromUrl(prevPostImage);
-      if (publicId) deleteImage(publicId);
+      if (publicId) deleteImage(publicId, cloudinaryConfig);
       setPrevPostImage('');
     }
-  }, [blogPostDataById?.thumbnail, isPostUpdated, prevPostImage]);
+  }, [cloudinaryConfig, blogPostDataById?.thumbnail, isPostUpdated, prevPostImage]);
 
   useEffect(() => {
     if (isPostCreated || isPostUpdated) {
@@ -68,14 +70,14 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
     if (fileState === unchanged) {
       data.blogPostInfo.thumbnail = blogPostInfo.thumbnail;
     } else if (fileState === modified) {
-      const uploadedImageData = await uploadImage(blogPostInfo.thumbnail as File);
+      const uploadedImageData = await uploadImage(blogPostInfo.thumbnail as File, cloudinaryConfig);
       data.blogPostInfo.thumbnail = uploadedImageData?.url;
     } else {
       data.blogPostInfo.thumbnail = '';
     }
 
     await createBlogPost(data);
-  }, [blogPostInfo, createBlogPost, fileState, modified, unchanged, userData?.access_token]);
+  }, [cloudinaryConfig, blogPostInfo, createBlogPost, fileState, modified, unchanged, userData?.access_token]);
 
   const onClickUpdate = useCallback(async () => {
     setPosting(true);
@@ -94,7 +96,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
     if (fileState === unchanged) {
       data.blogPostInfo.thumbnail = blogPostInfo.thumbnail;
     } else if (fileState === modified) {
-      const uploadedImageData = await uploadImage(blogPostInfo.thumbnail as File);
+      const uploadedImageData = await uploadImage(blogPostInfo.thumbnail as File, cloudinaryConfig);
       data.blogPostInfo.thumbnail = uploadedImageData?.url;
     } else {
       data.blogPostInfo.thumbnail = '';
@@ -102,6 +104,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo }: Props) => {
 
     await updateBlogPost(data);
   }, [
+    cloudinaryConfig,
     blogPostDataById?._id,
     blogPostDataById?.thumbnail,
     blogPostInfo,

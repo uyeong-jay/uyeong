@@ -6,8 +6,13 @@ import { useRouter } from 'next/router';
 import NotFound from '@src/pages/404';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { cancelPublishing, getPostById, setFileUnchanged } from '../WriteSlice';
+import { CloudinaryTypes } from '@src/pages/settings';
 
-const WriteContainer = () => {
+interface Props {
+  cloudinaryConfig: CloudinaryTypes;
+}
+
+const WriteContainer = ({ cloudinaryConfig }: Props) => {
   const { data: userData } = useGetUserDataQuery();
   const { data: blogPostsData } = useGetBlogPostsQuery();
   const isPublishing = useAppSelector((state) => state.write.isPublishing);
@@ -71,6 +76,7 @@ const WriteContainer = () => {
           blogPostsData={blogPostsData}
           blogPostInfo={blogPostInfo}
           setBlogPostInfo={setBlogPostInfo}
+          cloudinaryConfig={cloudinaryConfig}
         />
       )}
     </>

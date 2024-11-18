@@ -1,13 +1,14 @@
+import { CloudinaryTypes } from '@src/pages/settings';
 import sha256 from 'crypto-js/sha256';
 
-export const uploadImage = async (file: File) => {
+export const uploadImage = async (file: File, cloudinaryConfig: CloudinaryTypes) => {
   if (!file) return;
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('upload_preset', process.env.CLOUDINARY_UPLOAD_PRESET);
-  formData.append('cloud_name', process.env.CLOUDINARY_CLOUD_NAME);
+  formData.append('upload_preset', cloudinaryConfig.uploadPreset);
+  formData.append('cloud_name', cloudinaryConfig.cloudName);
 
-  const res = await fetch(process.env.CLOUDINARY_UPLOAD_API, {
+  const res = await fetch(cloudinaryConfig.uploadApi, {
     method: 'POST',
     body: formData,
   });
@@ -33,18 +34,18 @@ const generateSignature = (publicId: string, apiSecret: string) => {
   return `public_id=${publicId}&timestamp=${timestamp}${apiSecret}`;
 };
 
-export const deleteImage = async (id: string) => {
+export const deleteImage = async (id: string, cloudinaryConfig: CloudinaryTypes) => {
   if (!id) return;
   const timestamp = new Date().getTime().toString();
-  const signature = generateSHA256(generateSignature(id, process.env.CLOUDINARY_API_SECRET));
+  const signature = generateSHA256(generateSignature(id, cloudinaryConfig.apiSecret));
 
   const formData = new FormData();
   formData.append('public_id', id);
   formData.append('timestamp', timestamp);
   formData.append('signature', signature);
-  formData.append('api_key', process.env.CLOUDINARY_API_KEY);
+  formData.append('api_key', cloudinaryConfig.apiKey);
 
-  const res = await fetch(process.env.CLOUDINARY_DELETE_API, {
+  const res = await fetch(cloudinaryConfig.deleteApi, {
     method: 'POST',
     body: formData,
   });

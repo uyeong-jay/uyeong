@@ -7,6 +7,7 @@ import validFile from '@utils/valid/validFile';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { fileStatus, setFileModified, setFileRemoved, setFileUnchanged } from '@pages/Write/WriteSlice';
 import { useRouter } from 'next/router';
+import { CloudinaryTypes } from '@src/pages/settings';
 
 export interface IUserUpdateInfo {
   avatar?: string | File;
@@ -17,7 +18,11 @@ export interface IUserUpdateInfo {
   cf_new_password: string;
 }
 
-const SettingsContainer = () => {
+interface Props {
+  cloudinaryConfig: CloudinaryTypes;
+}
+
+const SettingsContainer = ({ cloudinaryConfig }: Props) => {
   const { data: userData } = useGetUserDataQuery();
   const [update, { isLoading: isUpdatingUserData, isSuccess: isUserDataUpdated, error: UserUpdateErr }] =
     useUpdateMutation();
@@ -76,19 +81,19 @@ const SettingsContainer = () => {
   useEffect(() => {
     if (isUserDataUpdated && prevAvatarImage && userData?.user?.avatar !== prevAvatarImage) {
       const publicId = getPublicIdFromUrl(prevAvatarImage);
-      if (publicId) deleteImage(publicId);
+      if (publicId) deleteImage(publicId, cloudinaryConfig);
       setPrevAvatarImage('');
     }
-  }, [prevAvatarImage, userData?.user?.avatar, isUserDataUpdated]);
+  }, [cloudinaryConfig, prevAvatarImage, userData?.user?.avatar, isUserDataUpdated]);
 
   //유저 업데이트 실패시 업로드된 이미지 삭제
   useEffect(() => {
     if (UserUpdateErr && isImageUploaded) {
-      deleteImage(imageId);
+      deleteImage(imageId, cloudinaryConfig);
       setImageId('');
       setImageUploaded(false);
     }
-  }, [UserUpdateErr, imageId, isImageUploaded]);
+  }, [cloudinaryConfig, UserUpdateErr, imageId, isImageUploaded]);
 
   //이미지 구분하여 임시 저장
   useEffect(() => {
@@ -133,7 +138,7 @@ const SettingsContainer = () => {
         if (fileState === unchanged) {
           data.userUpdateInfo.avatar = userUpdateInfo.avatar;
         } else if (fileState === modified) {
-          const uploadedImageData = await uploadImage(userUpdateInfo.avatar as File);
+          const uploadedImageData = await uploadImage(userUpdateInfo.avatar as File, cloudinaryConfig);
           data.userUpdateInfo.avatar = uploadedImageData?.url;
           setImageId(uploadedImageData?.id);
           setImageUploaded(true);
@@ -162,6 +167,7 @@ const SettingsContainer = () => {
       }
     },
     [
+      cloudinaryConfig,
       fileObj,
       fileState,
       fileUrl,
@@ -172,7 +178,7 @@ const SettingsContainer = () => {
       userData?.access_token,
       userData?.user,
       userUpdateInfo,
-    ],
+    ]
   );
 
   const onChangeInput = useCallback(
@@ -181,7 +187,7 @@ const SettingsContainer = () => {
 
       setUserUpdateInfo({ ...userUpdateInfo, [name]: value });
     },
-    [userUpdateInfo],
+    [userUpdateInfo]
   );
 
   const onClickUpload = useCallback(() => {
@@ -211,7 +217,7 @@ const SettingsContainer = () => {
         setUserUpdateInfo({ ...userUpdateInfo, avatar: file });
       }
     },
-    [dispatch, userUpdateInfo],
+    [dispatch, userUpdateInfo]
   );
 
   const onClickDeleteImg = useCallback(() => {

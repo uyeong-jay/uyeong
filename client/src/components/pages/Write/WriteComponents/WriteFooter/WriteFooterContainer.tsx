@@ -6,15 +6,17 @@ import { startPuslishing } from '@pages/Write/WriteSlice';
 import validBlog from '@utils/valid/validBlog';
 import { UserResponse } from '@app/services/user/userApi';
 import { useRouter } from 'next/router';
+import { CloudinaryTypes } from '@src/pages/settings';
 
 interface Props {
   userData?: UserResponse;
   blogPostsData?: BlogPostRes;
   blogPostInfo: BlogPostReq;
   setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
+  cloudinaryConfig: CloudinaryTypes;
 }
 
-const WriteFooterContainer = ({ userData, blogPostsData, blogPostInfo, setBlogPostInfo }: Props) => {
+const WriteFooterContainer = ({ userData, blogPostsData, blogPostInfo, setBlogPostInfo, cloudinaryConfig }: Props) => {
   const router = useRouter();
 
   const { title, content } = blogPostInfo;
@@ -49,7 +51,7 @@ const WriteFooterContainer = ({ userData, blogPostsData, blogPostInfo, setBlogPo
       if (!isCallback) return setExitModalOpen(true);
       router.back();
     },
-    [router],
+    [router]
   );
 
   return (
@@ -64,6 +66,7 @@ const WriteFooterContainer = ({ userData, blogPostsData, blogPostInfo, setBlogPo
       isExitModalOpen={isExitModalOpen}
       setExitModalOpen={setExitModalOpen}
       onClickExit={onClickExit}
+      cloudinaryConfig={cloudinaryConfig}
     />
   );
 };

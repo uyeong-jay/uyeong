@@ -6,6 +6,7 @@ import Publish from '../Publish';
 import { DIV } from './WriteFooterStyle';
 import ArrowLeftIcon from '@icons/ArrowLeftIcon';
 import ArrowUpIcon from '@icons/ArrowUpIcon';
+import { CloudinaryTypes } from '@src/pages/settings';
 
 interface Props {
   userData?: UserResponse;
@@ -18,6 +19,7 @@ interface Props {
   isExitModalOpen: boolean;
   setExitModalOpen: (isPostModalOpen: boolean) => void;
   onClickExit: (isCallback?: boolean) => void;
+  cloudinaryConfig: CloudinaryTypes;
 }
 
 const WriteFooterPresenter = ({
@@ -31,6 +33,7 @@ const WriteFooterPresenter = ({
   isExitModalOpen,
   setExitModalOpen,
   onClickExit,
+  cloudinaryConfig,
 }: Props) => {
   return (
     <DIV.WriteFooterFrame>
@@ -42,7 +45,12 @@ const WriteFooterPresenter = ({
         Done <ArrowUpIcon />
       </button>
 
-      <Publish userData={userData} blogPostInfo={blogPostInfo} setBlogPostInfo={setBlogPostInfo} />
+      <Publish
+        userData={userData}
+        blogPostInfo={blogPostInfo}
+        setBlogPostInfo={setBlogPostInfo}
+        cloudinaryConfig={cloudinaryConfig}
+      />
 
       <Modal type="alert" msg={writeErrMsg} isOpen={isPostModalOpen} setOpen={setPostModalOpen} shakeAlert />
 
