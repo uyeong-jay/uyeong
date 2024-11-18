@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useCallback, useEffect, useRef, useState
 import emailjs from '@emailjs/browser';
 import ContactPresenter from './ContactPresenter';
 import validEmail from '@utils/valid/validEmail';
+import { EmailjsProps } from '@src/pages/contact';
 
 export interface UserContactInfo {
   user_name: string;
@@ -10,11 +11,7 @@ export interface UserContactInfo {
 }
 
 interface Props {
-  emailjsConfig: {
-    serviceId: string;
-    templateId: string;
-    publicKey: string;
-  };
+  emailjsConfig: EmailjsProps;
 }
 
 const ContactContainer = ({ emailjsConfig }: Props) => {
