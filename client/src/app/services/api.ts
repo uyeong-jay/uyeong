@@ -4,7 +4,7 @@ import { axiosBaseQuery } from './baseQuery';
 
 export const api = createApi({
   baseQuery: axiosBaseQuery({
-    baseUrl: process.env.BASE_URL,
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   }),
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {

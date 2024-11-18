@@ -12,7 +12,7 @@ module.exports = withBundleAnalyzer({
   reactStrictMode: true,
 
   env: {
-    BASE_URL: prod ? process.env.PROD_URL : process.env.DEV_URL,
+    NEXT_PUBLIC_BASE_URL: prod ? process.env.NEXT_PUBLIC_PROD_URL : process.env.DEV_URL,
     CLOUDINARY_UPLOAD_PRESET: process.env.CLOUDINARY_UPLOAD_PRESET,
     CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
     CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
