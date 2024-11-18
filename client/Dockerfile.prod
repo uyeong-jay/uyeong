@@ -14,7 +14,8 @@ RUN if [ -f yarn.lock ]; then yarn --frozen-lockfile --network-timeout 600000; \
 FROM base AS builder
 WORKDIR /app
 
-ENV NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+ARG NEXT_PUBLIC_PROD_URL
+ENV NEXT_PUBLIC_PROD_URL=${NEXT_PUBLIC_PROD_URL}
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -46,10 +47,6 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-# Copy and set permissions for entrypoint script
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-
 USER nextjs
 
 EXPOSE 3000
@@ -58,5 +55,4 @@ ENV PORT=3000
 
 ENV HOSTNAME="0.0.0.0"
 
-ENTRYPOINT ["/usr/bin/entrypoint.sh"]
 CMD ["pm2-runtime", "start", "pm2.yml"]
