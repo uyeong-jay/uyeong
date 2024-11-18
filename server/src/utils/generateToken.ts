@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Response } from "express";
 
-//실행시 매번 다른 토큰 생성
+// 실행시 매번 다른 토큰 생성
 
 export const generateAccessToken = (payload: object) => {
   const access_token = jwt.sign(payload, `${process.env.ACCESS_TOKEN_SECRET}`, {
@@ -11,6 +11,7 @@ export const generateAccessToken = (payload: object) => {
   return access_token;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const generateRefreshToken = (payload: object, res: Response) => {
   const refresh_token = jwt.sign(payload, `${process.env.REFRESH_TOKEN_SECRET}`, {
     expiresIn: "7d",
