@@ -7,8 +7,12 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile.prod
+      args:
+        NEXT_PUBLIC_PROD_URL: http://uyeong.com
     ports:
       - 5000:5000
+    environment:
+      - NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=${CLOUDINARY_UPLOAD_PRESET}
     env_file:
       - ./server/.env
     depends_on:
