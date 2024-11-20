@@ -13,41 +13,39 @@ deploy:
     - docker --version
     - docker-compose --version
 
-    # - echo [INFO] Setting up environment variables...
-    # - echo "DEV_URL=$DEV_URL" >> client/.env.local
-    # - echo "PROD_URL=$PROD_URL" >> client/.env.local
-    # - echo "FONTAWESOME_KIT=$FONTAWESOME_KIT" >> client/.env.local
-    # - echo "CLOUDINARY_UPLOAD_PRESET=$CLOUDINARY_UPLOAD_PRESET" >> client/.env.local
-    # - echo "CLOUDINARY_CLOUD_NAME=$CLOUDINARY_CLOUD_NAME" >> client/.env.local
-    # - echo "CLOUDINARY_API_KEY=$CLOUDINARY_API_KEY" >> client/.env.local
-    # - echo "CLOUDINARY_API_SECRET=$CLOUDINARY_API_SECRET" >> client/.env.local
-    # - echo "CLOUDINARY_UPLOAD_API=$CLOUDINARY_UPLOAD_API" >> client/.env.local
-    # - echo "CLOUDINARY_DELETE_API=$CLOUDINARY_DELETE_API" >> client/.env.local
-    # - echo "EMAILJS_SERVICE_ID=$EMAILJS_SERVICE_ID" >> client/.env.local
-    # - echo "EMAILJS_TEMPLATE_ID=$EMAILJS_TEMPLATE_ID" >> client/.env.local
-    # - echo "EMAILJS_PUBLIC_KEY=$EMAILJS_PUBLIC_KEY" >> client/.env.local
-    # - echo "MONGODB_URI=$MONGODB_URI" >> server/.env
-    # - echo "ACCESS_TOKEN_SECRET=$ACCESS_TOKEN_SECRET" >> server/.env
-    # - echo "REFRESH_TOKEN_SECRET=$REFRESH_TOKEN_SECRET" >> server/.env
-    # - echo "NODEMAILER_USER_EMAIL=$NODEMAILER_USER_EMAIL" >> server/.env
-    # - echo "NODEMAILER_USER_PASSWORD=$NODEMAILER_USER_PASSWORD" >> server/.env
+    - echo [INFO] Setting up environment variables...
+    - echo "DEV_URL=$DEV_URL" >> client/.env.local
+    - echo "PROD_URL=$PROD_URL" >> client/.env.local
+    - echo "FONTAWESOME_KIT=$FONTAWESOME_KIT" >> client/.env.local
+    - echo "CLOUDINARY_UPLOAD_PRESET=$CLOUDINARY_UPLOAD_PRESET" >> client/.env.local
+    - echo "CLOUDINARY_CLOUD_NAME=$CLOUDINARY_CLOUD_NAME" >> client/.env.local
+    - echo "CLOUDINARY_API_KEY=$CLOUDINARY_API_KEY" >> client/.env.local
+    - echo "CLOUDINARY_API_SECRET=$CLOUDINARY_API_SECRET" >> client/.env.local
+    - echo "CLOUDINARY_UPLOAD_API=$CLOUDINARY_UPLOAD_API" >> client/.env.local
+    - echo "CLOUDINARY_DELETE_API=$CLOUDINARY_DELETE_API" >> client/.env.local
+    - echo "EMAILJS_SERVICE_ID=$EMAILJS_SERVICE_ID" >> client/.env.local
+    - echo "EMAILJS_TEMPLATE_ID=$EMAILJS_TEMPLATE_ID" >> client/.env.local
+    - echo "EMAILJS_PUBLIC_KEY=$EMAILJS_PUBLIC_KEY" >> client/.env.local
+    - echo "MONGODB_URI=$MONGODB_URI" >> server/.env
+    - echo "ACCESS_TOKEN_SECRET=$ACCESS_TOKEN_SECRET" >> server/.env
+    - echo "REFRESH_TOKEN_SECRET=$REFRESH_TOKEN_SECRET" >> server/.env
+    - echo "NODEMAILER_USER_EMAIL=$NODEMAILER_USER_EMAIL" >> server/.env
+    - echo "NODEMAILER_USER_PASSWORD=$NODEMAILER_USER_PASSWORD" >> server/.env
 
   script:
     - echo [INFO] Deployment started.
 
-    - docker system prune -a -f
+    - echo "Cleaning up previous containers and networks..."
+    - docker-compose -f docker-compose.prod.yml down
 
-    # - echo "Cleaning up previous containers and networks..."
-    # - docker-compose -f docker-compose.prod.yml down
+    - echo "Pruning unused volumes..."
+    - docker volume prune -f
 
-    # - echo "Pruning unused volumes..."
-    # - docker volume prune -f
+    - echo "Starting new containers..."
+    - docker-compose -f docker-compose.prod.yml up --build -d
 
-    # - echo "Starting new containers..."
-    # - docker-compose -f docker-compose.prod.yml up --build -d
-
-    # - echo "Removing unused images..."
-    # - docker rmi $(docker images -f dangling=true -q)
+    - echo "Removing unused images..."
+    - docker rmi $(docker images -f dangling=true -q)
 
   after_script:
     - echo [INFO] Deployment completed.
