@@ -3,5 +3,5 @@ module.exports = {
 
   "nginx/*.js": (filenames) => `yarn prettier --write ${filenames.join(" ")}`,
 
-  // "**/*.(conf)": (files) => "node nginx/nginx-format.js",
+  "**/*.(conf)": (files) => "node nginx/nginx-format.js",
 };
