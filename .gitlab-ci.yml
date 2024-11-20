@@ -4,7 +4,7 @@ stages:
 deploy:
   stage: deploy
   only:
-    - main
+    - tag
   tags:
     - docker
   before_script:
@@ -35,13 +35,13 @@ deploy:
   script:
     - echo [INFO] Deployment started.
 
+    - docker system prune -a -f
+
     # - echo "Cleaning up previous containers and networks..."
     # - docker-compose -f docker-compose.prod.yml down
 
     # - echo "Pruning unused volumes..."
     # - docker volume prune -f
-
-    - ls /builds/uyeong-jay/uyeong/nginx/nginx-prod.conf
 
     # - echo "Starting new containers..."
     # - docker-compose -f docker-compose.prod.yml up --build -d
