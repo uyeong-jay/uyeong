@@ -47,7 +47,7 @@ app.use("/api", [
   routes.blogCommentRouter,
 ]);
 
-const PORT = 5000;
-app.listen(PORT, () => {
-  console.log("Server is running on port", PORT);
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
