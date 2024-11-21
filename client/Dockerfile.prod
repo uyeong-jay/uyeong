@@ -47,6 +47,8 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
+COPY --chown=nextjs:nodejs pm2.yml /app/pm2.yml
+
 USER nextjs
 
 EXPOSE 3000
