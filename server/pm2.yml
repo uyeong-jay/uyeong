@@ -3,10 +3,5 @@ apps:
     script: ./dist/src/index.js
     instances: max
     exec_mode: cluster
-    node_args:
-      - -r
-      - ts-node/register/transpile-only
-      - -r
-      - tsconfig-paths/register
     env_production:
       NODE_ENV: production

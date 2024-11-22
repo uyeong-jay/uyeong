@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development nodemon -L",
     "start:prod": "cross-env NODE_ENV=production pm2-runtime start pm2.yml",
-    "build": "tsc -p tsconfig.prod.json",
+    "build": "tsc -p tsconfig.build.json && tsc-alias",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
@@ -39,6 +39,7 @@
     "prettier": "^2.5.1",
     "ts-jest": "^27.1.3",
     "ts-node": "^10.4.0",
+    "tsc-alias": "^1.8.10",
     "tsconfig-paths": "^3.12.0",
     "typescript": "^4.5.4"
   },
