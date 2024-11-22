@@ -22,7 +22,6 @@ node_modules
 jest.config.js
 jest.setup.ts
 lint-staged.config.js
-tsconfig.prod.json
 
 # Testing
 /coverage
