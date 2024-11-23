@@ -2,7 +2,6 @@
   "compilerOptions": {
     /* Paths */
     "baseUrl": ".",
-    "outDir": "dist",
     "paths": {
       "@app/*": ["src/app/*"],
       "@hooks/*": ["src/hooks/*"],
