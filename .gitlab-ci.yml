@@ -41,8 +41,8 @@ deploy:
     - echo "Pruning unused volumes..."
     - docker volume prune -f
 
-    - echo "Starting new containers..."
-    - docker-compose -f docker-compose.prod.yml up --build -d
+    # - echo "Starting new containers..."
+    # - docker-compose -f docker-compose.prod.yml up --build -d
 
     - echo "Removing unused images..."
     - docker rmi $(docker images -f dangling=true -q)
