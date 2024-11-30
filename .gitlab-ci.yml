@@ -14,8 +14,6 @@ deploy:
     - docker-compose --version
 
     - echo [INFO] Setting up environment variables...
-    - echo "DEV_URL=$DEV_URL" >> client/.env.local
-    - echo "PROD_URL=$PROD_URL" >> client/.env.local
     - echo "FONTAWESOME_KIT=$FONTAWESOME_KIT" >> client/.env.local
     - echo "CLOUDINARY_UPLOAD_PRESET=$CLOUDINARY_UPLOAD_PRESET" >> client/.env.local
     - echo "CLOUDINARY_CLOUD_NAME=$CLOUDINARY_CLOUD_NAME" >> client/.env.local
