@@ -1,10 +1,15 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
 import { axiosBaseQuery } from './baseQuery';
+// import getConfig from 'next/config';
+// const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+// const API_URI: string = serverRuntimeConfig.apiURL || publicRuntimeConfig.apiURL;
+// const API_URI: string = serverRuntimeConfig.apiURL;
 
 export const api = createApi({
   baseQuery: axiosBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
+    // baseUrl: API_URI,
   }),
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {
@@ -16,5 +21,5 @@ export const api = createApi({
 });
 
 export const {
-  util: { getRunningOperationPromises },
+  util: { getRunningQueriesThunk },
 } = api;
