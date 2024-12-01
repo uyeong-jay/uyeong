@@ -18,7 +18,7 @@
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@next/bundle-analyzer": "^14.2.13",
-    "@reduxjs/toolkit": "^1.8.4",
+    "@reduxjs/toolkit": "^1.9.1",
     "axios": "^0.27.2",
     "cross-env": "^7.0.3",
     "crypto-js": "^4.2.0",
