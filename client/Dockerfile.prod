@@ -4,6 +4,7 @@ FROM node:18-alpine AS base
 # Stage 2: Install Dependencies
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache fontconfig
 WORKDIR /app
 COPY package.json yarn.lock* ./
 RUN if [ -f yarn.lock ]; then yarn --frozen-lockfile --network-timeout 600000; \
