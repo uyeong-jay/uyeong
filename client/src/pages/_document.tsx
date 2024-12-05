@@ -13,7 +13,6 @@ class MyDocument extends Document {
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-          {/* eslint-disable-next-line @next/next/google-font-display */}
           <link
             href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display&family=Square+Peg&family=Baloo+Bhaijaan+2&family=Sono&display=block"
             rel="stylesheet"
