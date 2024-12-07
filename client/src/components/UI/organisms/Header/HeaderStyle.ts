@@ -24,7 +24,7 @@ HEADER.Frame = styled.header<HeaderFrameProps>`
   top: 0;
   z-index: 2; //modal 다음으로 높은 레벨
   width: 100%;
-  height: 50px;
+  height: 65px;
 
   //스크롤시 header 애니메이션
   ${(props) => {
@@ -72,18 +72,22 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
     align-items: center;
     width: 100%;
     height: 100%;
+    padding: 0 5px;
 
+    // 블로그 로고(1)
     & > li:nth-of-type(1) {
       // border: 1px solid black;
       max-width: 25px;
       max-height: 40px;
-      margin-left: 17px;
+      margin-left: 10px;
+      margin-top: 5px;
 
       & .logo {
         fill: ${({ theme }) => theme.LOGO_C};
       }
     }
 
+    // 헤더 메뉴(2)
     & > li:nth-of-type(2) {
       // border: 1px solid black;
       width: 50%;
@@ -103,6 +107,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
       }
     }
 
+    // 프로필(3)
     & > li:nth-of-type(3) {
       // border: 1px solid black;
       position: relative;
@@ -189,6 +194,7 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
       }
     }
 
+    // 헤더 메뉴 아이콘(4)
     & > li:nth-of-type(4) {
       // border: 1px solid black;
       width: 50px;
@@ -200,8 +206,10 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
       }
     }
 
-    // 833px 이하일때 적용
+    // -------------- 아래 부터는 width 833px 이하일때 적용 --------------
+
     @media screen and (max-width: 833px) {
+      // 헤더 메뉴(2)
       & > li:nth-of-type(2) {
         // border: 1px solid yellow;
         width: 80%;
@@ -299,11 +307,13 @@ NAV.HeaderNav = styled.nav<HeaderNavProps>`
         }
       }
 
+      // 프로필(3)
       & > li:nth-of-type(3) {
         // border: 1px solid black;
         margin-right: 10px;
       }
 
+      // 헤더 메뉴 아이콘(4)
       & > li:nth-of-type(4) {
         // border: 1px solid black;
         display: block;

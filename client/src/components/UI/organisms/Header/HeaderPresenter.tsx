@@ -105,9 +105,12 @@ const HeaderPresenter = ({
     };
   }, []);
 
+  //헤더 스크롤
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      // 모바일(ios 브라우저) 환경에서 오버 스크롤시 음수값이 되지 않도록 방지
+      // window.scrollY의 값과 0 중 더 큰 값 반환
+      const currentScrollY = Math.max(0, window.scrollY);
       setMenuIconClicked(false);
       setProfileOpen(false);
 
@@ -128,7 +131,7 @@ const HeaderPresenter = ({
           }
         }
       }
-      //추적
+      //현 스크롤 값 추적
       prevScrollY = currentScrollY;
     };
 
@@ -212,7 +215,7 @@ const HeaderPresenter = ({
         <NAV.HeaderNav isMenuIconClicked={isMenuIconClicked} isShowingMenuAni={isShowingMenuAni}>
           <DarkModeButton isDarkTheme={isDarkTheme} onClickDarkMode={onClickDarkMode} />
           <ul>
-            {/* 1. 대표로고 */}
+            {/* 1. 블로그 로고 */}
             <NavLinkBox href="/">
               <Logo />
             </NavLinkBox>
