@@ -11,13 +11,20 @@ const StyledDarkModeButton = styled.div`
     // border: 1px solid black;
     background-color: inherit;
     cursor: pointer;
-    border-radius: 9px;
     position: absolute;
-    top: 0;
-    right: calc(100px + 5vw);
+    top: 13px;
+    right: calc(100px + 6vw);
     width: 40px;
-    height: 100%;
+    height: 40px;
     color: ${({ theme }) => theme.FONT_C};
+
+    & > svg {
+      // border: 1px solid red;
+      position: absolute; // 모바일에서는 width가 재대로 적용되지 않아 absolute 추가
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
 
     @media screen and (min-width: 833px) {
       right: 130px;
@@ -71,13 +78,14 @@ const DarkModeButton = ({ isDarkTheme, onClickDarkMode }: DarkModeProps) => {
       <button onClick={onClickDarkMode}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="25"
-          height="25"
-          viewBox="0 0 24 24"
+          width="23"
+          height="23"
+          viewBox="0 0 25 25"
           fill="none"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          // preserveAspectRatio="xMidYMid slice"
         >
           {/* Moon  */}
           <path pathLength="1" className="moon-icon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
