@@ -33,6 +33,16 @@ DIV.BlogBlock = styled.div`
     margin-top: 50px;
     border-left: 2px solid ${({ theme }) => theme.BD_C};
     border-right: 2px solid ${({ theme }) => theme.BD_C};
+
+    //BlogMain의 왼쪽 테두리에 종속
+    &::after {
+      border-left: 2px solid ${({ theme }) => theme.BD_C};
+      content: '';
+      position: absolute;
+      top: 0px;
+      left: 227px;
+      height: 100%;
+    }
   }
 `;
 
@@ -47,7 +57,7 @@ SECTION.BlogMain = styled.section`
   padding-top: 50px;
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
-    border-left: 2px solid ${({ theme }) => theme.BD_C};
+    // border-left: 2px solid ${({ theme }) => theme.BD_C};
     min-width: 800px;
   }
   @media screen and (min-width: ${({ theme }) => theme.BP.PC}) {
