@@ -136,6 +136,25 @@ DIV.PublishCategory = styled.div<PublishCategpryProps>`
           }};
         }
       }
+
+      // 모바일에서는 rotateX 만 적용
+      @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
+        &:hover {
+          & .arrow-down-icon {
+            ${(props) => {
+              if (props.isOpenedCategory) {
+                return `
+                transform: translateY(5px) rotateX(180deg);
+              `;
+              } else {
+                return `
+                transform: translateY(-5px) rotateX(0deg);
+              `;
+              }
+            }};
+          }
+        }
+      }
     }
   }
 `;

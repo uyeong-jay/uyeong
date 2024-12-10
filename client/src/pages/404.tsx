@@ -28,32 +28,42 @@ MAIN.frame = styled.main`
   font-size: 15px;
   color: ${({ theme }) => theme.FONT_C};
 
-  & > h1 {
+  & > div {
     // border: 1px solid black;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    margin: 0px;
-    font-family: 'Baloo Bhaijaan 2', sans-serif;
-    font-optical-sizing: auto;
-    font-size: 6rem;
-    letter-spacing: 5px;
-  }
+    align-items: center;
+    height: 250px;
+    transform: translateY(-15%);
 
-  & > p {
-    // border: 1px solid black;
-  }
+    & > h1 {
+      // border: 1px solid red;
+      display: flex;
+      justify-content: center;
+      margin: 0px;
+      font-family: 'Baloo Bhaijaan 2', sans-serif;
+      font-optical-sizing: auto;
+      font-size: 6rem;
+      letter-spacing: 5px;
+    }
 
-  & a,
-  button {
-    // border: 1px solid black;
-    background-color: ${({ theme }) => theme.BD_C};
-    padding: 6px 10px;
-    margin-top: 25px;
-    font-weight: bold;
-    letter-spacing: 0.3px;
-    word-spacing: -3px;
-    color: ${({ theme }) => theme.BG_C};
-    border-radius: 10px;
+    & > p {
+      // border: 1px solid blue;
+    }
+
+    & a,
+    button {
+      // border: 1px solid green;
+      background-color: ${({ theme }) => theme.BD_C};
+      padding: 6px 10px;
+      margin-top: 25px;
+      font-weight: bold;
+      letter-spacing: 0.3px;
+      word-spacing: -3px;
+      color: ${({ theme }) => theme.BG_C};
+      border-radius: 10px;
+    }
   }
 `;
 
@@ -80,9 +90,11 @@ const NotFound = ({ isUserFetchError }: Props) => {
 
   return (
     <MAIN.frame>
-      <h1>404</h1>
-      <p>Oops... looks like you got lost</p>
-      {isUserFetchError ? <button onClick={onClickLogout}>Back to home</button> : <Link href="/">Back to home</Link>}
+      <div>
+        <h1>404</h1>
+        <p>Oops... looks like you got lost</p>
+        {isUserFetchError ? <button onClick={onClickLogout}>Back to home</button> : <Link href="/">Back to home</Link>}
+      </div>
     </MAIN.frame>
   );
 };

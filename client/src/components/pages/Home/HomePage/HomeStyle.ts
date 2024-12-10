@@ -147,11 +147,11 @@ DIV.ActiveBtns = styled.div`
   & > button {
     border: 2px solid ${({ theme }) => theme.BD_C};
     background-color: ${({ theme }) => theme.INITIAL_BG_C};
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
+    padding: 0; // 모바일 환경에서 width가 더 작게 조절되도록 padding 제거
     border-radius: 50%;
     margin: 0 10px;
-    transition: background-color 0.25s ease-in-out;
 
     &.active {
       background-color: ${({ theme }) => theme.BD_C};
@@ -159,12 +159,21 @@ DIV.ActiveBtns = styled.div`
   }
 
   @media screen and (min-height: 500px) and (min-width: 850px) {
-    bottom: -35px;
+    bottom: -40px;
     right: 10px;
     transform: translateX(0%);
 
     & > button {
+      width: 23px;
+      height: 23px;
       border: 3px solid ${({ theme }) => theme.BD_C};
+    }
+  }
+
+  // 모바일에서는 깜빡 거림이 있어 테블릿 크기 위로만 적용
+  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+    & > button {
+      transition: background-color 0.25s ease-in-out;
     }
   }
 `;

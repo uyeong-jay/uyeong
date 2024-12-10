@@ -16,14 +16,20 @@ const StyledDetailButton = styled.button`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 90px;
+  width: 100px; //모바일환경의 실제 width가 다르게 적용되어 추가
   height: 30px;
+  position: relative;
 
   & > a {
+    // border: 1px solid red;
     color: ${({ theme }) => theme.FONT_C};
   }
 
   & .arrow-right-icon {
+    // border: 1px solid blue;
+    position: absolute; //모바일환경의 실제 width가 다르게 적용되어 추가
+    top: 9px;
+    right: 5px;
     width: 7px;
     fill: ${({ theme }) => theme.FONT_C};
     transition: transform 0.3s;

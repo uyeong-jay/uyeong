@@ -13,7 +13,7 @@ SECTION.Frame = styled.section`
   & > .scrolling-words-box {
     // border: 1px solid black;
     position: absolute;
-    top: 45%;
+    top: 39%; // 모바일 화면에서의 높이
     left: 50%;
     transform: translate(-50%, -50%);
     min-width: 320px;
@@ -32,7 +32,7 @@ SECTION.Frame = styled.section`
         align-items: center;
         height: 3.5rem; //높이 맞추기 2
         list-style: none;
-        font-size: 2.5rem; //높이에 따라 글자 크기 맞추기
+        font-size: 2.3rem;
         font-weight: 600;
 
         & .heart-icon {
@@ -44,6 +44,12 @@ SECTION.Frame = styled.section`
             fill: ${({ theme }) => theme.FONT_C};
           }
         }
+      }
+
+      & > li:nth-of-type(3) {
+        // border: 1px solid red;
+        white-space: nowrap;
+        font-size: 2rem;
       }
 
       @keyframes scroll-up {
@@ -64,6 +70,12 @@ SECTION.Frame = styled.section`
           transform: translateY(-80%);
         }
       }
+    }
+  }
+
+  @media screen and (min-height: 500px) and (min-width: 850px) {
+    & > .scrolling-words-box {
+      top: 45%;
     }
   }
 `;

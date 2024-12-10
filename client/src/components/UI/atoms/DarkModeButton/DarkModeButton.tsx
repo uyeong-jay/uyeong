@@ -12,8 +12,8 @@ const StyledDarkModeButton = styled.div`
     background-color: inherit;
     cursor: pointer;
     position: absolute;
-    top: 13px;
-    right: calc(100px + 6vw);
+    top: 14px;
+    right: calc(100px + 6.7vw);
     width: 40px;
     height: 40px;
     color: ${({ theme }) => theme.FONT_C};

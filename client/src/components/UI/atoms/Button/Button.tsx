@@ -17,6 +17,7 @@ interface ButtonProps {
 const StyledButton = styled.button<ButtonProps>`
   text-align: center;
   font-weight: bold;
+  padding: 1px 6px;
 
   ${(props) => {
     if (props.disabled) return `opacity: 0.5;`;

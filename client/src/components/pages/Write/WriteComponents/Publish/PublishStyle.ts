@@ -18,6 +18,11 @@ DIV.PublishFrame = styled.div<PublishProps>`
   height: 100vh;
   overflow: auto;
   color: ${({ theme }) => theme.FONT_C};
+  padding-bottom: 70px; // 모바일에서 주소창이 하단 or 상단에 있을경우 모두 하단에 공간 필요
+
+  @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+    padding-bottom: 0px;
+  }
 
   animation: ${(props) => props.animationName} 0.5s ease-out 0s forwards;
 

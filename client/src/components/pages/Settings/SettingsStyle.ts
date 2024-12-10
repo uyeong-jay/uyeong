@@ -105,8 +105,9 @@ DIV.SettingsTopBtns = styled.div`
   }
 `;
 
-//제거 및 복구 버튼
+// 프로필 사진 제거 및 복구 버튼
 DIV.ToggleBtnWrapper = styled.div`
+  // border: 1px solid red;
   width: 30px;
 
   & > button {
@@ -131,6 +132,10 @@ DIV.ToggleBtnWrapper = styled.div`
 
     & .x-mark-icon {
       // border: 1px solid black;
+      position: absolute; //모바일환경의 실제 width가 다르게 적용되어 추가
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       width: 12px;
       fill: ${({ theme }) => theme.LOGO_C};
     }

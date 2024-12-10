@@ -15,7 +15,8 @@ DIV.Frame = styled.div<BadgesProps>`
     position: absolute;
     top: -25px;
     height: 15px;
-    // width: 5px;
+    width: 20px;
+    padding: 0; //모바일 환경에서 width가 더 작게 조절되도록 padding 제거
     border-radius: 25%;
   }
 
@@ -24,7 +25,7 @@ DIV.Frame = styled.div<BadgesProps>`
       if (!props.isAllBadgesActive) return `${props.theme.BD_C};`;
       else return `${props.theme.BG_C};`;
     }};
-    right: 50px;
+    right: 52px;
   }
 
   & > button:nth-of-type(2) {
