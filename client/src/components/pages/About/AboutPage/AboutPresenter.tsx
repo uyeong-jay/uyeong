@@ -79,7 +79,7 @@ const AboutPresenter = () => {
                 <span>안녕하세요!</span>
                 <br />
                 저는 장우영입니다. 프론트 엔드 개발자를 준비하는 과정에서 제 이야기를 기록하고 사용자와 같이 소통이
-                가능한 웹페이지를 직접 만들고 싶어 이 블로그 사이트를 만들게 되었습니다.
+                가능한 공간을 직접 만들고 싶어 이 블로그 사이트를 만들게 되었습니다.
               </p>
 
               <p>
@@ -100,16 +100,16 @@ const AboutPresenter = () => {
               <p>
                 <span>Hello!</span>
                 <br />
-                My name is U Yeong Jang. As I prepare to become a front-end developer, I decided to create this blog
-                site to record my journey and create a webpage where I can communicate with users.
+                My name is U Yeong Jang. As I work toward becoming a front-end developer, I created this blog to
+                document my journey and build a space where I can connect with users.
               </p>
               <p>
                 Here, starting with my experiences in creating this blog, I plan to document stories from learning new
-                technologies, undertaking various projects, and sharing snippets of my daily life.
+                technologies, working on various projects, and moments from my daily life.
               </p>
               <p>
-                I hope to connect with visitors like you, get feedback, and grow together. Feel free to leave comments
-                and share your thoughts.
+                I hope to connect with everyone who visits here, gather feedback, and grow together. Feel free to leave
+                comments and share your thoughts.
               </p>
               <p>Thank you for visiting!</p>
             </div>
@@ -125,14 +125,13 @@ const AboutPresenter = () => {
           <div>
             <h3>Likes</h3>
             <ul>
-              <li>Taking pictures of food or landscapes</li>
-              <li>Visiting or discovering good places while traveling</li>
-              <li>Hiking in the not that high mountains</li>
-              <li>Playing almost ball Sports</li>
-              <li>Making an effort to exercise regularly</li>
-              <li>Movie Marathon with snacks</li>
-              <li>Making dishes like soufflés and egg tarts</li>
-              <li>Watching cute animal videos before going to sleep</li>
+              <li>Having a movie marathon with snacks</li>
+              <li>Exploring hidden gems while traveling</li>
+              <li>Playing almost any sport with a ball</li>
+              <li>Hiking on moderate mountain trails</li>
+              <li>Messing around in the kitchen</li>
+              <li>Taking landscape or food photos</li>
+              <li>Watching animal videos to rest before bed</li>
             </ul>
           </div>
         </DIV.AboutMeDetail>
