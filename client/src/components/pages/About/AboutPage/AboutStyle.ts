@@ -175,7 +175,7 @@ DIV.AboutBlog = styled.div<AboutBlogProps>`
   display: flex;
   justify-content: center;
   width: auto;
-  min-height: 450px;
+  min-height: 500px;
   margin: 160px 0 180px 0;
   position: relative;
 
@@ -298,11 +298,11 @@ DIV.AboutBlog = styled.div<AboutBlogProps>`
   }
 
   @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
-    margin: 100px 0 160px 0;
+    margin: 130px 0 160px 0;
   }
 
   @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
-    margin: 130px 0 180px 0;
+    margin: 140px 0 180px 0;
     height: 550px;
 
     & > div {
