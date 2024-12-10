@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { fileStatus, setFileModified, setFileRemoved, setFileUnchanged } from '@pages/Write/WriteSlice';
 import { useRouter } from 'next/router';
 import { CloudinaryTypes } from '@src/pages/settings';
+import { removePageLoading } from '@organisms/Header/HeaderSlice';
 
 export interface IUserUpdateInfo {
   avatar?: string | File;
@@ -55,11 +56,17 @@ const SettingsContainer = ({ cloudinaryConfig }: Props) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isToggled, setToggled] = useState(false);
 
+  //유저 데이터가 없을 경우 홈으로 리다이렉트
   useEffect(() => {
-    if (!userData?.user) router.replace('/');
-  }, [router, userData?.user]);
+    if (!userData?.user)
+      router.replace('/').then(() => {
+        setTimeout(() => {
+          dispatch(removePageLoading());
+        }, 800); // removePageLoading이 바로 실행될 경우 로딩이 남아있는 오류가 있어 0.8초 지연
+      });
+  }, [dispatch, router, userData?.user]);
 
-  //로딩 종료
+  // 로딩 종료
   useEffect(() => {
     if (!isUpdatingUserData) setUpdatingUserInfo(false);
   }, [isUpdatingUserData]);

@@ -3,11 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 //initialState type
 interface initialState {
   scrollDirForModal: string;
+  pageLoading: boolean;
 }
 
 //initialState
 const initialState: initialState = {
   scrollDirForModal: '',
+  pageLoading: false,
 };
 
 //slice
@@ -24,9 +26,16 @@ const headerSlice = createSlice({
     scrollResetForModal: (state) => {
       state.scrollDirForModal = '';
     },
+    startPageLoading: (state) => {
+      state.pageLoading = true;
+    },
+    removePageLoading: (state) => {
+      state.pageLoading = false;
+    },
   },
 });
 
 //reducer, actions 내보내기
 export default headerSlice.reducer;
-export const { scrollDownForModal, scrollUpForModal, scrollResetForModal } = headerSlice.actions;
+export const { scrollDownForModal, scrollUpForModal, scrollResetForModal, startPageLoading, removePageLoading } =
+  headerSlice.actions;

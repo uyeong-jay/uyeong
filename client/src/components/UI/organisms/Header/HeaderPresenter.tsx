@@ -10,10 +10,11 @@ import useOnClickOutside from '@hooks/useOnClickOutside';
 import CaretDownIcon from '@icons/CaretDownIcon';
 import CaretUpIcon from '@icons/CaretUpIcon';
 import Logo from '@icons/Logo';
-import { useAppSelector } from '@app/hooks';
+import { useAppDispatch, useAppSelector } from '@app/hooks';
 import UserIcon from '@icons/UserIcon';
 import PageLoader from '@molecules/PageLoader';
 import DarkModeButton from '@atoms/DarkModeButton';
+import { removePageLoading, startPageLoading } from './HeaderSlice';
 
 interface Props {
   userData?: UserResponse;
@@ -53,39 +54,44 @@ const HeaderPresenter = ({
 
   const [isMenuIconClicked, setMenuIconClicked] = useState(false);
   const [isShowingMenuAni, setShowingMenuAni] = useState(false);
-  const [isPageLoading, setPageLoading] = useState(false);
+  // const [isPageLoading, setPageLoading] = useState(false);
 
   const router = useRouter();
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const { pageLoading } = useAppSelector((state) => state.header);
+  const dispatch = useAppDispatch();
 
   //페이지 로딩시 로더 보여주기
   useEffect(() => {
     const onStartPageLoading = () => {
       //0.5초 뒤 실행
       timerRef.current = setTimeout(() => {
-        setPageLoading(true);
+        // setPageLoading(true);
+        dispatch(startPageLoading());
       }, 500);
     };
 
-    const onCompletePageLoading = () => {
+    const onRemovePageLoading = () => {
       //시간에 상관없이 타이머 clear
       if (timerRef.current) {
         clearTimeout(timerRef.current);
         timerRef.current = null;
       }
-      setPageLoading(false);
+      // setPageLoading(false);
+      dispatch(removePageLoading());
     };
 
     router.events.on('routeChangeStart', onStartPageLoading);
-    router.events.on('routeChangeComplete', onCompletePageLoading);
-    router.events.on('routeChangeError', onCompletePageLoading);
+    router.events.on('routeChangeComplete', onRemovePageLoading);
+    router.events.on('routeChangeError', onRemovePageLoading);
 
     return () => {
       router.events.off('routeChangeStart', onStartPageLoading);
-      router.events.off('routeChangeComplete', onCompletePageLoading);
-      router.events.off('routeChangeError', onCompletePageLoading);
+      router.events.off('routeChangeComplete', onRemovePageLoading);
+      router.events.off('routeChangeError', onRemovePageLoading);
     };
-  }, [router]);
+  }, [dispatch, router]);
 
   //width가 833px 보다 커지면 메뉴 클릭 animation false
   useEffect(() => {
@@ -305,7 +311,7 @@ const HeaderPresenter = ({
         </NAV.HeaderNav>
       </HEADER.Frame>
 
-      {isPageLoading && <PageLoader />}
+      {pageLoading && <PageLoader />}
     </>
   );
 };
