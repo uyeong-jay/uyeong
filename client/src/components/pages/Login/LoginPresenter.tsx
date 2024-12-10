@@ -51,9 +51,6 @@ const LoginPresenter = ({
       <Head>
         <title>UYeong | Login</title>
       </Head>
-      {/* 로딩화면 */}
-      {/* {isLoggingIn && <Loader />} */}
-
       <PageFrame>
         <PageTitle text="Log in" />
 

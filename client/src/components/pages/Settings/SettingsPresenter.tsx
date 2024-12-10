@@ -73,7 +73,6 @@ const SettingsPresenter = ({
       <Head>
         <title>UYeong | Settings</title>
       </Head>
-      {/* 로딩중 */}
       <PageFrame>
         <PageTitle text="Settings" />
 

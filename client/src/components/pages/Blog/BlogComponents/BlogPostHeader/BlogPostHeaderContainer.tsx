@@ -34,7 +34,7 @@ const BlogPostHeaderContainer = ({ blogPost }: Props) => {
       dispatch(setPostAuthInfo(data));
       await router.replace('/blog');
     },
-    [_id, dispatch, router, userData?.access_token],
+    [_id, dispatch, router, userData?.access_token]
   );
 
   return (

@@ -24,7 +24,7 @@ SECTION.Frame = styled.section`
 `;
 
 DIV.SliderWrapper = styled.div`
-  border: 1px solid / blue;
+  // border: 1px solid blue;
   width: 230px;
   margin-top: 25px;
 
