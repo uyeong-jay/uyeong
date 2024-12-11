@@ -270,7 +270,7 @@ const HeaderPresenter = ({
                       <NavLinkBox href="/settings">Settings</NavLinkBox>
                       <span></span>
                       <li>
-                        <Button variant="logout" onClick={onClickLogout} text="Log out" />
+                        <Button variant="logout" onClick={onClickLogout} text="Sign out" />
                       </li>
                     </ul>
                   ) : (
@@ -279,7 +279,7 @@ const HeaderPresenter = ({
                       <NavLinkBox href="/settings">Settings</NavLinkBox>
                       <span></span>
                       <li>
-                        <Button variant="logout" onClick={onClickLogout} text="Log out" />
+                        <Button variant="logout" onClick={onClickLogout} text="Sign out" />
                       </li>
                     </ul>
                   ))}

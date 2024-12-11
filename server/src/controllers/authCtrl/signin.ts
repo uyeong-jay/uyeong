@@ -21,7 +21,7 @@ const signin = async (req: Request, res: Response) => {
       await Users.findOneAndUpdate({ _id: user._id }, { rf_token: "" });
 
       return res.status(400).json({
-        msg: "Since your last logout wasn’t completed successfully, please log in again to ensure you have proper access to your account.",
+        msg: "Since your last sign-out wasn’t completed successfully, please log in again to ensure you have proper access to your account.",
       });
     }
 

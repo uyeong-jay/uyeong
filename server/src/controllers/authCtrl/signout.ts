@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Users from "@models/userModel";
 
-const logout = async (req: Request, res: Response) => {
+const signout = async (req: Request, res: Response) => {
   try {
     const rf_token = req.cookies.refresh_token;
 
@@ -21,4 +21,4 @@ const logout = async (req: Request, res: Response) => {
   }
 };
 
-export default logout;
+export default signout;

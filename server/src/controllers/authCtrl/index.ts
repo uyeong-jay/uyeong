@@ -1,13 +1,13 @@
 import register from "./register";
 import signin from "./signin";
-import logout from "./logout";
+import signout from "./signout";
 import refresh from "./refresh";
 
 const authCtrl = {
   register,
   signin,
   refresh,
-  logout,
+  signout,
 };
 
 export default authCtrl;
