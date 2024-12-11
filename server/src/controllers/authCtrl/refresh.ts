@@ -10,7 +10,7 @@ const refresh = async (req: Request, res: Response) => {
 
     const rf_token = req.cookies.refresh_token;
 
-    if (!rf_token) return res.status(200).json({ msg: "User not logged in." });
+    if (!rf_token) return res.status(200).json({ msg: "User not signed in." });
 
     //디코드 with jwt
     const { decoded } = authToken(rf_token, `${process.env.REFRESH_TOKEN_SECRET}`);
@@ -28,7 +28,7 @@ const refresh = async (req: Request, res: Response) => {
 
     //다른곳에서 이미 로그인이 되어 있을때
     if (rf_token !== user.rf_token) {
-      return res.status(400).json({ msg: "You’re currently logged in somewhere else. Please sign in again here." });
+      return res.status(400).json({ msg: "You’re currently signed in somewhere else. Please sign in again here." });
     }
 
     const access_token = generateAccessToken({ id: user?._id });

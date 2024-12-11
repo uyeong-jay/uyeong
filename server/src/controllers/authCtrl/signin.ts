@@ -42,7 +42,7 @@ const signin = async (req: Request, res: Response) => {
     res.status(200).json({
       access_token,
       user: { ...user._doc, password: "" }, //비번 제외(IUser type(with _doc) model)
-      msg: "Logged in successfully!",
+      msg: "Signed in successfully!",
     });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });
