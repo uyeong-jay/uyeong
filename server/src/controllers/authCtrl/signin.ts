@@ -3,7 +3,7 @@ import Users from "@models/userModel";
 import bcrypt from "bcrypt";
 import { generateAccessToken, generateRefreshToken } from "@utils/generateToken";
 
-const login = async (req: Request, res: Response) => {
+const signin = async (req: Request, res: Response) => {
   try {
     //client 데이터 가져오기
     const { email, password } = req.body;
@@ -49,4 +49,4 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
-export default login;
+export default signin;

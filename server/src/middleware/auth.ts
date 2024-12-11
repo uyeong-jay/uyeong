@@ -25,7 +25,7 @@ const auth = async (req: IReqAuth, res: Response, next: NextFunction) => {
 
     //다른곳에서 이미 로그인이 되어 있을때
     if (rf_token !== user.rf_token) {
-      return res.status(400).json({ msg: "You’re currently logged in somewhere else. Please log in again here." });
+      return res.status(400).json({ msg: "You’re currently logged in somewhere else. Please sign in again here." });
     }
 
     req.user = user;

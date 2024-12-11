@@ -3,7 +3,7 @@ import authCtrl from "@controllers/authCtrl";
 import valid from "@middleware/valid";
 
 const authRouter = express.Router();
-const { register, login, logout, refresh } = authCtrl;
+const { register, signin, logout, refresh } = authCtrl;
 
 // get(read): 데이터 조회, no need data
 // post(create): 데이터 등록
@@ -11,7 +11,7 @@ const { register, login, logout, refresh } = authCtrl;
 // patch(update): 데이터 변경(부분)
 // delete(delete): 데이터 제거
 authRouter.post("/register", valid, register);
-authRouter.post("/login", login);
+authRouter.post("/signin", signin);
 authRouter.post("/logout", logout);
 authRouter.get("/refresh", refresh);
 

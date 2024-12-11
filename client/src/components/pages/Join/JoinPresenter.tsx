@@ -80,10 +80,10 @@ const JoinPresenter = ({
             </div>
             <p>
               Your account has been successfully created! <br />
-              Please click the button below to log in to your account.
+              Please click the button below to sign in to your account.
             </p>
-            <Link href="/login" passHref>
-              Log in
+            <Link href="/signin" passHref>
+              Sign in
             </Link>
           </DIV.JoinSuccess>
         </PageFrame>
@@ -187,7 +187,7 @@ const JoinPresenter = ({
           </FORM.JoinForm>
 
           <P.JoinFooter>
-            Already have an account? <Link href="/login">Log in here!</Link>
+            Already have an account? <Link href="/signin">Sign in here!</Link>
           </P.JoinFooter>
 
           {/* 에러 메시지 */}

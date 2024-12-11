@@ -57,7 +57,7 @@ const BlogPostCommentWritePresenter = ({
           />
           {render && (
             <DIV.CommentLoginBox animationName={show && 'up'} onAnimationEnd={() => onAnimationEnd}>
-              Please log in first !<Link href="/login">Log in</Link>
+              Please Sign in first !<Link href="/signin">Sign in</Link>
             </DIV.CommentLoginBox>
           )}
         </div>

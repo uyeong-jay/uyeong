@@ -33,7 +33,7 @@ const LoginContainer = () => {
       const { name, value } = e.target;
       setUserLoginInfo({ ...userLoginInfo, [name]: value });
     },
-    [userLoginInfo],
+    [userLoginInfo]
   );
 
   const onSubmit = useCallback(
@@ -45,7 +45,7 @@ const LoginContainer = () => {
 
       await login(userLoginInfo);
     },
-    [isModalOpen, login, userLoginInfo],
+    [isModalOpen, login, userLoginInfo]
   );
 
   return (

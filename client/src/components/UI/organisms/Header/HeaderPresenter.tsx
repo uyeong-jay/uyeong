@@ -293,8 +293,8 @@ const HeaderPresenter = ({
                   </li>
                 ) : (
                   //로그인 전
-                  <NavLinkBox href="/login" passHref={true}>
-                    <Button variant="login" text="Log in" />
+                  <NavLinkBox href="/signin" passHref={true}>
+                    <Button variant="login" text="Sign in" />
                   </NavLinkBox>
                 )}
               </>

@@ -53,7 +53,7 @@ export const userApi = api.injectEndpoints({
 
     login: builder.mutation<UserResponse, UserRequest>({
       query: (data) => ({
-        url: '/api/login',
+        url: '/api/signin',
         method: 'post',
         data,
       }),

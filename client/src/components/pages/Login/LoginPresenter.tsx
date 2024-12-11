@@ -49,10 +49,10 @@ const LoginPresenter = ({
   return (
     <>
       <Head>
-        <title>UYeong | Login</title>
+        <title>UYeong | Sign-in</title>
       </Head>
       <PageFrame>
-        <PageTitle text="Log in" />
+        <PageTitle text="Sign in" />
 
         <FORM.LoginForm onSubmit={onSubmit}>
           <div>
@@ -78,7 +78,7 @@ const LoginPresenter = ({
 
           <FormButton
             variant="login"
-            text="Log in"
+            text="Sign in"
             formIsLoading={isLoggingInFirst || isLoggingIn}
             disabled={email && password ? false : true}
           />
