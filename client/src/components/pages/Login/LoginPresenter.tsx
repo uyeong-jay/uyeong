@@ -85,7 +85,7 @@ const LoginPresenter = ({
         </FORM.LoginForm>
 
         <P.LoginFooter>
-          Don&#39;t have an account yet? <Link href="/join">Create one here!</Link>
+          Don&#39;t have an account yet? <Link href="/signup">Create one here!</Link>
         </P.LoginFooter>
 
         {/* 에러 메시지 */}

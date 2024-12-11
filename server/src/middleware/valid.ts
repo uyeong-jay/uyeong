@@ -35,4 +35,4 @@ const valid = (req: Request, res: Response, next: NextFunction) => {
 
 export default valid;
 
-//사용: authRouter.post("/register", valid, authCtrl.register);
+//사용: authRouter.post("/signup", valid, authCtrl.signup);

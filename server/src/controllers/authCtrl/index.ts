@@ -1,10 +1,10 @@
-import register from "./register";
+import signup from "./signup";
 import signin from "./signin";
 import signout from "./signout";
 import refresh from "./refresh";
 
 const authCtrl = {
-  register,
+  signup,
   signin,
   refresh,
   signout,

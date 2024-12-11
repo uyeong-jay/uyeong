@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import { generateRandomNumber, sendEmail } from "@utils/authEmail";
 import { generateAccessToken } from "@utils/generateToken";
 
-const register = async (req: Request, res: Response) => {
+const signup = async (req: Request, res: Response) => {
   try {
     //valid 미들웨어 통과 후
 
@@ -46,16 +46,16 @@ const register = async (req: Request, res: Response) => {
         password: passwordHash,
       });
 
-      const access_token = generateAccessToken({ id: newUser._id }); //join 확인용
+      const access_token = generateAccessToken({ id: newUser._id }); //signup 확인용
 
       //db에 저장
       await newUser.save();
 
-      res.status(200).json({ access_token, msg: "Joined successfully!" });
+      res.status(200).json({ access_token, msg: "Signed up successfully!" });
     }
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });
   }
 };
 
-export default register;
+export default signup;
