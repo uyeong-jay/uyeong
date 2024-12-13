@@ -41,14 +41,14 @@ deploy:
     - echo "Cleaning up previous docker-compose containers and networks..."
     - docker-compose -f docker-compose.prod.yml down
 
-    - echo "Starting new containers..."
-    - docker-compose -f docker-compose.prod.yml up --build -d
-
     - echo "Pruning unused volumes..."
     - docker volume prune -f
 
     - echo "Pruning unused containers..."
     - docker container prune -f
+
+    - echo "Starting new containers..."
+    - docker-compose -f docker-compose.prod.yml up --build -d
 
     - echo "Removing unused images..."
     - docker rmi $(docker images -f dangling=true -q)
