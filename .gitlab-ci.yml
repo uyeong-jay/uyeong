@@ -41,17 +41,19 @@ deploy:
     - echo "Cleaning up previous docker-compose containers and networks..."
     - docker-compose -f docker-compose.prod.yml down
 
-    - echo "Pruning unused volumes..."
-    - docker volume prune -f
+    - docker system prune --volumes -a -f
 
-    - echo "Pruning unused containers..."
-    - docker container prune -f
+    # - echo "Pruning unused volumes..."
+    # - docker volume prune -f
 
-    - echo "Starting new containers..."
-    - docker-compose -f docker-compose.prod.yml up --build -d
+    # - echo "Pruning unused containers..."
+    # - docker container prune -f
 
-    - echo "Removing unused images..."
-    - docker rmi $(docker images -f dangling=true -q)
+    # - echo "Starting new containers..."
+    # - docker-compose -f docker-compose.prod.yml up --build -d
+
+    # - echo "Removing unused images..."
+    # - docker rmi $(docker images -f dangling=true -q)
 
   after_script:
-    - echo [INFO] Deployment completed.
+    - if [ $? -eq 0 ]; then echo "[INFO] Deployment completed."; fi
