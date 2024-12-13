@@ -27,7 +27,7 @@ services:
     ports:
       - 3000:3000
     env_file:
-      - ./client/.env.local
+      - ./client/.env.production
     depends_on:
       - server-prod
     networks:
