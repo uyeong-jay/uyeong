@@ -54,7 +54,6 @@ const HeaderPresenter = ({
 
   const [isMenuIconClicked, setMenuIconClicked] = useState(false);
   const [isShowingMenuAni, setShowingMenuAni] = useState(false);
-  // const [isPageLoading, setPageLoading] = useState(false);
 
   const router = useRouter();
   const timerRef = useRef<NodeJS.Timeout | null>(null);
