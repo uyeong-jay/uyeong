@@ -9,13 +9,13 @@ deploy:
     - docker
   before_script:
     - echo [INFO] Current version - $CI_COMMIT_TAG
+
     - echo [INFO] Checking Docker and Docker Compose..
     - docker --version
     - docker-compose --version
 
     - echo [INFO] Setting up environment variables...
 
-    - echo > client/.env.local
     - echo > client/.env.production
     - echo "CLOUDINARY_UPLOAD_PRESET=$CLOUDINARY_UPLOAD_PRESET" >> client/.env.production
     - echo "CLOUDINARY_CLOUD_NAME=$CLOUDINARY_CLOUD_NAME" >> client/.env.production
@@ -38,22 +38,23 @@ deploy:
   script:
     - echo [INFO] Deployment started.
 
-    - echo "Cleaning up previous docker-compose containers and networks..."
+    - echo "Cleaning up previous containers and networks..."
     - docker-compose -f docker-compose.prod.yml down
 
-    - docker system prune --volumes -a -f
+    - echo "Starting new containers..."
+    - docker-compose -f docker-compose.prod.yml up --build -d
 
-    # - echo "Pruning unused volumes..."
-    # - docker volume prune -f
+    - echo "Pruning unused containers..."
+    - docker container prune -f
 
-    # - echo "Pruning unused containers..."
-    # - docker container prune -f
+    - echo "Pruning unused networks..."
+    - docker network prune -f
 
-    # - echo "Starting new containers..."
-    # - docker-compose -f docker-compose.prod.yml up --build -d
+    - echo "Pruning unused volumes..."
+    - docker volume prune -f
 
-    # - echo "Removing unused images..."
-    # - docker rmi $(docker images -f dangling=true -q)
+    - echo "Pruning unused images..."
+    - docker image prune -a -f
 
   after_script:
     - if [ $? -eq 0 ]; then echo "[INFO] Deployment completed."; fi
