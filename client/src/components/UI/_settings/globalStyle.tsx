@@ -24,9 +24,11 @@ const GlobalStyle = () => {
         body {
           overflow-x: hidden;
           line-height: 1.5; //줄 높이 글자 크기의 1.5배
+          font-size: 14px;
           font-family: 'Noto Sans KR', sans-serif;
           -webkit-font-smoothing: antialiased;
-          font-size: 14px;
+          -webkit-tap-highlight-color: transparent; //rgba(0, 0, 0, 0); // 모바일에서 터치시 나타나는 주변 배경 가리기
+          -webkit-focus-ring-color: transparent; //rgba(0, 0, 0, 0); // 모바일에서 터치시 나타나는 주변 배경 가리기
         }
 
         @media screen and (max-width: 320px) {
@@ -81,6 +83,7 @@ const GlobalStyle = () => {
           text-decoration: none;
           outline: none;
         }
+
         ul {
           list-style: none;
           padding-left: 0;
