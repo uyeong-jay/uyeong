@@ -100,8 +100,8 @@ const AboutPresenter = () => {
               <p>
                 <span>Hello!</span>
                 <br />
-                My name is U Yeong Jang. As I work toward becoming a front-end developer, I created this blog to
-                document my journey and build a space where I can connect with users.
+                <span>My name is U Yeong Jang.</span> As I work toward becoming a front-end developer, I created this
+                blog to document my journey and build a space where I can connect with users.
               </p>
               <p>
                 Here, starting with my experiences in creating this blog, I plan to document stories from learning new

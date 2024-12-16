@@ -179,6 +179,7 @@ DIV.AboutBlog = styled.div<AboutBlogProps>`
   margin: 160px 0 180px 0;
   position: relative;
 
+  // AboutBlog 버튼 스타일
   & > div:nth-of-type(1) {
     // border: 2px solid ${({ theme }) => theme.BD_C};
     position: absolute;
@@ -267,11 +268,27 @@ DIV.AboutBlog = styled.div<AboutBlogProps>`
             font-style: normal;
             font-variation-settings: 'MONO' 1;
             letter-spacing: -0.5px;
+            word-spacing: -3px;
+
+            // 화면 너비에 따라 줄바꿈 가능하도록 변경
+            & > span:nth-of-type(1) ~ span {
+              // border: 1px solid black;
+              display: block;
+            }
+
+            @media screen and (min-width: calc(${props.theme.BP.TABLET} - 270px)) {
+              & > span:nth-of-type(1) ~ span {
+                // border: 1px solid red; 
+                display: inline;
+              }
+            }
+
           `;
         }
       }};
 
-      & > span {
+      // 인삿말
+      & > span:nth-of-type(1) {
         // border: 1px solid black;
         display: inline-block;
         width: 100%;
