@@ -217,6 +217,10 @@ DIV.PublishPreviewBtns = styled.div`
 
       & .rotate-icon {
         // border: 1px solid black;
+        position: absolute; //모바일환경의 실제 width가 다르게 적용되어 추가
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 15px;
         fill: ${({ theme }) => theme.LOGO_C};
       }
