@@ -46,14 +46,15 @@ const Badges = () => {
       {isClicked ? (
         <Image
           width={badgeItem.width}
-          height={21}
+          height={22}
           alt={badgeItem.logoName}
           src={`https://img.shields.io/badge/${badgeItem.name}-${badgeItem.color}?style=plastic&logo=${badgeItem.logoName}&logoColor=white`}
           priority
           unoptimized //src에 url 그대로 사용하기 위해 이미지 최적화 비활성
         />
       ) : (
-        <span>{badgeItem.name.replace('--', '-')}</span>
+        // -- , %20 를 - 로 대체
+        <span>{badgeItem.name.replace(/--|%20/g, '-')}</span>
       )}
     </div>
   );
