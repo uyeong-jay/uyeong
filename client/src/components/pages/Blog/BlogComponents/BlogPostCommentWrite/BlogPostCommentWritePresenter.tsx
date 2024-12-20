@@ -67,7 +67,7 @@ const BlogPostCommentWritePresenter = ({
             <BTN.ReplyCancelBtn type="button" onClick={onClickReplyCancel}>
               Cancel
             </BTN.ReplyCancelBtn>
-            <BTN.ReplyBtn type="button" onClick={onClickReply}>
+            <BTN.ReplyBtn type="button" onClick={onClickReply} CommentContent={blogCommentInfo.content}>
               Reply
             </BTN.ReplyBtn>
           </DIV.ReplyBtnGroup>
@@ -81,7 +81,9 @@ const BlogPostCommentWritePresenter = ({
             </BTN.EditSaveBtn>
           </DIV.EditBtnGroup>
         ) : (
-          <BTN.CommentBtn type="submit">Comment</BTN.CommentBtn>
+          <BTN.CommentBtn type="submit" CommentContent={blogCommentInfo.content}>
+            Comment
+          </BTN.CommentBtn>
         )}
       </FORM.CommentWriteForm>
 

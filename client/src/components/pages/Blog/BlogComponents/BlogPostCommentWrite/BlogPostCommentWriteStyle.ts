@@ -4,6 +4,10 @@ interface CommentLoginBoxProps {
   animationName: string;
 }
 
+interface CommentContentProps {
+  CommentContent: string;
+}
+
 export const FORM = {} as any;
 export const DIV = {} as any;
 export const BTN = {} as any;
@@ -116,10 +120,21 @@ BTN.ReplyCancelBtn = styled.button`
   margin-right: 5px;
 `;
 
-BTN.ReplyBtn = styled.button`
+BTN.ReplyBtn = styled.button<CommentContentProps>`
   // border: 1px solid green;
   color: ${({ theme }) => theme.FONT_C};
   padding: 0 10px;
+
+  ${(props) => {
+    if (!props.CommentContent) {
+      return `
+        & {
+          color: ${props.theme.FONT_C}7F; //opacity: 50%
+          cursor: default;
+        }
+      `;
+    }
+  }}
 `;
 
 DIV.EditBtnGroup = styled.div`
@@ -151,10 +166,21 @@ BTN.EditSaveBtn = styled.button`
   padding: 0 10px;
 `;
 
-BTN.CommentBtn = styled.button`
+BTN.CommentBtn = styled.button<CommentContentProps>`
   // border: 1px solid green;
   align-self: end;
   margin: 10px 0;
   font-size: 15px;
   color: ${({ theme }) => theme.FONT_C};
+
+  ${(props) => {
+    if (!props.CommentContent) {
+      return `
+        & {
+          color: ${props.theme.FONT_C}7F; //opacity: 50%
+          cursor: default;
+        }
+      `;
+    }
+  }}
 `;

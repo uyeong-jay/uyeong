@@ -40,6 +40,10 @@ const StyledFormButton = styled.div<FormButtonProps>`
     letter-spacing: 1px;
     font-size: 14px;
   }
+
+  & > button:disabled {
+    cursor: default;
+  }
 `;
 
 const FormButton = ({ formIsLoading, variant, text, disabled }: Props) => {
