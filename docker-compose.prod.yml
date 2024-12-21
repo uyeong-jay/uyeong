@@ -71,7 +71,7 @@ services:
       - ./certbot/www:/var/www/certbot # Certbot 웹루트 파일을 Nginx와 공유
     depends_on:
       - nginx
-    command: certonly --webroot --webroot-path=/var/www/certbot --email uyeong.jay@gmail.com --agree-tos --no-eff-email -d uyeong.com -d www.uyeong.com
+    command: certonly --webroot --webroot-path=/var/www/certbot --email uyeong.jay@gmail.com --agree-tos --no-eff-email --force-renewal -d uyeong.com -d www.uyeong.com
 
 volumes:
   mongodb:
