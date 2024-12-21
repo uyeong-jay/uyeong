@@ -56,7 +56,7 @@ services:
     volumes:
       - ./certbot/conf:/etc/letsencrypt # Certbot이 생성한 인증서 전달
       - ./certbot/www:/var/www/certbot # Certbot 웹루트 파일 전달
-      - ./nginx/ssl-dhparams.pem:/etc/letsencrypt # ssl-dhparams.pem 파일 전달
+      - ./nginx/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem # ssl-dhparams.pem 파일 전달
     depends_on:
       - server-prod
       - client-prod
@@ -71,7 +71,7 @@ services:
       - ./certbot/www:/var/www/certbot # Certbot 웹루트 파일을 Nginx와 공유
     depends_on:
       - nginx
-    command: certonly --webroot --webroot-path=/var/www/certbot --email uyeong.jay@gmail.com --agree-tos --no-eff-email -d uyeong.com -d www.uyeong.com
+    command: certonly --webroot --webroot-path=/var/www/certbot --email uyeong.jay@gmail.com --agree-tos --no-eff-email --force-renewal -d uyeong.com -d www.uyeong.com
 
 volumes:
   mongodb:
