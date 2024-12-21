@@ -44,14 +44,14 @@ deploy:
     - echo "Starting new containers..."
     - docker-compose -f docker-compose.prod.yml up --build -d
 
-    # - echo "Pruning unused containers..."
-    # - docker container prune -f
+    - echo "Pruning unused containers..."
+    - docker container prune -f
 
-    # - echo "Pruning unused networks..."
-    # - docker network prune -f
+    - echo "Pruning unused networks..."
+    - docker network prune -f
 
-    # - echo "Pruning unused volumes..."
-    # - docker volume prune -f
+    - echo "Pruning unused volumes..."
+    - docker volume prune -f
 
     - echo "Pruning unused images..."
     - docker image prune -a -f
