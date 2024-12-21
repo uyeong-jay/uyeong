@@ -56,6 +56,7 @@ services:
     volumes:
       - ./certbot/conf:/etc/letsencrypt # Certbot이 생성한 인증서를 Nginx와 공유
       - ./certbot/www:/var/www/certbot # Certbot 웹루트 파일을 Nginx와 공유
+      - ./nginx/ssl-dhparams.pem:/etc/letsencrypt # ssl-dhparams.pem 파일 전달
     depends_on:
       - server-prod
       - client-prod
