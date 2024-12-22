@@ -14,9 +14,6 @@ deploy:
     - docker --version
     - docker-compose --version
 
-    - echo [INFO] Setting up dhparams file...
-    - echo "$SSL_DH_PARAMS" > nginx/dhparam-2048.pem
-
     - echo [INFO] Setting up environment variables...
 
     - echo > client/.env.production

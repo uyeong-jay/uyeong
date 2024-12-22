@@ -50,13 +50,14 @@ services:
     build:
       context: ./nginx
       dockerfile: Dockerfile.prod
+      args:
+        SSL_DH_PARAMS: ${SSL_DH_PARAMS}
     ports:
       - 80:80
       - 443:443
     volumes:
       - ./certbot/conf:/etc/letsencrypt # Certbot이 생성한 인증서 전달
       - ./certbot/www:/var/www/certbot # Certbot 웹루트 파일 전달
-      - ./nginx/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem # ssl-dhparams.pem 파일 전달
     depends_on:
       - server-prod
       - client-prod

@@ -1,4 +1,8 @@
 FROM nginx:1.27.3-alpine
 
+# DH 파라미터 파일 생성
+ARG SSL_DH_PARAMS
+RUN echo "$SSL_DH_PARAMS" > /etc/ssl/certs/dhparams-2048.pem
+
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx-prod.conf /etc/nginx/conf.d/default.conf
