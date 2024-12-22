@@ -21,7 +21,7 @@ if (prod) {
   app.use(helmet());
   app.use(
     cors({
-      origin: "http://uyeong.com", // 프론트엔드 도메인
+      origin: "https://uyeong.com", // 프론트엔드 도메인
       credentials: true, // 백,프 간 쿠키 공유
     })
   );
