@@ -38,9 +38,6 @@ deploy:
   script:
     - echo [INFO] Deployment started.
 
-    # - echo "Pruning unused volumes..."
-    # - docker volume prune -f
-
     - echo "Cleaning up previous containers and networks..."
     - docker-compose -f docker-compose.prod.yml down
 
@@ -49,6 +46,9 @@ deploy:
 
     - echo "Pruning unused containers..."
     - docker container prune -f
+
+    - echo "Pruning unused volumes..."
+    - docker volume prune -f
 
     - echo "Pruning unused images..."
     - docker image prune -a -f
