@@ -8,7 +8,7 @@ services:
       context: ./server
       dockerfile: Dockerfile.prod
       args:
-        NEXT_PUBLIC_PROD_URL: http://uyeong.com
+        NEXT_PUBLIC_PROD_URL: https://uyeong.com
     ports:
       - 5000:5000
     env_file:

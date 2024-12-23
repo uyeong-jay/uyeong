@@ -126,12 +126,12 @@ const AboutPresenter = () => {
             <h3>Likes</h3>
             <ul>
               <li>Having a movie marathon with snacks</li>
-              <li>Exploring hidden gems while traveling</li>
-              <li>Playing almost any sport with a ball</li>
               <li>Hiking on moderate mountain trails</li>
-              <li>Messing around in the kitchen</li>
               <li>Taking landscape or food photos</li>
-              <li>Watching animal videos to rest before bed</li>
+              <li>Exploring hidden gems while traveling</li>
+              <li>Watching animal videos</li>
+              <li>Messing around in the kitchen</li>
+              <li>Playing almost any sport with a ball</li>
             </ul>
           </div>
         </DIV.AboutMeDetail>
