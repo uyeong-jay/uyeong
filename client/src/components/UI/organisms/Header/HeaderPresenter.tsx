@@ -4,7 +4,7 @@ import { HEADER, NAV } from './HeaderStyle';
 import Button from '@atoms/Button';
 import NavLinkBox from '@molecules/NavLinkBox';
 import { UserResponse } from '@app/services/user/userApi';
-import NotFound from '@src/pages/404';
+// import NotFound from '@src/pages/404';
 import Image from 'next/image';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import CaretDownIcon from '@icons/CaretDownIcon';
@@ -40,8 +40,8 @@ const HeaderPresenter = ({
   userData,
   isLoadingUserData,
   isLoggingOut,
-  isUserDataError,
-  isLogoutError,
+  // isUserDataError,
+  // isLogoutError,
   onClickLogout,
   isDarkTheme,
   onClickDarkMode,
@@ -213,7 +213,7 @@ const HeaderPresenter = ({
     }
   }, [isMenuIconClicked]);
 
-  if (isUserDataError || isLogoutError) return <NotFound isUserFetchError={isUserDataError} />;
+  // if (isUserDataError || isLogoutError) return <NotFound isUserFetchError={isUserDataError} />;
   return (
     <>
       <HEADER.Frame scrollDirection={scrollDirection}>
