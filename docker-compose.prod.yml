@@ -9,7 +9,6 @@ services:
       dockerfile: Dockerfile.prod
       args:
         NEXT_PUBLIC_PROD_URL: ${PROD_URL}
-        NEXT_PUBLIC_SERVER_URL: ${SERVER_URL}
     ports:
       - 5000:5000
     env_file:
