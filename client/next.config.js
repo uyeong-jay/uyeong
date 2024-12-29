@@ -10,9 +10,20 @@ const prod = process.env.NODE_ENV === 'production';
 
 module.exports = withBundleAnalyzer({
   reactStrictMode: true,
+  // serverRuntimeConfig: {
+  //   // Only available on the server side
+  //   apiURL: prod ? process.env.SERVER_SIDE_API_URL : process.env.DEV_URL,
+  // },
+  // publicRuntimeConfig: {
+  //   // Available on both server and client
+  //   apiURL: prod ? process.env.CLIENT_SIDE_API_URL : process.env.DEV_URL,
+  // },
 
   env: {
+    // SERVER_SIDE_API_URL: process.env.SERVER_SIDE_API_URL,
+    // CLIENT_SIDE_API_URL: process.env.CLIENT_SIDE_API_URL,
     NEXT_PUBLIC_BASE_URL: prod ? process.env.NEXT_PUBLIC_PROD_URL : process.env.DEV_URL,
+    NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL,
     CLOUDINARY_UPLOAD_PRESET: process.env.CLOUDINARY_UPLOAD_PRESET,
     CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
     CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
