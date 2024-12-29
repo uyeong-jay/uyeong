@@ -7,7 +7,6 @@ import { authToken } from "@utils/authToken";
 const refresh = async (req: Request, res: Response) => {
   try {
     //refresh_token 쿠키 확인
-
     const rf_token = req.cookies.refresh_token;
 
     if (!rf_token) return res.status(200).json({ msg: "User not signed in." });

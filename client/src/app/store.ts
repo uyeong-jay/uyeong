@@ -17,7 +17,7 @@ const createStore = () => {
     if (isDev) return getDefaultMiddleware().concat(api.middleware);
     return getDefaultMiddleware({
       //https://stackoverflow.com/questions/71611934/redux-toolkit-query-not-invalidating-tags-and-cache-in-non-debug-or-production
-      //배포환경에서도 캐시 무효화를 가능하게 하여 invalidatesTags가 제대로 작동하도록 변경
+      //배포환경에서도 캐시 무효화를 가능하게 하여 invalidatesTags가 제대로 작동하도록 두 옵션 추가
       serializableCheck: true,
       immutableCheck: true,
     }).concat(api.middleware);
