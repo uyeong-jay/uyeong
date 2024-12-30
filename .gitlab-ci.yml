@@ -26,6 +26,7 @@ deploy:
     - echo "EMAILJS_SERVICE_ID=$EMAILJS_SERVICE_ID" >> client/.env.production
     - echo "EMAILJS_TEMPLATE_ID=$EMAILJS_TEMPLATE_ID" >> client/.env.production
     - echo "EMAILJS_PUBLIC_KEY=$EMAILJS_PUBLIC_KEY" >> client/.env.production
+    - echo "SERVER_URL=$SERVER_URL" >> client/.env.production
     - echo "ADMIN=$ADMIN" >> client/.env.production
 
     - echo > server/.env
