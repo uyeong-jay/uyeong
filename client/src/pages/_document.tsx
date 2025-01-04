@@ -27,6 +27,8 @@ class MyDocument extends Document {
             crossOrigin="anonymous"
           />
 
+          <link rel="apple-touch-icon-precomposed" href="/favicon2.png" />
+
           {/* badge images preload */}
           {badgeData.flatMap((category) =>
             category.contents.map((badge, index) => (
