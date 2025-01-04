@@ -101,7 +101,7 @@ const AboutPresenter = () => {
                 <span>Hello!</span>
                 <br />
                 <span>My name is U Yeong Jang.</span> As I work toward becoming a front-end developer, I created this
-                blog to document my journey and build a space where I can connect with users.
+                blog to document my journey and build a community where I can connect with users.
               </p>
               <p>
                 Here, starting with my experiences in creating this blog, I plan to document stories from learning new
@@ -127,11 +127,11 @@ const AboutPresenter = () => {
             <ul>
               <li>Having a movie marathon with snacks</li>
               <li>Hiking on moderate mountain trails</li>
-              <li>Taking landscape or food photos</li>
-              <li>Exploring hidden gems while traveling</li>
-              <li>Watching animal videos</li>
+              <li>Taking photos of landscape or food</li>
+              <li>Discovering hidden gems while traveling</li>
+              <li>Playing ball sports</li>
               <li>Messing around in the kitchen</li>
-              <li>Playing almost any sport with a ball</li>
+              <li>Watching cute animal videos</li>
             </ul>
           </div>
         </DIV.AboutMeDetail>
