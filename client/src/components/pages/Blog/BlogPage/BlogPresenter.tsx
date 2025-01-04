@@ -30,9 +30,9 @@ interface Props {
   userData?: UserResponse;
   blogPostsBySearch?: BlogPostRes;
   searchWordInput?: string;
-  inputRef?: RefObject<HTMLInputElement>;
+  // inputRef?: RefObject<HTMLInputElement>;
+  // onClickInput?: () => void;
   onChangeInput?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onClickInput?: () => void;
   onFocusInput?: () => void;
   onClearInput?: () => void;
   onClickTag: (tagName: string) => void;
@@ -49,9 +49,9 @@ const BlogPresenter: React.FC<Props> = ({
   userData,
   blogPostsBySearch,
   searchWordInput,
-  inputRef,
+  // inputRef,
+  // onClickInput,
   onChangeInput,
-  onClickInput,
   onFocusInput,
   onClearInput,
   onClickTag,
@@ -78,9 +78,9 @@ const BlogPresenter: React.FC<Props> = ({
                 type="text"
                 value={searchWordInput}
                 onChange={onChangeInput}
-                onClick={onClickInput}
                 onFocus={onFocusInput}
-                ref={inputRef}
+                // onClick={onClickInput}
+                // ref={inputRef}
                 placeholder=""
                 autofill={false}
               />

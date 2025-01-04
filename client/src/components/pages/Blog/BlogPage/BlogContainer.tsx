@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, useMemo } from 'react';
+import { useCallback, useEffect, /* useRef, */ useState, useMemo } from 'react';
 import BlogPresenter from './BlogPresenter';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { useDeleteBlogPostMutation, useGetBlogPostsBySearchQuery } from '@app/services/blog/postApi';
@@ -31,7 +31,7 @@ const BlogContainer = () => {
   const [searchWordInput, setSearchWordInput] = useState('');
   const [isSearchStarted, setSearchStarted] = useState(false);
   const [isInputFocused, setInputFocused] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  // const inputRef = useRef<HTMLInputElement>(null);
 
   const [isTagClicked, setTagClicked] = useState(false);
   const [tagUnderline, setTagUnderline] = useState('');
@@ -124,7 +124,7 @@ const BlogContainer = () => {
       });
       setIntersectionEnded(true);
     },
-    [dispatch],
+    [dispatch]
   );
 
   //검색 debounce
@@ -157,7 +157,7 @@ const BlogContainer = () => {
           searchWord: value,
         });
       }, 700),
-    [setSearchInfo],
+    [setSearchInfo]
   );
 
   //검색 with debounce
@@ -167,7 +167,7 @@ const BlogContainer = () => {
       delayedSearchInfoUpdate(e.target.value);
       setCanLoadMore(false);
     },
-    [delayedSearchInfoUpdate],
+    [delayedSearchInfoUpdate]
   );
 
   const onFocusInput = useCallback(() => {
@@ -185,10 +185,10 @@ const BlogContainer = () => {
     delayedSearchInfoUpdate('');
   }, [searchWordInput, delayedSearchInfoUpdate, dispatch]);
 
-  //Input 클릭시 검색어 전체 선택
-  const onClickInput = useCallback(() => {
-    inputRef.current?.select();
-  }, []);
+  // //Input 클릭시 검색어 전체 선택
+  // const onClickInput = useCallback(() => {
+  //   inputRef.current?.select();
+  // }, []);
 
   //infinite scroll hook with IntersectionObserver
   const targetRef = useIntersect(
@@ -211,7 +211,7 @@ const BlogContainer = () => {
       rootMargin: '0px',
       threshold: 0.5,
     },
-    'posts_intersection_target',
+    'posts_intersection_target'
   );
 
   return (
@@ -219,9 +219,9 @@ const BlogContainer = () => {
       userData={userData}
       blogPostsBySearch={blogPostsBySearch}
       searchWordInput={searchWordInput}
-      inputRef={inputRef}
+      // inputRef={inputRef}
+      // onClickInput={onClickInput}
       onChangeInput={onChangeInput}
-      onClickInput={onClickInput}
       onFocusInput={onFocusInput}
       onClearInput={onClearInput}
       onClickTag={onClickTag}
