@@ -44,7 +44,7 @@ function MyApp({ Component, multiLangDescription, theme: themeInCookie, ...rest 
               content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover"
             />
             <meta name="description" content={multiLangDescription} />
-            <meta property="og:title" content="Uyeong" />
+            <meta property="og:title" content="UYeong" />
             <meta property="og:description" content={multiLangDescription} />
             <meta
               property="og:image"
@@ -52,7 +52,7 @@ function MyApp({ Component, multiLangDescription, theme: themeInCookie, ...rest 
             />
             <meta property="og:url" content="https://uyeong.com" />
             <meta property="og:type" content="website" />
-            <meta property="og:site_name" content="Uyeong's Blog" />
+            <meta property="og:site_name" content="UYeong Blog" />
           </Head>
           <GlobalStyle />
           <AppLayout isDarkTheme={theme === DARK_THEME} onClickDarkMode={onClickDarkMode}>
@@ -69,8 +69,8 @@ MyApp.getInitialProps = async ({ ctx }: AppContext) => {
   const lang = ctx.req?.headers['accept-language']?.split(',')[0] || 'en';
 
   const multiLangDescription = lang.startsWith('ko')
-    ? '안녕하세요! 개발, 여행, 요리 등 제 다양한 일상들을 기록하는 블로그입니다. 방문해 주셔서 감사합니다. 좋은 하루 되세요!'
-    : 'Hi! Welcome to my blog where I share my experiences in development, travel, cooking, and everyday life. Thank you for visiting, and have a great day!';
+    ? '안녕하세요! UYeong 블로그입니다. 개발 및 다양한 일상 이야기들을 기록하고 있습니다.'
+    : 'Welcome to UYeong Blog - Sharing stories about development and everyday life.';
 
   return { multiLangDescription, theme: cookies.theme || LIGHT_THEME };
 };
