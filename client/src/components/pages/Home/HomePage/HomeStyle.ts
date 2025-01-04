@@ -143,6 +143,7 @@ DIV.ActiveBtns = styled.div`
   bottom: -45px;
   right: 50%;
   transform: translateX(50%);
+  min-width: 135px;
 
   & > button {
     border: 2px solid ${({ theme }) => theme.BD_C};
