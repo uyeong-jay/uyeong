@@ -1,14 +1,16 @@
+/* src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff'); */
 @font-face {
   font-family: 'GangwonEdu_OTFBoldA';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+  src: url('/fonts/GangwonEdu_OTFBoldA.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
+/* src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff'); */
 @font-face {
   font-family: 'MaplestoryOTFBold';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
+  src: url('/fonts/MaplestoryOTFBold.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
