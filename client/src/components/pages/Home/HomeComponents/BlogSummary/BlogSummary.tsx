@@ -27,6 +27,7 @@ DIV.SliderWrapper = styled.div`
   // border: 1px solid blue;
   width: 230px;
   margin-top: 25px;
+  color: ${({ theme }) => theme.FONT_C};
 
   & > button {
     // border: 1px solid black;

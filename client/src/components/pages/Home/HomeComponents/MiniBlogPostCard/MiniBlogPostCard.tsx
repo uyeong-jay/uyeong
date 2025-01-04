@@ -49,7 +49,7 @@ DIV.Frame = styled.div`
   }
 `;
 
-P.SlickPostTitle = styled.p`
+P.PostTitle = styled.p`
   // border: 1px solid black;
   position: relative;
   width: 100%;
@@ -60,9 +60,9 @@ P.SlickPostTitle = styled.p`
 
   & > a {
     // border: 1px solid green;
-    color: ${({ theme }) => theme.FONT_C};
     margin-left: 3px;
     overflow: hidden;
+    color: ${({ theme }) => theme.FONT_C};
   }
 `;
 
@@ -104,11 +104,12 @@ const MiniBlogPostCard = ({ post }: Props) => {
           )}
         </a>
       </Link>
-      <P.SlickPostTitle>
-        <Link href={`/blog/${titleForUrl}`} rel="noopener noreferrer">
-          {title}
+      <P.PostTitle>
+        <Link href={`/blog/${titleForUrl}`} rel="noopener noreferrer" passHref>
+          {/* ellipsis color가 theme 변경시 적용 안됨: link(a) + ellipsis 사용시 a 내부에 span 태그를 추가 하여 color 전체 적용 */}
+          <span>{title}</span>
         </Link>
-      </P.SlickPostTitle>
+      </P.PostTitle>
     </DIV.Frame>
   );
 };
