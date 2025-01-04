@@ -12,7 +12,6 @@ module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   serverRuntimeConfig: {
     // Only available on the server side
-    // apiURL: prod ? process.env.SERVER_SIDE_API_URL : process.env.DEV_URL,
     serverURL: process.env.SERVER_URL,
   },
   // publicRuntimeConfig: {
@@ -21,9 +20,6 @@ module.exports = withBundleAnalyzer({
   // },
 
   env: {
-    // SERVER_SIDE_API_URL: process.env.SERVER_SIDE_API_URL,
-    // CLIENT_SIDE_API_URL: process.env.CLIENT_SIDE_API_URL,
-    // SERVER_URL: prod ? process.env.SERVER_URL : process.env.DEV_SERVER_URL,
     NEXT_PUBLIC_BASE_URL: prod ? process.env.NEXT_PUBLIC_PROD_URL : process.env.DEV_URL,
     NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL,
     CLOUDINARY_UPLOAD_PRESET: process.env.CLOUDINARY_UPLOAD_PRESET,
@@ -38,7 +34,14 @@ module.exports = withBundleAnalyzer({
   },
 
   images: {
-    domains: ['res.cloudinary.com', 'img.shields.io'],
+    domains: ['res.cloudinary.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'img.shields.io',
+        pathname: '/badge/**',
+      },
+    ],
   },
   experimental: {
     scrollRestoration: true,
