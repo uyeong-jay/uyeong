@@ -95,6 +95,7 @@ DIV.Title = styled.div<TitleProps>`
     width: 280px;
     height: 185px;
     margin: 20px 0 40px 0;
+    cursor: pointer;
   }
 
   & .blog-card-image {

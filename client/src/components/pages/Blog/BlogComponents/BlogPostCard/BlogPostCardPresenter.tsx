@@ -38,21 +38,23 @@ const BlogPostCardPresenter = ({ post }: Props) => {
         <h3>
           <Link href={`/blog/${titleForUrl}`}>{title.charAt(0).toUpperCase() + title.slice(1)}</Link>
         </h3>
-        {thumbnail && (
-          <div className="blog-card-image-wrapper blog-card-image">
-            {
-              <Image
-                className="blog-card-image"
-                src={thumbnail as string}
-                alt="blog-card-image"
-                layout="fill"
-                objectFit="cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                priority
-              />
-            }
-          </div>
-        )}
+        <Link href={`/blog/${titleForUrl}`}>
+          {thumbnail && (
+            <div className="blog-card-image-wrapper blog-card-image">
+              {
+                <Image
+                  className="blog-card-image"
+                  src={thumbnail as string}
+                  alt="blog-card-image"
+                  layout="fill"
+                  objectFit="cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority
+                />
+              }
+            </div>
+          )}
+        </Link>
       </DIV.Title>
 
       <DIV.Content thumbnail={thumbnail}>

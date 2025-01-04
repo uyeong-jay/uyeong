@@ -48,23 +48,25 @@ const BlogCategoryCardPresenter = ({
   return (
     <DIV.Frame>
       {/* 카드 포스트 썸네일 */}
-      <div className="blog-category-card-image-wrapper blog-category-card-image">
-        {postsByCategoryName?.[0]?.thumbnail ? (
-          <Image
-            className="blog-category-card-image"
-            src={postsByCategoryName[0]?.thumbnail as string}
-            alt="category-card-image"
-            layout="fill"
-            objectFit="cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            priority
-          />
-        ) : (
-          <div>
-            <Logo />
-          </div>
-        )}
-      </div>
+      <Link href={`/blog/category/${cardName}`} passHref>
+        <div className="blog-category-card-image-wrapper blog-category-card-image">
+          {postsByCategoryName?.[0]?.thumbnail ? (
+            <Image
+              className="blog-category-card-image"
+              src={postsByCategoryName[0]?.thumbnail as string}
+              alt="category-card-image"
+              layout="fill"
+              objectFit="cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority
+            />
+          ) : (
+            <div>
+              <Logo />
+            </div>
+          )}
+        </div>
+      </Link>
 
       {/* 카드 내용 */}
       <DIV.CardContent>

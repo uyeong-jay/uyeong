@@ -53,31 +53,32 @@ const BlogCategoryDetailPresenter = ({
                       {post.title.charAt(0).toUpperCase() + post.title.slice(1)}
                     </Link>
                   </h3>
-
-                  <div className="blog-post-card-image-wrapper">
-                    {post.thumbnail ? (
-                      <Image
-                        className="blog-post-card-image"
-                        src={post.thumbnail as string}
-                        alt="blog-post-card-image"
-                        layout="fill"
-                        objectFit="cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        priority
-                      />
-                    ) : (
-                      <div>
-                        <Logo />
-                      </div>
-                    )}
-                  </div>
+                  <Link href={`/blog/${post.titleForUrl}`} passHref>
+                    <div className="blog-post-card-image-wrapper">
+                      {post.thumbnail ? (
+                        <Image
+                          className="blog-post-card-image"
+                          src={post.thumbnail as string}
+                          alt="blog-post-card-image"
+                          layout="fill"
+                          objectFit="cover"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          priority
+                        />
+                      ) : (
+                        <div>
+                          <Logo />
+                        </div>
+                      )}
+                    </div>
+                  </Link>
 
                   <span>{formatDate(post.createdAt)}</span>
                 </DIV.PostCard>
               ) : (
                 //limit 와 가져온 post 개수가 서로 같을때
                 <div key={uuid()}></div>
-              ),
+              )
             )
           ) : isFetchingPosts ? (
             //첫화면 or 새로고침시

@@ -114,6 +114,7 @@ DIV.PostCard = styled.div`
     display: inline-flex;
     position: relative;
     width: 100%;
+    cursor: pointer;
 
     // w:h = 3:2
     // width: 300px; //MOBILE also
