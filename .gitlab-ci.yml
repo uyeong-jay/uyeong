@@ -54,8 +54,8 @@ deploy:
     - echo "Pruning unused images..."
     - docker image prune -a -f
 
-    - echo "Pruning build cache (if necessary)..."
-    - docker builder prune -f
+    # - echo "Pruning build cache (if necessary)..."
+    # - docker builder prune -f
 
   after_script:
     - if [ $? -eq 0 ]; then echo "[INFO] Deployment completed."; fi
