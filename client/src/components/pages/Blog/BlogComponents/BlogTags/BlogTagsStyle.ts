@@ -104,8 +104,10 @@ DIV.BlogTag = styled.div<BlogTagProps>`
 
   @media screen and (min-width: calc(${({ theme }) => theme.BP.TABLET} + 300px)) {
     // border: 1px solid red;
+    margin: 0 0 10px 0;
     display: inline-block;
-    margin: 0 0 15px 0;
+    float: left;
+    clear: left;
 
     & > span {
       // border: 1px solid blue;
