@@ -18,20 +18,8 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display&family=Square+Peg&family=Baloo+Bhaijaan+2&family=Sono&display=block"
             rel="stylesheet"
           />
-          <link
-            rel="stylesheet preload"
-            href="/fonts/MaplestoryOTFBold.woff"
-            as="style"
-            type="font/woff"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="stylesheet preload"
-            href="/fonts/GangwonEdu_OTFBoldA.woff"
-            as="style"
-            type="font/woff"
-            crossOrigin="anonymous"
-          />
+          <link rel="stylesheet preload" href="/fonts/MaplestoryOTFBold.woff" as="style" crossOrigin="anonymous" />
+          <link rel="stylesheet preload" href="/fonts/GangwonEdu_OTFBoldA.woff" as="style" crossOrigin="anonymous" />
 
           <link rel="apple-touch-icon-precomposed" href="/favicon2.png" />
 
