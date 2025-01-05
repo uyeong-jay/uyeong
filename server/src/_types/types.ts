@@ -29,7 +29,7 @@ export interface IPost extends Document {
   _id: Types.ObjectId;
   user: string;
   title: string;
-  tags: [String];
+  tags: [string];
   content: string;
   description: string;
   thumnail: string;
