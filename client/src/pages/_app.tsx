@@ -53,6 +53,8 @@ function MyApp({ Component, multiLangDescription, theme: themeInCookie, ...rest 
             <meta property="og:url" content="https://uyeong.com" />
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="UYeong Blog" />
+
+            <meta name="msvalidate.01" content="0BCD1249AD6AB561B6107ACF8E0BD729" />
           </Head>
           <GlobalStyle />
           <AppLayout isDarkTheme={theme === DARK_THEME} onClickDarkMode={onClickDarkMode}>
