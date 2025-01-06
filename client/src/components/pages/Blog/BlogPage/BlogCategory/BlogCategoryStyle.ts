@@ -127,10 +127,12 @@ DIV.PageBtnGroup = styled.div`
     width: 40px;
     height: 30px;
     fill: ${({ theme }) => theme.FONT_C};
+    position: relative;
 
     & .angle-double-left-icon {
       // border: 1px solid black;
       width: 18px;
+      position: absolute; //모바일환경의 실제 width가 다르게 적용되어 추가
     }
     & .angle-left-icon {
       // border: 1px solid black;
@@ -143,10 +145,11 @@ DIV.PageBtnGroup = styled.div`
     & .angle-double-right-icon {
       // border: 1px solid black;
       width: 18px;
+      position: absolute; //모바일환경의 실제 width가 다르게 적용되어 추가
     }
 
     &.disabled {
-      opacity: 0.5;
+      opacity: 0.4;
       cursor: default;
     }
   }
