@@ -19,6 +19,7 @@ const BlogContainer = () => {
   const [deleteBlogPost, { error: deleteBlogPostError }] = useDeleteBlogPostMutation();
 
   const { tagName, postAuthInfo, blogPostsBySearch } = useAppSelector((state) => state.blog);
+  const { pageLoading } = useAppSelector((state) => state.header);
   const dispatch = useAppDispatch();
 
   const initialSearchInfo = {
@@ -228,6 +229,7 @@ const BlogContainer = () => {
       tagUnderline={tagUnderline}
       isTagClicked={isTagClicked}
       targetRef={targetRef}
+      pageLoading={pageLoading}
       isLoadingPosts={isLoadingPosts}
       isModalOpen={isModalOpen}
       setModalOpen={setModalOpen}

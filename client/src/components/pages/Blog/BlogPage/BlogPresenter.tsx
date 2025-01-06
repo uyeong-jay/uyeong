@@ -39,6 +39,7 @@ interface Props {
   isTagClicked: boolean;
   tagUnderline: string;
   targetRef: RefObject<HTMLDivElement>;
+  pageLoading: boolean;
   isLoadingPosts: boolean;
   isModalOpen: boolean;
   setModalOpen: (isModalOpen: boolean) => void;
@@ -58,6 +59,7 @@ const BlogPresenter: React.FC<Props> = ({
   tagUnderline,
   isTagClicked,
   targetRef,
+  pageLoading,
   isLoadingPosts,
   isModalOpen,
   setModalOpen,
@@ -92,7 +94,7 @@ const BlogPresenter: React.FC<Props> = ({
               <SearchIcon />
             </DIV.SearchBar>
             <BlogPosts userData={userData} blogPostsBySearch={blogPostsBySearch} />
-            <DIV.IntersectionTarget id="posts_intersection_target" ref={targetRef}>
+            <DIV.IntersectionTarget id="posts_intersection_target" ref={!pageLoading ? targetRef : null}>
               {isLoadingPosts ? (
                 <MiniLoader w={30} responsive />
               ) : (
