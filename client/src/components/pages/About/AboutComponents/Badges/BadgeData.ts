@@ -1,6 +1,6 @@
 export const badgeData = [
   {
-    name: 'Front end',
+    name: 'Front-end',
     contents: [
       {
         name: 'HTML5',
@@ -89,7 +89,7 @@ export const badgeData = [
     ],
   },
   {
-    name: 'Back end',
+    name: 'Back-end',
     contents: [
       {
         name: 'NodeJs',
