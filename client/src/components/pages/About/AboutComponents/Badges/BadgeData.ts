@@ -95,7 +95,7 @@ export const badgeData = [
         name: 'NodeJs',
         color: '339933',
         logoName: 'node.js',
-        width: 70,
+        width: 75,
       },
       {
         name: 'Express',
@@ -107,7 +107,13 @@ export const badgeData = [
         name: 'Mongoose',
         color: '880000',
         logoName: 'mongoose',
-        width: 90,
+        width: 95,
+      },
+      {
+        name: 'MongoDB',
+        color: '47A248',
+        logoName: 'mongodb',
+        width: 95,
       },
     ],
   },
