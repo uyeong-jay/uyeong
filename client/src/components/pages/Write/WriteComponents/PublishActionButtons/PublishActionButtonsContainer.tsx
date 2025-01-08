@@ -32,7 +32,7 @@ const PublishActionButtonsContainer = ({ userData, blogPostInfo, cloudinaryConfi
   const [prevPostImage, setPrevPostImage] = useState('');
   const { unchanged, modified } = fileStatus;
 
-  //유저 업데이트 성공시 이전 업로드된 이미지 삭제
+  //포스트 업데이트 성공시 이전 업로드된 이미지 삭제
   useEffect(() => {
     if (isPostUpdated && prevPostImage && blogPostDataById.thumbnail !== prevPostImage) {
       const publicId = getPublicIdFromUrl(prevPostImage);
