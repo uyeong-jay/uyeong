@@ -3,7 +3,7 @@ import TagsSummaryPresenter from './TagsSummaryPresenter';
 import { useAppDispatch } from '@app/hooks';
 import { BlogPostRes } from '@app/services/blog/postApi';
 import { getTagName } from '@pages/Blog/BlogSlice';
-import { TagWithCount } from '@pages/Blog/BlogPage/BlogContainer';
+import { TagWithCount } from '@pages/Blog/BlogComponents/BlogTags/BlogTagsContainer';
 import { useRouter } from 'next/router';
 
 interface Props {

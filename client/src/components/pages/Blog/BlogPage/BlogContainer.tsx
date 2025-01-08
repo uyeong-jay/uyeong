@@ -9,11 +9,6 @@ import { useGetUserDataQuery } from '@app/services/user/userApi';
 import { setPostAuthInfo } from '@pages/Blog/BlogSlice';
 import { initialPostAuthInfo } from '../BlogSlice/BlogSlice';
 
-export interface TagWithCount {
-  name: string;
-  count: number;
-}
-
 const BlogContainer = () => {
   const { data: userData } = useGetUserDataQuery();
   const [deleteBlogPost, { error: deleteBlogPostError }] = useDeleteBlogPostMutation();

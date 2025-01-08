@@ -1,4 +1,4 @@
-import { TagWithCount } from '@pages/Blog/BlogPage/BlogContainer';
+import { TagWithCount } from '@pages/Blog/BlogComponents/BlogTags/BlogTagsContainer';
 import React from 'react';
 import { DIV, SECTION } from './TagsSummaryStyle';
 import SummaryTitle from '../SummaryTitle';
