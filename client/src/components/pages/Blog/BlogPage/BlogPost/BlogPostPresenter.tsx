@@ -7,12 +7,14 @@ import Image from 'next/image';
 import BlogPostFooter from '@pages/Blog/BlogComponents/BlogPostFooter';
 import BlogPostHeader from '@pages/Blog/BlogComponents/BlogPostHeader';
 import MarkdownViewer from '@organisms/MarkdownViewer';
+import { CloudinaryTypes } from '@src/pages/settings';
 
 interface Props {
   blogPost?: BlogPost;
+  cloudinaryConfig: CloudinaryTypes;
 }
 
-const BlogPostPresenter = ({ blogPost }: Props) => {
+const BlogPostPresenter = ({ blogPost, cloudinaryConfig }: Props) => {
   const { _id, title, thumbnail, content } = blogPost || {};
 
   if (!_id) return <NotFound />;
@@ -23,7 +25,7 @@ const BlogPostPresenter = ({ blogPost }: Props) => {
       </Head>
       <SECTION.Frame>
         <BlogPostToc />
-        <BlogPostHeader blogPost={blogPost} />
+        <BlogPostHeader blogPost={blogPost} cloudinaryConfig={cloudinaryConfig} />
         <article>
           {thumbnail && (
             <div className="blog-post-image-wrapper" id="post-thumbnail-wrapper">
