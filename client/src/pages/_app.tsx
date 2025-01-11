@@ -48,7 +48,7 @@ function MyApp({ Component, multiLangDescription, theme: themeInCookie, ...rest 
             <meta property="og:description" content={multiLangDescription} />
             <meta
               property="og:image"
-              content="https://res.cloudinary.com/uyeong/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1733820910/uyeong-blog/uyeongblog_tm4nhd.png"
+              content="https://res.cloudinary.com/uyeong/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1733820910/uyeong-blog/og_image/uyeongblog_tm4nhd.png"
             />
             <meta property="og:url" content="https://uyeong.com" />
             <meta property="og:type" content="website" />
