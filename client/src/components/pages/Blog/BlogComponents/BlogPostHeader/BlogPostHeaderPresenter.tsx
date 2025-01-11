@@ -44,7 +44,7 @@ const BlogPostHeaderPresenter = ({ userData, blogPost, onClickDeletePost, isModa
 
         <DIV.Bottom>
           {tags?.map((tag) => (
-            <span key={tag}>#{tag}</span>
+            <span key={tag}># {tag}</span>
           ))}
         </DIV.Bottom>
       </HEADER.Frame>
