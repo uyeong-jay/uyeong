@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
 import Posts from "@models/blog/postModel";
-import Comments from "@models/blog/commentModel";
 
 const getPosts = async (req: Request, res: Response) => {
   try {
     const posts = await Posts.find().sort({ createdAt: -1 }); //최근에 생성된것이 처음에 위치
 
-    res.status(200).json({ posts: posts });
+    res.status(200).json({ posts });
   } catch (err: any) {
     return res.status(500).json({ msg: err.message });
   }
