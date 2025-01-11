@@ -18,8 +18,8 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display&family=Square+Peg&family=Baloo+Bhaijaan+2&family=Sono&display=block"
             rel="stylesheet"
           />
-          <link rel="stylesheet preload" href="/fonts/MaplestoryOTFBold.woff" as="style" crossOrigin="anonymous" />
-          <link rel="stylesheet preload" href="/fonts/GangwonEdu_OTFBoldA.woff" as="style" crossOrigin="anonymous" />
+          <link rel="preload" href="/fonts/MaplestoryOTFBold.woff" as="font" crossOrigin="anonymous" />
+          <link rel="preload" href="/fonts/GangwonEdu_OTFBoldA.woff" as="font" crossOrigin="anonymous" />
 
           <link rel="apple-touch-icon-precomposed" href="/favicon2.png" />
 
@@ -28,7 +28,7 @@ class MyDocument extends Document {
             category.contents.map((badge, index) => (
               <link
                 key={`${category.name}-${index}`}
-                rel="stylesheet preload"
+                rel="stylesheet"
                 href={`https://img.shields.io/badge/${badge.name}-${badge.color}?style=plastic&logo=${badge.logoName}&logoColor=white`}
                 as="style"
                 crossOrigin="anonymous"
