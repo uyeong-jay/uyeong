@@ -10,7 +10,7 @@ UYeong이라는 블로그 사이트는 프론트 엔드 개발자를 준비하�
 
 ## Skills
 
-![uyblog skill](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1736325343/uyeong-blog/posts/uyblog/uyblog_skill_tnk5cy.png)
+![uyblog skills](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1737364961/uyeong-blog/posts/uyblog/uyblog_skills_blpmps.png)
 
 ## Pages
 
