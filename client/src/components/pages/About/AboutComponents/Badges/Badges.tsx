@@ -1,14 +1,15 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import React, { useState } from 'react';
 import { badgeData as badges } from './BadgeData';
 import { DIV } from './BadgesStyle';
+import Badge from './Badge';
 
-interface BadgeItem {
-  name: string;
-  width: number;
-  color: string;
-  logoName: string;
-}
+// interface BadgeItem {
+//   name: string;
+//   width: number;
+//   color: string;
+//   logoName: string;
+// }
 
 interface ClickedBadges {
   [key: string]: boolean; // 각 배지 이름에 해당하는 클릭 상태를 boolean으로 표현
@@ -19,6 +20,7 @@ const Badges = () => {
   const [isAllBadgesActive, setAllBadgesActive] = useState(false);
 
   const onClickBadge = (badgeName: string) => {
+    console.log('clicked');
     setClickedBadges((prevState) => ({
       ...prevState,
       [badgeName]: !prevState[badgeName],
@@ -37,27 +39,27 @@ const Badges = () => {
     setClickedBadges({});
   };
 
-  const renderBadge = (badgeItem: BadgeItem, isClicked: boolean) => (
-    <div
-      key={badgeItem.name}
-      onClick={() => onClickBadge(badgeItem.name)}
-      style={{ width: badgeItem.width, height: 27 }}
-    >
-      {isClicked ? (
-        <Image
-          width={badgeItem.width}
-          height={22}
-          alt={badgeItem.logoName}
-          src={`https://img.shields.io/badge/${badgeItem.name}-${badgeItem.color}?style=plastic&logo=${badgeItem.logoName}&logoColor=white`}
-          priority
-          unoptimized //src에 url 그대로 사용하기 위해 이미지 최적화 비활성
-        />
-      ) : (
-        // -- , %20 를 - 로 대체
-        <span>{badgeItem.name.replace(/--|%20/g, '-')}</span>
-      )}
-    </div>
-  );
+  // const renderBadge = (badgeItem: BadgeItem, isClicked: boolean) => (
+  //   <div
+  //     key={badgeItem.name}
+  //     onClick={() => onClickBadge(badgeItem.name)}
+  //     style={{ width: badgeItem.width, height: 27 }}
+  //   >
+  //     {isClicked ? (
+  //       <Image
+  //         width={badgeItem.width}
+  //         height={22}
+  //         alt={badgeItem.logoName}
+  //         src={`https://img.shields.io/badge/${badgeItem.name}-${badgeItem.color}?style=plastic&logo=${badgeItem.logoName}&logoColor=white`}
+  //         priority
+  //         unoptimized //src에 url 그대로 사용하기 위해 이미지 최적화 비활성
+  //       />
+  //     ) : (
+  //       // -- , %20 를 - 로 대체
+  //       <span>{badgeItem.name.replace(/--|%20/g, '-')}</span>
+  //     )}
+  //   </div>
+  // );
 
   return (
     <DIV.Frame isAllBadgesActive={isAllBadgesActive}>
@@ -72,7 +74,15 @@ const Badges = () => {
               {/*  badge detail */}
               {badge.contents.map((badgeItem) => {
                 const isClicked = clickedBadges[badgeItem.name] ?? false; // 클릭 여부 확인
-                return renderBadge(badgeItem, isAllBadgesActive ? !isClicked : isClicked);
+                // return renderBadge(badgeItem, isAllBadgesActive ? !isClicked : isClicked);
+                return (
+                  <Badge
+                    key={badgeItem.name}
+                    badgeItem={badgeItem}
+                    isClicked={isAllBadgesActive ? !isClicked : isClicked}
+                    onClickBadge={onClickBadge}
+                  />
+                );
               })}
             </li>
           </ul>

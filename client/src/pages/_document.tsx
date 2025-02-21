@@ -1,5 +1,5 @@
 import Document, { DocumentContext, Html, Head, Main, NextScript } from 'next/document';
-import { badgeData } from '@pages/About/AboutComponents/Badges/BadgeData';
+// import { badgeData } from '@pages/About/AboutComponents/Badges/BadgeData';
 
 class MyDocument extends Document {
   static async getInitialProps(context: DocumentContext) {
@@ -24,17 +24,17 @@ class MyDocument extends Document {
           <link rel="apple-touch-icon-precomposed" href="/favicon2.png" />
 
           {/* badge images preload */}
-          {badgeData.flatMap((category) =>
+          {/* {badgeData.flatMap((category) =>
             category.contents.map((badge, index) => (
               <link
                 key={`${category.name}-${index}`}
-                rel="stylesheet"
+                rel="preload"
                 href={`https://img.shields.io/badge/${badge.name}-${badge.color}?style=plastic&logo=${badge.logoName}&logoColor=white`}
                 as="style"
                 crossOrigin="anonymous"
               />
             ))
-          )}
+          )} */}
         </Head>
         <body>
           <Main />
