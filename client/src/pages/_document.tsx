@@ -12,14 +12,15 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-          <link
+          {/* <link
             href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display&family=Square+Peg&family=Baloo+Bhaijaan+2&family=Sono&display=block"
             rel="stylesheet"
-          />
+          /> */}
           <link rel="preload" href="/fonts/MaplestoryOTFBold.woff" as="font" crossOrigin="anonymous" />
           <link rel="preload" href="/fonts/GangwonEdu_OTFBoldA.woff" as="font" crossOrigin="anonymous" />
+          <link rel="preload" href="/fonts/subset-SquarePeg-Regular.woff2" as="font" crossOrigin="anonymous" />
+          <link rel="preload" href="/fonts/subset-BalooBhaijaan2-Regular.woff2" as="font" crossOrigin="anonymous" />
+          <link rel="preload" href="/fonts/subset-SonoMonospace-Regular.woff2" as="font" crossOrigin="anonymous" />
 
           <link rel="apple-touch-icon-precomposed" href="/favicon2.png" />
 

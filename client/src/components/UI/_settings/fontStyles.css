@@ -1,4 +1,26 @@
-/* src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff'); */
+/* Banner 글 전체, Hello, UYeong */
+@font-face {
+  font-family: 'Square Peg';
+  src: url('/fonts/subset-SquarePeg-Regular.woff2') format('woff2'),
+    url('/fonts/subset-SquarePeg-Regular.woff') format('woff'),
+    url('/fonts/subset-SquarePeg-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+/* about 페이지 소개글 제목 - 한글 */
+/* src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff'); - 다운로드 링크(한글) */
+@font-face {
+  font-family: 'MaplestoryOTFBold';
+  src: url('/fonts/MaplestoryOTFBold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+/* about 페이지 소개글 - 한글 */
+/* src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff'); - 다운로드 링크(한글) */
 @font-face {
   font-family: 'GangwonEdu_OTFBoldA';
   src: url('/fonts/GangwonEdu_OTFBoldA.woff') format('woff');
@@ -7,10 +29,23 @@
   font-display: block;
 }
 
-/* src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff'); */
+/* about 페이지 소개글 - 영어 */
 @font-face {
-  font-family: 'MaplestoryOTFBold';
-  src: url('/fonts/MaplestoryOTFBold.woff') format('woff');
+  font-family: 'Sono';
+  src: url('/fonts/subset-SonoMonospace-Regular.woff2') format('woff2'),
+    url('/fonts/subset-SonoMonospace-Regular.woff') format('woff'),
+    url('/fonts/subset-SonoMonospace-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+/* 404 */
+@font-face {
+  font-family: 'Baloo Bhaijaan 2';
+  src: url('/fonts/subset-BalooBhaijaan2-Regular.woff2') format('woff2'),
+    url('/fonts/subset-BalooBhaijaan2-Regular.woff') format('woff'),
+    url('/fonts/subset-BalooBhaijaan2-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: block;

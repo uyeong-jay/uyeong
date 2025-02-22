@@ -24,7 +24,7 @@ MAIN.frame = styled.main`
   height: 100vh;
   margin: 0 auto;
   z-index: 9999;
-  font-family: Consolas, 'Courier New', monospace;
+  font-family: monospace;
   font-size: 15px;
   color: ${({ theme }) => theme.FONT_C};
 
