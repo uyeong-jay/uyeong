@@ -3,9 +3,11 @@ import blogPostCtrl from "@controllers/blogCtrl/postCtrl";
 import auth from "@middleware/auth";
 
 const blogPostRouter = express.Router();
-const { getPosts, getPost, getPostsByCategory, getPostsBySearch, createPost, updatePost, deletePost } = blogPostCtrl;
+const { getPosts, getPost, getPostsByCategory, getPostsBySearch, createPost, updatePost, deletePost, getTags } =
+  blogPostCtrl;
 
 blogPostRouter.get("/search", getPostsBySearch);
+blogPostRouter.get("/tag", getTags);
 blogPostRouter.get("/blog", getPosts);
 blogPostRouter.get("/blog/:slug", getPost);
 blogPostRouter.get("/blog/category/:slug", getPostsByCategory);

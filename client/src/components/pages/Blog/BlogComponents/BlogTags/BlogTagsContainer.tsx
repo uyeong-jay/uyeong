@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import BlogTagsPresenter from './BlogTagsPresenter';
-import { useGetBlogPostsQuery } from '@app/services/blog/postApi';
+import { useGetBlogTagsQuery } from '@app/services/blog/tagApi';
 
 export interface TagWithCount {
   name: string;
@@ -14,29 +14,14 @@ export interface Props {
 }
 
 const BlogTagsContainer = ({ tagUnderline, onClickTag, isTagClicked }: Props) => {
-  const { data: blogPostsData } = useGetBlogPostsQuery();
-
-  // 모든 태그 > 많은 순 정렬 (50개 까지)
-  const allTags = useMemo(() => {
-    const tagList: TagWithCount[] = [];
-    blogPostsData?.posts?.forEach((post) => {
-      post.tags.forEach((postTag: string) => {
-        const tagIndex = tagList.findIndex((tag) => tag.name === postTag);
-
-        if (tagIndex !== -1) {
-          tagList[tagIndex].count += 1;
-        } else tagList.push({ name: postTag, count: 1 });
-      });
-    });
-    return tagList.sort((a, b) => b.count - a.count).slice(0, 50);
-  }, [blogPostsData?.posts]);
+  const { data: blogTagsData } = useGetBlogTagsQuery();
 
   return (
     <BlogTagsPresenter
       tagUnderline={tagUnderline}
       onClickTag={onClickTag}
       isTagClicked={isTagClicked}
-      allTags={allTags}
+      blogTagsData={blogTagsData}
     />
   );
 };

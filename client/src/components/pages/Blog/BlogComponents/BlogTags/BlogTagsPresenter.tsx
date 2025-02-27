@@ -1,15 +1,15 @@
 import React, { useCallback } from 'react';
 import { DIV, ASIDE } from './BlogTagsStyle';
-import { TagWithCount } from './BlogTagsContainer';
+import { BlogTagRes } from '@app/services/blog/tagApi';
 
 interface Props {
-  allTags: TagWithCount[];
+  blogTagsData: BlogTagRes | undefined;
   tagUnderline: string;
   onClickTag: (tagName: string) => void;
   isTagClicked: boolean;
 }
 
-const BlogTagsPresenter = ({ allTags, tagUnderline, onClickTag, isTagClicked }: Props) => {
+const BlogTagsPresenter = ({ blogTagsData, tagUnderline, onClickTag, isTagClicked }: Props) => {
   const tagNameLength = useCallback((tagName: string) => {
     const cutTagName = tagName.slice(0, 13);
 
@@ -22,7 +22,7 @@ const BlogTagsPresenter = ({ allTags, tagUnderline, onClickTag, isTagClicked }: 
     <ASIDE.BlogTags>
       <h3>Tags</h3>
       <div className="tags-wrapper">
-        {allTags.map((tag, index) => (
+        {blogTagsData?.tags.map((tag, index) => (
           <DIV.BlogTag
             key={index}
             onClick={() => onClickTag(tag.name)}

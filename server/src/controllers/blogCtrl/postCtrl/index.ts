@@ -1,16 +1,18 @@
 import getPosts from "./getPosts";
-import createPost from "./createPost";
-import getPostsByCategory from "./getPostsByCategory";
-import getPostsBySearch from "./getPostsBySearch";
 import getPost from "./getPost";
+import getTags from "./getTags";
+import getPostsBySearch from "./getPostsBySearch";
+import getPostsByCategory from "./getPostsByCategory";
+import createPost from "./createPost";
 import updatePost from "./updatePost";
 import deletePost from "./deletePost";
 
 const postCtrl = {
   getPosts,
   getPost,
-  getPostsByCategory,
+  getTags,
   getPostsBySearch,
+  getPostsByCategory,
   createPost,
   updatePost,
   deletePost,
