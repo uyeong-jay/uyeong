@@ -1,5 +1,6 @@
 import styled from '@_settings/styled';
 import { useLogoutMutation } from '@app/services/user/userApi';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
@@ -89,13 +90,25 @@ const NotFound = ({ isUserFetchError }: Props) => {
   }, []);
 
   return (
-    <MAIN.frame>
-      <div>
-        <h1>404</h1>
-        <p>Oops... looks like you got lost</p>
-        {isUserFetchError ? <button onClick={onClickLogout}>Back to home</button> : <Link href="/">Back to home</Link>}
-      </div>
-    </MAIN.frame>
+    <>
+      <Head>
+        <title>UYeong | Not Found</title>
+        <link
+          key="preload-baloo" // (element 패널 내부) 중복 추가 방지
+          rel="preload"
+          href="/fonts/subset-BalooBhaijaan2-Regular.woff2"
+          as="font"
+          crossOrigin="anonymous"
+        />
+      </Head>
+      <MAIN.frame>
+        <div>
+          <h1>404</h1>
+          <p>Oops... looks like you got lost</p>
+          {isUserFetchError ? <button onClick={onClickLogout}>Reload</button> : <Link href="/">Back to home</Link>}
+        </div>
+      </MAIN.frame>
+    </>
   );
 };
 

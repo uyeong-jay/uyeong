@@ -24,6 +24,8 @@ const HomePresenter = ({ blogPostsData }: Props) => {
     <>
       <Head>
         <title>UYeong</title>
+        <link rel="preload" href="/fonts/subset-SquarePeg-Regular.woff2" as="font" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/subset-SonoMonospace-Regular.woff2" as="font" crossOrigin="anonymous" />
       </Head>
       <MAIN.Frame>
         <DIV.ContainerWidth>
@@ -34,7 +36,7 @@ const HomePresenter = ({ blogPostsData }: Props) => {
             <DIV.SummaryBlock>
               {activeBtnNum === 1 && <AboutSummary />}
               {activeBtnNum === 2 && <BlogSummary blogPostsData={blogPostsData} />}
-              {activeBtnNum === 3 && <TagsSummary blogPostsData={blogPostsData} />}
+              {activeBtnNum === 3 && <TagsSummary />}
               <DIV.ActiveBtns>
                 {activeBtnArr.map((_, i) => (
                   <button

@@ -9,15 +9,25 @@ import NavLinkBox from '@molecules/NavLinkBox';
 import AboutAvatar from '@pages/About/AboutComponents/AboutAvatar';
 import PageTitle from '@atoms/PageTitle';
 import PageFrame from '@templates/PageFrame';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const AboutPresenter = () => {
   const [isKorean, setKorean] = useState(false);
+  const [isFirstClicked, setFirstClicked] = useState(false);
+
+  useEffect(() => {
+    if (!isKorean) {
+      setFirstClicked(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
       <Head>
         <title>UYeong | About</title>
+        <link rel="preload" href="/fonts/subset-SquarePeg-Regular.woff2" as="font" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/subset-SonoMonospace-Regular.woff2" as="font" crossOrigin="anonymous" />
       </Head>
       <PageFrame>
         <PageTitle text="About" />
@@ -68,10 +78,17 @@ const AboutPresenter = () => {
         </DIV.AboutMe>
 
         {/* 3 */}
-        <DIV.AboutBlog isKorean={isKorean}>
+        <DIV.AboutBlog isKorean={isKorean} isFirstClicked={isFirstClicked}>
           <div>
             <button onClick={() => setKorean(false)}>EN</button>
-            <button onClick={() => setKorean(true)}>KO</button>
+            <button
+              onClick={() => {
+                setKorean(true);
+                setFirstClicked(true);
+              }}
+            >
+              KO
+            </button>
           </div>
           {isKorean && (
             <div>

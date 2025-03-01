@@ -2,6 +2,7 @@ import styled from '@_settings/styled';
 
 interface AboutBlogProps {
   isKorean: boolean;
+  isFirstClicked: boolean;
 }
 
 export const DIV = {} as any;
@@ -236,16 +237,20 @@ DIV.AboutBlog = styled.div<AboutBlogProps>`
     width: 100%;
     padding: 0 30px;
 
-    animation: active-language 0.25s ease-in-out 0s forwards;
+    ${(props) =>
+      props.isFirstClicked &&
+      `
+        animation: active-language 0.25s ease-in-out 0s forwards;
 
-    @keyframes active-language {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
+        @keyframes active-language {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+      `}
 
     & > p {
       // border: 1px solid black;
