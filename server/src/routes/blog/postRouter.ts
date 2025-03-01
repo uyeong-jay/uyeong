@@ -9,7 +9,7 @@ const { getPosts, getPost, getPostsByCategory, getPostsBySearch, createPost, upd
 blogPostRouter.get("/search", getPostsBySearch);
 blogPostRouter.get("/tag", getTags);
 blogPostRouter.get("/blog", getPosts);
-blogPostRouter.get("/blog/:slug", getPost);
+blogPostRouter.get("/blog/:identifier", getPost);
 blogPostRouter.get("/blog/category/:slug", getPostsByCategory);
 blogPostRouter.post("/blog", auth, createPost);
 blogPostRouter.patch("/blog", auth, updatePost);

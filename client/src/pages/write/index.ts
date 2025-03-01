@@ -2,12 +2,12 @@ import { GetServerSideProps } from 'next';
 import wrapper from '@app/store';
 import { getRunningQueriesThunk } from '@app/services/api';
 import { getUserData } from '@app/services/user/userApi';
-import { getBlogPosts } from '@app/services/blog/postApi';
+import { getBlogPost } from '@app/services/blog/postApi';
 import { setAxiosCookie } from '@utils/setAxiosCookie';
 
 export { default } from '@pages/Write/WritePage';
 
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async ({ req, query }) => {
   const cloudinaryConfig = {
     uploadPreset: process.env.CLOUDINARY_UPLOAD_PRESET,
     cloudName: process.env.CLOUDINARY_CLOUD_NAME,
@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
     store.dispatch(getUserData.initiate());
   }
 
-  store.dispatch(getBlogPosts.initiate());
+  store.dispatch(getBlogPost.initiate(query.id as string));
 
   await Promise.all(store.dispatch(getRunningQueriesThunk()));
 

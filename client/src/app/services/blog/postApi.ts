@@ -23,6 +23,10 @@ export interface BlogPostRes {
   msg?: string;
 }
 
+export interface BlogPostReqQuery {
+  limit: number;
+}
+
 export interface BlogPostReq {
   _id?: string;
   title: string;
@@ -50,14 +54,15 @@ export interface BlogPostId {
 
 export interface BlogPostReqWithToken {
   blogPostInfo: BlogPostReq | BlogPostId;
+  titleCheck?: string;
   token?: string;
 }
 
 export const postApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getBlogPosts: builder.query<BlogPostRes, void>({
-      query: () => ({
-        url: '/api/blog',
+    getBlogPosts: builder.query<BlogPostRes, BlogPostReqQuery>({
+      query: (data) => ({
+        url: `/api/blog?limit=${data.limit}`,
         method: 'get',
       }),
       providesTags: ['BlogPost'],
@@ -68,7 +73,7 @@ export const postApi = api.injectEndpoints({
         url: `/api/search?page=${query.nextPageId}&q=${query.searchWord}`,
         method: 'get',
       }),
-      providesTags: ['BlogPost'],
+      providesTags: ['BlogPost', 'BlogComment'],
     }),
 
     getBlogPostsByCategory: builder.query<BlogPostRes, BlogPostByCategoryReq>({
@@ -80,8 +85,8 @@ export const postApi = api.injectEndpoints({
     }),
 
     getBlogPost: builder.query<BlogPostRes, string>({
-      query: (slug) => ({
-        url: `/api/blog/${encodeURIComponent(slug)}`,
+      query: (identifier) => ({
+        url: `/api/blog/${encodeURIComponent(identifier)}`,
         method: 'get',
       }),
       providesTags: ['BlogPost'],
@@ -89,7 +94,7 @@ export const postApi = api.injectEndpoints({
 
     createBlogPost: builder.mutation<BlogPostRes, BlogPostReqWithToken>({
       query: (data) => ({
-        url: '/api/blog',
+        url: `/api/blog?titleCheck=${data.titleCheck}`,
         method: 'post',
         data: data.blogPostInfo,
         headers: {
@@ -101,7 +106,7 @@ export const postApi = api.injectEndpoints({
 
     updateBlogPost: builder.mutation<BlogPostRes, BlogPostReqWithToken>({
       query: (data) => ({
-        url: '/api/blog',
+        url: `/api/blog?titleCheck=${data.titleCheck}`,
         method: 'patch',
         data: data.blogPostInfo,
         headers: {
@@ -128,9 +133,9 @@ export const postApi = api.injectEndpoints({
 // export hooks for usage in functional components
 export const {
   useGetBlogPostsQuery,
-  useGetBlogPostQuery,
   useGetBlogPostsByCategoryQuery,
   useGetBlogPostsBySearchQuery,
+  useGetBlogPostQuery,
   useCreateBlogPostMutation,
   useUpdateBlogPostMutation,
   useDeleteBlogPostMutation,
