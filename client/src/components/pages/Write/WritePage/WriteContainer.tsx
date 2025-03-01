@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import WritePresenter from './WritePresenter';
 import { useGetUserDataQuery } from '@app/services/user/userApi';
-import { BlogPostReq, useGetBlogPostsQuery } from '@app/services/blog/postApi';
+import { BlogPostReq, useGetBlogPostQuery } from '@app/services/blog/postApi';
 import { useRouter } from 'next/router';
 import NotFound from '@src/pages/404';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
@@ -14,21 +14,23 @@ interface Props {
 
 const WriteContainer = ({ cloudinaryConfig }: Props) => {
   const { data: userData } = useGetUserDataQuery();
-  const { data: blogPostsData } = useGetBlogPostsQuery();
-  const isPublishing = useAppSelector((state) => state.write.isPublishing);
-  const dispatch = useAppDispatch();
 
   const router = useRouter();
   const { id } = router.query;
+  const { data: blogPostData } = useGetBlogPostQuery(id as string);
+  const { post } = blogPostData || {};
+
+  const isPublishing = useAppSelector((state) => state.write.isPublishing);
+  const dispatch = useAppDispatch();
 
   const initialState = {
-    title: '',
-    tags: [],
-    content: '',
-    thumbnail: '',
-    description: '',
-    category: '',
-    privacy: false,
+    title: post?.title ?? '',
+    tags: post?.tags ?? [],
+    content: post?.content ?? '',
+    thumbnail: post?.thumbnail ?? '',
+    description: post?.description ?? '',
+    category: post?.category ?? '',
+    privacy: post?.privacy ?? false,
   };
 
   const [blogPostInfo, setBlogPostInfo] = useState<BlogPostReq | null>(initialState);
@@ -36,25 +38,9 @@ const WriteContainer = ({ cloudinaryConfig }: Props) => {
   //post 업데이트 시
   useEffect(() => {
     if (id) {
-      const postData = blogPostsData?.posts?.find((v) => v._id === id);
-
-      if (!postData) setBlogPostInfo(null);
-
-      dispatch(getPostById(postData));
-
-      const { title, tags, content, thumbnail, description, category, privacy } = postData || ({} as BlogPostReq);
-
-      setBlogPostInfo({
-        title,
-        tags,
-        content,
-        thumbnail,
-        description,
-        category,
-        privacy,
-      });
+      dispatch(getPostById(post)); // update 와 post 버튼 구분
     }
-  }, [blogPostsData?.posts, dispatch, id]);
+  }, [dispatch, id, post]);
 
   useEffect(() => {
     //write page 언마운트시 실행
@@ -73,7 +59,6 @@ const WriteContainer = ({ cloudinaryConfig }: Props) => {
       ) : (
         <WritePresenter
           userData={userData}
-          blogPostsData={blogPostsData}
           blogPostInfo={blogPostInfo}
           setBlogPostInfo={setBlogPostInfo}
           cloudinaryConfig={cloudinaryConfig}

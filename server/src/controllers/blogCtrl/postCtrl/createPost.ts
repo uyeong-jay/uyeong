@@ -13,6 +13,15 @@ const createPost = async (req: IReqAuth, res: Response) => {
 
     //client 데이터 가져오기
     const { title, tags, content, thumbnail, description, category, privacy } = req.body;
+    const { titleCheck } = req.query;
+
+    // 기존 title이 있는지 검사 (대소문자 구분 없이 검사)
+    const existingPost = await Posts.findOne({ title: { $regex: new RegExp(`^${title}$`, "i") } });
+
+    if (existingPost) return res.status(400).json({ msg: "The post already exists." });
+
+    // 제목 중복 검사를 위한 요청이면 성공 응답 반환 후 종료
+    if (titleCheck === "true") return res.status(200).json({ msg: "You can use this title." });
 
     //post 조회
     //post model > title > required, unique, maxLength

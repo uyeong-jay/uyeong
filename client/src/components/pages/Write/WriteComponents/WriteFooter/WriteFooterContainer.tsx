@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import WriteFooterPresenter from './WriteFooterPresenter';
-import { BlogPostReq, BlogPostRes } from '@app/services/blog/postApi';
-import { useAppDispatch } from '@app/hooks';
+import { BlogPostReq, useCreateBlogPostMutation, useUpdateBlogPostMutation } from '@app/services/blog/postApi';
+import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { startPuslishing } from '@pages/Write/WriteSlice';
 import validBlog from '@utils/valid/validBlog';
 import { UserResponse } from '@app/services/user/userApi';
@@ -10,13 +10,17 @@ import { CloudinaryTypes } from '@src/pages/settings';
 
 interface Props {
   userData?: UserResponse;
-  blogPostsData?: BlogPostRes;
   blogPostInfo: BlogPostReq;
   setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
   cloudinaryConfig: CloudinaryTypes;
 }
 
-const WriteFooterContainer = ({ userData, blogPostsData, blogPostInfo, setBlogPostInfo, cloudinaryConfig }: Props) => {
+const WriteFooterContainer = ({ userData, blogPostInfo, setBlogPostInfo, cloudinaryConfig }: Props) => {
+  const [updateBlogPost, { isSuccess: isPostUpdated, isError: isPostUpdateError }] = useUpdateBlogPostMutation();
+  const [createBlogPost, { isSuccess: isPostCreated, isError: isPostCreateError }] = useCreateBlogPostMutation();
+
+  const blogPostDataById = useAppSelector((state) => state.write.blogPostDataById);
+
   const router = useRouter();
 
   const { title, content } = blogPostInfo;
@@ -27,24 +31,36 @@ const WriteFooterContainer = ({ userData, blogPostsData, blogPostInfo, setBlogPo
   const dispatch = useAppDispatch();
 
   //포스트 제목 중복 유효성 검사
-  const validBlogTitle = useCallback(() => {
-    const duplicateBlogTitle = blogPostsData?.posts?.find((post) => post.title === title);
-    if (!router.query.id && duplicateBlogTitle) {
-      return true;
-    } else return false;
-  }, [blogPostsData?.posts, router.query, title]);
-
-  const onClickDone = useCallback(() => {
-    const blogTitleErr = validBlogTitle();
-    const blogErr = validBlog({ title, content });
-    if (blogTitleErr) {
+  useEffect(() => {
+    if (isPostUpdateError || isPostCreateError) {
       setWriteErrMsg('The post title already exists. Please change the title.');
       return setPostModalOpen(true);
-    } else if (blogErr) {
+    }
+    if (isPostUpdated || isPostCreated) {
+      dispatch(startPuslishing());
+    }
+  }, [dispatch, isPostCreateError, isPostCreated, isPostUpdateError, isPostUpdated]);
+
+  const onClickDone = useCallback(() => {
+    const blogData = {
+      blogPostInfo: {
+        ...blogPostInfo,
+        _id: blogPostDataById?._id,
+        title,
+      },
+      token: userData?.access_token,
+      titleCheck: 'true',
+    };
+
+    const blogErr = validBlog({ title, content });
+
+    if (blogErr) {
       setWriteErrMsg(blogErr);
       return setPostModalOpen(true);
-    } else dispatch(startPuslishing());
-  }, [content, dispatch, title, validBlogTitle]);
+    } else {
+      blogPostDataById ? updateBlogPost(blogData) : createBlogPost(blogData);
+    }
+  }, [blogPostDataById, blogPostInfo, content, createBlogPost, title, updateBlogPost, userData?.access_token]);
 
   const onClickExit = useCallback(
     (isCallback?: boolean) => {

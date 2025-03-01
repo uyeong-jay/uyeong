@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { BlogPostReq, BlogPostRes } from '@app/services/blog/postApi';
+import { BlogPostReq } from '@app/services/blog/postApi';
 import { UserResponse } from '@app/services/user/userApi';
 import WriteHeader from '../WriteComponents/WriteHeader';
 import WriteMDEditer from '../WriteComponents/WriteMDEditer';
@@ -12,13 +12,12 @@ import { CloudinaryTypes } from '@src/pages/settings';
 
 interface Props {
   userData?: UserResponse;
-  blogPostsData?: BlogPostRes;
   blogPostInfo: BlogPostReq;
   setBlogPostInfo: (blogPostInfo: BlogPostReq) => void;
   cloudinaryConfig: CloudinaryTypes;
 }
 
-const WritePresenter = ({ userData, blogPostsData, blogPostInfo, setBlogPostInfo, cloudinaryConfig }: Props) => {
+const WritePresenter = ({ userData, blogPostInfo, setBlogPostInfo, cloudinaryConfig }: Props) => {
   useScrollBlock();
 
   if (userData?.user?.role !== 'admin') return <NotFound />;
@@ -34,7 +33,6 @@ const WritePresenter = ({ userData, blogPostsData, blogPostInfo, setBlogPostInfo
           <WriteFooter
             userData={userData}
             blogPostInfo={blogPostInfo}
-            blogPostsData={blogPostsData}
             setBlogPostInfo={setBlogPostInfo}
             cloudinaryConfig={cloudinaryConfig}
           />

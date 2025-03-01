@@ -13,9 +13,19 @@ const updatePost = async (req: IReqAuth, res: Response) => {
 
     //client 데이터 가져오기
     const { _id: postId, title, tags, content, thumbnail, description, category, privacy } = req.body;
+    const { titleCheck } = req.query;
 
-    if (!title) return res.status(400).json({ msg: "Please enter the title." });
-    if (title.length > 100) return res.status(400).json({ msg: "The title must be 100 characters or less." });
+    // 제목 중복 검사 (대소문자 구분없이 검사) (`id`가 존재하면 현재 수정 중인 포스트를 제외하고 검사)
+    const existingPost = await Posts.findOne(
+      postId
+        ? { title: { $regex: new RegExp(`^${title}$`, "i") }, _id: { $ne: postId } }
+        : { title: { $regex: new RegExp(`^${title}$`, "i") } }
+    );
+
+    if (existingPost) return res.status(400).json({ msg: "The post already exists." });
+
+    // titleCheck: 'true' or 'undefined'
+    if (titleCheck === "true") return res.status(200).json({ msg: "You can use this title." });
 
     //post 조회 후 업데이트
     const post = await Posts.findOneAndUpdate(
@@ -30,9 +40,10 @@ const updatePost = async (req: IReqAuth, res: Response) => {
         category,
         privacy,
       }
+      // { new: true } //업데이트된 데이터 반환
     );
 
-    if (!post) return res.status(400).json({ msg: "Invalid Authentication." });
+    if (!post) return res.status(400).json({ msg: "Failed to update the post." });
 
     res.status(200).json({ msg: "Updated successfully!" });
   } catch (err: any) {
