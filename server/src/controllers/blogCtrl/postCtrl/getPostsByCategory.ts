@@ -37,39 +37,3 @@ const getPostsByCategory = async (req: Request, res: Response) => {
 };
 
 export default getPostsByCategory;
-
-//client 가 받을 데이터
-// {
-//   "postsByCategory": [
-//       {
-//           "_id": "",
-//           "title": "Web1",
-//           "tags": [
-//               "web"
-//           ],
-//           "content": "# web1",
-//           "description": "web1",
-//           "thumbnail": "",
-//           "privacy": true,
-//           "category": "web",
-//           "createdAt": "",
-//           "updatedAt": "",
-//           "__v": 0,
-//       },
-//       {
-//           "_id": "",
-//           "title": "Web2",
-//           "tags": [
-//               "web"
-//           ],
-//           "content": "# web2",
-//           "description": "web2",
-//           "thumbnail": "",
-//           "privacy": true,
-//           "category": "web",
-//           "createdAt": "",
-//           "updatedAt": "",
-//           "__v": 0,
-//       }
-//   ]
-// }

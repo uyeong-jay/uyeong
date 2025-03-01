@@ -1,4 +1,5 @@
 /* Banner 글 전체, Hello, UYeong */
+/* Home, About, Blog 페이지 */
 @font-face {
   font-family: 'Square Peg';
   src: url('/fonts/subset-SquarePeg-Regular.woff2') format('woff2'),
@@ -40,7 +41,7 @@
   font-display: block;
 }
 
-/* 404 */
+/* 404 페이지 - 404 */
 @font-face {
   font-family: 'Baloo Bhaijaan 2';
   src: url('/fonts/subset-BalooBhaijaan2-Regular.woff2') format('woff2'),

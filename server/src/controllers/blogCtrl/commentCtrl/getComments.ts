@@ -92,36 +92,3 @@ const getComments = async (req: Request, res: Response) => {
 };
 
 export default getComments;
-
-//client 가 받을 데이터
-// {
-//   comments: [
-//     {
-//       _id: "",
-//       user: {
-//         _id: "",
-//         nickname: "",
-//         avatar: ""
-//       },
-//       content: '',
-//       post_id: '',
-//       createdAt: 2023-01-27T12:05:00.306Z,
-//       updatedAt: 2023-01-27T12:05:00.306Z,
-//       __v: 0
-//     },
-//     {
-//       _id: "",
-//       user: {
-//         _id: "",
-//         nickname: "",
-//         avatar: ""
-//       },
-//       content: '',
-//       post_id: '',
-//       createdAt: 2023-01-27T11:26:37.420Z,
-//       updatedAt: 2023-01-27T11:26:37.420Z,
-//       __v: 0
-//     },
-//   ],
-//   count: 2
-// }
