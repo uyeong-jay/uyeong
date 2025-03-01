@@ -25,10 +25,10 @@ const BlogPostCardPresenter = ({ post }: Props) => {
     privacy,
   } = post;
 
-  // 보여줄 설명 or 내용 200자 제한
+  // 보여줄 내용 200자 제한
   const cardContent = useMemo(() => {
-    const editContent = content.slice(0, 200);
-    return removeMd(editContent);
+    const slicedContent = content.slice(0, 200);
+    return removeMd(slicedContent);
   }, [content]);
 
   return (
