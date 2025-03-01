@@ -1,19 +1,19 @@
-import { TagWithCount } from '@pages/Blog/BlogComponents/BlogTags/BlogTagsContainer';
 import React from 'react';
 import { DIV, SECTION } from './TagsSummaryStyle';
 import SummaryTitle from '../SummaryTitle';
+import { BlogTagRes } from '@app/services/blog/tagApi';
 
 interface Props {
-  allTags: TagWithCount[];
+  blogTagsData?: BlogTagRes;
   onClickTag: (tagName: string) => void;
 }
 
-const TagsSummaryPresenter = ({ allTags, onClickTag }: Props) => {
+const TagsSummaryPresenter = ({ blogTagsData, onClickTag }: Props) => {
   return (
     <SECTION.Frame>
       <SummaryTitle text="TAGS" />
       <DIV.TagsWrapper>
-        {allTags.map((tag, index) => (
+        {blogTagsData?.tags.map((tag, index) => (
           <DIV.TagWrapper key={index} onClick={() => onClickTag(tag.name)} tagCount={tag.count}>
             {tag.name}
           </DIV.TagWrapper>

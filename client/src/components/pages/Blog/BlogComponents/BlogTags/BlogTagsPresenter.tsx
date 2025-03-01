@@ -3,7 +3,7 @@ import { DIV, ASIDE } from './BlogTagsStyle';
 import { BlogTagRes } from '@app/services/blog/tagApi';
 
 interface Props {
-  blogTagsData: BlogTagRes | undefined;
+  blogTagsData?: BlogTagRes;
   tagUnderline: string;
   onClickTag: (tagName: string) => void;
   isTagClicked: boolean;

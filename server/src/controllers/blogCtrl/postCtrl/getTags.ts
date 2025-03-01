@@ -3,8 +3,11 @@ import Posts from "@models/blog/postModel";
 
 const getTags = async (req: Request, res: Response) => {
   try {
+    const { limit: maxTags } = req.query;
+
     // 태그별 사용 횟수 계산
     const tags = await Posts.aggregate([
+      { $match: { privacy: { $ne: true } } }, // privacy가 true가 아닌 것만 가져오기
       { $unwind: "$tags" }, // tags 배열을 개별 태그로 분리
       {
         $group: {
@@ -13,7 +16,7 @@ const getTags = async (req: Request, res: Response) => {
         },
       },
       { $sort: { count: -1 } }, // 등장 횟수가 많은 순으로 정렬
-      { $limit: 50 }, // 최대 50개 태그만 가져오기
+      { $limit: Number(maxTags) }, // 최대로 가져올 태그 갯수
       {
         $project: {
           _id: 0,

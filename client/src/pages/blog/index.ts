@@ -2,7 +2,6 @@ import { GetServerSideProps } from 'next';
 import wrapper from '@app/store';
 import { getRunningQueriesThunk } from '@app/services/api';
 import { getUserData } from '@app/services/user/userApi';
-import { getBlogPosts } from '@app/services/blog/postApi';
 import { setAxiosCookie } from '@utils/setAxiosCookie';
 import { getBlogTags } from '@app/services/blog/tagApi';
 
@@ -15,8 +14,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
     store.dispatch(getUserData.initiate());
   }
 
-  store.dispatch(getBlogPosts.initiate());
-  store.dispatch(getBlogTags.initiate());
+  store.dispatch(getBlogTags.initiate({ limit: 50 }));
 
   await Promise.all(store.dispatch(getRunningQueriesThunk()));
 

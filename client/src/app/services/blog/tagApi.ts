@@ -8,12 +8,16 @@ export interface BlogTagRes {
   tags: BlogTag[];
 }
 
+export interface BlogTagReq {
+  limit: number;
+}
+
 export const tagApi = api.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
-    getBlogTags: builder.query<BlogTagRes, void>({
-      query: () => ({
-        url: '/api/tag',
+    getBlogTags: builder.query<BlogTagRes, BlogTagReq>({
+      query: (data) => ({
+        url: `/api/tag?limit=${data.limit}`,
         method: 'get',
       }),
       providesTags: ['BlogTag', 'BlogPost'],

@@ -14,7 +14,7 @@ export interface Props {
 }
 
 const BlogTagsContainer = ({ tagUnderline, onClickTag, isTagClicked }: Props) => {
-  const { data: blogTagsData } = useGetBlogTagsQuery();
+  const { data: blogTagsData } = useGetBlogTagsQuery({ limit: 50 });
 
   return (
     <BlogTagsPresenter
