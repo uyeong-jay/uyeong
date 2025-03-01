@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { UserResponse } from '@app/services/user/userApi';
 import formatDate from '@utils/formatDate';
 import { BlogCategory } from '@app/services/blog/categoryApi';
-import { BlogPost } from '@app/services/blog/postApi';
 import Link from 'next/link';
 import Logo from '@icons/Logo';
 import Modal from '@organisms/Modal';
@@ -17,7 +16,6 @@ interface Props {
   categoryName: {
     name: string;
   };
-  postsByCategoryName?: BlogPost[] | undefined;
   isUpdate: boolean;
   onClickEdit: () => void;
   onClickDelete: (cardName: string, isCallback?: boolean) => void;
@@ -34,7 +32,6 @@ const BlogCategoryCardPresenter = ({
   category,
   cardName,
   categoryName,
-  postsByCategoryName,
   isUpdate,
   onClickEdit,
   onClickDelete,
@@ -50,10 +47,10 @@ const BlogCategoryCardPresenter = ({
       {/* 카드 포스트 썸네일 */}
       <Link href={`/blog/category/${cardName}`} passHref>
         <div className="blog-category-card-image-wrapper blog-category-card-image">
-          {postsByCategoryName?.[0]?.thumbnail ? (
+          {category.posts[0]?.thumbnail ? (
             <Image
               className="blog-category-card-image"
-              src={postsByCategoryName[0]?.thumbnail as string}
+              src={category.posts[0].thumbnail}
               alt="category-card-image"
               layout="fill"
               objectFit="cover"
@@ -117,7 +114,7 @@ const BlogCategoryCardPresenter = ({
 
         {/* 포스트 개수, 최근 업데이트 날짜 */}
         <DIV.CardContentFooter>
-          <span>Posts: {postsByCategoryName?.length}</span>
+          <span>Posts: {category.postCount}</span>
           <span>Last update: {formatDate(category.updatedAt)}</span>
         </DIV.CardContentFooter>
       </DIV.CardContent>

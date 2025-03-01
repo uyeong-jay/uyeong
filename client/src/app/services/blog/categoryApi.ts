@@ -5,6 +5,11 @@ export interface BlogCategory {
   name: string;
   createdAt: string;
   updatedAt: string;
+  postCount: number;
+  posts: {
+    _id: string;
+    thumbnail: string;
+  }[];
 }
 
 export interface BlogCategoryRes {
@@ -36,7 +41,7 @@ export const categoryApi = api.injectEndpoints({
         url: `/api/blog/category?page=${query}`,
         method: 'get',
       }),
-      providesTags: ['BlogCategory'],
+      providesTags: ['BlogCategory', 'BlogPost'], //BlogPost 데이터가 변경되었을때도 데이터 리패치
     }),
 
     createBlogCategory: builder.mutation<BlogCategoryRes, BlogCategoryReq>({

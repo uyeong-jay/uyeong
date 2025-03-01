@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, /* useMemo, */ useState } from 'react';
 import BlogCategoryCardPresenter from './BlogCategoryCardPresenter';
 
 import {
@@ -7,15 +7,13 @@ import {
   BlogCategory,
 } from '@app/services/blog/categoryApi';
 import { UserResponse } from '@app/services/user/userApi';
-import { BlogPostRes } from '@app/services/blog/postApi';
 
 interface Props {
   userData?: UserResponse;
-  blogPostsData?: BlogPostRes;
   category: BlogCategory;
 }
 
-const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props) => {
+const BlogCategoryCardContainer = ({ userData, category }: Props) => {
   const [updateBlogCategory, { isSuccess, error: updateBlogCategoryError }] = useUpdateBlogCategoryMutation();
   const [deleteBlogCategory, { error: deleteBlogCategoryError }] = useDeleteBlogCategoryMutation();
   const { name: cardName } = category;
@@ -33,13 +31,6 @@ const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props)
     }
   }, [deleteBlogCategoryError]);
 
-  //카테고리별 포스트
-  const postsByCategoryName = useMemo(() => {
-    const postsData = blogPostsData?.posts?.filter((post) => post.category === categoryName.name);
-    return postsData;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [blogPostsData?.posts]);
-
   //Save category name
   const onClickSave = useCallback(
     async (cardName, currName) => {
@@ -51,7 +42,7 @@ const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props)
 
       setCategoryName({ name: currName });
     },
-    [categoryName, updateBlogCategory, userData?.access_token],
+    [categoryName, updateBlogCategory, userData?.access_token]
   );
 
   //제목을 바꿀수 있는 경우만 save
@@ -69,7 +60,7 @@ const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props)
         token: userData?.access_token,
       });
     },
-    [deleteBlogCategory, userData?.access_token],
+    [deleteBlogCategory, userData?.access_token]
   );
 
   //Edit category name
@@ -86,7 +77,6 @@ const BlogCategoryCardContainer = ({ userData, blogPostsData, category }: Props)
       category={category}
       cardName={cardName}
       categoryName={categoryName}
-      postsByCategoryName={postsByCategoryName}
       isUpdate={isUpdate}
       onClickEdit={onClickEdit}
       onClickDelete={onClickDelete}

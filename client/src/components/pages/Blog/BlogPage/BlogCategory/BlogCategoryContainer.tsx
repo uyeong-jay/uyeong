@@ -2,11 +2,9 @@ import React, { useCallback, useMemo, useState } from 'react';
 import BlogCategoryPresenter from './BlogCategoryPresenter';
 import { useGetUserDataQuery } from '@app/services/user/userApi';
 import { useGetBlogCategoriesQuery } from '@app/services/blog/categoryApi';
-import { useGetBlogPostsQuery } from '@app/services/blog/postApi';
 
 const BlogCategoryContainer = () => {
   const { data: userData } = useGetUserDataQuery();
-  const { data: blogPostsData } = useGetBlogPostsQuery();
 
   //Paging Category
   const [categoryPageNum, setCategoryPageNum] = useState(1);
@@ -20,7 +18,7 @@ const BlogCategoryContainer = () => {
   const categoryPages = useMemo(() => {
     const categoryPagesArr = Array.from({ length: totalPageCount }, (_, index) => index + 1).slice(
       currPageIndex,
-      currPageIndex + visiblePageCount,
+      currPageIndex + visiblePageCount
     );
     return categoryPagesArr;
   }, [totalPageCount, currPageIndex]);
@@ -56,7 +54,6 @@ const BlogCategoryContainer = () => {
   return (
     <BlogCategoryPresenter
       userData={userData}
-      blogPostsData={blogPostsData}
       blogCategoryData={blogCategoryData}
       categoryPages={categoryPages}
       categoryPageNum={categoryPageNum}

@@ -10,7 +10,7 @@ const createCategory = async (req: IReqAuth, res: Response) => {
     if (req.user.role !== "admin") return res.status(400).json({ msg: "Invalid Authentication." });
 
     //client 데이터 가져오기
-    const name = req.body.name;
+    const { name } = req.body;
 
     //category 조회
     //catrgory model > required, unique, maxLength
@@ -38,7 +38,7 @@ const createCategory = async (req: IReqAuth, res: Response) => {
 
       // errMsg = err.keyValue.name + " already exists.";
       // errMsg = Object.keys(err.keyValue)[0] + " already exists."; //'name already exists'.
-      errMsg = " Category " + '"' + Object.values(err.keyValue)[0] + '"' + " already exists.";
+      errMsg = ` Category "${Object.values(err.keyValue)[0]}" already exists.`;
     } else {
       let name = Object.keys(err.errors)[0];
       errMsg = err.errors[`${name}`].message;

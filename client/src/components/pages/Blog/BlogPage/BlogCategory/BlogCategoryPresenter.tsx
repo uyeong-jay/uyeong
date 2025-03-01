@@ -4,7 +4,6 @@ import Head from 'next/head';
 import { BTN, DIV, SECTION } from './BlogCategoryStyle';
 import BlogCategoryCard from '@pages/Blog/BlogComponents/BlogCategoryCard';
 import { BlogCategoryRes } from '@app/services/blog/categoryApi';
-import { BlogPostRes } from '@app/services/blog/postApi';
 import AngleDoubleLeftIcon from '@icons/AngleDoubleLeftIcon';
 import AngleDoubleRightIcon from '@icons/AngleDoubleRightIcon';
 import AngleLeftIcon from '@icons/AngleLeftIcon';
@@ -13,7 +12,6 @@ import BlogCategoryHeader from '@pages/Blog/BlogComponents/BlogCategoryHeader';
 
 interface Props {
   userData?: UserResponse;
-  blogPostsData?: BlogPostRes;
   blogCategoryData?: BlogCategoryRes;
   categoryPages: number[];
   categoryPageNum: number;
@@ -31,7 +29,6 @@ const InitialCategoryCardArr = Array.from({ length: CATEGORY_COUNT }, (_, index)
 
 const BlogCategoryPresenter = ({
   userData,
-  blogPostsData,
   blogCategoryData,
   categoryPages,
   categoryPageNum,
@@ -57,12 +54,7 @@ const BlogCategoryPresenter = ({
             {blogCategoryData ? (
               <>
                 {blogCategoryData.categories?.map((category) => (
-                  <BlogCategoryCard
-                    key={category._id}
-                    category={category}
-                    userData={userData}
-                    blogPostsData={blogPostsData}
-                  />
+                  <BlogCategoryCard key={category._id} category={category} userData={userData} />
                 ))}
               </>
             ) : isLoadingCategories ? (
