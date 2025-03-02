@@ -79,7 +79,7 @@ DIV.BannerBlock = styled.div`
   // border: 1px solid red;
   position: relative;
   width: 100%;
-  height: 90vh;
+  height: 600px;
 
   &::after {
     content: '';
