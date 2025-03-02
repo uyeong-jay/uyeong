@@ -39,22 +39,22 @@ deploy:
   script:
     - echo [INFO] Deployment started.
 
-    - echo "Cleaning up previous containers and networks..."
+    - echo "Cleaning up previous containers and networks...(if necessary)..."
     - docker-compose -f docker-compose.prod.yml down
 
     - echo "Starting new containers..."
     - docker-compose -f docker-compose.prod.yml up --build -d
 
-    - echo "Pruning unused containers..."
+    - echo "Pruning unused containers...(if necessary)..."
     - docker container prune -f
 
-    - echo "Pruning unused volumes..."
+    - echo "Pruning unused volumes...(if necessary)..."
     - docker volume prune -f
 
-    - echo "Pruning unused images..."
+    - echo "Pruning unused images...(if necessary)..."
     - docker image prune -a -f
 
-    - echo "Pruning build cache (if necessary)..."
+    - echo "Pruning build cache (if really necessary)..."
     - docker builder prune -f
 
   after_script:
