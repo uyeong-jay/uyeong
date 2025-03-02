@@ -35,6 +35,7 @@ const BlogPostPresenter = ({ blogPost, cloudinaryConfig }: Props) => {
                 alt="blog post image"
                 layout="fill"
                 objectFit="contain"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 priority
               />
             </div>

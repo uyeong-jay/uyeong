@@ -32,12 +32,17 @@ module.exports = withBundleAnalyzer({
   },
 
   images: {
-    domains: ['res.cloudinary.com'],
+    // 기본값
+    // deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840]
+    // imageSizes: [16, 32, 48, 64, 96, 128, 256, 384]
+    deviceSizes: [640, 750, 828, 1080], // 너무 큰 이미지는 제거
+    imageSizes: [128, 256, 384], // 너무 작은 이미지는 제거
+    domains: ['res.cloudinary.com'], // 해당 경로 모든 이미지 허용
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'img.shields.io',
-        pathname: '/badge/**',
+        pathname: '/badge/**', // badge 아래 경로만 이미지 허용
       },
     ],
   },
@@ -50,7 +55,7 @@ module.exports = withBundleAnalyzer({
     return {
       ...config,
       mode: prod ? 'production' : 'development',
-      devtool: prod ? 'hidden-source-map' : 'eval-source-map',
+      devtool: prod ? 'hidden-source-map' : 'eval-source-map', // src 폴더 숨기기
     };
   },
 });
