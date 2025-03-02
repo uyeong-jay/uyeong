@@ -75,9 +75,7 @@ const BlogSummary = ({ blogPostsData }: Props) => {
       <SummaryTitle text="BLOG" />
       <DIV.SliderWrapper>
         <Slider {...settings}>
-          {blogPostsData?.posts?.map((post) => (
-            <MiniBlogPostCard key={post._id} post={post} />
-          ))}
+          {blogPostsData?.posts?.map((post) => !post.privacy && <MiniBlogPostCard key={post._id} post={post} />)}
         </Slider>
         <DetailButton link="/blog" />
       </DIV.SliderWrapper>
