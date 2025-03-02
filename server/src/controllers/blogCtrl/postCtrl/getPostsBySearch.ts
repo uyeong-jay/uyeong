@@ -4,41 +4,28 @@ import Comments from "@models/blog/commentModel";
 
 const getPostsBySearch = async (req: Request, res: Response) => {
   try {
-    let posts;
-
     //pagination (infinite scroll)
     const { page: nextId, q: searchQuery } = req.query;
     const limit = 4;
-    const sort = "-_id";
-    // "-": 가장 최근 포스트가 먼저 보이도록 정렬 - same with sort({ createdAt: -1 })
+    const sort = "-_id"; //최근 포스트 순
 
-    if (!searchQuery) {
-      posts = await Posts.find({
-        _id: nextId ? { $lt: nextId } : { $exists: true },
-      })
-        .limit(limit)
-        .sort(sort);
-    } else {
-      posts = await Posts.find({
-        $and: [
-          {
-            _id: nextId ? { $lt: nextId } : { $exists: true },
-          },
-          {
-            $or: [
-              //$regex: 부분일치도 검색
-              //$in: 완전일치만 검색
-              { title: { $regex: req.query.q } },
-              { content: { $regex: req.query.q } },
-              { description: { $regex: req.query.q } },
-              { tags: { $in: [req.query.q] } },
-            ],
-          },
-        ],
-      })
-        .limit(limit)
-        .sort(sort);
+    let searchCondition: any = {
+      _id: nextId ? { $lt: nextId } : { $exists: true },
+    };
+
+    if (searchQuery) {
+      const regex = new RegExp(searchQuery as string, "i"); // 대소문자 구분 없이 검색
+      searchCondition.$or = [
+        { title: { $regex: regex } },
+        { content: { $regex: regex } },
+        { description: { $regex: regex } },
+        { tags: { $in: [searchQuery] } },
+        //$regex: 부분일치도 검색
+        //$in: 완전일치만 검색
+      ];
     }
+
+    const posts = await Posts.find(searchCondition).limit(limit).sort(sort);
 
     const next_cursor = posts[limit - 1]?._id.toString() || undefined;
 
@@ -49,7 +36,7 @@ const getPostsBySearch = async (req: Request, res: Response) => {
       posts.map(async (post) => {
         const commentCount = await Comments.countDocuments({ post_title: post.titleForUrl });
         return {
-          ...post._doc,
+          ...post.toObject(),
           commentCount, // 댓글 수 포함
         };
       })
