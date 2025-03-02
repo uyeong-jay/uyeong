@@ -114,7 +114,7 @@ const HeaderPresenter = ({
   useEffect(() => {
     const handleScroll = () => {
       // 모바일(ios 브라우저) 환경에서 오버 스크롤시 음수값이 되지 않도록 방지
-      // window.scrollY의 값과 0 중 더 큰 값 반환
+      // -> window.scrollY의 값과 0 중 더 큰 값 반환
       const currentScrollY = Math.max(0, window.scrollY);
       setMenuIconClicked(false);
       setProfileOpen(false);
