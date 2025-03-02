@@ -42,8 +42,18 @@ DIV.CommentTop = styled.div`
 
     & .user-icon {
       // border: 1px solid red;
+      transform: translateX(0px);
+
       width: 45%;
       fill: ${({ theme }) => theme.BD_C}7F; //7F: opacity 0.5
+
+      @media screen and (min-width: ${({ theme }) => theme.BP.MOBILE}) {
+        transform: translateX(0.5px);
+      }
+
+      @media screen and (min-width: ${({ theme }) => theme.BP.TABLET}) {
+        transform: translateX(0px);
+      }
     }
   }
 
