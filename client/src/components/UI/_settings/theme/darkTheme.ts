@@ -36,5 +36,7 @@ export const darkTheme = {
   CODE_NUMBER: '#F0EDCC',
   CODE_SELECTOR: '#9AC1FC',
 
+  TABLE_BD_C: '#ddd',
+
   BP: breakpoint,
 };

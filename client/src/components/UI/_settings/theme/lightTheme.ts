@@ -36,5 +36,7 @@ export const lightTheme = {
   CODE_NUMBER: '#e9573e',
   CODE_SELECTOR: '#967bdc',
 
+  TABLE_BD_C: '#7d7878',
+
   BP: breakpoint,
 };

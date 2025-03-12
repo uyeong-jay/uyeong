@@ -2,6 +2,7 @@ import components from './components';
 import styled from '@_settings/styled';
 import MiniLoader from '@atoms/MiniLoader';
 import dynamic from 'next/dynamic';
+import remarkGfm from 'remark-gfm';
 // import ReactMarkdown from 'react-markdown';
 
 interface Props {
@@ -62,7 +63,8 @@ const MarkdownWrapper = styled.div`
     border-radius: 15px;
   }
 
-  & > pre > code > div {
+  // 코드 블록
+  & pre > code > div {
     border: 3px solid ${({ theme }) => theme.BD_C}4C; //4C: opacity 30%
     background-color: ${({ theme }) => theme.BG_C} !important;
     transition: background-color 0.25s linear; // for theme mode
@@ -87,6 +89,25 @@ const MarkdownWrapper = styled.div`
     }
   }
 
+  // 테이블
+  & table {
+    width: 100%;
+    border-collapse: collapse; /* 셀이 붙어서 테두리가 깔끔하게 표시됨 */
+  }
+
+  & th,
+  td {
+    // border: 1px solid #ddd; /* 명확한 테두리 색상 지정 */
+    border: 1px solid ${({ theme }) => theme.TABLE_BD_C}; /* 명확한 테두리 색상 지정 */
+    padding: 1rem; /* 셀 내부 여백 */
+    text-align: center; /* 가운데 정렬 */
+  }
+
+  & th {
+    font-weight: bold; /* 헤더 폰트 굵게 */
+  }
+
+  // 로더
   & > .mini-loader-wrapper {
     display: none;
   }
@@ -95,7 +116,9 @@ const MarkdownWrapper = styled.div`
 const MarkdownViewer = ({ content }: Props) => {
   return (
     <MarkdownWrapper>
-      <ReactMarkdown components={components}>{content}</ReactMarkdown>
+      <ReactMarkdown components={components} remarkPlugins={[remarkGfm]}>
+        {content}
+      </ReactMarkdown>
     </MarkdownWrapper>
   );
 };
