@@ -48,6 +48,10 @@ const MarkdownWrapper = styled.div`
     }
   }
 
+  & > ol {
+    margin: 0 0 20px 0;
+  }
+
   & > p {
     margin-bottom: 15px;
   }
@@ -66,7 +70,7 @@ const MarkdownWrapper = styled.div`
   // 코드 블록
   & pre > code > div {
     border: 3px solid ${({ theme }) => theme.BD_C}4C; //4C: opacity 30%
-    background-color: ${({ theme }) => theme.BG_C} !important;
+    background-color: ${({ theme }) => theme.CODE_BG_C} !important;
     transition: background-color 0.25s linear; // for theme mode
     border-radius: 20px;
     margin: 30px 0;

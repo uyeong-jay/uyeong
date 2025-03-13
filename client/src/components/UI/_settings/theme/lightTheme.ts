@@ -15,6 +15,7 @@ export const lightTheme = {
   LOADER_BG_C: '#fffcf6',
   LOADER_SHADOW: '0px 2px 7px rgb(0, 0, 0, 0.3)',
 
+  CODE_BG_C: '#FFFCF6',
   CODE_MAYBE_CLASS: '#f76767', //연빨강
   CODE_IMPORTS: '#967bdc', //연보라
   CODE_PUNCT: '#434a54', //진회색

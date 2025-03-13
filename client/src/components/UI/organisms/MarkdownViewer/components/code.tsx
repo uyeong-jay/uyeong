@@ -1,7 +1,8 @@
 import styled from '@_settings/styled';
 import type { CodeProps } from 'react-markdown/lib/ast-to-react';
 
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+// import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import vs from 'react-syntax-highlighter/dist/cjs/styles/hljs/vs';
 
 // import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
@@ -29,7 +30,6 @@ const CodeWrapper = styled.code`
       color: gray;
     }
 
-    //
     &.maybe-class-name {
       color: ${({ theme }) => theme.CODE_MAYBE_CLASS};
     }

@@ -15,6 +15,7 @@ export const darkTheme = {
   LOADER_BG_C: '#314351',
   LOADER_SHADOW: '0px 2px 7px rgb(0, 0, 0, 0.5)',
 
+  CODE_BG_C: '#314351',
   CODE_MAYBE_CLASS: '#FCD468', //진노랑
   CODE_IMPORTS: '#C0A6F0', //연보라
   CODE_PUNCT: '#F0EDCC', //연노랑
