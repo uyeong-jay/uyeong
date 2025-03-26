@@ -9,17 +9,22 @@ const getPostsBySearch = async (req: Request, res: Response) => {
     const limit = 4;
     const sort = "-_id"; //최근 포스트 순
 
+    // 페이징 처리
     let searchCondition: any = {
       _id: nextId ? { $lt: nextId } : { $exists: true },
+      // { $lt: nextId }: nextId보다 작은 _id만 조회 (더 오래된 게시글)
+      // { $exists: true }: _id가 존재하는 모든 계시글 (초기 로딩 시)
     };
 
     if (searchQuery) {
       const regex = new RegExp(searchQuery as string, "i"); // 대소문자 구분 없이 검색
+
       searchCondition.$or = [
+        { tags: { $regex: regex } },
         { title: { $regex: regex } },
-        { content: { $regex: regex } },
-        { description: { $regex: regex } },
-        { tags: { $in: [searchQuery] } },
+        // { tags: { $in: [searchQuery] } }
+        // { content: { $regex: regex } },
+        // { description: { $regex: regex } },
         //$regex: 부분일치도 검색
         //$in: 완전일치만 검색
       ];
