@@ -6,138 +6,175 @@ UYeong은 블로그 기능을 가진 웹 애플리케이션으로 프론트엔�
 
 ## Architecture
 
-![uyblog architecture](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1736243016/uyeong-blog/posts/uyblog/uyblog_architecture_c80yhl.png)
+| Architecture                                                                                                                                             | Flow Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ![uyblog architecture](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1736243016/uyeong-blog/posts/uyblog/uyblog_architecture_c80yhl.png) | 1. 사용자는 브라우저(Client)를 통해 웹에 접속하여 요청을 합니다. <br><br> 2. 요청은 먼저 **Nginx**로 전달되어 리버스 프록시 역할을 하며 트래픽을 각 컨테이너로 라우팅합니다. <br><br> 3. **Front Server**는 React.js 기반의 **Next.js**로 구성되어 있으며 SSR(서버 사이드 렌더링) 또는 CSR(클라이언트 사이드 렌더링)을 수행합니다. 상태 관리는 Redux로 처리합니다. <br><br> 4. 프론트엔드에서 API 요청이 발생하면, 요청은 **Back Server**(Node.js + Express.js)로 전달됩니다. <br><br> 5. 백엔드는 비즈니스 로직 처리 후, **Mongoose**를 통해 **MongoDB**에 데이터를 요청하거나 응답합니다. <br><br> 6. 전체 시스템은 **Docker**로 컨테이너화되어 **AWS** 상에서 배포 및 운영됩니다. |
+
+<br />
 
 ## Skills
 
-![uyblog skills](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1737364961/uyeong-blog/posts/uyblog/uyblog_skills_blpmps.png)
+### 🟦 Language
+
+- **TypeScript** - Static Typing for JavaScript
+
+### 🎨 Front-end
+
+- **React.js** - Component-based UI library  
+  &nbsp;&nbsp;&nbsp;&nbsp;↳ _using Atomic Design_ <br>
+- **Next.js** - React framework supporting SSR and SSG <br>
+- **Redux** - State Management <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;↳ _with RTK Query_ <br>
+- **Storybook** - UI Component Development <br>
+- **Emotion** - CSS-in-JS <br>
+
+### 🛠️ Back-end
+
+- **Node.js** - JavaScript runtime <br>
+- **Express.js** - Web framework for Node.js <br>
+- **Mongoose** - MongoDB ODM <br>
+- **MongoDB** - NoSQL document database <br>
+
+### 🚀 Deployment
+
+- **PM2** - Process Manager <br>
+- **Nginx** - Reverse Proxy & Load Balancer <br>
+- **Docker** - Containerization <br>
+- **AWS** - Cloud computing platform <br>
+
+### 🧰 Development Tools
+
+- **ESLint** - Code Linting <br>
+- **Prettier** - Code Formatting <br>
+
+### 🗂 Version Control & CI/CD
+
+- **GitLab** - Version Control & CI/CD  
+  &nbsp;&nbsp;&nbsp;&nbsp;↳ _using GitLab Runner_ <br>
+- **GitHub** - Version Control & CI/CD <br>
+
+<br />
 
 ## Pages
 
-### Home Page
+### 🏠 Home
 
-<div align="center">
-  <img src="https://res.cloudinary.com/uyeong/image/upload/v1736657049/uyeong-blog/github_readme/home_mix_pzrubj.png" alt="home page">
-</div>
+| Light                                                                                                                                   | Dark                                                                                                                                  |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| ![home-light](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140676/uyeong-blog/github_readme/home_light_zgnlqu.png) | ![home-dark](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140676/uyeong-blog/github_readme/home_dark_f52yap.png) |
 
-<br />
+<br/>
 
-### About Page
+---
 
-<div align="center">
-  <img src="https://res.cloudinary.com/uyeong/image/upload/v1736590143/uyeong-blog/github_readme/about_bnzeok.png" alt="about page" width="45%">
-  <img src="https://res.cloudinary.com/uyeong/image/upload/v1736590144/uyeong-blog/github_readme/about_dark_eudhnd.png" alt="about page(dark)" width="45%">
-</div>
-<br />
-<ul>
-  <li>English-to-Korean self-introduction</li>
-  <li>Clickable badges</li>
-</ul>
+### 🧑🏻 About
 
-<br />
+| Light                                                                                                                                     | Dark                                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| ![about-light](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140676/uyeong-blog/github_readme/about_light_i8fdv1.png) | ![about-dark](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140676/uyeong-blog/github_readme/about_dark_fmp4ow.png) |
 
-### Blog Page
+- English-to-Korean self-introduction
+- Clickable badges
+  <br/>
 
-<div align="center">
-  <img src="https://res.cloudinary.com/uyeong/image/upload/v1736666956/uyeong-blog/github_readme/blog_mix_uzecsu.png" alt="blog page">
-</div>
-<br />
-<ul>
-  <li>Blog search bar</li>
-  <li>Infinite scrolling</li>
-</ul>
+---
 
-<br />
+### 📝 Blog List
 
-### Blog Post Page
+| Light                                                                                                                                   | Dark                                                                                                                                  |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| ![blog-light](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140681/uyeong-blog/github_readme/blog_light_qvtc8f.png) | ![blog-dark](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140681/uyeong-blog/github_readme/blog_dark_msrgwn.png) |
 
-<div align="center">
-  <img src="https://res.cloudinary.com/uyeong/image/upload/v1736668109/uyeong-blog/github_readme/blog_post_comment_mix_nofl3e.png" alt="blog post page">
-</div>
-<br />
-<ul>
-  <li>Table of contents for blog posts</li>
-  <li>Comment feature</li>
-</ul>
+- Blog search bar
+- Infinite scrolling
+  <br/>
 
-<br />
+---
 
-### Category Page
+### 📄 Blog Post + Comment
 
-<div align="center">
-  <img src="https://res.cloudinary.com/uyeong/image/upload/v1736670924/uyeong-blog/github_readme/category_mix_izzger.png" alt="category page">
-</div>
-<br />
-<ul>
-  <li>Pagination</li>
-  <li>Cateogry admin</li>
-</ul>
+| Post (Light)                                                                                                                                      | Comment (Light)                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![blog-post-light](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140678/uyeong-blog/github_readme/blog_post_light_ke9npk.png) | ![blog-comment-light](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743145707/uyeong-blog/github_readme/blog_comment_light_2_mgnex5.png) |
 
-<br />
+- Table of contents for blog posts
+- Comment feature
+  <br/>
 
-### Write Page (admin)
+---
 
-<div align="center">
-  <img src="https://res.cloudinary.com/uyeong/image/upload/v1736674303/uyeong-blog/github_readme/write_mix_dr9kl6.png" alt="write page">
-</div>
-<br />
-<ul>
-  <li>Markdown editer</li>
-  <li>Markdown viewer</li>
-</ul>
+### 📚 Category
 
-<br />
+| Light                                                                                                                                           | Dark                                                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![category-light](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743150565/uyeong-blog/github_readme/category_light_xjzvud.png) | ![category-dark](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743150565/uyeong-blog/github_readme/category_dark_ysvzlx.png) |
 
-### Publish Page (admin)
+- Pagination
+- Cateogry admin
+  <br/>
 
-<div align="center">
-  <img src="https://res.cloudinary.com/uyeong/image/upload/v1736674707/uyeong-blog/github_readme/write2_mix_z95nt3.png" alt="publish page">
-</div>
-<br />
-<ul>
-  <li>Post preview with image upload and description</li>
-  <li>Post settings with category selection and publish/private options</li>
-</ul>
+---
 
-<br />
+### ✍️ Write (admin)
 
-### Sign-in / Sign-up Page
+| Light                                                                                                                                     | Dark                                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| ![write-light](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140677/uyeong-blog/github_readme/write_light_qtkkyb.png) | ![write-dark](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140681/uyeong-blog/github_readme/write_dark_bmcvaq.png) |
 
-<div align="center">
-  <img src="https://res.cloudinary.com/uyeong/image/upload/v1736677710/uyeong-blog/github_readme/sign_mix_ctctmz.png" alt="sign page">
-</div>
-<br />
-<ul>
-  <li>Email verification with timer</li>
-  <li>Confirm password</li>
-</ul>
+- Markdown editer
+- Markdown viewer
+  <br/>
 
-<br />
+---
 
-### Settings Page
+### 🧾 Publish (admin)
 
-<div align="center">
-  <img src="https://res.cloudinary.com/uyeong/image/upload/v1736678106/uyeong-blog/github_readme/settings_mix_en5yyj.png" alt="settings page">
-</div>
-<br />
-<ul>
-  <li>Store only the latest profile image in the cloud</li>
-  <li>Updating nickname and password</li>
-</ul>
+| Light                                                                                                                                        | Dark                                                                                                                                       |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| ![publish-light](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140677/uyeong-blog/github_readme/write2_light_sizxiv.png) | ![publish-dark](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140681/uyeong-blog/github_readme/write2_dark_akh8kz.png) |
 
-<br />
+- Post preview with image upload and description
+- Post settings with category selection and publish/private options
+  <br/>
 
-### Contact Page
+---
 
-<div align="center">
-  <img src="https://res.cloudinary.com/uyeong/image/upload/v1736678233/uyeong-blog/github_readme/contact_mix_vnzicf.png" alt="contact page">
-</div>
-<br />
-<ul>
-  <li>Using the EmailJS library</li>
-</ul>
+### 🔐 Signin / Signup
+
+| Signin (Light)                                                                                                                              | Signup (Light)                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![signin-light](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140682/uyeong-blog/github_readme/signin_light_fstklt.png) | ![signup-light](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140675/uyeong-blog/github_readme/signup_light_pv9rkt.png) |
+
+- Email verification with timer
+- Confirm password
+  <br/>
+
+---
+
+### ⚙️ Settings
+
+| Light                                                                                                                                          | Dark                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![setting-light](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140681/uyeong-blog/github_readme/settings_light_dpkv8c.png) | ![setting-dark](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140681/uyeong-blog/github_readme/setting_dark_e4apik.png) |
+
+- Store only the latest profile image in the cloud
+- Updating nickname and password
+  <br/>
+
+---
+
+### 📨 Contact
+
+| Light                                                                                                                                         | Dark                                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![contact-light](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140685/uyeong-blog/github_readme/contact_light_xv5axc.png) | ![contact-dark](https://res.cloudinary.com/uyeong/image/upload/q_auto,f_auto/v1743140685/uyeong-blog/github_readme/contact_dark_lb0mxg.png) |
+
+- Using the EmailJS library
+  <br/>
+
+---
 
 <br/>
 <br/>
 
-<b>Every page is designed to be responsive.</b>
+### <b>Every page is designed to be responsive.</b>
