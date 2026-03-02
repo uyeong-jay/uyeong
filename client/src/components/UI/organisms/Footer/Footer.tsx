@@ -18,7 +18,7 @@ const Footer = () => {
           github.com/uyeong-jay
         </NavLinkBox>
       </ul>
-      <p>Copyright ⓒ 2025 UYeong Jang All rights reserved.</p>
+      <p>Copyright ⓒ 2026 U Yeong Jang All rights reserved.</p>
     </FOOTER.Frame>
   );
 };
